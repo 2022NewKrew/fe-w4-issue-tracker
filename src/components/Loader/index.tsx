@@ -1,22 +1,37 @@
 import React from "react";
-import { ClipLoader } from "react-spinners";
+import { ClockLoader } from "react-spinners";
+import styled from "styled-components";
 import { LoaderType } from "../../ts/type";
 const Loader = (props: LoaderType) => {
-  // if (props.size === undefined) props.size = 40;
-
   return (
-    <div className="overlay-content">
-      <div className="wrapper">
-        <ClipLoader
-          css={props.css}
-          size={props.size}
-          color={props.css}
-          loading={props.loading}
-        />
-        <span className="message">{props.message}</span>
-      </div>
-    </div>
+    <Wrapper>
+      <ClockLoader
+        size={300}
+        color={"#333"}
+        loading={props.loading}
+        css={props.css}
+      />
+      <MessageWrapper>
+        <span>{props.message}</span>
+      </MessageWrapper>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20vh;
+`;
+
+const MessageWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
+  font-size: 24px;
+`;
 
 export default Loader;

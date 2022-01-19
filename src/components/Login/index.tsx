@@ -1,7 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { color } from "../../constant/constant";
+import { githubLoginUrl } from "../../constant/constant";
 const Login = () => {
+  const githubLogin = () => {
+    location.href = githubLoginUrl;
+  };
   return (
     <Wrapper>
       <ListWrapper>
@@ -10,6 +14,7 @@ const Login = () => {
           background={color.Black}
           type="button"
           value="GitHub 계정으로 로그인"
+          onClick={githubLogin}
         />
         <Span>or</Span>
         <TextInput placeholder="아이디" />
@@ -31,7 +36,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   /* align-items: center; */
-  margin-top: 100px;
+  margin-top: 20vh;
 `;
 
 const ListWrapper = styled.div`

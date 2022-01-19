@@ -1,14 +1,9 @@
 module.exports={
-  mode: "development",
-  entry: "./src/index.js",
+  entry: './src/index.js',
   output: {
-    path: __dirname+"/dist",
-    filename: "bundle.js",
-    publicPath: "/"
-  },
-  devtool: "inline-source-map",
-  devServer: {
-    port: 8000
+    path: __dirname+'/dist',
+    filename: 'bundle.js',
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -16,10 +11,7 @@ module.exports={
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
-          options: {
-            sourceMap: true
-          }
+          loader: 'babel-loader'
         }
       },
       {
@@ -27,16 +19,16 @@ module.exports={
         exclude: /node_modules/,
         use: [
           {
-            loader: "style-loader",
+            loader: 'style-loader',
           },
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
               sourceMap: true,
             },
           },
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
             options: {
               sourceMap: true,
             },
@@ -45,4 +37,4 @@ module.exports={
       }
     ]
   }
-}
+};

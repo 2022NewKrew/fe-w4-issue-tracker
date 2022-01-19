@@ -1,10 +1,16 @@
 import React from "react";
-import Login from "./components/Login";
 import styled from "styled-components";
+import { Route, Routes } from "react-router-dom";
+
+import Login from "./components/Login";
+import Callback from "./components/Login/Callback";
 
 const App = () => (
   <Wrapper>
-    <Login />
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/callback" element={<Callback />} />
+    </Routes>
   </Wrapper>
 );
 

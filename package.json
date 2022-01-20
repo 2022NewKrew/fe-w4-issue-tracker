@@ -1,0 +1,14 @@
+{
+  "name": "root",
+  "version": "1.0.0",
+  "private": true,
+  "author": "ethan.3160",
+  "description": "4주차 프로젝트 issue tracker",
+  "scripts": {
+    "client": "yarn workspace @root/client",
+    "server": "yarn workspace @root/server"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}

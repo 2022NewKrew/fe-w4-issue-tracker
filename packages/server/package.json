@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "@babel/node": "^7.16.8",
+    "@types/cors": "^2.8.12",
     "nodemon": "^2.0.15"
   }
 }

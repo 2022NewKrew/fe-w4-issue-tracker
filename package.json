@@ -15,5 +15,8 @@
     "@babel/core": "^7.16.10",
     "@babel/preset-env": "^7.16.10",
     "prettier": "^2.5.1"
+  },
+  "dependencies": {
+    "typescript": "^4.5.4"
   }
 }

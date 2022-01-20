@@ -1,0 +1,24 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "jsx": "react",
+    "rootDir": ".",
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "composite": true,
+    "allowJs": false,
+    "declaration": true,
+    "declarationMap": true,
+    "allowSyntheticDefaultImports": true
+    // "paths": {
+    //   "@root/server": ["../server/src/app.ts"]
+    // }
+  },
+  //   "references": [
+  //     {
+  //       "path": "../server"
+  //     }
+  //   ],
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "*.d.ts"]
+}

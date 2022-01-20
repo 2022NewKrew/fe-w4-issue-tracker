@@ -21,6 +21,10 @@ module.exports = {
       overlay: true,
     },
     hot: true,
+    static: {
+      directory: path.resolve(__dirname, 'dist'),
+      publicPath: '/dist/'
+    },
     devMiddleware: {
       writeToDisk: true,
     }
@@ -34,14 +38,13 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        // use: ['style-loader', 'css-loader'],
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.(jpeg|jpg)$/,
         loader: 'file-loader',
         options: {
-          name: '[name].[ext]',
+          name: 'images/[name].[ext]',
         },
       },
     ],

@@ -1,14 +1,10 @@
-const webpack = require('webpack');
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const mode = process.env.NODE_ENV || 'development';
-const port = 3000;
-
 module.exports = {
-  mode,
   entry: './src/index.js',
   output: {
-    path: __dirname + '/dist',
+    path: path.resolve(__dirname, '../dist'),
     filename: 'bundle.[hash].js',
   },
   module: {
@@ -25,10 +21,4 @@ module.exports = {
       template: 'public/index.html',
     })
   ],
-  devServer: {
-    host: 'localhost',
-    port: port,
-    open: true,
-    historyApiFallback: true,
-  }
 };

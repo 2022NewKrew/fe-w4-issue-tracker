@@ -1,0 +1,36 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2020": true
+  },
+  "parser": "@typescript-eslint/parser", // Typescript 구문 분석
+  "parserOptions": {
+    "ecmaVersion": 2020, // 사용할 ECMAScript 버전
+    "sourceType": "module", // parser의 export 형태
+    "ecmaFeatures": {
+      // ECMAScript의 언어 확장 기능
+      "jsx": true
+    },
+    "project": ["./tsconfig.base.json"]
+  },
+  "ignorePatterns": [".eslintrc.js", "/node_modules/**"], // ESLint를 적용하지 않을 폴더나 파일
+  "plugins": [
+    // 원하는 규칙 집합
+    "@typescript-eslint",
+    "react",
+    "prettier"
+  ],
+  "extends": [
+    // 추가한 플러그인에서 사용할 규칙을 설정
+    "airbnb",
+    "airbnb-typescript",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "plugin:prettier/recommended", // eslint-plugin-prettier + eslint-config-prettier 동시 적용
+    "plugin:react/recommended"
+  ],
+  "rules": {
+    "prettier/prettier": "error"
+  }
+}

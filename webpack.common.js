@@ -1,10 +1,7 @@
 const path = require("path");
+const webpack = require("webpack");
 const port = 3000;
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-
-module.exports = function (env) {
-  return require(`./webpack/${env.WEBPACK_SERVE ? "dev" : "prod"}.js`);
-};
 
 module.exports = {
   mode: "development",
@@ -35,16 +32,15 @@ module.exports = {
       },
     ],
   },
+  resolve: {
+    extensions: ["js", "jsx"],
+    alias: {
+      "@": path.resolve(__dirname, "src/"),
+    },
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: "public/index.html",
     }),
   ],
-  devServer: {
-    host: "localhost",
-    port: port,
-    open: true,
-    historyApiFallback: true,
-    hot: true,
-  },
 };

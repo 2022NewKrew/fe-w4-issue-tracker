@@ -1,12 +1,12 @@
 # fe-w4-issue-tracker
 
-Features
+## Features
 
 [ ] 환경 설정
 
-- [ ] webpack 설정
-- [ ] babel 설정
-- [ ] development/product 모드 구분하기
+- [✓] webpack 설정
+- [✓] babel 설정
+- [✓] development/product 모드 구분하기
 - [ ] Firebase 추가 및 설정
 - [ ] 프로젝트 구조잡기
 - [ ] router 설정
@@ -66,3 +66,17 @@ Features
 - [ ] 마일스톤 생성하기
 - [ ] 마일스톤 편집하기
 - [ ] 마일스톤 삭제하기
+
+## url 설계
+
+## 1주차 (2022.01.19~2022.01.21)
+
+- 환경 설정 완료하기
+  - webpack 설정
+  - babel 설정
+  - development/product 모드 구분하기
+  - Firebase 추가 및 설정
+  - 프로젝트 구조잡기
+  - router 설정
+- 설계하기
+- 로그인 화면 구현

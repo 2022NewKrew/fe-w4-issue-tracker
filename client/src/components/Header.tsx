@@ -15,6 +15,7 @@ export const Header = () => {
 const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
+    padding: 27px 0;
 `;
 
 const Logo = styled.div`

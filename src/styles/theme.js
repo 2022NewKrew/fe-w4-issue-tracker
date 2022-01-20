@@ -5,10 +5,6 @@ const fontSizes = {
   extraSmall: "12px",
 };
 
-const paddings = {};
-
-const margins = {};
-
 const greyscale = {
   titleActive: "#14142B",
   body: "#D9DBE9",
@@ -39,13 +35,6 @@ const theme = {
   fontSizes,
   greyscale,
   colors,
-  deviceSizes,
-  device,
-  paddings,
-  margins,
-  interval,
-  verticalInterval,
-  gradient,
 };
 
 export default theme;

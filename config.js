@@ -3,5 +3,6 @@ System.config({
     "@commonComponents/*": "./src/components/common/*",
     "@routes/*": "./src/routes/*",
     "@components/*": "./src/components/*",
+    "@constants/*": "./src/constants/*",
   },
 });

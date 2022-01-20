@@ -2,7 +2,7 @@
   "name": "fe-w4-issue-tracker",
   "version": "1.0.0",
   "description": "fe-w4-issue-tracker",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack serve --config webpack.dev.js",
@@ -28,8 +28,6 @@
     "eslint": "^8.7.0",
     "eslint-plugin-react": "^7.28.0",
     "html-webpack-plugin": "^5.5.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
     "sass": "^1.49.0",
     "sass-loader": "^12.4.0",
     "style-loader": "^3.3.1",
@@ -37,5 +35,9 @@
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.7.3",
     "webpack-merge": "^5.8.0"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }

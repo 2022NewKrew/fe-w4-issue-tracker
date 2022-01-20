@@ -13,10 +13,14 @@ const config: Configuration = {
     module: {
         rules: [
             {
-                test: /.(ts|tsx)$/,
+                test: /\.(ts|tsx)$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
                 options: babelConfig,
+            },
+            {
+                test: /\.(png|j?g|svg|gif)?$/,
+                use: 'file-loader?name=./images/[name].[ext]',
             },
         ],
     },

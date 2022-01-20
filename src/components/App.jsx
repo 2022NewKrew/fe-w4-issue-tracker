@@ -8,14 +8,14 @@ const divStyle = css`
   &:hover {
     background-color: ${hoverColor};
   }
-`
+`;
 
 const App = () => {
   return (
     <div css={divStyle}>
-      <h1>Welcome to eve's issue tracker</h1>
+      <h1>Welcome to issue tracker</h1>
     </div>
-  )
-}
+  );
+};
 
 export default App;

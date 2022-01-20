@@ -1,3 +1,5 @@
+const HTMLPlugin=require('html-webpack-plugin');
+
 module.exports={
   entry: './src/index.js',
   output: {
@@ -5,6 +7,12 @@ module.exports={
     filename: 'bundle.js',
     publicPath: '/'
   },
+  plugins: [
+    new HTMLPlugin({
+      template: './public/index.html',
+      filename: './index.html'
+    })
+  ],
   module: {
     rules: [
       {

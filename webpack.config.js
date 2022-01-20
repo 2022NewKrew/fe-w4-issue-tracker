@@ -43,6 +43,7 @@ module.exports = {
     hot: true,
     host: 'localhost',
     port: 3001
-  }
+  },
+  devtool: 'source-map'
 }
 

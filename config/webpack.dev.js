@@ -10,4 +10,4 @@ module.exports = merge(common, {
     open: true,
     historyApiFallback: true,
   },
-})
+});

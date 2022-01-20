@@ -14,11 +14,11 @@ module.exports = {
         exclude: /node_modules/,
         use: 'babel-loader',
       },
-    ]
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: 'public/index.html',
-    })
+    }),
   ],
 };

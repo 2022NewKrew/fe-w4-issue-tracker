@@ -1,0 +1,65 @@
+{
+    "users": [
+        {
+            "id": "유저번호",
+            "name": "유저이름",
+            "profileImgSrc": "프로필이미지 주소"
+        }
+    ],
+    "issues": [
+        {
+            "id": "이슈번호",
+            "title": "제목",
+            "status": "open/close 상태",
+            "userId": "작성자 userId",
+            "timeStamp": "작성시간"
+        }
+    ],
+    "comments": [
+        {
+            "id": "코멘트번호",
+            "issueId": "종속된 issue의 id",
+            "content": "내용",
+            "userId": "코멘트를 남긴 user의 id",
+            "timeStamp": "작성시간"
+        }
+    ],
+    "labels": [
+        {
+            "id": "라벨번호",
+            "title": "라벨이름",
+            "description": "라벨설명",
+            "backgroundRGB": "배경색 rgb값",
+            "textRGB": "글씨 색 rgb값"
+        }
+    ],
+    "milestones": [
+        {
+            "id": "마일스톤번호",
+            "title": "마일스톤 제목",
+            "dueDate": "종료날짜",
+            "description": "마일스톤 설명"
+        }
+    ],
+    "assigned": [
+        {
+            "id": "assigned(이슈를 할당하는 relation)번호",
+            "userId": "assignee의 userId",
+            "issueId": "할당된 이슈번호"
+        }
+    ],
+    "labeling": [
+        {
+            "id": "labeling(라벨을 붙이는 relation)의 id",
+            "labelId": "라벨번호",
+            "issueId": "라벨이 붙여진 이슈번호"
+        }
+    ],
+    "milestoning": [
+        {
+            "id": "milestoning(이슈에 마일스톤을 지정하는 relation)의 id",
+            "milestoneId": "마일스톤번호",
+            "issueId": "마일스톤이 지정된 이슈번호"
+        }
+    ]
+}

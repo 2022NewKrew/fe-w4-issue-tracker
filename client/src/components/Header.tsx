@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ProfileImage } from './ProfileImg';
-import userProfileImage from '../../public/images/userImage.png';
+import userProfileImage from '/public/images/userImage.png';
 
 export const Header = () => {
     return (

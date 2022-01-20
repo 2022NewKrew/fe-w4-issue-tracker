@@ -1,10 +1,18 @@
 {
   "compilerOptions": {
-    "target": "es2018",
-    "module": "esnext",
+    "module": "commonjs",
+    "target": "es5",
+    "allowJs": true,
+    "checkJs": false,
+    "jsx": "react",
+    "outDir": "../server/dist",
+    "removeComments": true,
+    "noEmit": true,
+    "pretty": true,
+    "skipLibCheck": true,
     "strict": true,
-    "importHelpers": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true
-  }
+    "moduleResolution": "node",
+    "esModuleInterop": true
+  },
+  "exclude": ["node_modules"]
 }

@@ -12,9 +12,8 @@
       // ECMAScript의 언어 확장 기능
       "jsx": true
     },
-    "project": ["./tsconfig.base.json"]
+    "project": ["./tsconfig.json"]
   },
-  "ignorePatterns": [".eslintrc.js", "/node_modules/**"], // ESLint를 적용하지 않을 폴더나 파일
   "plugins": [
     // 원하는 규칙 집합
     "@typescript-eslint",

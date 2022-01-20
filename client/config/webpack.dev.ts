@@ -13,9 +13,9 @@ const devConfig: Configuration = merge(common, {
     devtool: 'inline-source-map',
     devServer: {
         static: path.resolve(process.cwd(), 'build'),
-        host: 'localhost',
+        host: process.env.REACT_HOST,
         open: true,
-        port: 3000,
+        port: process.env.REACT_PORT,
         historyApiFallback: true, // history api 또는 react-router 등을 사용하는 경우 새로고침시 404 에러 해결
     },
     output: {

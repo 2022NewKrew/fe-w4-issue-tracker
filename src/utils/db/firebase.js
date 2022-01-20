@@ -411,8 +411,8 @@ export async function readMilestone(filterOption) {
     }
   }
   
-  filteredMilestones = Object.entries(filteredMilestones)
-    .map(([ milestoneId, milestoneJson ]) => convertMilestoneJsonToData({ milestoneId, milestoneJson }))
+  filteredMilestones = await Promise.all(Object.entries(filteredMilestones)
+    .map(async ([ milestoneId, milestoneJson ]) => await convertMilestoneJsonToData({ milestoneId, milestoneJson })))
   
   return filteredMilestones
 }

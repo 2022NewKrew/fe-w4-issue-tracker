@@ -9,6 +9,7 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
   },
+  devtool: "inline-source-map",
   module: {
     rules: [
       {
@@ -32,9 +33,10 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: [".js", ".jsx", ".json"],
     alias: {
-      "@": path.resolve(__dirname, "src/"),
+      "@pages": path.resolve(__dirname, "../src/pages/"),
+      "@components": path.resolve(__dirname, "../src/components/"),
     },
   },
   plugins: [

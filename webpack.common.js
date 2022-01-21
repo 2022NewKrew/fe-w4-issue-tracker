@@ -21,7 +21,6 @@ module.exports = {
       "@constants": path.resolve(__dirname, "src/constants"),
     },
   },
-
   plugins: [
     new HtmlWebpackPlugin({
       template: "index.html",

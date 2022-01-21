@@ -20,6 +20,7 @@ const Button = styled.button`
     border: 4px solid ${(props) => props.theme.colors.lightBlue};
   }
   &:disabled {
+    cursor: "not-allowed";
     background-color: ${(props) => props.theme.colors.blue};
     opacity: 0.5;
   }
@@ -72,6 +73,7 @@ export const SecondaryButton = styled.button`
     border: 2px solid ${(props) => props.theme.colors.blue};
     color: ${(props) => props.theme.colors.blue};
     opacity: 0.5;
+    cursor: "not-allowed";
   }
 `;
 
@@ -92,6 +94,7 @@ export const TextButton = styled.button`
   &:disabled {
     color: ${(props) => props.theme.colors.body};
     opacity: 0.5;
+    cursor: "not-allowed";
   }
 `;
 

@@ -11,7 +11,7 @@ import {
 export default function Main() {
   return (
     <div>
-      Main Page
+      Main Page <br />
       <LargeButton>라지버튼</LargeButton>
       <MediumButton>미디엄버튼</MediumButton>
       <SmallButton>스몰버튼</SmallButton>

@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-export const StyleTextInput = styled.input`
+export const TextInput = styled.input`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,19 +24,19 @@ export const StyleTextInput = styled.input`
       : ``}
 `;
 
-export const LargeTextInput = styled(StyleTextInput)`
+export const LargeTextInput = styled(TextInput)`
   width: 340px;
   height: 64px;
   border-radius: 16px;
 `;
 
-export const MediumTextInput = styled(StyleTextInput)`
+export const MediumTextInput = styled(TextInput)`
   width: 320px;
   height: 56px;
   border-radius: 14px;
 `;
 
-export const SmallTextInput = styled(StyleTextInput)`
+export const SmallTextInput = styled(TextInput)`
   width: 300px;
   height: 40px;
   border-radius: 11px;

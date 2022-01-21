@@ -16,26 +16,28 @@ const AuthFormWrapper = styled.div`
   align-items: center;
 `;
 
-const AuthText = styled(MediumText)`
+const AuthFormText = styled(MediumText)`
   margin: 20px;
 `;
 
-const AuthInput = styled(LargeTextInput)`
+const AuthFormInput = styled(LargeTextInput)`
   margin-bottom: 20px;
 `;
 
-function AuthForm() {
+function AuthForm({ signInWithGithub }) {
   return (
     <AuthFormWrapper>
       <LargeLogo>Issue Tracker</LargeLogo>
-      <LargeButton color={COLOR.BLACK}>GitHub 계정으로 로그인</LargeButton>
-      <AuthText>or</AuthText>
-      <AuthInput type={"text"} placeholder={"아이디"} />
-      <AuthInput type={"password"} placeholder={"비밀번호"} />
+      <LargeButton color={COLOR.BLACK} onClick={signInWithGithub}>
+        GitHub 계정으로 로그인
+      </LargeButton>
+      <AuthFormText>or</AuthFormText>
+      <AuthFormInput type={"text"} placeholder={"아이디"} />
+      <AuthFormInput type={"password"} placeholder={"비밀번호"} />
       <LargeButton color={COLOR.BLUE} disabled={true}>
         아이디로 로그인
       </LargeButton>
-      <AuthText>회원가입</AuthText>
+      <AuthFormText>회원가입</AuthFormText>
     </AuthFormWrapper>
   );
 }

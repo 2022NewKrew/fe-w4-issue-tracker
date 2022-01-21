@@ -14,7 +14,7 @@ const BTN_COLOR = {
   },
 };
 
-export const StyledButton = styled.button`
+export const Button = styled.button`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -49,7 +49,7 @@ export const StyledButton = styled.button`
       : ``}
 `;
 
-export const LargeButton = styled(StyledButton)`
+export const LargeButton = styled(Button)`
   padding: 0 24px;
   border-radius: 20px;
   width: 340px;
@@ -58,19 +58,19 @@ export const LargeButton = styled(StyledButton)`
     border-color: #c7ebff;
   }
 `;
-export const MediumStandardButton = styled(StyledButton)`
+export const MediumStandardButton = styled(Button)`
   padding: 0 24px;
   border-radius: 20px;
   width: 340px;
   height: 64px;
 `;
-export const SmallStandardButton = styled(StyledButton)`
+export const SmallStandardButton = styled(Button)`
   padding: 0 16px;
   border-radius: 11px;
   width: 120px;
   height: 40px;
 `;
-export const SmallSecondaryButton = styled(StyledButton)`
+export const SmallSecondaryButton = styled(Button)`
   padding: 0 16px;
   border-radius: 11px;
   width: 120px;

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-export const StyledDisplay = styled.div`
+export const Display = styled.div`
   font-family: Noto Sans KR, sans-serif;
   font-style: normal;
   font-size: 32px;
@@ -9,10 +9,10 @@ export const StyledDisplay = styled.div`
   color: #14142b;
 `;
 
-export const BoldDisplay = styled(StyledDisplay)`
+export const BoldDisplay = styled(Display)`
   font-weight: bold;
 `;
 
-export const RegularDisplay = styled(StyledDisplay)`
+export const RegularDisplay = styled(Display)`
   font-weight: normal;
 `;

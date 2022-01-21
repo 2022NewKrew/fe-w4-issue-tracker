@@ -8,6 +8,11 @@ import {
   SmallTextButton,
 } from "../components/buttons/buttons";
 
+import {
+  LargeTextInput,
+  MediumTextInput,
+} from "../components/textInputs/textInputs";
+
 export default function Main() {
   return (
     <div>
@@ -19,6 +24,9 @@ export default function Main() {
       <SecondaryButton>세컨데리</SecondaryButton>
       <MediumTextButton>미디엄</MediumTextButton>
       <SmallTextButton>스몰</SmallTextButton>
+      <br />
+      <LargeTextInput />
+      <MediumTextInput />
     </div>
   );
 }

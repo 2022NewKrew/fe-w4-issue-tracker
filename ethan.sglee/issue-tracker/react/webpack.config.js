@@ -16,18 +16,18 @@ module.exports = {
   },
   devtool: 'inline-source-map',
   devServer: {
-    port: 5500,
+    port: 3000,
     client: {
       overlay: true,
     },
     hot: true,
     static: {
-      directory: path.resolve(__dirname, 'dist'),
-      publicPath: '/dist/'
+      directory: path.resolve(__dirname, 'public'),
     },
     devMiddleware: {
       writeToDisk: true,
-    }
+    },
+    historyApiFallback: true,
   },
   module: {
     rules: [
@@ -44,7 +44,7 @@ module.exports = {
         test: /\.(jpeg|jpg)$/,
         loader: 'file-loader',
         options: {
-          name: 'images/[name].[ext]',
+          name: '[path][name].[ext]',
         },
       },
     ],

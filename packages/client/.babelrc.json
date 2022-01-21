@@ -1,3 +1,12 @@
 {
-  "presets": [["@babel/preset-react", { "runtime": "automatic" }]]
+  "presets": [["@babel/preset-react", { "runtime": "automatic" }]],
+  "plugins": [
+    [
+      "@emotion",
+      {
+        "autoLabel": "dev-only", // 기본값 'dev-only'
+        "labelFormat": "mj-[dirname]-[filename]-[local]"
+      }
+    ]
+  ]
 }

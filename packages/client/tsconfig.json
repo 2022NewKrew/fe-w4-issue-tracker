@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "jsx": "react",
+    "jsx": "react-jsx",
     "rootDir": ".",
     "outDir": "./dist",
     "baseUrl": ".",
@@ -9,7 +9,8 @@
     "allowJs": false,
     "declaration": true,
     "declarationMap": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "jsxImportSource": "@emotion/react"
     // "paths": {
     //   "@root/server": ["../server/src/app.ts"]
     // }

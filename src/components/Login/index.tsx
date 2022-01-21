@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { color, githubLoginUrl } from "@/constant/constant";
+import { Color, githubLoginUrl } from "@/constant/constant";
 const Login = () => {
   const githubLogin = () => {
     location.href = githubLoginUrl;
@@ -10,7 +10,7 @@ const Login = () => {
       <ListWrapper>
         <Title>Isuue Tracker</Title>
         <ButtonInput
-          background={color.Black}
+          background={Color.TitleActive}
           type="button"
           value="GitHub 계정으로 로그인"
           onClick={githubLogin}
@@ -19,7 +19,7 @@ const Login = () => {
         <TextInput placeholder="아이디" />
         <TextInput placeholder="비밀번호" />
         <ButtonInput
-          background={color.LightBlue}
+          background={Color.LightBlue}
           type="button"
           value="아이디로 로그인"
         />

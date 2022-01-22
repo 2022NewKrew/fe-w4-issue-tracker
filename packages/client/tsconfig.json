@@ -4,16 +4,22 @@
     "jsx": "react-jsx",
     "rootDir": ".",
     "outDir": "./dist",
-    "baseUrl": ".",
     "composite": true,
     "allowJs": false,
     "declaration": true,
     "declarationMap": true,
     "allowSyntheticDefaultImports": true,
-    "jsxImportSource": "@emotion/react"
-    // "paths": {
-    //   "@root/server": ["../server/src/app.ts"]
-    // }
+    "jsxImportSource": "@emotion/react",
+    "baseUrl": "./",
+    "paths": {
+      "@components/*": ["./src/components/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@services/*": ["./src/services/*"],
+      "@stores/*": ["./src/stores/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@utils/*": ["./src/utils/*"]
+    }
   },
   //   "references": [
   //     {

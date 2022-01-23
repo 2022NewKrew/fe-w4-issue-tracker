@@ -28,7 +28,6 @@ const LargeLabelText = styled(LabelText)`
 `
 
 const Input = styled.input`
-  width: 100%;
   color: ${ COLOR.TITLE_ACTIVE };
   background: none;
   border: none;
@@ -40,6 +39,18 @@ const Input = styled.input`
 
   &:focus {
     outline: none;
+  }
+`
+
+const SuccessPlaceholderInput = styled(Input)`
+  &::placeholder {
+    color: ${ COLOR.GREEN }
+  }
+`
+
+const ErrorPlaceholderInput = styled(Input)`
+  &::placeholder {
+    color: ${ COLOR.RED }
   }
 `
 
@@ -108,14 +119,32 @@ const SmallWrapper = styled(Wrapper)`
   div {
     width: 80px;
   }
+
+  input {
+    width: calc(100% - 88px);
+  }
 `
 
-
+/**
+ * @param {string} type
+ * @param {string} state
+ * @param {string} placeholder
+ * @param {function} onChangeListener
+ * @return {JSX.Element}
+ * @constructor
+ */
 const TextInput = ({ type, state, placeholder, onChangeListener }) => {
+  // input element 참조
   const inputRef = useRef()
+  // input element가 focus인지 추적
   const [ isFocus, setIsFocus ] = useState(false)
+  // input element 내용이 비었는지 추적
   const [ isEmpty, setIsEmpty ] = useState(true)
+  // input 태그가 state, focus에 따라 바뀌기 때문에
+  // 입력한 내용이 사라지는 것을 방지하기 위해 input element 내용을 추적
+  const [ inputValue, setInputValue ] = useState('')
   
+  // input을 감싸고 있는 wrapper element가 클릭되어도 input으로 focus되도록 함
   const focusToInput = useCallback(() => {
     inputRef.current.focus()
   }, [])
@@ -128,8 +157,13 @@ const TextInput = ({ type, state, placeholder, onChangeListener }) => {
     setIsFocus(false)
   }, [])
   
-  const onChange = useCallback(({ target }) => {
-    if (target.value) {
+  const onChange = useCallback((event) => {
+    const { target } = event
+    const { value } = target
+    
+    event.preventDefault()
+    
+    if (value) {
       if (isEmpty) {
         setIsEmpty(false)
       }
@@ -137,7 +171,8 @@ const TextInput = ({ type, state, placeholder, onChangeListener }) => {
       setIsEmpty(true)
     }
     
-    onChangeListener(target.value)
+    setInputValue(value)
+    onChangeListener(value)
   }, [ onChangeListener ])
   
   const wrapperStyle = useCallback(() => {
@@ -150,17 +185,94 @@ const TextInput = ({ type, state, placeholder, onChangeListener }) => {
         
         case TEXT_INPUT_STATE.ERROR:
           return errorWrapperStyle
-          
+        
         default:
           return {}
       }
     }
-  }, []) // isFocus가 있을 때, 없을 때 차이 확인
-  // useCallback이란, dependency에 따라 함수가 재생성이 되는 것 아닌가?
+  }, [ isFocus ])
   
-  console.log('rerender')
-  console.log(isFocus)
-  console.log(wrapperStyle())
+  const labelStyle = useCallback(() => {
+    let style = {}
+    
+    if (!isEmpty) {
+      style = {
+        ...style,
+        display: 'inline-block'
+      }
+    }
+    
+    if (!isFocus) {
+      switch (state) {
+        case TEXT_INPUT_STATE.SUCCESS:
+          style = {
+            ...style,
+            ...successLabelStyle
+          }
+          break
+        
+        case TEXT_INPUT_STATE.ERROR:
+          style = {
+            ...style,
+            ...errorLabelStyle
+          }
+          break
+      }
+    }
+    
+    return style
+  }, [ isEmpty, isFocus ])
+  
+  const placeholderInInput = useMemo(() => {
+    if (type === TEXT_INPUT_TYPE.SMALL) {
+      return ''
+    } else {
+      return placeholder
+    }
+  }, [ type ])
+  
+  const input = useMemo(() => {
+    if (!isFocus) {
+      return (
+        state === TEXT_INPUT_STATE.SUCCESS
+        ? <SuccessPlaceholderInput
+          placeholder={ placeholderInInput }
+          ref={ inputRef }
+          onChange={ onChange }
+          onFocus={ onFocus }
+          onBlur={ onBlur }
+          value={ inputValue } />
+        :
+        state === TEXT_INPUT_STATE.ERROR
+        ? <ErrorPlaceholderInput
+          placeholder={ placeholderInInput }
+          ref={ inputRef }
+          onChange={ onChange }
+          onFocus={ onFocus }
+          onBlur={ onBlur }
+          value={ inputValue } />
+        : <Input
+          placeholder={ placeholderInInput }
+          ref={ inputRef }
+          onChange={ onChange }
+          onFocus={ onFocus }
+          onBlur={ onBlur }
+          value={ inputValue } />
+      )
+    } else {
+      return (
+        <Input
+          placeholder={ placeholderInInput }
+          ref={ inputRef }
+          onChange={ onChange }
+          onFocus={ onFocus }
+          onBlur={ onBlur }
+          value={ inputValue }
+          autoFocus={ true } />
+      )
+    }
+  }, [ state, isFocus, inputValue ])
+  
   
   switch (type) {
     case TEXT_INPUT_TYPE.LARGE:
@@ -168,13 +280,8 @@ const TextInput = ({ type, state, placeholder, onChangeListener }) => {
         <LargeWrapper
           onClick={ focusToInput }
           style={ wrapperStyle() }>
-          <LabelText style={ !isEmpty ? { display: 'inline-block' } : {} }>{ placeholder }</LabelText>
-          <Input
-            placeholder={ placeholder }
-            ref={ inputRef }
-            onChange={ onChange }
-            onFocus={ onFocus }
-            onBlur={ onBlur } />
+          <LabelText style={ labelStyle() }>{ placeholder }</LabelText>
+          { input }
         </LargeWrapper>
       )
     
@@ -183,13 +290,8 @@ const TextInput = ({ type, state, placeholder, onChangeListener }) => {
         <MediumWrapper
           onClick={ focusToInput }
           style={ wrapperStyle() }>
-          <LabelText style={ !isEmpty ? { display: 'inline-block' } : {} }>{ placeholder }</LabelText>
-          <Input
-            placeholder={ placeholder }
-            ref={ inputRef }
-            onChange={ onChange }
-            onFocus={ onFocus }
-            onBlur={ onBlur } />
+          <LabelText style={ labelStyle() }>{ placeholder }</LabelText>
+          { input }
         </MediumWrapper>
       )
     
@@ -200,14 +302,10 @@ const TextInput = ({ type, state, placeholder, onChangeListener }) => {
           style={ wrapperStyle() }>
           {
             isEmpty
-              ? <LargeLabelText>{ placeholder }</LargeLabelText>
-              : <LabelText>{ placeholder }</LabelText>
+            ? <LargeLabelText style={ labelStyle() }>{ placeholder }</LargeLabelText>
+            : <LabelText style={ labelStyle() }>{ placeholder }</LabelText>
           }
-          <Input
-            ref={ inputRef }
-            onChange={ onChange }
-            onFocus={ onFocus }
-            onBlur={ onBlur } />
+          { input }
         </SmallWrapper>
       )
   }

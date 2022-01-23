@@ -34,14 +34,17 @@ export const FONT = {
   TEXT_LARGE: `
     font-size: 24px;
     line-height: 40px;
+    font-weight: normal;
   `,
   TEXT_MEDIUM: `
     font-size: 18px;
     line-height: 32px;
+    font-weight: normal;
   `,
   TEXT_SMALL: `
     font-size: 16px;
     line-height: 28px;
+    font-weight: normal;
   `,
   TEXT_XSMALL: `
     font-size: 12px;

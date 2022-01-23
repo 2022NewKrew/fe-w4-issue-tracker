@@ -200,7 +200,14 @@ const SmallTextBtn = styled.div`
   ${textBtnStyle}
 `
 
-
+/**
+ * 버튼 컴포넌트
+ * @param { string } type
+ * @param {string} text
+ * @param {function} onClickListener
+ * @return {JSX.Element}
+ * @constructor
+ */
 const Button = ({ type, text, onClickListener }) => {
   switch (type) {
     case BUTTON_TYPE.LARGE_STANDARD:

@@ -29,9 +29,9 @@ const theme: Theme = {
     label: "#6E7191",
     placeholer: "#A0A3BD",
     line: "#D9DBE9",
-    inputBackgound: "#D9DBE9",
+    inputBackgound: "#EFF0F6",
     background: "#F7F7FC",
-    offWhite: "#D9DBE9",
+    offWhite: "#FEFEFE",
   },
   colors: {
     primary: {

@@ -13,6 +13,7 @@ type greyscaleKey =
   | "offWhite";
 
 type colorsKey = "primary" | "secondary" | "error" | "success";
+// type colorsTone = "default" | "dark" | "light";
 
 interface IColorDetail {
   default: string;

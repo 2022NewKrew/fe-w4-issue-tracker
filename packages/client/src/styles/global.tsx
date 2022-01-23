@@ -1,16 +1,14 @@
-import { Global, css, Theme } from "@emotion/react";
+import { Global, css } from "@emotion/react";
+import emotionReset from "emotion-reset";
+import theme from "@styles/theme";
 
-const style = (theme: Theme) => css`
+const style = css`
+  ${emotionReset}
   * {
-    margin: 0;
-    padding: 0;
     font-family: Noto Sans KR;
     font-style: normal;
     font-weight: normal;
     color: ${theme.greyscale.body};
-  }
-  body {
-    box-sizing: border-box;
   }
 `;
 

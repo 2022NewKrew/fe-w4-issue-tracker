@@ -1,5 +1,5 @@
 import mysql from "mysql2";
-import { dbConfig } from "../config";
+import { dbConfig } from "../../config";
 
 interface DBresult {
   status: string;
@@ -7,4 +7,5 @@ interface DBresult {
 }
 const pool = mysql.createPool(dbConfig).promise();
 
-export { pool, DBresult };
+export { pool };
+export type { DBresult };

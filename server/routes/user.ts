@@ -1,13 +1,9 @@
-import express, { Request, Response } from "express";
+import express from "express";
+import * as controller from "../src/user/user.controller";
+import * as auth from "../src/utils/auth";
+
 const router = express.Router();
 
-router.use("/", (req: Request, res: Response, next) => {
-  req.url = decodeURIComponent(req.url);
-  next();
-});
-
-router.get("/", (req: Request, res: Response) => {
-  res.render("index");
-});
-
+router.get("/signin", controller.signIn);
+router.get("/checkdup/:name", controller.checkDup);
 export default router;

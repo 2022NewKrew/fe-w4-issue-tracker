@@ -1,3 +1,5 @@
+const {convertIsOpenBool, convertIsOpenInt} = require('../global');
+
 /**
  * @param {import('better-sqlite3').Database} db
  */
@@ -24,6 +26,7 @@ module.exports=function initIssueDB(db){
     VALUES (@title, @authorID, @timestamp, @isOpen, @milestoneID, @body)
   `);
   function insert({title, authorID, timestamp, isOpen, milestoneID, body}){
+    isOpen=isOpen ? 1 : 0;
     insertStmt.run({title, authorID, timestamp, isOpen, milestoneID, body});
   }
 
@@ -60,7 +63,17 @@ module.exports=function initIssueDB(db){
     WHERE issueID=@issueID
   `);
   function updateIsOpen(issueID, {isOpen}){
+    isOpen=convertIsOpenInt(isOpen);
     updateIsOpenStmt.run({issueID, isOpen});
+  }
+
+  const selectStmt=db.prepare(`
+    SELECT * FROM issue
+  `);
+  function select(){
+    const result=selectStmt.all();
+    convertIsOpenBool(result);
+    return result;
   }
 
   return {
@@ -68,6 +81,7 @@ module.exports=function initIssueDB(db){
     updateTitle,
     updateMilestone,
     updateBody,
-    updateIsOpen
+    updateIsOpen,
+    select
   };
 };

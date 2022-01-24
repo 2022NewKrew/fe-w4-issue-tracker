@@ -126,6 +126,8 @@ const TextInput = ({
                    }) => {
   // input element 참조
   const inputRef = useRef()
+  // blur되었을때 즉시 setIsFocus가 실행되는 것을 막기 위한 delay 장치
+  const timeRef = useRef(0)
   // input element가 focus인지 추적
   const [ isFocus, setIsFocus ] = useState(false)
   // input element 내용이 비었는지 추적
@@ -133,11 +135,12 @@ const TextInput = ({
   // input element 내용을 추적
   const [ inputValueState, setInputValueState ] = useState('')
   
+  // inputValue가 변경되면 반영
   useEffect(() => {
     if (inputValue) {
       setInputValueState(inputValue)
     }
-  }, [inputValue])
+  }, [ inputValue ])
   
   // input을 감싸고 있는 wrapper element가 클릭되어도 input으로 focus되도록 함
   const focusToInput = useCallback(() => {
@@ -145,11 +148,14 @@ const TextInput = ({
   }, [])
   
   const onFocus = useCallback(() => {
+    clearTimeout(timeRef.current)
     setIsFocus(true)
   }, [])
   
   const onBlur = useCallback(() => {
-    setIsFocus(false)
+    timeRef.current = setTimeout(() => {
+      setIsFocus(false)
+    }, 50)
   }, [])
   
   const onChange = useCallback((event) => {

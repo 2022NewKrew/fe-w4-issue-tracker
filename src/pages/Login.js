@@ -7,11 +7,24 @@ import { SmallLink } from "@components/typography/link";
 import { LargeTextInput } from "@components/textInputs/textInputs";
 import AuthForm from "@components/login/AuthForm";
 
+import { firebaseAuth, githubProvider } from "../firebase";
+import { signInWithPopup } from "firebase/auth";
+
 export default function Login() {
+  const provider = githubProvider;
+  function handleGithubLogin() {
+    firebaseAuth.signInWithPopup(provider).then((result) => {
+      // The signed-in user info.
+      const user = result.user;
+    });
+  }
+
   return (
     <LoginContainer>
       <Logo />
-      <LargeButton color='black'> GitHub 계정으로 로그인</LargeButton>
+      <LargeButton color='black' onClick={handleGithubLogin}>
+        GitHub 계정으로 로그인
+      </LargeButton>
       <SmallLink>or</SmallLink>
       <AuthForm />
       {/* <LargeTextInput text='로그인'></LargeTextInput>

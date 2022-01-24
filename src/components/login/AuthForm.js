@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { LargeButton, SmallTextButton } from "@components/buttons/buttons";
 import styled, { css } from "styled-components";
-// import { SmallLink } from "@components/typography/link";
-// import { LargeTextInput } from "@components/textInputs/textInputs";
 
 export default function AuthForm() {
   const [id, setId] = useState("");

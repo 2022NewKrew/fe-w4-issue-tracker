@@ -1,8 +1,15 @@
 import React from "react";
-import AuthForm from "../components/auth/AuthForm";
+import AuthForm from "@components/auth/AuthForm";
+import { authService } from "../firebase";
 
 function Auth() {
-  return <AuthForm />;
+  const signInWithGithub = () => {
+    const authProvider = new authService.GithubAuthProvider();
+    const auth = authService.getAuth();
+    authService.signInWithPopup(auth, authProvider);
+  };
+
+  return <AuthForm signInWithGithub={signInWithGithub} />;
 }
 
 export default Auth;

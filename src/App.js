@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { authService } from "./firebase";
 import Auth from "@routes/Auth";
+import { Route, Routes } from "react-router-dom";
 import IssueList from "@routes/IssueList";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { authService } from "./firebase";
 
 const Main = styled.div`
   position: absolute;
@@ -29,26 +29,24 @@ function App() {
       } else {
         setUser(null);
       }
+      setInit(true);
     });
-    setInit(true);
   }, []);
 
   return (
     <Main>
       {init ? (
-        <BrowserRouter>
-          {user ? (
-            <Routes>
-              <Route path="/" element={<IssueList />} />
-            </Routes>
-          ) : (
-            <Routes>
-              <Route path="/" element={<Auth />} />
-            </Routes>
-          )}
-        </BrowserRouter>
+        user ? (
+          <Routes>
+            <Route path="/" element={<IssueList />} />
+          </Routes>
+        ) : (
+          <Routes>
+            <Route path="/" element={<Auth />} />
+          </Routes>
+        )
       ) : (
-        <div>initializing..</div>
+        <div>...initializing...</div>
       )}
     </Main>
   );

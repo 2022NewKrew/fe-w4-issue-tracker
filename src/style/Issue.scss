@@ -1,0 +1,21 @@
+@use "variables" as *;
+
+.Issue {
+    display: flex;
+    &:hover {
+        background-color: $off-white-color;
+    }
+
+    .checkbox-container {
+        flex: 0 1 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .issue-info-container {
+        flex: 1 1 500px;
+    }
+    .rest-container {
+        flex: 0 1 100px;
+    }
+}

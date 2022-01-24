@@ -1,3 +1,4 @@
+@use "variables" as *;
 @import 'https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap';
 
 * {
@@ -8,6 +9,7 @@
 
 :root {
     font-size: 13pt;
+    background-color: $background-color;
 }
 
 body {
@@ -18,17 +20,3 @@ body {
 #root {
     width: 100vw;
 }
-
-$title-active-color: #D9DBE9;
-$body-color: #D9DBE9;
-$label-color: #6E7191;
-$placeholder-color: #A0A3BD;
-$line-color: #D9DBE9;
-$input-background-color: #EFF0F6;
-$background-color: #F7F7FC;
-$off-white-color: #FEFEFE;
-
-$primary-color: #007AFF;
-$secondary-color: #0025E7;
-$error-color: #FF3B30;
-$success-color: #34C759;

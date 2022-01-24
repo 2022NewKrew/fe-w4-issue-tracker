@@ -1,6 +1,13 @@
-@use "global" as *;
+@use "variables" as *;
 
 .IssueList {
-    color: white;
-    background-color: $primary-color;
+    background-color: $background-color;
+    padding: 20px;
+    & > * {
+        margin: 0 auto;
+        max-width: 95vw;
+    }
+
+    // .issue-container {
+    // }
 }

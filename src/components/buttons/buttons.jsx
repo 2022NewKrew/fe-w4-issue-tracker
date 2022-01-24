@@ -25,7 +25,7 @@ const Button = styled.button`
   border-radius: 20px;
   padding: 0 24px;
   border: none;
-  cursor: pointer;
+  cursor: ${(props) => (props.disable === true ? "not-allowed" : "pointer")};
 
   font-weight: 700;
 
@@ -33,27 +33,29 @@ const Button = styled.button`
 
   color: ${(props) => props.theme.greyscale.offWhite};
 
+  opacity: ${(props) => (props.disable ? 0.5 : 1)};
   ${(props) => {
     const mainColor = props.color;
     const [INIT, LIGHT, DARK] = findColor(props.theme, mainColor);
 
-    return css`
-      background-color: ${INIT};
+    if (props.disable) {
+      return css`
+        background-color: ${INIT};
+      `;
+    } else {
+      return css`
+        background-color: ${INIT};
 
-      &:hover {
-        background-color: ${DARK};
-      }
-      &:focus {
-        background-color: ${INIT};
-        border: 4px solid ${LIGHT};
-      }
-      &:disabled {
-        cursor: "not-allowed";
-        background-color: ${INIT};
-        opacity: 0.5;
-      }
-    `;
-  }}
+        &:hover {
+          background-color: ${DARK};
+        }
+        &:focus {
+          background-color: ${INIT};
+          border: 4px solid ${LIGHT};
+        }
+      `;
+    }
+  }};
 `;
 
 export const LargeButton = styled(Button)`

@@ -15,6 +15,8 @@ type greyscaleKey =
 type colorsKey = "primary" | "secondary" | "error" | "success";
 // type colorsTone = "default" | "dark" | "light";
 
+type sizeKey = "large" | "medium" | "small";
+
 interface IColorDetail {
   default: string;
   light: string;

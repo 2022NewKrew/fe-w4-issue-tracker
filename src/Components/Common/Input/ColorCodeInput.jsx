@@ -18,8 +18,8 @@ const IconBox = styled.div`
 const ColorCodeInput = ({ onChangeListener }) => {
   const [ inputValue, setInputValue ] = useState('#')
   
-  const setInputValueWithListener = useCallback((value) => {
-    setInputValue(value)
+  const setColorCodeWithListener = useCallback((value) => {
+    setColorCode(value)
     
     if (onChangeListener) {
       onChangeListener(value)
@@ -28,26 +28,26 @@ const ColorCodeInput = ({ onChangeListener }) => {
   
   const generateColorCode = useCallback(() => {
     const colorValue = Math.floor((256 * 256 * 256 - 1) * Math.random())
-    const colorCode =
-      '#' + colorValue.toString(16)
-        .toUpperCase()
-        .padStart(6, '0')
+    const newColorCode = '#' + colorValue.toString(16)
+                                         .toUpperCase()
+                                         .padStart(6, '0')
     
-    setInputValueWithListener(colorCode)
+    setColorCodeWithListener(newColorCode)
+    setInputValue(newColorCode)
   }, [])
   
   const onChange = useCallback((value, setValue) => {
     if (!value.includes('#')) { // #이 지워지면 무시
-      setValue(inputValue)
+      setValue(colorCode)
     } else if (value.match(/[^#a-fA-F0-9]/)) { // #, 0~9, a~f, A~F외의 문자가 입력되면 무시
-      setValue(inputValue)
+      setValue(colorCode)
     } else if (value.length <= 7) { // 길이가 7이 넘지 않을 때 반영
-      setInputValueWithListener(value.toUpperCase())
+      setColorCodeWithListener(value.toUpperCase())
       setValue(value.toUpperCase())
     } else { // 그 외의 경우 모두 무시
-      setValue(inputValue)
+      setValue(colorCode)
     }
-  }, [ inputValue ])
+  }, [ colorCode ])
   
   return (
     <TextInput
@@ -65,6 +65,8 @@ const ColorCodeInput = ({ onChangeListener }) => {
   )
 }
 
-ColorCodeInput.propTypes = {}
+ColorCodeInput.propTypes = {
+  onChangeListener: PropTypes.func
+}
 
 export default ColorCodeInput

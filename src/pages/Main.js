@@ -15,8 +15,10 @@ import {
 } from "@components/textInputs/textInputs";
 
 import { ReactComponent as Logo } from "../components/icons/logo.svg";
+import { useNavigate } from "react-router-dom";
 
 export default function Main() {
+  let navigate = useNavigate();
   return (
     <div>
       Main Page <br />
@@ -32,7 +34,7 @@ export default function Main() {
       <MediumTextInput />
       <SmallTextInput />
       <br />
-      <Logo />
+      <Logo onClick={() => navigate("/login")} />
     </div>
   );
 }

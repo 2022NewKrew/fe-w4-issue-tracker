@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { LoginContainer } from "@components/login/loginContainer";
 import { ReactComponent as Logo } from "@components/icons/logo.svg";
@@ -8,16 +8,31 @@ import { LargeTextInput } from "@components/textInputs/textInputs";
 import AuthForm from "@components/login/AuthForm";
 
 import { firebaseAuth, githubProvider } from "../firebase";
-import { signInWithPopup } from "firebase/auth";
+
+import { useRecoilState } from "recoil";
+import { userState } from "../atoms/atoms";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const provider = githubProvider;
+  let navigate = useNavigate();
+
+  const [user, setUser] = useRecoilState(userState);
+
   function handleGithubLogin() {
     firebaseAuth.signInWithPopup(provider).then((result) => {
       // The signed-in user info.
-      const user = result.user;
+      const signedInUser = {
+        name: result.user.displayName,
+        email: result.user.email,
+      };
+      setUser(signedInUser);
     });
   }
+
+  useEffect(() => {
+    if (user) navigate("/");
+  }, [user]);
 
   return (
     <LoginContainer>

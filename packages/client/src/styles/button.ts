@@ -1,66 +1,95 @@
 import { css } from "@emotion/react";
-import { colorsKey } from "./emotion";
+import { buttonType, colorType, sizeType } from "./emotion";
 import theme from "@styles/theme";
 import { CSSIF } from "@utils/helper";
 
-export const ButtonBasicStyle = (color: colorsKey, reverse: boolean) =>
-  css`
-    ${theme.flexCenter}
-    font-weight: bold;
-    color: ${CSSIF(
-      reverse,
-      theme.colors[color].default,
-      theme.greyscale.offWhite
-    )};
-    background: ${CSSIF(
-      reverse,
-      theme.greyscale.offWhite,
-      theme.colors[color].default
-    )};
-    border: ${CSSIF(reverse, `2px solid ${theme.colors[color].default}`)};
-    :hover:enabled:not(:active) {
-      color: ${CSSIF(reverse, theme.colors[color].dark)};
-      background: ${CSSIF(
-        reverse,
-        theme.greyscale.offWhite,
-        theme.colors[color].dark
-      )};
-      border-color: ${CSSIF(reverse, theme.colors[color].dark)};
-    }
-    :active {
-      color: ${CSSIF(reverse, theme.colors[color].default)};
-      background: ${CSSIF(
-        reverse,
-        theme.greyscale.offWhite,
-        theme.colors[color].default
-      )};
-      border: 4px solid ${theme.colors[color].light};
-    }
-  `;
+const LARGE = "large";
+const MEDIUM = "medium";
+const SMALL = "small";
 
-export const ButtionStyle = (color: colorsKey, reverse = false) => ({
-  large: css`
-    ${ButtonBasicStyle(color, reverse)}
-    ${theme.text.medium}
-    width: 340px;
-    height: 64px;
-    border-radius: 20px;
-    padding: 0px 24px;
-  `,
-  medium: css`
-    ${ButtonBasicStyle(color, reverse)}
-    ${theme.text.medium}
-    width: 240px;
-    height: 56px;
-    border-radius: 20px;
-    padding: 0px 24px;
-  `,
-  small: css`
-    ${ButtonBasicStyle(color, reverse)}
-    ${theme.text.small}
-    width: 120px;
-    height: 40px;
-    border-radius: 11px;
-    padding: 0px 16px;
-  `,
-});
+const STANDARD = "standard";
+const SECONDARY = "secondary";
+const TEXT = "text";
+
+const PRIMARY = "primary";
+
+interface IButtonStyle {
+  size: sizeType;
+  color?: colorType;
+  type?: buttonType;
+}
+
+export const ButtionStyle = ({
+  size,
+  color = PRIMARY,
+  type = STANDARD,
+}: IButtonStyle) => css`
+  ${theme.flexCenter}
+  padding: 0 ${CSSIF(size !== SMALL, "24px", "16px")};
+
+  // font style
+  ${CSSIF(size !== SMALL, theme.text.medium, theme.text.small)}
+  font-weight: bold;
+  color: ${{
+    [STANDARD]: theme.greyscale.offWhite,
+    [SECONDARY]: theme.colors[color].default,
+    [TEXT]: theme.greyscale.label,
+  }[type]};
+
+  border: ${CSSIF(
+    type === SECONDARY,
+    `2px solid ${theme.colors[color].default}`
+  )};
+  border-radius: ${CSSIF(size !== SMALL, "20px", "11px")};
+
+  background: ${CSSIF(
+    type === STANDARD,
+    theme.colors[color].default,
+    theme.greyscale.offWhite
+  )};
+
+  ${{
+    [LARGE]: css`
+      width: 340px;
+      height: 64px;
+    `,
+    [MEDIUM]: css`
+      width: 240px;
+      height: 56px;
+    `,
+    [SMALL]: css`
+      width: 120px;
+      height: 40px;
+    `,
+  }[size]}
+
+  :hover:enabled:not(:active) {
+    ${{
+      [STANDARD]: css`
+        background: ${theme.colors[color].dark};
+      `,
+      [SECONDARY]: css`
+        color: ${theme.colors[color].dark};
+        border-color: ${theme.colors[color].dark};
+      `,
+      [TEXT]: css`
+        color: ${theme.greyscale.body};
+      `,
+    }[type]};
+  }
+  :active {
+    ${{
+      [STANDARD]: css`
+        border: 4px solid ${theme.colors[color].light};
+      `,
+      [SECONDARY]: css`
+        color: ${theme.colors[color].default};
+        border-color: ${theme.colors[color].dark};
+        border: 4px solid ${theme.colors[color].light};
+      `,
+      [TEXT]: css`
+        color: ${theme.greyscale.titleActive};
+      `,
+    }[type]};
+  }
+`;

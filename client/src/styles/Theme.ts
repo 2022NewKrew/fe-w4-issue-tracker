@@ -1,0 +1,27 @@
+export default {
+  color: {
+    background: "#F7F7FC",
+    inputBackground: "#EFF0F6",
+    titleActive: "#14142B",
+    body: "#4E4B66",
+    label: "#6E7191",
+    placeholder: "#A0A3BD",
+    line: "#D9DBE9",
+    offWhite: "#FEFEFE",
+    primary: "#007AFF",
+    primaryC1: "#004DE3",
+    primaryC2: "#C7EBFF",
+    secondary: "#0025E7",
+    secondaryC1: "#CCD4FF",
+    secondaryC2: "#020070",
+    error: "#FF3B30",
+    errorC1: "#FFd1CF",
+    errorC2: "#c60B00",
+    success: "#34C759",
+    successC1: "#DDFFE6",
+    successC2: "#00A028",
+  },
+  font: {
+    logoLarge: "Montserrat",
+  },
+};

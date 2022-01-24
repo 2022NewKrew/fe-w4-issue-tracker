@@ -42,11 +42,20 @@ export const ButtionStyle = ({
   )};
   border-radius: ${CSSIF(size !== SMALL, "20px", "11px")};
 
-  background: ${CSSIF(
-    type === STANDARD,
-    theme.colors[color].default,
-    theme.greyscale.offWhite
-  )};
+  ${{
+    [STANDARD]: css`
+      color: ${theme.greyscale.offWhite};
+      background: ${theme.colors[color].default};
+    `,
+    [SECONDARY]: css`
+      color: ${theme.colors[color].default};
+      background: ${theme.greyscale.offWhite};
+    `,
+    [TEXT]: css`
+      color: ${theme.greyscale.label};
+      background: transparent;
+    `,
+  }[type]};
 
   ${{
     [LARGE]: css`

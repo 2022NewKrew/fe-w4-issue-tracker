@@ -1,5 +1,6 @@
 import IDLoginForm from "@components/login/IDLoginForm";
 import { css } from "@emotion/react";
+import styled from "@emotion/styled";
 import { ButtionStyle } from "@styles/button";
 import theme from "@styles/theme";
 import React from "react";
@@ -11,9 +12,7 @@ const Login: React.FC = () => {
       <button id="GITLOGIN">GitHub 계정으로 로그인</button>
       <span>or</span>
       <IDLoginForm />
-      <button css={ButtionStyle({ size: "small", type: "text" })}>
-        회원가입
-      </button>
+      <SignupButton>회원가입</SignupButton>
     </div>
   );
 };
@@ -44,4 +43,8 @@ const WrapperStype = css`
     color: ${theme.greyscale.placeholer};
     font-weight: bold;
   }
+`;
+
+const SignupButton = styled.button`
+  ${ButtionStyle({ size: "small", type: "text" })}
 `;

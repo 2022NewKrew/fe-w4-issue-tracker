@@ -24,6 +24,9 @@ const style = css`
       cursor: not-allowed;
     }
   }
+  body {
+    background: #f7f7fc;
+  }
 `;
 
 const GlobalStyle = () => {

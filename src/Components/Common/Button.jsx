@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { COLOR, FONT } from '../../style/commonStyle'
 import plusIcon from '../../icon/ic-plus.svg'
+import { ReactComponent as PlusIcon } from '../../icon/ic-plus.svg'
 
 export const BUTTON_TYPE = {
   LARGE_STANDARD: 'large-standard',
@@ -23,22 +24,13 @@ const btnStyle = css`
     opacity: 0.5;
   }
 
-  div {
-    width: 1em;
-    height: 1em;
-    margin-right: 5px;
-    background-color: ${ COLOR.OFF_WHITE };
-    -webkit-mask: url(${ plusIcon }) no-repeat, center;
-    mask: url(${ plusIcon }) no-repeat, center;
-    -webkit-mask-size: 1em;
-    mask-size: 1em;
-    ${ FONT.LINK_MEDIUM }
+  svg {
+    color: ${ COLOR.OFF_WHITE };
   }
 `
 
 const standardBtnStyle = css`
-  ${btnStyle};
-  
+  ${ btnStyle };
   box-sizing: content-box;
   background: ${ COLOR.BLUE } content-box;
   border: 4px solid rgba(0, 0, 0, 0);
@@ -55,20 +47,28 @@ const standardBtnStyle = css`
     padding-top: 3px;
     color: ${ COLOR.OFF_WHITE };
   }
+  
+  svg {
+    color: ${ COLOR.OFF_WHITE };
+  }
+  
+  svg + span {
+    margin-left: 3px;
+  }
 `
 
 const secondaryStyle = css`
-  ${btnStyle};
-  
+  ${ btnStyle };
+
   background: ${ COLOR.OFF_WHITE };
   border: 2px solid ${ COLOR.BLUE };
   border-radius: 11px;
-  
+
   &:hover {
     border-color: ${ COLOR.DARK_BLUE };
 
-    div {
-      background-color: ${ COLOR.DARK_BLUE }
+    svg {
+      color: ${ COLOR.DARK_BLUE }
     }
 
     span {
@@ -79,17 +79,17 @@ const secondaryStyle = css`
   &:active {
     border: 2px solid ${ COLOR.LIGHT_BLUE };
 
-    div {
-      background-color: ${ COLOR.BLUE }
+    svg {
+      color: ${ COLOR.BLUE }
     }
-    
+
     span {
       color: ${ COLOR.BLUE };
     }
   }
 
-  div {
-    background-color: ${ COLOR.BLUE }
+  svg {
+    color: ${ COLOR.BLUE }
   }
 
   span {
@@ -99,16 +99,16 @@ const secondaryStyle = css`
 `
 
 const textBtnStyle = css`
-  ${btnStyle};
-  
+  ${ btnStyle };
+
   width: 100%;
   height: 100%;
   justify-content: space-between;
   padding: 0 24px;
 
   &:hover {
-    div {
-      background-color: ${ COLOR.BODY };
+    svg {
+      color: ${ COLOR.BODY };
     }
 
     span {
@@ -117,8 +117,8 @@ const textBtnStyle = css`
   }
 
   &:active {
-    div {
-      background-color: ${ COLOR.TITLE_ACTIVE };
+    svg {
+      color: ${ COLOR.TITLE_ACTIVE };
     }
 
     span {
@@ -126,8 +126,8 @@ const textBtnStyle = css`
     }
   }
 
-  div {
-    background-color: ${ COLOR.LABEL };
+  svg {
+    color: ${ COLOR.LABEL };
   }
 
   span {
@@ -167,37 +167,36 @@ const smallStyle = css`
 `
 
 const LargeStandardBtn = styled.div`
-  ${largeStyle}
-  ${standardBtnStyle}
+  ${ largeStyle }
+  ${ standardBtnStyle }
 `
 
 const MediumStandardBtn = styled.div`
-  ${mediumStyle}
-  ${standardBtnStyle}
+  ${ mediumStyle }
+  ${ standardBtnStyle }
 `
 
 const SmallStandardBtn = styled.div`
-  ${smallStyle}
-  ${standardBtnStyle}
+  ${ smallStyle }
+  ${ standardBtnStyle }
 `
 
 const SmallSecondaryBtn = styled.div`
-  ${smallStyle}
-  ${secondaryStyle}
+  ${ smallStyle }
+  ${ secondaryStyle }
 `
 
 const MediumTextBtn = styled.div`
-  ${mediumStyle}
-  ${textBtnStyle}
-  
+  ${ mediumStyle }
+  ${ textBtnStyle }
   span {
     ${ FONT.LINK_SMALL }
   }
 `
 
 const SmallTextBtn = styled.div`
-  ${smallStyle}
-  ${textBtnStyle}
+  ${ smallStyle }
+  ${ textBtnStyle }
 `
 
 /**
@@ -216,18 +215,20 @@ const Button = ({ type, text, onClickListener }) => {
           <span>{ text }</span>
         </LargeStandardBtn>
       )
-      
+    
     case BUTTON_TYPE.MEDIUM_STANDARD:
       return (
         <MediumStandardBtn onClick={ onClickListener }>
           <span>{ text }</span>
         </MediumStandardBtn>
       )
-      
+    
     case BUTTON_TYPE.SMALL_STANDARD:
       return (
         <SmallStandardBtn onClick={ onClickListener }>
-          <div />
+          <PlusIcon
+            width="1em"
+            height="1em" />
           <span>{ text }</span>
         </SmallStandardBtn>
       )
@@ -235,7 +236,9 @@ const Button = ({ type, text, onClickListener }) => {
     case BUTTON_TYPE.SMALL_SECONDARY:
       return (
         <SmallSecondaryBtn onClick={ onClickListener }>
-          <div />
+          <PlusIcon
+            width="1em"
+            height="1em" />
           <span>{ text }</span>
         </SmallSecondaryBtn>
       )
@@ -244,15 +247,19 @@ const Button = ({ type, text, onClickListener }) => {
       return (
         <MediumTextBtn onClick={ onClickListener }>
           <span>{ text }</span>
-          <div />
+          <PlusIcon
+            width="1em"
+            height="1em" />
         </MediumTextBtn>
       )
-      
+    
     case BUTTON_TYPE.SMALL_TEXT:
       return (
         <SmallTextBtn onClick={ onClickListener }>
           <span>{ text }</span>
-          <div />
+          <PlusIcon
+            width="1em"
+            height="1em" />
         </SmallTextBtn>
       )
   }

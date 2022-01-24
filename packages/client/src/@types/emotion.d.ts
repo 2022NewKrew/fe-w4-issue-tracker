@@ -4,6 +4,9 @@ type LARGE = "large";
 type MEDIUM = "medium";
 type SMALL = "small";
 
+type TITLE = "title";
+type XSMALL = "xsmall";
+
 type STANDARD = "standard";
 type SECONDARY = "secondary";
 type TEXT = "text";
@@ -24,7 +27,7 @@ type greyscaleKey =
   | "offWhite";
 
 type sizeType = LARGE | MEDIUM | SMALL;
-type textSizeType = "title" | sizeType | "xsmall";
+type textSizeType = TITLE | sizeType | XSMALL;
 
 type colorType = PRIMARY | SECONDARY | ERROR | SUCCESS;
 // type colorsTone = "default" | "dark" | "light";

@@ -15,6 +15,7 @@ p,
 blockquote,
 pre,
 a,
+button,
 abbr,
 acronym,
 address,
@@ -137,7 +138,7 @@ nav ul {
 }
 
 button {
-  border: none;
+  background: none;
 }
 
 * {

@@ -14,6 +14,9 @@ module.exports={
       favicon: './public/favicon.ico'
     })
   ],
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
   module: {
     rules: [
       {

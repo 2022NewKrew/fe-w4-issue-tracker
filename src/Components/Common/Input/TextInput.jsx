@@ -17,6 +17,7 @@ export const TEXT_INPUT_STATE = {
 
 const LabelText = styled.div`
   padding-top: 3px;
+  margin-top: 3px;
   margin-right: 8px;
   color: ${ COLOR.LABEL };
   ${ FONT.TEXT_XSMALL };
@@ -58,6 +59,7 @@ const Wrapper = styled.div`
   padding: 0 24px;
   border-radius: 16px;
   background-color: ${ COLOR.INPUT_BACKGROUND };
+  border: 1px solid rgba(0, 0, 0, 0);
   cursor: text;
 
   ${ ({ customStyle }) => customStyle }
@@ -69,19 +71,19 @@ const Wrapper = styled.div`
 const activeWrapperStyle = css`
   background-color: ${ COLOR.OFF_WHITE };
   border: 1px solid ${ COLOR.TITLE_ACTIVE };
-  padding: 0 23px;
+  padding: 0 24px;
 `
 
 const successWrapperStyle = css`
   border: 1px solid ${ COLOR.GREEN };
   background-color: ${ COLOR.LIGHT_GREEN };
-  padding: 0 23px;
+  padding: 0 24px;
 `
 
 const errorWrapperStyle = css`
   border: 1px solid ${ COLOR.RED };
   background-color: ${ COLOR.LIGHT_RED };
-  padding: 0 23px;
+  padding: 0 24px;
 `
 
 const largeWrapperStyle = css`

@@ -1,45 +1,16 @@
-import TextInput from "@components/common/TextInput";
+import IDLoginForm from "@components/login/IDLoginForm";
 import { css } from "@emotion/react";
-import useInput from "@hooks/useInput";
 import { ButtionStyle } from "@styles/button";
 import theme from "@styles/theme";
-import React, { FormEvent } from "react";
+import React from "react";
 
 const Login: React.FC = () => {
-  const [id, onChangeId] = useInput("");
-  const [password, onChangePassword] = useInput("");
-
-  const IDLogin = (e: FormEvent) => {
-    e.preventDefault();
-    console.log(id, password);
-  };
-
   return (
     <div css={WrapperStype}>
       <div>로고</div>
       <button id="GITLOGIN">GitHub 계정으로 로그인</button>
       <span>or</span>
-      <form onSubmit={IDLogin}>
-        <TextInput
-          size="large"
-          label="아이디"
-          value={id}
-          onChange={onChangeId}
-        />
-        <TextInput
-          size="large"
-          label="비밀번호"
-          type="password"
-          value={password}
-          onChange={onChangePassword}
-        />
-        <button
-          css={ButtionStyle({ size: "large", color: "primary" })}
-          disabled={!id || !password}
-        >
-          아이디로 로그인
-        </button>
-      </form>
+      <IDLoginForm />
       <button css={ButtionStyle({ size: "small", type: "text" })}>
         회원가입
       </button>

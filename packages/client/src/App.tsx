@@ -24,6 +24,7 @@ const App: React.FC = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/issueList" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </>

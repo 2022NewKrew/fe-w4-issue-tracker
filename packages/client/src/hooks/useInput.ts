@@ -8,7 +8,7 @@ const useInput = (initValue: string) => {
     },
     []
   );
-  return { value, onChange };
+  return [value, onChange] as const;
 };
 
 export default useInput;

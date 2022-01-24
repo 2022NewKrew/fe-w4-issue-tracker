@@ -6,17 +6,25 @@ import theme from "@styles/theme";
 import React from "react";
 
 const Login: React.FC = () => {
-  const test = useInput("");
+  const [value, onChange] = useInput("");
   return (
     <div css={WrapperStype}>
-      <div>로고</div>
-      <button css={ButtionStyle("primary").large}>
+      <button css={ButtionStyle({ size: "medium" })}>
+        GitHub 계정으로 로그인
+      </button>
+      <TextInput size="large" label="gd" value={value} onChange={onChange} />
+      <TextInput size="medium" label="gd" value={value} onChange={onChange} />
+      <TextInput size="small" label="gd" value={value} onChange={onChange} />
+      {/* <div>로고</div>
+      <button css={ButtionStyle({ size: "large", color: "primary" })}>
         GitHub 계정으로 로그인
       </button>
       <span>or</span>
       <TextInput size="large" label="아이디" {...test} />
       <TextInput size="large" label="비밀번호" {...test} />
-      <button css={ButtionStyle("primary").large}>아이디로 로그인</button>
+      <button css={ButtionStyle({ size: "large", color: "primary" })}>
+        아이디로 로그인
+      </button> */}
     </div>
   );
 };

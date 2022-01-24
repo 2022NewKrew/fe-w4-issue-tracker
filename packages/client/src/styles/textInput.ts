@@ -10,67 +10,88 @@ const VaildStyle = (color: colorsKey) => css`
   }
 `;
 
-export const InputTextWrapper = css`
-  position: relative;
-  label {
-    position: absolute;
-    padding-left: 3px;
-    left: 24px;
-    bottom: 18px;
-    width: 292px;
-    height: 28px;
-    text-align: left;
-    ${theme.text.small};
-    color: ${theme.greyscale.placeholer};
-    transform: translateY(0%);
-    transition: all 0.3s ease;
-    pointer-events: none;
-  }
-  input:not([value=""]) {
-    padding-top: 20px;
-    + label {
-      transform: translateY(-40%);
-      font-size: 12px;
-    }
-  }
-  input:required:not(:focus):valid {
-    ${VaildStyle("success")}
-  }
-  input:not([value=""]):not(:focus):invalid {
-    ${VaildStyle("error")}
-  }
-`;
-
-export const InputBasicStyle = () =>
+export const TextInputBasicStyle = () =>
   css`
-    ${theme.flexCenter}
     ${theme.text.small}
-    background: ${theme.greyscale.inputBackgound};
-    padding: 0px 24px;
-    color: ${theme.greyscale.titleActive};
-    :focus {
-      background: ${theme.greyscale.offWhite};
-      border: 1px solid ${theme.greyscale.titleActive};
+    position: relative;
+    overflow: hidden;
+    input {
+      height: 100%;
+      width: 100%;
+      background: ${theme.greyscale.inputBackgound};
+      color: ${theme.greyscale.titleActive};
+      padding: 0px 24px;
+      :required:focus:valid {
+        ${VaildStyle("success")}
+      }
+      :not([value=""]):focus:invalid {
+        ${VaildStyle("error")}
+      }
+      :not([value=""]) {
+        padding-top: 4%;
+        + label {
+          transform: translateY(-18%);
+          ${theme.text.xsmall};
+        }
+      }
+      :focus {
+        background: ${theme.greyscale.offWhite};
+        border: 1px solid ${theme.greyscale.titleActive};
+      }
+    }
+    label {
+      position: absolute;
+      padding-left: 3px;
+      left: 24px;
+      top: 0;
+      bottom: 0;
+      margin: auto 0;
+      width: 100%;
+      height: 28px;
+      text-align: left;
+      ${theme.text.small};
+      color: ${theme.greyscale.placeholer};
+      transform: translateY(0%);
+      transition: all 0.3s ease;
+      pointer-events: none;
     }
   `;
 
-export const InputStyle = {
+export const TextInputStyle = {
   large: css`
-    ${InputBasicStyle()}
+    ${TextInputBasicStyle()}
     width: 340px;
     height: 64px;
-    border-radius: 16px;
+    input {
+      border-radius: 16px;
+    }
   `,
   medium: css`
-    ${InputBasicStyle()}
+    ${TextInputBasicStyle()}
     width: 320px;
     height: 56px;
-    border-radius: 14px;
+    input {
+      border-radius: 14px;
+    }
   `,
   small: css`
-    ${InputBasicStyle()}
+    ${TextInputBasicStyle()}
     width: 300px;
     height: 40px;
-    border-radius: 11px;
+    label {
+      height: 40px;
+      display: flex;
+      align-items: center;
+    }
+    input {
+      border-radius: 11px;
+      padding-left: 112px;
+      :not([value=""]) {
+        padding-top: 0;
+        + label {
+          transform: translateY(0);
+        }
+      }
+    }
   `,
 };

@@ -1,6 +1,6 @@
 import useInput from "@hooks/useInput";
 import { ButtionStyle } from "@styles/button";
-import { InputStyle, InputTextWrapper } from "@styles/textInput";
+import { TextInputStyle } from "@styles/textInput";
 
 const App: React.FC = () => {
   const test = useInput("");
@@ -11,10 +11,29 @@ const App: React.FC = () => {
         Button
       </button>
       <button css={ButtionStyle("error").small}>Button</button>
-      <div css={InputTextWrapper}>
+      <div css={TextInputStyle.large}>
         <input
           id="userId"
-          css={InputStyle.large}
+          type="text"
+          {...test}
+          pattern="[a-z0-9_]{4,20}"
+          required
+        />
+        <label htmlFor="userId">아이디</label>
+      </div>
+      <div css={TextInputStyle.medium}>
+        <input
+          id="userId"
+          type="text"
+          {...test}
+          pattern="[a-z0-9_]{4,20}"
+          required
+        />
+        <label htmlFor="userId">아이디</label>
+      </div>
+      <div css={TextInputStyle.small}>
+        <input
+          id="userId"
           type="text"
           {...test}
           pattern="[a-z0-9_]{4,20}"

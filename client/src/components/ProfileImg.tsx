@@ -15,6 +15,6 @@ const CircleContainer = styled.div`
     align-items: center;
     width: 44px;
     height: 44px;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--placeholder-color);
     border-radius: 22px;
 `;

@@ -9,6 +9,7 @@ import {
     EditIssuePage,
     LabelListPage,
     MilestoneListPage,
+    TempPage,
 } from './components/pages';
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
                         <Route path="issue_list" element={<IssueListPage />} />
                         <Route path="label_list" element={<LabelListPage />} />
                         <Route path="milestone_list" element={<MilestoneListPage />} />
+                        <Route path="/" element={<TempPage />} />
                     </Routes>
                 </Wrapper>
             </Container>

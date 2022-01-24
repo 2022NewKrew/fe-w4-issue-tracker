@@ -8,6 +8,7 @@ import { COLOR } from '../../../style/commonStyle'
 const IconBox = styled.div`
   display: inline-block;
   cursor: pointer;
+  margin-right: 24px;
 
   svg {
     vertical-align: middle;
@@ -16,7 +17,7 @@ const IconBox = styled.div`
 `
 
 /**
- * @param {function} onChangeListener
+ * @param {function?} onChangeListener
  * @return {JSX.Element}
  * @constructor
  */
@@ -62,7 +63,7 @@ const ColorCodeInput = ({ onChangeListener }) => {
       type={ TEXT_INPUT_TYPE.SMALL }
       state={ TEXT_INPUT_STATE.NORMAL }
       placeholder="Label"
-      onChangeListener={ onChange }
+      onInputValueChangeListener={ onChange }
       inputValue={ inputValue }>
       <IconBox onClick={ generateColorCode }>
         <RefreshIcon

@@ -6,7 +6,8 @@ import { COLOR, FONT } from '../../../style/commonStyle'
 export const TEXT_INPUT_TYPE = {
   LARGE: 'large',
   MEDIUM: 'medium',
-  SMALL: 'small'
+  SMALL: 'small',
+  TEXT_AREA: 'text-area'
 }
 
 export const TEXT_INPUT_STATE = {
@@ -16,8 +17,9 @@ export const TEXT_INPUT_STATE = {
 }
 
 const LabelText = styled.div`
-  padding-top: 3px;
-  margin-top: 3px;
+  padding-top: 2px;
+  display: flex;
+  align-items: center;
   margin-right: 8px;
   color: ${ COLOR.LABEL };
   ${ FONT.TEXT_XSMALL };
@@ -28,7 +30,7 @@ const hidingLabelStyle = css`
   display: none;
 `
 
-const Input = styled.input`
+const textInputStyle = css`
   color: ${ COLOR.TITLE_ACTIVE };
   background: none;
   border: none;
@@ -44,6 +46,23 @@ const Input = styled.input`
   }
 `
 
+const Input = styled.input`
+  ${ textInputStyle }
+`
+
+const TextArea = styled.textarea`
+  ${ textInputStyle };
+  font-family: 'Noto Sans KR', sans-serif;
+
+  &::-webkit-resizer {
+    display: none;
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`
+
 const successLabelStyle = {
   color: COLOR.GREEN
 }
@@ -54,9 +73,10 @@ const errorLabelStyle = {
 
 const Wrapper = styled.div`
   display: flex;
+  position: relative;
   justify-content: center;
+  align-items: center;
   width: 100%;
-  padding: 0 24px;
   border-radius: 16px;
   background-color: ${ COLOR.INPUT_BACKGROUND };
   border: 1px solid rgba(0, 0, 0, 0);
@@ -71,19 +91,16 @@ const Wrapper = styled.div`
 const activeWrapperStyle = css`
   background-color: ${ COLOR.OFF_WHITE };
   border: 1px solid ${ COLOR.TITLE_ACTIVE };
-  padding: 0 24px;
 `
 
 const successWrapperStyle = css`
   border: 1px solid ${ COLOR.GREEN };
   background-color: ${ COLOR.LIGHT_GREEN };
-  padding: 0 24px;
 `
 
 const errorWrapperStyle = css`
   border: 1px solid ${ COLOR.RED };
   background-color: ${ COLOR.LIGHT_RED };
-  padding: 0 24px;
 `
 
 const largeWrapperStyle = css`
@@ -109,13 +126,28 @@ const smallWrapperStyle = css`
   }
 `
 
+const textAreaWrapperStyle = css`
+  flex-direction: column;
+  height: 100%;
+`
+
+const PaddingDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: ${ ({ flexDirection }) => flexDirection };
+  width: 100%;
+  height: 100%;
+  padding: 5px 24px;
+`
+
 /**
- * @param {ReactNode} children
+ * @param {ReactNode?} children
  * @param {string} type
  * @param {string} state
  * @param {string} placeholder
- * @param {string} inputValue
- * @param {function} onChangeListener
+ * @param {string?} inputValue
+ * @param {function?} onInputValueChangeListener
+ * @param {function?} onFocusChangeListener
  * @return {JSX.Element}
  * @constructor
  */
@@ -125,7 +157,8 @@ const TextInput = ({
                      state,
                      placeholder,
                      inputValue,
-                     onChangeListener
+                     onInputValueChangeListener,
+                     onFocusChangeListener
                    }) => {
   // input element 참조
   const inputRef = useRef()
@@ -153,13 +186,19 @@ const TextInput = ({
   const onFocus = useCallback(() => {
     clearTimeout(timeRef.current)
     setIsFocus(true)
-  }, [])
+    if (onFocusChangeListener) {
+      onFocusChangeListener(true)
+    }
+  }, [ onFocusChangeListener ])
   
   const onBlur = useCallback(() => {
     timeRef.current = setTimeout(() => {
       setIsFocus(false)
+      if (onFocusChangeListener) {
+        onFocusChangeListener(false)
+      }
     }, 50)
-  }, [])
+  }, [ onFocusChangeListener ])
   
   const onChange = useCallback((event) => {
     const { target } = event
@@ -177,17 +216,18 @@ const TextInput = ({
       setIsEmpty(true)
     }
     
-    if (onChangeListener) {
-      onChangeListener(inputValue, setInputValueState)
+    if (onInputValueChangeListener) {
+      onInputValueChangeListener(inputValue, setInputValueState)
     }
-  }, [ onChangeListener ])
+  }, [ onInputValueChangeListener ])
   
   const wrapperStyle = useMemo(() => {
     let style = (
       type === TEXT_INPUT_TYPE.LARGE ? largeWrapperStyle
         : type === TEXT_INPUT_TYPE.MEDIUM ? mediumWrapperStyle
           : type === TEXT_INPUT_TYPE.SMALL ? smallWrapperStyle
-            : mediumWrapperStyle
+            : type === TEXT_INPUT_TYPE.TEXT_AREA ? textAreaWrapperStyle
+              : mediumWrapperStyle
     )
     
     if (isFocus) {
@@ -204,7 +244,10 @@ const TextInput = ({
   const labelStyle = useMemo(() => {
     let style = css``
     
-    if (isEmpty && (type === TEXT_INPUT_TYPE.MEDIUM || type === TEXT_INPUT_TYPE.LARGE)) {
+    if (isEmpty && (
+      type === TEXT_INPUT_TYPE.MEDIUM
+      || type === TEXT_INPUT_TYPE.LARGE
+      || type === TEXT_INPUT_TYPE.TEXT_AREA)) {
       style = style.concat(hidingLabelStyle)
     }
     
@@ -224,9 +267,10 @@ const TextInput = ({
       
       case TEXT_INPUT_TYPE.MEDIUM:
       case TEXT_INPUT_TYPE.LARGE:
+      case TEXT_INPUT_TYPE.TEXT_AREA:
         return placeholder
     }
-  }, [ type ])
+  }, [ type, placeholder ])
   
   const placeholderColor = useMemo(() => {
     if (!isFocus) {
@@ -240,21 +284,42 @@ const TextInput = ({
     }
   }, [ state, isFocus ])
   
+  const textInput = useMemo(() => {
+    if (type === TEXT_INPUT_TYPE.TEXT_AREA) {
+      return (
+        <TextArea
+          placeholder={ placeholderInInput }
+          placeholderColor={ placeholderColor }
+          ref={ inputRef }
+          onChange={ onChange }
+          onFocus={ onFocus }
+          onBlur={ onBlur }
+          value={ inputValueState } />
+      )
+    } else {
+      return (
+        <Input
+          placeholder={ placeholderInInput }
+          placeholderColor={ placeholderColor }
+          ref={ inputRef }
+          onChange={ onChange }
+          onFocus={ onFocus }
+          onBlur={ onBlur }
+          value={ inputValueState } />
+      )
+    }
+  }, [ type, placeholderInInput, placeholderColor, inputRef, onChange, onFocus, onBlur, inputValueState ])
+  
   return (
     <Wrapper
       onClick={ focusToInput }
       customStyle={ wrapperStyle }>
-      <LabelText customStyle={ labelStyle }>
-        { placeholder }
-      </LabelText>
-      <Input
-        placeholder={ placeholderInInput }
-        placeholderColor={ placeholderColor }
-        ref={ inputRef }
-        onChange={ onChange }
-        onFocus={ onFocus }
-        onBlur={ onBlur }
-        value={ inputValueState } />
+      <PaddingDiv flexDirection={ type === TEXT_INPUT_TYPE.SMALL ? 'row' : 'column' }>
+        <LabelText customStyle={ labelStyle }>
+          { placeholder }
+        </LabelText>
+        { textInput }
+      </PaddingDiv>
       { children }
     </Wrapper>
   )
@@ -262,7 +327,8 @@ const TextInput = ({
 
 TextInput.propTypes = {
   inputValue: PropTypes.string,
-  onChangeListener: PropTypes.func,
+  onInputValueChangeListener: PropTypes.func,
+  onFocusChangeListener: PropTypes.func,
   placeholder: PropTypes.string.isRequired,
   state: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired

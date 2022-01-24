@@ -1,13 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ProfileImage } from './ProfileImg';
-import userProfileImage from '/public/images/userImage.png';
+import { ReactComponent as Logo } from '@images/LogotypeMedium.svg';
+import { ReactComponent as UserImage } from '@images/UserImageLarge.svg';
 
 export const Header = () => {
     return (
         <Wrapper>
-            <Logo>Issue Tracker</Logo>
-            <ProfileImage profileImgSrc={userProfileImage} />
+            <Logo width="199px" height="40px" />
+            <ProfileImage>
+                <UserImage />
+            </ProfileImage>
         </Wrapper>
     );
 };
@@ -16,15 +19,4 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
     padding: 27px 0;
-`;
-
-const Logo = styled.div`
-    width: 199px;
-    height: 40px;
-    font-family: Montserrat;
-    font-weight: 500;
-    font-style: italic;
-    font-size: 32px;
-    line-height: 40px;
-    color: var(--main-text-color);
 `;

@@ -2,14 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface IProps {
-    profileImgSrc: string;
+    children: React.ReactNode;
 }
 
-export const ProfileImage = ({ profileImgSrc }: IProps) => {
-    return <CircleImage src={profileImgSrc} />;
+export const ProfileImage = ({ children }: IProps) => {
+    return <CircleContainer>{children}</CircleContainer>;
 };
 
-const CircleImage = styled.img`
+const CircleContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 44px;
     height: 44px;
     border: 1px solid var(--border-color);

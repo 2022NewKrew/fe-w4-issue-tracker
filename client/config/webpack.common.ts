@@ -19,8 +19,20 @@ const config: Configuration = {
                 options: babelConfig,
             },
             {
-                test: /\.(png|j?g|svg|gif)?$/,
-                use: 'file-loader?name=./images/[name].[ext]',
+                test: /(\/icons\/)[\w.]+\.(svg)$/,
+                use: ['@svgr/webpack', 'file-loader?name=./icons/[name].[ext]'],
+            },
+            {
+                test: /(\/icons\/)[\w.]+\.(png|j?g|gif)$/,
+                use: ['file-loader?name=./icons/[name].[ext]'],
+            },
+            {
+                test: /(\/images\/)[\w.]+\.(svg)$/,
+                use: ['@svgr/webpack', 'file-loader?name=./images/[name].[ext]'],
+            },
+            {
+                test: /(\/images\/)[\w.]+\.(png|j?g|gif)$/,
+                use: ['file-loader?name=./images/[name].[ext]'],
             },
         ],
     },
@@ -31,6 +43,8 @@ const config: Configuration = {
     resolve: {
         extensions: ['.js', '.ts', '.tsx'], // 대상 파일 확장명
         alias: {
+            '@icons': path.resolve(process.cwd(), 'public/icons'),
+            '@images': path.resolve(process.cwd(), 'public/images'),
             '@components': path.resolve(process.cwd(), 'src/components'),
         },
     },

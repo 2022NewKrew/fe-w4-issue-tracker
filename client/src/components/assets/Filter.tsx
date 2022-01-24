@@ -1,14 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FilterButton } from './FilterButton';
-import searchIcon from '/public/images/search.png';
-
+import { FilterButton } from '@components/assets';
+import { ReactComponent as SearchIcon } from '@icons/Search.svg';
 export const Filter = () => {
     return (
         <Wrapper>
             <FilterButton />
             <Search>
-                <img src={searchIcon} />
+                <SearchIcon />
                 <form>
                     <input type="text" />
                 </form>

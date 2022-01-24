@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import downArrow from '/public/images/downArrow.png';
+import { ReactComponent as DownArrow } from '@icons/DownArrow.svg';
 
 export const FilterButton = () => {
     return (
         <Wrapper>
             <div>필터</div>
-            <DropdownButton src={downArrow} />
+            <DownArrow />
         </Wrapper>
     );
 };
@@ -18,7 +18,7 @@ const Wrapper = styled.div`
     justify-content: space-around;
     align-items: center;
 `;
-const DropdownButton = styled.img`
-    height: 4px;
-    width: 8px;
-`;
+// const DropdownButton = styled.img`
+//     height: 4px;
+//     width: 8px;
+// `;

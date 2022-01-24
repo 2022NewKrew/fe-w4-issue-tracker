@@ -1,6 +1,17 @@
 import "@emotion/react";
 
-type textKey = "title" | "large" | "medium" | "small" | "xsmall";
+type LARGE = "large";
+type MEDIUM = "medium";
+type SMALL = "small";
+
+type STANDARD = "standard";
+type SECONDARY = "secondary";
+type TEXT = "text";
+
+type PRIMARY = "primary";
+type SECONDARY = "secondary";
+type ERROR = "error";
+type SUCCESS = "success";
 
 type greyscaleKey =
   | "titleActive"
@@ -12,10 +23,13 @@ type greyscaleKey =
   | "background"
   | "offWhite";
 
-type colorsKey = "primary" | "secondary" | "error" | "success";
+type sizeType = LARGE | MEDIUM | SMALL;
+type textSizeType = "title" | sizeType | "xsmall";
+
+type colorType = PRIMARY | SECONDARY | ERROR | SUCCESS;
 // type colorsTone = "default" | "dark" | "light";
 
-type sizeKey = "large" | "medium" | "small";
+type buttonType = STANDARD | SECONDARY | TEXT;
 
 interface IColorDetail {
   default: string;
@@ -25,7 +39,7 @@ interface IColorDetail {
 
 declare module "@emotion/react" {
   export interface Theme {
-    text: { [key in textKey]: SerializedStyles };
+    text: { [key in textSizeType]: SerializedStyles };
     greyscale: {
       [key in greyscaleKey]: string;
     };

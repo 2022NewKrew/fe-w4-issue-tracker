@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
-import { buttonType, colorType, sizeType } from "./emotion";
 import theme from "@styles/theme";
 import { CSSIF } from "@utils/helper";
+import { buttonType, colorType, sizeType } from "src/@types/emotion";
 
 const LARGE = "large";
 const MEDIUM = "medium";

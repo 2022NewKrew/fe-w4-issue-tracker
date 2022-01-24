@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/scl2589/fe-w4-issue-tracker#readme",
   "dependencies": {
+    "file-loader": "^6.2.0",
     "firebase": "^9.6.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -30,6 +31,7 @@
     "@babel/plugin-proposal-class-properties": "^7.16.7",
     "@babel/preset-env": "^7.16.10",
     "@babel/preset-react": "^7.16.7",
+    "@svgr/webpack": "^6.2.0",
     "babel-loader": "^8.2.3",
     "css-loader": "^6.5.1",
     "dotenv-webpack": "^7.0.3",

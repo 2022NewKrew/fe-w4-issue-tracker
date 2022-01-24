@@ -1,31 +1,59 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+function findColor(theme, color) {
+  let INIT = "";
+  let LIGHT = "";
+  let DARK = "";
+  if (color === "blue") {
+    INIT = theme.colors.blue;
+    LIGHT = theme.colors.lightBlue;
+    DARK = theme.colors.darkBlue;
+  } else {
+    INIT = "#14142b";
+    LIGHT = "#1e1e40";
+    DARK = "#d9dbe9";
+  }
+  return [INIT, LIGHT, DARK];
+}
 
 const Button = styled.button`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   border-radius: 20px;
   padding: 0 24px;
   border: none;
   cursor: pointer;
-  /* border: 4px solid rgba(0, 0, 0, 0); */
 
   font-weight: 700;
 
-  color: ${(props) => props.theme.greyscale.offWhite};
-  background-color: ${(props) => props.theme.colors.blue};
-
-  &:hover {
-    background-color: ${(props) => props.theme.colors.darkBlue};
-  }
-  &:focus {
-    background-color: ${(props) => props.theme.colors.blue};
-    border: 4px solid ${(props) => props.theme.colors.lightBlue};
-  }
-  &:disabled {
-    cursor: "not-allowed";
-    background-color: ${(props) => props.theme.colors.blue};
-    opacity: 0.5;
-  }
-
   font-size: ${(props) => props.theme.fontSizes.medium};
+
+  color: ${(props) => props.theme.greyscale.offWhite};
+
+  ${(props) => {
+    const mainColor = props.color;
+    const [INIT, LIGHT, DARK] = findColor(props.theme, mainColor);
+
+    return css`
+      background-color: ${INIT};
+
+      &:hover {
+        background-color: ${DARK};
+      }
+      &:focus {
+        background-color: ${INIT};
+        border: 4px solid ${LIGHT};
+      }
+      &:disabled {
+        cursor: "not-allowed";
+        background-color: ${INIT};
+        opacity: 0.5;
+      }
+    `;
+  }}
 `;
 
 export const LargeButton = styled(Button)`
@@ -82,8 +110,10 @@ export const TextButton = styled.button`
   border: none;
   box-sizing: border-box;
 
-  color: ${(props) => props.theme.greyscale.Label};
-  background-color: ${(props) => props.theme.greyscale.offWhite};
+  font-weight: 700;
+
+  color: ${(props) => props.theme.greyscale.label};
+  background-color: transparent;
 
   &:active {
     color: ${(props) => props.theme.greyscale.titleActive};

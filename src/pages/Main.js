@@ -6,19 +6,22 @@ import {
   SecondaryButton,
   MediumTextButton,
   SmallTextButton,
-} from "../components/buttons/buttons";
+} from "@components/buttons/buttons";
 
 import {
   LargeTextInput,
   MediumTextInput,
-} from "../components/textInputs/textInputs";
+  SmallTextInput,
+} from "@components/textInputs/textInputs";
+
+import { ReactComponent as Logo } from "../components/icons/logo.svg";
 
 export default function Main() {
   return (
     <div>
       Main Page <br />
-      <LargeButton>라지버튼</LargeButton>
-      <MediumButton>미디엄버튼</MediumButton>
+      <LargeButton color='BLACK'>라지버튼</LargeButton>
+      <MediumButton color='BLUE'>미디엄버튼</MediumButton>
       <SmallButton>스몰버튼</SmallButton>
       <br />
       <SecondaryButton>세컨데리</SecondaryButton>
@@ -27,6 +30,9 @@ export default function Main() {
       <br />
       <LargeTextInput />
       <MediumTextInput />
+      <SmallTextInput />
+      <br />
+      <Logo />
     </div>
   );
 }

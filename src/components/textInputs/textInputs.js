@@ -29,12 +29,31 @@ const SmallField = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
+  box-sizing: border-box;
+
   width: 300px;
   height: 40px;
   padding: 0 24px;
   border-radius: 11px;
 
   background-color: ${(props) => props.theme.greyscale.inputBackground};
+
+  &:focus-within {
+    border: 1px solid ${(props) => props.theme.greyscale.titleActive};
+    background-color: ${(props) => props.theme.greyscale.offwhite};
+  }
+
+  &:disabled {
+    background-color: ${(props) => props.theme.greyscale.inputBackground};
+    color: ${(props) => props.theme.greyscale.placeholder};
+    opacity: 0.5;
+  }
+
+  .filled {
+    background-color: ${(props) => props.theme.greyscale.inputBackground};
+    color: ${(props) => props.theme.greyscale.label};
+    font-size: 12px;
+  }
 `;
 
 const Input = styled(InputColors)`
@@ -69,6 +88,10 @@ const MediumInput = styled(Input)`
 const SmallInput = styled.input`
   width: 164px;
   margin-left: 8px;
+  background-color: inherit;
+
+  border: none;
+  outline: none;
 `;
 
 const LargeLabel = styled.label`
@@ -79,6 +102,8 @@ const LargeLabel = styled.label`
   left: 24px;
   bottom: 24px;
   transition: 0.3s ease all;
+  color: ${(props) => props.theme.greyscale.placeholder};
+
   ${LargeInput}:focus ~ & {
     top: 8px;
     font-size: 12px;
@@ -101,6 +126,7 @@ const MediumLabel = styled.label`
   left: 24px;
   bottom: 14px;
   transition: 0.3s ease all;
+  color: ${(props) => props.theme.greyscale.placeholder};
   ${MediumInput}:focus ~ & {
     top: 8px;
     font-size: 12px;
@@ -116,30 +142,38 @@ const MediumLabel = styled.label`
 
 const SmallLabel = styled.label`
   width: 80px;
+  font-weight: 400;
+  font-size: 16px;
+  color: ${(props) => props.theme.greyscale.placeholder};
+
+  ${SmallInput}:focus ~ & {
+    color: 1px solid ${(props) => props.theme.greyscale.label};
+    font-size: 12px;
+  }
 `;
 
-export function LargeTextInput() {
+export function LargeTextInput(props) {
   return (
     <Field>
       <LargeInput />
-      <LargeLabel>로그인</LargeLabel>
+      <LargeLabel>{props.text}</LargeLabel>
     </Field>
   );
 }
 
-export function MediumTextInput() {
+export function MediumTextInput(props) {
   return (
     <Field>
       <MediumInput />
-      <MediumLabel>제목</MediumLabel>
+      <MediumLabel>{props.text}</MediumLabel>
     </Field>
   );
 }
 
-export function SmallTextInput() {
+export function SmallTextInput(props) {
   return (
     <SmallField>
-      <SmallLabel>제목</SmallLabel>
+      <SmallLabel>{props.text}</SmallLabel>
       <SmallInput />
     </SmallField>
   );

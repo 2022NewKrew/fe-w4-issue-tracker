@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { LargeLogo } from "@commonComponents/Logo";
-import { LargeButton } from "@commonComponents/Button";
-import { MediumText } from "@commonComponents/Text";
-import { LargeTextInput } from "@commonComponents/TextInput";
+import { LargeLogo } from "@atoms/Logo";
+import { LargeButton } from "@atoms/Button";
+import { MediumText } from "@atoms/Text";
+import { LargeTextInput } from "@atoms/TextInput";
 import { COLOR } from "@constants/color";
 
 const AuthFormWrapper = styled.div`

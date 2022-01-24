@@ -1,6 +1,6 @@
 import React from "react";
-import AuthForm from "@components/auth/AuthForm";
-import { authService } from "../firebase";
+import AuthForm from "@molecules/AuthForm";
+import { authService } from "@/firebase";
 
 function Auth() {
   const signInWithGithub = () => {

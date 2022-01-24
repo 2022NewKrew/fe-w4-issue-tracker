@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import Auth from "@routes/Auth";
 import { Route, Routes } from "react-router-dom";
-import IssueList from "@routes/IssueList";
-import { authService } from "./firebase";
+import styled from "styled-components";
+import Auth from "@pages/Auth";
+import IssueList from "@pages/IssueList";
+import { authService } from "@/firebase";
 
 const Main = styled.div`
   position: absolute;

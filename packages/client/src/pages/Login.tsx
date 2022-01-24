@@ -29,6 +29,7 @@ const Login: React.FC = () => {
         <TextInput
           size="large"
           label="비밀번호"
+          type="password"
           value={password}
           onChange={onChangePassword}
         />

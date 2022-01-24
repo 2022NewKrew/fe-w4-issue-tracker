@@ -8,6 +8,7 @@ interface Props {
   onChange: (e: any) => void;
   required?: boolean;
   pattern?: string;
+  type?: string;
 }
 
 const TextInput = ({
@@ -17,12 +18,13 @@ const TextInput = ({
   onChange,
   required,
   pattern,
+  type = "text",
 }: Props) => {
   return (
     <div css={TextInputStyle({ size })}>
       <input
         id="userId"
-        type="text"
+        type={type}
         value={value}
         onChange={onChange}
         required={required}

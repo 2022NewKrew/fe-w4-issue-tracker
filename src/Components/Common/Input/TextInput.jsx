@@ -31,6 +31,7 @@ const Input = styled.input`
   color: ${ COLOR.TITLE_ACTIVE };
   background: none;
   border: none;
+  flex: 1;
   ${ FONT.TEXT_SMALL };
 
   &::placeholder {

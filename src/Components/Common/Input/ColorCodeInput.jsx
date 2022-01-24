@@ -15,8 +15,16 @@ const IconBox = styled.div`
   }
 `
 
+/**
+ * @param {function} onChangeListener
+ * @return {JSX.Element}
+ * @constructor
+ */
 const ColorCodeInput = ({ onChangeListener }) => {
+  // input 태그의 값을 바꿔야할때만 수정
   const [ inputValue, setInputValue ] = useState('#')
+  // input 태그의 값과 일치
+  const [ colorCode, setColorCode ] = useState('')
   
   const setColorCodeWithListener = useCallback((value) => {
     setColorCode(value)

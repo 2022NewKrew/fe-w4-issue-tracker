@@ -1,14 +1,14 @@
 module.exports = {
-  "presets": ["@babel/preset-react", "@babel/preset-env"],
-  "plugins": [
+  presets: ['@babel/preset-react', '@babel/preset-env'],
+  plugins: [
     [
-      "@emotion",
+      '@emotion',
       {
-        "sourceMap": true,
-        "autoLabel": "dev-only",
-        "labelFormat": "[dirname]-[filename]-[local]",
-        "cssPropOptimization": true
-      }
-    ]
-  ]
+        sourceMap: true,
+        autoLabel: 'dev-only',
+        labelFormat: '[dirname]-[filename]-[local]',
+        cssPropOptimization: true,
+      },
+    ],
+  ],
 };

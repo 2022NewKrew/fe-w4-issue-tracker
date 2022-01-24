@@ -7,6 +7,7 @@ const initAllDBs=require('./db/initAllDBs');
 const express=require('express');
 const app=express();
 const appPort=8080;
+const cors=require('cors');
 
 const {
   userDB, milestoneDB, issueDB, labelDB, issueLabelDB, commentDB, assigneeDB
@@ -16,6 +17,7 @@ const {
  * Without using json middleware, express cannot parse request body.
  */
 app.use(express.json());
+app.use(cors());
 app.listen(appPort, ()=>{
   console.log('express is listening');
 });

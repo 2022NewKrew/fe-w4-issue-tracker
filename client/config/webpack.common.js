@@ -1,6 +1,5 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: path.resolve(__dirname, "../src/index.tsx"),
@@ -12,7 +11,7 @@ module.exports = {
   resolve: {
     extensions: [".ts", ".tsx", ".js"],
     alias: {
-      "@": path.resolve(__dirname, "../src/"),
+      "@": path.resolve(__dirname, "../src"),
     },
   },
   module: {
@@ -23,26 +22,13 @@ module.exports = {
         loader: "babel-loader",
       },
       {
-        test: /\.s[ac]ss$/i,
-        // css 파일을 별도 분리한다.
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
-      },
-      {
-        test: /\.(png|jpe?g|gif)$/i,
-        use: {
-          loader: "url-loader",
-          options: {
-            limit: 8192,
-          },
-        },
+        test: /\.svg$/,
+        use: ["@svgr/webpack", "file-loader"],
       },
     ],
   },
   plugins: [
     // 컴파일 + 번들링 CSS 파일이 저장될 경로와 이름 지정
-    new MiniCssExtractPlugin({
-      filename: "css/style.css",
-    }),
     new HtmlWebpackPlugin({
       template: "public/index.html",
     }),

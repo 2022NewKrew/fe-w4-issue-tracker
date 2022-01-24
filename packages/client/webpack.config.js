@@ -19,6 +19,7 @@ module.exports = {
     alias: {
       "@components": path.resolve(__dirname, "./src/components"),
       "@hooks": path.resolve(__dirname, "./src/hooks"),
+      "@assets": path.resolve(__dirname, "./src/assets"),
       "@pages": path.resolve(__dirname, "./src/pages"),
       "@services": path.resolve(__dirname, "./src/services"),
       "@stores": path.resolve(__dirname, "./src/stores"),

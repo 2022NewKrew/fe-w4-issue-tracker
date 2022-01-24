@@ -12,15 +12,17 @@ const style = css`
     color: ${theme.greyscale.body};
   }
   input,
+  textarea,
   button {
     border: none;
     outline: none;
   }
   button {
     cursor: pointer;
-  }
-  *:disabled {
-    opacity: 0.5;
+    :disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 `;
 

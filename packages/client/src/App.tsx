@@ -1,5 +1,6 @@
 import useInput from "@hooks/useInput";
 import { ButtionStyle } from "@styles/button";
+import { TextAreaStyle } from "@styles/textArea";
 import { TextInputStyle } from "@styles/textInput";
 
 const App: React.FC = () => {
@@ -40,6 +41,12 @@ const App: React.FC = () => {
           required
         />
         <label htmlFor="userId">아이디</label>
+      </div>
+      <div css={TextAreaStyle}>
+        <textarea {...test} placeholder=" "></textarea>
+        <label>코멘트를 입력하세요</label>
+        <span />
+        <button>파일 첨부하기</button>
       </div>
     </>
   );

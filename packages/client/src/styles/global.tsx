@@ -27,6 +27,9 @@ const style = css`
   body {
     background: #f7f7fc;
   }
+  a {
+    text-decoration: none;
+  }
 `;
 
 const GlobalStyle = () => {

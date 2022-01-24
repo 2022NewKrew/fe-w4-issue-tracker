@@ -1,7 +1,12 @@
 import AppLayout from "@components/common/AppLayout";
+import LinkTap from "@components/Issue/LinkTap";
 
 const Issue = () => {
-  return <AppLayout>이슈리스트</AppLayout>;
+  return (
+    <AppLayout>
+      <LinkTap />
+    </AppLayout>
+  );
 };
 
 export default Issue;

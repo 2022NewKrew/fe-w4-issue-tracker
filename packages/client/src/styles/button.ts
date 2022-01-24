@@ -28,7 +28,7 @@ export const ButtionStyle = ({
   padding: 0 ${CSSIF(size !== SMALL, "24px", "16px")};
 
   // font style
-  ${CSSIF(size !== SMALL, theme.text.medium, theme.text.small)}
+  ${CSSIF(size !== SMALL, theme.text.medium, theme.text.xsmall)}
   font-weight: bold;
   color: ${{
     [STANDARD]: theme.greyscale.offWhite,
@@ -62,6 +62,12 @@ export const ButtionStyle = ({
       height: 40px;
     `,
   }[size]}
+
+  ${type === TEXT &&
+  css`
+    width: max-content;
+    height: 32px;
+  `}
 
   :hover:enabled:not(:active) {
     ${{

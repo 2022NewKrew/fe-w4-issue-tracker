@@ -30,5 +30,6 @@ declare module "@emotion/react" {
     colors: {
       [key in colorsKey]: IColorDetail;
     };
+    flexCenter: SerializedStyles;
   }
 }

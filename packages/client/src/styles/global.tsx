@@ -5,10 +5,22 @@ import theme from "@styles/theme";
 const style = css`
   ${emotionReset}
   * {
+    box-sizing: border-box;
     font-family: Noto Sans KR;
     font-style: normal;
     font-weight: normal;
     color: ${theme.greyscale.body};
+  }
+  input,
+  button {
+    border: none;
+    outline: none;
+  }
+  button {
+    cursor: pointer;
+  }
+  *:disabled {
+    opacity: 0.5;
   }
 `;
 

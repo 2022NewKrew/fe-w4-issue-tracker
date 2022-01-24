@@ -5,12 +5,8 @@ import { CSSIF } from "@utils/helper";
 
 export const ButtonBasicStyle = (color: colorsKey, reverse: boolean) =>
   css`
-    ${theme.text.medium}
+    ${theme.flexCenter}
     font-weight: bold;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     color: ${CSSIF(
       reverse,
       theme.colors[color].default,
@@ -22,7 +18,7 @@ export const ButtonBasicStyle = (color: colorsKey, reverse: boolean) =>
       theme.colors[color].default
     )};
     border: ${CSSIF(reverse, `2px solid ${theme.colors[color].default}`)};
-    &:hover {
+    :hover:enabled:not(:active) {
       color: ${CSSIF(reverse, theme.colors[color].dark)};
       background: ${CSSIF(
         reverse,
@@ -31,7 +27,7 @@ export const ButtonBasicStyle = (color: colorsKey, reverse: boolean) =>
       )};
       border-color: ${CSSIF(reverse, theme.colors[color].dark)};
     }
-    &:focus {
+    :active {
       color: ${CSSIF(reverse, theme.colors[color].default)};
       background: ${CSSIF(
         reverse,
@@ -40,27 +36,12 @@ export const ButtonBasicStyle = (color: colorsKey, reverse: boolean) =>
       )};
       border: 4px solid ${theme.colors[color].light};
     }
-    &:disabled {
-      opacity: 0.5;
-      &:hover {
-        color: ${CSSIF(
-          reverse,
-          theme.colors[color].default,
-          theme.greyscale.offWhite
-        )};
-        background: ${CSSIF(
-          reverse,
-          theme.greyscale.offWhite,
-          theme.colors[color].default
-        )};
-        border-color: ${CSSIF(reverse, theme.colors[color].default)};
-      }
-    }
   `;
 
 export const ButtionStyle = (color: colorsKey, reverse = false) => ({
   large: css`
     ${ButtonBasicStyle(color, reverse)}
+    ${theme.text.medium}
     width: 340px;
     height: 64px;
     border-radius: 20px;
@@ -68,6 +49,7 @@ export const ButtionStyle = (color: colorsKey, reverse = false) => ({
   `,
   medium: css`
     ${ButtonBasicStyle(color, reverse)}
+    ${theme.text.medium}
     width: 240px;
     height: 56px;
     border-radius: 20px;
@@ -75,6 +57,7 @@ export const ButtionStyle = (color: colorsKey, reverse = false) => ({
   `,
   small: css`
     ${ButtonBasicStyle(color, reverse)}
+    ${theme.text.small}
     width: 120px;
     height: 40px;
     border-radius: 11px;

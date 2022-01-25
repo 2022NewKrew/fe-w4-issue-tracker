@@ -1,19 +1,17 @@
-import styled, { css, useTheme } from "styled-components";
+import styled, { css } from "styled-components";
 import { Icon } from "../atoms/Icons";
 import { Text } from "../atoms/Text";
 
 export const Taps = ({ labelCount, milestoneCount }) => {
-  const theme = useTheme();
-
   return (
     <Wrapper>
       <Item>
-        <Icon name="tag" color={theme.grayscale.label} />
+        <Icon name="tag" />
         <Text options={{ size: "small", isLink: true }}>레이블</Text>
         <Text options={{ size: "small" }}>{`(${labelCount})`}</Text>
       </Item>
       <Item>
-        <Icon name="milestone" color={theme.grayscale.label} />
+        <Icon name="milestone" />
         <Text options={{ size: "small", isLink: true }}>마일스톤</Text>
         <Text options={{ size: "small" }}>{`(${milestoneCount})`}</Text>
       </Item>

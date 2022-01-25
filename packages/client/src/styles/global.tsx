@@ -35,6 +35,9 @@ const style = css`
   a {
     text-decoration: none;
   }
+  svg {
+    cursor: pointer;
+  }
 `;
 
 const GlobalStyle = () => {

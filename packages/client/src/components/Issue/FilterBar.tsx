@@ -2,6 +2,7 @@ import Dropdown from "@components/common/Dropdown";
 import styled from "@emotion/styled";
 import theme from "@styles/theme";
 import { useState } from "react";
+import SearchIcon from "@assets/icons/search.svg";
 
 const filterList = ["필터1", "필터2", "필터3"];
 
@@ -16,6 +17,7 @@ const FilterBar = () => {
   return (
     <Wrapper>
       <form onSubmit={handleSubmit}>
+        <SearchIcon />
         <input
           id="search"
           placeholder={focus ? "Search all issues" : "is:issue is:open"}
@@ -23,7 +25,7 @@ const FilterBar = () => {
           onBlur={() => setFocus(false)}
         ></input>
       </form>
-      <Dropdown title="필터 이름" list={filterList} />
+      <Dropdown title="필터 이름" list={filterList} icon />
     </Wrapper>
   );
 };
@@ -31,6 +33,14 @@ const FilterBar = () => {
 export default FilterBar;
 
 const Wrapper = styled.div`
+  form > svg {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 10px;
+    left: 24px;
+    opacity: 0.5;
+  }
   display: flex;
   flex-direction: row-reverse;
   width: 601px;
@@ -39,6 +49,7 @@ const Wrapper = styled.div`
   form {
     border: 1px solid ${theme.greyscale.line};
     border-radius: 11px;
+    position: relative;
   }
 
   div > button:first-child {
@@ -66,6 +77,9 @@ const Wrapper = styled.div`
       + div > button:first-child {
         background: ${theme.greyscale.offWhite};
         border-color: ${theme.greyscale.titleActive};
+      }
+      svg {
+        opacity: 1;
       }
     }
   }

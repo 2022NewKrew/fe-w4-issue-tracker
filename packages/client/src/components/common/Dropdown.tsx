@@ -2,6 +2,9 @@ import styled from "@emotion/styled";
 import { useBooleanState } from "@hooks";
 import theme from "@styles/theme";
 import { useEffect, useState } from "react";
+import ArrowDownIcon from "@assets/icons/arrow_down.svg";
+import SelectIcon from "@assets/icons/check-on-circle.svg";
+import NotSelectIcon from "@assets/icons/check-off-circle.svg";
 
 interface Props {
   title: string;
@@ -11,7 +14,7 @@ interface Props {
 }
 
 const Dropdown = ({ title, list, image = false, icon = false }: Props) => {
-  const [visible, showMenu, closeMenu] = useBooleanState(false);
+  const [visible, showMenu, closeMenu] = useBooleanState(true);
   const [select, setSelect] = useState("");
 
   const handleClick = (e: any) => {
@@ -29,13 +32,17 @@ const Dropdown = ({ title, list, image = false, icon = false }: Props) => {
 
   return (
     <Wrapper>
-      <Indicator onClick={showMenu}>Filter</Indicator>
+      <Indicator onClick={showMenu}>
+        Filter
+        <ArrowDownIcon />
+      </Indicator>
       <Panel visible={visible}>
         <h3>{title}</h3>
         <ul onClick={handleClick}>
           {list.map((ele) => (
             <li key={ele} className={select === ele ? "select" : ""}>
               {ele}
+              {icon && (select === ele ? <SelectIcon /> : <NotSelectIcon />)}
             </li>
           ))}
         </ul>
@@ -57,9 +64,19 @@ const Indicator = styled.button`
   font-weight: bold;
   color: ${theme.greyscale.label};
   background: ${theme.greyscale.background};
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
   :hover {
     color: ${theme.greyscale.body};
     background: ${theme.greyscale.line};
+    svg {
+      opacity: 1;
+    }
+  }
+  svg {
+    opacity: 0.5;
   }
 `;
 
@@ -88,6 +105,9 @@ const Panel = styled.div<{ visible: boolean }>`
     color: ${theme.greyscale.body};
     border-top: 1px solid ${theme.greyscale.line};
     background: ${theme.greyscale.offWhite};
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     cursor: pointer;
     :hover {
       color: ${theme.greyscale.titleActive};

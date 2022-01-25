@@ -1,9 +1,11 @@
 import styled from "@emotion/styled";
+import Logo from "./Logo";
+import ProfileLarge from "@assets/icons/UserImageLarge.svg";
 
 const Header: React.FC = () => (
   <StyledHeader>
-    <div>로고</div>
-    <div>아이콘</div>
+    <Logo size="medium" />
+    <ProfileLarge />
   </StyledHeader>
 );
 

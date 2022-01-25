@@ -12,12 +12,14 @@ import { useRecoilState } from "recoil";
 import { userState } from "../atoms/atoms";
 
 import { useNavigate } from "react-router-dom";
+import { Cookies } from "react-cookie";
 
 export default function Login() {
   const provider = githubProvider;
   let navigate = useNavigate();
 
   const [user, setUser] = useRecoilState(userState);
+  const cookies = new Cookies();
 
   function handleGithubLogin() {
     firebaseAuth.signInWithPopup(provider).then((result) => {
@@ -25,7 +27,9 @@ export default function Login() {
         name: result.user.displayName,
         email: result.user.email,
       };
+      const accessToken = result.credential.accessToken;
       setUser(signedInUser);
+      cookies.set("user", accessToken);
     });
   }
 

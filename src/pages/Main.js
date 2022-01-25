@@ -1,6 +1,7 @@
 import React from "react";
 import { SmallButton } from "@components/buttons";
 import { DropdownIndicators } from "@components/dropdownIndicators";
+import { FilterBar } from "@components/filterBar";
 
 import { firebaseAuth } from "../firebase";
 
@@ -24,6 +25,7 @@ export default function Main() {
       <SmallButton onClick={logout}>로그아웃 하러 가기</SmallButton>
       <br />
       <DropdownIndicators />
+      <FilterBar />
     </div>
   );
 }

@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { Route, Routes } from "react-router-dom";
-
+import Common from "./components/common";
 import Login from "./components/Login";
 import Callback from "./components/Login/Callback";
 
 const App = () => (
   <Wrapper>
     <Routes>
+      <Route path="/common" element={<Common />} />
       <Route path="/login" element={<Login />} />
       <Route path="/callback" element={<Callback />} />
     </Routes>

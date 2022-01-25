@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import styled from "styled-components";
-import { Auth, IssueList } from "@pages/";
 import { authService } from "@/firebase";
+import { Auth, Home } from "@pages/";
 
 const Main = styled.div`
   position: absolute;
@@ -37,7 +37,7 @@ function App() {
       {init ? (
         user ? (
           <Routes>
-            <Route path="/" element={<IssueList />} />
+            <Route path="/" element={<Home />} />
           </Routes>
         ) : (
           <Routes>

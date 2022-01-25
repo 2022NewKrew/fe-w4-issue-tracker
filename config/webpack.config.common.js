@@ -1,11 +1,33 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: 'index.js',
-  output: {
-    path: path.resolve(__dirname, './dist'),
-    filename: 'index_bundle.js',
+	entry: '../src/index.jsx',
+	output: {
+		path: path.resolve(__dirname, '../dist'),
+		publicPath:'/',
+    filename: '[name].[chunkhash].js',
+	},
+	plugins: [
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+    }), 
+  ],
+  resolve: {
+    extensions: ['.jsx', 'js'],
+    alias: {
+      '@utils': path.resolve(__dirname, '../src/utils'),
+      '@core': path.resolve(__dirname, '../src/core'),
+      '@assets': path.resolve(__dirname, '../src/assets'),
+    },
   },
-  plugins: [new HtmlWebpackPlugin()],
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: 'babel-loader',
+      },
+    ],
+  },
 };

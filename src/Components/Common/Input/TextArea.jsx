@@ -2,8 +2,8 @@ import React, { useCallback, useMemo, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import TextInput, { TEXT_INPUT_STATE, TEXT_INPUT_TYPE } from './TextInput'
-import { COLOR, FONT } from '../../../style/commonStyle'
-import { ReactComponent as AttachIcon } from '../../../icon/ic-paperclip.svg'
+import { COLOR, FONT } from '../../../Assets/Styles/commonStyle'
+import { ReactComponent as AttachIcon } from '../../../Assets/Icon/ic-paperclip.svg'
 
 const AttachWrapper = styled.div`
   width: 100%;

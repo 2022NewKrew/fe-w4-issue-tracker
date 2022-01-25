@@ -2,8 +2,8 @@ import React, { useCallback, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import TextInput, { TEXT_INPUT_STATE, TEXT_INPUT_TYPE } from './TextInput'
-import { ReactComponent as RefreshIcon } from '../../../icon/ic-refresh.svg'
-import { COLOR } from '../../../style/commonStyle'
+import { ReactComponent as RefreshIcon } from '../../../Assets/Icon/ic-refresh.svg'
+import { COLOR } from '../../../Assets/Styles/commonStyle'
 
 const IconBox = styled.div`
   display: inline-block;

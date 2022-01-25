@@ -169,51 +169,21 @@ const disableBtnStyle = css`
 
 /**
  * 버튼 컴포넌트
+ * @param {JSX.Element} children
  * @param {string} type
  * @param {string} size
- * @param {string} text
- * @param {SVGElement} Icon
- * @param {boolean} isRightIcon
  * @param {boolean} isDisabled
  * @param {function} onClickListener
  * @return {JSX.Element}
  * @constructor
  */
 const Button = ({
+                  children,
                   type,
                   size,
-                  text,
-                  Icon,
-                  isRightIcon,
                   isDisabled,
                   onClickListener
                 }) => {
-  const leftIcon = useMemo(() => {
-    if (Icon && !isRightIcon) {
-      return (
-        <Icon
-          width="1em"
-          height="1em"
-        />
-      )
-    }
-  
-    return null
-  }, [ Icon, isRightIcon ])
-  
-  const rightIcon = useMemo(() => {
-    if (Icon && isRightIcon) {
-      return (
-        <Icon
-          width="1em"
-          height="1em"
-        />
-      )
-    }
-  
-    return null
-  }, [ Icon, isRightIcon ])
-  
   const onClick = useCallback(() => {
     if (!isDisabled) {
       onClickListener()
@@ -253,9 +223,7 @@ const Button = ({
     <Btn
       onClick={ onClick }
       customStyle={ customStyle }>
-      { leftIcon }
-      <span>{ text }</span>
-      { rightIcon }
+      { children }
     </Btn>
   )
 }
@@ -263,10 +231,7 @@ const Button = ({
 Button.propTypes = {
   type: PropTypes.string.isRequired,
   size: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
   onClickListener: PropTypes.func.isRequired,
-  Icon: PropTypes.func,
-  isRightIcon: PropTypes.bool,
   isDisabled: PropTypes.bool
 }
 

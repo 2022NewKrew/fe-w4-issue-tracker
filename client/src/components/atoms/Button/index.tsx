@@ -10,11 +10,11 @@ import ButtonTextSmall from "./ButtonTextSmall";
 export interface ButtonProps {
   name: string;
   color?: string;
-  props?: Record<string, any>;
   margin?: string;
   padding?: string;
   textAlign?: string;
   cssValue?: any;
+  children?: React.ReactNode;
 }
 export interface StyleProps {
   theme: {
@@ -37,40 +37,23 @@ export interface StyleProps {
 interface ButtonFactoryProps extends ButtonProps {
   type: string;
 }
-const Button: React.FC<ButtonFactoryProps> = ({ type, color, name, ...props }) => {
+const Button: React.FC<ButtonFactoryProps> = ({ type, name, ...props }) => {
   switch (type) {
     case "large":
-      return <ButtonLarge name={name} color={color} {...props}></ButtonLarge>;
+      return <ButtonLarge name={name} {...props}></ButtonLarge>;
     case "mediumStandard":
-      return <ButtonMediumStandard name={name} color={color} {...props}></ButtonMediumStandard>;
+      return <ButtonMediumStandard name={name} {...props}></ButtonMediumStandard>;
     case "smallSecondary":
-      return <ButtonSmallSecondary name={name} color={color} {...props}></ButtonSmallSecondary>;
+      return <ButtonSmallSecondary name={name} {...props}></ButtonSmallSecondary>;
     case "smallStandard":
-      return <ButtonSmallStandard name={name} color={color} {...props}></ButtonSmallStandard>;
+      return <ButtonSmallStandard name={name} {...props}></ButtonSmallStandard>;
     case "textMedium":
-      return <ButtonTextMedium name={name} color={color} {...props}></ButtonTextMedium>;
+      return <ButtonTextMedium name={name} {...props}></ButtonTextMedium>;
     case "textSmall":
-      return <ButtonTextSmall name={name} color={color} {...props}></ButtonTextSmall>;
+      return <ButtonTextSmall name={name} {...props}></ButtonTextSmall>;
     default:
-      return <ButtonLarge name={name} color={color} {...props}></ButtonLarge>;
+      return <ButtonLarge name={name} {...props}></ButtonLarge>;
   }
 };
-
-export const ButtonStyle = css`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-export const ButtonContentStyle = css`
-  font-family: Noto Sans KR;
-  font-style: normal;
-  font-weight: bold;
-  padding-top: 2px;
-  flex: none;
-  flex-grow: 0;
-  text-align: center;
-  display: table-cell;
-  vertical-align: middle;
-`;
 
 export default Button;

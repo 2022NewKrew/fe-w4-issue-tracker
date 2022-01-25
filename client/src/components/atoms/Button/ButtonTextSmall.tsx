@@ -1,19 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import theme from "@/styles/Theme";
+import { ButtonContentStyle, ButtonStyle } from "@/styles/Common";
 import { Plus } from "@/components/atoms/Icons";
-import { ButtonProps, StyleProps, ButtonStyle, ButtonContentStyle } from "./index";
+import { ButtonProps, StyleProps } from "./index";
 
-const ButtonTextSmall: React.FC<ButtonProps> = ({ name }) => {
+const ButtonTextSmall: React.FC<ButtonProps> = ({ name, children, ...props }) => {
   return (
-    <ButtonTextSmallEl>
+    <ButtonTextSmallEl {...props}>
       <Plus color="#6E7191" />
       <ButtonTextSmallContent>{name}</ButtonTextSmallContent>
     </ButtonTextSmallEl>
   );
 };
 const ButtonTextSmallEl = styled.button<StyleProps>`
-  ${() => ButtonStyle};
+  ${ButtonStyle};
   width: 70px;
   height: 32px;
   /* border-radius: 20px; */
@@ -37,6 +38,6 @@ const ButtonTextSmallContent = styled.div`
   height: 20px;
   font-size: 12px;
   line-height: 20px;
-  ${() => ButtonContentStyle}
+  ${ButtonContentStyle}
 `;
 export default ButtonTextSmall;

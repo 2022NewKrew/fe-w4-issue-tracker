@@ -1,17 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-import { ButtonProps, StyleProps, ButtonStyle, ButtonContentStyle } from "./index";
+import { ButtonProps, StyleProps } from "./index";
+import { ButtonContentStyle, ButtonStyle } from "@/styles/Common";
 
-const ButtonLarge: React.FC<ButtonProps> = ({ name, color, ...props }) => {
+const ButtonLarge: React.FC<ButtonProps> = ({ name, children, ...props }) => {
   return (
-    <ButtonLargeEl color={color} {...props}>
+    <ButtonLargeEl {...props}>
       <ButtonLargeContent>{name}</ButtonLargeContent>
     </ButtonLargeEl>
   );
 };
-
 const ButtonLargeEl = styled.button<StyleProps>`
-  ${() => ButtonStyle}
+  ${ButtonStyle}
   padding: 0px 24px;
   width: 340px;
   height: 64px;
@@ -31,7 +31,7 @@ const ButtonLargeEl = styled.button<StyleProps>`
   margin: ${props => props.margin};
 `;
 const ButtonLargeContent = styled.div`
-  ${() => ButtonContentStyle}
+  ${ButtonContentStyle}
   width: 292px;
   height: 32px;
   font-size: 18px;

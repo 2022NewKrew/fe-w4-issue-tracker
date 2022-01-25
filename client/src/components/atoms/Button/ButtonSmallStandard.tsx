@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { Plus } from "@/components/atoms/Icons";
-import { ButtonProps, StyleProps, ButtonStyle, ButtonContentStyle } from "./index";
+import { ButtonContentStyle, ButtonStyle } from "@/styles/Common";
+import { ButtonProps, StyleProps } from "./index";
 
-const ButtonSmallStandard: React.FC<ButtonProps> = ({ name, children }) => {
+const ButtonSmallStandard: React.FC<ButtonProps> = ({ name, children, ...props }) => {
   return (
-    <ButtonSmallStandardEl>
+    <ButtonSmallStandardEl {...props}>
       <Plus />
       <ButtonSmallStandardContent>{name}</ButtonSmallStandardContent>
     </ButtonSmallStandardEl>
@@ -13,7 +14,7 @@ const ButtonSmallStandard: React.FC<ButtonProps> = ({ name, children }) => {
 };
 
 const ButtonSmallStandardEl = styled.button<StyleProps>`
-  ${() => ButtonStyle}
+  ${ButtonStyle}
   padding: 0px 16px;
   width: 120px;
   height: 40px;
@@ -36,7 +37,7 @@ const ButtonSmallStandardEl = styled.button<StyleProps>`
   }
 `;
 const ButtonSmallStandardContent = styled.div`
-  ${() => ButtonContentStyle};
+  ${ButtonContentStyle};
   width: 50px;
   height: 20px;
   font-size: 12px;

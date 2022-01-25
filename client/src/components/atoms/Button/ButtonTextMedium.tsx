@@ -2,18 +2,19 @@ import React from "react";
 import styled from "styled-components";
 import theme from "@/styles/Theme";
 import { Plus } from "@/components/atoms/Icons";
-import { ButtonProps, StyleProps, ButtonStyle, ButtonContentStyle } from "./index";
+import { ButtonContentStyle, ButtonStyle } from "@/styles/Common";
+import { ButtonProps, StyleProps } from "./index";
 
-const ButtonTextMedium: React.FC<ButtonProps> = ({ name }) => {
+const ButtonTextMedium: React.FC<ButtonProps> = ({ name, children, ...props }) => {
   return (
-    <ButtonTextMediumEl>
+    <ButtonTextMediumEl {...props}>
       <Plus color={theme.color.label} />
       <ButtonTextMediumContent>{name}</ButtonTextMediumContent>
     </ButtonTextMediumEl>
   );
 };
 const ButtonTextMediumEl = styled.button<StyleProps>`
-  ${() => ButtonStyle}
+  ${ButtonStyle}
   width: 87px;
   height: 32px;
 
@@ -31,7 +32,7 @@ const ButtonTextMediumEl = styled.button<StyleProps>`
   }
 `;
 const ButtonTextMediumContent = styled.div`
-  ${() => ButtonContentStyle}
+  ${ButtonContentStyle}
   width: 67px;
   height: 28px;
 

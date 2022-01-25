@@ -64,3 +64,19 @@ export const InputTagStyle = css`
     border: 0px solid rgba(255, 255, 255, 0);
   }
 `;
+export const ButtonStyle = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+export const ButtonContentStyle = css`
+  font-family: Noto Sans KR;
+  font-style: normal;
+  font-weight: bold;
+  padding-top: 2px;
+  flex: none;
+  flex-grow: 0;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+`;

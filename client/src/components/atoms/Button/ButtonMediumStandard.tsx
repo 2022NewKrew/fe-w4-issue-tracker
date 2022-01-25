@@ -1,16 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-import { ButtonContentStyle, ButtonStyle, ButtonProps, StyleProps } from "./index";
+import { ButtonProps, StyleProps } from "./index";
+import { ButtonContentStyle, ButtonStyle } from "@/styles/Common";
 
-const ButtonMediumStandard: React.FC<ButtonProps> = ({ name }) => {
+const ButtonMediumStandard: React.FC<ButtonProps> = ({ name, children, ...props }) => {
   return (
-    <ButtonMediumStandardEl>
+    <ButtonMediumStandardEl {...props}>
       <ButtonMediumStandardContent>{name}</ButtonMediumStandardContent>
     </ButtonMediumStandardEl>
   );
 };
 const ButtonMediumStandardEl = styled.button<StyleProps>`
-  ${() => ButtonStyle}
+  ${ButtonStyle}
   padding: 0px 24px;
   width: 240px;
   height: 56px;
@@ -29,7 +30,7 @@ const ButtonMediumStandardEl = styled.button<StyleProps>`
   }
 `;
 const ButtonMediumStandardContent = styled.div<StyleProps>`
-  ${() => ButtonContentStyle}
+  ${ButtonContentStyle}
   width: 192px;
   height: 32px;
   font-size: 18px;

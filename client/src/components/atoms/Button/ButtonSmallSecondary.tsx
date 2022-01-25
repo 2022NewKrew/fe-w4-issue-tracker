@@ -1,18 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 import { Plus } from "@/components/atoms/Icons";
-import { ButtonProps, StyleProps, ButtonStyle, ButtonContentStyle } from "./index";
+import { ButtonProps, StyleProps } from "./index";
+import { ButtonContentStyle, ButtonStyle } from "@/styles/Common";
 
-const ButtonSmallSecondary = ({ name, props }: ButtonProps) => {
+const ButtonSmallSecondary = ({ name, children, ...props }: ButtonProps) => {
   return (
-    <ButtonSmallSecondaryEl>
+    <ButtonSmallSecondaryEl {...props}>
       <Plus color="#007AFF" />
       <ButtonSmallSecondaryContent>{name}</ButtonSmallSecondaryContent>
     </ButtonSmallSecondaryEl>
   );
 };
 const ButtonSmallSecondaryEl = styled.button<StyleProps>`
-  ${() => ButtonStyle}
+  ${ButtonStyle}
   box-sizing: border-box;
   width: 120px;
   height: 40px;
@@ -37,7 +38,7 @@ const ButtonSmallSecondaryEl = styled.button<StyleProps>`
 `;
 
 const ButtonSmallSecondaryContent = styled.div<StyleProps>`
-  ${() => ButtonContentStyle};
+  ${ButtonContentStyle};
   width: 50px;
   height: 20px;
   font-size: 12px;

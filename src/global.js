@@ -5,9 +5,8 @@ export const issueListURL=new URL('issue-list', backendURL).href;
 export const issueLabelURL=new URL('issue-label', backendURL).href;
 
 export async function getFromURL(url, params){
-  return await (await axios.get(url, {
-    params: params
-  })).data;
+  const {data}=await (await axios.get(url, {params: params}));
+  return data;
 }
 
 export function getPrettyDate(date){

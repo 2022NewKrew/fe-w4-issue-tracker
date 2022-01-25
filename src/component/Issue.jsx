@@ -11,12 +11,7 @@ export default function Issue({issueID, title, authorID, timestamp, isOpen, mile
 
   useEffect(()=>{
     getFromURL(issueLabelURL, {issueID: issueID}).then((newIssueLabelArray)=>{
-      console.log(newIssueLabelArray);
-      const flattenedArray=newIssueLabelArray.reduce((prev, cur)=>{
-        prev.push(cur);
-        return prev;
-      }, []);
-      setLabelIDArray(flattenedArray);
+      setLabelIDArray(newIssueLabelArray);
     });
   }, []);
 
@@ -36,7 +31,7 @@ export default function Issue({issueID, title, authorID, timestamp, isOpen, mile
         {milestoneID}
       </span>
     );
-  }, [milestone]);
+  }, []);
 
   function onClick(){
     navigate(`/issue/${issueID}`, {replace: false});

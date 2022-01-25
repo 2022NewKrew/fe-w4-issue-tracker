@@ -1,9 +1,7 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { COLOR, FONT } from '../../../Assets/Styles/commonStyle'
-import plusIcon from '../../../Assets/Icon/ic-plus.svg'
-import { ReactComponent as PlusIcon } from '../../../Assets/Icon/ic-plus.svg'
 
 export const BUTTON_TYPE = {
   LARGE_STANDARD: 'large-standard',
@@ -27,6 +25,10 @@ const btnStyle = css`
   svg {
     color: ${ COLOR.OFF_WHITE };
   }
+
+  svg + span {
+    margin-left: 3px;
+  }
 `
 
 const standardBtnStyle = css`
@@ -46,14 +48,6 @@ const standardBtnStyle = css`
   span {
     padding-top: 3px;
     color: ${ COLOR.OFF_WHITE };
-  }
-  
-  svg {
-    color: ${ COLOR.OFF_WHITE };
-  }
-  
-  svg + span {
-    margin-left: 3px;
   }
 `
 
@@ -203,63 +197,101 @@ const SmallTextBtn = styled.div`
  * 버튼 컴포넌트
  * @param { string } type
  * @param {string} text
+ * @param {SVGElement} Icon
+ * @param {boolean} isRightIcon
  * @param {function} onClickListener
  * @return {JSX.Element}
  * @constructor
  */
-const Button = ({ type, text, onClickListener }) => {
+const Button = ({
+                  type,
+                  text,
+                  Icon,
+                  isRightIcon,
+                  onClickListener
+                }) => {
+  const leftIcon = useMemo(() => {
+    if (Icon) {
+      if (!isRightIcon) {
+        return (
+          <Icon
+          width="1em"
+          height="1em"
+          />
+        )
+      }
+    }
+    
+    return null
+  }, [ Icon, rightIcon ])
+  
+  const rightIcon = useMemo(() => {
+    if (Icon) {
+      if (isRightIcon) {
+        return (
+          <Icon
+            width="1em"
+            height="1em"
+          />
+        )
+      }
+    }
+    
+    return null
+  }, [ Icon, rightIcon ])
+  
   switch (type) {
     case BUTTON_TYPE.LARGE_STANDARD:
       return (
         <LargeStandardBtn onClick={ onClickListener }>
+          { leftIcon }
           <span>{ text }</span>
+          { rightIcon }
         </LargeStandardBtn>
       )
     
     case BUTTON_TYPE.MEDIUM_STANDARD:
       return (
         <MediumStandardBtn onClick={ onClickListener }>
+          { leftIcon }
           <span>{ text }</span>
+          { rightIcon }
         </MediumStandardBtn>
       )
     
     case BUTTON_TYPE.SMALL_STANDARD:
       return (
         <SmallStandardBtn onClick={ onClickListener }>
-          <PlusIcon
-            width="1em"
-            height="1em" />
+          { leftIcon }
           <span>{ text }</span>
+          { rightIcon }
         </SmallStandardBtn>
       )
     
     case BUTTON_TYPE.SMALL_SECONDARY:
       return (
         <SmallSecondaryBtn onClick={ onClickListener }>
-          <PlusIcon
-            width="1em"
-            height="1em" />
+          { leftIcon }
           <span>{ text }</span>
+          { rightIcon }
         </SmallSecondaryBtn>
       )
     
     case BUTTON_TYPE.MEDIUM_TEXT:
       return (
         <MediumTextBtn onClick={ onClickListener }>
+          { leftIcon }
           <span>{ text }</span>
-          <PlusIcon
-            width="1em"
-            height="1em" />
+          { rightIcon }
         </MediumTextBtn>
       )
     
     case BUTTON_TYPE.SMALL_TEXT:
       return (
         <SmallTextBtn onClick={ onClickListener }>
+          { leftIcon }
           <span>{ text }</span>
-          <PlusIcon
-            width="1em"
-            height="1em" />
+          { rightIcon }
         </SmallTextBtn>
       )
   }
@@ -268,7 +300,9 @@ const Button = ({ type, text, onClickListener }) => {
 Button.propTypes = {
   type: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
-  onClickListener: PropTypes.func.isRequired
+  onClickListener: PropTypes.func.isRequired,
+  Icon: PropTypes.func,
+  isRightIcon: PropTypes.bool
 }
 
 export default Button

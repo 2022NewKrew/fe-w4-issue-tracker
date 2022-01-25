@@ -5,15 +5,15 @@ import Login from "@pages/Login";
 
 import { useRecoilState } from "recoil";
 import { userState } from "./atoms/atoms";
-import { Cookies } from "react-cookie";
+import { useCookies } from "react-cookie";
 
 const App = () => {
   const [user, setUser] = useRecoilState(userState);
-  const cookies = new Cookies();
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
 
   useEffect(() => {
-    if (cookies.get("user")) {
-      setUser(cookies.get("user"));
+    if (cookies) {
+      setUser(cookies);
     }
   }, []);
   return (

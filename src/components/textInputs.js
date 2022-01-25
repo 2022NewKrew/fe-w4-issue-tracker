@@ -172,7 +172,7 @@ export function TextInput({
   };
 
   const changeActive = (value) => {
-    value ? setActive(true) : setActive(false);
+    setActive(!!value);
   };
 
   const changeDisable = (value) => {

@@ -12,7 +12,7 @@ import { useRecoilState } from "recoil";
 import { userState } from "../atoms/atoms";
 
 import { useNavigate } from "react-router-dom";
-import { Cookies } from "react-cookie";
+import { useCookies } from "react-cookie";
 
 export default function Login() {
   const provider = githubProvider;
@@ -22,7 +22,7 @@ export default function Login() {
   const [disable, setDisable] = useState(true);
   const [id, setId] = useState("");
   const [pwd, setPwd] = useState("");
-  const cookies = new Cookies();
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
 
   function handleGithubLogin() {
     firebaseAuth.signInWithPopup(provider).then((result) => {
@@ -32,7 +32,7 @@ export default function Login() {
       };
       const accessToken = result.credential.accessToken;
       setUser(signedInUser);
-      cookies.set("user", accessToken);
+      setCookie("user", accessToken);
     });
   }
 

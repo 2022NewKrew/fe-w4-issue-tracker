@@ -6,16 +6,16 @@ import { firebaseAuth } from "../firebase";
 import { useSetRecoilState } from "recoil";
 import { userState } from "../atoms/atoms";
 
-import { Cookies } from "react-cookie";
+import { useCookies } from "react-cookie";
 
 export default function Main() {
   const setUser = useSetRecoilState(userState);
-  const cookies = new Cookies();
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
 
   function logout() {
     firebaseAuth.signOut();
     setUser(null);
-    cookies.remove("user");
+    removeCookie("user");
   }
   return (
     <div>

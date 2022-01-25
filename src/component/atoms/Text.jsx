@@ -3,7 +3,6 @@ import styled, { css } from "styled-components";
 const Text = styled.p`
   font-family: Noto Sans KR, sans-serif;
   font-style: normal;
-  text-align: center;
   font-weight: 300;
 
   ${({ options: { size } }) => sizeType[size]}

@@ -16,6 +16,7 @@ blockquote,
 pre,
 a,
 button,
+input,
 abbr,
 acronym,
 address,
@@ -83,6 +84,7 @@ video {
   margin: 0;
   padding: 0;
   border: 0;
+  background: none;
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
@@ -137,8 +139,8 @@ nav ul {
   list-style: none;
 }
 
-button {
-  background: none;
+input:focus {
+  outline: none;
 }
 
 * {

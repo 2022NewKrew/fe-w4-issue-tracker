@@ -14,6 +14,15 @@ module.exports = (webpackEnv) =>
     output: {
       filename: "js/[name].[contenthash:8].js",
     },
+    module: {
+      rules: [
+        {
+          test: /\.css$/,
+          exclude: /node_modules/,
+          use: ["style-loader", "css-loader"],
+        },
+      ],
+    },
     plugins: [
       new Dotenv({ path: path.resolve(ENV, ".env.dev") }), // .env에 있는 변수를 가져오는 Plugin. process.env.XXX 로 접근 가능
     ],
@@ -22,10 +31,10 @@ module.exports = (webpackEnv) =>
       host: "localhost", // host 설정
       open: true, // 서버를 실행했을 때, 브라우저를 열어주는 여부
       compress: true,
-      historyApiFallback: true,
+      historyApiFallback: true, // url 직접 접근을 해결해주는?
       client: {
         overlay: true,
       },
     },
-    devtool: "inline-source-map",
+    devtool: "hidden-source-map",
   });

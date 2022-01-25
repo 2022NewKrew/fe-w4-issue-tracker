@@ -1,6 +1,5 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 // Path Config
 const PROJECT_ROOT = path.resolve(__dirname, "..");
@@ -20,13 +19,8 @@ module.exports = (webpackEnv) => {
       rules: [
         {
           test: /\.(js|jsx)$/,
-          exclude: "/node_modules/",
+          exclude: /node_modules/,
           loader: "babel-loader",
-        },
-        {
-          test: /\.css$/,
-          exclude: "/node_modules/",
-          use: [MiniCssExtractPlugin.loader, "css-loader"],
         },
         {
           test: /\.(png|jpe?g|gif)$/,
@@ -42,7 +36,6 @@ module.exports = (webpackEnv) => {
     },
     plugins: [
       new HtmlWebpackPlugin({ template: PUBLIC_INDEX }), // 빌드한 결과물을 HTML 파일로 생성해주는 Plugin
-      new MiniCssExtractPlugin(), // 별도로 css 파일을 만들어서 빌드하는 Plugin
     ],
   };
 };

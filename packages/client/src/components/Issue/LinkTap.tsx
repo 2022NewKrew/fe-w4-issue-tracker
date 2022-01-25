@@ -20,6 +20,7 @@ export default LinkTap;
 
 const Wrapper = styled.div`
   position: absolute;
+  right: 0;
   display: flex;
   & > a:last-child {
     margin-left: 16px;

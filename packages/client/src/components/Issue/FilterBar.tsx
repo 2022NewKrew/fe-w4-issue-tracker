@@ -25,7 +25,13 @@ const FilterBar = () => {
           onBlur={() => setFocus(false)}
         ></input>
       </form>
-      <Dropdown title="필터 이름" list={filterList} icon />
+      <Dropdown
+        indicator="Filter"
+        panelTitle="필터 이름"
+        direction="left"
+        list={filterList}
+        icon
+      />
     </Wrapper>
   );
 };
@@ -33,31 +39,28 @@ const FilterBar = () => {
 export default FilterBar;
 
 const Wrapper = styled.div`
-  form > svg {
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    top: 10px;
-    left: 24px;
-    opacity: 0.5;
-  }
   display: flex;
   flex-direction: row-reverse;
+  align-items: center;
   width: 601px;
   height: 40px;
-  div button,
-  form {
-    border: 1px solid ${theme.greyscale.line};
-    border-radius: 11px;
-    position: relative;
+  & > form,
+  & > div {
+    height: 100%;
+    display: flex;
+    align-items: center;
   }
-
-  div > button:first-child {
-    border-right: 1px solid ${theme.greyscale.line};
+  div > button {
+    padding: 0 25px;
+    height: 100%;
+    border: 1px solid ${theme.greyscale.line};
     border-radius: 11px 0 0 11px;
     border-right: none;
   }
   form {
+    border: 1px solid ${theme.greyscale.line};
+    border-radius: 11px;
+    position: relative;
     flex: 1;
     overflow: hidden;
     border-radius: 0 11px 11px 0;
@@ -67,6 +70,11 @@ const Wrapper = styled.div`
       height: 100%;
       padding: 0 48px;
     }
+    svg {
+      top: 10px;
+      left: 24px;
+      opacity: 0.5;
+    }
     :focus-within {
       background: ${theme.greyscale.offWhite};
       border-color: ${theme.greyscale.titleActive};
@@ -74,9 +82,11 @@ const Wrapper = styled.div`
       input {
         background: ${theme.greyscale.offWhite};
       }
-      + div > button:first-child {
+      + div > button {
         background: ${theme.greyscale.offWhite};
-        border-color: ${theme.greyscale.titleActive};
+        border: 1px solid ${theme.greyscale.titleActive};
+        border-right: none;
+        border-radius: 11px 0 0 11px;
       }
       svg {
         opacity: 1;

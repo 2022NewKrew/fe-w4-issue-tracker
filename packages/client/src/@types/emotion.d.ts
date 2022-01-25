@@ -47,7 +47,7 @@ declare module "@emotion/react" {
       [key in greyscaleKey]: string;
     };
     colors: {
-      [key in colorsKey]: IColorDetail;
+      [key in colorType]: IColorDetail;
     };
     flexCenter: SerializedStyles;
   }

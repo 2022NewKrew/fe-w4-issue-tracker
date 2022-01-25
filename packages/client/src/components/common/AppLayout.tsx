@@ -2,13 +2,6 @@ import styled from "@emotion/styled";
 import Logo from "./Logo";
 import ProfileLarge from "@assets/icons/UserImageLarge.svg";
 
-const Header: React.FC = () => (
-  <StyledHeader>
-    <Logo size="medium" />
-    <ProfileLarge />
-  </StyledHeader>
-);
-
 interface Props {
   children: React.ReactNode;
 }
@@ -16,7 +9,10 @@ interface Props {
 const AppLayout = ({ children }: Props) => {
   return (
     <Wrapper>
-      <Header />
+      <StyledHeader>
+        <Logo size="medium" />
+        <ProfileLarge />
+      </StyledHeader>
       <main>{children}</main>
     </Wrapper>
   );
@@ -25,16 +21,24 @@ const AppLayout = ({ children }: Props) => {
 export default AppLayout;
 
 const Wrapper = styled.div`
-  padding: 27px 80px 0;
+  padding: 0 80px;
   main {
+    position: relative;
     display: flex;
     flex-direction: column;
   }
 `;
 
 const StyledHeader = styled.header`
-  display: flex;
-  justify-content: space-between;
   width: 100%;
-  margin-bottom: 60px;
+  height: 126px;
+  position: relative;
+  svg:first-child {
+    left: 0;
+    top: 27px;
+  }
+  svg:last-child {
+    right: 0;
+    top: 25px;
+  }
 `;

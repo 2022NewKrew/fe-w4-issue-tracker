@@ -10,6 +10,7 @@ const style = css`
     font-style: normal;
     font-weight: normal;
     color: ${theme.greyscale.body};
+    /* letter-spacing: -0.03rem; */
   }
   input,
   textarea,
@@ -36,7 +37,11 @@ const style = css`
     text-decoration: none;
   }
   svg {
+    position: absolute;
     cursor: pointer;
+  }
+  li {
+    list-style: none;
   }
 `;
 

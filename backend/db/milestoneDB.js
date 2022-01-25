@@ -1,3 +1,5 @@
+const {convertIsOpenInt, convertIsOpenBool} = require('../global');
+
 /**
  * @param {import('better-sqlite3').Database} db
  */
@@ -21,6 +23,7 @@ module.exports=function initMilestoneDB(db){
     VALUES (@title, @completeTimestamp, @isOpen, @body)
   `);
   function insert({title, completeTimestamp, isOpen, body}){
+    isOpen=convertIsOpenInt(isOpen);
     insertStmt.run({title, completeTimestamp, isOpen, body});
   }
 
@@ -33,6 +36,7 @@ module.exports=function initMilestoneDB(db){
     WHERE milestoneID=@milestoneID
   `);
   function update(milestoneID, {title, completeTimestamp, isOpen, body}){
+    isOpen=convertIsOpenInt(isOpen);
     updateStmt.run({milestoneID, title, completeTimestamp, isOpen, body});
   }
 
@@ -56,9 +60,13 @@ module.exports=function initMilestoneDB(db){
    */
   function select(milestoneID){
     if(milestoneID===undefined){
-      return selectAllStmt.all();
+      const rows=selectAllStmt.all();
+      convertIsOpenBool(rows);
+      return rows;
     }
-    return selectByIDStmt.get({milestoneID});
+    const row=selectByIDStmt.get({milestoneID});
+    convertIsOpenBool(row);
+    return row;
   }
 
   return {

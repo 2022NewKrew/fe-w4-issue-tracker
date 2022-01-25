@@ -1,3 +1,5 @@
+const {flatObjectArray} = require('../global');
+
 /**
  * @param {import('better-sqlite3').Database} db
  */
@@ -31,11 +33,15 @@ module.exports=function initMilestoneDB(db){
     removeStmt.run({issueID, labelID});
   }
 
-  const selectByIssueIDStmt=db.prepare(`
+  const selectLabelIDByIssueIDStmt=db.prepare(`
     SELECT labelID FROM issueLabel WHERE issueID=@issueID
   `);
+  /**
+   * @returns {int[]}
+   */
   function selectLabelIDsByIssueID(issueID){
-    selectByIssueIDStmt.all({issueID});
+    const rows=selectLabelIDByIssueIDStmt.all({issueID});
+    return flatObjectArray(rows, 'labelID');
   }
 
   return {

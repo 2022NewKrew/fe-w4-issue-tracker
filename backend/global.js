@@ -26,14 +26,30 @@ function convertIsOpenBool(rows){
 }
 /**
  * Convert `isOpen` property value type to `int` and return the value.
- * @param {Array.<{isOpen:int}>} rows
+ * @param {boolean} isOpen
  */
-function convertIsOpenInt(isBool){
-  return isBool===true ? 1 : 0;
+function convertIsOpenInt(isOpen){
+  return isOpen===true ? 1 : 0;
+}
+/**
+ * Flat given array of objects into an array of certain key.
+ * Throws an error if the key does not exist in any object.
+ * @param {Array.<{key}>} objectArray
+ * @param {string} key
+ */
+function flatObjectArray(objectArray, key){
+  return objectArray.reduce((prev, cur)=>{
+    if(cur[key]===undefined){
+      throw Error('key does not exist');
+    }
+    prev.push(cur[key]);
+    return prev;
+  }, []);
 }
 
 module.exports={
   mergeTwoObjects,
   convertIsOpenBool,
-  convertIsOpenInt
+  convertIsOpenInt,
+  flatObjectArray
 };

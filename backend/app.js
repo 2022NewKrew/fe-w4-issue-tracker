@@ -30,3 +30,13 @@ app.get('/issue-list', (req, res)=>{
     res.sendStatus(500);
   }
 });
+
+app.get('/issue-label', (req, res)=>{
+  try{
+    const issueID=req.query.issueID;
+    const issueLabels=issueLabelDB.selectLabelIDsByIssueID(issueID);
+    res.send(issueLabels).status(200);
+  }catch{
+    res.sendStatus(500);
+  }
+});

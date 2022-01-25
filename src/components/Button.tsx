@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/react';
-import { theme } from '@Styles/theme';
+import { theme } from '@styles/theme';
 
 const Button = ({ type, children, ...props }) => {
   const getStyle = (type) => {

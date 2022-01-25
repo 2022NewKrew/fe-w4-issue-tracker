@@ -1,8 +1,8 @@
 /** @jsx jsx */
 import { jsx, css, ThemeProvider } from '@emotion/react';
-import { theme } from '@Styles/theme';
-import Button from '@Components/Button.jsx';
-import { ReactComponent as Plus } from '@Icons/Plus.svg';
+import { theme } from '@styles/theme';
+import Button from '@components/Button';
+// import { ReactComponent as Plus } from '@icons/Plus.svg';
 
 const App = () => {
   const spacing = css`
@@ -18,11 +18,11 @@ const App = () => {
         <span>BUTTON</span>
       </Button>
       <Button css={spacing} type="SmallStandard" onClick={() => console.log('hi')}>
-        <Plus />
+        {/* <Plus /> */}
         <span>BUTTON</span>
       </Button>
       <Button css={spacing} type="SmallSecondary" onClick={() => console.log('hi')}>
-        <Plus />
+        {/* <Plus /> */}
         <span>BUTTON</span>
       </Button>
     </ThemeProvider>

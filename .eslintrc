@@ -4,20 +4,15 @@
     "es2021": true,
     "node": true
   },
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
   "extends": [
     "eslint:recommended", 
     "plugin:react/recommended", 
     "plugin:prettier/recommended", 
-    "eslint-config-prettier"
+    "eslint-config-prettier",
+    "plugin:@typescript-eslint/recommended",
   ],
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "ecmaVersion": 12,
-    "sourceType": "module"
-  },
-  "plugins": ["react", "prettier"],
   "rules": {
     "prettier/prettier": [
       "warn",
@@ -26,14 +21,15 @@
         "singleQuote": true,
         "tabWidth": 2,
         "useTabs": false
-      },
+      }
     ],
     "react/prop-types": "off",
-    "no-unused-vars": "warn"
+    "no-unused-vars": "warn",
+    "@typescript-eslint/no-var-requires": 0,
   },
   "settings": {
     "react": {
       "version": "detect"
-    }
+    },
   }
 }

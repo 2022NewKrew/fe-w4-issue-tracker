@@ -18,7 +18,3 @@ const Wrapper = styled.div`
     justify-content: space-around;
     align-items: center;
 `;
-// const DropdownButton = styled.img`
-//     height: 4px;
-//     width: 8px;
-// `;

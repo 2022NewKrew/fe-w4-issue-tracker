@@ -1,5 +1,5 @@
 import { ITheme } from '../styles/themeInterface';
 
 declare module '@types' {
-    ITheme;
+    interface IStyleTheme extends ITheme {}
 }

@@ -28,19 +28,19 @@ export interface IColors extends IGrayScale, IThemeColors {}
 
 export interface IFonts {
     size: {
+        display: string;
         large: string;
         medium: string;
         small: string;
         xSmall: string;
     };
     weight: {
-        large: string;
-        medium: string;
-        small: string;
-        xSmall: string;
-        link: string;
+        bold: string;
+        bolder: string;
+        normal: string;
     };
     lineHeight: {
+        display: string;
         large: string;
         medium: string;
         small: string;

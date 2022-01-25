@@ -37,7 +37,10 @@ const config: Configuration = {
         ],
     },
     plugins: [
-        new HtmlWebpackPlugin({ template: path.resolve(process.cwd(), 'public/index.html') }),
+        new HtmlWebpackPlugin({
+            title: 'Issue Maker',
+            template: path.resolve(process.cwd(), 'public/index.html'),
+        }),
         new Dotenv({ path: path.resolve(process.cwd(), `.env.${process.env.NODE_ENV}`) }),
     ],
     resolve: {

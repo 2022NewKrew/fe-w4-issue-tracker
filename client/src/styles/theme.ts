@@ -28,19 +28,19 @@ const lightThemeColors: IThemeColors = {
 
 const fonts: IFonts = {
     size: {
+        display: '32px',
         large: '24px',
         medium: '18px',
         small: '16px',
         xSmall: '12px',
     },
     weight: {
-        large: '400',
-        medium: '400',
-        small: '400',
-        xSmall: '500',
-        link: '700',
+        bold: '700',
+        bolder: '500',
+        normal: '400',
     },
     lineHeight: {
+        display: '48px',
         large: '40px',
         medium: '32px',
         small: '28px',

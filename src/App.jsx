@@ -26,7 +26,7 @@ const App = () => {
         type={ BUTTON_TYPE.STANDARD }
         size={ BUTTON_SIZE.LARGE }
         text="LARGE STANDARD DISABLE"
-        isDisable
+        isDisabled
         onClickListener={ () => {
           console.log('clicked')
         } } />
@@ -92,7 +92,7 @@ const App = () => {
       <TextInput type={ TEXT_INPUT_TYPE.LARGE }
                  state={ TEXT_INPUT_STATE.NORMAL }
                  placeholder="아이디"
-                 isDisable
+                 isDisabled
                  onInputValueChangeListener={ () => {
                    console.log('change')
                  } } />

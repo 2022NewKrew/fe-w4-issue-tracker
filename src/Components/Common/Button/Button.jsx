@@ -174,7 +174,7 @@ const disableBtnStyle = css`
  * @param {string} text
  * @param {SVGElement} Icon
  * @param {boolean} isRightIcon
- * @param {boolean} isDisable
+ * @param {boolean} isDisabled
  * @param {function} onClickListener
  * @return {JSX.Element}
  * @constructor
@@ -185,7 +185,7 @@ const Button = ({
                   text,
                   Icon,
                   isRightIcon,
-                  isDisable,
+                  isDisabled,
                   onClickListener
                 }) => {
   const leftIcon = useMemo(() => {
@@ -219,10 +219,10 @@ const Button = ({
   }, [ Icon, rightIcon ])
   
   const onClick = useCallback(() => {
-    if (!isDisable) {
+    if (!isDisabled) {
       onClickListener()
     }
-  }, [ isDisable ])
+  }, [ isDisabled ])
   
   const customStyle = useMemo(() => {
     let style = (
@@ -239,7 +239,7 @@ const Button = ({
             : style.concat(standardBtnStyle)
     )
     
-    if (isDisable) {
+    if (isDisabled) {
       style = style.concat(disableBtnStyle)
     } else {
       style = (
@@ -251,7 +251,7 @@ const Button = ({
     }
     
     return style
-  }, [ type, size, isDisable ])
+  }, [ type, size, isDisabled ])
   
   return (
     <Btn
@@ -271,7 +271,7 @@ Button.propTypes = {
   onClickListener: PropTypes.func.isRequired,
   Icon: PropTypes.func,
   isRightIcon: PropTypes.bool,
-  isDisable: PropTypes.bool
+  isDisabled: PropTypes.bool
 }
 
 export default Button

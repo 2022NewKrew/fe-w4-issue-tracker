@@ -6,5 +6,5 @@ const dbConfig = {
   waitForConnections: true,
   connectionLimit: 10,
 };
-
-export { dbConfig };
+const jwtSecret = "kakaoonboarding";
+export { dbConfig, jwtSecret };

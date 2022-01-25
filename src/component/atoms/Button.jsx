@@ -6,7 +6,7 @@ export const LargeButton = ({ color = "primary", prefixIcon, children, ...props 
   const theme = useTheme();
   return (
     <FilledButton options={{ size: "large", color }} {...props}>
-      <Icon name={prefixIcon} color={theme.grayscale.offWhite} />
+      {prefixIcon && <Icon name={prefixIcon} color={theme.grayscale.offWhite} />}
       <Text options={{ size: "medium", isLink: true }}>{children}</Text>
     </FilledButton>
   );
@@ -16,7 +16,7 @@ export const MediumStandardButton = ({ color = "primary", prefixIcon, children, 
   const theme = useTheme();
   return (
     <FilledButton options={{ size: "medium", color }} {...props}>
-      <Icon name={prefixIcon} color={theme.grayscale.offWhite} />
+      {prefixIcon && <Icon name={prefixIcon} color={theme.grayscale.offWhite} />}
       <Text options={{ size: "medium", isLink: true }}>{children}</Text>
     </FilledButton>
   );
@@ -26,7 +26,7 @@ export const SmallStandardButton = ({ color = "primary", prefixIcon, children, .
   const theme = useTheme();
   return (
     <FilledButton options={{ size: "small", color }} {...props}>
-      <Icon name={prefixIcon} color={theme.grayscale.offWhite} />
+      {prefixIcon && <Icon name={prefixIcon} color={theme.grayscale.offWhite} />}
       <Text options={{ size: "xsmall", isLink: true }}>{children}</Text>
     </FilledButton>
   );
@@ -36,7 +36,7 @@ export const SmallSecondaryButton = ({ color = "primary", prefixIcon, children, 
   const theme = useTheme();
   return (
     <EmptyButton options={{ size: "small", color }} {...props}>
-      <Icon name={prefixIcon} color={themeColor(theme, color).default} />
+      {prefixIcon && <Icon name={prefixIcon} color={themeColor(theme, color).default} />}
       <Text options={{ size: "xsmall", isLink: true }}>{children}</Text>
     </EmptyButton>
   );
@@ -46,7 +46,7 @@ export const MediumTextButton = ({ prefixIcon, children, ...props }) => {
   const theme = useTheme();
   return (
     <TextButton options={{ size: "text" }} {...props}>
-      <Icon name={prefixIcon} color={theme.grayscale.label} />
+      {prefixIcon && <Icon name={prefixIcon} color={theme.grayscale.label} />}
       <Text options={{ size: "small", isLink: true }}>{children}</Text>
     </TextButton>
   );
@@ -56,7 +56,7 @@ export const SmallTextButton = ({ prefixIcon, children, ...props }) => {
   const theme = useTheme();
   return (
     <TextButton options={{ size: "text" }} {...props}>
-      <Icon name={prefixIcon} color={theme.grayscale.label} />
+      {prefixIcon && <Icon name={prefixIcon} color={theme.grayscale.label} />}
       <Text options={{ size: "xsmall", isLink: true }}>{children}</Text>
     </TextButton>
   );

@@ -81,11 +81,12 @@ const Wrapper = styled.div`
   background-color: ${ COLOR.INPUT_BACKGROUND };
   border: 1px solid rgba(0, 0, 0, 0);
   cursor: text;
-
   ${ ({ customStyle }) => customStyle }
-  &:disabled {
-    opacity: 0.5;
-  }
+`
+
+const disableWrapperStyle = css`
+  opacity: 0.5;
+  cursor: default;
 `
 
 const activeWrapperStyle = css`
@@ -145,6 +146,7 @@ const PaddingDiv = styled.div`
  * @param {string} type
  * @param {string} state
  * @param {string} placeholder
+ * @param {boolean?} isDisable
  * @param {string?} inputValue
  * @param {function?} onInputValueChangeListener
  * @param {function?} onFocusChangeListener
@@ -156,6 +158,7 @@ const TextInput = ({
                      type,
                      state,
                      placeholder,
+                     isDisable,
                      inputValue,
                      onInputValueChangeListener,
                      onFocusChangeListener
@@ -181,11 +184,13 @@ const TextInput = ({
   
   // input을 감싸고 있는 wrapper element가 클릭되어도 input으로 focus되도록 함
   const focusToInput = useCallback(() => {
-    setTimeout(() => {
-      clearTimeout(blurTimeRef.current)
-      inputRef.current.focus()
-    }, 1)
-  }, [])
+    if (!isDisable) {
+      setTimeout(() => {
+        clearTimeout(blurTimeRef.current)
+        inputRef.current.focus()
+      }, 1)
+    }
+  }, [ isDisable ])
   
   const onFocus = useCallback(() => {
     setIsFocus(true)
@@ -241,8 +246,12 @@ const TextInput = ({
           : null
     }
     
+    if (isDisable) {
+      style = style.concat(disableWrapperStyle)
+    }
+    
     return style
-  }, [ type, isFocus, state ])
+  }, [ type, isFocus, state, isDisable ])
   
   const labelStyle = useMemo(() => {
     let style = css``
@@ -293,6 +302,7 @@ const TextInput = ({
         <TextArea
           placeholder={ placeholderInInput }
           placeholderColor={ placeholderColor }
+          disabled={isDisable}
           ref={ inputRef }
           onChange={ onChange }
           onFocus={ onFocus }
@@ -304,6 +314,7 @@ const TextInput = ({
         <Input
           placeholder={ placeholderInInput }
           placeholderColor={ placeholderColor }
+          disabled={isDisable}
           ref={ inputRef }
           onChange={ onChange }
           onFocus={ onFocus }
@@ -334,7 +345,8 @@ TextInput.propTypes = {
   onFocusChangeListener: PropTypes.func,
   placeholder: PropTypes.string.isRequired,
   state: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired
+  type: PropTypes.string.isRequired,
+  isDisable: PropTypes.bool
 }
 
 export default TextInput

@@ -1,26 +1,25 @@
-import React, { useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { COLOR, FONT } from '../../../Assets/Styles/commonStyle'
 
 export const BUTTON_TYPE = {
-  LARGE_STANDARD: 'large-standard',
-  MEDIUM_STANDARD: 'medium-standard',
-  SMALL_STANDARD: 'small-standard',
-  SMALL_SECONDARY: 'small-secondary',
-  MEDIUM_TEXT: 'medium-text',
-  SMALL_TEXT: 'small-text'
+  STANDARD: 'standard',
+  SECONDARY: 'secondary',
+  TEXT: 'text'
 }
 
-const btnStyle = css`
+export const BUTTON_SIZE = {
+  LARGE: 'large',
+  MEDIUM: 'medium',
+  SMALL: 'small'
+}
+
+const Btn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-
-  &:disabled {
-    opacity: 0.5;
-  }
 
   svg {
     color: ${ COLOR.OFF_WHITE };
@@ -29,21 +28,14 @@ const btnStyle = css`
   svg + span {
     margin-left: 3px;
   }
+
+  ${ ({ customStyle }) => customStyle }
 `
 
 const standardBtnStyle = css`
-  ${ btnStyle };
   box-sizing: content-box;
   background: ${ COLOR.BLUE } content-box;
   border: 4px solid rgba(0, 0, 0, 0);
-
-  &:hover {
-    background: ${ COLOR.DARK_BLUE } content-box;
-  }
-
-  &:active {
-    border: 4px solid ${ COLOR.LIGHT_BLUE }
-  }
 
   span {
     padding-top: 3px;
@@ -51,13 +43,32 @@ const standardBtnStyle = css`
   }
 `
 
-const secondaryStyle = css`
-  ${ btnStyle };
+const standardBtnInteractionStyle = css`
+  &:hover {
+    background: ${ COLOR.DARK_BLUE } content-box;
+  }
 
+  &:active {
+    border: 4px solid ${ COLOR.LIGHT_BLUE }
+  }
+`
+
+const secondaryBtnStyle = css`
   background: ${ COLOR.OFF_WHITE };
   border: 2px solid ${ COLOR.BLUE };
   border-radius: 11px;
 
+  svg {
+    color: ${ COLOR.BLUE }
+  }
+
+  span {
+    padding-top: 3px;
+    color: ${ COLOR.BLUE };
+  }
+`
+
+const secondaryBtnInteractionStyle = css`
   &:hover {
     border-color: ${ COLOR.DARK_BLUE };
 
@@ -81,25 +92,25 @@ const secondaryStyle = css`
       color: ${ COLOR.BLUE };
     }
   }
-
-  svg {
-    color: ${ COLOR.BLUE }
-  }
-
-  span {
-    padding-top: 3px;
-    color: ${ COLOR.BLUE };
-  }
 `
 
 const textBtnStyle = css`
-  ${ btnStyle };
-
   width: 100%;
   height: 100%;
   justify-content: space-between;
   padding: 0 24px;
 
+  svg {
+    color: ${ COLOR.LABEL };
+  }
+
+  span {
+    padding-top: 4px;
+    color: ${ COLOR.LABEL };
+  }
+`
+
+const textBtnInteractionStyle = css`
   &:hover {
     svg {
       color: ${ COLOR.BODY };
@@ -118,15 +129,6 @@ const textBtnStyle = css`
     span {
       color: ${ COLOR.TITLE_ACTIVE };
     }
-  }
-
-  svg {
-    color: ${ COLOR.LABEL };
-  }
-
-  span {
-    padding-top: 4px;
-    color: ${ COLOR.LABEL };
   }
 `
 
@@ -160,54 +162,30 @@ const smallStyle = css`
   }
 `
 
-const LargeStandardBtn = styled.div`
-  ${ largeStyle }
-  ${ standardBtnStyle }
-`
-
-const MediumStandardBtn = styled.div`
-  ${ mediumStyle }
-  ${ standardBtnStyle }
-`
-
-const SmallStandardBtn = styled.div`
-  ${ smallStyle }
-  ${ standardBtnStyle }
-`
-
-const SmallSecondaryBtn = styled.div`
-  ${ smallStyle }
-  ${ secondaryStyle }
-`
-
-const MediumTextBtn = styled.div`
-  ${ mediumStyle }
-  ${ textBtnStyle }
-  span {
-    ${ FONT.LINK_SMALL }
-  }
-`
-
-const SmallTextBtn = styled.div`
-  ${ smallStyle }
-  ${ textBtnStyle }
+const disableBtnStyle = css`
+  opacity: 0.5;
+  cursor: default;
 `
 
 /**
  * 버튼 컴포넌트
- * @param { string } type
+ * @param {string} type
+ * @param {string} size
  * @param {string} text
  * @param {SVGElement} Icon
  * @param {boolean} isRightIcon
+ * @param {boolean} isDisable
  * @param {function} onClickListener
  * @return {JSX.Element}
  * @constructor
  */
 const Button = ({
                   type,
+                  size,
                   text,
                   Icon,
                   isRightIcon,
+                  isDisable,
                   onClickListener
                 }) => {
   const leftIcon = useMemo(() => {
@@ -215,15 +193,15 @@ const Button = ({
       if (!isRightIcon) {
         return (
           <Icon
-          width="1em"
-          height="1em"
+            width="1em"
+            height="1em"
           />
         )
       }
     }
     
     return null
-  }, [ Icon, rightIcon ])
+  }, [ Icon, isRightIcon ])
   
   const rightIcon = useMemo(() => {
     if (Icon) {
@@ -240,69 +218,60 @@ const Button = ({
     return null
   }, [ Icon, rightIcon ])
   
-  switch (type) {
-    case BUTTON_TYPE.LARGE_STANDARD:
-      return (
-        <LargeStandardBtn onClick={ onClickListener }>
-          { leftIcon }
-          <span>{ text }</span>
-          { rightIcon }
-        </LargeStandardBtn>
-      )
+  const onClick = useCallback(() => {
+    if (!isDisable) {
+      onClickListener()
+    }
+  }, [ isDisable ])
+  
+  const customStyle = useMemo(() => {
+    let style = (
+      size === BUTTON_SIZE.LARGE ? largeStyle
+        : size === BUTTON_SIZE.MEDIUM ? mediumStyle
+          : size === BUTTON_SIZE.SMALL ? smallStyle
+            : mediumStyle
+    )
     
-    case BUTTON_TYPE.MEDIUM_STANDARD:
-      return (
-        <MediumStandardBtn onClick={ onClickListener }>
-          { leftIcon }
-          <span>{ text }</span>
-          { rightIcon }
-        </MediumStandardBtn>
-      )
+    style = (
+      type === BUTTON_TYPE.STANDARD ? style.concat(standardBtnStyle)
+        : type === BUTTON_TYPE.SECONDARY ? style.concat(secondaryBtnStyle)
+          : type === BUTTON_TYPE.TEXT ? style.concat(textBtnStyle)
+            : style.concat(standardBtnStyle)
+    )
     
-    case BUTTON_TYPE.SMALL_STANDARD:
-      return (
-        <SmallStandardBtn onClick={ onClickListener }>
-          { leftIcon }
-          <span>{ text }</span>
-          { rightIcon }
-        </SmallStandardBtn>
+    if (isDisable) {
+      style = style.concat(disableBtnStyle)
+    } else {
+      style = (
+        type === BUTTON_TYPE.STANDARD ? style.concat(standardBtnInteractionStyle)
+          : type === BUTTON_TYPE.SECONDARY ? style.concat(secondaryBtnInteractionStyle)
+            : type === BUTTON_TYPE.TEXT ? style.concat(textBtnInteractionStyle)
+              : style.concat(standardBtnInteractionStyle)
       )
+    }
     
-    case BUTTON_TYPE.SMALL_SECONDARY:
-      return (
-        <SmallSecondaryBtn onClick={ onClickListener }>
-          { leftIcon }
-          <span>{ text }</span>
-          { rightIcon }
-        </SmallSecondaryBtn>
-      )
-    
-    case BUTTON_TYPE.MEDIUM_TEXT:
-      return (
-        <MediumTextBtn onClick={ onClickListener }>
-          { leftIcon }
-          <span>{ text }</span>
-          { rightIcon }
-        </MediumTextBtn>
-      )
-    
-    case BUTTON_TYPE.SMALL_TEXT:
-      return (
-        <SmallTextBtn onClick={ onClickListener }>
-          { leftIcon }
-          <span>{ text }</span>
-          { rightIcon }
-        </SmallTextBtn>
-      )
-  }
+    return style
+  }, [ type, size, isDisable ])
+  
+  return (
+    <Btn
+      onClick={ onClick }
+      customStyle={ customStyle }>
+      { leftIcon }
+      <span>{ text }</span>
+      { rightIcon }
+    </Btn>
+  )
 }
 
 Button.propTypes = {
   type: PropTypes.string.isRequired,
+  size: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   onClickListener: PropTypes.func.isRequired,
   Icon: PropTypes.func,
-  isRightIcon: PropTypes.bool
+  isRightIcon: PropTypes.bool,
+  isDisable: PropTypes.bool
 }
 
 export default Button

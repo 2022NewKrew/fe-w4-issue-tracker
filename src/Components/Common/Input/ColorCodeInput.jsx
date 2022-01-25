@@ -17,11 +17,15 @@ const IconBox = styled.div`
 `
 
 /**
+ * @param {boolean} isDisable
  * @param {function?} onChangeListener
  * @return {JSX.Element}
  * @constructor
  */
-const ColorCodeInput = ({ onChangeListener }) => {
+const ColorCodeInput = ({
+                          isDisable,
+                          onChangeListener
+                        }) => {
   // input 태그의 값을 바꿔야할때만 수정
   const [ inputValue, setInputValue ] = useState('#')
   // input 태그의 값과 일치
@@ -64,7 +68,8 @@ const ColorCodeInput = ({ onChangeListener }) => {
       state={ TEXT_INPUT_STATE.NORMAL }
       placeholder="Label"
       onInputValueChangeListener={ onChange }
-      inputValue={ inputValue }>
+      inputValue={ inputValue }
+      isDisable={ isDisable }>
       <IconBox onClick={ generateColorCode }>
         <RefreshIcon
           width="1em"
@@ -75,7 +80,8 @@ const ColorCodeInput = ({ onChangeListener }) => {
 }
 
 ColorCodeInput.propTypes = {
-  onChangeListener: PropTypes.func
+  onChangeListener: PropTypes.func,
+  isDisable: PropTypes.bool
 }
 
 export default ColorCodeInput

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import styled from "styled-components";
-import Auth from "@pages/Auth";
-import IssueList from "@pages/IssueList";
+import { Auth, IssueList } from "@pages/";
 import { authService } from "@/firebase";
 
 const Main = styled.div`

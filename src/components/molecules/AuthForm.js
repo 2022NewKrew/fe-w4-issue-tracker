@@ -1,10 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { LargeLogo } from "@atoms/Logo";
-import { LargeButton } from "@atoms/Button";
-import { MediumText } from "@atoms/Text";
-import { LargeTextInput } from "@atoms/TextInput";
-import { COLOR } from "@constants/color";
+import { LargeLogo, LargeButton, MediumText, LargeTextInput } from "@atoms/";
+import { COLOR } from "@constants/";
 
 const AuthFormWrapper = styled.div`
   position: relative;

@@ -1,5 +1,5 @@
 import React from "react";
-import AuthForm from "@molecules/AuthForm";
+import { AuthForm } from "@molecules/";
 import { authService } from "@/firebase";
 
 function Auth() {

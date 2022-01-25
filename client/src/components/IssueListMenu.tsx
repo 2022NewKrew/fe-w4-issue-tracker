@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FilterBar, Tabs } from './assets';
+import { FilterBar, Tabs, Button } from './assets';
 
 export const IssueListMenu = () => {
     return (
@@ -8,6 +8,8 @@ export const IssueListMenu = () => {
             <FilterBar />
             <RightButtons>
                 <Tabs />
+                <EmptySpace />
+                <Button innerText="이슈 작성" buttonType="small-standard" />
             </RightButtons>
         </Wrapper>
     );
@@ -20,4 +22,8 @@ const Wrapper = styled.div`
 
 const RightButtons = styled.div`
     display: flex;
+`;
+
+const EmptySpace = styled.div`
+    width: 16px;
 `;

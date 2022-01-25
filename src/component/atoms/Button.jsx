@@ -1,6 +1,6 @@
 import styled, { css, useTheme } from "styled-components";
 import { Icon } from "./Icons";
-import Text from "./Text";
+import { Text } from "./Text";
 
 export const Button = ({ options, children, ...props }) => {
   const theme = useTheme();

@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-const Text = styled.p`
+export const Text = styled.p`
   font-family: Noto Sans KR, sans-serif;
   font-style: normal;
   font-weight: 300;
@@ -31,5 +31,3 @@ const sizeType = {
 const link = css`
   font-weight: 500;
 `;
-
-export default Text;

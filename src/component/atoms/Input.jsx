@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import styled, { css } from "styled-components";
-import Text from "./Text";
+import { Text } from "./Text";
 
 export const Input = ({ options, placeholder, disabled, onChange, onFocus, onBlur, className, ...props }) => {
   const [isFocus, setFocus] = useState(false);

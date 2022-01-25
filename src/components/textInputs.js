@@ -1,28 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
 
 const Field = styled.div`
   position: relative;
-`;
-
-const InputColors = styled.input`
-  background-color: ${(props) => props.theme.greyscale.inputBackground};
-  color: ${(props) => props.theme.greyscale.titleActive};
-  &:active,
-  &:focus {
-    border: 1px solid ${(props) => props.theme.greyscale.titleActive};
-    padding-top: 28px;
-  }
-  &:disabled {
-    background-color: ${(props) => props.theme.greyscale.inputBackground};
-    color: ${(props) => props.theme.greyscale.placeholder};
-    opacity: 0.5;
-  }
-  .active {
-    background-color: ${(props) => props.theme.greyscale.offwhite};
-    border: 1px solid ${(props) => props.theme.greyscale.titleActive};
-    outline: none;
-  }
 `;
 
 const SmallField = styled.div`
@@ -56,12 +36,33 @@ const SmallField = styled.div`
   }
 `;
 
-const Input = styled(InputColors)`
+const Input = styled.input.attrs(({ type }) => ({
+  type: type || "text",
+}))`
   box-sizing: border-box;
+
   padding: 0 24px;
   outline: none;
-  font-size: 16px;
   border: none;
+
+  font-size: 16px;
+
+  background-color: ${(props) => props.theme.greyscale.inputBackground};
+  color: ${(props) => props.theme.greyscale.titleActive};
+
+  &:focus {
+    background-color: ${(props) => props.theme.greyscale.offWhite};
+    border: 1px solid ${(props) => props.theme.greyscale.titleActive};
+    padding-top: 28px;
+  }
+
+  ${(props) => {
+    if (props.active) {
+      return css`
+        padding-top: 28px;
+      `;
+    }
+  }}
 `;
 
 const LargeInput = styled(Input)`
@@ -96,12 +97,15 @@ const SmallInput = styled.input`
 
 const LargeLabel = styled.label`
   position: absolute;
-  font-size: 16px;
-  font-weight: normal;
-  pointer-events: none;
   left: 24px;
   bottom: 24px;
+
+  font-size: 16px;
+  font-weight: normal;
+
+  pointer-events: none;
   transition: 0.3s ease all;
+
   color: ${(props) => props.theme.greyscale.placeholder};
 
   ${LargeInput}:focus ~ & {
@@ -109,6 +113,17 @@ const LargeLabel = styled.label`
     font-size: 12px;
     color: #5264ae;
   }
+
+  ${(props) => {
+    if (props.active) {
+      return css`
+        top: 8px;
+        font-size: 12px;
+        color: #5264ae;
+      `;
+    }
+  }}
+
   .success {
     color: ${(props) => props.theme.colors.darkGreen};
   }
@@ -152,11 +167,38 @@ const SmallLabel = styled.label`
   }
 `;
 
-export function LargeTextInput(props) {
+export function LargeTextInput({
+  type,
+  value,
+  handleValueChange,
+  setDisable,
+  text,
+}) {
+  const [active, setActive] = useState(false);
+
+  const handleChange = (e) => {
+    changeDisable(e.currentTarget.value);
+    changeActive(e.currentTarget.value);
+    handleValueChange(e.currentTarget.value);
+  };
+
+  const changeActive = (value) => {
+    value ? setActive(true) : setActive(false);
+  };
+
+  const changeDisable = (value) => {
+    if (!value) setDisable(true);
+  };
+
   return (
     <Field>
-      <LargeInput />
-      <LargeLabel>{props.text}</LargeLabel>
+      <LargeInput
+        type={type}
+        onChange={handleChange}
+        value={value}
+        active={active}
+      />
+      <LargeLabel active={active}>{text}</LargeLabel>
     </Field>
   );
 }

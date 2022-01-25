@@ -14,6 +14,10 @@ module.exports = {
         exclude: /node_modules/,
         use: 'babel-loader',
       },
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack', 'file-loader'],
+      },
     ],
   },
   plugins: [
@@ -21,4 +25,11 @@ module.exports = {
       template: 'public/index.html',
     }),
   ],
+  resolve: {
+    alias: {
+      '@Components': path.resolve(__dirname, '../src/components'),
+      '@Styles': path.resolve(__dirname, '../src/styles'),
+      '@Icons': path.resolve(__dirname, '../src/assets/icons'),
+    },
+  },
 };

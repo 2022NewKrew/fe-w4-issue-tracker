@@ -8,7 +8,12 @@ module.exports = {
                 corejs: { version: 3, proposals: true },
             },
         ],
-        '@babel/preset-react',
+        [
+            '@babel/preset-react',
+            {
+                runtime: 'automatic',
+            },
+        ],
     ],
     plugins: ['babel-plugin-styled-components'],
 };

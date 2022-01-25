@@ -2,6 +2,7 @@ import React from "react";
 import { SmallButton } from "@components/buttons";
 import { DropdownIndicators } from "@components/dropdownIndicators";
 import { FilterBar } from "@components/filterBar";
+import { Taps } from "@components/Taps";
 
 import { firebaseAuth } from "../firebase";
 
@@ -26,6 +27,7 @@ export default function Main() {
       <br />
       <DropdownIndicators />
       <FilterBar />
+      <Taps />
     </div>
   );
 }

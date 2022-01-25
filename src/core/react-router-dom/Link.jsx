@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Link({ to, children }) {
+export function Link({ to, children }) {
     const preventReload = (e) => {
         e.preventDefault();
         window.history.pushState({}, '', to);

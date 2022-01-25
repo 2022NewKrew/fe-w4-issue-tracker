@@ -10,6 +10,7 @@ module.exports = {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist'),
         clean: true,
+        publicPath: '/',
     },
     plugins: [
         new CleanWebpackPlugin(),
@@ -34,6 +35,7 @@ module.exports = {
         extensions: ['.js', '.jsx'],
         alias: {
             '@components': path.resolve(__dirname, 'src/components'),
+            '@context': path.resolve(__dirname, 'src/context'),
             '@core': path.resolve(__dirname, 'src/core'),
             // '@utils': path.resolve(__dirname, 'src/utils'),
             // '@api': path.resolve(__dirname, 'src/api'),

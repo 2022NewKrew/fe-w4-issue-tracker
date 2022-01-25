@@ -9,3 +9,9 @@ export enum ButtonMode {
   Secondary,
   Text,
 }
+
+export enum CheckState {
+  Success,
+  None,
+  Fail,
+}

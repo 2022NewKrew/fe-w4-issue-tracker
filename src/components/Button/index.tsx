@@ -1,14 +1,27 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
+import React from 'react';
 import { jsx, css } from '@emotion/react';
 import { theme } from '@styles/theme';
 
-const Button = ({ type, children, ...props }) => {
+interface ButtonProps {
+  type?: 'Large' | 'MediumStandard' | 'SmallStandard' | 'SmallSecondary';
+  children: React.ReactNode;
+  onClick: (event: React.MouseEvent<HTMLElement>) => void;
+}
+
+const Button = ({ type = 'Large', children, ...props }: ButtonProps) => {
   const getStyle = (type) => {
-    if (type === 'MediumStandard') return [blockStyle, medium, filled];
-    if (type === 'SmallStandard') return [blockStyle, small, filled];
-    if (type === 'SmallSecondary') return [blockStyle, small, bordered];
-    return [large, filled];
+    switch (type) {
+      case 'MediumStandard':
+        return [blockStyle, medium, filled];
+      case 'SmallStandard':
+        return [blockStyle, small, filled];
+      case 'SmallSecondary':
+        return [blockStyle, small, bordered];
+      default:
+        return [blockStyle, large, filled];
+    }
   };
 
   return (
@@ -18,12 +31,9 @@ const Button = ({ type, children, ...props }) => {
   );
 };
 
-const lightBlue = theme.colors.primary.lightBlue;
 const offWhite = theme.greyScale.offWhite;
-const blue = theme.colors.primary.blue;
-const darkBlue = theme.colors.primary.darkBlue;
-const linkMedium = theme.textStyles.linkMedium;
-const linkXSmall = theme.textStyles.linkXSmall;
+const { blue, lightBlue, darkBlue } = theme.colors.primary;
+const { linkMedium, linkXSmall } = theme.textStyles;
 
 const buttonStyle = css`
   display: flex;

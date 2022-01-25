@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { LargeButton, SmallTextButton } from "@components/buttons/buttons";
+import { LargeButton } from "@components/buttons";
 import styled, { css } from "styled-components";
 
 export default function AuthForm() {

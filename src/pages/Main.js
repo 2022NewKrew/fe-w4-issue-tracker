@@ -6,15 +6,15 @@ import {
   SecondaryButton,
   MediumTextButton,
   SmallTextButton,
-} from "@components/buttons/buttons";
+} from "@components/buttons";
 
 import {
   LargeTextInput,
   MediumTextInput,
   SmallTextInput,
-} from "@components/textInputs/textInputs";
+} from "@components/textInputs";
 
-import { ReactComponent as Logo } from "../components/icons/logo.svg";
+import { ReactComponent as Logo } from "../assets/icons/logo.svg";
 
 import { firebaseAuth } from "../firebase";
 

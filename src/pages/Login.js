@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 
 import { LoginContainer } from "@components/login/loginContainer";
-import { ReactComponent as Logo } from "@components/icons/logo.svg";
-import { LargeButton, SmallTextButton } from "@components/buttons/buttons";
-import { SmallLink } from "@components/typography/link";
+import { ReactComponent as Logo } from "../assets/icons/logo.svg";
+import { LargeButton, SmallTextButton } from "@components/buttons";
+import { SmallLink } from "@components/link";
 import AuthForm from "@components/login/AuthForm";
 
 import { firebaseAuth, githubProvider } from "../firebase";

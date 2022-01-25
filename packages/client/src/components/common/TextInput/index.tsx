@@ -1,15 +1,15 @@
-import { TextInputStyle } from "@styles/textInput";
+import { TextInputStyle } from "@components/common/TextInput/style";
 import { sizeType } from "src/@types/emotion";
 
 interface Props {
   id: string;
   size: sizeType;
   value: string;
-  onChange: (e: any) => void;
+  type?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   label?: string;
   required?: boolean;
   pattern?: string;
-  type?: string;
 }
 
 const TextInput = ({

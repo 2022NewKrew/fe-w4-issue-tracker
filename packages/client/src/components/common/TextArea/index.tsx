@@ -1,8 +1,8 @@
-import { TextAreaStyle } from "@styles/textArea";
+import { TextAreaStyle } from "@components/common/TextArea/style";
 
 interface Props {
   value: string;
-  onChange: (e: any) => void;
+  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 const TextArea = ({ value, onChange }: Props) => {

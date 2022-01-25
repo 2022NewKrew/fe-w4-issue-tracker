@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, css, ThemeProvider } from '@emotion/react';
 import { theme } from '@styles/theme';

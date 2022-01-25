@@ -189,32 +189,28 @@ const Button = ({
                   onClickListener
                 }) => {
   const leftIcon = useMemo(() => {
-    if (Icon) {
-      if (!isRightIcon) {
-        return (
-          <Icon
-            width="1em"
-            height="1em"
-          />
-        )
-      }
+    if (Icon && !isRightIcon) {
+      return (
+        <Icon
+          width="1em"
+          height="1em"
+        />
+      )
     }
-    
+  
     return null
   }, [ Icon, isRightIcon ])
   
   const rightIcon = useMemo(() => {
-    if (Icon) {
-      if (isRightIcon) {
-        return (
-          <Icon
-            width="1em"
-            height="1em"
-          />
-        )
-      }
+    if (Icon && isRightIcon) {
+      return (
+        <Icon
+          width="1em"
+          height="1em"
+        />
+      )
     }
-    
+  
     return null
   }, [ Icon, rightIcon ])
   

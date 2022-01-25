@@ -1,12 +1,27 @@
 {
-  "posts": [
+  "users": [
     {
-      "id": 1,
-      "title": "lowdb is awesome"
-    },
+      "id": "sampleid",
+      "password": "samplepwd"
+    }
+  ],
+  "issues": [
     {
-      "id": 2,
-      "title": "qwerqe"
+      "id": "issueid",
+      "title": "issue title",
+      "content": "issue content"
+    }
+  ],
+  "labels": [
+    {
+      "id": "labelid",
+      "title": "label title"
+    }
+  ],
+  "milestones": [
+    {
+      "id": "milestoneid",
+      "title": "milestone title"
     }
   ]
 }

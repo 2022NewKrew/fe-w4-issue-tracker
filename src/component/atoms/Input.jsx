@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import styled, { css } from "styled-components";
 import Text from "./Text";
 
-export const Input = ({ options, placeholder, disabled, onChange, onFocus, onBlur, ...props }) => {
+export const Input = ({ options, placeholder, disabled, onChange, onFocus, onBlur, className, ...props }) => {
   const [isFocus, setFocus] = useState(false);
   const [isFilled, setFilled] = useState(false);
   const inputRef = useRef();
@@ -29,7 +29,7 @@ export const Input = ({ options, placeholder, disabled, onChange, onFocus, onBlu
     onChange && onChange(e);
   };
 
-  const wrapperClassName = `${isFocus ? "focus" : ""} ${isFilled ? "filled" : ""}`;
+  const wrapperClassName = (className ?? "") + `${isFocus ? "focus" : ""} ${isFilled ? "filled" : ""}`;
 
   return (
     <Div options={options} className={wrapperClassName} onClick={handleClick} disabled={disabled}>

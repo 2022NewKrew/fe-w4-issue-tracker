@@ -4,23 +4,18 @@ const theme: Theme = {
   text: {
     title: css`
       font-size: 2rem;
-      line-height: 150%;
     `,
     large: css`
       font-size: 1.5rem;
-      line-height: 167%;
     `,
     medium: css`
       font-size: 1.125rem;
-      line-height: 178%;
     `,
     small: css`
       font-size: 1rem;
-      line-height: 175%;
     `,
     xsmall: css`
       font-size: 0.75rem;
-      line-height: 167%;
     `,
   },
   greyscale: {

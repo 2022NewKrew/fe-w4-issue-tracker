@@ -1,6 +1,6 @@
+import Button from "@components/common/Button";
 import TextInput from "@components/common/TextInput";
 import { useInput } from "@hooks";
-import { ButtionStyle } from "@styles/button";
 import React, { FormEvent } from "react";
 
 const IDLoginForm: React.FC = () => {
@@ -28,12 +28,9 @@ const IDLoginForm: React.FC = () => {
         value={password}
         onChange={onChangePassword}
       />
-      <button
-        css={ButtionStyle({ size: "large", color: "primary" })}
-        disabled={!id || !password}
-      >
+      <Button size="large" disabled={!id || !password}>
         아이디로 로그인
-      </button>
+      </Button>
     </form>
   );
 };

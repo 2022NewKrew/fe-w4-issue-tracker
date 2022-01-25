@@ -14,19 +14,26 @@ const NONE = "none";
 interface ILabelStyle {
   size: "large" | "small";
   type?: "open" | "close" | "dark" | "light" | "line" | "none";
+  color?: string;
+  background?: string;
 }
 
-const LabelStyle = ({ size, type = NONE }: ILabelStyle) => css`
-  ${theme.flexCenter}
+const LabelStyle = ({
+  size,
+  type = NONE,
+  color = "",
+  background = "",
+}: ILabelStyle) => css`
+  /* ${theme.flexCenter} */
+  display: inline-block;
   ${theme.text.xsmall}
   border-radius: 30px;
+  padding: 4px 16px;
   ${{
     [LARGE]: css`
-      width: 100px;
       height: 40px;
     `,
     [SMALL]: css`
-      max-width: 90px;
       height: 28px;
     `,
   }[size]}
@@ -48,15 +55,16 @@ const LabelStyle = ({ size, type = NONE }: ILabelStyle) => css`
     `,
     [LIGHT]: css`
       background: ${theme.greyscale.body};
-      color: ${theme.greyscale.titleActive};
+      color: ${theme.greyscale.offWhite};
     `,
     [LINE]: css`
-      background: ${theme.greyscale.body};
-      color: ${theme.greyscale.titleActive};
+      background: ${theme.greyscale.offWhite};
+      color: ${theme.greyscale.line};
+      border: 1px solid ${theme.greyscale.line};
     `,
     [NONE]: css`
-      background: ${theme.greyscale.body};
-      color: ${theme.greyscale.titleActive};
+      color: ${color};
+      background: ${background};
     `,
   }[type]}
 `;

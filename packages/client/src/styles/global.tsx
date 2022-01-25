@@ -9,6 +9,7 @@ const style = css`
     font-family: Noto Sans KR;
     font-style: normal;
     font-weight: normal;
+    line-height: 100%;
     color: ${theme.greyscale.body};
     /* letter-spacing: -0.03rem; */
   }

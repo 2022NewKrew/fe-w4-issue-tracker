@@ -6,6 +6,7 @@ import CloseIcon from "@assets/icons/archive.svg";
 import MilestonIcon from "@assets/icons/milestone.svg";
 import UserIcon from "@assets/icons/UserImageSmall.svg";
 import Dropdown from "@components/common/Dropdown";
+import LabelStyle from "@styles/label";
 
 const labelList = ["레이블이 없는 이슈", "bug", "documentation"];
 const milestonList = ["마일스톤이 없는 이슈", "마스터즈 코스"];
@@ -54,7 +55,17 @@ const IssueTable = () => {
         <div className="table_content">
           <div className="table_content_title">
             <OpenIcon />
-            이슈 제목<label>레이블 이름</label>
+            이슈 제목
+            <label
+              css={LabelStyle({
+                size: "small",
+                type: "none",
+                color: "#FEFEFE",
+                background: "#004DE3",
+              })}
+            >
+              레이블 이름
+            </label>
           </div>
           <div className="table_content_info">
             <span>#이슈번호</span>
@@ -143,6 +154,7 @@ const TableCell = styled.li`
       position: relative;
       font-weight: bold;
       color: ${theme.greyscale.titleActive};
+      display: flex;
       svg {
         top: 5px;
         left: 0;

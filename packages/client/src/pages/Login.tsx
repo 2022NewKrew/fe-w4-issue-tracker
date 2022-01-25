@@ -1,7 +1,7 @@
+import Button from "@components/common/Button";
 import Logo from "@components/common/Logo";
 import IDLoginForm from "@components/login/IDLoginForm";
 import styled from "@emotion/styled";
-import { ButtionStyle } from "@styles/button";
 import theme from "@styles/theme";
 import React from "react";
 
@@ -9,10 +9,12 @@ const Login: React.FC = () => {
   return (
     <Wrapper>
       <Logo />
-      <button id="GITLOGIN">GitHub 계정으로 로그인</button>
+      <Button size="large">GitHub 계정으로 로그인</Button>
       <span>or</span>
       <IDLoginForm />
-      <SignupButton>회원가입</SignupButton>
+      <Button size="small" type="text">
+        회원가입
+      </Button>
     </Wrapper>
   );
 };
@@ -23,10 +25,12 @@ const Wrapper = styled.div`
   ${theme.flexCenter}
   margin-top: 230px;
   justify-content: space-between;
-  #GITLOGIN {
-    ${ButtionStyle({ size: "large", color: "primary" })}
+  svg {
+    position: static;
+  }
+  & > button:first-of-type {
     background: #14142b;
-    margin: 61px 0 24px;
+    margin: 60px 0 24px;
     :hover:enabled:not(:active),
     :active {
       background: #14142b;
@@ -43,8 +47,4 @@ const Wrapper = styled.div`
     color: ${theme.greyscale.placeholer};
     font-weight: bold;
   }
-`;
-
-const SignupButton = styled.button`
-  ${ButtionStyle({ size: "small", type: "text" })}
 `;

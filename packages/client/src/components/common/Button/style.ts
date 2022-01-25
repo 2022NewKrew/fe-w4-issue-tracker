@@ -11,22 +11,15 @@ const STANDARD = "standard";
 const SECONDARY = "secondary";
 const TEXT = "text";
 
-const PRIMARY = "primary";
-
 interface IButtonStyle {
   size: sizeType;
-  color?: colorType;
-  type?: buttonType;
+  color: colorType;
+  type: buttonType;
 }
 
-export const ButtionStyle = ({
-  size,
-  color = PRIMARY,
-  type = STANDARD,
-}: IButtonStyle) => css`
+export const ButtionStyle = ({ size, color, type }: IButtonStyle) => css`
   ${theme.flexCenter}
   padding: 0 ${CSSIF(size !== SMALL, "24px", "16px")};
-
   // font style
   ${CSSIF(size !== SMALL, theme.text.medium, theme.text.xsmall)}
   font-weight: bold;

@@ -24,11 +24,15 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader']
+        test: /\.(css|scss)$/i,
+        use: ['Styles-loader', 'css-loader', 'sass-loader']
       },
       {
-        test: /\.(png|jp(e*)g|svg|gif)$/,
+        test: /\.svg$/,
+        use: [ '@svgr/webpack', 'file-loader']
+      },
+      {
+        test: /\.(png|jp(e*)g|gif)$/,
         use: ['file-loader']
       }
     ]
@@ -42,7 +46,8 @@ module.exports = {
   devServer: {
     hot: true,
     host: 'localhost',
-    port: 3001
+    port: 3001,
+    // historyApiFallback: true
   },
   devtool: 'source-map'
 }

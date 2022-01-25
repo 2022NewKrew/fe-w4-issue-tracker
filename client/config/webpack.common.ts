@@ -49,6 +49,7 @@ const config: Configuration = {
             '@icons': path.resolve(process.cwd(), 'public/icons'),
             '@images': path.resolve(process.cwd(), 'public/images'),
             '@components': path.resolve(process.cwd(), 'src/components'),
+            '@styles': path.resolve(process.cwd(), 'src/styles'),
         },
     },
 };

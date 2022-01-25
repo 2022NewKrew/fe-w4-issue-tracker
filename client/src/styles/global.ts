@@ -20,7 +20,8 @@ const GlobalStyle = createGlobalStyle<{ theme: ITheme }>`
                 --line-color: ${theme.colors.line};
                 --input-background-color: ${theme.colors.inputBackground};
                 --background-color: ${theme.colors.background};
-                --off-white-color: ${theme.colors.background};
+                --off-white-color: ${theme.colors.offWhite};
+                --active-border-color: ${theme.colors.activeBorder};
 
                 --primary1-color: ${theme.colors.primary1};
                 --primary2-color: ${theme.colors.primary2};

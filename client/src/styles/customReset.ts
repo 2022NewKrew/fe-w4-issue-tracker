@@ -9,6 +9,7 @@ export const customReset = css`
         outline: none;
     }
     button {
+        border: none;
         padding: 0;
     }
 `;

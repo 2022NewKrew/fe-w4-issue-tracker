@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Filter } from './assets';
+import { FilterBar } from './assets';
 
 export const IssueListMenu = () => {
     return (
         <Wrapper>
-            <Filter />
+            <FilterBar />
         </Wrapper>
     );
 };

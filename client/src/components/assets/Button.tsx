@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { LinkMedium, LinkXSmall } from '../../styles/textStyle';
+import { LinkMedium, LinkXSmall } from '@styles/styleTemplates';
 import { ReactComponent as PlusIcon } from '@icons/Plus.svg';
 
 type buttonClasses = 'large' | 'medium-standard' | 'medium-text' | 'small-standard' | 'small-secondary' | 'small-text';
@@ -26,7 +26,7 @@ const LargeSize = css`
     line-height: normal;
     width: 340px;
     height: 64px;
-    border-width: 4px;
+    border: 4px solid;
     border-radius: 20px;
 `;
 
@@ -35,7 +35,7 @@ const MediumSize = css`
     line-height: normal;
     width: 240px;
     height: 64px;
-    border-width: 4px;
+    border: 4px solid;
     border-radius: 20px;
 `;
 
@@ -44,7 +44,7 @@ const SmallSize = css`
     line-height: normal;
     width: 120px;
     height: 40px;
-    border-width: 2px;
+    border: 2px solid;
     border-radius: 11px;
     & svg {
         display: block;
@@ -54,7 +54,7 @@ const SmallSize = css`
 const StandardColor = css`
     color: var(--off-white-color);
     background-color: var(--primary1-color);
-    border: solid var(--primary1-color);
+    border-color: var(--primary1-color);
 
     &:hover:enabled {
         background-color: var(--primary3-color);
@@ -73,7 +73,7 @@ const StandardColor = css`
 const SecondaryColor = css`
     color: var(--primary1-color);
     background-color: var(--offWhite-color);
-    border: 1px solid var(--primary1-color);
+    border-color: var(--primary1-color);
 
     &:hover:enabled {
         color: var(--primary3-color);
@@ -82,6 +82,10 @@ const SecondaryColor = css`
 
     &:focus:enabled {
         border-color: var(--primary2-color);
+    }
+
+    & svg path {
+        stroke: var(--primary1-color);
     }
 `;
 

@@ -7,6 +7,7 @@ export interface IGrayScale {
     inputBackground: string;
     background: string;
     offWhite: string;
+    activeBorder: string;
 }
 
 export interface IThemeColors {

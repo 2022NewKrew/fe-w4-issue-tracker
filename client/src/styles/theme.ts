@@ -9,6 +9,7 @@ const lightThemeGrayScale: IGrayScale = {
     inputBackground: '#EFF0F6',
     background: '#F7F7FC',
     offWhite: '#FEFEFE',
+    activeBorder: '#000000',
 };
 
 const lightThemeColors: IThemeColors = {

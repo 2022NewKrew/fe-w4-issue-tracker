@@ -1,20 +1,27 @@
 {
-  "memo": [
+  "users": [
     {
-      "id": 1,
-      "title": "첫 메모 제목",
-      "body": "첫 메모 내용"
-    },
+      "id": "sampleid",
+      "password": "samplepwd"
+    }
+  ],
+  "issues": [
     {
-      "id": 2
-    },
+      "id": "issueid",
+      "title": "issue title",
+      "content": "issue content"
+    }
+  ],
+  "labels": [
     {
-      "id": 3
-    },
+      "id": "labelid",
+      "title": "label title"
+    }
+  ],
+  "milestones": [
     {
-      "title": "테스팅",
-      "body": "테스팅",
-      "id": 4
+      "id": "milestoneid",
+      "title": "milestone title"
     }
   ]
 }

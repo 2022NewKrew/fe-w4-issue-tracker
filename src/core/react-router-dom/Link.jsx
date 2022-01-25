@@ -1,5 +1,3 @@
-import React from 'react';
-
 export function Link({ to, children }) {
     const preventReload = (e) => {
         e.preventDefault();

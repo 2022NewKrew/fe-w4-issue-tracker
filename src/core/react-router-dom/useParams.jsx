@@ -1,4 +1,3 @@
-import React from 'react';
 import { useRoute } from '@context/RouteStore';
 
 export function useParams() {

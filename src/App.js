@@ -1,5 +1,3 @@
-import React from 'react';
-import styled from 'styled-components';
 import { Link, Routes, Route } from '@core/react-router-dom';
 import { Test, User, NotFound } from '@components';
 

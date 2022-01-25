@@ -212,7 +212,7 @@ const Button = ({
     }
   
     return null
-  }, [ Icon, rightIcon ])
+  }, [ Icon, isRightIcon ])
   
   const onClick = useCallback(() => {
     if (!isDisabled) {

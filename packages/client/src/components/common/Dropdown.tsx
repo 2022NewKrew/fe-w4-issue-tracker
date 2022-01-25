@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { useBooleanState } from "@hooks";
 import theme from "@styles/theme";
 import { useEffect, useState } from "react";
 
@@ -10,16 +11,8 @@ interface Props {
 }
 
 const Dropdown = ({ title, list, image = false, icon = false }: Props) => {
-  const [visible, setVisible] = useState(false);
+  const [visible, showMenu, closeMenu] = useBooleanState(false);
   const [select, setSelect] = useState("");
-
-  const showMenu = () => {
-    setVisible(true);
-  };
-
-  const closeMenu = () => {
-    setVisible(false);
-  };
 
   const handleClick = (e: any) => {
     setSelect(e.target.textContent);

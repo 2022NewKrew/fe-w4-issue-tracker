@@ -1,5 +1,5 @@
-import { sizeType } from "src/@types/emotion";
 import { TextInputStyle } from "@styles/textInput";
+import { sizeType } from "src/@types/emotion";
 
 interface Props {
   id: string;

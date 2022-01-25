@@ -1,5 +1,5 @@
 import TextInput from "@components/common/TextInput";
-import useInput from "@hooks/useInput";
+import { useInput } from "@hooks";
 import { ButtionStyle } from "@styles/button";
 import React, { FormEvent } from "react";
 

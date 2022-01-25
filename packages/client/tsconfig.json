@@ -10,10 +10,10 @@
     "declarationMap": true,
     "allowSyntheticDefaultImports": true,
     "jsxImportSource": "@emotion/react",
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
       "@components/*": ["./src/components/*"],
-      "@hooks/*": ["./src/hooks/*"],
+      "@hooks": ["./src/hooks"],
       "@assets/*": ["./src/assets/*"],
       "@pages/*": ["./src/pages/*"],
       "@services/*": ["./src/services/*"],
@@ -27,6 +27,6 @@
   //       "path": "../server"
   //     }
   //   ],
-  "include": ["src/**/*"],
+  "include": ["@types", "src/**/*"],
   "exclude": ["node_modules", "dist", "*.d.ts"]
 }

@@ -5,6 +5,104 @@ const Field = styled.div`
   position: relative;
 `;
 
+const Input = styled.input.attrs(({ type }) => ({
+  type: type || "text",
+}))`
+  box-sizing: border-box;
+
+  padding: 0 24px;
+  outline: none;
+  border: none;
+
+  font-size: 16px;
+
+  background-color: ${(props) => props.theme.greyscale.inputBackground};
+  color: ${(props) => props.theme.greyscale.titleActive};
+
+  &:focus {
+    background-color: ${(props) => props.theme.greyscale.offWhite};
+    border: 1px solid ${(props) => props.theme.greyscale.titleActive};
+    padding-top: 28px;
+  }
+
+  ${(props) => {
+    if (props.active) {
+      return css`
+        padding-top: 28px;
+      `;
+    }
+  }}
+
+  ${(props) => {
+    switch (props.size) {
+      case "large":
+        return css`
+          width: 340px;
+          height: 64px;
+          border-radius: 16px;
+        `;
+      case "medium":
+        return css`
+          width: 320px;
+          height: 56px;
+          border-radius: 14px;
+        `;
+      default:
+        return css`
+          width: 340px;
+          height: 64px;
+          border-radius: 16px;
+        `;
+    }
+  }}
+
+  .success {
+    background-color: ${(props) => props.theme.colors.lightGreen};
+    border: 1px solid ${(props) => props.theme.colors.green};
+  }
+  .error {
+    background-color: ${(props) => props.theme.colors.lightRed};
+    border: 1px solid ${(props) => props.theme.colors.red};
+  }
+`;
+
+const Label = styled.label`
+  position: absolute;
+  left: 24px;
+  bottom: ${(props) => (props.size === "large" ? 24 : 14)}px;
+
+  font-size: 16px;
+  font-weight: normal;
+
+  pointer-events: none;
+  transition: 0.3s ease all;
+
+  color: ${(props) => props.theme.greyscale.placeholder};
+
+  ${Input}:focus ~ & {
+    top: 8px;
+    font-size: 12px;
+    color: #5264ae;
+  }
+
+  ${(props) => {
+    if (props.active) {
+      return css`
+        top: 8px;
+        font-size: 12px;
+        color: #5264ae;
+      `;
+    }
+  }}
+
+  .success {
+    color: ${(props) => props.theme.colors.darkGreen};
+  }
+  .error {
+    color: ${(props) => props.theme.colors.darkRed};
+  }
+`;
+
 const SmallField = styled.div`
   display: flex;
   justify-content: start;
@@ -36,56 +134,6 @@ const SmallField = styled.div`
   }
 `;
 
-const Input = styled.input.attrs(({ type }) => ({
-  type: type || "text",
-}))`
-  box-sizing: border-box;
-
-  padding: 0 24px;
-  outline: none;
-  border: none;
-
-  font-size: 16px;
-
-  background-color: ${(props) => props.theme.greyscale.inputBackground};
-  color: ${(props) => props.theme.greyscale.titleActive};
-
-  &:focus {
-    background-color: ${(props) => props.theme.greyscale.offWhite};
-    border: 1px solid ${(props) => props.theme.greyscale.titleActive};
-    padding-top: 28px;
-  }
-
-  ${(props) => {
-    if (props.active) {
-      return css`
-        padding-top: 28px;
-      `;
-    }
-  }}
-`;
-
-const LargeInput = styled(Input)`
-  width: 340px;
-  height: 64px;
-  border-radius: 16px;
-
-  .success {
-    background-color: ${(props) => props.theme.colors.lightGreen};
-    border: 1px solid ${(props) => props.theme.colors.green};
-  }
-  .error {
-    background-color: ${(props) => props.theme.colors.lightRed};
-    border: 1px solid ${(props) => props.theme.colors.red};
-  }
-`;
-
-const MediumInput = styled(Input)`
-  width: 320px;
-  height: 56px;
-  border-radius: 14px;
-`;
-
 const SmallInput = styled.input`
   width: 164px;
   margin-left: 8px;
@@ -93,66 +141,6 @@ const SmallInput = styled.input`
 
   border: none;
   outline: none;
-`;
-
-const LargeLabel = styled.label`
-  position: absolute;
-  left: 24px;
-  bottom: 24px;
-
-  font-size: 16px;
-  font-weight: normal;
-
-  pointer-events: none;
-  transition: 0.3s ease all;
-
-  color: ${(props) => props.theme.greyscale.placeholder};
-
-  ${LargeInput}:focus ~ & {
-    top: 8px;
-    font-size: 12px;
-    color: #5264ae;
-  }
-
-  ${(props) => {
-    if (props.active) {
-      return css`
-        top: 8px;
-        font-size: 12px;
-        color: #5264ae;
-      `;
-    }
-  }}
-
-  .success {
-    color: ${(props) => props.theme.colors.darkGreen};
-  }
-  .error {
-    color: ${(props) => props.theme.colors.darkRed};
-  }
-`;
-
-const MediumLabel = styled.label`
-  position: absolute;
-  font-size: 16px;
-  font-weight: normal;
-  pointer-events: none;
-  height: 20px;
-  left: 24px;
-  bottom: 14px;
-  transition: 0.3s ease all;
-  color: ${(props) => props.theme.greyscale.placeholder};
-  ${MediumInput}:focus ~ & {
-    top: 8px;
-    font-size: 12px;
-    color: #5264ae;
-  }
-  .success {
-    color: ${(props) => props.theme.colors.darkGreen};
-  }
-  .error {
-    color: ${(props) => props.theme.colors.darkRed};
-  }
 `;
 
 const SmallLabel = styled.label`
@@ -167,8 +155,9 @@ const SmallLabel = styled.label`
   }
 `;
 
-export function LargeTextInput({
+export function TextInput({
   type,
+  size,
   value,
   handleValueChange,
   setDisable,
@@ -192,22 +181,16 @@ export function LargeTextInput({
 
   return (
     <Field>
-      <LargeInput
+      <Input
+        size={size}
         type={type}
         onChange={handleChange}
         value={value}
         active={active}
       />
-      <LargeLabel active={active}>{text}</LargeLabel>
-    </Field>
-  );
-}
-
-export function MediumTextInput(props) {
-  return (
-    <Field>
-      <MediumInput />
-      <MediumLabel>{props.text}</MediumLabel>
+      <Label size={size} active={active}>
+        {text}
+      </Label>
     </Field>
   );
 }

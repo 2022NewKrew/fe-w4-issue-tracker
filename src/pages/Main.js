@@ -1,6 +1,5 @@
 import React from "react";
 import { SmallButton } from "@components/buttons";
-import { ReactComponent as Logo } from "../assets/icons/logo.svg";
 
 import { firebaseAuth } from "../firebase";
 
@@ -22,6 +21,7 @@ export default function Main() {
     <div>
       Main Page <br />
       <SmallButton onClick={logout}>로그아웃 하러 가기</SmallButton>
+      <br />
     </div>
   );
 }

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { LoginContainer } from "@components/loginContainer";
 import { ReactComponent as Logo } from "../assets/icons/logo.svg";
 import { LargeButton, SmallTextButton } from "@components/buttons";
-import { LargeTextInput } from "@components/textInputs";
+import { TextInput } from "@components/textInputs";
 import { SmallLink } from "@components/link";
 
 import { firebaseAuth, githubProvider } from "../firebase";
@@ -63,13 +63,13 @@ export default function Login() {
         GitHub 계정으로 로그인
       </LargeButton>
       <SmallLink>or</SmallLink>
-      <LargeTextInput
+      <TextInput
         value={id}
         handleValueChange={setId}
         setDisable={setDisable}
         text='로그인'
       />
-      <LargeTextInput
+      <TextInput
         type='password'
         value={pwd}
         handleValueChange={setPwd}

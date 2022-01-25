@@ -36,6 +36,7 @@ const Wrapper = styled.button`
     }
 
     &:hover {
+        color: var(--body-color);
         background-color: var(--line-color);
     }
 `;

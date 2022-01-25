@@ -1,9 +1,10 @@
 import React from 'react';
-import { Button, FilterBar } from '@components/assets';
+import { Button, FilterBar, Tabs } from '@components/assets';
 
 export const TempPage = () => {
     return (
         <div>
+            <Tabs />
             <FilterBar />
             <Button innerText="BUTTON" buttonType="large" />
             <Button innerText="BUTTON" buttonType="medium-standard" />

@@ -18,7 +18,6 @@ export const DisplayBold = css`
 
 export const Text = css`
     font-weight: var(--normal-font-weight);
-    color: var(--body-color);
 `;
 export const TextLarge = css`
     ${Text};

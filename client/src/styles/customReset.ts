@@ -11,5 +11,6 @@ export const customReset = css`
     button {
         border: none;
         padding: 0;
+        background-color: unset;
     }
 `;

@@ -95,7 +95,6 @@ const StyledButton = styled.button<{ buttonType: buttonClasses }>`
     justify-content: center;
     align-items: center;
     vertical-align: middle;
-    margin: 4px;
     font-weight: var(--link-font-weight);
     font-family: Noto Sans KR;
 

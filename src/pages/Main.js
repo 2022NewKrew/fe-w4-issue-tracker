@@ -15,10 +15,18 @@ import {
 } from "@components/textInputs/textInputs";
 
 import { ReactComponent as Logo } from "../components/icons/logo.svg";
-import { useNavigate } from "react-router-dom";
+
+import { firebaseAuth } from "../firebase";
+
+import { useSetRecoilState } from "recoil";
+import { userState } from "../atoms/atoms";
 
 export default function Main() {
-  let navigate = useNavigate();
+  const setUser = useSetRecoilState(userState);
+  function logout() {
+    firebaseAuth.signOut();
+    setUser(null);
+  }
   return (
     <div>
       Main Page <br />
@@ -34,7 +42,9 @@ export default function Main() {
       <MediumTextInput />
       <SmallTextInput />
       <br />
-      <Logo onClick={() => navigate("/login")} />
+      <Logo />
+      <br />
+      <button onClick={logout}>로그아웃 하러 가기</button>
     </div>
   );
 }

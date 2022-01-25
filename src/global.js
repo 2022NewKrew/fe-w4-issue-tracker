@@ -1,10 +1,13 @@
 import axios from 'axios';
 
 export const backendURL='http://localhost:8080';
-export const issueListURL=new URL('issue-list', backendURL);
+export const issueListURL=new URL('issue-list', backendURL).href;
+export const issueLabelURL=new URL('issue-label', backendURL).href;
 
-export async function getFromURL(url){
-  return await (await axios.get(url)).data;
+export async function getFromURL(url, params){
+  return await (await axios.get(url, {
+    params: params
+  })).data;
 }
 
 export function getPrettyDate(date){

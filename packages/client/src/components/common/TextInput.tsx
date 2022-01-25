@@ -2,35 +2,37 @@ import { sizeType } from "src/@types/emotion";
 import { TextInputStyle } from "@styles/textInput";
 
 interface Props {
+  id: string;
   size: sizeType;
-  label: string;
   value: string;
   onChange: (e: any) => void;
+  label?: string;
   required?: boolean;
   pattern?: string;
   type?: string;
 }
 
 const TextInput = ({
+  id,
   size,
-  label,
   value,
   onChange,
   required,
   pattern,
+  label,
   type = "text",
 }: Props) => {
   return (
     <div css={TextInputStyle({ size })}>
       <input
-        id="userId"
+        id={id}
         type={type}
         value={value}
         onChange={onChange}
         required={required}
         pattern={pattern}
       />
-      <label htmlFor="userId">{label}</label>
+      <label htmlFor={id}>{label}</label>
     </div>
   );
 };

@@ -13,8 +13,15 @@ const IDLoginForm: React.FC = () => {
   };
   return (
     <form onSubmit={IDLogin}>
-      <TextInput size="large" label="아이디" value={id} onChange={onChangeId} />
       <TextInput
+        id="id"
+        size="large"
+        label="아이디"
+        value={id}
+        onChange={onChangeId}
+      />
+      <TextInput
+        id="password"
         size="large"
         label="비밀번호"
         type="password"

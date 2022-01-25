@@ -1,10 +1,12 @@
 import AppLayout from "@components/common/AppLayout";
-import LinkTap from "@components/Issue/LinkTap";
+import FilterBar from "@components/Issue/FilterBar";
+// import LinkTap from "@components/Issue/LinkTap";
 
 const Issue = () => {
   return (
     <AppLayout>
-      <LinkTap />
+      {/* <LinkTap /> */}
+      <FilterBar />
     </AppLayout>
   );
 };

@@ -24,6 +24,11 @@ const style = css`
       cursor: not-allowed;
     }
   }
+  input::placeholder {
+    ${theme.text.small}
+    color: ${theme.greyscale.placeholer};
+    padding-left: 3px;
+  }
   body {
     background: #f7f7fc;
   }

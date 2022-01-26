@@ -1,2 +1,2 @@
 export { default as FilterBar } from "./FilterBar";
-export { default as AuthForm } from "./AuthForm.js";
+export { default as AuthForm } from "./AuthForm";

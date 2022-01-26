@@ -1,1 +1,1 @@
-export { default as ProtectedRoutes } from "./ProtectedRoutes.js";
+export { default as ProtectedRoutes } from "./ProtectedRoutes";

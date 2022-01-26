@@ -2,8 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
 import { COLOR } from "@constants/";
 import { SmallText, TextInput } from "@atoms/";
-import ChevronDown from "@icons/chevron-down.svg";
-import Search from "@icons/search.svg";
+import { ChevronDownIcon, SearchIcon } from "@icons/";
 
 const FilterBarWrapper = styled.div`
   display: flex;
@@ -113,14 +112,14 @@ function FilterBar() {
     <FilterBarWrapper isActivated={activated}>
       <FilterDropdownButton isActivated={activated}>
         <FilterDropdownButtonText>필터</FilterDropdownButtonText>
-        <ChevronDown />
+        <ChevronDownIcon />
       </FilterDropdownButton>
       <FilterSearchWrapper
         isActivated={activated}
         onFocus={handleFocus}
         onClick={handleClick}
       >
-        <Search />
+        <SearchIcon />
         <FilterTextInput
           placeholder={"Search all issues"}
           ref={filterInput}

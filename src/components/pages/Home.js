@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { authService } from "@/firebase";
+import { FilterBar } from "@organisms/";
 import { Header } from "@molecules/";
 
 const HomeWrapper = styled.div`
@@ -18,6 +19,7 @@ function Home() {
   return (
     <HomeWrapper>
       <Header />
+      <FilterBar />
       <button
         onClick={() => {
           authService.signOut(auth);

@@ -22,7 +22,7 @@ const VaildStyle = (color: colorType) => css`
   }
 `;
 
-export const TextInputStyle = ({ size }: ITextInput) => css`
+const TextInputStyle = ({ size }: ITextInput) => css`
   ${theme.text.small}
   position: relative;
   overflow: hidden;
@@ -98,3 +98,5 @@ export const TextInputStyle = ({ size }: ITextInput) => css`
     }[size]}
   }
 `;
+
+export default TextInputStyle;

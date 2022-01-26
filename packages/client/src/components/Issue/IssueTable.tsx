@@ -1,12 +1,9 @@
+import Dropdown from "@components/common/Dropdown";
+import Label from "@components/common/Label";
+
 import styled from "@emotion/styled";
 import theme from "@styles/theme";
-import CheckBox from "@assets/icons/check box initial.svg";
-import OpenIcon from "@assets/icons/alert-circle.svg";
-import CloseIcon from "@assets/icons/archive.svg";
-import MilestonIcon from "@assets/icons/milestone.svg";
-import UserIcon from "@assets/icons/UserImageSmall.svg";
-import Dropdown from "@components/common/Dropdown";
-import LabelStyle from "@styles/label";
+import Icon from "@icon";
 
 const labelList = ["레이블이 없는 이슈", "bug", "documentation"];
 const milestonList = ["마일스톤이 없는 이슈", "마스터즈 코스"];
@@ -16,13 +13,13 @@ const IssueTable = () => {
   return (
     <Wrapper>
       <TableHeader>
-        <CheckBox />
+        <Icon name="check_box_initial" />
         <button>
-          <OpenIcon />
+          <Icon name="alert_circle" />
           열린 이슈(2)
         </button>
         <button>
-          <CloseIcon />
+          <Icon name="archive" />
           닫힌 이슈(0)
         </button>
         <Dropdown
@@ -51,31 +48,22 @@ const IssueTable = () => {
         />
       </TableHeader>
       <TableCell>
-        <CheckBox />
+        <Icon name="check_box_initial" />
         <div className="table_content">
           <div className="table_content_title">
-            <OpenIcon />
+            <Icon name="alert_circle" />
             이슈 제목
-            <label
-              css={LabelStyle({
-                size: "small",
-                type: "none",
-                color: "#FEFEFE",
-                background: "#004DE3",
-              })}
-            >
-              레이블 이름
-            </label>
+            <Label color="#004DE3">레이블 이름</Label>
           </div>
           <div className="table_content_info">
             <span>#이슈번호</span>
             <span>작성자 및 타임스탬프 정보</span>
             <span>
-              <MilestonIcon />
+              <Icon name="milestone" />
               마스터즈
             </span>
           </div>
-          <UserIcon />
+          <Icon name="user_image_small" />
         </div>
       </TableCell>
     </Wrapper>
@@ -102,7 +90,7 @@ const TableHeader = styled.div`
   width: 100%;
   height: 64px;
   background: ${theme.greyscale.background};
-  padding: 16px 32px;
+  padding: 26px 32px;
   position: relative;
   & > svg:first-child {
     top: 22px;
@@ -112,8 +100,8 @@ const TableHeader = styled.div`
     font-weight: bold;
     padding-left: 20px;
     position: relative;
+    background: transparent;
     & > svg {
-      top: 6px;
       left: 0;
     }
   }
@@ -150,11 +138,12 @@ const TableCell = styled.li`
     }
     .table_content_title {
       ${theme.text.medium}
+      display: flex;
+      align-items: center;
       padding-left: 24px;
       position: relative;
       font-weight: bold;
       color: ${theme.greyscale.titleActive};
-      display: flex;
       svg {
         top: 5px;
         left: 0;

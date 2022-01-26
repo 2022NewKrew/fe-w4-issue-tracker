@@ -2,7 +2,7 @@ import Dropdown from "@components/common/Dropdown";
 import styled from "@emotion/styled";
 import theme from "@styles/theme";
 import { useState } from "react";
-import SearchIcon from "@assets/icons/search.svg";
+import Icon from "@icon";
 
 const filterList = ["필터1", "필터2", "필터3"];
 
@@ -17,7 +17,7 @@ const FilterBar = () => {
   return (
     <Wrapper>
       <form onSubmit={handleSubmit}>
-        <SearchIcon />
+        <Icon name="search" />
         <input
           id="search"
           placeholder={focus ? "Search all issues" : "is:issue is:open"}

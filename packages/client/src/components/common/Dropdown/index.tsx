@@ -1,9 +1,8 @@
 import { useBooleanState } from "@hooks";
 import { useEffect, useState } from "react";
-import ArrowDownIcon from "@assets/icons/arrow_down.svg";
-import SelectIcon from "@assets/icons/check-on-circle.svg";
-import NotSelectIcon from "@assets/icons/check-off-circle.svg";
+
 import { Indicator, Panel, Wrapper } from "./style";
+import Icon from "@icon";
 
 interface Props {
   indicator: string;
@@ -42,7 +41,7 @@ const Dropdown = ({
     <Wrapper>
       <Indicator onClick={showMenu}>
         {indicator}
-        <ArrowDownIcon />
+        <Icon name="arrow_down" />
       </Indicator>
       <Panel visible={visible} direction={direction}>
         <h3>{panelTitle}</h3>
@@ -50,7 +49,12 @@ const Dropdown = ({
           {list.map((ele) => (
             <li key={ele} className={select === ele ? "select" : ""}>
               {ele}
-              {icon && (select === ele ? <SelectIcon /> : <NotSelectIcon />)}
+              {icon &&
+                (select === ele ? (
+                  <Icon name="check_on_circle" />
+                ) : (
+                  <Icon name="check_off_circle" />
+                ))}
             </li>
           ))}
         </ul>

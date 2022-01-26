@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
-import Logo from "./Logo";
-import ProfileLarge from "@assets/icons/UserImageLarge.svg";
+import Icon from "@icon";
 
 interface Props {
   children: React.ReactNode;
@@ -10,8 +9,8 @@ const AppLayout = ({ children }: Props) => {
   return (
     <Wrapper>
       <StyledHeader>
-        <Logo size="medium" />
-        <ProfileLarge />
+        <Icon name="logo_medium" />
+        <Icon name="user_image_large" />
       </StyledHeader>
       <main>{children}</main>
     </Wrapper>

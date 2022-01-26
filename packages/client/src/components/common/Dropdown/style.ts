@@ -53,6 +53,8 @@ export const Panel = styled.div<{
   }
   li {
     ${theme.text.small};
+    display: flex;
+    align-items: center;
     color: ${theme.greyscale.body};
     border-top: 1px solid ${theme.greyscale.line};
     background: ${theme.greyscale.offWhite};

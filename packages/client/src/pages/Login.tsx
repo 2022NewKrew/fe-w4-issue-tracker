@@ -1,14 +1,14 @@
 import Button from "@components/common/Button";
-import Logo from "@components/common/Logo";
 import IDLoginForm from "@components/login/IDLoginForm";
 import styled from "@emotion/styled";
 import theme from "@styles/theme";
 import React from "react";
+import Icon from "@icon";
 
 const Login: React.FC = () => {
   return (
     <Wrapper>
-      <Logo />
+      <Icon name="logo_large" />
       <Button size="large">GitHub 계정으로 로그인</Button>
       <span>or</span>
       <IDLoginForm />

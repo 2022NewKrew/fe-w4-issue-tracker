@@ -1,19 +1,17 @@
 import { css } from "@emotion/react";
-import theme from "./theme";
+import theme from "@styles/theme";
 
-export const TextAreaStyle = css`
+const TextAreaStyle = css`
   background: ${theme.greyscale.inputBackgound};
   border-radius: 16px;
   padding: 10px;
-  width: 340px;
-  height: 200px;
   position: relative;
   ${theme.flexCenter}
   ${theme.text.small};
   textarea {
     background: transparent;
     width: 100%;
-    height: 128px;
+    height: 60%;
     margin-bottom: 10px;
     padding: 34px 0 0 14px;
     :not(:placeholder-shown) + label {
@@ -58,3 +56,5 @@ export const TextAreaStyle = css`
     }
   }
 `;
+
+export default TextAreaStyle;

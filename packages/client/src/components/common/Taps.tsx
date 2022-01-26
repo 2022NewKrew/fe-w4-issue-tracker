@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import theme from "@styles/theme";
 import { NavLink } from "react-router-dom";
+import Icon from "./Icon";
 
 const Taps = () => {
   return (
@@ -10,6 +11,7 @@ const Taps = () => {
           to="/label"
           className={({ isActive }) => (isActive ? "activated" : "")}
         >
+          <Icon name="tag" />
           레이블<span>(0)</span>
         </NavLink>
       </li>
@@ -18,6 +20,7 @@ const Taps = () => {
           to="/milestone"
           className={({ isActive }) => (isActive ? "activated" : "")}
         >
+          <Icon name="milestone" />
           마일스톤<span>(0)</span>
         </NavLink>
       </li>
@@ -51,6 +54,11 @@ const TapsStyles = css`
         margin-left: 8px;
         color: ${theme.greyscale.label};
       }
+      svg {
+        position: static;
+        margin-right: 8px;
+        opacity: 0.5;
+      }
     }
     :hover {
       background: ${theme.greyscale.inputBackgound};
@@ -66,5 +74,8 @@ const TapsStyles = css`
   .activated {
     color: ${theme.greyscale.body};
     background: ${theme.greyscale.line};
+    svg {
+      opacity: 1;
+    }
   }
 `;

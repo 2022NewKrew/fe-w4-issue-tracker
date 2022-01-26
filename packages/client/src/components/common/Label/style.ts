@@ -9,24 +9,19 @@ const CLOSE = "close";
 const DARK = "dark";
 const LIGHT = "light";
 const LINE = "line";
-const NONE = "none";
+const CUSTOM = "custom";
 
 interface ILabelStyle {
   size: "large" | "small";
-  type?: "open" | "close" | "dark" | "light" | "line" | "none";
-  color?: string;
-  background?: string;
+  type: "open" | "close" | "dark" | "light" | "line" | "custom";
+  color: string;
 }
 
-const LabelStyle = ({
-  size,
-  type = NONE,
-  color = "",
-  background = "",
-}: ILabelStyle) => css`
-  /* ${theme.flexCenter} */
-  display: inline-block;
+const LabelStyle = ({ size, type, color }: ILabelStyle) => css`
+  display: flex;
+  align-items: center;
   ${theme.text.xsmall}
+
   border-radius: 30px;
   padding: 4px 16px;
   ${{
@@ -62,9 +57,9 @@ const LabelStyle = ({
       color: ${theme.greyscale.line};
       border: 1px solid ${theme.greyscale.line};
     `,
-    [NONE]: css`
-      color: ${color};
-      background: ${background};
+    [CUSTOM]: css`
+      color: ${theme.greyscale.offWhite};
+      background: ${color};
     `,
   }[type]}
 `;

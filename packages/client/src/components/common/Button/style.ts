@@ -17,7 +17,7 @@ interface IButtonStyle {
   type: buttonType;
 }
 
-export const ButtionStyle = ({ size, color, type }: IButtonStyle) => css`
+const ButtionStyle = ({ size, color, type }: IButtonStyle) => css`
   ${theme.flexCenter}
   padding: 0 ${CSSIF(size !== SMALL, "24px", "16px")};
   // font style
@@ -101,3 +101,5 @@ export const ButtionStyle = ({ size, color, type }: IButtonStyle) => css`
     }[type]};
   }
 `;
+
+export default ButtionStyle;

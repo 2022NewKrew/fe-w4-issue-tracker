@@ -1,4 +1,4 @@
-import { TextInputStyle } from "@components/common/TextInput/style";
+import TextInputStyle from "./style";
 import { sizeType } from "src/@types/emotion";
 
 interface Props {

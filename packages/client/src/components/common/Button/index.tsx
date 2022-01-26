@@ -1,4 +1,4 @@
-import { ButtionStyle } from "@components/common/Button/style";
+import ButtionStyle from "./style";
 
 interface ButtonProps {
   children: React.ReactNode;

@@ -1,37 +1,37 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import styled, { css } from "styled-components";
-import { Color } from "@/constant/constant";
-import { Size, CheckState } from "@/ts/enum";
-import { Dispatch, SetStateAction } from "react";
+import { Color, Size } from "@/common/designSystem";
 
-type InputInfo = {
+export enum CheckState {
+  Success,
+  None,
+  Fail,
+}
+
+interface InputStyleProp {
+  inputSize: Size;
+  textCheckResult: CheckState;
+}
+
+interface InputProps {
   inputSize?: Size;
   placeholder?: string;
-  textCheckResult?: (message: string) => CheckState;
-  textCheckMessage?: (checkResult: CheckState) => string;
+  textCheckResult?: CheckState;
+  textCheckMessage?: string;
   inputValue: string;
-  setInputValue: Dispatch<SetStateAction<string>>;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-};
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
-const Input = (props: InputInfo) => {
-  const inputSize = props.inputSize;
-  const inputValue = props.inputValue;
-  const placeholder = props.placeholder;
-  const textCheckResult = props.textCheckResult
-    ? props.textCheckResult(inputValue)
-    : CheckState.None;
-  const textCheckMessage =
-    textCheckResult !== CheckState.None && props.textCheckMessage
-      ? props.textCheckMessage(textCheckResult)
-      : "";
-
+const Input: FunctionComponent<InputProps> = ({
+  inputSize = Size.Medium,
+  placeholder = "",
+  textCheckResult = CheckState.None,
+  textCheckMessage = "",
+  inputValue,
+  onChange,
+}) => {
   const inputValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (props.onChange) {
-      props.onChange(event);
-      return;
-    }
-    props.setInputValue(event.target.value);
+    onChange(event);
   };
 
   return (
@@ -53,127 +53,6 @@ const Input = (props: InputInfo) => {
       </TextCheckMessageSpan>
     </Wrapper>
   );
-};
-
-const Wrapper = styled.div`
-  margin: 5px; //TODO: 테스트용 값 변경 예장
-`;
-
-const InputWrapper = styled.div`
-  position: relative;
-`;
-
-const textFontStyle = css`
-  font-family: Noto Sans KR;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 16px;
-  line-height: 28px;
-`;
-
-const TextCheckMessageSpan = styled.span<{ textCheckResult: CheckState }>`
-  font-family: Noto Sans KR;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 20px;
-  margin-top: 8px;
-  ${(props) => getCheckResultStyle(props.textCheckResult)}
-  width: max-content;
-  background: transparent;
-  outline: none;
-`;
-
-const TextLabel = styled.label<{
-  inputSize?: Size;
-  textCheckResult: CheckState;
-}>`
-  position: absolute;
-  top: 0px;
-  padding: 0px 24px;
-  display: flex;
-  align-items: center;
-  color: ${Color.Placeholder};
-  pointer-events: none;
-  ${textFontStyle}
-  ${(props) => getSizeStyle(props.inputSize)}
-  ${(props) => getCheckResultStyle(props.textCheckResult)}
-  width: max-content;
-  background: transparent;
-  outline: none;
-`;
-
-const TextInput = styled.input<{
-  inputSize?: Size;
-  textCheckResult: CheckState;
-}>`
-  display: block;
-  padding: 0;
-  text-indent: 24px;
-  /* outline: none; */
-  background: ${Color.InputBackground};
-  border: none;
-
-  ${textFontStyle}
-  ${(props) => getSizeStyle(props.inputSize)}
-  ${(props) => getCheckResultStyle(props.textCheckResult)}
-
-  &:active {
-    background: white;
-    outline: 1px solid ${Color.TitleActive};
-  }
-
-  &:focus {
-    background: white;
-    outline: 1px solid ${Color.TitleActive};
-    + label {
-      color: ${Color.Label};
-      font-size: 12px;
-      line-height: 20px;
-      align-items: start;
-    }
-    vertical-align: bottom;
-  }
-
-  &.fill {
-    + label {
-      font-size: 12px;
-      line-height: 20px;
-      align-items: start;
-    }
-    vertical-align: bottom;
-  }
-
-  &:disabled {
-    opacity: 0.5;
-    background: ${Color.InputBackground};
-    border: none;
-  }
-
-  color: ${Color.TitleActive};
-`;
-
-const getSizeStyle = (inputSize: Size | undefined) => {
-  switch (inputSize) {
-    case Size.Large:
-      return largeSize;
-    case Size.Small:
-      return smallSize;
-    default:
-      //Size.Medium || undefined
-      return mediumSize;
-  }
-};
-
-const getCheckResultStyle = (textCheckResult: CheckState) => {
-  switch (textCheckResult) {
-    case CheckState.Success:
-      return successResult;
-    case CheckState.Fail:
-      return failResult;
-    default:
-      return null;
-  }
 };
 
 const largeSize = css`
@@ -231,6 +110,110 @@ const failResult = css`
   background: ${Color.LightRed};
   outline: 1px solid ${Color.Red};
   color: ${Color.DarkRed};
+`;
+
+const textFontStyle = css`
+  font-family: Noto Sans KR;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 28px;
+`;
+
+const inputSizeToStyles = {
+  [Size.Large]: largeSize,
+  [Size.Medium]: mediumSize,
+  [Size.Small]: smallSize,
+};
+
+const inputCheckResultToStyles = {
+  [CheckState.Success]: successResult,
+  [CheckState.Fail]: failResult,
+  [CheckState.None]: null,
+};
+
+const Wrapper = styled.div`
+  margin: 5px; //TODO: 테스트용 값 변경 예장
+`;
+
+const InputWrapper = styled.div`
+  position: relative;
+`;
+
+const TextCheckMessageSpan = styled.span<{ textCheckResult: CheckState }>`
+  font-family: Noto Sans KR;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 20px;
+  margin-top: 8px;
+  ${(props) => inputCheckResultToStyles[props.textCheckResult]}
+  width: max-content;
+  background: transparent;
+  outline: none;
+`;
+
+const TextLabel = styled.label<InputStyleProp>`
+  position: absolute;
+  top: 0px;
+  padding: 0px 24px;
+  display: flex;
+  align-items: center;
+  color: ${Color.Placeholder};
+  pointer-events: none;
+  ${textFontStyle}
+  ${(props) => inputSizeToStyles[props.inputSize]}
+  ${(props) => inputCheckResultToStyles[props.textCheckResult]}
+  width: max-content;
+  background: transparent;
+  outline: none;
+`;
+
+const TextInput = styled.input<InputStyleProp>`
+  display: block;
+  padding: 0;
+  text-indent: 24px;
+  /* outline: none; */
+  background: ${Color.InputBackground};
+  border: none;
+
+  ${textFontStyle}
+  ${(props) => inputSizeToStyles[props.inputSize]}
+  ${(props) => inputCheckResultToStyles[props.textCheckResult]}
+
+  &:active {
+    background: white;
+    outline: 1px solid ${Color.TitleActive};
+  }
+
+  &:focus {
+    background: white;
+    outline: 1px solid ${Color.TitleActive};
+    + label {
+      color: ${Color.Label};
+      font-size: 12px;
+      line-height: 20px;
+      align-items: start;
+    }
+    vertical-align: bottom;
+  }
+
+  &.fill {
+    + label {
+      font-size: 12px;
+      line-height: 20px;
+      align-items: start;
+    }
+    vertical-align: bottom;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    background: ${Color.InputBackground};
+    border: none;
+  }
+
+  color: ${Color.TitleActive};
 `;
 
 export default Input;

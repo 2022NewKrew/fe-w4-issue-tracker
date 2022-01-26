@@ -1,19 +1,29 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import styled, { css } from "styled-components";
-import { Color } from "@/constant/constant";
-import { Size, ButtonMode } from "@/ts/enum";
+import { Color, Size } from "@/common/designSystem";
 
-type ButtonInfo = {
+export enum ButtonMode {
+  Standard,
+  Secondary,
+  Text,
+}
+
+interface ButtonInputInfo {
+  buttonSize: Size;
+  buttonMode: ButtonMode;
+}
+
+interface ButtonProps {
   buttonSize?: Size;
   buttonMode?: ButtonMode;
   message?: string;
-};
+}
 
-const Button = (props: ButtonInfo) => {
-  const buttonSize = props.buttonSize;
-  const buttonMode = props.buttonMode;
-  //TODO 메세지의 경우 현재 text모드일때 +를 텍스트로 추가하는 형태로 넣고 있지만 자체적으로 메시지를 이미지화 또는 + 이미지를 앞에 붙이는 형식 고민 중
-  const message = props.message;
+const Button: FunctionComponent<ButtonProps> = ({
+  buttonSize = Size.Medium,
+  buttonMode = ButtonMode.Text,
+  message = "BUTTON",
+}) => {
   return (
     <ButtonInput
       type="button"
@@ -23,45 +33,6 @@ const Button = (props: ButtonInfo) => {
     />
   );
 };
-
-const ButtonInput = styled.input<ButtonInfo>`
-  margin: 5px; //TODO: 테스트용 값 변경 예장
-
-  padding: 0px 24px;
-  border-radius: 20px;
-
-  text-align: center;
-
-  /* Link Medium */
-  font-family: Noto Sans KR;
-  font-style: normal;
-  font-weight: bold;
-  border: none;
-
-  ${(props) => {
-    switch (props.buttonSize) {
-      case Size.Large:
-        return largeSize;
-      case Size.Small:
-        return smallSize;
-      default:
-        //Size.Medium || undefined
-        return mediumSize;
-    }
-  }}
-
-  ${(props) => {
-    switch (props.buttonMode) {
-      case ButtonMode.Standard:
-        return standardMode;
-      case ButtonMode.Secondary:
-        return secondaryMode;
-      default:
-        //ButtonMode.Text|| undefined
-        return textMode;
-    }
-  }}
-`;
 
 const largeSize = css`
   height: 64px;
@@ -141,5 +112,36 @@ const textMode = css`
   height: max-content;
   border-radius: 0px;
   padding: 0px;
+`;
+
+const buttonSizeToStyles = {
+  [Size.Large]: largeSize,
+  [Size.Medium]: mediumSize,
+  [Size.Small]: smallSize,
+};
+
+const buttonModeToStyles = {
+  [ButtonMode.Standard]: standardMode,
+  [ButtonMode.Secondary]: secondaryMode,
+  [ButtonMode.Text]: textMode,
+};
+
+const ButtonInput = styled.input<ButtonInputInfo>`
+  margin: 5px; //TODO: 테스트용 값 변경 예장
+
+  padding: 0px 24px;
+  border-radius: 20px;
+
+  text-align: center;
+
+  /* Link Medium */
+  font-family: Noto Sans KR;
+  font-style: normal;
+  font-weight: bold;
+  border: none;
+
+  ${(props) => buttonSizeToStyles[props.buttonSize]}
+
+  ${(props) => buttonModeToStyles[props.buttonMode]}
 `;
 export default Button;

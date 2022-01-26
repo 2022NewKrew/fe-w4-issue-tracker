@@ -1,7 +1,16 @@
 import React from "react";
 import { ClockLoader } from "react-spinners";
 import styled from "styled-components";
-import { LoaderType } from "../../ts/type";
+
+export declare type LengthType = number | string;
+
+export type LoaderType = {
+  loading: boolean;
+  message?: string;
+  css: string;
+  size: LengthType;
+};
+
 const Loader = (props: LoaderType) => {
   return (
     <Wrapper>

@@ -1,24 +1,32 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "jsx": "react",
+    "jsx": "react-jsx",
     "rootDir": ".",
     "outDir": "./dist",
-    "baseUrl": ".",
     "composite": true,
     "allowJs": false,
     "declaration": true,
     "declarationMap": true,
-    "allowSyntheticDefaultImports": true
-    // "paths": {
-    //   "@root/server": ["../server/src/app.ts"]
-    // }
+    "allowSyntheticDefaultImports": true,
+    "jsxImportSource": "@emotion/react",
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["./src/components/*"],
+      "@hooks": ["./src/hooks"],
+      "@assets/*": ["./src/assets/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@services/*": ["./src/services/*"],
+      "@stores/*": ["./src/stores/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@utils/*": ["./src/utils/*"]
+    }
   },
   //   "references": [
   //     {
   //       "path": "../server"
   //     }
   //   ],
-  "include": ["src/**/*"],
+  "include": ["@types", "src/**/*"],
   "exclude": ["node_modules", "dist", "*.d.ts"]
 }

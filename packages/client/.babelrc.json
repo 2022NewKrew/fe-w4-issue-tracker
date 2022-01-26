@@ -1,3 +1,12 @@
 {
-  "presets": [["@babel/preset-react", { "runtime": "automatic" }]]
+  "presets": [
+    ["@babel/preset-react", { "runtime": "automatic" }],
+    [
+      "@emotion/babel-preset-css-prop",
+      {
+        "autoLabel": "dev-only",
+        "labelFormat": "[dirname]-[filename]-[local]"
+      }
+    ]
+  ]
 }

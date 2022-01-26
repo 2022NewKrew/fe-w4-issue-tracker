@@ -56,7 +56,7 @@ module.exports = {
       '@types': path.resolve(__dirname, '../src/types'),
       '@layout': path.resolve(__dirname, '../src/layout'),
       '@pages': path.resolve(__dirname, '../src/pages'),
-      '@icons': path.resolve(__dirname, '../src/assets/icons'),
+      '@icon': path.resolve(__dirname, '../src/icon/Icon'),
     },
   },
 };

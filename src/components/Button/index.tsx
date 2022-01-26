@@ -7,10 +7,11 @@ import { theme } from '@styles/theme';
 interface ButtonProps {
   type?: 'Large' | 'MediumStandard' | 'SmallStandard' | 'SmallSecondary';
   children: React.ReactNode;
-  onClick: (event: React.MouseEvent<HTMLElement>) => void;
+  onClick?: (event?: React.MouseEvent<HTMLButtonElement>) => void;
+  disabled?: boolean;
 }
 
-const Button = ({ type = 'Large', children, ...props }: ButtonProps) => {
+const Button = ({ type = 'Large', children, disabled, ...props }: ButtonProps) => {
   const getStyle = (type) => {
     switch (type) {
       case 'MediumStandard':
@@ -25,7 +26,7 @@ const Button = ({ type = 'Large', children, ...props }: ButtonProps) => {
   };
 
   return (
-    <button css={[buttonStyle, ...getStyle(type)]} {...props}>
+    <button css={[buttonStyle, ...getStyle(type)]} disabled={disabled} {...props}>
       {children}
     </button>
   );

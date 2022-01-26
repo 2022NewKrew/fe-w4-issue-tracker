@@ -2,7 +2,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import Button from '@components/Button';
-import Plus from '@icons/Plus.svg';
+import Icon from '@icon';
 
 export default {
   title: 'Components/Button',
@@ -17,7 +17,7 @@ const Template: ComponentStory<typeof Button> = (args) => (
 
 const IconTemplate: ComponentStory<typeof Button> = (args) => (
   <Button {...args}>
-    <Plus />
+    <Icon icon="Plus" />
     <span>Button</span>
   </Button>
 );

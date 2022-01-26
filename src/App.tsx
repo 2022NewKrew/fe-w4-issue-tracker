@@ -3,7 +3,7 @@
 import { jsx, css, ThemeProvider } from '@emotion/react';
 import { theme } from '@styles/theme';
 import Button from '@components/Button';
-import Plus from '@icons/Plus.svg';
+import Icon from '@icon';
 
 const App = () => {
   const spacing = css`
@@ -19,11 +19,11 @@ const App = () => {
         <span>BUTTON</span>
       </Button>
       <Button css={spacing} type="SmallStandard" onClick={() => console.log('hi')}>
-        <Plus />
+        <Icon icon="Plus" />
         <span>BUTTON</span>
       </Button>
       <Button css={spacing} type="SmallSecondary" onClick={() => console.log('hi')}>
-        <Plus />
+        <Icon icon="Plus" />
         <span>BUTTON</span>
       </Button>
     </ThemeProvider>

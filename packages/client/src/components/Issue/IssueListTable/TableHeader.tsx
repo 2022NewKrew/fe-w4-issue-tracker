@@ -1,7 +1,7 @@
 import Dropdown from "@components/common/Dropdown";
 
 import styled from "@emotion/styled";
-import theme from "@styles/theme";
+import { css } from "@emotion/react";
 import Icon from "@icon";
 
 const labelList = ["레이블이 없는 이슈", "bug", "documentation"];
@@ -52,6 +52,7 @@ const TableHeader = () => {
   const createFilterTabs = (filterTabs: IFilterTab[]) =>
     filterTabs.map(({ indicator, panelTitle, list, direction }) => (
       <Dropdown
+        key={indicator}
         indicator={indicator}
         panelTitle={panelTitle}
         list={list}
@@ -78,29 +79,31 @@ const TableHeader = () => {
 export default TableHeader;
 
 const Wrapper = styled.div`
-  width: 100%;
-  height: 64px;
-  background: ${theme.greyscale.background};
-  padding: 26px 32px;
-  position: relative;
-  & > svg:first-of-type {
-    top: 22px;
-  }
-  & > button {
-    ${theme.text.small};
-    font-weight: bold;
-    padding-left: 20px;
+  ${({ theme: { greyscale, text } }) => css`
+    width: 100%;
+    height: 64px;
+    background: ${greyscale.background};
+    padding: 26px 32px;
     position: relative;
-    background: transparent;
-    & > svg {
-      left: 0;
+    & > svg:first-of-type {
+      top: 22px;
     }
-  }
-  & > button:first-of-type {
-    margin: 0 24px 0 48px;
-  }
-  & > div {
-    float: right;
-    margin-left: 32px;
-  }
+    & > button {
+      ${text.small};
+      font-weight: bold;
+      padding-left: 20px;
+      position: relative;
+      background: transparent;
+      & > svg {
+        left: 0;
+      }
+    }
+    & > button:first-of-type {
+      margin: 0 24px 0 48px;
+    }
+    & > div {
+      float: right;
+      margin-left: 32px;
+    }
+  `}
 `;

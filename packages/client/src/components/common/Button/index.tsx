@@ -1,4 +1,6 @@
-import Icon, { IconName } from "../Icon";
+import Icon, { IconName } from "@icon";
+
+import { useTheme } from "@emotion/react";
 import ButtionStyle from "./style";
 
 interface ButtonProps {
@@ -21,10 +23,12 @@ const Button = ({
   onClick,
   width,
   icon,
+  ...props
 }: ButtonProps) => {
+  const theme = useTheme();
   return (
     <button
-      css={[ButtionStyle({ type, color, size }), { width }]}
+      css={[ButtionStyle({ type, color, size }, theme), { width }]}
       disabled={disabled}
       onClick={onClick}
     >

@@ -1,9 +1,10 @@
 import TableHeader from "@components/Issue/IssueListTable/TableHeader";
 import TableCell from "@components/Issue/IssueListTable/TableCell";
 
-import styled from "@emotion/styled";
-import theme from "@styles/theme";
 import { useCallback } from "react";
+
+import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 
 const issueList = [
   {
@@ -52,15 +53,17 @@ const ListTable = () => {
 export default ListTable;
 
 const Wrapper = styled.section`
-  ${theme.flexCenter}
-  margin-top: 24px;
-  width: 100%;
-  border: 1px solid ${theme.greyscale.line};
-  border-radius: 16px;
-  div:first-of-type {
-    border-radius: 16px 16px 0 0;
-  }
-  li:last-child {
-    border-radius: 0 0 16px 16px;
-  }
+  ${({ theme: { flexCenter, greyscale } }) => css`
+    ${flexCenter}
+    margin-top: 24px;
+    width: 100%;
+    border: 1px solid ${greyscale.line};
+    border-radius: 16px;
+    div:first-of-type {
+      border-radius: 16px 16px 0 0;
+    }
+    li:last-child {
+      border-radius: 0 0 16px 16px;
+    }
+  `}
 `;

@@ -1,3 +1,4 @@
+import { useTheme } from "@emotion/react";
 import TextAreaStyle from "./style";
 
 interface Props {
@@ -7,8 +8,9 @@ interface Props {
 }
 
 const TextArea = ({ value, onChange, height }: Props) => {
+  const theme = useTheme();
   return (
-    <div css={[TextAreaStyle, { height }]}>
+    <div css={[TextAreaStyle(theme), { height }]}>
       <textarea value={value} onChange={onChange} placeholder=" "></textarea>
       <label>코멘트를 입력하세요</label>
       <span />

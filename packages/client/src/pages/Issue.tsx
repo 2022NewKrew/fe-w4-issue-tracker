@@ -1,7 +1,7 @@
-import AppLayout from "@components/common/AppLayout";
+import AppLayout from "@components/Layout/AppLayout";
+import LinkTap from "@components/Issue/LinkTap";
 import FilterBar from "@components/Issue/FilterBar";
 import IssueListTable from "@components/Issue/IssueListTable";
-import LinkTap from "@components/Issue/LinkTap";
 
 const Issue = () => {
   return (

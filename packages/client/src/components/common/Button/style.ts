@@ -1,15 +1,5 @@
-import { css } from "@emotion/react";
-import theme from "@styles/theme";
-import { CSSIF } from "@utils/helper";
+import { css, Theme } from "@emotion/react";
 import { buttonType, colorType, sizeType } from "src/@types/emotion";
-
-const LARGE = "large";
-const MEDIUM = "medium";
-const SMALL = "small";
-
-const STANDARD = "standard";
-const SECONDARY = "secondary";
-const TEXT = "text";
 
 interface IButtonStyle {
   size: sizeType;
@@ -17,85 +7,80 @@ interface IButtonStyle {
   type: buttonType;
 }
 
-const ButtionStyle = ({ size, color, type }: IButtonStyle) => css`
-  padding: 0 ${CSSIF(size !== SMALL, "24px", "16px")};
-  // font style
-  ${CSSIF(size !== SMALL, theme.text.medium, theme.text.xsmall)}
+const ButtionStyle = (
+  { size, color, type }: IButtonStyle,
+  { text, greyscale, colors }: Theme
+) => css`
   font-weight: bold;
-  color: ${{
-    [STANDARD]: theme.greyscale.offWhite,
-    [SECONDARY]: theme.colors[color].default,
-    [TEXT]: theme.greyscale.label,
-  }[type]};
-
-  border: ${CSSIF(
-    type === SECONDARY,
-    `2px solid ${theme.colors[color].default}`
-  )};
-  border-radius: ${CSSIF(size !== SMALL, "20px", "11px")};
 
   ${{
-    [STANDARD]: css`
-      color: ${theme.greyscale.offWhite};
-      background: ${theme.colors[color].default};
+    standard: css`
+      color: ${greyscale.offWhite};
+      background: ${colors[color].default};
     `,
-    [SECONDARY]: css`
-      color: ${theme.colors[color].default};
-      background: ${theme.greyscale.offWhite};
+    secondary: css`
+      color: ${colors[color].default};
+      background: ${greyscale.offWhite};
+      border: 2px solid ${colors[color].default};
     `,
-    [TEXT]: css`
-      color: ${theme.greyscale.label};
+    text: css`
+      color: ${greyscale.label};
       background: transparent;
+      width: max-content;
+      height: 32px;
     `,
   }[type]};
 
   ${{
-    [LARGE]: css`
+    large: css`
+      ${text.medium};
       width: 340px;
       height: 64px;
+      padding: 0 24px;
+      border-radius: 20px;
     `,
-    [MEDIUM]: css`
+    medium: css`
+      ${text.medium};
       width: 240px;
       height: 56px;
+      padding: 0 24px;
+      border-radius: 20px;
     `,
-    [SMALL]: css`
+    small: css`
+      ${text.xsmall};
       width: 120px;
       height: 40px;
+      padding: 0 16px;
+      border-radius: 11px;
     `,
   }[size]}
 
-  ${type === TEXT &&
-  css`
-    width: max-content;
-    height: 32px;
-  `}
-
   :hover:enabled:not(:active) {
     ${{
-      [STANDARD]: css`
-        background: ${theme.colors[color].dark};
+      standard: css`
+        background: ${colors[color].dark};
       `,
-      [SECONDARY]: css`
-        color: ${theme.colors[color].dark};
-        border-color: ${theme.colors[color].dark};
+      secondary: css`
+        color: ${colors[color].dark};
+        border-color: ${colors[color].dark};
       `,
-      [TEXT]: css`
-        color: ${theme.greyscale.body};
+      text: css`
+        color: ${greyscale.body};
       `,
     }[type]};
   }
   :active {
     ${{
-      [STANDARD]: css`
-        border: 4px solid ${theme.colors[color].light};
+      standard: css`
+        border: 4px solid ${colors[color].light};
       `,
-      [SECONDARY]: css`
-        color: ${theme.colors[color].default};
-        border-color: ${theme.colors[color].dark};
-        border: 4px solid ${theme.colors[color].light};
+      secondary: css`
+        color: ${colors[color].default};
+        border-color: ${colors[color].dark};
+        border: 4px solid ${colors[color].light};
       `,
-      [TEXT]: css`
-        color: ${theme.greyscale.titleActive};
+      text: css`
+        color: ${greyscale.titleActive};
       `,
     }[type]};
   }

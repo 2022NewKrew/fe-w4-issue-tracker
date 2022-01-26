@@ -1,3 +1,4 @@
+import { useTheme } from "@emotion/react";
 import LabelStyle from "./style";
 
 interface LabelProps {
@@ -8,13 +9,17 @@ interface LabelProps {
 }
 
 const Label = ({ children, size, type, color }: LabelProps) => {
+  const theme = useTheme();
   return (
     <label
-      css={LabelStyle({
-        size,
-        type,
-        color,
-      })}
+      css={LabelStyle(
+        {
+          size,
+          type,
+          color,
+        },
+        theme
+      )}
     >
       {children}
     </label>

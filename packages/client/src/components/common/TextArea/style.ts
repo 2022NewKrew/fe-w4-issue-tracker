@@ -1,14 +1,13 @@
-import { css } from "@emotion/react";
-import theme from "@styles/theme";
+import { css, Theme } from "@emotion/react";
 
-const TextAreaStyle = css`
-  background: ${theme.greyscale.inputBackground};
+const TextAreaStyle = ({ text, greyscale, flexCenter }: Theme) => css`
+  background: ${greyscale.inputBackground};
   border-radius: 16px;
   padding: 10px;
   position: relative;
   width: 100%;
-  ${theme.flexCenter}
-  ${theme.text.small};
+  ${flexCenter}
+  ${text.small};
   textarea {
     background: transparent;
     width: 100%;
@@ -16,15 +15,15 @@ const TextAreaStyle = css`
     margin-bottom: 10px;
     padding: 34px 0 0 14px;
     :not(:placeholder-shown) + label {
-      ${theme.text.xsmall};
-      color: ${theme.greyscale.label};
+      ${text.xsmall};
+      color: ${greyscale.label};
     }
   }
   label {
     position: absolute;
     top: 16px;
     left: 24px;
-    color: ${theme.greyscale.placeholer};
+    color: ${greyscale.placeholer};
     transform: translateY(0%);
     transition: all 0.3s ease;
     pointer-events: none;
@@ -35,25 +34,25 @@ const TextAreaStyle = css`
     right: 0;
     top: 74%;
     bottom: 26%;
-    border: 1px dashed ${theme.greyscale.line};
+    border: 1px dashed ${greyscale.line};
   }
   button {
-    ${theme.text.xsmall};
+    ${text.xsmall};
     margin-top: 10px;
-    color: ${theme.greyscale.label};
+    color: ${greyscale.label};
     background: transparent;
     font-weight: bold;
     flex: 1;
-    ${theme.flexCenter}
+    ${flexCenter}
     align-items: flex-start;
     width: 100%;
   }
 
   :focus-within {
-    background: ${theme.greyscale.offWhite};
-    border: 1px solid ${theme.greyscale.titleActive};
+    background: ${greyscale.offWhite};
+    border: 1px solid ${greyscale.titleActive};
     span {
-      border-color: ${theme.greyscale.titleActive};
+      border-color: ${greyscale.titleActive};
     }
   }
 `;

@@ -1,7 +1,7 @@
 import Label from "@components/common/Label";
 
 import styled from "@emotion/styled";
-import theme from "@styles/theme";
+import { css } from "@emotion/react";
 import Icon from "@icon";
 
 interface Props {
@@ -48,51 +48,53 @@ const TableCell = ({
 export default TableCell;
 
 const Wrapper = styled.li`
-  width: 100%;
-  height: 100px;
-  background: ${theme.greyscale.offWhite};
-  border-top: 1px solid ${theme.greyscale.line};
-  padding: 16px 0 16px 80px;
-  position: relative;
-  & > svg {
-    top: 24px;
-    left: 32px;
-  }
-  .table_content {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    cursor: pointer;
+  ${({ theme: { greyscale, text } }) => css`
+    width: 100%;
+    height: 100px;
+    background: ${greyscale.offWhite};
+    border-top: 1px solid ${greyscale.line};
+    padding: 16px 0 16px 80px;
     position: relative;
     & > svg {
-      top: 20px;
-      right: 54px;
+      top: 24px;
+      left: 32px;
     }
-    .table_content_title {
-      ${theme.text.medium}
+    .table_content {
+      height: 100%;
       display: flex;
-      align-items: center;
-      padding-left: 24px;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
       position: relative;
-      font-weight: bold;
-      color: ${theme.greyscale.titleActive};
-      svg {
-        top: 5px;
-        left: 0;
+      & > svg {
+        top: 20px;
+        right: 54px;
       }
-      label {
-        margin-left: 8px;
+      .table_content_title {
+        ${text.medium}
+        display: flex;
+        align-items: center;
+        padding-left: 24px;
+        position: relative;
+        font-weight: bold;
+        color: ${greyscale.titleActive};
+        svg {
+          top: 5px;
+          left: 0;
+        }
+        label {
+          margin-left: 8px;
+        }
+      }
+      .table_content_info span {
+        margin-right: 16px;
+        ${text.small}
+        color: ${greyscale.label};
+        svg {
+          position: static;
+          margin-right: 6px;
+        }
       }
     }
-    .table_content_info span {
-      margin-right: 16px;
-      ${theme.text.small}
-      color: ${theme.greyscale.label};
-      svg {
-        position: static;
-        margin-right: 6px;
-      }
-    }
-  }
+  `}
 `;

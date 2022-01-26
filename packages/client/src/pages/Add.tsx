@@ -1,11 +1,12 @@
-import AppLayout from "@components/common/AppLayout";
+import AppLayout from "@components/Layout/AppLayout";
 import Button from "@components/common/Button";
 import Icon from "@components/common/Icon";
 import TextArea from "@components/common/TextArea";
 import TextInput from "@components/common/TextInput";
-import styled from "@emotion/styled";
 import { useInput } from "@hooks";
-import theme from "@styles/theme";
+
+import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 
 const Add = () => {
   const [title, onChangeTitle] = useInput("");
@@ -39,29 +40,31 @@ const Add = () => {
 export default Add;
 
 const IssueRegisterForm = styled.form`
-  ${theme.flexCenter}
-  width: 1280px;
-  h3 {
-    align-self: flex-start;
-  }
-  .formBody {
-    & > svg {
-      left: 0;
+  ${({ theme: { flexCenter, greyscale } }) => css`
+    ${flexCenter}
+    width: 1280px;
+    h3 {
+      align-self: flex-start;
     }
-    & > div:first-of-type {
-      margin-bottom: 8px;
+    .formBody {
+      & > svg {
+        left: 0;
+      }
+      & > div:first-of-type {
+        margin-bottom: 8px;
+      }
+      width: 100%;
+      padding: 32px 340px 32px 60px;
+      position: relative;
+      border: 1px solid ${greyscale.line};
+      border-left: none;
+      border-right: none;
+      margin: 32px 0;
     }
-    width: 100%;
-    padding: 32px 340px 32px 60px;
-    position: relative;
-    border: 1px solid ${theme.greyscale.line};
-    border-left: none;
-    border-right: none;
-    margin: 32px 0;
-  }
-  .buttonGroup {
-    display: flex;
-    align-items: center;
-    align-self: flex-end;
-  }
+    .buttonGroup {
+      display: flex;
+      align-items: center;
+      align-self: flex-end;
+    }
+  `}
 `;

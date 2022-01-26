@@ -1,7 +1,9 @@
 import Button from "@components/common/Button";
 import Taps from "@components/common/Taps";
-import styled from "@emotion/styled";
+
 import { Link } from "react-router-dom";
+
+import styled from "@emotion/styled";
 
 const LinkTap = () => {
   return (

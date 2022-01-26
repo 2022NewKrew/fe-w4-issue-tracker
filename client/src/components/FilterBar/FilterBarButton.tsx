@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import styled from 'styled-components';
 import { FilterButton } from '@components/assets';
 
 export const FilterBarButton = () => {
-    const onClickHandler = (e: React.MouseEvent<HTMLElement>) => {
+    const onClickHandler = (e: MouseEvent<HTMLElement>) => {
         e.preventDefault();
+        // TODO: 드롭다운 펼쳐지도록 구현
     };
-    return <BarButton title="필터" onClickHandler={onClickHandler} />;
+    return <BarButton title="필터" onClickHandler={onClickHandler} hover={true} />;
 };
 
 const BarButton = styled(FilterButton)`

@@ -1,39 +1,45 @@
 import React, { MouseEvent } from 'react';
-import styled from 'styled-components';
-import { LinkSmall, AlignXYCenter } from '@styles/styleTemplates';
+import styled, { css } from 'styled-components';
+import { LinkSmall, AlignYCenter } from '@styles/styleTemplates';
 import { ReactComponent as DownArrow } from '@icons/DownArrow.svg';
 
 interface IProps {
     title: string;
     onClickHandler: (e: MouseEvent<HTMLElement>) => void;
     className?: string;
+    hover?: boolean;
 }
 
-export const FilterButton = ({ title, onClickHandler, className }: IProps) => {
+export const FilterButton = ({ title, onClickHandler, className = '', hover = false }: IProps) => {
     return (
-        <Wrapper onClick={onClickHandler} className={className ? className : ''}>
+        <Wrapper onClick={onClickHandler} className={className} hover={hover}>
             <div>{title}</div>
             <DownArrow />
         </Wrapper>
     );
 };
 
-const Wrapper = styled.button`
+const Wrapper = styled.button<{ hover: boolean }>`
     ${LinkSmall}
-    ${AlignXYCenter}
-    min-width: 100px;
+    ${AlignYCenter}
+    justify-content: space-between;
+    min-width: fit-content;
     color: var(--label-color);
     cursor: pointer;
 
+    ${({ hover }) => {
+        if (hover)
+            return css`
+                &:hover {
+                    color: var(--body-color);
+                    background-color: var(--line-color);
+                }
+            `;
+    }}
     & svg {
-        padding: 4px;
+        padding: 6px 10px;
         path {
             stroke: var(--label-color);
         }
-    }
-
-    &:hover {
-        color: var(--body-color);
-        background-color: var(--line-color);
     }
 `;

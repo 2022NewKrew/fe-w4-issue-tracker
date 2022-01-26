@@ -12,4 +12,9 @@ declare module '@types' {
         userId: number;
         timeStamp: number;
     }
+    interface IFilter {
+        title: string;
+        type: 'filter' | 'assignee' | 'label' | 'milestone' | 'writer';
+        emptyFilterOption?: string;
+    }
 }

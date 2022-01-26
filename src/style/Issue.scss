@@ -1,0 +1,39 @@
+@use "variables" as *;
+
+.Issue {
+    display: flex;
+    min-height: 80px;
+    background-color: $off-white-color;
+    border: 1px solid $line-color;
+    &:hover {
+        background-color: $background-color;
+        cursor: pointer;
+    }
+
+    .checkbox-container {
+        @extend .tab-first;
+    }
+    .issue-info-container {
+        @extend .tab-second;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        .issue-title {
+            @extend %flex-vertical;
+            font-weight: bold;
+            font-size: 1.1rem;
+            flex:1;
+        }
+        .issue-info {
+            flex: 1;
+            .issue-info-item {
+                margin-right: 10px;
+                color: $label-color
+            }
+        }
+    }
+    .rest-container {
+        @extend %flex-center;
+        @extend .tab-rest;
+    }
+}

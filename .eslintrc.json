@@ -9,6 +9,66 @@
         "plugin:react/recommended",
         "plugin:react/jsx-runtime"
     ],
+    "overrides": [
+        {
+            "files": ["*.jsx", "*.js"],
+            "rules": {
+                "indent": [
+                    "error",
+                    2
+                ],
+                "linebreak-style": [
+                    "error",
+                    "unix"
+                ],
+                "quotes": [
+                    "error",
+                    "single"
+                ],
+                "semi": [
+                    "error",
+                    "always"
+                ],
+                "space-before-function-paren": [
+                    "error",
+                    "never"
+                ],
+                "space-before-blocks": [
+                    "error",
+                    "never"
+                ],
+                "comma-spacing":"error",
+                "key-spacing": [
+                    "error",
+                    {
+                        "afterColon": true
+                    }
+                ],
+                "no-trailing-spaces": [
+                    "error",
+                    {
+                        "skipBlankLines": true
+                    }
+                ],
+                "sort-imports": [
+                    "error",
+                    {
+                        "ignoreCase": true
+                    }
+                ],
+                "object-curly-spacing": [
+                    "error",
+                    "never"
+                ],
+                "max-len": [
+                    "error",
+                    {
+                        "code": 100
+                    }
+                ]
+            }
+        }
+    ],
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -26,54 +86,5 @@
         "react": {
             "version": "detect"
         }
-    },
-    "rules": {
-        "indent": [
-            "error",
-            2
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ],
-        "space-before-function-paren": [
-            "error",
-            "never"
-        ],
-        "space-before-blocks": [
-            "error",
-            "never"
-        ],
-        "comma-spacing":"error",
-        "key-spacing": [
-            "error",
-            {
-                "afterColon": true
-            }
-        ],
-        "no-trailing-spaces": [
-            "error",
-            {
-                "skipBlankLines": true
-            }
-        ],
-        "sort-imports": [
-            "error",
-            {
-                "ignoreCase": true
-            }
-        ],
-        "object-curly-spacing": [
-            "error",
-            "never"
-        ]
     }
 }

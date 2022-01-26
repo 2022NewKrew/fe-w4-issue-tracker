@@ -1,5 +1,5 @@
 import React from "react";
-import { AuthForm } from "@organisms/";
+import { AuthForm } from "@organisms";
 import { useLocation, Navigate } from "react-router-dom";
 
 function Auth({ isLoggedIn }) {

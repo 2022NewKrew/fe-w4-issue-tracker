@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
-import { COLOR } from "@constants/";
-import { SmallText, TextInput } from "@atoms/";
-import { ChevronDownIcon, SearchIcon } from "@icons/";
+import { COLOR } from "@constants";
+import { SmallText, TextInput } from "@atoms";
+import { ChevronDownIcon, SearchIcon } from "@icons";
 
 const FilterBarWrapper = styled.div`
   display: flex;

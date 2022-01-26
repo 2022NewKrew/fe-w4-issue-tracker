@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { COLOR } from "@constants/color.js";
-import { LargeButton } from "@atoms/Button.js";
+import { COLOR } from "@constants";
+import { LargeButton } from "@atoms";
 import { authService } from "@/firebase.js";
 
 const OAuthWrapper = styled.div`

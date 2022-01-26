@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { MediumLogo } from "@atoms/Logo";
+import { MediumLogo } from "@atoms";
 import { authService } from "@/firebase.js";
 
 const HeaderWrapper = styled.div`

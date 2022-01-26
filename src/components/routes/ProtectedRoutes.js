@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Navigate, useLocation } from "react-router-dom";
-import { Home } from "@pages/";
+import { Home } from "@pages";
 
 function ProtectedRoutes({ isLoggedIn }) {
   const location = useLocation();

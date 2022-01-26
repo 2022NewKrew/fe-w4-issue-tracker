@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { authService } from "@/firebase";
-import { FilterBar } from "@organisms/";
-import { Header } from "@molecules/";
-import { TabList } from "@molecules/";
+import { Header, FilterBar, TabList } from "@molecules";
 
 const HomeWrapper = styled.div`
   position: relative;

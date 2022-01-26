@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { COLOR } from "@constants/";
-import { MilestoneIcon, TagIcon } from "@icons/";
-import { SmallText } from "@atoms/";
+import { COLOR } from "@constants";
+import { MilestoneIcon, TagIcon } from "@icons";
+import { SmallText } from "@atoms";
 
 const TabListWrapper = styled.div`
   display: flex;

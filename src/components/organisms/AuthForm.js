@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { LargeLogo, LargeButton, MediumText, LargeTextInput } from "@atoms/";
-import { COLOR } from "@constants/";
-import { OAuthForm } from "@molecules/";
+import { LargeLogo, LargeButton, MediumText, LargeTextInput } from "@atoms";
+import { COLOR } from "@constants";
+import { OAuthForm } from "@molecules";
 
 const AuthFormWrapper = styled.div`
   position: relative;

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Size } from "@/common/designSystem";
 import Input, { CheckState } from "./Input";
 import Button, { ButtonMode } from "./Button";
+
 const Common = () => {
   //TODO: 테스트화면에 테스트 값
   const [inputValue1, setInputValue1] = useState("");

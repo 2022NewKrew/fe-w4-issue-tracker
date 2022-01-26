@@ -1,5 +1,5 @@
-import { useBooleanState } from "@hooks";
-import { useEffect, useState } from "react";
+import { useDropdown } from "@hooks";
+import { useState } from "react";
 
 import { Indicator, Panel, Wrapper } from "./style";
 import Icon from "@icon";
@@ -21,25 +21,16 @@ const Dropdown = ({
   image = false,
   icon = true,
 }: Props) => {
-  const [visible, showMenu, closeMenu] = useBooleanState(false);
+  const [visible, open] = useDropdown();
   const [select, setSelect] = useState("");
 
   const handleClick = (e: any) => {
     setSelect(e.target.textContent);
   };
 
-  useEffect(() => {
-    if (visible) {
-      document.addEventListener("click", closeMenu);
-    }
-    return () => {
-      document.removeEventListener("click", closeMenu);
-    };
-  }, [visible]);
-
   return (
     <Wrapper>
-      <Indicator onClick={showMenu}>
+      <Indicator onClick={open}>
         {indicator}
         <Icon name="arrow_down" />
       </Indicator>

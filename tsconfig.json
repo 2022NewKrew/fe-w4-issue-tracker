@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+  /* 기본 옵션 */
+    // 사용할 ECMAScript 버전 설정
+    "target": "es6",
+    // 모듈을 위한 코드 생성 설정
+    "module": "esnext",
+    // jsx 코드 생성 설정
+    "jsx": "react",
+  /* 모듈 해석 옵션 */
+    // 모듈 해석 방법 설정
+    "moduleResolution": "node",
+    // non-absolute한 모듈 이름을 처리할 기준이자, 아래 paths를 사용하려면 baseUrl 설정이 필요하다
+    "baseUrl": "./",
+  /* 추가 옵션 */
+    // any 타입 금지 여부
+    "noImplicitAny": false,
+    // import * as React from 'react' 대신 import React from 'react'가 가능하게 한다
+    "allowSyntheticDefaultImports": true,
+    // webpack의 resolve alias와 함께 써주어야 한다
+    "paths": { 
+      "@/*": ["src/*"], 
+      "@api/*": ["src/api/*"], 
+      "@hooks/*": ["src/hooks/*"], 
+      "@components/*": ["src/components/*"], 
+      "@styles/*": ["src/styles/*"], 
+      "@static/*": ["stc/static/*"], 
+      "@utils/*": ["src/utils/*"], 
+      "@types/*": ["src/types/*"], 
+      "@layouts/*": ["src/layouts/*"], 
+      "@pages/*": ["src/pages/*"],
+      "@icons/*": ["src/assets/icons/*"],
+      }
+  },
+  "typeRoots": ["node_modules/@types", "src/types"],
+  "exclude": ["node_modules"],
+  "include": ["./src/**/*", "@type"]
+}

@@ -1,22 +1,20 @@
-// webpack.dev.js
+// webpack.prod.js
 const path = require("path");
 const { merge } = require("webpack-merge");
 const common = require("./webpack.common.js");
 const Dotenv = require("dotenv-webpack");
-const port = 3000;
 
 module.exports = merge(common, {
-  mode: "development",
-  devServer: {
-    host: "localhost",
-    port: port,
-    open: true,
-    historyApiFallback: true,
-    hot: true,
+  mode: "production",
+
+  output: {
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
   },
+
   plugins: [
     new Dotenv({
-      path: path.resolve(__dirname, "./.env.development"),
+      path: path.resolve(__dirname, "../../.env.production"),
     }),
   ],
 });

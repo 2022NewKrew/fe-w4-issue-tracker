@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { authService } from "@/firebase";
 import { FilterBar } from "@organisms/";
 import { Header } from "@molecules/";
+import { TabList } from "@molecules/";
 
 const HomeWrapper = styled.div`
   position: relative;
@@ -20,6 +21,7 @@ function Home() {
     <HomeWrapper>
       <Header />
       <FilterBar />
+      <TabList />
       <button
         onClick={() => {
           authService.signOut(auth);

@@ -1,6 +1,5 @@
 import React from "react";
-import { AuthForm } from "@molecules/";
-import { authService } from "@/firebase";
+import { AuthForm } from "@organisms/";
 import { useLocation, Navigate } from "react-router-dom";
 
 function Auth({ isLoggedIn }) {
@@ -12,13 +11,7 @@ function Auth({ isLoggedIn }) {
     return <Navigate to={from} replace={true} />;
   }
 
-  const signInWithGithub = () => {
-    const authProvider = new authService.GithubAuthProvider();
-    const auth = authService.getAuth();
-    authService.signInWithPopup(auth, authProvider);
-  };
-
-  return <AuthForm signInWithGithub={signInWithGithub} />;
+  return <AuthForm />;
 }
 
 export default Auth;

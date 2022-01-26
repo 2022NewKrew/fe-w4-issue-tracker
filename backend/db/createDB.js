@@ -23,13 +23,13 @@ function createDB(db){
   });
 
   milestoneDB.insert({
-    title: 'milestone1',
+    title: 'road to be',
     completeTimestamp: (new Date()).toISOString(),
     isOpen: true,
     body: ''
   });
   milestoneDB.insert({
-    title: 'milestone2',
+    title: 'road to fe',
     completeTimestamp: null,
     isOpen: false,
     body: ''
@@ -38,7 +38,7 @@ function createDB(db){
   issueDB.insert({
     title: 'db not implemented',
     authorID: 'dlguswo333',
-    timestamp: (new Date()).toISOString(),
+    timestamp: (new Date('2022-01-14T19:24:00')).toISOString(),
     isOpen: true,
     milestoneID: 1,
     body: 'db is not implemented yet???'
@@ -46,22 +46,30 @@ function createDB(db){
   issueDB.insert({
     title: 'fe not implemented',
     authorID: 'trey.lee',
-    timestamp: (new Date()).toISOString(),
+    timestamp: (new Date('2021-12-17T03:24:00')).toISOString(),
     isOpen: true,
-    milestoneID: 1,
+    milestoneID: 2,
     body: 'fe is not implemented yet???'
+  });
+  issueDB.insert({
+    title: 'run redux',
+    authorID: 'trey.lee',
+    timestamp: (new Date('2021-01-15T12:12:37')).toISOString(),
+    isOpen: false,
+    milestoneID: null,
+    body: 'closed issue because I currently have no time to learn redux'
   });
 
   labelDB.insert({
     title: 'implement',
     textColor: '#FFFFFF',
-    backgroundColor: '#0000FF',
+    backgroundColor: '#004DE3',
     body: 'help'
   });
   labelDB.insert({
     title: 'bug',
     textColor: '#FFFFFF',
-    backgroundColor: '#0000FF',
+    backgroundColor: '#004DE3',
     body: 'bug'
   });
 

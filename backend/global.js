@@ -46,10 +46,31 @@ function flatObjectArray(objectArray, key){
     return prev;
   }, []);
 }
+/**
+ * Create an object with the given key.
+ * That is, the return value is an object with key
+ * and the mapped value is each object inside `objectArray`.
+ * Throws an error if key does not exist or is not unique.
+ * This function is to find out the object quickly with the unique ID.
+ * We cannot do that with plain array.
+ * @param {Array.<{key}>} objectArray
+ * @param {string} key
+ * @returns {object.<{key: object}>}
+ */
+function createObjectWithKey(objectArray, key){
+  return objectArray.reduce((prev, cur)=>{
+    if(cur[key]===undefined || prev[key]!==undefined){
+      throw Error('key does not exist or there are duplicated keys');
+    }
+    prev[cur[key]]=cur;
+    return prev;
+  }, {});
+}
 
 module.exports={
   mergeTwoObjects,
   convertIsOpenBool,
   convertIsOpenInt,
-  flatObjectArray
+  flatObjectArray,
+  createObjectWithKey
 };

@@ -37,10 +37,6 @@ const ItemContainer = styled.div`
   cursor: pointer;
 
   background-color: ${(props) => props.theme.greyscale.offWhite};
-
-  /* svg:last-child {
-    cursor: pointer;
-  } */
 `;
 
 const ImageTextContainer = styled.div`
@@ -58,7 +54,6 @@ export function DropdownPanel(props) {
 
   function handleClick(id) {
     setSelected(id);
-    console.log(selected, id);
   }
 
   function showSelectionIcon(type, id) {

@@ -18,3 +18,5 @@ export { default as Trash } from './Trash.svg';
 export { default as UserImageLarge } from './UserImageLarge.svg';
 export { default as UserImageSmall } from './UserImageSmall.svg';
 export { default as XSquare } from './XSquare.svg';
+export { default as LogotypeLarge } from './LogotypeLarge.svg';
+export { default as LogotypeMedium } from './LogotypeMedium.svg';

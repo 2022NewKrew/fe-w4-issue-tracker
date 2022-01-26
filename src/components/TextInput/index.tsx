@@ -22,6 +22,7 @@ const TextInput = ({
   valueEvaluator,
   successMessage,
   errorMessage,
+  ...props
 }: TextInputProps) => {
   const [inputStatus, setInputStatus] = useState<
     'Initial' | 'Typing' | 'Filled' | 'Success' | 'Error' | 'Disabled'
@@ -38,7 +39,7 @@ const TextInput = ({
   };
 
   return (
-    <div css={[initialStyle, sizeStyle[size], statusStyle[inputStatus]]}>
+    <div css={[initialStyle, sizeStyle[size], statusStyle[inputStatus]]} {...props}>
       {inputStatus !== 'Initial' && inputStatus !== 'Disabled' && <div>{placeholder}</div>}
       <input
         placeholder={placeholder}

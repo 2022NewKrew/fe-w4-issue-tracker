@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { MediumLogo } from "@atoms";
 import { authService } from "@/firebase.js";
 
-const HeaderWrapper = styled.div`
+const Wrapper = styled.div`
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -24,10 +24,10 @@ function Header() {
   const auth = authService.getAuth();
   const url = auth.currentUser.photoURL;
   return (
-    <HeaderWrapper>
+    <Wrapper>
       <MediumLogo>Issue Tracker</MediumLogo>
       <ProfileImg src={url} />
-    </HeaderWrapper>
+    </Wrapper>
   );
 }
 

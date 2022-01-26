@@ -4,7 +4,7 @@ import { LargeLogo, LargeButton, MediumText, LargeTextInput } from "@atoms";
 import { COLOR } from "@constants";
 import { OAuthForm } from "@molecules";
 
-const AuthFormWrapper = styled.div`
+const Wrapper = styled.div`
   position: relative;
   height: 100%;
   width: 100%;
@@ -24,7 +24,7 @@ const AuthFormInput = styled(LargeTextInput)`
 
 function AuthForm() {
   return (
-    <AuthFormWrapper>
+    <Wrapper>
       <LargeLogo>Issue Tracker</LargeLogo>
       <OAuthForm />
       <AuthFormText>or</AuthFormText>
@@ -34,7 +34,7 @@ function AuthForm() {
         아이디로 로그인
       </LargeButton>
       <AuthFormText>회원가입</AuthFormText>
-    </AuthFormWrapper>
+    </Wrapper>
   );
 }
 

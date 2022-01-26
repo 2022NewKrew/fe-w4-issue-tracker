@@ -4,7 +4,7 @@ import { COLOR } from "@constants";
 import { MilestoneIcon, TagIcon } from "@icons";
 import { SmallText } from "@atoms";
 
-const TabListWrapper = styled.div`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -50,7 +50,7 @@ const TabText = styled(SmallText)`
 
 function TabList() {
   return (
-    <TabListWrapper>
+    <Wrapper>
       <LeftTab>
         <TagIcon />
         <TabText>
@@ -63,7 +63,7 @@ function TabList() {
           마일스톤 (<span>0</span>)
         </TabText>
       </RightTab>
-    </TabListWrapper>
+    </Wrapper>
   );
 }
 

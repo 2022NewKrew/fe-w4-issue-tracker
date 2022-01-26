@@ -4,7 +4,7 @@ import { COLOR } from "@constants";
 import { LargeButton } from "@atoms";
 import { authService } from "@/firebase.js";
 
-const OAuthWrapper = styled.div`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,11 +23,11 @@ function OAuthForm() {
   };
 
   return (
-    <OAuthWrapper>
+    <Wrapper>
       <OAuthButton color={COLOR.BLACK} onClick={signInWithGithub}>
         GitHub 계정으로 로그인
       </OAuthButton>
-    </OAuthWrapper>
+    </Wrapper>
   );
 }
 

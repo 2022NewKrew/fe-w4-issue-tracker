@@ -4,7 +4,7 @@ import { authService } from "@/firebase";
 import { Header, FilterBar, TabList } from "@molecules";
 import { IssueListHeader } from "@organisms";
 
-const HomeWrapper = styled.div`
+const Wrapper = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
@@ -17,7 +17,7 @@ const HomeWrapper = styled.div`
 function Home() {
   const auth = authService.getAuth();
   return (
-    <HomeWrapper>
+    <Wrapper>
       <Header />
       <IssueListHeader />
       <button
@@ -27,7 +27,7 @@ function Home() {
       >
         sign out
       </button>
-    </HomeWrapper>
+    </Wrapper>
   );
 }
 

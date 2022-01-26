@@ -2,10 +2,11 @@ import { css } from "@emotion/react";
 import theme from "@styles/theme";
 
 const TextAreaStyle = css`
-  background: ${theme.greyscale.inputBackgound};
+  background: ${theme.greyscale.inputBackground};
   border-radius: 16px;
   padding: 10px;
   position: relative;
+  width: 100%;
   ${theme.flexCenter}
   ${theme.text.small};
   textarea {

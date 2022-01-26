@@ -22,7 +22,7 @@ type greyscaleKey =
   | "label"
   | "placeholer"
   | "line"
-  | "inputBackgound"
+  | "inputBackground"
   | "background"
   | "offWhite";
 

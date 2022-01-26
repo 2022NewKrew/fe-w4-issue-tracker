@@ -18,7 +18,6 @@ interface IButtonStyle {
 }
 
 const ButtionStyle = ({ size, color, type }: IButtonStyle) => css`
-  ${theme.flexCenter}
   padding: 0 ${CSSIF(size !== SMALL, "24px", "16px")};
   // font style
   ${CSSIF(size !== SMALL, theme.text.medium, theme.text.xsmall)}

@@ -1,3 +1,4 @@
+import Icon, { IconName } from "../Icon";
 import ButtionStyle from "./style";
 
 interface ButtonProps {
@@ -8,6 +9,7 @@ interface ButtonProps {
   onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
   width?: string | number;
+  icon?: IconName;
 }
 
 const Button = ({
@@ -18,6 +20,7 @@ const Button = ({
   disabled,
   onClick,
   width,
+  icon,
 }: ButtonProps) => {
   return (
     <button
@@ -25,6 +28,7 @@ const Button = ({
       disabled={disabled}
       onClick={onClick}
     >
+      {icon && <Icon name={icon} />}
       {children}
     </button>
   );

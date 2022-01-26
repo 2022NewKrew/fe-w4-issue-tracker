@@ -65,7 +65,7 @@ const Wrapper = styled.div`
     overflow: hidden;
     border-radius: 0 11px 11px 0;
     input {
-      background: ${theme.greyscale.inputBackgound};
+      background: ${theme.greyscale.inputBackground};
       width: 100%;
       height: 100%;
       padding: 0 48px;

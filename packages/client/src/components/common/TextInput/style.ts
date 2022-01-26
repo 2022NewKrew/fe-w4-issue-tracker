@@ -26,17 +26,15 @@ const TextInputStyle = ({ size }: ITextInput) => css`
   ${theme.text.small}
   position: relative;
   overflow: hidden;
+  width: 100%;
   ${{
     [LARGE]: css`
-      width: 340px;
       height: 64px;
     `,
     [MEDIUM]: css`
-      width: 320px;
       height: 56px;
     `,
     [SMALL]: css`
-      width: 300px;
       height: 40px;
       label {
         height: 40px;
@@ -49,13 +47,13 @@ const TextInputStyle = ({ size }: ITextInput) => css`
     position: absolute;
     padding-left: 3px;
     left: 24px;
-    top: 0;
+    top: 10px;
     bottom: 0;
     margin: auto 0;
     width: 100%;
-    height: 28px;
     text-align: left;
     ${theme.text.small};
+    line-height: 100%;
     color: ${theme.greyscale.placeholer};
     transform: translateY(0%);
     transition: all 0.3s ease;
@@ -64,7 +62,7 @@ const TextInputStyle = ({ size }: ITextInput) => css`
   input {
     height: 100%;
     width: 100%;
-    background: ${theme.greyscale.inputBackgound};
+    background: ${theme.greyscale.inputBackground};
     color: ${theme.greyscale.titleActive};
     padding: 0px 24px;
     :required:focus:valid {

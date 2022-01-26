@@ -61,7 +61,7 @@ const TapsStyles = css`
       }
     }
     :hover {
-      background: ${theme.greyscale.inputBackgound};
+      background: ${theme.greyscale.inputBackground};
     }
     :active {
       color: ${theme.greyscale.body};

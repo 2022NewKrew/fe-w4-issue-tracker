@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { TableRowDiv } from '@styles/styleTemplates';
 import { IIssue } from '@types';
 
 interface IProps {
@@ -10,7 +11,8 @@ export const IssueRow = ({ issueData: { title } }: IProps) => {
     return <Wrapper>{title}</Wrapper>;
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled(TableRowDiv)`
     padding: 16px;
-    height: 64px;
+    height: 68px;
+    grid-column: 1 / -1;
 `;

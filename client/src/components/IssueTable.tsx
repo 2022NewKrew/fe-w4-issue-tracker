@@ -45,7 +45,7 @@ export const IssueTable = () => {
     return (
         <Table selectMode={selectMode}>
             <IssueTableHeader selectMode={selectMode} />
-            {renderTableData([])}
+            {renderTableData(dummyData)}
         </Table>
     );
 };

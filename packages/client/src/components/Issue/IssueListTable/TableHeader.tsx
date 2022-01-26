@@ -7,8 +7,58 @@ import Icon from "@icon";
 const labelList = ["레이블이 없는 이슈", "bug", "documentation"];
 const milestonList = ["마일스톤이 없는 이슈", "마스터즈 코스"];
 const managerList = ["담당자가 없는 이슈", "크롱", "죠니"];
+const authorList = ["ethan.3160"];
+
+interface IFilterTab {
+  id: number;
+  indicator: string;
+  panelTitle: string;
+  list: string[];
+  direction: string;
+}
+
+const filterTabs: IFilterTab[] = [
+  {
+    id: 1,
+    indicator: "담당자",
+    panelTitle: "담당자 필터",
+    list: managerList,
+    direction: "right",
+  },
+  {
+    id: 2,
+    indicator: "레이블",
+    panelTitle: "레이블 필터",
+    list: labelList,
+    direction: "right",
+  },
+  {
+    id: 3,
+    indicator: "마일스톤",
+    panelTitle: "마일스톤 필터",
+    list: milestonList,
+    direction: "right",
+  },
+  {
+    id: 4,
+    indicator: "작성자",
+    panelTitle: "작성자 필터",
+    list: authorList,
+    direction: "right",
+  },
+];
 
 const TableHeader = () => {
+  const createFilterTabs = (filterTabs: IFilterTab[]) =>
+    filterTabs.map(({ indicator, panelTitle, list, direction }) => (
+      <Dropdown
+        indicator={indicator}
+        panelTitle={panelTitle}
+        list={list}
+        direction={direction as "left" | "right"}
+      />
+    ));
+
   return (
     <Wrapper>
       <Icon name="check_box_initial" />
@@ -20,30 +70,7 @@ const TableHeader = () => {
         <Icon name="archive" />
         닫힌 이슈(0)
       </button>
-      <Dropdown
-        indicator="담당자"
-        panelTitle="담당자 필터"
-        list={managerList}
-        direction="right"
-      />
-      <Dropdown
-        indicator="레이블"
-        panelTitle="레이블 필터"
-        list={labelList}
-        direction="right"
-      />
-      <Dropdown
-        indicator="마일스톤"
-        panelTitle="마일스톤 필터"
-        list={milestonList}
-        direction="right"
-      />
-      <Dropdown
-        indicator="작성자"
-        panelTitle="작성자 필터"
-        list={["ethan.3160"]}
-        direction="right"
-      />
+      {createFilterTabs(filterTabs)}
     </Wrapper>
   );
 };

@@ -3,6 +3,7 @@ import { SmallButton } from "@components/buttons";
 import { DropdownIndicators } from "@components/dropdownIndicators";
 import { FilterBar } from "@components/filterBar";
 import { Taps } from "@components/Taps";
+import { LargeLabel } from "@components/Labels";
 
 import { firebaseAuth } from "../firebase";
 
@@ -28,6 +29,8 @@ export default function Main() {
       <DropdownIndicators />
       <FilterBar />
       <Taps />
+      <LargeLabel type='open' />
+      <LargeLabel type='closed' />
     </div>
   );
 }

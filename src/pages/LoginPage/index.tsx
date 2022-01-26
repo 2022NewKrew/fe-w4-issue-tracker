@@ -1,5 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
+import { useState } from 'react';
 import { jsx, css } from '@emotion/react';
 import Icon from '@icon';
 import Button from '@components/Button';
@@ -7,12 +8,15 @@ import { theme } from '@styles/theme';
 import TextInput from '@components/TextInput';
 
 const LoginPage = () => {
+  const [id, setId] = useState('');
+  const [password, setPassword] = useState('');
+
   const handleGithubLogin = () => {
     alert('깃헙 로그인 기능은 준비 중에 있습니다');
   };
 
   const handleCustomLogin = () => {
-    alert('로그인 기능은 준비 중에 있습니다');
+    alert(`아이디 ${id}로 로그인합니다. 로그인 기능은 준비 중에 있습니다`);
   };
 
   const handleJoin = () => {
@@ -27,9 +31,20 @@ const LoginPage = () => {
           GitHub 계정으로 로그인
         </Button>
         <div css={[linkSmall, { color: placeHolder }]}>or</div>
-        <TextInput type="text" size="large" placeholder="아이디" css={{ margin: '24px 0 16px' }} />
-        <TextInput type="password" size="large" placeholder="비밀번호" />
-        <Button type="Large" onClick={handleCustomLogin} css={{ margin: '24px 0 30px' }}>
+        <TextInput
+          type="text"
+          setValue={setId}
+          size="large"
+          placeholder="아이디"
+          css={{ margin: '24px 0 16px' }}
+        />
+        <TextInput setValue={setPassword} type="password" size="large" placeholder="비밀번호" />
+        <Button
+          type="Large"
+          onClick={handleCustomLogin}
+          disabled={id === '' || password === ''}
+          css={{ margin: '24px 0 30px' }}
+        >
           아이디로 로그인
         </Button>
         <Button type="SmallText" onClick={handleJoin}>

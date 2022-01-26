@@ -4,22 +4,22 @@ import { Text } from "../atoms/Text";
 
 export const Taps = ({ labelCount, milestoneCount }) => {
   return (
-    <Wrapper>
-      <Item>
+    <TapWrapper>
+      <TapItem>
         <Icon name="tag" />
         <Text options={{ size: "small", isLink: true }}>레이블</Text>
         <Text options={{ size: "small" }}>{`(${labelCount})`}</Text>
-      </Item>
-      <Item>
+      </TapItem>
+      <TapItem>
         <Icon name="milestone" />
         <Text options={{ size: "small", isLink: true }}>마일스톤</Text>
         <Text options={{ size: "small" }}>{`(${milestoneCount})`}</Text>
-      </Item>
-    </Wrapper>
+      </TapItem>
+    </TapWrapper>
   );
 };
 
-const Wrapper = styled.ul`
+const TapWrapper = styled.ul`
   ${({ theme }) => css`
     display: flex;
     align-items: flex-start;
@@ -29,14 +29,13 @@ const Wrapper = styled.ul`
     border-radius: 11px;
     overflow: hidden;
 
-    li:first-child {
+    li:not(:last-child) {
       border-right: 1px solid ${theme.grayscale.line};
-      box-sizing: content-box;
     }
   `}
 `;
 
-const Item = styled.li`
+const TapItem = styled.li`
   ${({ theme }) => css`
     width: 160px;
     height: 40px;

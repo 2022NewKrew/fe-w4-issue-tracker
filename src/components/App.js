@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 import { authService } from "@/firebase";
-import { Auth, Home } from "@pages/";
+import { Auth } from "@pages/";
+import { ProtectedRoutes } from "@components/routes";
 
 const Main = styled.div`
   position: absolute;
@@ -15,38 +16,26 @@ const Main = styled.div`
 
 function App() {
   const [init, setInit] = useState(false);
-  const [user, setUser] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const auth = authService.getAuth();
     authService.onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser({
-          displayName: user.displayName,
-          uid: user.uid,
-        });
-      } else {
-        setUser(null);
-      }
+      setIsLoggedIn(!!user);
       setInit(true);
     });
   }, []);
 
+  if (!init) {
+    return <div>...initializing...</div>;
+  }
+
   return (
     <Main>
-      {init ? (
-        user ? (
-          <Routes>
-            <Route path="/" element={<Home />} />
-          </Routes>
-        ) : (
-          <Routes>
-            <Route path="/" element={<Auth />} />
-          </Routes>
-        )
-      ) : (
-        <div>...initializing...</div>
-      )}
+      <Routes>
+        <Route path="/" element={<ProtectedRoutes isLoggedIn={isLoggedIn} />} />
+        <Route path="/auth" element={<Auth isLoggedIn={isLoggedIn} />} />
+      </Routes>
     </Main>
   );
 }

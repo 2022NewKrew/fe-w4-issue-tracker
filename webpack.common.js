@@ -24,6 +24,7 @@ module.exports = {
       "@organisms": path.resolve(__dirname, "src/components/organisms"),
       "@pages": path.resolve(__dirname, "src/components/pages"),
       "@templates": path.resolve(__dirname, "src/components/templates"),
+      "@routes": path.resolve(__dirname, "src/components/routes"),
       "@components": path.resolve(__dirname, "src/components"),
       "@constants": path.resolve(__dirname, "src/constants"),
       "@icons": path.resolve(__dirname, "src/assets/icons"),

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, FilterBar, Tabs } from '@components/assets';
+import { FilterBar } from '@components/FilterBar';
+import { Button, Tabs } from '@components/assets';
 
 export const TempPage = () => {
     return (

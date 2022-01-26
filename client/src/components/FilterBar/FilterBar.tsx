@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { RoundBorderDiv, TextSmall } from '@styles/styleTemplates';
-import { FilterButton } from './FilterButton';
+import { FilterBarButton } from './FilterBarButton';
 import { ReactComponent as SearchIcon } from '@icons/Search.svg';
 
 interface IProps {
@@ -38,7 +38,7 @@ export const FilterBar = ({ placeholder, onFocusPlaceholder }: IProps) => {
                 value={inputValue}
             />
             <FilterBarBorder isEmpty={inputValue.length === 0}>
-                <FilterButton />
+                <FilterBarButton />
                 <Search>
                     <SearchIcon />
                 </Search>

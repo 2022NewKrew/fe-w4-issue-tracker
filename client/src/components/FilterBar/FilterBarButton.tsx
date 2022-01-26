@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { LinkSmall } from '@styles/styleTemplates';
 import { ReactComponent as DownArrow } from '@icons/DownArrow.svg';
 
-export const FilterButton = () => {
+export const FilterBarButton = () => {
     const onClickHandler = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
     };

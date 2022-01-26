@@ -50,6 +50,7 @@ const config: Configuration = {
             '@images': path.resolve(process.cwd(), 'public/images'),
             '@components': path.resolve(process.cwd(), 'src/components'),
             '@styles': path.resolve(process.cwd(), 'src/styles'),
+            '@utils': path.resolve(process.cwd(), 'src/utils'),
             '@types': path.resolve(process.cwd(), 'src/@types'),
         },
     },

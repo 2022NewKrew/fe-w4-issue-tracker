@@ -1,2 +1,2 @@
 export * from './textStyle';
-export * from './menuStyle';
+export * from './elementStyle';

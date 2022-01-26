@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FilterBar, Tabs, Button } from './assets';
+import { FilterBar } from './FilterBar';
+import { Tabs, Button } from './assets';
 
 export const IssueListMenu = () => {
     return (
@@ -18,6 +19,7 @@ export const IssueListMenu = () => {
 const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
+    margin-bottom: 24px;
 `;
 
 const RightButtons = styled.div`

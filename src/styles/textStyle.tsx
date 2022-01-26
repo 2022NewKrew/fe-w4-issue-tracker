@@ -7,7 +7,7 @@ const display = css`
   font-style: normal;
   font-weight: normal;
   font-size: 32px;
-  line-height: 48px;
+  /* line-height: 48px; */
 `;
 
 const displayBold = css`
@@ -20,7 +20,7 @@ const linkMedium = css`
   font-style: normal;
   font-weight: bold;
   font-size: 18px;
-  line-height: 32px;
+  /* line-height: 32px; */
 `;
 
 const linkSmall = css`
@@ -28,7 +28,7 @@ const linkSmall = css`
   font-style: normal;
   font-weight: bold;
   font-size: 16px;
-  line-height: 28px;
+  /* line-height: 28px; */
 `;
 
 const linkXSmall = css`
@@ -36,7 +36,7 @@ const linkXSmall = css`
   font-style: normal;
   font-weight: bold;
   font-size: 12px;
-  line-height: 20px;
+  /* line-height: 20px; */
 `;
 
 export const textStyles = {

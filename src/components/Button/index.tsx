@@ -5,7 +5,13 @@ import { jsx, css } from '@emotion/react';
 import { theme } from '@styles/theme';
 
 interface ButtonProps {
-  type?: 'Large' | 'MediumStandard' | 'SmallStandard' | 'SmallSecondary';
+  type?:
+    | 'Large'
+    | 'MediumStandard'
+    | 'SmallStandard'
+    | 'SmallSecondary'
+    | 'MediumText'
+    | 'SmallText';
   children: React.ReactNode;
   onClick?: (event?: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
@@ -15,13 +21,17 @@ const Button = ({ type = 'Large', children, disabled, ...props }: ButtonProps) =
   const getStyle = (type) => {
     switch (type) {
       case 'MediumStandard':
-        return [blockStyle, medium, filled];
+        return [blockStyle, medium, linkMedium, filled];
       case 'SmallStandard':
-        return [blockStyle, small, filled];
+        return [blockStyle, small, linkXSmall, filled, withIcon];
       case 'SmallSecondary':
-        return [blockStyle, small, bordered];
+        return [blockStyle, small, linkXSmall, bordered, withIcon];
+      case 'MediumText':
+        return [textStyle, linkSmall, withIcon];
+      case 'SmallText':
+        return [textStyle, linkXSmall, withIcon];
       default:
-        return [blockStyle, large, filled];
+        return [blockStyle, large, linkMedium, filled];
     }
   };
 
@@ -32,9 +42,9 @@ const Button = ({ type = 'Large', children, disabled, ...props }: ButtonProps) =
   );
 };
 
-const offWhite = theme.greyScale.offWhite;
+const { offWhite, label, titleActive, body } = theme.greyScale;
 const { blue, lightBlue, darkBlue } = theme.colors.primary;
-const { linkMedium, linkXSmall } = theme.textStyles;
+const { linkMedium, linkSmall, linkXSmall } = theme.textStyles;
 
 const buttonStyle = css`
   display: flex;
@@ -49,10 +59,6 @@ const buttonStyle = css`
     text-align: center;
   }
 
-  & > svg {
-    margin-right: 4px;
-  }
-
   &:hover:enabled {
     cursor: pointer;
   }
@@ -62,36 +68,30 @@ const buttonStyle = css`
   }
 `;
 
+const withIcon = css`
+  & > svg {
+    margin-right: 4px;
+    width: 16px;
+    height: 16px;
+  }
+`;
+
 const small = css`
   width: 120px;
   height: 40px;
   border-radius: 11px;
-  & > svg {
-    width: 16px;
-    height: 16px;
-  }
-  & > span {
-    ${linkXSmall}
-    margin-top: 2px;
-  }
 `;
 
 const medium = css`
   width: 240px;
   height: 56px;
   border-radius: 20px;
-  & > span {
-    ${linkMedium}
-  }
 `;
 
 const large = css`
   width: 340px;
   height: 64px;
   border-radius: 20px;
-  & > span {
-    ${theme.textStyles.linkMedium}
-  }
 `;
 
 const blockStyle = css`
@@ -100,12 +100,26 @@ const blockStyle = css`
   }
 `;
 
-const filled = css`
-  background: ${blue};
-  color: ${offWhite};
-  & > img {
-    color: ${offWhite};
+const textStyle = css`
+  height: 32px;
+  background: none;
+
+  color: ${label};
+
+  &:active {
+    color: ${titleActive};
   }
+
+  &:hover {
+    color: ${body};
+  }
+`;
+
+const filled = css`
+  color: ${offWhite};
+
+  background: ${blue};
+
   &:hover:enabled {
     background: ${darkBlue};
   }
@@ -113,8 +127,10 @@ const filled = css`
 
 const bordered = css`
   background: ${offWhite};
-  border: 2px solid ${blue};
+
   color: ${blue};
+  border: 2px solid ${blue};
+
   &:hover:enabled {
     color: ${darkBlue};
     border: 2px solid ${darkBlue};

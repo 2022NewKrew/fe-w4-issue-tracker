@@ -9,16 +9,12 @@ export default {
   component: Button,
 } as ComponentMeta<typeof Button>;
 
-const Template: ComponentStory<typeof Button> = (args) => (
-  <Button {...args}>
-    <span>Button</span>
-  </Button>
-);
+const Template: ComponentStory<typeof Button> = (args) => <Button {...args}>Button</Button>;
 
 const IconTemplate: ComponentStory<typeof Button> = (args) => (
   <Button {...args}>
     <Icon icon="Plus" />
-    <span>Button</span>
+    Button
   </Button>
 );
 
@@ -40,4 +36,14 @@ SmallStandard.args = {
 export const SmallSecondary = IconTemplate.bind({});
 SmallSecondary.args = {
   type: 'SmallSecondary',
+};
+
+export const MediumText = IconTemplate.bind({});
+MediumText.args = {
+  type: 'MediumText',
+};
+
+export const SmallText = IconTemplate.bind({});
+SmallText.args = {
+  type: 'SmallText',
 };

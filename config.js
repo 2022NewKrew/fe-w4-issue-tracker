@@ -7,6 +7,7 @@ System.config({
     "@template/*": "./src/components/templates/*",
     "@components/*": "./src/components/*",
     "@constants/*": "./src/constants/*",
+    "@icons/*": "./src/assets/icons/*",
     "@/*": "./src/*",
   },
 });

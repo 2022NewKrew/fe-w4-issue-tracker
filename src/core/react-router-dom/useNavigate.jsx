@@ -1,3 +1,4 @@
+import { dispatchPopStateEvent } from '@utils';
 
 export function useNavigate() {
     return (to, option) => {
@@ -12,9 +13,11 @@ export function useNavigate() {
 
         if (option?.replace) {
             history.replaceState({}, '', to);
+            dispatchPopStateEvent();
             return;
         }
 
         history.pushState({}, '', to);
+        dispatchPopStateEvent();
     };
 }

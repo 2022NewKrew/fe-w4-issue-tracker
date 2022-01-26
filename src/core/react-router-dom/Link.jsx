@@ -1,9 +1,10 @@
+import { dispatchPopStateEvent } from '@utils';
+
 export function Link({ to, children }) {
     const preventReload = (e) => {
         e.preventDefault();
         window.history.pushState({}, '', to);
-        const navigationEvent = new PopStateEvent('navigate');
-        window.dispatchEvent(navigationEvent);
+        dispatchPopStateEvent();
     };
 
     return (

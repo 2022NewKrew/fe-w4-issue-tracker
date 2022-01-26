@@ -5,7 +5,7 @@ import { FilterBar, Tabs, Button } from './assets';
 export const IssueListMenu = () => {
     return (
         <Wrapper>
-            <FilterBar />
+            <FilterBar placeholder="Search all issues" onFocusPlaceholder="is:issue is:open" />
             <RightButtons>
                 <Tabs />
                 <EmptySpace />

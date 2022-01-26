@@ -26,5 +26,5 @@ const TabsBorder = styled(RoundBorderDiv)`
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    width: 320px;
+    max-width: fit-content;
 `;

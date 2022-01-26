@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import { LinkSmall, TextSmall } from '@styles/styleTemplates';
 import { ITabElement } from '@types';

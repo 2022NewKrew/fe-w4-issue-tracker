@@ -4,7 +4,12 @@ import { RoundBorderDiv, TextSmall } from '@styles/styleTemplates';
 import { FilterButton } from './FilterButton';
 import { ReactComponent as SearchIcon } from '@icons/Search.svg';
 
-export const FilterBar = () => {
+interface IProps {
+    placeholder: string;
+    onFocusPlaceholder: string;
+}
+
+export const FilterBar = ({ placeholder, onFocusPlaceholder }: IProps) => {
     const [isFocus, setIsFocus] = useState(false);
     const [inputValue, setInputValue] = useState('');
 
@@ -19,7 +24,7 @@ export const FilterBar = () => {
     };
     const getPlaceHolder = () => {
         if (inputValue.length > 0) return '';
-        return isFocus ? 'Search all issues' : 'is:issue is:open';
+        return isFocus ? onFocusPlaceholder : placeholder;
     };
 
     return (

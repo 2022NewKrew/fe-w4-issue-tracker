@@ -14,7 +14,15 @@
         "isolatedModules": true,
         "noEmit": true,
         "jsx": "react-jsx",
-        "typeRoots": ["src/@types", "./node_modules/@types"]
+        "typeRoots": ["src/@types", "node_modules/@types"],
+        "baseUrl": ".",
+        "paths": {
+            "@icons/*": ["public/icons/*"],
+            "@images/*": ["public/images/*"],
+            "@components/*": ["src/components/*"],
+            "@styles/*": ["src/styles/*"],
+            "@types/*": ["src/@types/*"]
+        }
     },
     "include": ["src", "images.d.ts"],
     "exclude": ["node_modues"]

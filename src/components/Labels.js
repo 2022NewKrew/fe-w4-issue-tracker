@@ -4,7 +4,7 @@ import { ReactComponent as AlertCircle } from "../assets/icons/alertCircle.svg";
 import { ReactComponent as Archive } from "../assets/icons/archive.svg";
 import { XSmallText } from "@components/Text";
 
-const Container = styled.div`
+const LargeContainer = styled.div`
   width: 100px;
   height: 40px;
   padding: 0 10px 0 13px;
@@ -41,13 +41,54 @@ const Container = styled.div`
 
 export function LargeLabel(props) {
   const type = props.type;
-  const color = props.type === "open" ? "blue" : "purple";
-  const text = props.type === "open" ? "열린 이슈" : "닫힌 이슈";
-  const icon = props.type === "open" ? <AlertCircle /> : <Archive />;
+  const color = type === "open" ? "blue" : "purple";
+  const text = type === "open" ? "열린 이슈" : "닫힌 이슈";
+  const icon = type === "open" ? <AlertCircle /> : <Archive />;
   return (
-    <Container type={type}>
+    <LargeContainer type={type}>
       {icon}
       <XSmallText color={color}>{text}</XSmallText>
-    </Container>
+    </LargeContainer>
+  );
+}
+
+const SmallContainer = styled.div`
+  width: fit-content;
+  border-radius: 30px;
+  padding: 4px 16px;
+
+  ${(props) => {
+    if (props.type === "dark") {
+      return css`
+        background-color: ${(props) => props.theme.greyscale.background};
+      `;
+    } else if (props.type === "light") {
+      return css`
+        background-color: ${(props) => props.theme.greyscale.body};
+      `;
+    } else {
+      return css`
+        border: 1px solid ${(props) => props.theme.greyscale.line};
+      `;
+    }
+  }}
+`;
+
+export function SmallLabel(props) {
+  const type = props.type;
+  const text = props.text;
+
+  let color;
+  if (type === "dark") {
+    color = "titleActive";
+  } else if (type === "light") {
+    color = "offWhite";
+  } else {
+    color = "label";
+  }
+  return (
+    <SmallContainer type={type}>
+      <XSmallText color={color}>{text}</XSmallText>
+    </SmallContainer>
   );
 }

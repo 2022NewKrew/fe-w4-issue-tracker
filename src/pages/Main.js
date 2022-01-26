@@ -3,7 +3,7 @@ import { SmallButton } from "@components/buttons";
 import { DropdownIndicators } from "@components/dropdownIndicators";
 import { FilterBar } from "@components/filterBar";
 import { Taps } from "@components/Taps";
-import { LargeLabel } from "@components/Labels";
+import { LargeLabel, SmallLabel } from "@components/Labels";
 
 import { firebaseAuth } from "../firebase";
 
@@ -31,6 +31,9 @@ export default function Main() {
       <Taps />
       <LargeLabel type='open' />
       <LargeLabel type='closed' />
+      <SmallLabel type='dark' text='레이블 이름' />
+      <SmallLabel type='light' text='레이블 이름' />
+      <SmallLabel type='line' text='작성자' />
     </div>
   );
 }

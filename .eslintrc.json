@@ -65,7 +65,8 @@
                     {
                         "code": 100
                     }
-                ]
+                ],
+                "react/prop-types": 0
             }
         }
     ],

@@ -1,3 +1,4 @@
+import Add from "@pages/Add";
 import Issue from "@pages/Issue";
 import Label from "@pages/Label";
 import Login from "@pages/Login";
@@ -9,7 +10,8 @@ const App: React.FC = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="issue/*" element={<Issue />} />
+        <Route path="/issue" element={<Issue />} />
+        <Route path="/add" element={<Add />} />
         <Route path="/label" element={<Label />} />
         <Route path="/milestone" element={<Milestone />} />
         <Route path="*" element={<Navigate replace to="/login" />} />

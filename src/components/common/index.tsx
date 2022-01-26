@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Size } from "@/common/designSystem";
 import Input, { CheckState } from "./Input";
 import Button, { ButtonMode } from "./Button";
+import CommentTextArea from "./CommentTextArea";
 
 const Common = () => {
   //TODO: 테스트화면에 테스트 값
@@ -10,6 +11,17 @@ const Common = () => {
   const [inputValue2, setInputValue2] = useState("Success");
   const [inputValue3, setInputValue3] = useState("Fail");
   const [inputValue4, setInputValue4] = useState("123456");
+  const [textAreaValue, setTextAreaValue] = useState("");
+
+  const textAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setTextAreaValue(event.target.value);
+  };
+  //TODO 서버 구성 시 연동 예정
+  const addFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      console.log(event.target.files[0]);
+    }
+  };
   const returnLengthAboveSix = () => {
     if (inputValue4 === "") {
       return CheckState.None;
@@ -26,7 +38,6 @@ const Common = () => {
         return "";
     }
   };
-
   const inputValue1Change = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue1(event.target.value);
   };
@@ -45,6 +56,11 @@ const Common = () => {
 
   return (
     <Wrapper>
+      <CommentTextArea
+        textAreaValue={textAreaValue}
+        onChange={textAreaChange}
+        addFile={addFile}
+      />
       <Input
         inputSize={Size.Large}
         placeholder="아이디"

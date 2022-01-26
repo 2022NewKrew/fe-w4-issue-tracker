@@ -1,9 +1,13 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import { COLOR } from "@constants";
 
 export const Button = styled.button`
   display: flex;
-  flex-direction: column;
+  ${({ direction }) =>
+    css`
+      flex-direction: ${direction};
+    `};
   justify-content: center;
   align-items: center;
 
@@ -12,6 +16,10 @@ export const Button = styled.button`
   line-height: 32px;
   color: #fefefe;
   border: 4px solid transparent;
+
+  svg {
+    color: ${COLOR.GREYSCALE.OFF_WHITE};
+  }
 
   ${({ color, disabled }) => {
     const { INITIAL, HOVER, ACTIVATED } = color;

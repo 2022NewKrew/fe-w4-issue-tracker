@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { authService } from "@/firebase";
 import { Header, FilterBar, TabList } from "@molecules";
+import { IssueListHeader } from "@organisms";
 
 const HomeWrapper = styled.div`
   position: relative;
@@ -18,8 +19,7 @@ function Home() {
   return (
     <HomeWrapper>
       <Header />
-      <FilterBar />
-      <TabList />
+      <IssueListHeader />
       <button
         onClick={() => {
           authService.signOut(auth);

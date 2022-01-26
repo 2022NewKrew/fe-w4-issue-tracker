@@ -36,7 +36,7 @@ const Button = ({ type = 'Large', children, disabled, ...props }: ButtonProps) =
   };
 
   return (
-    <button css={[buttonStyle, ...getStyle(type)]} disabled={disabled} {...props}>
+    <button css={[...getStyle(type), buttonStyle]} disabled={disabled} {...props}>
       {children}
     </button>
   );
@@ -54,10 +54,7 @@ const buttonStyle = css`
   box-sizing: border-box;
 
   border: none;
-
-  & > span {
-    text-align: center;
-  }
+  line-height: unset;
 
   &:hover:enabled {
     cursor: pointer;
@@ -70,7 +67,7 @@ const buttonStyle = css`
 
 const withIcon = css`
   & > svg {
-    margin-right: 4px;
+    margin: 0 4px 1.5px 0;
     width: 16px;
     height: 16px;
   }

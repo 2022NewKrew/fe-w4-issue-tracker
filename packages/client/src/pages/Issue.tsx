@@ -1,6 +1,6 @@
 import AppLayout from "@components/common/AppLayout";
 import FilterBar from "@components/Issue/FilterBar";
-import IssueTable from "@components/Issue/IssueTable";
+import IssueListTable from "@components/Issue/IssueListTable";
 import LinkTap from "@components/Issue/LinkTap";
 
 const Issue = () => {
@@ -8,7 +8,7 @@ const Issue = () => {
     <AppLayout>
       <LinkTap />
       <FilterBar />
-      <IssueTable />
+      <IssueListTable />
     </AppLayout>
   );
 };

@@ -42,17 +42,15 @@ export const Panel = styled.div<{
   border-radius: 16px;
   overflow: hidden;
   z-index: 10;
-  h3,
-  li {
-    padding: 8px 16px;
-  }
   h3 {
     ${theme.text.medium};
     color: ${theme.greyscale.titleActive};
     background: ${theme.greyscale.background};
+    padding: 16px 16px 12px;
   }
   li {
     ${theme.text.small};
+    padding: 8px 16px;
     display: flex;
     align-items: center;
     color: ${theme.greyscale.body};

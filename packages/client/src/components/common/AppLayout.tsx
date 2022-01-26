@@ -32,7 +32,7 @@ const StyledHeader = styled.header`
   width: 100%;
   height: 126px;
   position: relative;
-  svg:first-child {
+  svg:first-of-type {
     left: 0;
     top: 27px;
   }

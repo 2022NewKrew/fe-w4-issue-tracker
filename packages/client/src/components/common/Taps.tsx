@@ -68,7 +68,7 @@ const TapsStyles = css`
       background: ${theme.greyscale.line};
     }
   }
-  li:first-child {
+  li:first-of-type {
     border-right: 1px solid ${theme.greyscale.line};
   }
   .activated {

@@ -5,7 +5,7 @@ import Layout from "./Layout";
 const Home = () => {
   return (
     <Layout>
-      <p>Hello World of React and Webpack!</p>
+      <p>Hello World of KAKAO FrontEnd!</p>
       <p>
         <Link to="/components">Navigate to Components Page</Link>
       </p>

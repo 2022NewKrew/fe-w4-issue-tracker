@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { Color, githubLoginUrl } from "@/constant/constant";
+import { githubLoginUrl } from "@/common/constant";
+import { Color } from "@/common/designSystem";
+
 const Login = () => {
   const githubLogin = () => {
     location.href = githubLoginUrl;

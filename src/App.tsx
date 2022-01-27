@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Route, Routes } from "react-router-dom";
-import Common from "./components/common";
+import Common from "./components/Common";
 import Login from "./components/Login";
 import Callback from "./components/Login/Callback";
 
@@ -17,7 +17,6 @@ const App = () => (
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100%;
   background: #f7f7fc;
 `;
 

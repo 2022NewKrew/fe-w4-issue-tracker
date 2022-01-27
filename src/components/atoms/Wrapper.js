@@ -1,14 +1,8 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  ${({
-    direction = "column",
-    justifyContent = "center",
-    alignItems = "center",
-  }) => css`
-    display: flex;
-    flex-direction: ${direction};
-    justify-content: ${justifyContent};
-    align-items: ${alignItems};
-  `}
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;

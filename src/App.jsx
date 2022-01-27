@@ -8,19 +8,25 @@ import { TestNew } from "./component/page/test/TestNew";
 import { Button } from "./component/atoms/Button";
 
 function App() {
+  // 배경색 설정
+  const theme = useTheme();
+  useEffect(() => {
+    document.body.style.backgroundColor = theme.grayscale.background;
+  }, []);
+
   return (
     <>
       <Routes>
         <Route path="/" element={<Navigate to="/issue" />} />
         <Route path="/issue" element={<IssuePage />}>
           <Route path="" element={<IssueHome />} />
-        <Route
+          <Route
             path="*"
-          element={
+            element={
               <Link to="/issue">
                 <Button options={{ type: "Medium-Standard" }}>이슈 목록으로</Button>
               </Link>
-          }
+            }
           />
         </Route>
         <Route path="/test" element={<TestPage />}>

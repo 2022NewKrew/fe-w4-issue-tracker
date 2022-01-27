@@ -1,9 +1,6 @@
+import { ButtonGroupProps, ButtonGroupStyleProps } from "@interface/components";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-
-interface ButtonGroupProps extends ButtonGroupStyleProps {
-  children: React.ReactNode;
-}
 
 const ButtonGroup = ({
   children,
@@ -16,11 +13,6 @@ const ButtonGroup = ({
     </Wrapper>
   );
 };
-
-interface ButtonGroupStyleProps {
-  direction: "row" | "column";
-  gap: number | string;
-}
 
 const Wrapper = styled.div<ButtonGroupStyleProps>`
   ${({ direction, gap }) => css`

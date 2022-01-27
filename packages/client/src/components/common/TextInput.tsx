@@ -1,17 +1,8 @@
-import { colorType, sizeType } from "src/@types/emotion";
+import { colorType } from "src/@types/emotion";
 
 import styled from "@emotion/styled";
 import { css, Theme } from "@emotion/react";
-
-interface Props extends TextInputProps {
-  id: string;
-  value: string;
-  type?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  label?: string;
-  required?: boolean;
-  pattern?: string;
-}
+import { TextInputProps, TextInputStyleProps } from "@interface/components";
 
 const TextInput = ({
   id,
@@ -22,7 +13,7 @@ const TextInput = ({
   pattern,
   label,
   type = "text",
-}: Props) => {
+}: TextInputProps) => {
   return (
     <Wrapper size={size}>
       <input
@@ -40,11 +31,7 @@ const TextInput = ({
 
 export default TextInput;
 
-interface TextInputProps {
-  size: sizeType;
-}
-
-const Wrapper = styled.div<TextInputProps>`
+const Wrapper = styled.div<TextInputStyleProps>`
   ${({ theme: { text, greyscale, colors }, size }) => css`
     ${text.small}
     position: relative;

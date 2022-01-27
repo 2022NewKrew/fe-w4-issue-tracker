@@ -1,13 +1,8 @@
+import { LabelStyleProps } from "@interface/components";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 
-interface LabelProps {
-  size?: "large" | "small";
-  type?: "open" | "close" | "dark" | "light" | "line" | "custom";
-  color: string;
-}
-
-const Label = styled.label<LabelProps>`
+const Label = styled.label<LabelStyleProps>`
   ${({
     theme: { text, colors, greyscale },
     size = "small",

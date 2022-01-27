@@ -1,12 +1,8 @@
+import { TextAreaProps, TextAreaStyleProps } from "@interface/components";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 
-interface Props extends TextAreaProps {
-  value: string;
-  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-}
-
-const TextArea = ({ value, onChange, height }: Props) => {
+const TextArea = ({ value, onChange, height }: TextAreaProps) => {
   return (
     <Wrapper height={height}>
       <textarea value={value} onChange={onChange} placeholder=" "></textarea>
@@ -19,11 +15,7 @@ const TextArea = ({ value, onChange, height }: Props) => {
 
 export default TextArea;
 
-interface TextAreaProps {
-  height: number | string;
-}
-
-const Wrapper = styled.div<TextAreaProps>`
+const Wrapper = styled.div<TextAreaStyleProps>`
   ${({ theme: { text, greyscale, flexCenter }, height }) => css`
     background: ${greyscale.inputBackground};
     border-radius: 16px;

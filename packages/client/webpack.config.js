@@ -26,6 +26,7 @@ module.exports = {
       "@stores": path.resolve(__dirname, "./src/stores"),
       "@styles": path.resolve(__dirname, "./src/styles"),
       "@utils": path.resolve(__dirname, "./src/utils"),
+      "@interface": path.resolve(__dirname, "./src/interface"),
     },
   },
   devServer: {

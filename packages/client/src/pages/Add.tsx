@@ -1,5 +1,5 @@
 import AppLayout from "@components/Layout/AppLayout";
-import ButtonGroup from "@components/common/ButtonGrop";
+import ButtonGroup from "@components/common/ButtonGroup";
 import Button from "@components/common/Button";
 import Icon from "@components/common/Icon";
 import TextArea from "@components/common/TextArea";

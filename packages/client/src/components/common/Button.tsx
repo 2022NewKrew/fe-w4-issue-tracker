@@ -1,19 +1,18 @@
-import Icon, { IconName } from "@icon";
+import Icon from "@icon";
+import { ButtonProps, ButtonStyleProps } from "@interface/components";
 
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 
-import { buttonType, colorType, sizeType } from "src/@types/emotion";
-
-interface Props extends ButtonProps {
-  children: React.ReactNode;
-  onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
-  disabled?: boolean;
-  icon?: IconName;
-}
-
-const Button = (props: Props) => {
-  const { children, shape, color, size, disabled, onClick, icon } = props;
+const Button = ({
+  children,
+  shape,
+  color,
+  size,
+  disabled,
+  onClick,
+  icon,
+}: ButtonProps) => {
   return (
     <StyledButton
       shape={shape}
@@ -30,13 +29,7 @@ const Button = (props: Props) => {
 
 export default Button;
 
-interface ButtonProps {
-  size: sizeType;
-  color?: colorType;
-  shape?: buttonType;
-}
-
-const StyledButton = styled.button<ButtonProps>`
+const StyledButton = styled.button<ButtonStyleProps>`
   ${({
     theme: { text, greyscale, colors, flexCenter },
     size,

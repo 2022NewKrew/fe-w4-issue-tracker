@@ -4,6 +4,7 @@ export const customReset = css`
     input {
         outline: none;
         border: none;
+        margin: 0;
     }
     input:focus {
         outline: none;

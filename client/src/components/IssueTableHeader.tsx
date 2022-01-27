@@ -14,7 +14,7 @@ const FilterTypes: IFilter[] = [
     { title: '담당자', type: 'assignee', emptyFilterOption: '담당자가 없는 이슈' },
     { title: '레이블', type: 'label', emptyFilterOption: '레이블이 없는 이슈' },
     { title: '마일스톤', type: 'milestone', emptyFilterOption: '마일스톤이 없는 이슈' },
-    { title: '작성자', type: 'writer' },
+    { title: '작성자', type: 'author' },
 ];
 
 const renderFilterButton = (selectMode: boolean, FilterTypes: IFilter[]) => {
@@ -51,7 +51,7 @@ export const IssueTableHeader = ({ selectMode }: IProps) => {
 
 const Checkbox = styled.div`
     ${TableHeader}
-    justify-content: center;
+    padding: 0 20px 0 32px;
     & input {
         width: 16px;
         height: 16px;

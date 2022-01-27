@@ -14,7 +14,8 @@ declare module '@types' {
     }
     interface IFilter {
         title: string;
-        type: 'filter' | 'assignee' | 'label' | 'milestone' | 'writer';
+        type: 'filter' | 'assignee' | 'label' | 'milestone' | 'author';
         emptyFilterOption?: string;
     }
+    type messageType = 'open' | 'close';
 }

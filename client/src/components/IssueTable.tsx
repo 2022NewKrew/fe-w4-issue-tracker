@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { AlignXYCenter, TextSmall } from '@styles/styleTemplates';
-import { RoundBorderDiv, TableRowDiv } from '@styles/styleTemplates';
+import { AlignXYCenter, TextSmall, RoundBorderDiv, TableData, Table } from '@styles/styleTemplates';
 import { IIssue } from '@types';
 import { IssueTableHeader } from '.';
 import { IssueRow } from '@components/IssueRow';
 
 const renderTableData = (issueDatas: IIssue[], isFiltering = false) => {
     const NO_ISSUE_MESSAGE = '등록된 이슈가 없습니다';
-    const NOTHING_FOUND_MESSAGE = '검색과 일치하는 결과가 없습니다.';
+    const NOTHING_FOUND_MESSAGE = '검색과 일치하는 결과가 없습니다';
     if (issueDatas.length > 0)
         return issueDatas.map((issue) => <IssueRow issueData={issue} key={issue.id} />);
     if (isFiltering) return <EmptyRow>{NOTHING_FOUND_MESSAGE}</EmptyRow>;
@@ -35,27 +34,28 @@ const dummyData: IIssue[] = [
         title: '닫힌 이슈',
         status: 'close',
         userId: 0,
-        timeStamp: 1643206233139,
+        timeStamp: 1640908800000,
     },
 ];
 
 export const IssueTable = () => {
-    const [selectMode, setSelectMode] = useState(true);
+    const [selectMode, setSelectMode] = useState(false);
     return (
-        <Table selectMode={selectMode}>
+        <TableContainer selectMode={selectMode}>
             <IssueTableHeader selectMode={selectMode} />
             {renderTableData(dummyData)}
-        </Table>
+        </TableContainer>
     );
 };
 
-const Table = styled(RoundBorderDiv)<{ selectMode: boolean }>`
-    display: grid;
-    grid-template-columns: 48px ${({ selectMode }) =>
-            selectMode ? '1085px 1fr' : '790px auto auto auto auto'};
+const TableContainer = styled(RoundBorderDiv)<{ selectMode: boolean }>`
+    ${Table}
+    grid-template-columns: 68px ${({ selectMode }) =>
+        selectMode ? '1085px 1fr' : '790px auto auto auto auto'};
 `;
 
-const EmptyRow = styled(TableRowDiv)`
+const EmptyRow = styled.div`
+    ${TableData}
     ${AlignXYCenter};
     ${TextSmall};
     color: var(--label-color);

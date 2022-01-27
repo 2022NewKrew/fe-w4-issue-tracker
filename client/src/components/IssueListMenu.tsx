@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FilterBar } from './FilterBar';
-import { Tabs, Button } from './assets';
+import { Button } from './assets';
+import { Tabs, FilterBar } from '@components';
 
 export const IssueListMenu = () => {
     return (

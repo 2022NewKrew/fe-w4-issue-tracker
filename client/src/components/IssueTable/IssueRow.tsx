@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TextSmall, TableData, SmallIcon, AlignXCenter } from '@styles/styleTemplates';
+import { TextSmall, TableData, SmallIcon } from '@styles/styleTemplates';
 import { IIssue } from '@types';
 import { TimeStampMessage } from '@components/assets';
 import { ReactComponent as Alertcircle } from '@icons/AlertCircle.svg';

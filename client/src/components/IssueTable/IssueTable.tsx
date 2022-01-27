@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { AlignXYCenter, TextSmall, RoundBorderDiv, TableData, Table } from '@styles/styleTemplates';
 import { IIssue } from '@types';
-import { IssueTableHeader } from '.';
-import { IssueRow } from '@components/IssueRow';
+import { IssueTableHeader, IssueRow } from '.';
 
 const renderTableData = (issueDatas: IIssue[], isFiltering = false) => {
     const NO_ISSUE_MESSAGE = '등록된 이슈가 없습니다';

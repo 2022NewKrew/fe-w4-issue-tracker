@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { AlignXYCenter, DisplayBold } from '@styles/styleTemplates';
 import { ReactComponent as AlertCircle } from '@icons/AlertCircle.svg';
-import { AlignYCenter } from '../../styles/styleTemplates';
 
 export const ErrorPage = () => {
     return (

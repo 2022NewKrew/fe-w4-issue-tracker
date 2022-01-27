@@ -24,11 +24,17 @@ $success-color: #34c759;
 .hover-item {
     color: $label-color;
     stroke: $label-color;
-    &:hover {
+    user-select: none;
+    &:hover, &.active {
         color: $body-color;
         stroke: $body-color;
         cursor: pointer;
     }
+}
+
+.round-border {
+    border-radius: 16px;
+    overflow: hidden;
 }
 
 .tab-first {

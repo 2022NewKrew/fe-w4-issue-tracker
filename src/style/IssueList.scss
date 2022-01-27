@@ -8,6 +8,19 @@
         max-width: min(95vw, 1200px);
     }
 
+    .issue-searchbar {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        justify-content: space-between;
+        .align-left {
+            justify-self: start;
+        }
+        .align-right {
+            justify-self: end;
+        }
+    }
+
     .issue-header {
         display: flex;
         min-height: 60px;

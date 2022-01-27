@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
 import { Color } from "@/common/designSystem";
-import logo from "@/asset/img/dropdown.svg";
+import dropdownArrowImg from "@/asset/img/dropdown.svg";
 import checkOffImg from "@/asset/img/check-off-circle.svg";
 import checkOnImg from "@/asset/img/check-on-circle.svg";
 export interface DropdownItem {
@@ -81,7 +81,7 @@ const Dropdown: FunctionComponent<DropdownProps> = ({
     <Wrapper ref={ref}>
       <DropdownTitleWrapper onClick={dropdownClick}>
         <DropdownTitle>{dropdownTitle}</DropdownTitle>
-        <DropdownImg src={logo} />
+        <DropdownImg src={dropdownArrowImg} />
       </DropdownTitleWrapper>
       <DropdownGroupWrapper
         isOpen={isOpen}
@@ -97,7 +97,8 @@ const Dropdown: FunctionComponent<DropdownProps> = ({
 
 const Wrapper = styled.div`
   margin: 5px; //TODO: 테스트용 값 변경 예장
-  width: 50px;
+  width: max-content;
+  min-width: 50px;
   position: relative;
 `;
 

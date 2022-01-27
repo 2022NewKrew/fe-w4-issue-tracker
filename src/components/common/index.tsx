@@ -115,7 +115,7 @@ const Common = () => {
           clickItem={clickItem}
         ></Dropdown>
         <Dropdown
-          dropdownTitle="Filter2"
+          dropdownTitle="마일스톤 12"
           dropdwonGroupTitle="이슈 필터2"
           dropdownGroup={dropdownGroup2}
           clickItem={clickItem2}

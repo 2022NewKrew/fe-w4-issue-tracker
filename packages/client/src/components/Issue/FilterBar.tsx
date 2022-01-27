@@ -1,8 +1,10 @@
 import Dropdown from "@components/common/Dropdown";
-import styled from "@emotion/styled";
-import theme from "@styles/theme";
+
 import { useState } from "react";
-import SearchIcon from "@assets/icons/search.svg";
+
+import styled from "@emotion/styled";
+import { css } from "@emotion/react";
+import Icon from "@icon";
 
 const filterList = ["필터1", "필터2", "필터3"];
 
@@ -17,7 +19,7 @@ const FilterBar = () => {
   return (
     <Wrapper>
       <form onSubmit={handleSubmit}>
-        <SearchIcon />
+        <Icon name="search" />
         <input
           id="search"
           placeholder={focus ? "Search all issues" : "is:issue is:open"}
@@ -39,58 +41,60 @@ const FilterBar = () => {
 export default FilterBar;
 
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
-  width: 601px;
-  height: 40px;
-  & > form,
-  & > div {
-    height: 100%;
+  ${({ theme: { greyscale } }) => css`
     display: flex;
+    flex-direction: row-reverse;
     align-items: center;
-  }
-  div > button {
-    padding: 0 25px;
-    height: 100%;
-    border: 1px solid ${theme.greyscale.line};
-    border-radius: 11px 0 0 11px;
-    border-right: none;
-  }
-  form {
-    border: 1px solid ${theme.greyscale.line};
-    border-radius: 11px;
-    position: relative;
-    flex: 1;
-    overflow: hidden;
-    border-radius: 0 11px 11px 0;
-    input {
-      background: ${theme.greyscale.inputBackgound};
-      width: 100%;
+    width: 601px;
+    height: 40px;
+    & > form,
+    & > div {
       height: 100%;
-      padding: 0 48px;
+      display: flex;
+      align-items: center;
     }
-    svg {
-      top: 10px;
-      left: 24px;
-      opacity: 0.5;
+    div > button {
+      padding: 0 25px;
+      height: 100%;
+      border: 1px solid ${greyscale.line};
+      border-radius: 11px 0 0 11px;
+      border-right: none;
     }
-    :focus-within {
-      background: ${theme.greyscale.offWhite};
-      border-color: ${theme.greyscale.titleActive};
-      border-left: 1px solid ${theme.greyscale.line};
+    form {
+      border: 1px solid ${greyscale.line};
+      border-radius: 11px;
+      position: relative;
+      flex: 1;
+      overflow: hidden;
+      border-radius: 0 11px 11px 0;
       input {
-        background: ${theme.greyscale.offWhite};
-      }
-      + div > button {
-        background: ${theme.greyscale.offWhite};
-        border: 1px solid ${theme.greyscale.titleActive};
-        border-right: none;
-        border-radius: 11px 0 0 11px;
+        background: ${greyscale.inputBackground};
+        width: 100%;
+        height: 100%;
+        padding: 0 48px;
       }
       svg {
-        opacity: 1;
+        top: 10px;
+        left: 24px;
+        opacity: 0.5;
+      }
+      :focus-within {
+        background: ${greyscale.offWhite};
+        border-color: ${greyscale.titleActive};
+        border-left: 1px solid ${greyscale.line};
+        input {
+          background: ${greyscale.offWhite};
+        }
+        + div > button {
+          background: ${greyscale.offWhite};
+          border: 1px solid ${greyscale.titleActive};
+          border-right: none;
+          border-radius: 11px 0 0 11px;
+        }
+        svg {
+          opacity: 1;
+        }
       }
     }
-  }
+  `}
 `;

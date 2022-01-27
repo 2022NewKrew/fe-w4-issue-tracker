@@ -1,17 +1,15 @@
+import Icon from "@icon";
+
+import { LayoutProps } from "@interface/components";
+
 import styled from "@emotion/styled";
-import Logo from "./Logo";
-import ProfileLarge from "@assets/icons/UserImageLarge.svg";
 
-interface Props {
-  children: React.ReactNode;
-}
-
-const AppLayout = ({ children }: Props) => {
+const AppLayout = ({ children }: LayoutProps) => {
   return (
     <Wrapper>
       <StyledHeader>
-        <Logo size="medium" />
-        <ProfileLarge />
+        <Icon name="logo_medium" />
+        <Icon name="user_image_large" />
       </StyledHeader>
       <main>{children}</main>
     </Wrapper>
@@ -33,7 +31,7 @@ const StyledHeader = styled.header`
   width: 100%;
   height: 126px;
   position: relative;
-  svg:first-child {
+  svg:first-of-type {
     left: 0;
     top: 27px;
   }

@@ -1,15 +1,19 @@
-import { css } from "@emotion/react";
-import theme from "@styles/theme";
+import Icon from "@icon";
+
 import { NavLink } from "react-router-dom";
+
+import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 
 const Taps = () => {
   return (
-    <ul css={TapsStyles}>
+    <Wrapper>
       <li>
         <NavLink
           to="/label"
           className={({ isActive }) => (isActive ? "activated" : "")}
         >
+          <Icon name="tag" />
           레이블<span>(0)</span>
         </NavLink>
       </li>
@@ -18,53 +22,64 @@ const Taps = () => {
           to="/milestone"
           className={({ isActive }) => (isActive ? "activated" : "")}
         >
+          <Icon name="milestone" />
           마일스톤<span>(0)</span>
         </NavLink>
       </li>
-    </ul>
+    </Wrapper>
   );
 };
 export default Taps;
 
-const TapsStyles = css`
-  overflow: hidden;
-  display: flex;
-  width: 321px;
-  height: 40px;
-  border: 1px solid ${theme.greyscale.line};
-  border-radius: 11px;
-  li {
-    flex: 1;
-    ${theme.flexCenter}
-    background: ${theme.greyscale.background};
-    a {
-      ${theme.text.small}
-      width: 100%;
-      height: 100%;
-      ${theme.flexCenter}
-      flex-direction: row;
+const Wrapper = styled.ul`
+  ${({ theme: { greyscale, flexCenter, text } }) => css`
+    overflow: hidden;
+    display: flex;
+    width: 321px;
+    height: 40px;
+    border: 1px solid ${greyscale.line};
+    border-radius: 11px;
+    li {
+      flex: 1;
+      ${flexCenter}
+      background: ${greyscale.background};
+      a {
+        ${text.small}
+        width: 100%;
+        height: 100%;
+        ${flexCenter}
+        flex-direction: row;
 
-      font-weight: bold;
-      color: ${theme.greyscale.label};
-      span {
-        font-weight: normal;
-        margin-left: 8px;
-        color: ${theme.greyscale.label};
+        font-weight: bold;
+        color: ${greyscale.label};
+        span {
+          font-weight: normal;
+          margin-left: 8px;
+          color: ${greyscale.label};
+        }
+        svg {
+          position: static;
+          margin-right: 8px;
+          opacity: 0.5;
+        }
+      }
+      :hover {
+        background: ${greyscale.inputBackground};
+      }
+      :active {
+        color: ${greyscale.body};
+        background: ${greyscale.line};
       }
     }
-    :hover {
-      background: ${theme.greyscale.inputBackgound};
+    li:first-of-type {
+      border-right: 1px solid ${greyscale.line};
     }
-    :active {
-      color: ${theme.greyscale.body};
-      background: ${theme.greyscale.line};
+    .activated {
+      color: ${greyscale.body};
+      background: ${greyscale.line};
+      svg {
+        opacity: 1;
+      }
     }
-  }
-  li:first-child {
-    border-right: 1px solid ${theme.greyscale.line};
-  }
-  .activated {
-    color: ${theme.greyscale.body};
-    background: ${theme.greyscale.line};
-  }
+  `}
 `;

@@ -16,10 +16,10 @@ const Wrapper = styled.div`
     justify-content: space-between;
     svg {
       position: static;
+      margin-bottom: 60px;
     }
     & > button:first-of-type {
       background: #14142b;
-      margin: 60px 0 24px;
       :hover:enabled:not(:active),
       :active {
         background: #14142b;
@@ -27,14 +27,15 @@ const Wrapper = styled.div`
       }
     }
     form {
-      ${flexCenter}
-      height: 230px;
-      justify-content: space-between;
+      & > div:nth-of-type(2) {
+        margin: 16px 0 24px;
+      }
     }
-    span {
+    & > span {
       ${text.small};
       color: ${greyscale.placeholer};
       font-weight: bold;
+      margin: 24px 0;
     }
   `}
 `;

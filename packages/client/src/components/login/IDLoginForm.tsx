@@ -10,7 +10,6 @@ const IDLoginForm: React.FC = () => {
 
   const IDLogin = (e: FormEvent) => {
     e.preventDefault();
-    console.log(id, password);
   };
   return (
     <form onSubmit={IDLogin}>
@@ -28,8 +27,11 @@ const IDLoginForm: React.FC = () => {
         type="password"
         value={password}
         onChange={onChangePassword}
+        required
+        pattern=".{8,}"
+        errormsg="비밀번호는 8자리 이상입니다."
       />
-      <Button size="large" disabled={!id || !password}>
+      <Button size="large" disabled={!id || !password} link="/issue">
         아이디로 로그인
       </Button>
     </form>

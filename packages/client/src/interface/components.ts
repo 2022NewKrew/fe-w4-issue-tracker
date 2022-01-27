@@ -64,6 +64,7 @@ export interface TextInputProps extends TextInputStyleProps {
   label?: string;
   required?: boolean;
   pattern?: string;
+  errormsg?: string;
 }
 
 export interface DropdownProps {

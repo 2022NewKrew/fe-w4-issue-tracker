@@ -14,6 +14,12 @@ module.exports = {
   entry: {
     main: require.resolve("./src/index.tsx"),
   },
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "/",
+    filename: "[name].bundle.js",
+    clean: true,
+  },
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx"],
     alias: {

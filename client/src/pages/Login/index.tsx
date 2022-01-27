@@ -1,9 +1,10 @@
 import React from "react";
-import { LogotypeLarge } from "@/components/atoms/Icons";
-import styled from "styled-components";
 import { LoginForm } from "@/components/organisms";
 
-const Login: React.FC = props => {
+import { LogotypeLarge } from "@/components/atoms/Logo";
+import styled from "styled-components";
+
+const Login: React.FC = () => {
   return (
     <LoginWrap>
       <LogotypeLarge></LogotypeLarge>
@@ -17,7 +18,6 @@ const LoginWrap = styled.div`
   flex-direction: column;
   align-items: center;
   padding-top: 22vh;
-  /* justify-content: center; */
   height: 100vh;
   width: 100vw;
   background-color: ${({ theme }) => theme.color.background};

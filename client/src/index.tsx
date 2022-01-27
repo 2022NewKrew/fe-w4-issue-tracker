@@ -1,5 +1,5 @@
 import React from "react";
-import theme from "@/styles/Theme";
+import { theme } from "@/styles/theme";
 import ReactDOM from "react-dom";
 import App from "./App";
 import { ThemeProvider } from "styled-components";

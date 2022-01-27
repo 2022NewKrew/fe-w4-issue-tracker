@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Divider, Icon } from "semantic-ui-react";
 
@@ -9,7 +8,7 @@ const Layout = ({ children }) => {
   return (
     <Container>
       <Link to="/">
-        <Header1 as="h1">webpack-for-react</Header1>
+        <Header1 as="h1">fe-w4-issue-tracker</Header1>
       </Link>
       {children}
       <Divider />

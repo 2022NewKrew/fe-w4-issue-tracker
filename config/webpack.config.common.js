@@ -13,6 +13,7 @@ module.exports = (webpackEnv) => {
     output: {
       path: BUILD_PATH,
       filename: "js/bundle.js",
+      publicPath: "/", // nested router 처리를 위한 옵션..
       clean: true, // CleanWebpackPlugin 대체, 빌드 성공 시 이전 빌드파일 삭제
     },
     module: {

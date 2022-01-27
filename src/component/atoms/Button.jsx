@@ -1,23 +1,15 @@
-import styled, { css, useTheme } from "styled-components";
+import styled, { css } from "styled-components";
 import { Icon } from "./Icons";
-import Text from "./Text";
+import { Text } from "./Text";
 
 export const Button = ({ options, children, ...props }) => {
-  const theme = useTheme();
   const { type, prefixIcon, color = "primary" } = options;
-
   const buttonOption = { ...buttonType[type], color };
   const textOption = buttonOption.textOption;
 
-  const prefixIconColor = {
-    filled: theme.grayscale.offWhite,
-    empty: theme.color[color].default,
-    text: theme.grayscale.label,
-  };
-
   return (
     <StyledButton options={buttonOption} {...props}>
-      {prefixIcon && <Icon name={prefixIcon} color={prefixIconColor[buttonOption.style]} />}
+      {prefixIcon && <Icon name={prefixIcon} />}
       <Text options={textOption}>{children}</Text>
     </StyledButton>
   );

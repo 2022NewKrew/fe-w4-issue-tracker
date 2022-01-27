@@ -10,6 +10,26 @@ export default {
     offWhite: "#FEFEFE",
   },
   color: {
+    blue: {
+      default: "#007AFF",
+      light: "#C7EBFF",
+      dark: "#004DE3",
+    },
+    purple: {
+      default: "#0025E7",
+      light: "#CCD4FF",
+      dark: "#020070",
+    },
+    red: {
+      default: "#FF3B30",
+      light: "#FFD1CF",
+      dark: "#C60B00",
+    },
+    green: {
+      default: "#34C759",
+      light: "#DDFFE6",
+      dark: "#00A028",
+    },
     primary: {
       default: "#007AFF",
       light: "#C7EBFF",

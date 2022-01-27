@@ -1,11 +1,11 @@
 import { useRef, useState } from "react";
 import styled, { css } from "styled-components";
-import Text from "./Text";
+import { Text } from "./Text";
 
-export const Input = ({ options, placeholder, disabled, onChange, onFocus, onBlur, className, ...props }) => {
+export const Input = ({ options, placeholder, disabled, onChange, onFocus, onBlur, className, ref, ...props }) => {
   const [isFocus, setFocus] = useState(false);
   const [isFilled, setFilled] = useState(false);
-  const inputRef = useRef();
+  const inputRef = ref ?? useRef();
 
   const handleFocus = (e) => {
     setFocus(true);
@@ -29,19 +29,19 @@ export const Input = ({ options, placeholder, disabled, onChange, onFocus, onBlu
     onChange && onChange(e);
   };
 
-  const wrapperClassName = (className ?? "") + `${isFocus ? "focus" : ""} ${isFilled ? "filled" : ""}`;
+  const wrapperClassName = (className ?? "") + ` ${isFocus ? "focus" : ""} ${isFilled ? "filled" : ""}`;
 
   return (
-    <Div options={options} className={wrapperClassName} onClick={handleClick} disabled={disabled}>
+    <InputWrapper options={options} className={wrapperClassName} onClick={handleClick} disabled={disabled}>
       <Text as="label" options={{ size: isFocus || isFilled ? "xsmall" : "small" }}>
         {placeholder}
       </Text>
       <Text as="input" options={{ size: "small" }} ref={inputRef} onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange} disabled={disabled} {...props} />
-    </Div>
+    </InputWrapper>
   );
 };
 
-const Div = styled.div`
+const InputWrapper = styled.div`
   ${({ options: { size } }) => sizeType[size]};
 
   position: relative;

@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import React, { useState, Dispatch, SetStateAction } from 'react';
+import { useState, Dispatch, SetStateAction } from 'react';
 import { jsx, css } from '@emotion/react';
 import { theme } from '@styles/theme';
 import Icon from '@icon';
@@ -11,7 +11,7 @@ interface DropdownProps {
   setSelected: Dispatch<SetStateAction<number>>;
   options: [string];
   type: 'Text' | 'ImageAndText' | 'Modify';
-  images: [any];
+  images: JSX.Element[];
   customName?: string;
 }
 
@@ -25,10 +25,21 @@ const Dropdown = ({
   customName,
 }: DropdownProps) => {
   const [open, setOpen] = useState(false);
-  const handleClickOption = (index) => {
+  const handleClickOption = (index: number) => {
     setSelected(index);
     setOpen(false);
   };
+
+  const optionEl = options.map((opt, idx) => (
+    <li key={opt} onClick={() => handleClickOption(idx)}>
+      <span>
+        {type === 'ImageAndText' && images[idx]}
+        {opt}
+      </span>
+      {type !== 'Modify' && <Icon icon={selected === idx ? 'CheckOnCircle' : 'CheckOffCircle'} />}
+    </li>
+  ));
+
   return (
     <div css={{ position: 'relative' }}>
       <div css={IndicatorStyle} onClick={() => setOpen(true)}>
@@ -38,12 +49,7 @@ const Dropdown = ({
       {open && (
         <ul css={PannelStyle}>
           <li>{customName ?? `${label} 필터`}</li>
-          {options.map((opt, ind) => (
-            <li key={opt} onClick={() => handleClickOption(ind)}>
-              {opt}
-              <Icon icon={selected === ind ? 'CheckOnCircle' : 'CheckOffCircle'} />
-            </li>
-          ))}
+          {optionEl}
         </ul>
       )}
     </div>
@@ -97,7 +103,6 @@ const PannelStyle = css`
   }
 
   & > li {
-    ${textSmall}
     padding: 10px 16px 6px;
     border-top: 1px solid ${line};
     cursor: pointer;
@@ -108,6 +113,16 @@ const PannelStyle = css`
 
   & > li > svg {
     margin-top: 3px;
+  }
+
+  & > li > span {
+    ${textSmall}
+    display: flex;
+  }
+
+  & > li > span > svg {
+    margin: 2px 8px 0 0;
+    width: 20px;
   }
 `;
 

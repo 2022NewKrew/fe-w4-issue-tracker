@@ -1,36 +1,91 @@
 import { Low, JSONFile } from 'lowdb'
 import express from 'express'
 
+import { getResponse, getArrayResponse, putResponse, deleteResponse, postResponse } from './util.js'
+
 export const router = express.Router();
 
 const adapter = new JSONFile('db.json')
-const db = new Low(adapter)
+export const db = new Low(adapter)
 await db.read()
 // db.data ||= { posts: [] }
 
-const issues = db.data
+const issues = db.data.issues
+const labels = db.data.labels
+const milestones = db.data.milestones
 
-router.route('/issues/:issue-id')
-  .all(function (req, res, next) {
-    next()
+router.route('/issues/:id')
+.all(async function (req, res, next) {
+  next()
   })
-  .get(function (req, res, next) {
-    res.json(req.title)
+  .get(async function (req, res, next) {
+    getResponse(req, res, next, issues)
   })
-  .put(function (req, res, next) {
-    // just an example of maybe updating the user
-    const issue = 
-    req.issues.find() = req.params.title
-    // save user ... etc
-    res.json(req.user)
+  .put(async function (req, res, next) {
+    putResponse(req, res, next, issues)
   })
-  .delete(function (req, res, next) {
-    next(new Error('not implemented'))
+  .delete(async function (req, res, next) {
+    deleteResponse(req, res, next, issues)
   })
 
 router.route('/issues')
-  .all(function (req, res, next) {
-    res.send('checked')
+  .all(async function (req, res, next) {
+    next()
+  })
+  .get(async function (req, res, next) {
+    getArrayResponse(req, res, next, issues)
+  })
+  .post(async function (req, res, next) {
+    postResponse(req, res, next, issues)
   })
 
-// module.exports = router
+router.route('/labels/:id')
+.all(async function (req, res, next) {
+  next()
+  })
+  .get(async function (req, res, next) {
+    getResponse(req, res, next, labels)
+  })
+  .put(async function (req, res, next) {
+    putResponse(req, res, next, labels)
+  })
+  .delete(async function (req, res, next) {
+    deleteResponse(req, res, next, labels)
+  })
+
+router.route('/labels')
+  .all(async function (req, res, next) {
+    next()
+  })
+  .get(async function (req, res, next) {
+    getArrayResponse(req, res, next, labels)
+  })
+  .post(async function (req, res, next) {
+    postResponse(req, res, next, labels)
+  })
+
+router.route('/milestones/:id')
+.all(async function (req, res, next) {
+  next()
+  })
+  .get(async function (req, res, next) {
+    getResponse(req, res, next, milestones)
+  })
+  .put(async function (req, res, next) {
+    putResponse(req, res, next, milestones)
+  })
+  .delete(async function (req, res, next) {
+    deleteResponse(req, res, next, milestones)
+  })
+
+router.route('/milestones')
+  .all(async function (req, res, next) {
+    next()
+  })
+  .get(async function (req, res, next) {
+    getArrayResponse(req, res, next, milestones)
+  })
+  .post(async function (req, res, next) {
+    postResponse(req, res, next, milestones)
+  })
+  

@@ -27,11 +27,11 @@
 
 # 1. Feature List
 
-- [ ] 기초 환경 설정(react)
+- [X] 기초 환경 설정(react)
 - [ ] Rest API server 구성
-  - [ ] json-server 사용 환경 구성
-  - [ ] 데이터 구조 생성
-  - [ ] rest api url 구성
+  - [X] json-server 사용 환경 구성
+  - [X] 데이터 구조 생성
+  - [X] rest api url 구성
   - [ ] 프레임워크 서버로 업그레이드
   - [ ] db table 구성
 - [ ] 구조 디자인
@@ -59,13 +59,29 @@
 - babel
 - package.json
   - script
-    - "dev": "webpack-dev-server --progress"
-    - "build": "webpack --progress"
+    - $ npm run dev
+    - $ npm run build
 ## Rest API server 구성
+- json-server 사용 -> lowdb 사용
 ### json-server 사용 환경 구성
 - $ json-server --watch db.json --port 3001
+- json-server 만으로는 라우팅이 불가능해 lowdb를 이용하여 서버를 구성
+  - server.js 파일 직접 실행
+    - $ node server.js
 ### 데이터 구조 생성
+- 기본 데이터 테이블
+  - users
+  - issues
+  - labels
+  - milestones
 ### rest api url 구성
+- CRUD
+  - 전체 목록(issues, labels, milestones)
+    - url: http://localhost:[port]/[component]
+    - GET, POST
+  - 개별 항목(issue, label, milestone)
+    - url: http://localhost:[port]/[component]/[id]
+    - GET, PUT, DELETE
 ### 프레임워크 서버로 업그레이드
 ### db table 구성
 ## 구조 디자인

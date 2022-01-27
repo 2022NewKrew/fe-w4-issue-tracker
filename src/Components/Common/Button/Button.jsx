@@ -96,9 +96,9 @@ const secondaryBtnInteractionStyle = css`
 
 const textBtnStyle = css`
   width: 100%;
-  height: 100%;
+  height: 28px;
   justify-content: space-between;
-  padding: 0 24px;
+  padding: 0 4px;
 
   svg {
     color: ${ COLOR.LABEL };
@@ -107,6 +107,14 @@ const textBtnStyle = css`
   span {
     padding-top: 4px;
     color: ${ COLOR.LABEL };
+  }
+  
+  span + svg {
+    margin-left: 5px;
+  }
+  
+  svg + span {
+    margin-left: 5px;
   }
 `
 

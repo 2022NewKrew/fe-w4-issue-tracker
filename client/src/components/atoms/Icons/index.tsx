@@ -1,7 +1,5 @@
 import React from "react";
 import Theme from "@/styles/Theme";
-import { ReactComponent as LargeLogo } from "@/assets/LogotypeLarge.svg";
-import { ReactComponent as MediumLogo } from "@/assets/LogotypeMedium.svg";
 
 const Plus: React.FC<{ color?: string }> = ({ color = Theme.color.offWhite }) => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -34,7 +32,7 @@ const PaperClip: React.FC<{ color?: string }> = ({ color = Theme.color.offWhite 
   </svg>
 );
 
-const LogotypeLarge: React.FC = () => <LargeLogo />;
-const LogotypeMedium: React.FC = () => <MediumLogo />;
+  <svg
+    {...props}
 
-export { Plus, PaperClip, LogotypeLarge, LogotypeMedium };
+export { Plus, PaperClip, IconRefresh };

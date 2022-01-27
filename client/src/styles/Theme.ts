@@ -1,4 +1,4 @@
-export default {
+export const theme = {
   color: {
     background: "#F7F7FC",
     inputBackground: "#EFF0F6",
@@ -16,7 +16,7 @@ export default {
     secondaryC2: "#020070",
     error: "#FF3B30",
     errorC1: "#FFd1CF",
-    errorC2: "#c60B00",
+    errorC2: "#C60B00",
     success: "#34C759",
     successC1: "#DDFFE6",
     successC2: "#00A028",

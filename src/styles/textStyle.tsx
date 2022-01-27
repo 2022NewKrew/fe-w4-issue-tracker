@@ -10,6 +10,7 @@ const display = css`
   line-height: 48px;
 `;
 
+
 const link = css`
   font-family: Noto Sans KR;
   font-style: normal;
@@ -28,9 +29,11 @@ const Large = css`
 `;
 
 const Medium = css`
+
   font-size: 18px;
   line-height: 32px;
 `;
+
 
 const Small = css`
   font-size: 16px;

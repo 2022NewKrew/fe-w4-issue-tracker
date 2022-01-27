@@ -56,6 +56,7 @@ const buttonStyle = css`
   border: none;
   line-height: unset;
 
+
   &:hover:enabled {
     cursor: pointer;
   }
@@ -97,6 +98,7 @@ const blockStyle = css`
   }
 `;
 
+
 const textStyle = css`
   height: 32px;
   background: none;
@@ -124,7 +126,7 @@ const filled = css`
 
 const bordered = css`
   background: ${offWhite};
-
+  
   color: ${blue};
   border: 2px solid ${blue};
 

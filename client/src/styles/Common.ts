@@ -1,60 +1,56 @@
 import { css } from "styled-components";
+import { theme } from "@/styles/theme";
 
-export const InputWrapStyle = css`
+export const inputWrapStyle = css`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   padding: 0px 24px;
 `;
-export const InputWrapMediaStyle = css`
+export const inputWrapMediaStyle = css`
   &.initial {
-    background: ${({ theme }) => theme.color.inputBackground};
+    background: ${theme.color.inputBackground};
   }
   &.active {
-    background: ${({ theme }) => theme.color.offWhite};
-    border: 1px solid ${({ theme }) => theme.color.titleActive};
+    background: ${theme.color.offWhite};
+    border: 1px solid ${theme.color.titleActive};
   }
   &.filled {
-    background: ${({ theme }) => theme.color.inputBackground};
+    background: ${theme.color.inputBackground};
   }
   &.typing {
-    background: ${({ theme }) => theme.color.offWhite};
-    border: 1px solid ${({ theme }) => theme.color.titleActive};
+    background: ${theme.color.offWhite};
+    border: 1px solid ${theme.color.titleActive};
   }
 `;
-export const InputWrapSuccessStyle = css`
+export const inputWrapSuccessStyle = css`
   &.success {
-    background: ${({ theme }) => theme.color.successC1};
-    border: 1px solid ${({ theme }) => theme.color.success};
+    background: ${theme.color.successC1};
+    border: 1px solid ${theme.color.success};
   }
 `;
-export const InputWrapErrorStyle = css`
+export const inputWrapErrorStyle = css`
   &.error {
-    background: ${({ theme }) => theme.color.errorC1};
-    border: 1px solid ${({ theme }) => theme.color.error};
+    background: ${theme.color.errorC1};
+    border: 1px solid ${theme.color.error};
   }
 `;
-export const InputMessageMediaStyle = css`
+export const inputMessageMediaStyle = css`
   &.success {
     display: flex;
-    color: ${({ theme }) => theme.color.success};
+    color: ${theme.color.success};
   }
   &.error {
     display: flex;
-    color: ${({ theme }) => theme.color.error};
+    color: ${theme.color.error};
   }
 `;
-export const InputLabelStyle = css`
-  font-family: Noto Sans KR;
-  font-style: normal;
+export const inputLabelStyle = css`
   font-weight: 500;
   display: none;
 `;
-export const InputTagStyle = css`
-  font-family: Noto Sans KR;
-  font-style: normal;
-  font-weight: normal;
+export const inputTagStyle = css`
   background-color: inherit;
   border: 0px solid rgba(255, 255, 255, 0);
   :focus-visible,
@@ -64,15 +60,12 @@ export const InputTagStyle = css`
     border: 0px solid rgba(255, 255, 255, 0);
   }
 `;
-export const ButtonStyle = css`
+export const flexCenter = css`
   display: flex;
   justify-content: center;
   align-items: center;
 `;
-export const ButtonContentStyle = css`
-  font-family: Noto Sans KR;
-  font-style: normal;
-  font-weight: bold;
+export const buttonContentStyle = css`
   padding-top: 2px;
   flex: none;
   flex-grow: 0;

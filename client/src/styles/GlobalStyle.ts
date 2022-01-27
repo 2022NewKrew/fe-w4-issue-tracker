@@ -80,6 +80,9 @@ const GlobalStyles = createGlobalStyle`
     }
     *{
         box-sizing: border-box;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 100%;
     }
     @keyframes fade-in {
         from {

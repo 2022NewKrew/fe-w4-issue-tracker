@@ -1,12 +1,11 @@
 import { ChangeEventHandler, FocusEventHandler, useState, EventHandler } from "react";
 import useSWR from "swr";
 import fetcher from "@/utils/fetcher";
+import { TEXT_INPUT_TYPE, INPUT_TYPE, INPUT_CLASS_TYPE } from "@/constants/type";
 
-const TYPE_TEXT_LARGE = "TextInputLarge";
-const TYPE_TEXT_SMALL = "TextInputSmall";
 export interface TextInputProps {
-  value?: string;
-  type: string;
+  value: any;
+  className: string;
   onFocus: FocusEventHandler;
   onBlur: FocusEventHandler;
   onChange: ChangeEventHandler<HTMLInputElement>;
@@ -14,56 +13,71 @@ export interface TextInputProps {
 export interface UseInputProps {
   initialValue?: string;
   inputType?: string;
+  loginType?: "아이디" | "비밀번호" | string;
 }
-const useInput = ({ initialValue, inputType = "" }: UseInputProps) => {
+const useInput = ({ initialValue, inputType = "", loginType = "" }: UseInputProps) => {
   const [value, setValue] = useState(initialValue);
-  const [type, setType] = useState("initial");
+  const [className, setClassName] = useState(INPUT_CLASS_TYPE.INITIAL);
   const largeSuccessData = useSWR(
-    checkTypeURL({ type, inputType, value, initialValue }),
+    checkTypeURL({ className, inputType, value, initialValue, loginType }),
     fetcher,
   ).data;
 
   if (!!largeSuccessData) {
-    largeSuccessData.status === "success" ? setType("success") : setType("error");
+    largeSuccessData.status === INPUT_CLASS_TYPE.SUCCESS
+      ? setClassName(INPUT_CLASS_TYPE.SUCCESS)
+      : setClassName(INPUT_CLASS_TYPE.ERROR);
   }
 
   const onChange: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
-    setType("typing");
+    setClassName(INPUT_CLASS_TYPE.TYPING);
     setValue(target.value);
   };
   const onFocus: FocusEventHandler = () => {
-    setType("active");
+    setClassName(INPUT_CLASS_TYPE.ACTIVE);
   };
   const onBlur: FocusEventHandler = () => {
     if (value !== "" && value !== initialValue) {
-      setType("filled");
+      setClassName(INPUT_CLASS_TYPE.FILLED);
     } else {
-      setType("initial");
+      setClassName(INPUT_CLASS_TYPE.INITIAL);
       setValue(initialValue);
     }
   };
 
-  return { value, type, onChange, onFocus, onBlur };
+  return { value, className, onChange, onFocus, onBlur };
 };
 
 interface checkTypeProps {
-  type: string;
+  className: string;
   inputType: string;
   value?: string;
   initialValue?: string;
+  loginType?: "아이디" | "비밀번호" | string;
 }
-const checkTypeURL = ({ type, inputType, value, initialValue }: checkTypeProps) => {
-  if (checkTypeTextLargeAndTypeId({ type, inputType, value, initialValue })) {
+const checkTypeURL = ({ className, inputType, value, initialValue, loginType }: checkTypeProps) => {
+  if (checkTypeTextLargeAndTypeId({ className, inputType, value, initialValue, loginType })) {
     return `/user/checkdup/${value}`;
-  } else if (checkTypeTextSmallAndFilled({ type, inputType, value, initialValue })) {
+  } else if (checkTypeTextSmallAndFilled({ className, inputType })) {
     return `/user/checktitle/${value}`;
   } else return null;
 };
 
-const checkTypeTextLargeAndTypeId = ({ type, inputType, value, initialValue }: checkTypeProps) => {
-  return value !== initialValue && type === "filled" && inputType === TYPE_TEXT_LARGE;
+const checkTypeTextLargeAndTypeId = ({
+  className,
+  inputType,
+  value,
+  initialValue,
+  loginType,
+}: checkTypeProps) => {
+  return (
+    value !== initialValue &&
+    className === INPUT_CLASS_TYPE.FILLED &&
+    inputType === TEXT_INPUT_TYPE.LARGE &&
+    loginType === INPUT_TYPE.ID
+  );
 };
-const checkTypeTextSmallAndFilled = ({ type, inputType, value, initialValue }: checkTypeProps) => {
-  return type === "filled" && inputType === TYPE_TEXT_SMALL;
+const checkTypeTextSmallAndFilled = ({ className, inputType }: checkTypeProps) => {
+  return className === INPUT_CLASS_TYPE.FILLED && inputType === TEXT_INPUT_TYPE.SMALL;
 };
 export default useInput;

@@ -22,10 +22,10 @@ const Text = styled.p`
   }
 `;
 
-export function DropdownIndicators() {
+export function DropdownIndicators(props) {
   return (
     <Container>
-      <Text>Filter</Text>
+      <Text>{props.text}</Text>
       <Down />
     </Container>
   );

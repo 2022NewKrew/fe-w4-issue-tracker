@@ -1,12 +1,10 @@
 import React from "react";
 
 import Header from "@components/organisms/Header";
-import { SmallButton } from "@components/atoms/buttons";
-import { DropdownIndicators } from "@components/molecules/dropdownIndicators";
-import { FilterBar } from "@components/molecules/filterBar";
-import { Taps } from "@components/molecules/Taps";
-import { LargeLabel, SmallLabel } from "@components/molecules/Labels";
-import { DropdownPanel } from "@components/molecules/DropdownPanel";
+import IssueListHeader from "../components/organisms/IssueListHeader";
+import IssueTableContainer from "../components/templates/IssueTableContainer";
+
+import { Button } from "@components/atoms/buttons";
 
 import { firebaseAuth } from "../firebase";
 
@@ -14,6 +12,7 @@ import { useSetRecoilState } from "recoil";
 import { userState } from "../atoms/atoms";
 
 import { useCookies } from "react-cookie";
+import IssueList from "./IssueList";
 
 export default function Main() {
   const setUser = useSetRecoilState(userState);
@@ -35,21 +34,12 @@ export default function Main() {
   return (
     <div>
       <Header />
-      Main Page <br />
-      <SmallButton onClick={logout}>로그아웃 하러 가기</SmallButton>
+      <IssueListHeader />
+      <IssueTableContainer />
       <br />
-      <DropdownIndicators />
-      <FilterBar />
-      <Taps />
-      <LargeLabel type='open' />
-      <LargeLabel type='closed' />
-      <SmallLabel type='dark' text='레이블 이름' />
-      <SmallLabel type='light' text='레이블 이름' />
-      <SmallLabel type='line' text='작성자' />
-      <br />
-      <DropdownPanel type='text' menus={dropdownMenus} header='필터 이름' />
-      <DropdownPanel type='image' menus={dropdownMenus} header='필터 이름' />
-      <DropdownPanel type='modify' menus={dropdownMenus} header='상태 변경' />
+      <Button size='medium' color='blue' onClick={logout}>
+        로그아웃 하러 가기
+      </Button>
     </div>
   );
 }

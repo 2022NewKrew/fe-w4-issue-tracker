@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import { ReactComponent as Logo } from "../../assets/icons/logo.svg";
-import { ReactComponent as UserimageLarge } from "../../assets/icons/userimageLarge.svg";
+import { ReactComponent as Logo } from "@assets/icons/logo.svg";
+import { ReactComponent as UserimageLarge } from "@assets/icons/userimageLarge.svg";
 
 const HeaderContainer = styled.div`
   display: flex;

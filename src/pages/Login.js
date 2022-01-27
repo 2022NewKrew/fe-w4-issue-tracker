@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { LoginContainer } from "@components/templates/loginContainer";
 import { ReactComponent as Logo } from "@assets/icons/logo.svg";
-import { LargeButton, SmallTextButton } from "@components/atoms/buttons";
+import { Button, SmallTextButton } from "@components/atoms/buttons";
 import { TextInput } from "@components/atoms/textInputs";
 import { SmallLink } from "@components/atoms/link";
 
@@ -59,9 +59,9 @@ export default function Login() {
   return (
     <LoginContainer>
       <Logo />
-      <LargeButton color='black' onClick={handleGithubLogin}>
+      <Button size='large' color='black' onClick={handleGithubLogin}>
         GitHub 계정으로 로그인
-      </LargeButton>
+      </Button>
       <SmallLink>or</SmallLink>
       <TextInput
         value={id}
@@ -76,9 +76,9 @@ export default function Login() {
         setDisable={setDisable}
         text='비밀번호'
       />
-      <LargeButton onClick={handleLogin} color='blue' disable={disable}>
+      <Button size='large' onClick={handleLogin} color='blue' disable={disable}>
         아이디로 로그인
-      </LargeButton>
+      </Button>
       <SmallTextButton>회원가입</SmallTextButton>
     </LoginContainer>
   );

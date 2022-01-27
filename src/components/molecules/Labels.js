@@ -58,7 +58,11 @@ const SmallContainer = styled.div`
   padding: 4px 16px;
 
   ${(props) => {
-    if (props.type === "dark") {
+    if (props.color) {
+      return css`
+        background-color: ${(props) => props.color};
+      `;
+    } else if (props.type === "dark") {
       return css`
         background-color: ${(props) => props.theme.greyscale.background};
       `;
@@ -77,6 +81,7 @@ const SmallContainer = styled.div`
 export function SmallLabel(props) {
   const type = props.type;
   const text = props.text;
+  const bgColor = props.color;
 
   let color;
   if (type === "dark") {
@@ -88,7 +93,7 @@ export function SmallLabel(props) {
   }
 
   return (
-    <SmallContainer type={type}>
+    <SmallContainer color={bgColor} type={type}>
       <XSmallText color={color}>{text}</XSmallText>
     </SmallContainer>
   );

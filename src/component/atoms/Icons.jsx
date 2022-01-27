@@ -195,19 +195,19 @@ const icons = {
   ),
   "check-box-initial": (props) => (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
-      <rect x="0.8" y="0.8" width="14.4" height="14.4" rx="1.2" fill={color === "#FEFEFE" ? "#14142B" : "#FEFEFE"} stroke="currentColor" strokeWidth="1.6" />
+      <rect x="0.8" y="0.8" width="14.4" height="14.4" rx="1.2" fill="currentColor" stroke="current" strokeWidth="1.6" />
     </svg>
   ),
   "check-box-disable": (props) => (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <rect width="16" height="16" rx="2" fill="currentColor" />
-      <path d="M6 8H10" stroke={color === "#FEFEFE" ? "#14142B" : "#FEFEFE"} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M6 8H10" stroke="current" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   ),
   "check-box-active": (props) => (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <rect width="16" height="16" rx="2" fill="currentColor" />
-      <path d="M10.6667 6L7 9.67333L5 7.67333" stroke={color === "#FEFEFE" ? "#14142B" : "#FEFEFE"} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M10.6667 6L7 9.67333L5 7.67333" stroke="current" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   ),
   "arrow-down": (props) => (

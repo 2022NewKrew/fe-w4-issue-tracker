@@ -1,1 +1,1 @@
-export { default as ContentTextArea } from "./ContentTextArea";
+export { default as CommentTextArea } from "./CommentTextArea";

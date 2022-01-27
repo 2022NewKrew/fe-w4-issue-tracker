@@ -1,29 +1,47 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import {
-  InputWrapMediaStyle,
-  InputWrapErrorStyle,
-  InputLabelStyle,
-  InputTagStyle,
-} from "@/styles/Common";
+import { inputWrapMediaStyle, inputWrapErrorStyle, inputLabelStyle } from "@/styles/common";
+import { theme } from "@/styles/theme";
 import useTextArea, { TextAreaProps } from "@/hooks/useTextArea";
-import { Text, Input } from "@/components/atoms";
+import { Text, FileInput, TextArea } from "@/components/atoms";
 
 const ContentTextArea = ({ name }: any) => {
   const { value, type, count, ...props }: TextAreaProps = useTextArea({
     initialValue: name,
   });
+
+  const Props = {
+    WrapProps: {
+      className: type,
+    },
+    TextLabelProps: {
+      className: type,
+      styles: {
+        childCSS: TextAreaTitle,
+      },
+    },
+    TextAreaProps: {
+      className: type,
+      name: value,
+      ...props,
+    },
+    TextCountProps: {
+      className: type,
+      styles: { childCSS: TextAreaCount },
+    },
+  };
+
   return (
-    <WrapEl className={type}>
-      <Text type="xsmall" className={type} cssValue={TextAreaTitle}>
+    <WrapEl {...Props.WrapProps}>
+      <Text type="xsmall" {...Props.TextLabelProps}>
         코멘트를 입력하세요
       </Text>
-      <Input type="textarea" className={type} name={value} {...props} />
+      <TextArea {...Props.TextAreaProps} />
       <TextAreaDivLine />
-      <Text type="xsmall" className={type} cssValue={TextAreaCount}>
+      <Text type="xsmall" {...Props.TextCountProps}>
         {count}
       </Text>
-      <Input type="file" />
+      <FileInput />
     </WrapEl>
   );
 };
@@ -39,26 +57,26 @@ const WrapEl = styled.div<any>`
   height: 200px;
   border-radius: 16px;
   position: relative;
-  ${() => InputWrapMediaStyle}
-  ${() => InputWrapErrorStyle}
+  ${inputWrapMediaStyle}
+  ${inputWrapErrorStyle}
 `;
 
 const TextAreaDivLine = styled.div<any>`
-  position: absolute;
   left: 0%;
   right: 0%;
   top: 74%;
   bottom: 26%;
-  border: 1px dashed ${({ theme }) => theme.color.line};
+  position: absolute;
+  border: 1px dashed ${theme.color.line};
   height: 0px;
   width: 340px;
 `;
 
 const TextAreaTitle = css`
-  ${() => InputLabelStyle}
+  ${inputLabelStyle}
   width: 292px;
   height: 20px;
-  color: ${({ theme }) => theme.color.label};
+  color: ${theme.color.label};
   opacity: 0;
   &.typing,
   &.filled {
@@ -78,8 +96,9 @@ const TextAreaCount = css`
   bottom: 36%;
   font-weight: 500;
   display: none;
-  color: ${({ theme }) => theme.color.label};
-  &.typing {
+  color: ${theme.color.label};
+  &.typing,
+  &.filled {
     animation: fade-in 0.5s;
     animation-fill-mode: forwards;
     display: flex;

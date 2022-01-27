@@ -25,9 +25,11 @@ module.exports = {
             {
                 test: /\.(js|jsx)$/,
                 exclude: /[\\/]node_modules[\\/]/,
-                use: {
-                    loader: 'babel-loader',
-                },
+                use: ['babel-loader'],
+            },
+            {
+                test: /\.(png|jpg)$/,
+                use: ['file-loader'],
             },
         ],
     },
@@ -37,7 +39,9 @@ module.exports = {
             '@components': path.resolve(__dirname, 'src/components'),
             '@context': path.resolve(__dirname, 'src/context'),
             '@core': path.resolve(__dirname, 'src/core'),
-            // '@utils': path.resolve(__dirname, 'src/utils'),
+            '@hooks': path.resolve(__dirname, 'src/hooks'),
+            '@style': path.resolve(__dirname, 'src/style'),
+            '@utils': path.resolve(__dirname, 'src/utils'),
             // '@api': path.resolve(__dirname, 'src/api'),
         },
     },

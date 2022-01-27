@@ -1,34 +1,24 @@
-import React, { useState, useEffect } from 'react';
 import { Route } from '@core/react-router-dom';
+import { usePopstate } from '@hooks';
+import { regSeparateBasedSlash } from '@utils';
 
 export function Routes({ children }) {
-    const [currentPath, setCurrentPath] = useState(window.location.pathname);
+    const currentPath = usePopstate();
 
-    useEffect(() => {
-        const onLocationChange = () => {
-            setCurrentPath(window.location.pathname);
-        };
-        window.addEventListener('navigate', onLocationChange);
-        window.addEventListener('popstate', onLocationChange);
-        return () => {
-            window.removeEventListener('navigate', onLocationChange);
-            window.removeEventListener('popstate', onLocationChange);
-        };
-    }, []);
-
-    const isURLHasParams = (path) =>
-        path.includes(':') &&
-        new RegExp(`${path.split('/:')[0]}/?.*`, 'g').test(currentPath);
+    const isURLMatchPath = (path) => {
+        const regManageParams = path
+            .split(regSeparateBasedSlash)
+            .map((urlPath) => (urlPath.includes(':') ? '/?.*' : urlPath))
+            .join('');
+        return new RegExp(`^${regManageParams}$`, 'g').test(currentPath);
+    };
 
     const getCurrentPathProps = () => {
         const currentPathProps = children.find(({ props: { path } }) => {
             if (path === '*') {
                 return;
             }
-            if (isURLHasParams(path)) {
-                return true;
-            }
-            if (path === currentPath) {
+            if (isURLMatchPath(path)) {
                 return true;
             }
         })?.props;

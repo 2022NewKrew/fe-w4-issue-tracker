@@ -1,20 +1,25 @@
+import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { Icon } from "../atoms/Icons";
 import { Text } from "../atoms/Text";
 
-export const Taps = ({ labelCount, milestoneCount }) => {
+export const Taps = ({ labelCount, milestoneCount, ...props }) => {
   return (
-    <TapWrapper>
-      <TapItem>
-        <Icon name="tag" />
-        <Text options={{ size: "small", isLink: true }}>레이블</Text>
-        <Text options={{ size: "small" }}>{`(${labelCount})`}</Text>
-      </TapItem>
-      <TapItem>
-        <Icon name="milestone" />
-        <Text options={{ size: "small", isLink: true }}>마일스톤</Text>
-        <Text options={{ size: "small" }}>{`(${milestoneCount})`}</Text>
-      </TapItem>
+    <TapWrapper {...props}>
+      <Link to="/labels">
+        <TapItem>
+          <Icon name="tag" />
+          <Text options={{ size: "small", isLink: true }}>레이블</Text>
+          <Text options={{ size: "small" }}>{`(${labelCount})`}</Text>
+        </TapItem>
+      </Link>
+      <Link to="/milestones">
+        <TapItem>
+          <Icon name="milestone" />
+          <Text options={{ size: "small", isLink: true }}>마일스톤</Text>
+          <Text options={{ size: "small" }}>{`(${milestoneCount})`}</Text>
+        </TapItem>
+      </Link>
     </TapWrapper>
   );
 };
@@ -29,7 +34,7 @@ const TapWrapper = styled.ul`
     border-radius: 11px;
     overflow: hidden;
 
-    li:not(:last-child) {
+    & > *:not(:last-child) {
       border-right: 1px solid ${theme.grayscale.line};
     }
   `}

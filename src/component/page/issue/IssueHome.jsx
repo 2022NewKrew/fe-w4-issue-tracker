@@ -31,7 +31,9 @@ export const IssueHome = () => {
         <FilterBar />
         <RightItems>
           <Taps labelCount={3} milestoneCount={2} />
-          <Button options={{ type: "Small-Standard", prefixIcon: "plus" }}>이슈 작성</Button>
+          <Link to="new">
+            <Button options={{ type: "Small-Standard", prefixIcon: "plus" }}>이슈 작성</Button>
+          </Link>
         </RightItems>
       </Header>
       <IssueTable>
@@ -48,9 +50,6 @@ export const IssueHome = () => {
           <SmallLabel name="documentation" backgroundColor="blue" isBright={true} />
         </Issue>
       </IssueTable>
-      <Link to="new">
-        <Button options={{ type: "Medium-Standard" }}>새로운 이슈 작성</Button>
-      </Link>
       <Link to="/test">
         <Button options={{ type: "Medium-Standard" }}>테스트 페이지</Button>
       </Link>

@@ -2,13 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { COLOR } from "@constants";
 import { MilestoneIcon, TagIcon } from "@icons";
-import { SmallText } from "@atoms";
+import { SmallText, Wrapper } from "@atoms";
 
-const Wrapper = styled.div`
-  display: flex;
+const _Wrapper = styled(Wrapper)`
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
   overflow: hidden;
 
   border-radius: 11px;
@@ -50,7 +47,7 @@ const TabText = styled(SmallText)`
 
 function TabList() {
   return (
-    <Wrapper>
+    <_Wrapper>
       <LeftTab>
         <TagIcon />
         <TabText>
@@ -63,7 +60,7 @@ function TabList() {
           마일스톤 (<span>0</span>)
         </TabText>
       </RightTab>
-    </Wrapper>
+    </_Wrapper>
   );
 }
 

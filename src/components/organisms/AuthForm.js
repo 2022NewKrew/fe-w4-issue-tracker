@@ -4,14 +4,10 @@ import { LargeLogo, LargeButton, MediumText, LargeTextInput } from "@atoms";
 import { COLOR } from "@constants";
 import { OAuthForm } from "@molecules";
 
-const Wrapper = styled.div`
+const _Wrapper = styled.div`
   position: relative;
   height: 100%;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 `;
 
 const AuthFormText = styled(MediumText)`
@@ -24,7 +20,7 @@ const AuthFormInput = styled(LargeTextInput)`
 
 function AuthForm() {
   return (
-    <Wrapper>
+    <_Wrapper>
       <LargeLogo>Issue Tracker</LargeLogo>
       <OAuthForm />
       <AuthFormText>or</AuthFormText>
@@ -34,7 +30,7 @@ function AuthForm() {
         아이디로 로그인
       </LargeButton>
       <AuthFormText>회원가입</AuthFormText>
-    </Wrapper>
+    </_Wrapper>
   );
 }
 

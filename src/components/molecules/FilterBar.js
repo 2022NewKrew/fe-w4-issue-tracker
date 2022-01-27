@@ -1,14 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
 import { COLOR } from "@constants";
-import { SmallText, TextInput } from "@atoms";
+import { SmallText, TextInput, Wrapper } from "@atoms";
 import { ChevronDownIcon, SearchIcon } from "@icons";
 
-const Wrapper = styled.div`
-  display: flex;
+const _Wrapper = styled(Wrapper)`
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
+
   border: 1px solid transparent;
 
   ${({ isActivated }) =>
@@ -109,7 +107,7 @@ function FilterBar() {
   };
 
   return (
-    <Wrapper isActivated={activated}>
+    <_Wrapper isActivated={activated}>
       <FilterDropdownButton isActivated={activated}>
         <FilterDropdownButtonText>필터</FilterDropdownButtonText>
         <ChevronDownIcon />
@@ -126,7 +124,7 @@ function FilterBar() {
           onBlur={handleBlur}
         />
       </FilterSearchWrapper>
-    </Wrapper>
+    </_Wrapper>
   );
 }
 

@@ -1,16 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { FilterBar, TabList } from "@molecules";
-import { SmallStandardButton, XSmallText } from "@atoms";
+import { SmallStandardButton, Wrapper, XSmallText } from "@atoms";
 import { PlusIcon } from "@icons";
 import { COLOR, DIRECTION } from "@constants";
 
-const Wrapper = styled.div`
-  display: flex;
+const _Wrapper = styled(Wrapper)`
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-  width: 1200px;
+  width: 100%;
 `;
 
 const RightPart = styled.div`
@@ -31,7 +29,7 @@ const CreateIssueButton = styled(SmallStandardButton)`
 
 function IssueListHeader() {
   return (
-    <Wrapper>
+    <_Wrapper>
       <FilterBar />
       <RightPart>
         <TabList />
@@ -40,7 +38,7 @@ function IssueListHeader() {
           <ButtonText>이슈 작성</ButtonText>
         </CreateIssueButton>
       </RightPart>
-    </Wrapper>
+    </_Wrapper>
   );
 }
 

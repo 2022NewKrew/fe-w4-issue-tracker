@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { MediumLogo } from "@atoms";
+import { MediumLogo, Wrapper } from "@atoms";
 import { authService } from "@/firebase.js";
 
-const Wrapper = styled.div`
+const _Wrapper = styled(Wrapper)`
   position: relative;
-  display: flex;
+  flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-  min-width: 1200px;
+  width: 100%;
   height: 80px;
+  padding: 20px 0 40px 0;
 `;
 
 const ProfileImg = styled.img`
@@ -24,10 +24,10 @@ function Header() {
   const auth = authService.getAuth();
   const url = auth.currentUser.photoURL;
   return (
-    <Wrapper>
+    <_Wrapper>
       <MediumLogo>Issue Tracker</MediumLogo>
       <ProfileImg src={url} />
-    </Wrapper>
+    </_Wrapper>
   );
 }
 

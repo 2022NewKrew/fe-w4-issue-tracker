@@ -20,5 +20,7 @@
 │
 ├───📄 App.jsx: React root App file.
 │
+├───📄 hook.js: Useful custom hooks are defined here.
+│
 └───📄 index.js: Frontend root file.
 ```

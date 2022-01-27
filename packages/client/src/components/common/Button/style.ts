@@ -9,9 +9,15 @@ interface IButtonStyle {
 
 const ButtionStyle = (
   { size, color, type }: IButtonStyle,
-  { text, greyscale, colors }: Theme
+  { text, greyscale, colors, flexCenter }: Theme
 ) => css`
   font-weight: bold;
+
+  ${flexCenter}
+  flex-direction: row;
+  & > svg {
+    position: static;
+  }
 
   ${{
     standard: css`
@@ -26,34 +32,45 @@ const ButtionStyle = (
     text: css`
       color: ${greyscale.label};
       background: transparent;
-      width: max-content;
-      height: 32px;
     `,
   }[type]};
 
-  ${{
-    large: css`
-      ${text.medium};
-      width: 340px;
-      height: 64px;
-      padding: 0 24px;
-      border-radius: 20px;
-    `,
-    medium: css`
-      ${text.medium};
-      width: 240px;
-      height: 56px;
-      padding: 0 24px;
-      border-radius: 20px;
-    `,
-    small: css`
-      ${text.xsmall};
-      width: 120px;
-      height: 40px;
-      padding: 0 16px;
-      border-radius: 11px;
-    `,
-  }[size]}
+  ${(type === "text"
+    ? {
+        medium: css`
+          ${text.medium};
+          height: 56px;
+          border-radius: 20px;
+        `,
+        small: css`
+          ${text.xsmall};
+          height: 40px;
+          border-radius: 11px;
+        `,
+      }
+    : {
+        large: css`
+          ${text.medium};
+          width: 340px;
+          height: 64px;
+          padding: 0 24px;
+          border-radius: 20px;
+        `,
+        medium: css`
+          ${text.medium};
+          width: 240px;
+          height: 56px;
+          padding: 0 24px;
+          border-radius: 20px;
+        `,
+        small: css`
+          ${text.xsmall};
+          width: 120px;
+          height: 40px;
+          padding: 0 16px;
+          border-radius: 11px;
+        `,
+      })[size]}
 
   :hover:enabled:not(:active) {
     ${{

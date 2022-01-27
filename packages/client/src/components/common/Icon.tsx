@@ -1,4 +1,5 @@
 import * as icons from "@assets/icons";
+
 import { IconName, IconProps } from "@interface/components";
 
 const Icon = ({ name, ...props }: IconProps) => {

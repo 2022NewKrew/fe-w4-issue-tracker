@@ -1,11 +1,10 @@
-import styled from "@emotion/styled";
 import Icon from "@icon";
 
-interface Props {
-  children: React.ReactNode;
-}
+import { LayoutProps } from "@interface/components";
 
-const AppLayout = ({ children }: Props) => {
+import styled from "@emotion/styled";
+
+const AppLayout = ({ children }: LayoutProps) => {
   return (
     <Wrapper>
       <StyledHeader>

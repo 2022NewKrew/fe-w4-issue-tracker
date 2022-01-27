@@ -1,8 +1,9 @@
+import Icon from "@icon";
+
 import { NavLink } from "react-router-dom";
 
-import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import Icon from "@icon";
+import { css } from "@emotion/react";
 
 const Taps = () => {
   return (

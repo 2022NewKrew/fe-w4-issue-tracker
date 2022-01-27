@@ -18,7 +18,6 @@ const Wrapper = styled.div<ButtonGroupStyleProps>`
   ${({ direction, gap }) => css`
     display: flex;
     flex-direction: ${direction};
-    margin-left: ;
     & > button + button {
       ${direction === "row" ? `margin-left: ${gap}px` : `margin-top: ${gap}px`}
     }

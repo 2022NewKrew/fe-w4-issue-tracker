@@ -1,11 +1,9 @@
+import { LayoutProps } from "@interface/components";
+
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 
-interface Props {
-  children: React.ReactNode;
-}
-
-const LoginLayout = ({ children }: Props) => {
+const LoginLayout = ({ children }: LayoutProps) => {
   return <Wrapper>{children}</Wrapper>;
 };
 

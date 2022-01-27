@@ -1,6 +1,10 @@
 import { buttonType, colorType, sizeType } from "src/@types/emotion";
 import * as icons from "@assets/icons";
 
+export interface LayoutProps {
+  children: React.ReactNode;
+}
+
 // icon
 export type IconName = keyof typeof icons;
 
@@ -16,11 +20,11 @@ export interface ButtonStyleProps {
   shape?: buttonType;
 }
 
-export interface ButtonProps extends ButtonStyleProps {
-  children: React.ReactNode;
+export interface ButtonProps extends ButtonStyleProps, LayoutProps {
   onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
   icon?: IconName;
+  link?: string;
 }
 
 export interface ButtonGroupStyleProps {
@@ -28,9 +32,7 @@ export interface ButtonGroupStyleProps {
   gap: number | string;
 }
 
-export interface ButtonGroupProps extends ButtonGroupStyleProps {
-  children: React.ReactNode;
-}
+export interface ButtonGroupProps extends ButtonGroupStyleProps, LayoutProps {}
 
 // label
 export interface LabelStyleProps {

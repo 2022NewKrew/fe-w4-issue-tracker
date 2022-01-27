@@ -1,8 +1,10 @@
+import Icon from "@icon";
 import { useDropdown } from "@hooks";
+
 import { useState } from "react";
 
-import Icon from "@icon";
 import { DropdownProps } from "@interface/components";
+
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 

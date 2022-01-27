@@ -59,10 +59,10 @@ const Wrapper = styled.section`
     width: 100%;
     border: 1px solid ${greyscale.line};
     border-radius: 16px;
-    div:first-of-type {
+    & > div:first-of-type {
       border-radius: 16px 16px 0 0;
     }
-    li:last-child {
+    & > li:last-child {
       border-radius: 0 0 16px 16px;
     }
   `}

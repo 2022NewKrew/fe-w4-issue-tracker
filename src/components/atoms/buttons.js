@@ -16,24 +16,46 @@ function findColor(theme, color) {
   return [INIT, LIGHT, DARK];
 }
 
-const Button = styled.button`
+export const Button = styled.button`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  border-radius: 20px;
-  padding: 0 24px;
   border: none;
   cursor: ${(props) => (props.disable === true ? "not-allowed" : "pointer")};
 
   font-weight: 700;
 
-  font-size: ${(props) => props.theme.fontSizes.medium};
-
   color: ${(props) => props.theme.greyscale.offWhite};
 
   opacity: ${(props) => (props.disable ? 0.5 : 1)};
+
+  ${(props) => {
+    const size = props.size;
+    if (size === "large") {
+      return `
+        width: 340px;
+        height: 64px;
+        border-radius: 20px;
+        font-size: ${(props) => props.theme.fontSizes.medium};
+      `;
+    } else if (size === "medium") {
+      return `
+        width: 240px;
+        height: 56px;
+        border-radius: 20px;
+        font-size: ${(props) => props.theme.fontSizes.medium};
+      `;
+    } else if (size === "small") {
+      return `
+        width: 120px;
+        height: 40px;
+        border-radius: 11px;
+        font-size: ${(props) => props.theme.fontSizes.extraSmall};
+      `;
+    }
+  }}
+
   ${(props) => {
     const mainColor = props.color;
     const [INIT, LIGHT, DARK] = findColor(props.theme, mainColor);
@@ -56,24 +78,6 @@ const Button = styled.button`
       `;
     }
   }};
-`;
-
-export const LargeButton = styled(Button)`
-  width: 340px;
-  height: 64px;
-`;
-
-export const MediumButton = styled(Button)`
-  width: 240px;
-  height: 56px;
-`;
-
-export const SmallButton = styled(Button)`
-  width: 120px;
-  height: 40px;
-  border-radius: 11px;
-
-  font-size: ${(props) => props.theme.fontSizes.extraSmall};
 `;
 
 export const SecondaryButton = styled.button`

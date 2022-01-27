@@ -1,5 +1,6 @@
 export { default as AlertCircle } from './AlertCircle.svg';
 export { default as Archive } from './Archive.svg';
+export { default as Arrow } from './Arrow.svg';
 export { default as Calendar } from './Calendar.svg';
 export { default as CheckBoxActive } from './CheckBoxActive.svg';
 export { default as CheckBoxDisable } from './CheckBoxDisable.svg';

@@ -32,7 +32,7 @@ const TapContainer = styled.div.attrs((props) => ({
   cursor: pointer;
 
   background-color: ${(props) =>
-    props.selected === props.type ? props.theme.greyscale.line : "none"};
+    props.selectedValue === props.type ? props.theme.greyscale.line : "none"};
 
   &:hover {
     background-color: ${(props) => props.theme.greyscale.inputBackground};
@@ -54,22 +54,22 @@ const Line = styled.div`
 `;
 
 export function Taps(props) {
-  const [selected, setSelected] = useState("");
+  const [selectedValue, setSelectedValue] = useState("");
 
-  const toggle = (e) => {
+  const handleTapClick = (e) => {
     const value = e.target.closest("[type]").attributes.type.value;
-    value === selected ? setSelected("") : setSelected(value);
+    value === selectedValue ? setSelectedValue("") : setSelectedValue(value);
   };
 
   return (
-    <TapsContainer onClick={(e) => toggle(e)}>
-      <TapContainer selected={selected} type='label'>
+    <TapsContainer onClick={(e) => handleTapClick(e)}>
+      <TapContainer selectedValue={selectedValue} type='label'>
         <Tag />
         <SmallLink>레이블</SmallLink>
         <SmallText>(0)</SmallText>
       </TapContainer>
       <Line />
-      <TapContainer selected={selected} type='milestone'>
+      <TapContainer selectedValue={selectedValue} type='milestone'>
         <Milestone />
         <SmallLink>마일스톤</SmallLink>
         <SmallText>(0)</SmallText>

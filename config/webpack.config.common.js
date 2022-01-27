@@ -8,17 +8,12 @@ module.exports = {
 		publicPath:'/',
     filename: '[name].[chunkhash].js',
 	},
-	plugins: [
-    new HtmlWebpackPlugin({
-      template: './public/index.html',
-    }), 
-  ],
   resolve: {
     extensions: ['.jsx', 'js'],
     alias: {
-      '@utils': path.resolve(__dirname, '../src/utils'),
-      '@core': path.resolve(__dirname, '../src/core'),
-      '@assets': path.resolve(__dirname, '../src/assets'),
+      '@utils': path.resolve(__dirname, './src/utils'),
+      '@public': path.resolve(__dirname, './public'),
+      '@components': path.resolve(__dirname, './src/components'),
     },
   },
   module: {
@@ -28,6 +23,20 @@ module.exports = {
         exclude: /node_modules/,
         use: 'babel-loader',
       },
+      {
+        test: /\.(png|jpe?g|gif|ico|svg|webp)$/i,
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: '[name].[contenthash].[ext]',
+          },
+        },
+      },
     ],
   },
+	plugins: [
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+    }), 
+  ],
 };

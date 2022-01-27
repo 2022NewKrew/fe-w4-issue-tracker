@@ -27,6 +27,7 @@
     "isolatedModules": true, /* Ensure that each file can be safely transpiled without relying on other imports. */
   },
   "include": [
-    "src"
+    "src/components",
+    "src/custom.d.ts"
   ]
 }

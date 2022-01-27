@@ -35,40 +35,37 @@ export default function IssueList(){
     setShowingIssues(issueArray.filter(({isOpen})=>isOpen===showOpen));
   }, [issueArray, showOpen]);
 
-  function isIndexChecked(index){
-    console.log(index, isChecked(index));
+  const isIndexChecked=useCallback((index)=>{
     return isChecked(index);
-  }
+  }, [isChecked]);
 
   const getIssues=useCallback(()=>{
-    if(issueArray.length===0){
+    if(showingIssues.length===0){
       return (
         <div className='flex-center'>
           필터에 해당하는 이슈가 없습니다.
         </div>
       );
     }
-    return issueArray.map(
+    return showingIssues.map(
       ({issueID, title, authorID, timestamp, isOpen, milestoneID, body}, index)=>{
-        if(showOpen===isOpen){
-          return (
-            <Issue
-              key={issueID}
-              issueID={issueID}
-              title={title}
-              authorID={authorID}
-              timestamp={timestamp}
-              isOpen={isOpen}
-              milestoneID={milestoneID}
-              body={body}
-              isChecked={isIndexChecked(index)}
-              toggleCheck={()=>toggleCheck(index)}
-            ></Issue>
-          );
-        }
+        return (
+          <Issue
+            key={String(issueID)+isIndexChecked(index)}
+            issueID={issueID}
+            title={title}
+            authorID={authorID}
+            timestamp={timestamp}
+            isOpen={isOpen}
+            milestoneID={milestoneID}
+            body={body}
+            isChecked={isIndexChecked(index)}
+            toggleCheck={()=>toggleCheck(index)}
+          ></Issue>
+        );
       }
     );
-  }, [issueArray, showOpen]);
+  }, [isIndexChecked, toggleCheck, showingIssues]);
 
   return (
     <div className='IssueList'>

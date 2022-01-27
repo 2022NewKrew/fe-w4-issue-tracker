@@ -4,7 +4,7 @@ export default function InputeMedium({title='', type='text', value, onChange}){
   const [isFocused, setIsFocused]=useState(false);
   return (
     <div className={'InputMedium'
-    + (value.length>0 ? ' filled' : '')
+    + (value.length ? ' filled' : '')
     + (isFocused ? ' focused' : '')}>
       <input type={type}
         onChange={(e)=>onChange(e.target.value)}

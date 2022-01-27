@@ -21,7 +21,7 @@ export default function Issue({
     getFromURL(issueLabelURL, {issueID: issueID}).then((newIssueLabelArray)=>{
       setLabelIDArray(newIssueLabelArray);
     });
-  }, []);
+  }, [issueID]);
 
   const getLabels=useCallback(()=>{
     return labelIDArray.map((labelID)=>(
@@ -38,7 +38,7 @@ export default function Issue({
         <MilestoneSmall title={milestones[milestoneID].title} />
       );
     }
-  }, []);
+  }, [milestones, milestoneID]);
 
   function onClick(){
     navigate(`/issue/${issueID}`, {replace: false});

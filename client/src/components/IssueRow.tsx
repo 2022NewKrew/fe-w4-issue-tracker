@@ -63,13 +63,7 @@ const IssueItem = styled.div`
 
 const IssueItemUpperArea = styled.div`
     display: flex;
-    ${SmallIcon}
-    & svg {
-        fill: var(--primary2-color);
-        path {
-            stroke: var(--primary1-color);
-        }
-    }
+    ${SmallIcon('var(--primary1-color)', 'var(--primary2-color)')}
 `;
 
 const IssueItemBelowArea = styled.div`

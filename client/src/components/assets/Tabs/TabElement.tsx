@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { LinkSmall, TextSmall } from '@styles/styleTemplates';
+import { LinkSmall, TextSmall, SmallIcon } from '@styles/styleTemplates';
 import { ITabElement } from '@types';
 
 export const TabElement = ({ icon, title, count, isLast }: ITabElement) => {
@@ -22,13 +22,7 @@ const Tab = styled.button<{ isLast: boolean }>`
     height: 40px;
     color: var(--label-color);
     cursor: pointer;
-    & svg {
-        width: 16px;
-        height: 16px;
-        path {
-            stroke: var(--label-color);
-        }
-    }
+    ${SmallIcon('var(--label-color)')}
     ${({ isLast }) => {
         if (!isLast)
             return css`

@@ -1,6 +1,6 @@
 import React, { MouseEvent } from 'react';
 import styled from 'styled-components';
-import { TableHeader, AlignXYCenter } from '@styles/styleTemplates';
+import { TableHeader, AlignXYCenter, SmallIcon } from '@styles/styleTemplates';
 import { IFilter } from '@types';
 import { FilterButton } from '@components/assets';
 import { ReactComponent as Alertcircle } from '@icons/AlertCircle.svg';
@@ -68,6 +68,7 @@ const IssueStatuses = styled.div`
 const Status = styled.div`
     ${AlignXYCenter}
     padding: 12px;
+    ${SmallIcon()}
     & svg {
         padding-right: 4px;
     }

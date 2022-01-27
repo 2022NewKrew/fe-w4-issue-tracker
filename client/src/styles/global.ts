@@ -1,61 +1,65 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, css } from 'styled-components';
+import reset from 'styled-reset';
+import { customReset } from './customReset';
+import { ITheme } from './themeInterface';
 
-const GlobalStyle = createGlobalStyle`
-    :root { // 문서의 루트 요소 선택. 여기서는 html이라고 이해할 수 있음.
-        --background-color: #f7f7fc;
-        --main-text-color: #243542;
-        --border-color: #d9dbe9;
-        --input-background-color: #eff0f6;
-    }
-    
-    body {
-        font-family: Noto Sans KR;
-        background-color: var(--background-color);
-    }
+const GlobalStyle = createGlobalStyle<{ theme: ITheme }>`
+    ${reset};
+    ${customReset};
+    ${({ theme }) => {
+        return css`
+            // 문서의 루트 요소 선택. 여기서는 html이라고 이해할 수 있음.
+            :root {
+                // 자주 쓰는 변수들은 theme의 타입명시없이 var()로 쓸 수 있도록 변수화
 
-    html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video {
-        margin: 0;
-        padding: 0;
-        border: 0;
-        font-size: 100%;
-        font: inherit;
-        vertical-align: baseline;
-    }
+                /* Colors */
+                --title-active-color: ${theme.colors.titleActive};
+                --body-color: ${theme.colors.body};
+                --label-color: ${theme.colors.label};
+                --placeholder-color: ${theme.colors.placeholder};
+                --line-color: ${theme.colors.line};
+                --input-background-color: ${theme.colors.inputBackground};
+                --background-color: ${theme.colors.background};
+                --off-white-color: ${theme.colors.offWhite};
+                --active-border-color: ${theme.colors.activeBorder};
 
-    /* HTML5 display-role reset for older browsers */
-    article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
-        display: block;
-    }
-    body {
-      line-height: 1;
-    }
-    ol,ul {
-      list-style: none;
-    }
-    blockquote,q {
-      quotes: none;
-    }
-    blockquote:before,blockquote:after,q:before,q:after {
-      content: "";
-      content: none;
-    }
-    table {
-      border-collapse: collapse;
-      border-spacing: 0;
-    }
-    input {
-      outline: none;
-      border: none;
-    }
-    input:focus {
-      outline: none;
-    }
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+                --primary1-color: ${theme.colors.primary1};
+                --primary2-color: ${theme.colors.primary2};
+                --primary3-color: ${theme.colors.primary3};
+                --secondary1-color: ${theme.colors.secondary1};
+                --secondary2-color: ${theme.colors.secondary2};
+                --secondary3-color: ${theme.colors.secondary3};
+                --error1-color: ${theme.colors.error1};
+                --error2-color: ${theme.colors.error2};
+                --error3-color: ${theme.colors.error3};
+                --success1-color: ${theme.colors.success1};
+                --success2-color: ${theme.colors.success2};
+                --success3-color: ${theme.colors.success3};
 
-    /* 출처: https://velog.io/@jewon119/01.CSS-%EA%B8%B0%EC%B4%88-Reset-CSS */
+                /* Fonts */
+                --display-font-size: ${theme.fonts.size.display};
+                --large-font-size: ${theme.fonts.size.large};
+                --medium-font-size: ${theme.fonts.size.medium};
+                --small-font-size: ${theme.fonts.size.small};
+                --x-small-font-size: ${theme.fonts.size.xSmall};
+
+                --bold-font-weight: ${theme.fonts.weight.bold};
+                --bolder-font-weight: ${theme.fonts.weight.bolder};
+                --normal-font-weight: ${theme.fonts.weight.normal};
+
+                --display-font-line-height: ${theme.fonts.lineHeight.display};
+                --large-font-line-height: ${theme.fonts.lineHeight.large};
+                --medium-font-line-height: ${theme.fonts.lineHeight.medium};
+                --small-font-line-height: ${theme.fonts.lineHeight.small};
+                --x-small-font-line-height: ${theme.fonts.lineHeight.xSmall};
+            }
+
+            body {
+                font-family: Noto Sans KR;
+                background-color: var(--background-color);
+            }
+        `;
+    }}
 `;
 
 export default GlobalStyle;

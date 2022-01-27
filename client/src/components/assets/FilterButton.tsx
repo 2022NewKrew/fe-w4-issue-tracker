@@ -1,24 +1,45 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { MouseEvent } from 'react';
+import styled, { css } from 'styled-components';
+import { LinkSmall, AlignYCenter } from '@styles/styleTemplates';
 import { ReactComponent as DownArrow } from '@icons/DownArrow.svg';
 
-export const FilterButton = () => {
+interface IProps {
+    title: string;
+    onClickHandler: (e: MouseEvent<HTMLElement>) => void;
+    className?: string;
+    hover?: boolean;
+}
+
+export const FilterButton = ({ title, onClickHandler, className = '', hover = false }: IProps) => {
     return (
-        <Wrapper>
-            <div>필터</div>
+        <Wrapper onClick={onClickHandler} className={className} hover={hover}>
+            <div>{title}</div>
             <DownArrow />
         </Wrapper>
     );
 };
 
-const Wrapper = styled.div`
-    width: 128px;
-    height: 40px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+const Wrapper = styled.button<{ hover: boolean }>`
+    ${LinkSmall}
+    ${AlignYCenter}
+    justify-content: space-between;
+    min-width: fit-content;
+    color: var(--label-color);
+    cursor: pointer;
+
+    ${({ hover }) => {
+        if (hover)
+            return css`
+                &:hover {
+                    color: var(--body-color);
+                    background-color: var(--line-color);
+                }
+            `;
+    }}
+    & svg {
+        padding: 6px 10px;
+        path {
+            stroke: var(--label-color);
+        }
+    }
 `;
-// const DropdownButton = styled.img`
-//     height: 4px;
-//     width: 8px;
-// `;

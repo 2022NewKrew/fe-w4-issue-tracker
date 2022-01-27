@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ProfileImage } from './ProfileImg';
+import { ProfileImage } from './assets';
 import { ReactComponent as Logo } from '@images/LogotypeMedium.svg';
 import { ReactComponent as UserImage } from '@images/UserImageLarge.svg';
 

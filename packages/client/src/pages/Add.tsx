@@ -1,5 +1,5 @@
 import AppLayout from "@components/Layout/AppLayout";
-import ButtonGroup from "@components/common/Button/ButtonGrop";
+import ButtonGroup from "@components/common/ButtonGrop";
 import Button from "@components/common/Button";
 import Icon from "@components/common/Icon";
 import TextArea from "@components/common/TextArea";
@@ -28,7 +28,7 @@ const Add = () => {
           <TextArea value={text} onChange={onChangeText} height={343} />
         </div>
         <ButtonGroup direction="row" gap={32}>
-          <Button size="medium" type="text" icon="x_square">
+          <Button size="medium" shape="text" icon="x_square">
             작성 취소
           </Button>
           <Button size="medium">완료</Button>

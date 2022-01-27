@@ -11,7 +11,7 @@ const Login: React.FC = () => {
       <Button size="large">GitHub 계정으로 로그인</Button>
       <span>or</span>
       <IDLoginForm />
-      <Button size="small" type="text">
+      <Button size="small" shape="text">
         회원가입
       </Button>
     </LoginLayout>

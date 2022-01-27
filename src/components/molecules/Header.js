@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { MediumLogo, Wrapper } from "@atoms";
+import { MediumLogo, SmallLinkText, Wrapper } from "@atoms";
 import { authService } from "@/firebase.js";
 
 const _Wrapper = styled(Wrapper)`
@@ -18,6 +18,11 @@ const ProfileImg = styled.img`
   border-radius: 30px;
   border: 1px solid #d9dbe9;
   box-sizing: border-box;
+  margin: 0 10px;
+`;
+
+const ProfileWrapper = styled(Wrapper)`
+  flex-direction: row;
 `;
 
 function Header() {
@@ -26,7 +31,10 @@ function Header() {
   return (
     <_Wrapper>
       <MediumLogo>Issue Tracker</MediumLogo>
-      <ProfileImg src={url} />
+      <ProfileWrapper>
+        <SmallLinkText onClick={() => auth.signOut()}>로그아웃</SmallLinkText>
+        <ProfileImg src={url} />
+      </ProfileWrapper>
     </_Wrapper>
   );
 }

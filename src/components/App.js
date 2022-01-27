@@ -2,16 +2,20 @@ import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 import { authService } from "@/firebase";
-import { Auth } from "@pages/";
+import { Auth } from "@pages";
 import { ProtectedRoutes } from "@components/routes";
+import { COLOR } from "@constants";
 
 const Main = styled.div`
   position: absolute;
-  background: #e5e5e5;
+  background: ${COLOR.GREYSCALE.BACKGROUND};
   height: 100%;
   width: 100%;
   top: 0;
   left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 function App() {

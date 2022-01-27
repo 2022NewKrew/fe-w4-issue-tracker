@@ -8,6 +8,7 @@ export const COLOR = {
     INITIAL: "#007aff",
     HOVER: "#004de3",
     ACTIVATED: "#c7ebff",
+    DARK_BLUE: "#004DE3",
   },
   GREYSCALE: {
     TITLE_ACTIVE: "#14142B",

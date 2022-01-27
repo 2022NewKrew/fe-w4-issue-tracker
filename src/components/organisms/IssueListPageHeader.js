@@ -27,7 +27,7 @@ const CreateIssueButton = styled(SmallStandardButton)`
   margin-left: 30px;
 `;
 
-function IssueListHeader() {
+function IssueListPageHeader() {
   return (
     <_Wrapper>
       <FilterBar />
@@ -42,4 +42,4 @@ function IssueListHeader() {
   );
 }
 
-export default IssueListHeader;
+export default IssueListPageHeader;

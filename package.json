@@ -1,25 +1,28 @@
 {
-  "name": "react-webpack-boilerplate-hmr",
+  "name": "fe-w4-issue-tracker",
   "version": "1.0.0",
-  "description": "https://www.notion.so/TIL-0326bb9d8d244c08b7ff7cc7cde959a1",
-  "main": "index.js",
+  "description": "GitHub 이슈 관리 서비스 만들기",
+  "main": "index.jsx",
   "scripts": {
-    "dev": "webpack-dev-server --config webpack.config.development.js",
+    "dev": "webpack-dev-server --env env=dev",
+    "dev:bundleanalyzer": "npm run dev --env addons=bundleanalyzer",
     "prebuild": "rimraf dist",
-    "build": "cross-env NODE_ENV=production webpack --mode production --config webpack.config.production.js"
+    "build": "cross-env NODE_ENV=production webpack --mode production --env env=prod",
+    "build:bundleanalyzer": "npm run build --env addons=bundleanalyzer"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dragons6641/react-webpack-boilerplate-hmr.git"
+    "url": "git+https://github.com/dragons6641/fe-w4-issue-tracker.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dragons6641/react-webpack-boilerplate-hmr/issues"
+    "url": "https://github.com/dragons6641/fe-w4-issue-tracker/issues"
   },
-  "homepage": "https://github.com/dragons6641/react-webpack-boilerplate-hmr#readme",
+  "homepage": "https://github.com/dragons6641/fe-w4-issue-tracker#readme",
   "dependencies": {
+    "core-js": "^3.20.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-imported-component": "^6.5.3",
@@ -29,19 +32,27 @@
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
+    "@babel/cli": "^7.16.8",
     "@babel/core": "^7.16.12",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "babel-loader": "^8.2.3",
     "cross-env": "^7.0.3",
     "css-loader": "^6.5.1",
+    "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.5.2",
+    "node-sass": "^7.0.1",
     "postcss-loader": "^6.2.1",
+    "raw-loader": "^4.0.2",
     "rimraf": "^3.0.2",
+    "sass-loader": "^12.4.0",
     "style-loader": "^3.3.1",
+    "url-loader": "^4.1.1",
     "webpack": "^5.67.0",
+    "webpack-bundle-analyzer": "^4.5.0",
     "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^4.7.3"
+    "webpack-dev-server": "^4.7.3",
+    "webpack-merge": "^5.8.0"
   }
 }

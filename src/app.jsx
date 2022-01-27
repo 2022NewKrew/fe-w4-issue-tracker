@@ -1,1 +1,5 @@
-export default function App() {}
+import styled from 'styled-components';
+
+export default function App() {
+  return <div></div>;
+}

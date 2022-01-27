@@ -4,6 +4,7 @@ import { Size } from "@/common/designSystem";
 import Input, { CheckState } from "./Input";
 import Button, { ButtonMode } from "./Button";
 import CommentTextArea from "./CommentTextArea";
+import Dropdown, { DropdownItem, DropdownType, FixPoint } from "./Dropdown";
 
 const Common = () => {
   //TODO: 테스트화면에 테스트 값
@@ -54,8 +55,74 @@ const Common = () => {
     setInputValue4(event.target.value);
   };
 
+  const [dropdownGroup, setDropdownGroup] = useState<DropdownItem[]>([
+    {
+      type: DropdownType.none,
+      itemTitle: "필터1",
+      isChecked: false,
+    },
+    {
+      type: DropdownType.none,
+      itemTitle: "필터2",
+      isChecked: false,
+    },
+    {
+      type: DropdownType.none,
+      itemTitle: "필터3",
+      isChecked: false,
+    },
+  ]);
+
+  const [dropdownGroup2, setDropdownGroup2] = useState<DropdownItem[]>([
+    {
+      type: DropdownType.none,
+      itemTitle: "필터4",
+      isChecked: false,
+    },
+    {
+      type: DropdownType.none,
+      itemTitle: "필터5",
+      isChecked: false,
+    },
+    {
+      type: DropdownType.none,
+      itemTitle: "필터6",
+      isChecked: false,
+    },
+  ]);
+
+  const clickItem = (clickItemIndex: number) => {
+    const newDropdownGroup = [...dropdownGroup];
+    newDropdownGroup[clickItemIndex].isChecked =
+      !newDropdownGroup[clickItemIndex].isChecked;
+    setDropdownGroup(newDropdownGroup);
+  };
+
+  const clickItem2 = (clickItemIndex: number) => {
+    const newDropdownGroup = [...dropdownGroup2];
+    newDropdownGroup[clickItemIndex].isChecked =
+      !newDropdownGroup[clickItemIndex].isChecked;
+    setDropdownGroup2(newDropdownGroup);
+  };
+
   return (
     <Wrapper>
+      <DropdownWrapper>
+        <Dropdown
+          dropdownTitle="Filter"
+          dropdwonGroupTitle="이슈 필터"
+          dropdownGroup={dropdownGroup}
+          clickItem={clickItem}
+        ></Dropdown>
+        <Dropdown
+          dropdownTitle="Filter2"
+          dropdwonGroupTitle="이슈 필터2"
+          dropdownGroup={dropdownGroup2}
+          clickItem={clickItem2}
+          dropdownPopupFixPoint={FixPoint.right}
+        ></Dropdown>
+      </DropdownWrapper>
+
       <CommentTextArea
         textAreaValue={textAreaValue}
         onChange={textAreaChange}
@@ -152,4 +219,10 @@ const Wrapper = styled.div`
   margin-left: 10px;
 `;
 
+const DropdownWrapper = styled.div`
+  width: 240px;
+  display: flex;
+  justify-content: space-between;
+  /* margin-bottom: 200px; */
+`;
 export default Common;

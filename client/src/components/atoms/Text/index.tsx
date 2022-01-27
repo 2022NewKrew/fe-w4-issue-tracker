@@ -1,80 +1,71 @@
 import React from "react";
-import { css } from "styled-components";
-import TextLarge from "./TextLarge";
-import TextMedium from "./TextMedium";
-import TextSmall from "./TextSmall";
-import TextXSmall from "./TextXSmall";
+import styled, { css } from "styled-components";
+import { TEXT_TYPE } from "@/constants/type";
+import { theme } from "@/styles/theme";
 
-export interface TextProps {
-  className?: string;
-  children?: string;
-  margin?: string;
-  padding?: string;
-  textAlign?: string;
-  cssValue?: any;
-  props?: any;
-}
-export interface StyleProps {
-  theme: {
-    color: {
-      primary?: string;
-      primaryC1?: string;
-      primaryC2?: string;
-      label?: string;
-      body?: string;
-      titleActive?: string;
-      offWhite?: string;
-    };
+type TextType = "large" | "medium" | "small" | "xsmall";
+interface ITextProps {
+  type: TextType;
+  styles?: {
+    margin?: string;
+    padding?: string;
+    textAlign?: string;
+    childCSS?: any;
   };
-  margin?: string;
-  padding?: string;
-  textAlign?: string;
-  cssValue?: any;
+  className?: string;
 }
 
-interface TextFactoryProps extends TextProps {
-  type: string;
-}
-const Text: React.FC<TextFactoryProps> = ({ type, children, cssValue, ...props }) => {
-  switch (type) {
-    case "large":
-      return (
-        <TextLarge cssValue={cssValue} {...props}>
-          {children}
-        </TextLarge>
-      );
-    case "medium":
-      return (
-        <TextMedium cssValue={cssValue} {...props}>
-          {children}
-        </TextMedium>
-      );
-    case "small":
-      return (
-        <TextSmall cssValue={cssValue} {...props}>
-          {children}
-        </TextSmall>
-      );
-    case "xsmall":
-      return (
-        <TextXSmall cssValue={cssValue} {...props}>
-          {children}
-        </TextXSmall>
-      );
-    default:
-      return (
-        <TextLarge cssValue={cssValue} {...props}>
-          {children}
-        </TextLarge>
-      );
-  }
+const Text: React.FC<ITextProps> = ({ type, ...props }) => {
+  const StyledTextProps = {
+    type,
+    ...props,
+  };
+  return <StyledText {...StyledTextProps}></StyledText>;
 };
 
-/** Common Styles **/
-
-export const TextStyle = css`
-  font-family: Noto Sans KR;
-  font-style: normal;
-  font-weight: normal;
+const StyledText = styled.div<any>`
+  ${({ type, styles }) => {
+    switch (type) {
+      case TEXT_TYPE.LARGE:
+        return css`
+          width: 276px;
+          height: 80px;
+          font-size: 24px;
+          line-height: 40px;
+          color: ${theme.color.body};
+          margin: ${styles.margin};
+          ${styles.childCSS}
+        `;
+      case TEXT_TYPE.MEDIUM:
+        return css`
+          width: 207px;
+          height: 64px;
+          font-size: 18px;
+          color: ${theme.color.body};
+          margin: ${styles.margin};
+          ${styles.childCSS}
+        `;
+      case TEXT_TYPE.SMALL:
+        return css`
+          width: 184px;
+          height: 56px;
+          font-size: 16px;
+          color: ${theme.color.body};
+          margin: ${styles.margin};
+          ${styles.childCSS}
+        `;
+      case TEXT_TYPE.XSMALL:
+        return css`
+          width: 138px;
+          height: 40px;
+          font-size: 12px;
+          font-weight: 500;
+          margin: ${styles.margin};
+          ${styles.childCSS}
+        `;
+      default:
+        return css``;
+    }
+  }}
 `;
 export default Text;

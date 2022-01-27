@@ -10,3 +10,14 @@ export const garoCenterAlign = css`
   display: flex;
   justify-content: center;
 `;
+
+export const seroCenterAlign = css`
+  display: flex;
+  align-items: center;
+`;
+
+export const defaultPageFrame = css`
+  padding-top: 120px;
+  width: 1220px;
+  margin: 0 auto;
+`;

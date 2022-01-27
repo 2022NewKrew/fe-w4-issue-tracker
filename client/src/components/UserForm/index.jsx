@@ -8,6 +8,7 @@ import CustomButton from '@/components/CustomButton';
 import { toastAtom } from '@/store/atoms';
 import { allCenterAlign } from '@/static/style/mixin';
 import { useNavigate } from '@/core/Router';
+import { api } from '@/api/base';
 
 let timer = 0;
 const disableOpacity = 0.5;
@@ -30,24 +31,94 @@ function UserForm({ btnContent, mode }) {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => controlOpacity(), [id, pwd, confirmPwd]);
+
+  const controlOpacity = () => {
+    if (mode === '로그인') {
+      if (id && pwd) setOpacity(enableOpacity);
+      else setOpacity(disableOpacity);
+    } else if (mode === '회원가입') {
+      if (id && pwd && confirmPwd) setOpacity(enableOpacity);
+      else setOpacity(disableOpacity);
+    }
+  };
+
   const handleSubmitForm = (e) => {
     e.preventDefault();
     if (mode === '로그인') {
-      loginLogic();
+      handleLoginAPI();
+    } else if (mode === '회원가입') {
+      const isValid = checkValidation();
+      isValid && handleRegisterAPI();
+    }
+  };
+
+  const checkValidation = () => {
+    if (!checkIdValidation()) {
+      setToast({
+        isActive: true,
+        title: 'ID는 영어 또는 영어+숫자 조합만 가능합니다.',
+        mode: 'caution',
+      });
+      return false;
+    }
+    if (!checkPwdValidation()) {
+      setToast({
+        isActive: true,
+        title: '비밀번호는 영어+숫자+특수문자 조합만 가능합니다.',
+        mode: 'caution',
+      });
+      return false;
+    }
+    if (pwd !== confirmPwd) {
+      setToast({
+        isActive: true,
+        title: '비밀번호가 일치하지 않습니다.',
+        mode: 'caution',
+      });
+      return false;
+    }
+    return true;
+  };
+
+  const checkIdValidation = () => {
+    if (id.search(/[a-zA-Z]/g) === -1) return false;
+    if (id.search(/[^a-zA-Z0-9]/g) >= 0) return false;
+    return true;
+  };
+
+  const checkPwdValidation = () => {
+    if (pwd.search(/[a-zA-Z]/g) === -1) return false;
+    if (pwd.search(/[0-9]/g) === -1) return false;
+    if (pwd.search(/[~!@#$%^&*-+=]/g) === -1) return false;
+    return true;
+  };
+
+  const handleLoginAPI = async () => {
+    const result = await api.post('/users/login', { id, password: pwd });
+    if (!result.isSuccess) {
+      setToast({
+        isActive: true,
+        title: result.message,
+        mode: 'fail',
+      });
       return;
     }
-    if (mode === '회원가입') {
-      registerLogic();
+
+    navigateTo('/main');
+  };
+
+  const handleRegisterAPI = async () => {
+    const result = await api.post('/users/register', { id, password: pwd });
+    if (!result.isSuccess) {
+      setToast({
+        isActive: true,
+        title: result.message,
+        mode: 'fail',
+      });
+      return;
     }
-  };
 
-  const loginLogic = () => {
-    // login API 통신
-    alert('로그인');
-  };
-
-  const registerLogic = () => {
-    // register API 통신
     setToast({
       isActive: true,
       title: '회원가입이 되었습니다❗️',
@@ -64,73 +135,43 @@ function UserForm({ btnContent, mode }) {
     }, switchPageTime);
   };
 
-  const handleChangeId = (e) => {
-    controlDisable(e.currentTarget.value, 'id');
-    setId(e.currentTarget.value);
-  };
-
-  const handleChangePwd = (e) => {
-    controlDisable(e.currentTarget.value, 'pwd');
-    setPwd(e.currentTarget.value);
-  };
-
-  const handleChangeConfirmPwd = (e) => {
-    controlDisable(e.currentTarget.value, 'confirmPwd');
-    setConfirmPwd(e.currentTarget.value);
-  };
-
-  const controlDisable = (value, type) => {
-    if (!value) {
-      setOpacity(disableOpacity);
-      return;
-    }
-
-    if (mode === '로그인') {
-      if (type === 'id') pwd && setOpacity(enableOpacity);
-      else if (type === 'pwd') id && setOpacity(enableOpacity);
-      return;
-    }
-    if (mode === '회원가입') {
-      if (type === 'id') pwd && confirmPw && setOpacity(enableOpacity);
-      else if (type === 'pwd') id && confirmPwd && setOpacity(enableOpacity);
-      else if (type === 'confirmPwd') id && pwd && setOpacity(enableOpacity);
-    }
-  };
-  const createInput = () => {
-    return (
-      <>
-        <input
-          value={id}
-          onChange={handleChangeId}
-          type="text"
-          autoComplete="username"
-          required
-          placeholder="아이디"
-        ></input>
-        <input
-          value={pwd}
-          onChange={handleChangePwd}
-          type="password"
-          autoComplete="current-password"
-          required
-          placeholder="비밀번호"
-        ></input>
-        {mode === '회원가입' && (
-          <input
-            value={confirmPwd}
-            onChange={handleChangeConfirmPwd}
-            type="password"
-            required
-            placeholder="비밀번호 재확인"
-          ></input>
-        )}
-      </>
-    );
-  };
+  const handleChangeId = (e) => setId(e.currentTarget.value);
+  const handleChangePwd = (e) => setPwd(e.currentTarget.value);
+  const handleChangeConfirmPwd = (e) => setConfirmPwd(e.currentTarget.value);
 
   return (
     <Form onSubmit={handleSubmitForm} color={theme.colors.blue}>
-      {createInput()}
+      <input
+        value={id}
+        onChange={handleChangeId}
+        type="text"
+        autoComplete="username"
+        required
+        placeholder="아이디"
+        minLength={mode === '회원가입' ? '6' : ''}
+        maxLength="16"
+      ></input>
+      <input
+        value={pwd}
+        onChange={handleChangePwd}
+        type="password"
+        autoComplete="current-password"
+        required
+        placeholder="비밀번호"
+        minLength={mode === '회원가입' ? '6' : ''}
+        maxLength="12"
+      ></input>
+      {mode === '회원가입' && (
+        <input
+          value={confirmPwd}
+          onChange={handleChangeConfirmPwd}
+          type="password"
+          required
+          placeholder="비밀번호 재확인"
+          minLength="6"
+          maxLength="12"
+        ></input>
+      )}
       <CustomButton
         opacity={opacity}
         sizeLevel={3}

@@ -1,7 +1,7 @@
 import React from "react";
 
 import styled, { css } from "styled-components";
-import { ReactComponent as Down } from "../assets/icons/down.svg";
+import { ReactComponent as Down } from "@assets/icons/down.svg";
 
 const Container = styled.div`
   display: flex;

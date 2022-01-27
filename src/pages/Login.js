@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-import { LoginContainer } from "@components/loginContainer";
-import { ReactComponent as Logo } from "../assets/icons/logo.svg";
-import { LargeButton, SmallTextButton } from "@components/buttons";
-import { TextInput } from "@components/textInputs";
-import { SmallLink } from "@components/link";
+import { LoginContainer } from "@components/templates/loginContainer";
+import { ReactComponent as Logo } from "@assets/icons/logo.svg";
+import { LargeButton, SmallTextButton } from "@components/atoms/buttons";
+import { TextInput } from "@components/atoms/textInputs";
+import { SmallLink } from "@components/atoms/link";
 
 import { firebaseAuth, githubProvider } from "../firebase";
 

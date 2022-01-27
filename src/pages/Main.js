@@ -1,10 +1,12 @@
 import React from "react";
-import { SmallButton } from "@components/buttons";
-import { DropdownIndicators } from "@components/dropdownIndicators";
-import { FilterBar } from "@components/filterBar";
-import { Taps } from "@components/Taps";
-import { LargeLabel, SmallLabel } from "@components/Labels";
-import { DropdownPanel } from "@components/DropdownPanel";
+
+import Header from "@components/organisms/Header";
+import { SmallButton } from "@components/atoms/buttons";
+import { DropdownIndicators } from "@components/molecules/dropdownIndicators";
+import { FilterBar } from "@components/molecules/filterBar";
+import { Taps } from "@components/molecules/Taps";
+import { LargeLabel, SmallLabel } from "@components/molecules/Labels";
+import { DropdownPanel } from "@components/molecules/DropdownPanel";
 
 import { firebaseAuth } from "../firebase";
 
@@ -32,6 +34,7 @@ export default function Main() {
   ];
   return (
     <div>
+      <Header />
       Main Page <br />
       <SmallButton onClick={logout}>로그아웃 하러 가기</SmallButton>
       <br />

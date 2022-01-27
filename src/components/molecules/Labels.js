@@ -1,8 +1,8 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { ReactComponent as AlertCircle } from "../assets/icons/alertCircle.svg";
-import { ReactComponent as Archive } from "../assets/icons/archive.svg";
-import { XSmallText } from "@components/Text";
+import { ReactComponent as AlertCircle } from "@assets/icons/alertCircle.svg";
+import { ReactComponent as Archive } from "@assets/icons/archive.svg";
+import { XSmallText } from "@components/atoms/Text";
 
 const LargeContainer = styled.div`
   width: 100px;
@@ -86,6 +86,7 @@ export function SmallLabel(props) {
   } else {
     color = "label";
   }
+
   return (
     <SmallContainer type={type}>
       <XSmallText color={color}>{text}</XSmallText>

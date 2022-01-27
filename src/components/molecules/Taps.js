@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 
-import { SmallLink } from "@components/link";
-import { SmallText } from "@components/Text";
+import { SmallLink } from "@components/atoms/link";
+import { SmallText } from "@components/atoms/Text";
 
-import { ReactComponent as Tag } from "../assets/icons/tag.svg";
-import { ReactComponent as Milestone } from "../assets/icons/milestone.svg";
+import { ReactComponent as Tag } from "@assets/icons/tag.svg";
+import { ReactComponent as Milestone } from "@assets/icons/milestone.svg";
 
 const TapsContainer = styled.div`
   width: 320px;

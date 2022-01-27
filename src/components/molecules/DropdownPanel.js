@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
-import { MediumText, SmallText } from "@components/Text";
-import { ReactComponent as UserimageSmall } from "../assets/icons/userimageSmall.svg";
-import { ReactComponent as CheckoffCircle } from "../assets/icons/checkoffCircle.svg";
-import { ReactComponent as CheckonCircle } from "../assets/icons/checkonCircle.svg";
+import { MediumText, SmallText } from "@components/atoms/Text";
+import { ReactComponent as UserimageSmall } from "@assets/icons/userimageSmall.svg";
+import { ReactComponent as CheckoffCircle } from "@assets/icons/checkoffCircle.svg";
+import { ReactComponent as CheckonCircle } from "@assets/icons/checkonCircle.svg";
 
 const Container = styled.div`
   width: 240px;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
-import { ReactComponent as Down } from "../assets/icons/down.svg";
-import { ReactComponent as Search } from "../assets/icons/Search.svg";
+import { ReactComponent as Down } from "@assets/icons/down.svg";
+import { ReactComponent as Search } from "@assets/icons/Search.svg";
 
 const Container = styled.div`
   width: 601px;

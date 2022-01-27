@@ -29,7 +29,7 @@
       "@types/*": ["src/types/*"], 
       "@layouts/*": ["src/layouts/*"], 
       "@pages/*": ["src/pages/*"],
-      "@icons/*": ["src/assets/icons/*"],
+      "@icon": ["src/icon/Icon.tsx"],
       }
   },
   "typeRoots": ["node_modules/@types", "src/types"],

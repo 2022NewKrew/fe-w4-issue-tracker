@@ -9,6 +9,9 @@ module.exports = {
   entry: './src/index.js',
   resolve: {
     extensions: ['.js', '.jsx'],
+    alias: {
+      "@IssueContext": path.resolve(__dirname, "src/context/issues"),
+    },
   },
   output: {
     path: path.resolve(__dirname, './dist'), // 결과물 경로

@@ -1,8 +1,11 @@
 import Icon from "@icon";
+
 import { ButtonProps, ButtonStyleProps } from "@interface/components";
 
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
+import { useNavigate } from "react-router-dom";
+import { useCallback } from "react";
 
 const Button = ({
   children,
@@ -12,14 +15,20 @@ const Button = ({
   disabled,
   onClick,
   icon,
+  link,
 }: ButtonProps) => {
+  const navigate = useNavigate();
+  const onClickLink = useCallback(() => {
+    navigate(link as string);
+  }, []);
+
   return (
     <StyledButton
       shape={shape}
       color={color}
       size={size}
       disabled={disabled}
-      onClick={onClick}
+      onClick={link ? onClickLink : onClick}
     >
       {icon && <Icon name={icon} />}
       {children}

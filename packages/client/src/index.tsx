@@ -1,13 +1,16 @@
 import ReactDOM from "react-dom";
-import App from "./App";
+import Router from "./Router";
 import theme from "@styles/theme";
 import GlobalStyle from "@styles/global";
 import { ThemeProvider } from "@emotion/react";
+import { RecoilRoot } from "recoil";
 
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
-    <GlobalStyle />
-    <App />
-  </ThemeProvider>,
+  <RecoilRoot>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Router />
+    </ThemeProvider>
+  </RecoilRoot>,
   document.getElementById("root")
 );

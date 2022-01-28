@@ -43,19 +43,12 @@ export default function Issue({
   function onClick(){
     navigate(`/issue/${issueID}`, {replace: false});
   }
-  /**
-   * @param {Event} e
-   */
-  function onCheckboxClick(e){
-    e.stopPropagation();
-    toggleCheck();
-  }
 
   return (
     <div className='Issue' onClick={onClick}>
       <div className='checkbox-container'>
         <input type='checkbox'
-          onChange={onCheckboxClick}
+          onChange={toggleCheck}
           onClick={(e)=>{e.stopPropagation();}}
           checked={isChecked}></input>
       </div>

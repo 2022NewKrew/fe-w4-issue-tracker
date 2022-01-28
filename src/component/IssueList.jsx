@@ -51,7 +51,7 @@ export default function IssueList(){
       ({issueID, title, authorID, timestamp, isOpen, milestoneID, body}, index)=>{
         return (
           <Issue
-            key={String(issueID)+isIndexChecked(index)}
+            key={issueID}
             issueID={issueID}
             title={title}
             authorID={authorID}

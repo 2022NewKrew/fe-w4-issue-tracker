@@ -96,9 +96,9 @@ const secondaryBtnInteractionStyle = css`
 
 const textBtnStyle = css`
   width: 100%;
-  height: 100%;
+  height: 28px;
   justify-content: space-between;
-  padding: 0 24px;
+  padding: 0 4px;
 
   svg {
     color: ${ COLOR.LABEL };
@@ -107,6 +107,14 @@ const textBtnStyle = css`
   span {
     padding-top: 4px;
     color: ${ COLOR.LABEL };
+  }
+  
+  span + svg {
+    margin-left: 5px;
+  }
+  
+  svg + span {
+    margin-left: 5px;
   }
 `
 
@@ -169,60 +177,26 @@ const disableBtnStyle = css`
 
 /**
  * 버튼 컴포넌트
+ * @param {JSX.Element} children
  * @param {string} type
  * @param {string} size
- * @param {string} text
- * @param {SVGElement} Icon
- * @param {boolean} isRightIcon
- * @param {boolean} isDisable
+ * @param {boolean} isDisabled
  * @param {function} onClickListener
  * @return {JSX.Element}
  * @constructor
  */
 const Button = ({
+                  children,
                   type,
                   size,
-                  text,
-                  Icon,
-                  isRightIcon,
-                  isDisable,
+                  isDisabled,
                   onClickListener
                 }) => {
-  const leftIcon = useMemo(() => {
-    if (Icon) {
-      if (!isRightIcon) {
-        return (
-          <Icon
-            width="1em"
-            height="1em"
-          />
-        )
-      }
-    }
-    
-    return null
-  }, [ Icon, isRightIcon ])
-  
-  const rightIcon = useMemo(() => {
-    if (Icon) {
-      if (isRightIcon) {
-        return (
-          <Icon
-            width="1em"
-            height="1em"
-          />
-        )
-      }
-    }
-    
-    return null
-  }, [ Icon, rightIcon ])
-  
   const onClick = useCallback(() => {
-    if (!isDisable) {
+    if (!isDisabled) {
       onClickListener()
     }
-  }, [ isDisable ])
+  }, [ isDisabled ])
   
   const customStyle = useMemo(() => {
     let style = (
@@ -239,7 +213,7 @@ const Button = ({
             : style.concat(standardBtnStyle)
     )
     
-    if (isDisable) {
+    if (isDisabled) {
       style = style.concat(disableBtnStyle)
     } else {
       style = (
@@ -251,15 +225,13 @@ const Button = ({
     }
     
     return style
-  }, [ type, size, isDisable ])
+  }, [ type, size, isDisabled ])
   
   return (
     <Btn
       onClick={ onClick }
       customStyle={ customStyle }>
-      { leftIcon }
-      <span>{ text }</span>
-      { rightIcon }
+      { children }
     </Btn>
   )
 }
@@ -267,11 +239,8 @@ const Button = ({
 Button.propTypes = {
   type: PropTypes.string.isRequired,
   size: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
   onClickListener: PropTypes.func.isRequired,
-  Icon: PropTypes.func,
-  isRightIcon: PropTypes.bool,
-  isDisable: PropTypes.bool
+  isDisabled: PropTypes.bool
 }
 
 export default Button

@@ -41,7 +41,7 @@ const InputLengthText = styled.div`
 
 /**
  * @param {string?} placeholder
- * @param {boolean} isDisable
+ * @param {boolean} isDisabled
  * @param {function?} onChangeListener
  * @param {function?} onAttachClickListener
  * @return {JSX.Element}
@@ -49,7 +49,7 @@ const InputLengthText = styled.div`
  */
 const TextArea = ({
                     placeholder,
-                    isDisable,
+                    isDisabled,
                     onChangeListener,
                     onAttachClickListener
                   }) => {
@@ -100,7 +100,7 @@ const TextArea = ({
       type={ TEXT_INPUT_TYPE.TEXT_AREA }
       state={ TEXT_INPUT_STATE.NORMAL }
       placeholder={ placeholder || '' }
-      isDisable={ isDisable }
+      isDisabled={ isDisabled }
       onInputValueChangeListener={ onInputValueChange }
       onFocusChangeListener={ onFocusChange }>
       { inputLengthText }
@@ -122,7 +122,7 @@ TextArea.propTypes = {
   onChangeListener: PropTypes.func,
   onAttachClickListener: PropTypes.func,
   placeholder: PropTypes.string,
-  isDisable: PropTypes.bool
+  isDisabled: PropTypes.bool
 }
 
 export default TextArea

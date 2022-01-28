@@ -146,7 +146,7 @@ const PaddingDiv = styled.div`
  * @param {string} type
  * @param {string} state
  * @param {string} placeholder
- * @param {boolean?} isDisable
+ * @param {boolean?} isDisabled
  * @param {string?} inputValue
  * @param {function?} onInputValueChangeListener
  * @param {function?} onFocusChangeListener
@@ -158,7 +158,7 @@ const TextInput = ({
                      type,
                      state,
                      placeholder,
-                     isDisable,
+                     isDisabled,
                      inputValue,
                      onInputValueChangeListener,
                      onFocusChangeListener
@@ -184,13 +184,13 @@ const TextInput = ({
   
   // input을 감싸고 있는 wrapper element가 클릭되어도 input으로 focus되도록 함
   const focusToInput = useCallback(() => {
-    if (!isDisable) {
+    if (!isDisabled) {
       setTimeout(() => {
         clearTimeout(blurTimeRef.current)
         inputRef.current.focus()
       }, 1)
     }
-  }, [ isDisable ])
+  }, [ isDisabled ])
   
   const onFocus = useCallback(() => {
     setIsFocus(true)
@@ -246,12 +246,12 @@ const TextInput = ({
           : null
     }
     
-    if (isDisable) {
+    if (isDisabled) {
       style = style.concat(disableWrapperStyle)
     }
     
     return style
-  }, [ type, isFocus, state, isDisable ])
+  }, [ type, isFocus, state, isDisabled ])
   
   const labelStyle = useMemo(() => {
     let style = css``
@@ -302,7 +302,7 @@ const TextInput = ({
         <TextArea
           placeholder={ placeholderInInput }
           placeholderColor={ placeholderColor }
-          disabled={isDisable}
+          disabled={isDisabled}
           ref={ inputRef }
           onChange={ onChange }
           onFocus={ onFocus }
@@ -314,7 +314,7 @@ const TextInput = ({
         <Input
           placeholder={ placeholderInInput }
           placeholderColor={ placeholderColor }
-          disabled={isDisable}
+          disabled={isDisabled}
           ref={ inputRef }
           onChange={ onChange }
           onFocus={ onFocus }
@@ -346,7 +346,7 @@ TextInput.propTypes = {
   placeholder: PropTypes.string.isRequired,
   state: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  isDisable: PropTypes.bool
+  isDisabled: PropTypes.bool
 }
 
 export default TextInput

@@ -25,20 +25,20 @@ export function useDebounce(callback, time, deps){
  * @param {any[]} array
  */
 export function useCheck(array){
-  const [checkArray, setCheckArray]=useState(array.map(()=>false));
+  const [checked, setChecked]=useState({});
   const [isCheckedAll, setIsCheckedAll]=useState(false);
   
   useEffect(()=>{
-    setCheckArray(array.map(()=>false));
+    setChecked({});
   }, [array]);
 
   useEffect(()=>{
-    setIsCheckedAll(checkArray.every((value)=>value));
-  }, [checkArray]);
+    setIsCheckedAll(array.length && Object.keys(checked).length===array.length);
+  }, [checked, array]);
 
   const isChecked=useCallback((index)=>{
-    return checkArray[index];
-  }, [checkArray]);
+    return (index in checked);
+  }, [checked]);
   /**
    * @param {number} index
    */
@@ -46,24 +46,28 @@ export function useCheck(array){
     if(index===undefined){
       return;
     }
-    setCheckArray((checkArray)=>{
-      const newCheckArray=[...checkArray];
-      newCheckArray[index]=!newCheckArray[index];
-      return newCheckArray;
+    setChecked((checked)=>{
+      if(index in checked){
+        const newChecked={...checked};
+        delete newChecked[index];
+        return newChecked;
+      }
+      const newChecked={...checked, [index]: true};
+      return newChecked;
     });
   }, []);
 
   const checkAll=useCallback(()=>{
-    const newChecked=array.map(()=>true);
-    setCheckArray(newChecked);
+    const newChecked=array.reduce((prev, _, index)=>{
+      prev[index]=true;
+      return prev;
+    }, {});
+    setChecked(newChecked);
   }, [array]);
   const uncheckAll=useCallback(()=>{
-    const newChecked=array.map(()=>false);
-    setCheckArray(newChecked);
-  }, [array]);
-  /**
-   * NOTE Toggling check all does not change checkbox of each row... Why?
-   */
+    setChecked({});
+  }, []);
+  
   const toggleCheckAll=useCallback(()=>{
     isCheckedAll ? uncheckAll() : checkAll();
   }, [isCheckedAll, uncheckAll, checkAll]);

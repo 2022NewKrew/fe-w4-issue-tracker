@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
+import { MediumTextButton } from "@components/atoms/buttons";
 import { DropdownIndicators } from "@components/molecules/dropdownIndicators";
-import { LargeLabel } from "@components/molecules/Labels";
+import { ReactComponent as AlertCircle } from "@assets/icons/alertCircle.svg";
+import { ReactComponent as Archive } from "@assets/icons/archive.svg";
 import { ReactComponent as CheckboxInitial } from "@assets/icons/checkboxInitial.svg";
 
 const HeaderContainer = styled.div`
@@ -39,22 +41,40 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: start;
 
-  svg + div {
+  svg + button {
     margin-left: 32px;
   }
 
-  div + div {
+  button + button {
     margin-left: 24px;
   }
 `;
 
 export default function IssueTableHeader() {
+  const [activeIssueType, setActiveIssueType] = useState("open");
+
+  function clickIssueType(e) {
+    setActiveIssueType(e.target.attributes.type.value);
+  }
+
   return (
     <HeaderContainer>
       <Wrapper>
         <CheckboxInitial />
-        <LargeLabel type='open' />
-        <LargeLabel type='closed' />
+        <MediumTextButton
+          type='open'
+          onClick={(e) => clickIssueType(e)}
+          active={activeIssueType === "open"}>
+          <AlertCircle />
+          열린 이슈(2)
+        </MediumTextButton>
+        <MediumTextButton
+          type='closed'
+          onClick={(e) => clickIssueType(e)}
+          active={activeIssueType === "closed"}>
+          <Archive />
+          닫힌 이슈(2)
+        </MediumTextButton>
       </Wrapper>
 
       <IndicatorsContainer>

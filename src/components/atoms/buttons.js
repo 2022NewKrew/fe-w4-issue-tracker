@@ -132,12 +132,19 @@ export const TextButton = styled.button`
     opacity: 0.5;
     cursor: "not-allowed";
   }
+
+  ${(props) => {
+    if (props.active) {
+      return css`
+        color: ${(props) => props.theme.greyscale.titleActive};
+      `;
+    }
+  }}
 `;
 
 export const MediumTextButton = styled(TextButton)`
-  width: 100px;
+  width: 105px;
   height: 40px;
-  padding: 0 24px;
 
   font-size: ${(props) => props.theme.fontSizes.small};
 `;
@@ -147,4 +154,8 @@ export const SmallTextButton = styled(TextButton)`
   height: 40px;
 
   font-size: ${(props) => props.theme.fontSizes.extraSmall};
+
+  svg {
+    margin-right: 7.33px;
+  }
 `;

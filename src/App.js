@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Main from "@pages/Main";
 import Login from "@pages/Login";
+import Label from "./pages/Label";
+import Milestone from "./pages/Milestone";
+import CreateIssue from "./pages/CreateIssue";
+import IssueDetail from "./pages/IssueDetail";
 
 import { useRecoilState } from "recoil";
 import { userState } from "./atoms/atoms";
@@ -24,6 +28,10 @@ const App = () => {
         element={user ? <Main /> : <Navigate to={"/login"} />}
       />
       <Route exact path='/login' element={<Login />} />
+      <Route exact path='/create' element={<CreateIssue />} />
+      <Route exact path='/issues/:id' element={<IssueDetail />} />
+      <Route exact path='/labels' element={<Label />} />
+      <Route exact path='/milestones' element={<Milestone />} />
     </Routes>
   );
 };

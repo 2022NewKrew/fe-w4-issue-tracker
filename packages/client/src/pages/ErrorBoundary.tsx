@@ -25,7 +25,12 @@ class ErrorBoundary extends Component<Props, State> {
 
   public render() {
     if (this.state.hasError) {
-      return <h1>죄송합니다. 지금은 서비스에 오류가 발생하였습니다.</h1>;
+      return (
+        <h1>
+          죄송합니다. 지금은 서비스에 오류가 발생하였습니다
+          <div className=""></div>
+        </h1>
+      );
     }
 
     return this.props.children;

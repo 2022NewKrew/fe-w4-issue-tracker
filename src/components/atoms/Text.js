@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import { COLOR } from "@constants/color.js";
 
 export const Text = styled.span`
   font-family: Noto Sans KR, sans-serif;
-  color: #4e4b66;
+  color: ${COLOR.GREYSCALE.BODY};
   font-style: normal;
 `;
 

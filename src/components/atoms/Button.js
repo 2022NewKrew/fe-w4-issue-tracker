@@ -1,52 +1,43 @@
 import React from "react";
 import styled, { css } from "styled-components";
-
-const BTN_COLOR = {
-  BLACK: {
-    INITIAL: "#14142b",
-    HOVER: "#1e1e40",
-    ACTIVATED: "#d9dbe9",
-  },
-  BLUE: {
-    INITIAL: "#007aff",
-    HOVER: "#004de3",
-    ACTIVATED: "#c7ebff",
-  },
-};
+import { COLOR } from "@constants";
 
 export const Button = styled.button`
   display: flex;
-  flex-direction: column;
+  ${({ direction }) =>
+    css`
+      flex-direction: ${direction};
+    `};
   justify-content: center;
   align-items: center;
 
-  font-family: Noto Sans KR, sans-serif;
-  font-style: normal;
   font-weight: bold;
   font-size: 18px;
   line-height: 32px;
   color: #fefefe;
   border: 4px solid transparent;
 
-  ${({ color }) => {
-    const { INITIAL, HOVER, ACTIVATED } = BTN_COLOR[color];
-    return css`
-      background: ${INITIAL};
-      &:hover {
-        background: ${HOVER};
-      }
-      &:active {
-        border-color: ${ACTIVATED};
-      }
-    `;
-  }}
+  svg {
+    color: ${COLOR.GREYSCALE.OFF_WHITE};
+  }
 
-  ${({ disabled }) =>
-    disabled
+  ${({ color, disabled }) => {
+    const { INITIAL, HOVER, ACTIVATED } = color;
+    return disabled
       ? css`
+          background: ${INITIAL};
           opacity: 0.5;
         `
-      : ``}
+      : css`
+          background: ${INITIAL};
+          &:active {
+            border-color: ${ACTIVATED};
+          }
+          &:hover {
+            background: ${HOVER};
+          }
+        `;
+  }}
 `;
 
 export const LargeButton = styled(Button)`
@@ -76,7 +67,7 @@ export const SmallSecondaryButton = styled(Button)`
   width: 120px;
   height: 40px;
   ${({ color }) => {
-    const { INITIAL, HOVER } = BTN_COLOR[color];
+    const { INITIAL, HOVER } = color;
     return css`
       border: 2px solid ${INITIAL};
       background-color: transparent;

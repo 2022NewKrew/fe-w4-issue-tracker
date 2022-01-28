@@ -1,31 +1,24 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { authService } from "@/firebase";
-import { Header } from "@molecules/";
+import { Header } from "@molecules";
+import { IssueListPageHeader, IssueTable } from "@organisms";
+import { Wrapper } from "@atoms";
 
-const HomeWrapper = styled.div`
+const _Wrapper = styled(Wrapper)`
   position: relative;
-  width: 100%;
+  width: 1280px;
   height: 100%;
-  display: flex;
-  flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
 `;
 
 function Home() {
-  const auth = authService.getAuth();
   return (
-    <HomeWrapper>
+    <_Wrapper>
       <Header />
-      <button
-        onClick={() => {
-          authService.signOut(auth);
-        }}
-      >
-        sign out
-      </button>
-    </HomeWrapper>
+      <IssueListPageHeader />
+      <IssueTable />
+    </_Wrapper>
   );
 }
 

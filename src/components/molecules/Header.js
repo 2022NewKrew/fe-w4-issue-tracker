@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { MediumLogo } from "@atoms/Logo";
+import { MediumLogo, SmallLinkText, Wrapper } from "@atoms";
 import { authService } from "@/firebase.js";
 
-const HeaderWrapper = styled.div`
+const _Wrapper = styled(Wrapper)`
   position: relative;
-  display: flex;
+  flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-  min-width: 720px;
+  width: 100%;
   height: 80px;
+  padding: 20px 0 40px 0;
 `;
 
 const ProfileImg = styled.img`
@@ -18,16 +18,24 @@ const ProfileImg = styled.img`
   border-radius: 30px;
   border: 1px solid #d9dbe9;
   box-sizing: border-box;
+  margin: 0 10px;
+`;
+
+const ProfileWrapper = styled(Wrapper)`
+  flex-direction: row;
 `;
 
 function Header() {
   const auth = authService.getAuth();
   const url = auth.currentUser.photoURL;
   return (
-    <HeaderWrapper>
+    <_Wrapper>
       <MediumLogo>Issue Tracker</MediumLogo>
-      <ProfileImg src={url} />
-    </HeaderWrapper>
+      <ProfileWrapper>
+        <SmallLinkText onClick={() => auth.signOut()}>로그아웃</SmallLinkText>
+        <ProfileImg src={url} />
+      </ProfileWrapper>
+    </_Wrapper>
   );
 }
 

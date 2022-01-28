@@ -1,15 +1,17 @@
 import React from "react";
-import { AuthForm } from "@molecules/";
-import { authService } from "@/firebase";
+import { AuthForm } from "@organisms";
+import { useLocation, Navigate } from "react-router-dom";
 
-function Auth() {
-  const signInWithGithub = () => {
-    const authProvider = new authService.GithubAuthProvider();
-    const auth = authService.getAuth();
-    authService.signInWithPopup(auth, authProvider);
-  };
+function Auth({ isLoggedIn }) {
+  const location = useLocation();
 
-  return <AuthForm signInWithGithub={signInWithGithub} />;
+  const from = location.state?.from?.pathname || "/";
+
+  if (isLoggedIn) {
+    return <Navigate to={from} replace={true} />;
+  }
+
+  return <AuthForm />;
 }
 
 export default Auth;

@@ -7,10 +7,26 @@ import IssueTableCell from "../organisms/IssueTableCell";
 const Container = styled.div`
   margin: 0 80px;
 
-  border-radius: 16px;
-  border: 1px solid ${(props) => props.theme.greyscale.line};
+  /* border-radius: 16px; */
+  /* border: 1px solid ${(props) => props.theme.greyscale.line}; */
 
-  overflow: hidden;
+  /* overflow: hidden; */
+
+  .clearfix:before,
+  .clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    overflow: hidden;
+  }
+
+  .clearfix:after {
+    clear: both;
+  }
+
+  .clearfix {
+    zoom: 1;
+  }
 `;
 
 export default function IssueTableContainer() {
@@ -59,7 +75,7 @@ export default function IssueTableContainer() {
   ));
 
   return (
-    <Container>
+    <Container className='clearfix'>
       <IssueTableHeader
         selectedIssueIds={selectedIssueIds}
         setSelectedIssueIds={setSelectedIssueIds}

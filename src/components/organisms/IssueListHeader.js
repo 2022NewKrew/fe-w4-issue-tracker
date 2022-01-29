@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import { FilterBar } from "@components/molecules/filterBar.js";
+import { DropdownPanel } from "@components/molecules/DropdownPanel";
 import { Taps } from "@components/molecules/Taps.js";
 import { Button } from "@components/atoms/buttons";
 import { ReactComponent as Plus } from "@assets/icons/plus.svg";
@@ -23,6 +24,10 @@ const HeaderContainer = styled.div`
       margin-right: 7.33px;
     }
   }
+`;
+
+const FilterContainer = styled.div`
+  position: relative;
 `;
 
 const Wrapper = styled.div`
@@ -51,9 +56,33 @@ const StyledLink = styled(Link)`
 `;
 
 export default function IssueListHeader() {
+  const [showPanel, setShowPanel] = useState(false);
+
+  function handleDropdownPanels() {
+    console.log(showPanel);
+    setShowPanel(!showPanel);
+  }
+
+  const menus = [
+    "열린 이슈",
+    "내가 작성한 이슈",
+    "나에게 할당된 이슈",
+    "내가 댓글을 남긴 이슈",
+    "닫힌 이슈",
+  ];
+
   return (
     <HeaderContainer>
-      <FilterBar />
+      <FilterContainer>
+        <FilterBar showPanel={showPanel} setShowPanel={setShowPanel} />
+        <DropdownPanel
+          show={showPanel}
+          header='이슈 필터'
+          type='text'
+          menus={menus}
+        />
+      </FilterContainer>
+
       <Wrapper>
         <Taps />
         <Button size='small' color='blue'>

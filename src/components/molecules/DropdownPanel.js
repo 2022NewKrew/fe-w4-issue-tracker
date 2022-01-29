@@ -7,6 +7,8 @@ import { ReactComponent as CheckoffCircle } from "@assets/icons/checkoffCircle.s
 import { ReactComponent as CheckonCircle } from "@assets/icons/checkonCircle.svg";
 
 const Container = styled.div`
+  position: absolute;
+
   width: 240px;
   box-sizing: border-box;
 
@@ -14,6 +16,9 @@ const Container = styled.div`
 
   border: 1px solid ${(props) => props.theme.greyscale.line};
   border-radius: 16px;
+
+  top: ${(props) => (props.position === "right" ? 45 : null)}px;
+  right: ${(props) => (props.position === "right" ? 0 : null)}px;
 `;
 
 const Header = styled.div`
@@ -68,22 +73,26 @@ export function DropdownPanel(props) {
     }
   }
 
-  return (
-    <Container>
-      <Header>
-        <MediumText color='titleActive'>{props.header}</MediumText>
-      </Header>
-      {props.menus.map((menu, id) => {
-        return (
-          <ItemContainer key={id} onClick={() => handleClick(id)}>
-            <ImageTextContainer>
-              {type === "image" ? <UserimageSmall /> : null}
-              <SmallText>{menu.name}</SmallText>
-            </ImageTextContainer>
-            {showSelectionIcon(type, id)}
-          </ItemContainer>
-        );
-      })}
-    </Container>
-  );
+  if (props.show) {
+    return (
+      <Container position={props.position}>
+        <Header>
+          <MediumText color='titleActive'>{props.header}</MediumText>
+        </Header>
+        {props.menus.map((menu, id) => {
+          return (
+            <ItemContainer key={id} onClick={() => handleClick(id)}>
+              <ImageTextContainer>
+                {type === "image" ? <UserimageSmall /> : null}
+                <SmallText>{menu}</SmallText>
+              </ImageTextContainer>
+              {showSelectionIcon(type, id)}
+            </ItemContainer>
+          );
+        })}
+      </Container>
+    );
+  } else {
+    return "";
+  }
 }

@@ -97,7 +97,7 @@ const Input = styled.input`
   background-color: transparent;
 `;
 
-export function FilterBar({ value }) {
+export function FilterBar({ setShowPanel, showPanel, value }) {
   const [isFocus, setIsFocus] = useState(false);
   const [placeholderText, setPlaceholderText] = useState("is:issue is:open");
 
@@ -111,9 +111,13 @@ export function FilterBar({ value }) {
     setPlaceholderText("is:issue is:open");
   }
 
+  function handleFilterClick() {
+    setShowPanel(!showPanel);
+  }
+
   return (
     <Container isFocus={isFocus}>
-      <Button isFocus={isFocus}>
+      <Button isFocus={isFocus} onClick={() => handleFilterClick()}>
         <Text>필터</Text>
         <Down></Down>
       </Button>

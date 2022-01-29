@@ -20,6 +20,9 @@ const Container = styled.div`
   padding: 0 30px;
 
   background-color: ${(props) => props.theme.greyscale.offWhite};
+
+  border: 1px solid ${(props) => props.theme.greyscale.line};
+  border-top: none;
 `;
 
 const Wrapper = styled.div`
@@ -69,15 +72,20 @@ export default function IssueTableCell(props) {
   const { id, title, label, author, milestone, date } = props.info;
   const color = "#004DE3";
 
-  function handleCheckboxClick(id) {
-    props.setSelectedIssueIds([...props.selectedIssueIds, id]);
+  function handleCheckboxClick() {
+    if (props.selectedIssueIds.includes(id)) {
+      const tempIssues = props.selectedIssueIds.filter(($id) => $id !== id);
+      props.setSelectedIssueIds(tempIssues);
+    } else {
+      props.setSelectedIssueIds([...props.selectedIssueIds, id]);
+    }
   }
 
   function checkbox() {
     if (props.selected) {
-      return <CheckboxActive onClick={() => handleCheckboxClick(id)} />;
+      return <CheckboxActive onClick={() => handleCheckboxClick()} />;
     } else {
-      return <CheckboxInitial onClick={() => handleCheckboxClick(id)} />;
+      return <CheckboxInitial onClick={() => handleCheckboxClick()} />;
     }
   }
 

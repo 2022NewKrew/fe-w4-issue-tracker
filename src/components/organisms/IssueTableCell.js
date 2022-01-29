@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { ReactComponent as CheckboxInitial } from "@assets/icons/checkboxInitial.svg";
+import { ReactComponent as CheckboxActive } from "@assets/icons/checkboxActive.svg";
 import { ReactComponent as AlertCircle } from "@assets/icons/alertCircle.svg";
 import { ReactComponent as Milestone } from "@assets/icons/milestone.svg";
 import { ReactComponent as UserimageSmall } from "@assets/icons/userimageSmall.svg";
@@ -24,6 +25,10 @@ const Container = styled.div`
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
+
+  svg:first-child {
+    cursor: pointer;
+  }
 `;
 
 const ContentWrapper = styled.div`
@@ -63,10 +68,23 @@ const IssueInfoWrapper = styled.div`
 export default function IssueTableCell(props) {
   const { id, title, label, author, milestone, date } = props.info;
   const color = "#004DE3";
+
+  function handleCheckboxClick(id) {
+    props.setSelectedIssueIds([...props.selectedIssueIds, id]);
+  }
+
+  function checkbox() {
+    if (props.selected) {
+      return <CheckboxActive onClick={() => handleCheckboxClick(id)} />;
+    } else {
+      return <CheckboxInitial onClick={() => handleCheckboxClick(id)} />;
+    }
+  }
+
   return (
     <Container>
       <Wrapper>
-        <CheckboxInitial />
+        {checkbox()}
         <ContentWrapper>
           <IssueTitleWrapper>
             <AlertCircle color='#007AFF' />

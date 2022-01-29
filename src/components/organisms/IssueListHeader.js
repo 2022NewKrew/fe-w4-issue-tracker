@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 import { FilterBar } from "@components/molecules/filterBar.js";
 import { Taps } from "@components/molecules/Taps.js";
@@ -32,6 +33,23 @@ const Wrapper = styled.div`
   }
 `;
 
+const StyledLink = styled(Link)`
+  display: flex;
+  align-items: center;
+
+  text-decoration: none;
+  color: inherit;
+
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    color: inherit;
+    text-decoration: none;
+  }
+`;
+
 export default function IssueListHeader() {
   return (
     <HeaderContainer>
@@ -39,8 +57,10 @@ export default function IssueListHeader() {
       <Wrapper>
         <Taps />
         <Button size='small' color='blue'>
-          <Plus />
-          이슈 작성
+          <StyledLink to='/create'>
+            <Plus />
+            이슈 작성
+          </StyledLink>
         </Button>
       </Wrapper>
     </HeaderContainer>

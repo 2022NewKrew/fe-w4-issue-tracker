@@ -6,6 +6,7 @@ import { DropdownIndicators } from "@components/molecules/dropdownIndicators";
 import { ReactComponent as AlertCircle } from "@assets/icons/alertCircle.svg";
 import { ReactComponent as Archive } from "@assets/icons/archive.svg";
 import { ReactComponent as CheckboxInitial } from "@assets/icons/checkboxInitial.svg";
+import { ReactComponent as CheckboxActive } from "@assets/icons/checkboxActive.svg";
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -41,6 +42,10 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: start;
 
+  svg:first-child {
+    cursor: pointer;
+  }
+
   svg + button {
     margin-left: 32px;
   }
@@ -50,17 +55,37 @@ const Wrapper = styled.div`
   }
 `;
 
-export default function IssueTableHeader() {
+export default function IssueTableHeader(props) {
   const [activeIssueType, setActiveIssueType] = useState("open");
 
   function clickIssueType(e) {
     setActiveIssueType(e.target.attributes.type.value);
   }
 
+  function handleCheckboxClick(status) {
+    if (status === "active") {
+      props.setSelectedIssueIds([]);
+    } else if (status === "initial") {
+      const issueIds = [];
+      props.issues.forEach((issue) => {
+        issueIds.push(issue.id);
+      });
+      props.setSelectedIssueIds(issueIds);
+    }
+  }
+
+  function checkbox() {
+    if (props.selectedIssueIds.length >= 1) {
+      return <CheckboxActive onClick={() => handleCheckboxClick("active")} />;
+    } else {
+      return <CheckboxInitial onClick={() => handleCheckboxClick("initial")} />;
+    }
+  }
+
   return (
     <HeaderContainer>
       <Wrapper>
-        <CheckboxInitial />
+        {checkbox()}
         <MediumTextButton
           type='open'
           onClick={(e) => clickIssueType(e)}

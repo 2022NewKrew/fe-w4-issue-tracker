@@ -26,9 +26,14 @@ const Add = () => {
             onChange={onChangeTitle}
           />
           <TextArea value={text} onChange={onChangeText} height={343} />
+          <SideBar>
+            <li></li>
+            <li></li>
+            <li></li>
+          </SideBar>
         </div>
         <ButtonGroup direction="row" gap={32}>
-          <Button size="medium" shape="text" icon="x_square">
+          <Button size="medium" shape="text" icon="x_square" link="/issue">
             작성 취소
           </Button>
           <Button size="medium">완료</Button>
@@ -40,12 +45,28 @@ const Add = () => {
 
 export default Add;
 
+const SideBar = styled.ul`
+  ${({ theme: { greyscale } }) => css`
+    position: absolute;
+    top: 32px;
+    right: 0;
+    width: 308px;
+    height: min-content;
+    border: 1px solid ${greyscale.line};
+    border-radius: 16px;
+  `}
+`;
+
 const IssueRegisterForm = styled.form`
   ${({ theme: { flexCenter, greyscale } }) => css`
     ${flexCenter}
     width: 1280px;
     h3 {
       align-self: flex-start;
+    }
+    & > div:nth-of-type(2) {
+      width: 100%;
+      justify-content: flex-end;
     }
     .formBody {
       & > svg {
@@ -61,11 +82,6 @@ const IssueRegisterForm = styled.form`
       border-left: none;
       border-right: none;
       margin: 32px 0;
-    }
-    .buttonGroup {
-      display: flex;
-      align-items: center;
-      align-self: flex-end;
     }
   `}
 `;

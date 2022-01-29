@@ -18,6 +18,7 @@ const style = css`
   button {
     border: none;
     outline: none;
+    padding: 0;
   }
   button {
     cursor: pointer;
@@ -33,6 +34,7 @@ const style = css`
   }
   body {
     background: #f7f7fc;
+    width: 1440px;
   }
   a {
     text-decoration: none;

@@ -7,7 +7,7 @@ const LinkTap = () => {
   return (
     <Wrapper>
       <Taps />
-      <Button size="small" link="/issue/new">
+      <Button size="small" link="/issue/new" icon="plus_white">
         이슈 작성
       </Button>
     </Wrapper>

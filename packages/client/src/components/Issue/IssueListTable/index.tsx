@@ -36,7 +36,7 @@ const issueList = [
 ];
 
 const ListTable = () => {
-  const issueListRender = useCallback(
+  const createIssueList = useCallback(
     (issueList) =>
       issueList.map((issue: any) => <TableCell key={issue.id} issue={issue} />),
     []
@@ -45,7 +45,7 @@ const ListTable = () => {
   return (
     <Wrapper>
       <TableHeader />
-      {issueListRender(issueList)}
+      {createIssueList(issueList)}
     </Wrapper>
   );
 };

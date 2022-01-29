@@ -3,6 +3,8 @@ import Dropdown from "@components/common/Dropdown";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import Icon from "@icon";
+import ButtonGroup from "@components/common/ButtonGroup";
+import Button from "@components/common/Button";
 
 const labelList = ["레이블이 없는 이슈", "bug", "documentation"];
 const milestonList = ["마일스톤이 없는 이슈", "마스터즈 코스"];
@@ -63,14 +65,14 @@ const TableHeader = () => {
   return (
     <Wrapper>
       <Icon name="check_box_initial" />
-      <button>
-        <Icon name="alert_circle" />
-        열린 이슈(2)
-      </button>
-      <button>
-        <Icon name="archive" />
-        닫힌 이슈(0)
-      </button>
+      <ButtonGroup gap={24}>
+        <Button size="small" shape="text" icon="issue_open">
+          열린 이슈(2)
+        </Button>
+        <Button size="small" shape="text" icon="archive">
+          열린 이슈(2)
+        </Button>
+      </ButtonGroup>
       {createFilterTabs(filterTabs)}
     </Wrapper>
   );
@@ -83,27 +85,24 @@ const Wrapper = styled.div`
     width: 100%;
     height: 64px;
     background: ${greyscale.background};
-    padding: 26px 32px;
+    padding: 16px 32px;
     position: relative;
-    & > svg:first-of-type {
-      top: 22px;
+    & > svg {
+      top: 24px;
     }
-    & > button {
-      ${text.small};
-      font-weight: bold;
-      padding-left: 20px;
-      position: relative;
-      background: transparent;
-      & > svg {
-        left: 0;
+    & > div:first-of-type {
+      float: left;
+      margin-left: 48px;
+      & > button {
+        width: 105px;
+        height: 32px;
+        ${text.small}
       }
     }
-    & > button:first-of-type {
-      margin: 0 24px 0 48px;
-    }
-    & > div {
+    & > div:not(:first-of-type) {
       float: right;
       margin-left: 32px;
+      margin-top: 10px;
     }
   `}
 `;

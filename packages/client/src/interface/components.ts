@@ -28,7 +28,7 @@ export interface ButtonProps extends ButtonStyleProps, LayoutProps {
 }
 
 export interface ButtonGroupStyleProps {
-  direction: "row" | "column";
+  direction?: "row" | "column";
   gap: number | string;
 }
 

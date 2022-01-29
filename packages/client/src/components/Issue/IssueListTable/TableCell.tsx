@@ -23,7 +23,7 @@ const TableCell = ({
       <Icon name="check_box_initial" />
       <div className="table_content">
         <div className="table_content_title">
-          <Icon name="alert_circle" />
+          <Icon name="issue_open_blue" />
           {title}
           {label.map(({ title, color }, idx) => (
             <Label key={idx} color={color}>
@@ -53,19 +53,21 @@ const Wrapper = styled.li`
     height: 100px;
     background: ${greyscale.offWhite};
     border-top: 1px solid ${greyscale.line};
-    padding: 16px 0 16px 80px;
+    padding: 16px 32px;
     position: relative;
     & > svg {
       top: 24px;
-      left: 32px;
     }
     .table_content {
+      float: left;
+      margin-left: 48px;
+      width: 100%;
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      cursor: pointer;
       position: relative;
+      cursor: pointer;
       & > svg {
         top: 20px;
         right: 54px;

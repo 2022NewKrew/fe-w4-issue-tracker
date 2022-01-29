@@ -50,6 +50,7 @@ const StyledButton = styled.button<ButtonStyleProps>`
     flex-direction: row;
     & > svg {
       position: static;
+      margin-right: 4px;
     }
     ${{
       standard: css`
@@ -72,11 +73,13 @@ const StyledButton = styled.button<ButtonStyleProps>`
             ${text.medium};
             height: 56px;
             border-radius: 20px;
+            justify-content: space-between;
           `,
           small: css`
             ${text.xsmall};
             height: 40px;
             border-radius: 11px;
+            justify-content: space-between;
           `,
         }
       : {

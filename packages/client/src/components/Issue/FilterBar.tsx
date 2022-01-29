@@ -6,7 +6,13 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import Icon from "@icon";
 
-const filterList = ["필터1", "필터2", "필터3"];
+const filterList = [
+  "열린 이슈",
+  "내가 작성한 이슈",
+  "나에게 할당된 이슈",
+  "내가 댓글을 남긴 이슈",
+  "닫힌 이슈",
+];
 
 const FilterBar = () => {
   const [focus, setFocus] = useState(false);
@@ -29,7 +35,7 @@ const FilterBar = () => {
       </form>
       <Dropdown
         indicator="Filter"
-        panelTitle="필터 이름"
+        panelTitle="이슈 필터"
         direction="left"
         list={filterList}
         icon

@@ -75,6 +75,14 @@ export default function IssueTableHeader(props) {
   const [showStatusChangePanel, setShowStatusChangePanel] = useState(false);
 
   const statusChangeMenus = ["선택한 이슈 열기", "선택한 이슈 닫기"];
+  const asssignneeChangeMenus = ["담당자가 없는 이슈", "Lin", "Genie"];
+  const labelChangeMenus = ["레이블이 없는 이슈", "documentation", "bug"];
+  const milestoneChangeMennus = [
+    "마일스톤이 없는 필터",
+    "마스터즈 코스",
+    "비기너 코스",
+  ];
+  const writerChangeMenus = ["Lin", "Min", "Genie"];
 
   function clickIssueType(e) {
     setActiveIssueType(e.target.attributes.type.value);
@@ -106,10 +114,46 @@ export default function IssueTableHeader(props) {
     if (props.selectedIssueIds.length < 1) {
       return (
         <>
-          <DropdownIndicators text='담당자' />
-          <DropdownIndicators text='레이블' />
-          <DropdownIndicators text='마일스톤' />
-          <DropdownIndicators text='작성자' />
+          <DropdownContainer>
+            <DropdownIndicators text='담당자' />
+            <DropdownPanel
+              show={showStatusChangePanel}
+              header='담당자 필터'
+              type='modify'
+              menus={asssignneeChangeMenus}
+              position='right'
+            />
+          </DropdownContainer>
+          <DropdownContainer>
+            <DropdownIndicators text='레이블' />
+            <DropdownPanel
+              show={showStatusChangePanel}
+              header='담당자 필터'
+              type='modify'
+              menus={asssignneeChangeMenus}
+              position='right'
+            />
+          </DropdownContainer>
+          <DropdownContainer>
+            <DropdownIndicators text='마일스톤' />
+            <DropdownPanel
+              show={showStatusChangePanel}
+              header='담당자 필터'
+              type='modify'
+              menus={asssignneeChangeMenus}
+              position='right'
+            />
+          </DropdownContainer>
+          <DropdownContainer>
+            <DropdownIndicators text='작성자' />
+            <DropdownPanel
+              show={showStatusChangePanel}
+              header='담당자 필터'
+              type='modify'
+              menus={asssignneeChangeMenus}
+              position='right'
+            />
+          </DropdownContainer>
         </>
       );
     } else {
@@ -124,7 +168,7 @@ export default function IssueTableHeader(props) {
             show={showStatusChangePanel}
             header='상태 변경'
             type='modify'
-            menus={statusChangeMenus}
+            menus={asssignneeChangeMenus}
             position='right'
           />
         </DropdownContainer>

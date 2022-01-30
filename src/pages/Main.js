@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Header from "@components/organisms/Header";
-import IssueListHeader from "../components/organisms/IssueListHeader";
-import IssueTableContainer from "../components/templates/IssueTableContainer";
+import IssueListHeader from "@components/organisms/IssueListHeader";
+import IssueTableContainer from "@components/templates/IssueTableContainer";
 
 import { Button } from "@components/atoms/buttons";
+import TextArea from "@components/atoms/TextAreas";
 
 import { firebaseAuth } from "../firebase";
 
@@ -17,6 +18,7 @@ import IssueList from "./IssueList";
 export default function Main() {
   const setUser = useSetRecoilState(userState);
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+  const [textAreaValue, setTextAreaValue] = useState("");
 
   function logout() {
     firebaseAuth.signOut();
@@ -40,6 +42,12 @@ export default function Main() {
       <Button size='medium' color='blue' onClick={logout}>
         로그아웃 하러 가기
       </Button>
+
+      <TextArea
+        placeholder='코멘트를 입력하세요'
+        textAreaValue={textAreaValue}
+        setTextAreaValue={setTextAreaValue}
+      />
     </div>
   );
 }

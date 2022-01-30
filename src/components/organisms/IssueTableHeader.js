@@ -72,12 +72,18 @@ const DropdownContainer = styled.div`
 
 export default function IssueTableHeader(props) {
   const [activeIssueType, setActiveIssueType] = useState("open");
-  const [showStatusChangePanel, setShowStatusChangePanel] = useState(false);
+  const [showPanel, setShowPanel] = useState({
+    statusModify: false,
+    assignee: false,
+    label: false,
+    milestone: false,
+    writer: false,
+  });
 
   const statusChangeMenus = ["선택한 이슈 열기", "선택한 이슈 닫기"];
   const asssignneeChangeMenus = ["담당자가 없는 이슈", "Lin", "Genie"];
   const labelChangeMenus = ["레이블이 없는 이슈", "documentation", "bug"];
-  const milestoneChangeMennus = [
+  const milestoneChangeMenus = [
     "마일스톤이 없는 필터",
     "마스터즈 코스",
     "비기너 코스",
@@ -115,9 +121,14 @@ export default function IssueTableHeader(props) {
       return (
         <>
           <DropdownContainer>
-            <DropdownIndicators text='담당자' />
+            <DropdownIndicators
+              setShowPanel={setShowPanel}
+              showPanel={showPanel}
+              name='assignee'
+              text='담당자'
+            />
             <DropdownPanel
-              show={showStatusChangePanel}
+              show={showPanel["assignee"]}
               header='담당자 필터'
               type='modify'
               menus={asssignneeChangeMenus}
@@ -125,32 +136,47 @@ export default function IssueTableHeader(props) {
             />
           </DropdownContainer>
           <DropdownContainer>
-            <DropdownIndicators text='레이블' />
+            <DropdownIndicators
+              setShowPanel={setShowPanel}
+              showPanel={showPanel}
+              name='label'
+              text='레이블'
+            />
             <DropdownPanel
-              show={showStatusChangePanel}
-              header='담당자 필터'
+              show={showPanel["label"]}
+              header='레이블 필터'
               type='modify'
-              menus={asssignneeChangeMenus}
+              menus={labelChangeMenus}
               position='right'
             />
           </DropdownContainer>
           <DropdownContainer>
-            <DropdownIndicators text='마일스톤' />
+            <DropdownIndicators
+              setShowPanel={setShowPanel}
+              showPanel={showPanel}
+              name='milestone'
+              text='마일스톤'
+            />
             <DropdownPanel
-              show={showStatusChangePanel}
-              header='담당자 필터'
+              show={showPanel["milestone"]}
+              header='마일스톤 필터'
               type='modify'
-              menus={asssignneeChangeMenus}
+              menus={milestoneChangeMenus}
               position='right'
             />
           </DropdownContainer>
           <DropdownContainer>
-            <DropdownIndicators text='작성자' />
+            <DropdownIndicators
+              setShowPanel={setShowPanel}
+              showPanel={showPanel}
+              name='writer'
+              text='작성자'
+            />
             <DropdownPanel
-              show={showStatusChangePanel}
-              header='담당자 필터'
+              show={showPanel["writer"]}
+              header='작성자 필터'
               type='modify'
-              menus={asssignneeChangeMenus}
+              menus={writerChangeMenus}
               position='right'
             />
           </DropdownContainer>
@@ -160,15 +186,16 @@ export default function IssueTableHeader(props) {
       return (
         <DropdownContainer>
           <DropdownIndicators
-            setShowStatusChangePanel={setShowStatusChangePanel}
-            showStatusChangePanel={showStatusChangePanel}
+            setShowPanel={setShowPanel}
+            showPanel={showPanel}
+            type='statusModify'
             text='상태 수정'
           />
           <DropdownPanel
-            show={showStatusChangePanel}
+            show={showPanel}
             header='상태 변경'
             type='modify'
-            menus={asssignneeChangeMenus}
+            menus={statusChangeMenus}
             position='right'
           />
         </DropdownContainer>

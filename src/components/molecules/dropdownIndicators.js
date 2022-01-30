@@ -24,7 +24,10 @@ const Text = styled.p`
 
 export function DropdownIndicators(props) {
   function handleStatusChangePanel() {
-    props.setShowStatusChangePanel(!props.showStatusChangePanel);
+    props.setShowPanel({
+      ...props.showPanel,
+      [props.name]: !props.showPanel[props.name],
+    });
   }
   return (
     <Container onClick={() => handleStatusChangePanel()}>

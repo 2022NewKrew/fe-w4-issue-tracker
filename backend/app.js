@@ -25,13 +25,53 @@ app.listen(appPort, ()=>{
 
 app.get('/issue-list', (req, res)=>{
   try{
-    const issues=issueDB.select();
-    res.send(issues).status(200);
+    const rawFilter=req.query.rawFilter;
+    if(rawFilter===undefined){
+      const issues=issueDB.selectAll();
+      return res.send(issues).status(200);
+    }
+    const {authorID, milestoneTitle, labelTitle}=parseFilter(rawFilter);
+    db.transaction(()=>{
+      let milestoneID, labelID;
+      if(milestoneTitle!==undefined){
+        milestoneID=milestoneDB.selectByTitle(milestoneTitle).milestoneID;
+      }
+      if(labelTitle!==undefined){
+        labelID=labelDB.selectByTitle(labelTitle).labelID;
+      }
+      const issues=issueDB.select({authorID, milestoneID, labelID});
+      res.send(issues).status(200);
+    })();
   }catch(e){
     console.error(e.message);
     res.sendStatus(500);
   }
 });
+
+/**
+ * @param {string} rawFilter
+ */
+function parseFilter(rawFilter){
+  const filterArray=rawFilter.split(' ').filter((val)=>val.length && val!==' ');
+  let authorID, milestoneTitle, labelTitle;
+  filterArray.forEach((val)=>{
+    const [key, value]=val.split(':');
+    switch(key){
+    case 'author':
+      authorID=value;
+      break;
+    case 'milestone':
+      milestoneTitle=value;
+      break;
+    case 'label':
+      labelTitle=value;
+      break;
+    default:
+      throw Error('parseFilter: Invalid filter key.');
+    }
+  });
+  return {authorID, milestoneTitle, labelTitle};
+}
 
 app.get('/issue-label', (req, res)=>{
   try{

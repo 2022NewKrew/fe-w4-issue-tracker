@@ -67,11 +67,27 @@ module.exports=function initIssueDB(db){
     updateIsOpenStmt.run({issueID, isOpen});
   }
 
-  const selectStmt=db.prepare(`
+  const selectAllStmt=db.prepare(`
     SELECT * FROM issue
   `);
-  function select(){
-    const result=selectStmt.all();
+  function selectAll(){
+    const result=selectAllStmt.all();
+    convertIsOpenBool(result);
+    return result;
+  }
+
+  function select({authorID, milestoneID, labelID}){
+    const condition=[
+      authorID!==undefined ? 'authorID=@authorID' : '',
+      milestoneID!==undefined ? 'milestoneID=@milestoneID' : '',
+      labelID!==undefined ? 'labelID=@labelID' : ''
+    ].filter((val)=>val.length).join(' AND ');
+    const selectStmt=db.prepare(`
+      SELECT * FROM
+      (issue NATURAL JOIN issueLabel)
+      WHERE ${condition}
+    `);
+    const result=selectStmt.all({authorID, milestoneID, labelID});
     convertIsOpenBool(result);
     return result;
   }
@@ -82,6 +98,7 @@ module.exports=function initIssueDB(db){
     updateMilestone,
     updateBody,
     updateIsOpen,
-    select
+    select,
+    selectAll
   };
 };

@@ -1,3 +1,5 @@
+const {convertIsOpenBool}=require('../global');
+
 /**
  * @param {import('better-sqlite3').Database} db
  */
@@ -49,11 +51,20 @@ module.exports=function initLabelDB(db){
   function selectAll(){
     return selectAllStmt.all();
   }
+  const selectByTitleStmt=db.prepare(`
+    SELECT * FROM label WHERE title LIKE @title
+  `);
+  function selectByTitle(title){
+    const row=selectByTitleStmt.get({title});
+    convertIsOpenBool(row);
+    return row;
+  }
 
   return {
     insert,
     update,
     remove,
-    selectAll
+    selectAll,
+    selectByTitle
   };
 };

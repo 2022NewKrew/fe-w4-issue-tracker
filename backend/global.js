@@ -15,13 +15,19 @@ function mergeTwoObjects(a, b){
 
 /**
  * Convert `isOpen` property value type to `bool` for row in rows in-place.
- * @param {Array.<{isOpen:int}>} rows
+ * @param {Array.<{isOpen:int}>|{isOpen:int}} rows
  */
 function convertIsOpenBool(rows){
-  for(const row of rows){
-    if(row.isOpen!==undefined){
-      row.isOpen=row.isOpen===1 ? true : false;
+  if(Array.isArray(rows)){
+    for(const row of rows){
+      if(row.isOpen!==undefined){
+        row.isOpen=row.isOpen===1 ? true : false;
+      }
     }
+    return;
+  }
+  if(rows.isOpen!==undefined){
+    rows.isOpen=rows.isOpen===1 ? true: false;
   }
 }
 /**

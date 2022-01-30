@@ -68,11 +68,20 @@ module.exports=function initMilestoneDB(db){
     convertIsOpenBool(row);
     return row;
   }
+  const selectByTitleStmt=db.prepare(`
+    SELECT * FROM milestone WHERE title LIKE @title
+  `);
+  function selectByTitle(title){
+    const row=selectByTitleStmt.get({title});
+    convertIsOpenBool(row);
+    return row;
+  }
 
   return {
     insert,
     update,
     remove,
-    selectAll
+    selectAll,
+    selectByTitle
   };
 };

@@ -55,15 +55,20 @@ const ImageTextContainer = styled.div`
 
 export function DropdownPanel(props) {
   const type = props.type;
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState([]);
 
   function handleClick(id) {
-    setSelected(id);
+    if (selected && selected.includes(id)) {
+      const tempSelected = selected.filter((eachId) => eachId !== id);
+      setSelected(tempSelected);
+    } else {
+      setSelected([...selected, id]);
+    }
   }
 
   function showSelectionIcon(type, id) {
     if (type !== "modify") {
-      if (id === selected) {
+      if (selected && selected.includes(id)) {
         return <CheckonCircle />;
       } else {
         return <CheckoffCircle />;

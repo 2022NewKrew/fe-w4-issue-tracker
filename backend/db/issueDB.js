@@ -86,6 +86,7 @@ module.exports=function initIssueDB(db){
       SELECT * FROM
       (issue NATURAL JOIN issueLabel)
       WHERE ${condition}
+      GROUP BY issueID
     `);
     const result=selectStmt.all({authorID, milestoneID, labelID});
     convertIsOpenBool(result);

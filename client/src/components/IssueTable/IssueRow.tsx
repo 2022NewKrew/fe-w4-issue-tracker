@@ -2,14 +2,28 @@ import React from 'react';
 import styled from 'styled-components';
 import { TextSmall, TableData, SmallIcon } from '@styles/styleTemplates';
 import { IIssue } from '@types';
-import { TimeStampMessage } from '@components/assets';
+import { TimeStampMessage, SmallLabel } from '@components/assets';
 import { ReactComponent as Alertcircle } from '@icons/AlertCircle.svg';
 
 interface IProps {
     issueData: IIssue;
+    selectMode: boolean;
 }
 
-export const IssueRow = ({ issueData: { title, id, timeStamp, status } }: IProps) => {
+const renderRightAria = (selectMode: boolean, issue: IIssue | undefined) => {
+    if (selectMode) return <EmptySpace />;
+    return (
+        <>
+            <Assignee></Assignee>
+            <EmptySpace />
+            <EmptySpace />
+            <Author></Author>
+        </>
+    );
+    // TODO: issue의 작성자, 담당자 정보를 받아 렌더
+};
+
+export const IssueRow = ({ issueData: { title, id, timeStamp, status }, selectMode }: IProps) => {
     return (
         <>
             <CheckBox>
@@ -19,6 +33,7 @@ export const IssueRow = ({ issueData: { title, id, timeStamp, status } }: IProps
                 <IssueItemUpperArea>
                     <Alertcircle />
                     <div>{title}</div>
+                    <SmallLabel type="light-text" title="documentation" color="blue" />
                 </IssueItemUpperArea>
                 <IssueItemBelowArea>
                     <div>#{id}</div>
@@ -32,10 +47,7 @@ export const IssueRow = ({ issueData: { title, id, timeStamp, status } }: IProps
                     </div>
                 </IssueItemBelowArea>
             </IssueItem>
-            <Assignee></Assignee>
-            <EmptySpace />
-            <EmptySpace />
-            <Author></Author>
+            {renderRightAria(selectMode)}
         </>
     );
 };
@@ -58,6 +70,8 @@ const CheckBox = styled.div`
 
 const IssueItem = styled.div`
     ${TableData}
+    flex-direction: column;
+    align-items: flex-start;
     padding: 12px;
 `;
 

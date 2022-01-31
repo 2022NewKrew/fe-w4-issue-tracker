@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 
 interface IProps {
-    children: React.ReactNode;
+    children: ReactNode;
 }
 
 export const ProfileImage = ({ children }: IProps) => {

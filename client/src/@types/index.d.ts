@@ -1,4 +1,5 @@
 declare module '@types' {
+    type issueStatus = 'open' | 'close';
     interface ITabElement {
         icon: string;
         title: string;
@@ -8,7 +9,7 @@ declare module '@types' {
     interface IIssue {
         id: number;
         title: string;
-        status: 'open' | 'close';
+        status: issueStatus;
         userId: number;
         timeStamp: number;
     }
@@ -17,5 +18,4 @@ declare module '@types' {
         type: 'filter' | 'assignee' | 'label' | 'milestone' | 'author';
         emptyFilterOption?: string;
     }
-    type messageType = 'open' | 'close';
 }

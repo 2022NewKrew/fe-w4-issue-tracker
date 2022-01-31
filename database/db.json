@@ -29,8 +29,7 @@
             "id": "라벨번호",
             "title": "라벨이름",
             "description": "라벨설명",
-            "backgroundRGB": "배경색 rgb값",
-            "textRGB": "글씨 색 rgb값"
+            "colorHEX": "배경색 코드값"
         }
     ],
     "milestones": [

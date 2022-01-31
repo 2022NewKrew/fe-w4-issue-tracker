@@ -4,11 +4,13 @@ import { AlignXYCenter, TextSmall, RoundBorderDiv, TableData, Table } from '@sty
 import { IIssue } from '@types';
 import { IssueTableHeader, IssueRow } from '.';
 
-const renderTableData = (issueDatas: IIssue[], isFiltering = false) => {
+const renderTableData = (issueDatas: IIssue[], selectMode: boolean, isFiltering = false) => {
     const NO_ISSUE_MESSAGE = '등록된 이슈가 없습니다';
     const NOTHING_FOUND_MESSAGE = '검색과 일치하는 결과가 없습니다';
     if (issueDatas.length > 0)
-        return issueDatas.map((issue) => <IssueRow issueData={issue} key={issue.id} />);
+        return issueDatas.map((issue) => (
+            <IssueRow issueData={issue} selectMode={selectMode} key={issue.id} />
+        ));
     if (isFiltering) return <EmptyRow>{NOTHING_FOUND_MESSAGE}</EmptyRow>;
     return <EmptyRow>{NO_ISSUE_MESSAGE}</EmptyRow>;
 };
@@ -38,11 +40,11 @@ const dummyData: IIssue[] = [
 ];
 
 export const IssueTable = () => {
-    const [selectMode, setSelectMode] = useState(false);
+    const [selectMode, setSelectMode] = useState(true);
     return (
         <TableContainer selectMode={selectMode}>
             <IssueTableHeader selectMode={selectMode} />
-            {renderTableData(dummyData)}
+            {renderTableData(dummyData, selectMode)}
         </TableContainer>
     );
 };

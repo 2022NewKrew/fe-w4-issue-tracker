@@ -78,6 +78,7 @@ export default function IssueTableHeader(props) {
     label: false,
     milestone: false,
     writer: false,
+    status: false,
   });
 
   const statusChangeMenus = ["선택한 이슈 열기", "선택한 이슈 닫기"];
@@ -114,9 +115,13 @@ export default function IssueTableHeader(props) {
     }
   }
 
-  // Dropdown panels
-
   function showDropdownIndicators() {
+    const [selectedAssignee, setSelectedAssignee] = useState([]);
+    const [selectedLabel, setSelectedLabel] = useState([]);
+    const [selectedMilestone, setSelectedMilestone] = useState([]);
+    const [selectedWriter, setSelectedWriter] = useState([]);
+    const [selectedStatus, setSelectedStatus] = useState("");
+
     if (props.selectedIssueIds.length < 1) {
       return (
         <>
@@ -133,6 +138,8 @@ export default function IssueTableHeader(props) {
               type='image'
               menus={asssignneeChangeMenus}
               position='right'
+              selected={selectedAssignee}
+              setSelected={setSelectedAssignee}
             />
           </DropdownContainer>
           <DropdownContainer>
@@ -148,6 +155,8 @@ export default function IssueTableHeader(props) {
               type='image'
               menus={labelChangeMenus}
               position='right'
+              selected={selectedLabel}
+              setSelected={setSelectedLabel}
             />
           </DropdownContainer>
           <DropdownContainer>
@@ -163,6 +172,8 @@ export default function IssueTableHeader(props) {
               type='image'
               menus={milestoneChangeMenus}
               position='right'
+              selected={selectedMilestone}
+              setSelected={setSelectedMilestone}
             />
           </DropdownContainer>
           <DropdownContainer>
@@ -178,6 +189,8 @@ export default function IssueTableHeader(props) {
               type='image'
               menus={writerChangeMenus}
               position='right'
+              selected={selectedWriter}
+              setSelected={setSelectedWriter}
             />
           </DropdownContainer>
         </>
@@ -188,15 +201,21 @@ export default function IssueTableHeader(props) {
           <DropdownIndicators
             setShowPanel={setShowPanel}
             showPanel={showPanel}
+            name='status'
             type='statusModify'
             text='상태 수정'
           />
           <DropdownPanel
-            show={showPanel}
+            show={showPanel["status"]}
+            showPanel={showPanel}
+            setShowPanel={setShowPanel}
+            name='status'
             header='상태 변경'
             type='modify'
             menus={statusChangeMenus}
             position='right'
+            selected={selectedStatus}
+            setSelected={setSelectedStatus}
           />
         </DropdownContainer>
       );

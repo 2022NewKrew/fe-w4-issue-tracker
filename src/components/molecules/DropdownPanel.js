@@ -17,7 +17,7 @@ const Container = styled.div`
   border: 1px solid ${(props) => props.theme.greyscale.line};
   border-radius: 16px;
 
-  top: ${(props) => (props.position === "right" ? 45 : null)}px;
+  top: ${(props) => (props.position === "right" ? 45 : 0)}px;
   right: ${(props) => (props.position === "right" ? 0 : null)}px;
 `;
 
@@ -55,20 +55,30 @@ const ImageTextContainer = styled.div`
 
 export function DropdownPanel(props) {
   const type = props.type;
-  const [selected, setSelected] = useState([]);
+  const selected = props.selected;
+  const setSelected = props.setSelected;
 
-  function handleClick(id) {
-    if (selected && selected.includes(id)) {
-      const tempSelected = selected.filter((eachId) => eachId !== id);
-      setSelected(tempSelected);
+  function handleClick(id, menu) {
+    if (type === "modify") {
+      props.setSelected(menu);
+      // 선택 시 해당 패널 닫기
+      props.setShowPanel({
+        ...props.showPanel,
+        [props.name]: !props.showPanel[props.name],
+      });
     } else {
-      setSelected([...selected, id]);
+      if (selected && selected.includes(menu)) {
+        const tempSelected = selected.filter((each) => each !== menu);
+        setSelected(tempSelected);
+      } else {
+        setSelected([...selected, menu]);
+      }
     }
   }
 
-  function showSelectionIcon(type, id) {
+  function showSelectionIcon(type, menu) {
     if (type !== "modify") {
-      if (selected && selected.includes(id)) {
+      if (selected && selected.includes(menu)) {
         return <CheckonCircle />;
       } else {
         return <CheckoffCircle />;
@@ -86,12 +96,12 @@ export function DropdownPanel(props) {
         </Header>
         {props.menus.map((menu, id) => {
           return (
-            <ItemContainer key={id} onClick={() => handleClick(id)}>
+            <ItemContainer key={id} onClick={() => handleClick(id, menu)}>
               <ImageTextContainer>
                 {type === "image" ? <UserimageSmall /> : null}
                 <SmallText>{menu}</SmallText>
               </ImageTextContainer>
-              {showSelectionIcon(type, id)}
+              {showSelectionIcon(type, menu)}
             </ItemContainer>
           );
         })}

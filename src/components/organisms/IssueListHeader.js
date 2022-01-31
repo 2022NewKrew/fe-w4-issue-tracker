@@ -57,12 +57,7 @@ const StyledLink = styled(Link)`
 
 export default function IssueListHeader() {
   const [showPanel, setShowPanel] = useState(false);
-
-  function handleDropdownPanels() {
-    console.log(showPanel);
-    setShowPanel(!showPanel);
-  }
-
+  const [selected, setSelected] = useState([]);
   const menus = [
     "열린 이슈",
     "내가 작성한 이슈",
@@ -76,10 +71,12 @@ export default function IssueListHeader() {
       <FilterContainer>
         <FilterBar showPanel={showPanel} setShowPanel={setShowPanel} />
         <DropdownPanel
-          show={showPanel}
+          showPanel={showPanel}
           header='이슈 필터'
           type='text'
           menus={menus}
+          selected={selected}
+          setSelected={setSelected}
         />
       </FilterContainer>
 

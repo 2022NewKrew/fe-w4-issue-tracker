@@ -84,7 +84,7 @@ module.exports=function initIssueDB(db){
     ].filter((val)=>val.length).join(' AND ');
     const selectStmt=db.prepare(`
       SELECT * FROM
-      (issue NATURAL JOIN issueLabel)
+      (issue LEFT JOIN issueLabel USING (issueID))
       WHERE ${condition}
       GROUP BY issueID
     `);

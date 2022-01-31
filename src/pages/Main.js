@@ -7,6 +7,7 @@ import IssueTableContainer from "@components/templates/IssueTableContainer";
 import { Button } from "@components/atoms/buttons";
 import TextArea from "@components/atoms/TextAreas";
 import { ProgressIndicator } from "@components/molecules/ProgressIndicators";
+import { Sidebar } from "@components/molecules/Sidebars";
 
 import { firebaseAuth } from "../firebase";
 
@@ -53,6 +54,8 @@ export default function Main() {
       <ProgressIndicator type='text' openIssues={10} closedIssues={2} />
       <br />
       <ProgressIndicator openIssues={5} closedIssues={12} />
+      <br />
+      <Sidebar />
     </div>
   );
 }

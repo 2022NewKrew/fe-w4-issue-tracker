@@ -130,7 +130,7 @@ export default function IssueTableHeader(props) {
             <DropdownPanel
               show={showPanel["assignee"]}
               header='담당자 필터'
-              type='modify'
+              type='image'
               menus={asssignneeChangeMenus}
               position='right'
             />
@@ -145,7 +145,7 @@ export default function IssueTableHeader(props) {
             <DropdownPanel
               show={showPanel["label"]}
               header='레이블 필터'
-              type='modify'
+              type='image'
               menus={labelChangeMenus}
               position='right'
             />
@@ -160,7 +160,7 @@ export default function IssueTableHeader(props) {
             <DropdownPanel
               show={showPanel["milestone"]}
               header='마일스톤 필터'
-              type='modify'
+              type='image'
               menus={milestoneChangeMenus}
               position='right'
             />
@@ -175,7 +175,7 @@ export default function IssueTableHeader(props) {
             <DropdownPanel
               show={showPanel["writer"]}
               header='작성자 필터'
-              type='modify'
+              type='image'
               menus={writerChangeMenus}
               position='right'
             />

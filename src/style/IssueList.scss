@@ -28,4 +28,12 @@
         background-color: $background-color;
         border: 1px solid $line-color;
     }
+
+    .issue-empty {
+        @extend .flex-center;
+        border-radius: 0 0 16px 16px;
+        border: 1px solid $line-color;
+        padding: 16px 0;
+        background-color: $off-white-color;
+    }
 }

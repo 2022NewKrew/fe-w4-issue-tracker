@@ -7,7 +7,7 @@ export const labelListURL=new URL('label-list', backendURL).href;
 export const milestoneListURL=new URL('milestone-list', backendURL).href;
 
 export async function getFromURL(url, params){
-  const {data}=await (await axios.get(url, {params: params}));
+  const {data}=await axios.get(url, {params: params});
   return data;
 }
 

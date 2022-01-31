@@ -22,14 +22,14 @@ export default function IssueList(){
   const numLabels=useArrayLength(labels);
   const numMilestones=useArrayLength(milestones);
   const [issueFilter, setIssueFilter]=useRecoilState(issueFilterState);
+  const [rawIssueFilter, setRawIssueFilter]=useState(issueFilter);
   const [showingIssues, setShowingIssues]=useState([]);
-  const {isChecked, isCheckedAll, toggleCheck, toggleCheckAll}=useCheck(showingIssues);
+  const {isChecked, isCheckedAll, isCheckedAny,
+    toggleCheck, toggleCheckAll}=useCheck(showingIssues);
 
   useEffect(()=>{
-    getFromURL(issueListURL).then((newIssueArray)=>{
-      setIssueArray(newIssueArray);
-    });
-  }, []);
+    filterIssues();
+  }, [filterIssues, issueFilter]);
 
   useEffect(()=>{
     setShowingIssues(issueArray.filter(({isOpen})=>isOpen===showOpen));
@@ -42,7 +42,7 @@ export default function IssueList(){
   const getIssues=useCallback(()=>{
     if(showingIssues.length===0){
       return (
-        <div className='flex-center'>
+        <div className='issue-empty'>
           필터에 해당하는 이슈가 없습니다.
         </div>
       );
@@ -67,12 +67,29 @@ export default function IssueList(){
     );
   }, [isIndexChecked, toggleCheck, showingIssues]);
 
+  const filterIssues=useCallback(()=>{
+    getFromURL(issueListURL, {
+      filter: issueFilter
+    }).then(newIssueArray=>{
+      setIssueArray(newIssueArray);
+    }).catch(()=>{
+      alert('잘못된 필터 값입니다. 다시 시도해주세요!');
+      setRawIssueFilter('');
+      setIssueFilter('');
+    });
+  }, [issueFilter, setIssueFilter]);
+
   return (
     <div className='IssueList'>
       <Header />
       <div className='issue-searchbar'>
         <div className='align-left'>
-          <InputeMedium title='필터' value={issueFilter} onChange={setIssueFilter}/>
+          <form onSubmit={(e)=>{
+            e.preventDefault();
+            setIssueFilter(rawIssueFilter);
+          }}>
+            <InputeMedium title='필터' value={rawIssueFilter} onChange={setRawIssueFilter}/>
+          </form>
         </div>
         <div className='align-right'>
           <ButtonMedium title='+ 이슈 작성' onClick={()=>console.log('Add Issue')}/>

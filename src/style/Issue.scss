@@ -33,7 +33,7 @@
         }
     }
     .rest-container {
-        @extend %flex-center;
+        @extend .flex-center;
         @extend .tab-rest;
     }
 }

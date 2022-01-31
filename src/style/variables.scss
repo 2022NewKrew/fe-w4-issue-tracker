@@ -12,7 +12,7 @@ $secondary-color: #0025e7;
 $error-color: #ff3b30;
 $success-color: #34c759;
 
-%flex-center {
+.flex-center {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -38,7 +38,7 @@ $success-color: #34c759;
 }
 
 .tab-first {
-    @extend %flex-center;
+    @extend .flex-center;
     flex: 0 1 50px;
 }
 .tab-second {
@@ -46,7 +46,7 @@ $success-color: #34c759;
     flex: 1 1 500px;
 }
 .tab-rest {
-    @extend %flex-center;
+    @extend .flex-center;
     flex: 0 1 100px;
 }
 .margin-right {

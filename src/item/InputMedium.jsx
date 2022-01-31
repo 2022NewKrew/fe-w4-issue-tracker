@@ -7,6 +7,7 @@ export default function InputeMedium({title='', type='text', value, onChange}){
     + (value.length ? ' filled' : '')
     + (isFocused ? ' focused' : '')}>
       <input type={type}
+        value={value}
         onChange={(e)=>onChange(e.target.value)}
         onFocus={()=>setIsFocused(true)}
         onBlur={()=>setIsFocused(false)} />

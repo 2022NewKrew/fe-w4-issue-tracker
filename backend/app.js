@@ -25,7 +25,7 @@ app.listen(appPort, ()=>{
 
 app.get('/issue-list', (req, res)=>{
   try{
-    const rawFilter=req.query.rawFilter;
+    const rawFilter=req.query.filter;
     if(rawFilter===undefined || rawFilter.match(/^\s*$/)){
       const issues=issueDB.selectAll();
       return res.send(issues).status(200);

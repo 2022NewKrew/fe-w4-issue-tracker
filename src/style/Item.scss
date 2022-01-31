@@ -1,7 +1,7 @@
 @use "variables" as *;
 
 .LabelSmall {
-    @extend %flex-center;
+    @extend .flex-center;
     border-radius: 30px;
     padding: 4px 16px;
     font-size: 0.8rem;

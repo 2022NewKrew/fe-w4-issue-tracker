@@ -6,7 +6,7 @@ import { ReactComponent as AlertCircle } from '@icons/AlertCircle.svg';
 export const ErrorPage = () => {
     return (
         <ErrorDisplay>
-            <AlertCircle />
+            <AlertCircle width="32px" height="32px" />
             <span>404 요청하신 페이지를 찾을 수 없습니다</span>
         </ErrorDisplay>
     );

@@ -26,7 +26,6 @@ const getDateString = (time: number) => {
 
 export const compareAgoTime = (beforeTime: number, afterTime: number) => {
     const diffMilliSeconds = afterTime - beforeTime;
-    console.log(beforeTime, afterTime, diffMilliSeconds);
     if (diffMilliSeconds < SECOND) return '지금';
     if (diffMilliSeconds < MINUTE) return `${convertTime(diffMilliSeconds, SECOND)}초 전`;
     if (diffMilliSeconds < HOUR) return `${convertTime(diffMilliSeconds, MINUTE)}분 전`;

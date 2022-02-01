@@ -1,6 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TextSmall, TableData, SmallIcon, AlignXYCenter } from '@styles/styleTemplates';
+import {
+    TextSmall,
+    TableData,
+    SmallIcon,
+    AlignXYCenter,
+    AlignYCenter,
+} from '@styles/styleTemplates';
 import { IIssue } from '@types';
 import { TimeStampMessage, SmallLabel } from '@components/assets';
 import { ReactComponent as Alertcircle } from '@icons/AlertCircle.svg';
@@ -74,9 +80,8 @@ const IssueItem = styled.div`
 
 const IssueItemUpperArea = styled.div`
     height: 32px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    ${AlignYCenter}
+    line-height: normal;
     margin-bottom: 8px;
     ${SmallIcon('var(--primary1-color)', '8px', 'var(--primary2-color)')};
     & > * {

@@ -26,10 +26,58 @@
     ],
     "labels": [
         {
-            "id": "라벨번호",
-            "title": "라벨이름",
-            "description": "라벨설명",
-            "colorHEX": "배경색 코드값"
+            "id": 0,
+            "title": "bug",
+            "description": "Something isn't working",
+            "colorHEX": "#FF0000"
+        },
+        {
+            "id": 1,
+            "title": "documentation",
+            "description": "improvements or additions to ducumentation",
+            "colorHEX": "#654ea3"
+        },
+        {
+            "id": 2,
+            "title": "duplicate",
+            "description": "This issue or pull request already exists",
+            "colorHEX": "#ee9ca7"
+        },
+        {
+            "id": 3,
+            "title": "enhancement",
+            "description": "New feature or request",
+            "colorHEX": "#59C173"
+        },
+        {
+            "id": 4,
+            "title": "good first issue",
+            "description": "Good for newcomers",
+            "colorHEX": "#a8c0ff"
+        },
+        {
+            "id": 5,
+            "title": "help wanted",
+            "description": "Extra attention is needed",
+            "colorHEX": "#ff9966"
+        },
+        {
+            "id": 6,
+            "title": "invalid",
+            "description": "This doesn't seem right",
+            "colorHEX": "#fdbb2d"
+        },
+        {
+            "id": 7,
+            "title": "question",
+            "description": "Further information is requested",
+            "colorHEX": "#22c1c3"
+        },
+        {
+            "id": 8,
+            "title": "wontfix",
+            "description": "This will not be worked on",
+            "colorHEX": "#0575E6"
         }
     ],
     "milestones": [

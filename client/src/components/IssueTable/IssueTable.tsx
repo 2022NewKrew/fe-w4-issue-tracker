@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useFetch } from '@hooks';
 import styled from 'styled-components';
 import { AlignXYCenter, TextSmall, RoundBorderDiv, TableData, Table } from '@styles/styleTemplates';
 import { IIssue } from '@types';
@@ -41,6 +42,9 @@ const dummyData: IIssue[] = [
 
 export const IssueTable = () => {
     const [selectMode, setSelectMode] = useState(false);
+
+    const { data, errorMsg, loading } = useFetch(`${process.env.SERVER_BASE_URL}/issues`);
+    if (!!errorMsg) return <div>{errorMsg}</div>;
     return (
         <TableContainer selectMode={selectMode}>
             <IssueTableHeader selectMode={selectMode} />

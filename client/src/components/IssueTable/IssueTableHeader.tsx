@@ -61,8 +61,6 @@ const Checkbox = styled.div`
 const IssueStatuses = styled.div`
     ${TableHeader}
     line-height: normal;
-    display: flex;
-    padding: 0 4px;
 `;
 
 const Status = styled.div`

@@ -51,6 +51,7 @@ const config: Configuration = {
             '@components': path.resolve(process.cwd(), 'src/components'),
             '@styles': path.resolve(process.cwd(), 'src/styles'),
             '@utils': path.resolve(process.cwd(), 'src/utils'),
+            '@hooks': path.resolve(process.cwd(), 'src/hooks'),
             '@types': path.resolve(process.cwd(), 'src/@types'),
         },
     },

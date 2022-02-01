@@ -106,10 +106,12 @@ export default function IssueList(){
       </div>
       
       {issueFilter.length>0 &&
-      <button className='delete-filter'
-        onClick={deleteFilter}>
-        <XIcon /> 현재 검색 필터 지우기
-      </button>}
+      <div>
+        <button className='delete-filter'
+          onClick={deleteFilter}>
+          <XIcon /> 현재 검색 필터 지우기
+        </button>
+      </div>}
 
       <div className='issue-header'>
         <div className='tab-first'>

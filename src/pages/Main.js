@@ -8,6 +8,7 @@ import { Button } from "@components/atoms/buttons";
 import TextArea from "@components/atoms/TextAreas";
 import { ProgressIndicator } from "@components/molecules/ProgressIndicators";
 import { Sidebar } from "@components/molecules/Sidebars";
+import { RadioOption } from "@components/molecules/RadioOption";
 
 import { firebaseAuth } from "../firebase";
 
@@ -21,6 +22,7 @@ export default function Main() {
   const setUser = useSetRecoilState(userState);
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const [textAreaValue, setTextAreaValue] = useState("");
+  const options = ["option1", "option2", "option3"];
 
   function logout() {
     firebaseAuth.signOut();
@@ -56,6 +58,8 @@ export default function Main() {
       <ProgressIndicator openIssues={5} closedIssues={12} />
       <br />
       <Sidebar />
+      <br />
+      <RadioOption options={options} label='LABEL' />
     </div>
   );
 }

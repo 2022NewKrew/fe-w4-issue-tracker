@@ -11,6 +11,7 @@ import issueFilterState from '../store/issueFilterState';
 import labelsState from '../store/labelsState';
 import milestonesState from '../store/milestonesState';
 import MoreIcon from '../svg/More.svg';
+import XIcon from '../svg/X.svg';
 
 export default function IssueList(){
   const [issueArray, setIssueArray]=useState([]);
@@ -74,10 +75,14 @@ export default function IssueList(){
       setIssueArray(newIssueArray);
     }).catch(()=>{
       alert('잘못된 필터 값입니다. 다시 시도해주세요!');
-      setRawIssueFilter('');
-      setIssueFilter('');
+      deleteFilter();
     });
-  }, [issueFilter, setIssueFilter]);
+  }, [issueFilter, deleteFilter]);
+
+  const deleteFilter=useCallback(()=>{
+    setRawIssueFilter('');
+    setIssueFilter('');
+  }, [setRawIssueFilter, setIssueFilter]);
 
   return (
     <div className='IssueList'>
@@ -95,6 +100,11 @@ export default function IssueList(){
           <ButtonMedium title='+ 이슈 작성' onClick={()=>console.log('Add Issue')}/>
         </div>
       </div>
+      {issueFilter.length>0 &&
+      <button className='delete-filter'
+        onClick={deleteFilter}>
+        <XIcon /> 현재 검색 필터 지우기
+      </button>}
       <div className='issue-header'>
         <div className='tab-first'>
           <input type='checkbox'

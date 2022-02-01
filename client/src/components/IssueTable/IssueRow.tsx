@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TextSmall, TableData, SmallIcon } from '@styles/styleTemplates';
+import { TextSmall, TableData, SmallIcon, AlignXYCenter } from '@styles/styleTemplates';
 import { IIssue } from '@types';
 import { TimeStampMessage, SmallLabel } from '@components/assets';
 import { ReactComponent as Alertcircle } from '@icons/AlertCircle.svg';
+import { ReactComponent as Milestone } from '@icons/Milestone.svg';
 
 interface IProps {
     issueData: IIssue;
@@ -23,7 +24,8 @@ const renderRightAria = (selectMode: boolean, issue: IIssue | undefined) => {
     // TODO: issue의 작성자, 담당자 정보를 받아 렌더
 };
 
-export const IssueRow = ({ issueData: { title, id, timeStamp, status }, selectMode }: IProps) => {
+export const IssueRow = ({ issueData, selectMode }: IProps) => {
+    const { title, id, timeStamp, status } = issueData;
     return (
         <>
             <CheckBox>
@@ -37,27 +39,22 @@ export const IssueRow = ({ issueData: { title, id, timeStamp, status }, selectMo
                 </IssueItemUpperArea>
                 <IssueItemBelowArea>
                     <div>#{id}</div>
-                    <div>
-                        <TimeStampMessage
-                            timeStamp={timeStamp}
-                            current={new Date().getTime()}
-                            type={status}
-                            author="임시유저"
-                        />
-                    </div>
+                    <TimeStampMessage
+                        timeStamp={timeStamp}
+                        current={new Date().getTime()}
+                        type={status}
+                        author="임시유저"
+                    />
+                    <MilestoneName>
+                        <Milestone />
+                        <div>마일스톤</div>
+                    </MilestoneName>
                 </IssueItemBelowArea>
             </IssueItem>
-            {renderRightAria(selectMode)}
+            {renderRightAria(selectMode, issueData)}
         </>
     );
 };
-
-const Wrapper = styled.div`
-    ${TableData}
-    padding: 16px;
-    height: 68px;
-    grid-column: 1 / -1;
-`;
 
 const CheckBox = styled.div`
     ${TableData}
@@ -76,14 +73,30 @@ const IssueItem = styled.div`
 `;
 
 const IssueItemUpperArea = styled.div`
+    height: 32px;
     display: flex;
-    ${SmallIcon('var(--primary1-color)', 'var(--primary2-color)')}
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 8px;
+    ${SmallIcon('var(--primary1-color)', '8px', 'var(--primary2-color)')};
+    & > * {
+        margin-right: 8px;
+    }
 `;
 
 const IssueItemBelowArea = styled.div`
     ${TextSmall}
+    height: 28px;
     color: var(--label-color);
     display: flex;
+    & div {
+        margin-right: 16px;
+    }
+`;
+
+const MilestoneName = styled.div`
+    ${AlignXYCenter};
+    ${SmallIcon('var(--label-color)', '8px')}
 `;
 
 const Assignee = styled.div`

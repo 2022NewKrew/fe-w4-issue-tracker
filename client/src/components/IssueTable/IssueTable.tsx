@@ -40,7 +40,7 @@ const dummyData: IIssue[] = [
 ];
 
 export const IssueTable = () => {
-    const [selectMode, setSelectMode] = useState(true);
+    const [selectMode, setSelectMode] = useState(false);
     return (
         <TableContainer selectMode={selectMode}>
             <IssueTableHeader selectMode={selectMode} />

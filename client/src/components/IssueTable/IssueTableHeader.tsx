@@ -68,10 +68,7 @@ const IssueStatuses = styled.div`
 const Status = styled.div`
     ${AlignXYCenter}
     padding: 12px;
-    ${SmallIcon()}
-    & svg {
-        padding-right: 4px;
-    }
+    ${SmallIcon('var(--label-color)', '4px')}
 `;
 
 const IssueFilterButton = styled(FilterButton)`

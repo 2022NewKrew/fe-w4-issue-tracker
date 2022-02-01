@@ -50,12 +50,13 @@ export const TableData = css`
     background-color: var(--off-white-color);
 `;
 
-export const SmallIcon = (stroke: string = '', fill: string = 'none') => {
+export const SmallIcon = (stroke: string = '', marginRight = 'none', fill: string = 'none') => {
     return css`
         & svg {
             width: 16px;
             height: 16px;
             fill: ${fill};
+            margin-right: ${marginRight};
             path {
                 stroke: ${stroke};
             }

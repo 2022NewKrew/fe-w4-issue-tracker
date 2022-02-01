@@ -31,10 +31,6 @@ const StyledLabel = styled.div<{ mainColor: string }>`
     height: 40px;
     padding: 10px 16.5px;
 
-    & div {
-        padding-left: 4px;
-    }
-
     ${(props) => {
         const color1 = props.mainColor + '1';
         const color2 = props.mainColor + '2';
@@ -42,7 +38,7 @@ const StyledLabel = styled.div<{ mainColor: string }>`
             background-color: ${props.theme.colors[color2]};
             border-color: ${props.theme.colors[color1]};
             color: ${props.theme.colors[color1]};
-            ${SmallIcon(props.theme.colors[color1])}
+            ${SmallIcon(props.theme.colors[color1], '4px')}
         `;
     }}
 `;

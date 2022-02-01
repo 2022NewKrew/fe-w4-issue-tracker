@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { TextXSmall, AlignXYCenter } from '@styles/styleTemplates';
+import { TextXSmall } from '@styles/styleTemplates';
 
 type labelType = 'dark-text' | 'light-text' | 'line';
 interface IProps {
@@ -19,7 +19,6 @@ export const SmallLabel = ({ type, title, color }: IProps) => {
 
 const StyledLabel = styled.div<{ type: labelType; mainColor: string }>`
     ${TextXSmall}
-    ${AlignXYCenter}
     width: fit-content;
     box-sizing: border-box;
     border-radius: 30px;

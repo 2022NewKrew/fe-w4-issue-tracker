@@ -19,6 +19,6 @@ const getMessage = (timeAgo: string, type: issueStatus, author: string) => {
 
 export const TimeStampMessage = ({ timeStamp, current, type = null, author = null }: IProps) => {
     const timeAgoString = compareAgoTime(timeStamp, current);
-    if (!type || !author) return timeAgoString;
-    return getMessage(timeAgoString, type, author);
+    if (!type || !author) return <div>{timeAgoString}</div>;
+    return <div>{getMessage(timeAgoString, type, author)}</div>;
 };

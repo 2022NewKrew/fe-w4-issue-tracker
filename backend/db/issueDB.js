@@ -76,19 +76,23 @@ module.exports=function initIssueDB(db){
     return result;
   }
 
-  function select({authorID, milestoneID, labelID}){
+  function select({authorID, milestoneID, labelID, assigneeID}){
     const condition=[
       authorID!==undefined ? 'authorID=@authorID' : '',
       milestoneID!==undefined ? 'milestoneID=@milestoneID' : '',
-      labelID!==undefined ? 'labelID=@labelID' : ''
+      labelID!==undefined ? 'labelID=@labelID' : '',
+      assigneeID!==undefined ? 'assigneeID=@assigneeID' : ''
     ].filter((val)=>val.length).join(' AND ');
     const selectStmt=db.prepare(`
       SELECT * FROM
       (issue LEFT JOIN issueLabel USING (issueID))
+      LEFT JOIN
+      (SELECT userID assigneeID, issueID FROM assignee)
+      USING (issueID)
       WHERE ${condition}
       GROUP BY issueID
     `);
-    const result=selectStmt.all({authorID, milestoneID, labelID});
+    const result=selectStmt.all({authorID, milestoneID, labelID, assigneeID});
     convertIsOpenBool(result);
     return result;
   }

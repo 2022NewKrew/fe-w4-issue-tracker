@@ -30,16 +30,24 @@ app.get('/issue-list', (req, res)=>{
       const issues=issueDB.selectAll();
       return res.send(issues).status(200);
     }
-    const {authorID, milestoneTitle, labelTitle}=parseFilter(rawFilter);
+    const {authorID, milestoneTitle, labelTitle, assigneeID}=parseFilter(rawFilter);
     db.transaction(()=>{
       let milestoneID, labelID;
       if(milestoneTitle!==undefined){
-        milestoneID=milestoneDB.selectByTitle(milestoneTitle).milestoneID;
+        const milestone=milestoneDB.selectByTitle(milestoneTitle);
+        if(milestone===undefined){
+          return res.send([]).status(200);
+        }
+        milestoneID=milestone.milestoneID;
       }
       if(labelTitle!==undefined){
-        labelID=labelDB.selectByTitle(labelTitle).labelID;
+        const label=labelDB.selectByTitle(labelTitle);
+        if(label===undefined){
+          return res.send([]).status(200);
+        }
+        labelID=label.labelID;
       }
-      const issues=issueDB.select({authorID, milestoneID, labelID});
+      const issues=issueDB.select({authorID, milestoneID, labelID, assigneeID});
       res.send(issues).status(200);
     })();
   }catch(e){
@@ -53,7 +61,7 @@ app.get('/issue-list', (req, res)=>{
  */
 function parseFilter(rawFilter){
   const filterArray=rawFilter.split(' ').filter((val)=>val.length && val!==' ');
-  let authorID, milestoneTitle, labelTitle;
+  let authorID, milestoneTitle, labelTitle, assigneeID;
   filterArray.forEach((val)=>{
     const [key, value]=val.split(':');
     switch(key){
@@ -66,11 +74,14 @@ function parseFilter(rawFilter){
     case 'label':
       labelTitle=value;
       break;
+    case 'assignee':
+      assigneeID=value;
+      break;
     default:
       throw Error('parseFilter: Invalid filter key.');
     }
   });
-  return {authorID, milestoneTitle, labelTitle};
+  return {authorID, milestoneTitle, labelTitle, assigneeID};
 }
 
 app.get('/issue-label', (req, res)=>{

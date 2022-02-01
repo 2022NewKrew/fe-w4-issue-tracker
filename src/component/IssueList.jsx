@@ -26,7 +26,7 @@ export default function IssueList(){
   const [rawIssueFilter, setRawIssueFilter]=useState(issueFilter);
   const [showingIssues, setShowingIssues]=useState([]);
   const {isChecked, isCheckedAll, isCheckedAny,
-    toggleCheck, toggleCheckAll}=useCheck(showingIssues);
+    numChecked, toggleCheck, toggleCheckAll}=useCheck(showingIssues);
 
   useEffect(()=>{
     filterIssues();
@@ -35,6 +35,10 @@ export default function IssueList(){
   useEffect(()=>{
     setShowingIssues(issueArray.filter(({isOpen})=>isOpen===showOpen));
   }, [issueArray, showOpen]);
+
+  useEffect(()=>{
+    setRawIssueFilter(issueFilter);
+  }, [issueFilter, setRawIssueFilter]);
 
   const isIndexChecked=useCallback((index)=>{
     return isChecked(index);
@@ -80,13 +84,13 @@ export default function IssueList(){
   }, [issueFilter, deleteFilter]);
 
   const deleteFilter=useCallback(()=>{
-    setRawIssueFilter('');
     setIssueFilter('');
-  }, [setRawIssueFilter, setIssueFilter]);
+  }, [setIssueFilter]);
 
   return (
     <div className='IssueList'>
       <Header />
+
       <div className='issue-searchbar'>
         <div className='align-left'>
           <form onSubmit={(e)=>{
@@ -100,11 +104,13 @@ export default function IssueList(){
           <ButtonMedium title='+ 이슈 작성' onClick={()=>console.log('Add Issue')}/>
         </div>
       </div>
+      
       {issueFilter.length>0 &&
       <button className='delete-filter'
         onClick={deleteFilter}>
         <XIcon /> 현재 검색 필터 지우기
       </button>}
+
       <div className='issue-header'>
         <div className='tab-first'>
           <input type='checkbox'
@@ -112,31 +118,45 @@ export default function IssueList(){
             onChange={()=>toggleCheckAll()}>
           </input>
         </div>
-        <div className='tab-second'>
-          <strong className={'margin-right hover-item'+(showOpen ? ' active' : '')}
-            onClick={()=>{setShowOpen(true);}}
-          >
-            열린 이슈({numOpenIssues})
-          </strong>
-          <strong className={'margin-right hover-item'+(!showOpen ? ' active' : '')}
-            onClick={()=>{setShowOpen(false);}}
-          >
-            닫힌 이슈({numClosedIssues})
-          </strong>
-        </div>
-        <div className='tab-rest hover-item'>
-          <span className='margin-right'>담당자</span><MoreIcon/>
-        </div>
-        <div className='tab-rest hover-item'>
-          <span className='margin-right'>레이블</span><MoreIcon/>
-        </div>
-        <div className='tab-rest hover-item'>
-          <span className='margin-right'>마일스톤</span><MoreIcon/>
-        </div>
-        <div className='tab-rest hover-item'>
-          <span className='margin-right'>작성자</span><MoreIcon/>
-        </div>
+        {isCheckedAny ?
+          <>
+            <div className='tab-second'>
+              <strong className='grey-color'>{numChecked}개 이슈 선택</strong>
+            </div>
+            <div className='tab-rest hover-item'>
+              <span className='margin-right'>상태 수정</span><MoreIcon/>
+            </div>
+          </>
+          :
+          <>
+            <div className='tab-second'>
+              <strong className={'margin-right hover-item'+(showOpen ? ' active' : '')}
+                onClick={()=>{setShowOpen(true);}}
+              >
+                열린 이슈({numOpenIssues})
+              </strong>
+              <strong className={'margin-right hover-item'+(!showOpen ? ' active' : '')}
+                onClick={()=>{setShowOpen(false);}}
+              >
+                닫힌 이슈({numClosedIssues})
+              </strong>
+            </div>
+            <div className='tab-rest hover-item'>
+              <span className='margin-right'>담당자</span><MoreIcon/>
+            </div>
+            <div className='tab-rest hover-item'>
+              <span className='margin-right'>레이블</span><MoreIcon/>
+            </div>
+            <div className='tab-rest hover-item'>
+              <span className='margin-right'>마일스톤</span><MoreIcon/>
+            </div>
+            <div className='tab-rest hover-item'>
+              <span className='margin-right'>작성자</span><MoreIcon/>
+            </div>
+          </>
+        }
       </div>
+
       <div className='issue-container'>
         {getIssues()}
       </div>

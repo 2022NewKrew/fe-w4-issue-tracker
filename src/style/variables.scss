@@ -37,6 +37,10 @@ $success-color: #34c759;
     overflow: hidden;
 }
 
+.grey-color {
+    color: $label-color;
+}
+
 .tab-first {
     @extend .flex-center;
     flex: 0 1 50px;

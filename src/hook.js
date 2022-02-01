@@ -26,6 +26,7 @@ export function useDebounce(callback, time, deps){
  */
 export function useCheck(array){
   const [checked, setChecked]=useState({});
+  const [numChecked, setNumChecked]=useState(0);
   const [isCheckedAll, setIsCheckedAll]=useState(false);
   const [isCheckedAny, setIsCheckedAny]=useState(false);
   
@@ -35,8 +36,12 @@ export function useCheck(array){
 
   useEffect(()=>{
     setIsCheckedAll(array.length && Object.keys(checked).length===array.length);
-    setIsCheckedAny(Object.keys(checked).length>0);
   }, [checked, array]);
+
+  useEffect(()=>{
+    setIsCheckedAny(Object.keys(checked).length>0);
+    setNumChecked(Object.keys(checked).length);
+  }, [checked]);
 
   const isChecked=useCallback((index)=>{
     return (index in checked);
@@ -74,6 +79,7 @@ export function useCheck(array){
     isCheckedAll ? uncheckAll() : checkAll();
   }, [isCheckedAll, uncheckAll, checkAll]);
   return {
-    isChecked, isCheckedAll, isCheckedAny, toggleCheck, checkAll, uncheckAll, toggleCheckAll
+    isChecked, isCheckedAll, isCheckedAny, numChecked,
+    toggleCheck, checkAll, uncheckAll, toggleCheckAll
   };
 }

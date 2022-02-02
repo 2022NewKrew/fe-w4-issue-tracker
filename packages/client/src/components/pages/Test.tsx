@@ -2,6 +2,7 @@ import Atoms from "@UI/Atoms";
 import styled from "@emotion/styled";
 import { useInput } from "@hooks";
 import { ColorCode, Dropdown, Taps, TextArea, TextInput } from "@UI/Molecules";
+import { FilterBar } from "@UI/Organisms";
 
 const Test = () => {
   const [text, onChange] = useInput("");
@@ -38,6 +39,7 @@ const Test = () => {
         direction="left"
       />
       <Taps />
+      <FilterBar />
     </Wrapper>
   );
 };

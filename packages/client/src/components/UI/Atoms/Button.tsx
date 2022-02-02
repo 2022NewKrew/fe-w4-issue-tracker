@@ -54,7 +54,6 @@ const SButton = styled.button<SProps>`
   ${({ theme }) => theme.FlexCenter};
   flex-direction: row;
   font-weight: bold;
-  border-radius: ${({ size }) => (size !== "small" ? "20px" : "11px")};
   ${({ shape = "standard", color = "primary" }) => shapeList(color)[shape]}
   ${({ size, shape = "standard", theme }) => sizeList(shape, theme)[size]}
   .btn_icon {
@@ -134,18 +133,21 @@ function sizeList(shape: Shape, theme: Theme) {
           width: 340px;
           height: 64px;
           padding: 0 24px;
+          border-radius: 20px;
         `,
         medium: `
         ${theme.FontSize.medium};
           width: 240px;
           height: 56px;
           padding: 0 24px;
+          border-radius: 20px;
         `,
         small: `
         ${theme.FontSize.xsmall};
           width: 120px;
           height: 40px;
           padding: 0 16px;
+          border-radius: 11px;
         `,
       };
 }

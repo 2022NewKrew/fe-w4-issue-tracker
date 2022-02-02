@@ -33,7 +33,7 @@ const style = css`
     padding-left: 3px;
   }
   body {
-    background: #f7f7fc;
+    background: ${theme.Greyscale.background};
     width: 1440px;
     margin: 0 auto;
   }

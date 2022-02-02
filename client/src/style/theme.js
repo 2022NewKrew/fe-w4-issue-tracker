@@ -29,12 +29,3 @@ export const theme = {
             -webkit-line-clamp: ${rowNum};
         `;
     },
-    basicButton: css`
-        background-color: #007aff;
-        border-radius: 20px;
-        font-weight: bold;
-        font-size: 18px;
-        line-height: 32px;
-        color: #fefefe;
-    `,
-};

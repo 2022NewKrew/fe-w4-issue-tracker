@@ -1,7 +1,5 @@
 import Icon from "@Icon";
-import { useDropdown } from "@hooks";
-
-import { useState } from "react";
+import { useDropdown, useSelection } from "@hooks";
 
 import styled from "@emotion/styled";
 import Atoms from "@UI/Atoms";
@@ -24,10 +22,7 @@ const Dropdown = ({
   icon = true,
 }: Props) => {
   const [visible, open] = useDropdown();
-  const [select, setSelect] = useState("");
-  const handleClick = (e: any) => {
-    setSelect(e.target.textContent);
-  };
+  const [select, onClick] = useSelection("");
 
   const createList = (list: string[]) => {
     return list.map((item) => (
@@ -51,7 +46,7 @@ const Dropdown = ({
       </Atoms.Button>
       <Panel visible={visible} direction={direction}>
         <Atoms.Title type="panel">{listTitle}</Atoms.Title>
-        <ul onClick={handleClick}>{createList(list)}</ul>
+        <ul onClick={onClick}>{createList(list)}</ul>
       </Panel>
     </Wrapper>
   );

@@ -26,7 +26,7 @@ const TableCell = ({
           <Icon name="issue_open_blue" />
           {title}
           {label.map(({ title, color }, idx) => (
-            <Atoms.Label key={idx} color={color}>
+            <Atoms.Label key={idx} type="custom" color={color}>
               {title}
             </Atoms.Label>
           ))}

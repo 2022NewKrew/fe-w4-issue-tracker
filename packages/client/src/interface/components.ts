@@ -1,7 +1,7 @@
 import * as icons from "@assets/icons";
 
 export interface LayoutProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 // icon

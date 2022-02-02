@@ -1,5 +1,5 @@
 import { Dropdown } from "@UI/Molecules";
-import Icon from "@styles/Icon";
+import Icon from "@Icon";
 
 import { useState } from "react";
 

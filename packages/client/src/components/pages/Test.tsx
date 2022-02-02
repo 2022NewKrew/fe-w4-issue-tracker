@@ -1,8 +1,18 @@
 import Atoms from "@UI/Atoms";
 import styled from "@emotion/styled";
 import { useInput } from "@hooks";
-import { ColorCode, Dropdown, Taps, TextArea, TextInput } from "@UI/Molecules";
+import {
+  ColorCode,
+  Comment,
+  Dropdown,
+  OptionSelection,
+  Progress,
+  Taps,
+  TextArea,
+  TextInput,
+} from "@UI/Molecules";
 import { FilterBar } from "@UI/Organisms";
+import Label from "@UI/Atoms/Label";
 
 const Test = () => {
   const [text, onChange] = useInput("");
@@ -40,6 +50,17 @@ const Test = () => {
       />
       <Taps />
       <FilterBar />
+      <Label type="open" />
+      <Label type="close" />
+      <Label type="dark">레이블 이름</Label>
+      <Label type="light">레이블 이름</Label>
+      <Label type="athor" />
+      <Comment width={480} text="코멘트는 이렇게 보여집니다." />
+      <Comment width={480} state="close" text="이슈가 닫혔습니다." />
+      <Comment width={480} state="reopen" text="이슈가 다시 열렸습니다." />
+      <OptionSelection label="Label" options={["Option1", "Option2"]} />
+      <Progress />
+      <Progress text />
     </Wrapper>
   );
 };

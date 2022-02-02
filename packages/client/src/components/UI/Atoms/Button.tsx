@@ -1,4 +1,4 @@
-import Icon from "@styles/Icon";
+import Icon from "@Icon";
 
 import { IconName, LayoutProps } from "@interface/components";
 import styled from "@emotion/styled";

@@ -1,8 +1,8 @@
-import Button from "@components/common/Button";
-import TextInput from "@components/common/TextInput";
+import Atoms from "@UI/Atoms";
 import { useInput } from "@hooks";
 
-import React, { FormEvent } from "react";
+import { FormEvent } from "react";
+import { TextInput } from "@UI/Molecules";
 
 const IDLoginForm: React.FC = () => {
   const [id, onChangeId] = useInput("");
@@ -13,15 +13,8 @@ const IDLoginForm: React.FC = () => {
   };
   return (
     <form onSubmit={IDLogin}>
+      <TextInput size="large" label="아이디" value={id} onChange={onChangeId} />
       <TextInput
-        id="id"
-        size="large"
-        label="아이디"
-        value={id}
-        onChange={onChangeId}
-      />
-      <TextInput
-        id="password"
         size="large"
         label="비밀번호"
         type="password"
@@ -31,9 +24,9 @@ const IDLoginForm: React.FC = () => {
         pattern=".{8,}"
         errormsg="비밀번호는 8자리 이상입니다."
       />
-      <Button size="large" disabled={!id || !password} link="/issue">
+      <Atoms.Button size="large" disabled={!id || !password} link="/issue">
         아이디로 로그인
-      </Button>
+      </Atoms.Button>
     </form>
   );
 };

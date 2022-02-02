@@ -1,4 +1,4 @@
-import Icon from "@icon";
+import Icon from "@Icon";
 import { useDropdown } from "@hooks";
 
 import { useState } from "react";
@@ -52,15 +52,15 @@ const Dropdown = ({
 
 export default Dropdown;
 
-export const Wrapper = styled.div`
+const Wrapper = styled.div`
   position: relative;
 `;
 
 export const Indicator = styled.button`
-  ${({ theme: { text, greyscale } }) => css`
-    ${text.small}
-    color: ${greyscale.label};
-    background: ${greyscale.background};
+  ${({ theme: { FontSize, Greyscale } }) => css`
+    ${FontSize.small}
+    color: ${Greyscale.label};
+    background: ${Greyscale.background};
     font-weight: bold;
     display: flex;
     justify-content: space-between;
@@ -72,7 +72,7 @@ export const Indicator = styled.button`
       opacity: 0.5;
     }
     :hover {
-      color: ${greyscale.body};
+      color: ${Greyscale.body};
       svg {
         opacity: 1;
       }
@@ -84,9 +84,9 @@ export const Panel = styled.div<{
   visible: boolean;
   direction: "left" | "right";
 }>`
-  ${({ theme: { text, greyscale }, visible, direction }) => css`
-    background: ${greyscale.line};
-    border: 1px solid ${greyscale.line};
+  ${({ theme: { FontSize, Greyscale }, visible, direction }) => css`
+    background: ${Greyscale.line};
+    border: 1px solid ${Greyscale.line};
     display: ${visible ? "flex" : "none"};
     flex-direction: column;
     width: 240px;
@@ -97,19 +97,19 @@ export const Panel = styled.div<{
     overflow: hidden;
     z-index: 10;
     h3 {
-      ${text.medium};
-      color: ${greyscale.titleActive};
-      background: ${greyscale.background};
+      ${FontSize.medium};
+      color: ${Greyscale.titleActive};
+      background: ${Greyscale.background};
       padding: 16px 16px 12px;
     }
     li {
-      ${text.small};
+      ${FontSize.small};
       padding: 8px 16px;
       display: flex;
       align-items: center;
-      color: ${greyscale.body};
-      border-top: 1px solid ${greyscale.line};
-      background: ${greyscale.offWhite};
+      color: ${Greyscale.body};
+      border-top: 1px solid ${Greyscale.line};
+      background: ${Greyscale.offWhite};
       height: 44px;
       position: relative;
       cursor: pointer;
@@ -118,12 +118,12 @@ export const Panel = styled.div<{
         right: 17px;
       }
       :hover {
-        color: ${greyscale.titleActive};
-        background: ${greyscale.background};
+        color: ${Greyscale.titleActive};
+        background: ${Greyscale.background};
       }
     }
     .select {
-      color: ${greyscale.titleActive};
+      color: ${Greyscale.titleActive};
     }
   `}
 `;

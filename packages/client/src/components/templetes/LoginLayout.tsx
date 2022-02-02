@@ -10,8 +10,8 @@ const LoginLayout = ({ children }: LayoutProps) => {
 export default LoginLayout;
 
 const Wrapper = styled.div`
-  ${({ theme: { flexCenter, text, greyscale } }) => css`
-    ${flexCenter}
+  ${({ theme: { FlexCenter, FontSize, Greyscale } }) => css`
+    ${FlexCenter}
     margin-top: 230px;
     justify-content: space-between;
     svg {
@@ -32,8 +32,8 @@ const Wrapper = styled.div`
       }
     }
     & > span {
-      ${text.small};
-      color: ${greyscale.placeholer};
+      ${FontSize.small};
+      color: ${Greyscale.placeholer};
       font-weight: bold;
       margin: 24px 0;
     }

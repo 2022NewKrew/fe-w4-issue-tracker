@@ -1,8 +1,8 @@
-import Label from "@components/common/Label";
+import Atoms from "@UI/Atoms";
 
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-import Icon from "@icon";
+import Icon from "@styles/Icon";
 
 interface Props {
   issue: {
@@ -26,9 +26,9 @@ const TableCell = ({
           <Icon name="issue_open_blue" />
           {title}
           {label.map(({ title, color }, idx) => (
-            <Label key={idx} color={color}>
+            <Atoms.Label key={idx} color={color}>
               {title}
-            </Label>
+            </Atoms.Label>
           ))}
         </div>
         <div className="table_content_info">
@@ -48,11 +48,11 @@ const TableCell = ({
 export default TableCell;
 
 const Wrapper = styled.li`
-  ${({ theme: { greyscale, text } }) => css`
+  ${({ theme: { Greyscale, FontSize } }) => css`
     width: 100%;
     height: 100px;
-    background: ${greyscale.offWhite};
-    border-top: 1px solid ${greyscale.line};
+    background: ${Greyscale.offWhite};
+    border-top: 1px solid ${Greyscale.line};
     padding: 16px 32px;
     position: relative;
     & > svg {
@@ -73,13 +73,13 @@ const Wrapper = styled.li`
         right: 54px;
       }
       .table_content_title {
-        ${text.medium}
+        ${FontSize.medium}
         display: flex;
         align-items: center;
         padding-left: 24px;
         position: relative;
         font-weight: bold;
-        color: ${greyscale.titleActive};
+        color: ${Greyscale.titleActive};
         svg {
           top: 5px;
           left: 0;
@@ -90,8 +90,8 @@ const Wrapper = styled.li`
       }
       .table_content_info span {
         margin-right: 16px;
-        ${text.small}
-        color: ${greyscale.label};
+        ${FontSize.small}
+        color: ${Greyscale.label};
         svg {
           position: static;
           margin-right: 6px;

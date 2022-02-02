@@ -1,5 +1,5 @@
-import Button from "@components/common/Button";
-import Taps from "@components/common/Taps";
+import Atoms from "@UI/Atoms";
+import { Taps } from "@UI/Molecules";
 
 import styled from "@emotion/styled";
 
@@ -7,9 +7,9 @@ const LinkTap = () => {
   return (
     <Wrapper>
       <Taps />
-      <Button size="small" link="/issue/new" icon="plus_white">
+      <Atoms.Button size="small" link="/issue/new" icon="plus_white">
         이슈 작성
-      </Button>
+      </Atoms.Button>
     </Wrapper>
   );
 };

@@ -1,10 +1,10 @@
-import Dropdown from "@components/common/Dropdown";
+import { Dropdown } from "@UI/Molecules";
+import Icon from "@styles/Icon";
 
 import { useState } from "react";
 
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-import Icon from "@icon";
 
 const filterList = [
   "열린 이슈",
@@ -47,7 +47,7 @@ const FilterBar = () => {
 export default FilterBar;
 
 const Wrapper = styled.div`
-  ${({ theme: { greyscale } }) => css`
+  ${({ theme: { Greyscale } }) => css`
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
@@ -62,19 +62,19 @@ const Wrapper = styled.div`
     div > button {
       padding: 0 25px;
       height: 100%;
-      border: 1px solid ${greyscale.line};
+      border: 1px solid ${Greyscale.line};
       border-radius: 11px 0 0 11px;
       border-right: none;
     }
     form {
-      border: 1px solid ${greyscale.line};
+      border: 1px solid ${Greyscale.line};
       border-radius: 11px;
       position: relative;
       flex: 1;
       overflow: hidden;
       border-radius: 0 11px 11px 0;
       input {
-        background: ${greyscale.inputBackground};
+        background: ${Greyscale.inputBackground};
         width: 100%;
         height: 100%;
         padding: 0 48px;
@@ -85,15 +85,15 @@ const Wrapper = styled.div`
         opacity: 0.5;
       }
       :focus-within {
-        background: ${greyscale.offWhite};
-        border-color: ${greyscale.titleActive};
-        border-left: 1px solid ${greyscale.line};
+        background: ${Greyscale.offWhite};
+        border-color: ${Greyscale.titleActive};
+        border-left: 1px solid ${Greyscale.line};
         input {
-          background: ${greyscale.offWhite};
+          background: ${Greyscale.offWhite};
         }
         + div > button {
-          background: ${greyscale.offWhite};
-          border: 1px solid ${greyscale.titleActive};
+          background: ${Greyscale.offWhite};
+          border: 1px solid ${Greyscale.titleActive};
           border-right: none;
           border-radius: 11px 0 0 11px;
         }

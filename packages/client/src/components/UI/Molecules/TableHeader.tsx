@@ -1,10 +1,9 @@
-import Dropdown from "@components/common/Dropdown";
+import { Dropdown } from "@UI/Molecules";
+import Atoms from "@UI/Atoms";
+import Icon from "@styles/Icon";
 
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-import Icon from "@icon";
-import ButtonGroup from "@components/common/ButtonGroup";
-import Button from "@components/common/Button";
 
 const labelList = ["레이블이 없는 이슈", "bug", "documentation"];
 const milestonList = ["마일스톤이 없는 이슈", "마스터즈 코스"];
@@ -65,14 +64,14 @@ const TableHeader = () => {
   return (
     <Wrapper>
       <Icon name="check_box_initial" />
-      <ButtonGroup gap={24}>
-        <Button size="small" shape="text" icon="issue_open">
+      <Atoms.ButtonGroup gap={24}>
+        <Atoms.Button size="small" shape="text" icon="issue_open">
           열린 이슈(2)
-        </Button>
-        <Button size="small" shape="text" icon="archive">
+        </Atoms.Button>
+        <Atoms.Button size="small" shape="text" icon="archive">
           열린 이슈(2)
-        </Button>
-      </ButtonGroup>
+        </Atoms.Button>
+      </Atoms.ButtonGroup>
       {createFilterTabs(filterTabs)}
     </Wrapper>
   );
@@ -81,10 +80,10 @@ const TableHeader = () => {
 export default TableHeader;
 
 const Wrapper = styled.div`
-  ${({ theme: { greyscale, text } }) => css`
+  ${({ theme: { Greyscale, FontSize } }) => css`
     width: 100%;
     height: 64px;
-    background: ${greyscale.background};
+    background: ${Greyscale.background};
     padding: 16px 32px;
     position: relative;
     & > svg {
@@ -96,7 +95,7 @@ const Wrapper = styled.div`
       & > button {
         width: 105px;
         height: 32px;
-        ${text.small}
+        ${FontSize.small};
       }
     }
     & > div:not(:first-of-type) {

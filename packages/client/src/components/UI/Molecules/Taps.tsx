@@ -1,4 +1,4 @@
-import Icon from "@icon";
+import Icon from "@styles/Icon";
 
 import { NavLink } from "react-router-dom";
 
@@ -32,30 +32,30 @@ const Taps = () => {
 export default Taps;
 
 const Wrapper = styled.ul`
-  ${({ theme: { greyscale, flexCenter, text } }) => css`
+  ${({ theme: { Greyscale, FlexCenter, FontSize } }) => css`
     overflow: hidden;
     display: flex;
     width: 321px;
     height: 40px;
-    border: 1px solid ${greyscale.line};
+    border: 1px solid ${Greyscale.line};
     border-radius: 11px;
     li {
       flex: 1;
-      ${flexCenter}
-      background: ${greyscale.background};
+      ${FlexCenter}
+      background: ${Greyscale.background};
       a {
-        ${text.small}
+        ${FontSize.small}
         width: 100%;
         height: 100%;
-        ${flexCenter}
+        ${FlexCenter}
         flex-direction: row;
 
         font-weight: bold;
-        color: ${greyscale.label};
+        color: ${Greyscale.label};
         span {
           font-weight: normal;
           margin-left: 8px;
-          color: ${greyscale.label};
+          color: ${Greyscale.label};
         }
         svg {
           position: static;
@@ -64,19 +64,19 @@ const Wrapper = styled.ul`
         }
       }
       :hover {
-        background: ${greyscale.inputBackground};
+        background: ${Greyscale.inputBackground};
       }
       :active {
-        color: ${greyscale.body};
-        background: ${greyscale.line};
+        color: ${Greyscale.body};
+        background: ${Greyscale.line};
       }
     }
     li:first-of-type {
-      border-right: 1px solid ${greyscale.line};
+      border-right: 1px solid ${Greyscale.line};
     }
     .activated {
-      color: ${greyscale.body};
-      background: ${greyscale.line};
+      color: ${Greyscale.body};
+      background: ${Greyscale.line};
       svg {
         opacity: 1;
       }

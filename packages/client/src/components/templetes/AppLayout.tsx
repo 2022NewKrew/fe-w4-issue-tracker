@@ -1,16 +1,15 @@
-import Icon from "@icon";
+import Icon from "@styles/Icon";
 
 import { LayoutProps } from "@interface/components";
-
 import styled from "@emotion/styled";
 
 const AppLayout = ({ children }: LayoutProps) => {
   return (
     <Wrapper>
-      <StyledHeader>
+      <header>
         <Icon name="logo_medium" />
         <Icon name="user_image_large" />
-      </StyledHeader>
+      </header>
       <main>{children}</main>
     </Wrapper>
   );
@@ -25,18 +24,17 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
   }
-`;
-
-const StyledHeader = styled.header`
-  width: 100%;
-  height: 126px;
-  position: relative;
-  svg:first-of-type {
-    left: 0;
-    top: 27px;
-  }
-  svg:last-child {
-    right: 0;
-    top: 25px;
+  header {
+    width: 100%;
+    height: 126px;
+    position: relative;
+    svg:first-of-type {
+      left: 0;
+      top: 27px;
+    }
+    svg:last-child {
+      right: 0;
+      top: 25px;
+    }
   }
 `;

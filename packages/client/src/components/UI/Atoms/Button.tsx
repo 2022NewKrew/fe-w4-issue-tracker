@@ -1,0 +1,139 @@
+import Icon from "@styles/Icon";
+
+import { IconName, LayoutProps } from "@interface/components";
+import styled from "@emotion/styled";
+import { Size } from "src/@types/emotion";
+import { Theme } from "@emotion/react";
+import { useButtonLink } from "@hooks";
+
+export interface Props extends SProps, LayoutProps {
+  onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
+  disabled?: boolean;
+  icon?: IconName;
+  link?: string;
+}
+
+const Button = ({
+  children,
+  shape,
+  color,
+  size,
+  disabled,
+  onClick,
+  icon,
+  link,
+}: Props) => {
+  const onClickLink = useButtonLink(link);
+
+  return (
+    <SButton
+      shape={shape}
+      color={color}
+      size={size}
+      disabled={disabled}
+      onClick={link ? onClickLink : onClick}
+    >
+      {icon && <Icon className="btn_icon" name={icon} />}
+      {children}
+    </SButton>
+  );
+};
+
+export default Button;
+
+type Color = "primary" | "secondary" | "error" | "success";
+type Shape = "standard" | "secondary" | "text";
+
+interface SProps {
+  size: Size;
+  color?: Color;
+  shape?: Shape;
+}
+
+const SButton = styled.button<SProps>`
+  ${({ theme }) => theme.FlexCenter};
+  flex-direction: row;
+  font-weight: bold;
+  border-radius: ${({ size }) => (size !== "small" ? "20px" : "11px")};
+  ${({ shape = "standard", color = "primary" }) => shapeList(color)[shape]}
+  ${({ size, shape = "standard", theme }) => sizeList(shape, theme)[size]}
+  .btn_icon {
+    position: static;
+    margin-right: 4px;
+  }
+`;
+
+function shapeList(color: Color) {
+  return {
+    standard: `
+    color: var(--offWhite);
+    background: var(--${color}-default);
+    :hover:enabled:not(:active){
+      background: var(--${color}-dark);
+    }
+    :active{
+      border: 4px solid var(--${color}-light);
+    }
+
+  `,
+    secondary: `
+    color: var(--${color}-default);
+    background: var(--offWhite);
+    border: 2px solid var(--${color}-default);
+    :hover:enabled:not(:active){
+      color: var(--${color}-dark);
+      border-color: var(--${color}-dark);
+    }
+    :active{
+      color: var(--${color}-default);
+      border-color: var(--${color}-dark);
+      border: 4px solid var(--${color}-light);
+    }
+  `,
+    text: `
+    color: var(--label);
+    background: transparent;
+    :hover:enabled:not(:active){
+      color: var(--body);
+    }
+    :active{
+      color: var(--titleActive);
+    }
+  `,
+  };
+}
+
+function sizeList(shape: Shape, theme: Theme) {
+  return shape === "text"
+    ? {
+        large: ``,
+        medium: `
+        ${theme.FontSize.small};
+          height: 56px;
+        `,
+        small: `
+        ${theme.FontSize.xsmall};
+          height: 40px;
+        `,
+      }
+    : {
+        large: `
+        ${theme.FontSize.medium};
+          width: 340px;
+          height: 64px;
+          padding: 0 24px;
+        `,
+        medium: `
+        ${theme.FontSize.medium};
+          width: 240px;
+          height: 56px;
+          padding: 0 24px;
+        `,
+        small: `
+        ${theme.FontSize.xsmall};
+          width: 120px;
+          height: 40px;
+          padding: 0 16px;
+        `,
+      };
+}

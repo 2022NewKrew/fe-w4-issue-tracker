@@ -10,7 +10,7 @@ const style = css`
     font-style: normal;
     font-weight: normal;
     line-height: 100%;
-    color: ${theme.greyscale.body};
+    color: ${theme.Greyscale.body};
     /* letter-spacing: -0.03rem; */
   }
   input,
@@ -28,13 +28,14 @@ const style = css`
     }
   }
   input::placeholder {
-    ${theme.text.small}
-    color: ${theme.greyscale.placeholer};
+    ${theme.FontSize.small}
+    color: ${theme.Greyscale.placeholer};
     padding-left: 3px;
   }
   body {
     background: #f7f7fc;
     width: 1440px;
+    margin: 0 auto;
   }
   a {
     text-decoration: none;
@@ -45,6 +46,28 @@ const style = css`
   }
   li {
     list-style: none;
+  }
+  :root {
+    --primary-light: ${theme.Colors.primary.light};
+    --primary-default: ${theme.Colors.primary.default};
+    --primary-dark: ${theme.Colors.primary.dark};
+    --secondary-light: ${theme.Colors.secondary.light};
+    --secondary-default: ${theme.Colors.secondary.default};
+    --secondary-dark: ${theme.Colors.secondary.dark};
+    --success-light: ${theme.Colors.success.light};
+    --success-default: ${theme.Colors.success.default};
+    --success-dark: ${theme.Colors.success.dark};
+    --error-light: ${theme.Colors.error.light};
+    --error-default: ${theme.Colors.error.default};
+    --error-dark: ${theme.Colors.error.dark};
+    --titleActive: ${theme.Greyscale.titleActive};
+    --body: ${theme.Greyscale.body};
+    --label: ${theme.Greyscale.label};
+    --placeholer: ${theme.Greyscale.placeholer};
+    --line: ${theme.Greyscale.line};
+    --inputBackground: ${theme.Greyscale.inputBackground};
+    --background: ${theme.Greyscale.background};
+    --offWhite: ${theme.Greyscale.offWhite};
   }
 `;
 

@@ -1,5 +1,4 @@
-import TableHeader from "@components/Issue/IssueListTable/TableHeader";
-import TableCell from "@components/Issue/IssueListTable/TableCell";
+import { TableHeader, TableCell } from "@UI/Molecules";
 
 import { useCallback } from "react";
 
@@ -35,7 +34,7 @@ const issueList = [
   },
 ];
 
-const ListTable = () => {
+const IssueListTable = () => {
   const createIssueList = useCallback(
     (issueList) =>
       issueList.map((issue: any) => <TableCell key={issue.id} issue={issue} />),
@@ -50,14 +49,14 @@ const ListTable = () => {
   );
 };
 
-export default ListTable;
+export default IssueListTable;
 
 const Wrapper = styled.section`
-  ${({ theme: { flexCenter, greyscale } }) => css`
-    ${flexCenter}
+  ${({ theme: { FlexCenter, Greyscale } }) => css`
+    ${FlexCenter}
     margin-top: 24px;
     width: 100%;
-    border: 1px solid ${greyscale.line};
+    border: 1px solid ${Greyscale.line};
     border-radius: 16px;
     & > div:first-of-type {
       border-radius: 16px 16px 0 0;

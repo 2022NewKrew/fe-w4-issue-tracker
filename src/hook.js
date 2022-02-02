@@ -9,6 +9,14 @@ export function useArrayLength(array){
 }
 
 /**
+ * @param {{}} object
+ */
+export function useNumObjectKeys(object){
+  const numKeys=useMemo(()=>Object.keys(object).length, [object]);
+  return numKeys;
+}
+
+/**
  * @param {Function} callback
  * @param {number} time
  * @param {any[]} deps

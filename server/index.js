@@ -19,13 +19,13 @@ app.use(function (req, res, next) {
 app.get('/issues', async (req, res) => {
     console.log('GET /issues');
     const { data } = await database.get('issues?_embed=labelings');
-    res.status('200').json(data);
+    res.status('200').json({ data });
 });
 
 app.get('/labels', async (req, res) => {
     console.log('GET /labels');
     const { data } = await database.get('labels');
-    res.status('200').json(data);
+    res.status('200').json({ data });
 });
 
 app.get('*', (req, res) => {

@@ -21,36 +21,36 @@
             "id": 1,
             "title": "첫번째 이슈",
             "status": "open",
-            "userId": "1",
-            "timeStamp": "1640908800000"
+            "userId": 1,
+            "timeStamp": 1640908800000
         },
         {
             "id": 2,
             "title": "FE 이슈트래커 개발",
             "status": "open",
-            "userId": "0",
-            "timeStamp": "1643206176368"
+            "userId": 0,
+            "timeStamp": 1643206176368
         },
         {
             "id": 3,
             "title": "이슈리스트 페이지 개발",
             "status": "close",
-            "userId": "2",
-            "timeStamp": "1643794189926"
+            "userId": 2,
+            "timeStamp": 1643794189926
         },
         {
             "id": 4,
             "title": "닫힌 이슈",
             "status": "close",
-            "userId": "1",
-            "timeStamp": "1643794820621"
+            "userId": 1,
+            "timeStamp": 1643794820621
         },
         {
             "id": 5,
             "title": "커스텀훅 적용하기",
             "status": "open",
-            "userId": "0",
-            "timeStamp": "1643794189926"
+            "userId": 0,
+            "timeStamp": 1643794189926
         }
     ],
     "comments": [
@@ -67,55 +67,55 @@
             "id": 0,
             "title": "bug",
             "description": "Something isn't working",
-            "colorHEX": "#FF0000"
+            "color": "#FF0000"
         },
         {
             "id": 1,
             "title": "documentation",
             "description": "improvements or additions to ducumentation",
-            "colorHEX": "#654ea3"
+            "color": "#654ea3"
         },
         {
             "id": 2,
             "title": "duplicate",
             "description": "This issue or pull request already exists",
-            "colorHEX": "#ee9ca7"
+            "color": "#ee9ca7"
         },
         {
             "id": 3,
             "title": "enhancement",
             "description": "New feature or request",
-            "colorHEX": "#59C173"
+            "color": "#59C173"
         },
         {
             "id": 4,
             "title": "good first issue",
             "description": "Good for newcomers",
-            "colorHEX": "#a8c0ff"
+            "color": "#a8c0ff"
         },
         {
             "id": 5,
             "title": "help wanted",
             "description": "Extra attention is needed",
-            "colorHEX": "#ff9966"
+            "color": "#ff9966"
         },
         {
             "id": 6,
             "title": "invalid",
             "description": "This doesn't seem right",
-            "colorHEX": "#fdbb2d"
+            "color": "#fdbb2d"
         },
         {
             "id": 7,
             "title": "question",
             "description": "Further information is requested",
-            "colorHEX": "#22c1c3"
+            "color": "#22c1c3"
         },
         {
             "id": 8,
             "title": "wontfix",
             "description": "This will not be worked on",
-            "colorHEX": "#0575E6"
+            "color": "#0575E6"
         }
     ],
     "milestones": [
@@ -141,37 +141,37 @@
         },
         {
             "id": 1,
-            "labelId": 0,
+            "labelId": 1,
             "issueId": 5
         },
         {
             "id": 2,
-            "labelId": 0,
+            "labelId": 4,
             "issueId": 4
         },
         {
             "id": 3,
-            "labelId": 0,
+            "labelId": 2,
             "issueId": 3
         },
         {
             "id": 4,
-            "labelId": 0,
+            "labelId": 3,
             "issueId": 3
         },
         {
             "id": 5,
-            "labelId": 0,
+            "labelId": 4,
             "issueId": 2
         },
         {
             "id": 6,
-            "labelId": 0,
+            "labelId": 5,
             "issueId": 1
         },
         {
             "id": 7,
-            "labelId": 0,
+            "labelId": 6,
             "issueId": 1
         }
     ],

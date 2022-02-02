@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
+const { database } = require('./api');
 dotenv.config();
 
 const app = express();
@@ -15,9 +16,16 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.get('/issues', (req, res) => {
+app.get('/issues', async (req, res) => {
     console.log('GET /issues');
-    res.status('200').json({ data: 'this is your response' });
+    const { data } = await database.get('issues?_embed=labelings');
+    res.status('200').json(data);
+});
+
+app.get('/labels', async (req, res) => {
+    console.log('GET /labels');
+    const { data } = await database.get('labels');
+    res.status('200').json(data);
 });
 
 app.get('*', (req, res) => {
@@ -26,5 +34,5 @@ app.get('*', (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Server is listening at http://localhost:${PORT}`);
+    console.log(`Server is listening at ${process.env.SERVER_BASE_URL}`);
 });

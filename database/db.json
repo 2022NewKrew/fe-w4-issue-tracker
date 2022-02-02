@@ -1,18 +1,56 @@
 {
     "users": [
         {
-            "id": "유저번호",
-            "name": "유저이름",
-            "profileImgSrc": "프로필이미지 주소"
+            "id": "0",
+            "name": "milly",
+            "profileImgSrc": "https://yt3.ggpht.com/yti/APfAmoGb9GknvFP6JQRMR8iQApOWMifRAwZddAr1q5lqQA=s88-c-k-c0x00ffffff-no-rj-mo"
+        },
+        {
+            "id": "1",
+            "name": "subway",
+            "profileImgSrc": "chrome://favicon2/?size=24&scale_factor=1x&show_fallback_monogram=&page_url=https%3A%2F%2Fgithub.com%2Fvvvpiano"
+        },
+        {
+            "id": "2",
+            "name": "yasmin",
+            "profileImgSrc": "chrome://favicon2/?size=24&scale_factor=1x&show_fallback_monogram=&page_url=https%3A%2F%2Fwww.youtube.com%2F"
         }
     ],
     "issues": [
         {
-            "id": "이슈번호",
-            "title": "제목",
-            "status": "open/close 상태",
-            "userId": "작성자 userId",
-            "timeStamp": "작성시간"
+            "id": 1,
+            "title": "첫번째 이슈",
+            "status": "open",
+            "userId": "1",
+            "timeStamp": "1640908800000"
+        },
+        {
+            "id": 2,
+            "title": "FE 이슈트래커 개발",
+            "status": "open",
+            "userId": "0",
+            "timeStamp": "1643206176368"
+        },
+        {
+            "id": 3,
+            "title": "이슈리스트 페이지 개발",
+            "status": "close",
+            "userId": "2",
+            "timeStamp": "1643794189926"
+        },
+        {
+            "id": 4,
+            "title": "닫힌 이슈",
+            "status": "close",
+            "userId": "1",
+            "timeStamp": "1643794820621"
+        },
+        {
+            "id": 5,
+            "title": "커스텀훅 적용하기",
+            "status": "open",
+            "userId": "0",
+            "timeStamp": "1643794189926"
         }
     ],
     "comments": [
@@ -95,14 +133,49 @@
             "issueId": "할당된 이슈번호"
         }
     ],
-    "labeling": [
+    "labelings": [
         {
-            "id": "labeling(라벨을 붙이는 relation)의 id",
-            "labelId": "라벨번호",
-            "issueId": "라벨이 붙여진 이슈번호"
+            "id": 0,
+            "labelId": 0,
+            "issueId": 5
+        },
+        {
+            "id": 1,
+            "labelId": 0,
+            "issueId": 5
+        },
+        {
+            "id": 2,
+            "labelId": 0,
+            "issueId": 4
+        },
+        {
+            "id": 3,
+            "labelId": 0,
+            "issueId": 3
+        },
+        {
+            "id": 4,
+            "labelId": 0,
+            "issueId": 3
+        },
+        {
+            "id": 5,
+            "labelId": 0,
+            "issueId": 2
+        },
+        {
+            "id": 6,
+            "labelId": 0,
+            "issueId": 1
+        },
+        {
+            "id": 7,
+            "labelId": 0,
+            "issueId": 1
         }
     ],
-    "milestoning": [
+    "milestonings": [
         {
             "id": "milestoning(이슈에 마일스톤을 지정하는 relation)의 id",
             "milestoneId": "마일스톤번호",

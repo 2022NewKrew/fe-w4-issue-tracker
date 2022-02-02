@@ -89,6 +89,12 @@ function shapeList(color: Color) {
       border-color: var(--${color}-dark);
       border: 4px solid var(--${color}-light);
     }
+    .btn_icon {
+      opacity: 0.5;
+    }
+    :hover .btn_icon {
+      opacity: 1;
+    }
   `,
     text: `
     color: var(--label);
@@ -98,6 +104,12 @@ function shapeList(color: Color) {
     }
     :active{
       color: var(--titleActive);
+    }
+    .btn_icon {
+      opacity: 0.5;
+    }
+    :hover .btn_icon {
+      opacity: 1;
     }
   `,
   };

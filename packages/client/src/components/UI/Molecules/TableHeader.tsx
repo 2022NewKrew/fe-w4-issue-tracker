@@ -55,7 +55,7 @@ const TableHeader = () => {
       <Dropdown
         key={indicator}
         indicator={indicator}
-        panelTitle={panelTitle}
+        listTitle={panelTitle}
         list={list}
         direction={direction as "left" | "right"}
       />

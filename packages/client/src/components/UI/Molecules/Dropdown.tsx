@@ -3,48 +3,55 @@ import { useDropdown } from "@hooks";
 
 import { useState } from "react";
 
-import { DropdownProps } from "@interface/components";
-
 import styled from "@emotion/styled";
-import { css } from "@emotion/react";
+import Atoms from "@UI/Atoms";
+
+interface Props {
+  indicator: string;
+  listTitle: string;
+  list: string[];
+  direction: "left" | "right";
+  image?: boolean;
+  icon?: boolean;
+}
 
 const Dropdown = ({
   indicator,
-  panelTitle,
+  listTitle,
   list,
   direction,
   image = false,
   icon = true,
-}: DropdownProps) => {
+}: Props) => {
   const [visible, open] = useDropdown();
   const [select, setSelect] = useState("");
-
   const handleClick = (e: any) => {
     setSelect(e.target.textContent);
   };
 
+  const createList = (list: string[]) => {
+    return list.map((item) => (
+      <li key={item} className={select === item ? "select" : ""}>
+        {image && <Icon name="user_image_small" />}
+        {item}
+        {icon &&
+          (select === item ? (
+            <Icon name="check_on_circle" />
+          ) : (
+            <Icon name="check_off_circle" />
+          ))}
+      </li>
+    ));
+  };
+
   return (
     <Wrapper>
-      <Indicator onClick={open}>
+      <Atoms.Button shape="text" size="medium" onClick={open} icon="arrow_down">
         {indicator}
-        <Icon name="arrow_down" />
-      </Indicator>
+      </Atoms.Button>
       <Panel visible={visible} direction={direction}>
-        <h3>{panelTitle}</h3>
-        <ul onClick={handleClick}>
-          {list.map((ele) => (
-            <li key={ele} className={select === ele ? "select" : ""}>
-              {image && <Icon name="user_image_small" />}
-              {ele}
-              {icon &&
-                (select === ele ? (
-                  <Icon name="check_on_circle" />
-                ) : (
-                  <Icon name="check_off_circle" />
-                ))}
-            </li>
-          ))}
-        </ul>
+        <Atoms.Title type="panel">{listTitle}</Atoms.Title>
+        <ul onClick={handleClick}>{createList(list)}</ul>
       </Panel>
     </Wrapper>
   );
@@ -54,76 +61,46 @@ export default Dropdown;
 
 const Wrapper = styled.div`
   position: relative;
-`;
-
-export const Indicator = styled.button`
-  ${({ theme: { FontSize, Greyscale } }) => css`
-    ${FontSize.small}
-    color: ${Greyscale.label};
-    background: ${Greyscale.background};
-    font-weight: bold;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    svg {
-      position: static;
-      margin-left: 8px;
-      opacity: 0.5;
-    }
-    :hover {
-      color: ${Greyscale.body};
-      svg {
-        opacity: 1;
-      }
-    }
-  `}
+  & > button {
+    flex-direction: row-reverse;
+  }
 `;
 
 export const Panel = styled.div<{
   visible: boolean;
   direction: "left" | "right";
 }>`
-  ${({ theme: { FontSize, Greyscale }, visible, direction }) => css`
-    background: ${Greyscale.line};
-    border: 1px solid ${Greyscale.line};
-    display: ${visible ? "flex" : "none"};
-    flex-direction: column;
-    width: 240px;
-    position: absolute;
-    top: 48px;
-    ${direction === "left" ? "left : 0" : "right: 0"};
-    border-radius: 16px;
-    overflow: hidden;
-    z-index: 10;
-    h3 {
-      ${FontSize.medium};
-      color: ${Greyscale.titleActive};
-      background: ${Greyscale.background};
-      padding: 16px 16px 12px;
+  display: ${({ visible }) => (visible ? "flex" : "none")};
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  width: 240px;
+  position: absolute;
+  top: 48px;
+  overflow: hidden;
+  ${({ direction }) => (direction === "left" ? "left : 0" : "right: 0")};
+  & > h2 {
+    background: var(--background);
+    padding: 8px 16px;
+    height: 48px;
+  }
+  & > ul > li {
+    ${({ theme }) => theme.FontSize.small}
+    padding: 8px 16px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    color: var(--body);
+    background: var(--offWhite);
+    height: 44px;
+    position: relative;
+    cursor: pointer;
+    & > svg:last-of-type {
+      top: 12px;
+      right: 17px;
     }
-    li {
-      ${FontSize.small};
-      padding: 8px 16px;
-      display: flex;
-      align-items: center;
-      color: ${Greyscale.body};
-      border-top: 1px solid ${Greyscale.line};
-      background: ${Greyscale.offWhite};
-      height: 44px;
-      position: relative;
-      cursor: pointer;
-      svg {
-        top: 12px;
-        right: 17px;
-      }
-      :hover {
-        color: ${Greyscale.titleActive};
-        background: ${Greyscale.background};
-      }
-    }
-    .select {
-      color: ${Greyscale.titleActive};
-    }
-  `}
+  }
+  .select {
+    color: var(--titleActive);
+  }
 `;

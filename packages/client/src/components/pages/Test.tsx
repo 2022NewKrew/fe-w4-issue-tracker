@@ -1,7 +1,7 @@
 import Atoms from "@UI/Atoms";
 import styled from "@emotion/styled";
 import { useInput } from "@hooks";
-import { ColorCode, TextArea, TextInput } from "@UI/Molecules";
+import { ColorCode, Dropdown, Taps, TextArea, TextInput } from "@UI/Molecules";
 
 const Test = () => {
   const [text, onChange] = useInput("");
@@ -31,6 +31,13 @@ const Test = () => {
       <TextInput size="small" label="아이디" value={text} onChange={onChange} />
       <TextArea value={text} onChange={onChange} width={340} height={200} />
       <ColorCode label="Label" />
+      <Dropdown
+        indicator="Filter"
+        listTitle="필터이름"
+        list={["1", "2"]}
+        direction="left"
+      />
+      <Taps />
     </Wrapper>
   );
 };

@@ -35,7 +35,7 @@ const FilterBar = () => {
       </form>
       <Dropdown
         indicator="Filter"
-        panelTitle="이슈 필터"
+        listTitle="이슈 필터"
         direction="left"
         list={filterList}
         icon

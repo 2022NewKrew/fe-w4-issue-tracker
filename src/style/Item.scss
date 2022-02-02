@@ -67,3 +67,30 @@
         cursor: pointer;
     }
 }
+
+.Tap {
+    width: 160px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $line-color;
+    border-right: none;
+    background-color: $background-color;
+    color: $label-color;
+    user-select: none;
+    &:first-child {
+        border-radius: 11px 0 0 11px;
+    }
+    &:last-child {
+        border-radius: 0 11px 11px 0;
+        border-right: 1px solid $line-color;
+    }
+    &:hover {
+        background-color: $input-background-color;
+        cursor: pointer;
+    }
+    &:active {
+        background-color: $line-color;
+    }
+}

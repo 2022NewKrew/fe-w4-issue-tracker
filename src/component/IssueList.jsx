@@ -1,6 +1,6 @@
 import '../style/IssueList.scss';
 import {getFromURL, issueListURL} from '../global';
-import {useArrayLength, useCheck} from '../hook';
+import {useArrayLength, useCheck, useNumObjectKeys} from '../hook';
 import {useCallback, useEffect, useState} from 'react';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import ButtonMedium from '../item/ButtonMedium';
@@ -9,8 +9,11 @@ import InputeMedium from '../item/InputMedium';
 import Issue from './Issue';
 import issueFilterState from '../store/issueFilterState';
 import labelsState from '../store/labelsState';
+import MilestoneIcon from '../svg/Milestone.svg';
 import milestonesState from '../store/milestonesState';
 import MoreIcon from '../svg/More.svg';
+import TagIcon from '../svg/Tag.svg';
+import Tap from '../item/Tap';
 import XIcon from '../svg/X.svg';
 
 export default function IssueList(){
@@ -20,14 +23,14 @@ export default function IssueList(){
   const numClosedIssues=useArrayLength(issueArray.filter(({isOpen})=>!isOpen));
   const labels=useRecoilValue(labelsState);
   const milestones=useRecoilValue(milestonesState);
-  const numLabels=useArrayLength(labels);
-  const numMilestones=useArrayLength(milestones);
+  const numLabels=useNumObjectKeys(labels);
+  const numMilestones=useNumObjectKeys(milestones);
   const [issueFilter, setIssueFilter]=useRecoilState(issueFilterState);
   const [rawIssueFilter, setRawIssueFilter]=useState(issueFilter);
   const [showingIssues, setShowingIssues]=useState([]);
   const {isChecked, isCheckedAll, isCheckedAny,
     numChecked, toggleCheck, toggleCheckAll}=useCheck(showingIssues);
-
+  
   useEffect(()=>{
     filterIssues();
   }, [filterIssues, issueFilter]);
@@ -43,7 +46,7 @@ export default function IssueList(){
   const isIndexChecked=useCallback((index)=>{
     return isChecked(index);
   }, [isChecked]);
-
+  
   const getIssues=useCallback(()=>{
     if(showingIssues.length===0){
       return (
@@ -101,6 +104,10 @@ export default function IssueList(){
           </form>
         </div>
         <div className='align-right'>
+          <ul className='taps'>
+            <Tap icon={<TagIcon />} title={`레이블 (${numLabels})`}></Tap>
+            <Tap icon={<MilestoneIcon />} title={`마일스톤 (${numMilestones})`}></Tap>
+          </ul>
           <ButtonMedium title='+ 이슈 작성' onClick={()=>console.log('Add Issue')}/>
         </div>
       </div>

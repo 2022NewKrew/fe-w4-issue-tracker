@@ -18,6 +18,13 @@
         }
         .align-right {
             justify-self: end;
+            display: flex;
+            align-items: center;
+        }
+        .taps {
+            display: flex;
+            padding: 0;
+            margin-right: 10px;
         }
     }
 

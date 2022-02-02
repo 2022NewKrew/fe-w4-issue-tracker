@@ -1,15 +1,15 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { TextXSmall } from '@styles/styleTemplates';
+import { ILabel } from '@types';
 
 type labelType = 'dark-text' | 'light-text' | 'line';
 interface IProps {
     type: labelType;
-    title: string;
-    color: string;
+    labelInfo: ILabel;
 }
 
-export const SmallLabel = ({ type, title, color }: IProps) => {
+export const SmallLabel = ({ type, labelInfo: { title, color } }: IProps) => {
     return (
         <StyledLabel type={type} mainColor={color}>
             {title}

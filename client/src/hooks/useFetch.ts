@@ -12,8 +12,8 @@ export const useFetch = (url: string) => {
                 if (!res.ok) {
                     setErrorMsg(`response error. status code: ${res.status}`);
                 }
-                const { data } = await res.json();
-                setData(data);
+                const resJson = await res.json();
+                setData(resJson.data);
                 setLoading(false);
             } catch (e) {
                 let message = 'Unknown Error';

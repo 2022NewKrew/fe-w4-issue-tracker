@@ -1,4 +1,6 @@
 import React from 'react';
+import { useRecoilStateLoadable } from 'recoil';
+import { labelInfoAtom } from '@atoms';
 import styled from 'styled-components';
 import {
     TextSmall,
@@ -7,7 +9,7 @@ import {
     AlignXYCenter,
     AlignYCenter,
 } from '@styles/styleTemplates';
-import { IIssue } from '@types';
+import { IIssue, ILabel } from '@types';
 import { TimeStampMessage, SmallLabel } from '@components/assets';
 import { ReactComponent as Alertcircle } from '@icons/AlertCircle.svg';
 import { ReactComponent as Milestone } from '@icons/Milestone.svg';
@@ -31,7 +33,20 @@ const renderRightAria = (selectMode: boolean, issue: IIssue | undefined) => {
 };
 
 export const IssueRow = ({ issueData, selectMode }: IProps) => {
-    const { title, id, timeStamp, status } = issueData;
+    const { title, id, timeStamp, status, labelings } = issueData;
+    const [labelInfo] = useRecoilStateLoadable<ILabel[]>(labelInfoAtom);
+
+    const renderLabels = () => {
+        if (labelInfo.state === 'loading') return <div>loading...</div>;
+        if (labelInfo.state === 'hasValue') {
+            return labelings.map(({ labelId }) => {
+                const labelTarget = labelInfo.contents.find(
+                    (label: ILabel) => label.id === labelId
+                );
+                return <SmallLabel type="light-text" labelInfo={labelTarget} key={labelId} />;
+            });
+        }
+    };
     return (
         <>
             <CheckBox>
@@ -41,7 +56,7 @@ export const IssueRow = ({ issueData, selectMode }: IProps) => {
                 <IssueItemUpperArea>
                     <Alertcircle />
                     <div>{title}</div>
-                    <SmallLabel type="light-text" title="documentation" color="blue" />
+                    {renderLabels()}
                 </IssueItemUpperArea>
                 <IssueItemBelowArea>
                     <div>#{id}</div>

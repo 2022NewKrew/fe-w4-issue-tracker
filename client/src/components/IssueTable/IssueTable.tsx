@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useFetch } from '@hooks';
 import styled from 'styled-components';
 import { AlignXYCenter, TextSmall, RoundBorderDiv, TableData, Table } from '@styles/styleTemplates';
 import { IIssue } from '@types';
 import { IssueTableHeader, IssueRow } from '.';
+import { getIssues } from '@apis';
 
 const renderTableData = (issueDatas: IIssue[], selectMode: boolean, isFiltering = false) => {
     const NO_ISSUE_MESSAGE = '등록된 이슈가 없습니다';
@@ -16,39 +16,15 @@ const renderTableData = (issueDatas: IIssue[], selectMode: boolean, isFiltering 
     return <EmptyRow>{NO_ISSUE_MESSAGE}</EmptyRow>;
 };
 
-const dummyData: IIssue[] = [
-    {
-        id: 0,
-        title: '이슈 제목',
-        status: 'open',
-        userId: 0,
-        timeStamp: 1643205903698,
-    },
-    {
-        id: 1,
-        title: 'FE 이슈트래커 개발',
-        status: 'open',
-        userId: 0,
-        timeStamp: 1643206176368,
-    },
-    {
-        id: 2,
-        title: '닫힌 이슈',
-        status: 'close',
-        userId: 0,
-        timeStamp: 1640908800000,
-    },
-];
-
 export const IssueTable = () => {
     const [selectMode, setSelectMode] = useState(false);
 
-    const { data, errorMsg, loading } = useFetch(`${process.env.SERVER_BASE_URL}/issues`);
+    const { data, errorMsg } = getIssues();
     if (!!errorMsg) return <div>{errorMsg}</div>;
     return (
         <TableContainer selectMode={selectMode}>
             <IssueTableHeader selectMode={selectMode} />
-            {renderTableData(dummyData, selectMode)}
+            {renderTableData(data, selectMode)}
         </TableContainer>
     );
 };

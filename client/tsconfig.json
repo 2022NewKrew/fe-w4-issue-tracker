@@ -22,7 +22,8 @@
             "@components/*": ["src/components/*"],
             "@styles/*": ["src/styles/*"],
             "@utils/*": ["src/utils/*"],
-            "@hooks/*": ["src/hooks"],
+            "@apis/*": ["src/hooks"],
+            "@atoms/*": ["src/atoms"],
             "@types/*": ["src/@types/*"]
         }
     },

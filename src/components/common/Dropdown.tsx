@@ -103,7 +103,7 @@ const Dropdown: FunctionComponent<DropdownProps> = ({
 
 const Wrapper = styled.div`
   margin: 5px; //TODO: 테스트용 값 변경 예장
-  width: max-content;
+  width: 100%;
   min-width: 50px;
   position: relative;
 `;

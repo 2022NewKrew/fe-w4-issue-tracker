@@ -3,6 +3,7 @@ import styled from "styled-components";
 const Link = styled.p`
   font-weight: 700;
   color: ${(props) => props.theme.greyscale.body};
+  margin: 0;
 `;
 
 export const LargeLink = styled(Link)`

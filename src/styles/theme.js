@@ -7,7 +7,7 @@ const fontSizes = {
 
 const greyscale = {
   titleActive: "#14142B",
-  body: "#D9DBE9",
+  body: "#4E4B66",
   label: "#6E7191",
   placeholder: "#A0A3BD",
   line: "#D9DBE9",

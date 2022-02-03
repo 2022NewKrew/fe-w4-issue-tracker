@@ -8,19 +8,36 @@ import usersState from '../store/usersState';
 export default function AssigneeDropdown(){
   const users=useRecoilValue(usersState);
   const [show, setShow]=useState(false);
-  const [issuefilter, setIssueFilter]=useRecoilState(issueFilterState);
+  const [issueFilter, setIssueFilter]=useRecoilState(issueFilterState);
 
   const toggle=useCallback(()=>{
     setShow((show)=>!show);
   }, [setShow]);
 
   function getItemArray(){
-    return Object.values(users).map(({userID})=>{
+    const itemArray=[{label: '담당자가 없는 이슈', onClick: ()=>{
+      setIssueFilter('assignee:');
+      toggle();
+    }}];
+    itemArray.push(...Object.values(users).map(({userID})=>{
       return {label: userID, onClick: ()=>{
         setIssueFilter(`assignee:${userID}`);
         toggle();
       }};
-    });
+    }));
+    return itemArray;
+  }
+
+  function isSelectedIndex({label}, index){
+    const matchResult=issueFilter.match(/assignee:([\S]*)/);
+    if(matchResult===null){
+      return;
+    }
+    const curAssignee=matchResult[1];
+    if(curAssignee===label || (curAssignee.length===0 && index===0)){
+      return true;
+    }
+    return false;
   }
   
   return (
@@ -34,7 +51,7 @@ export default function AssigneeDropdown(){
         itemArray={getItemArray()}
         toggle={toggle}
         showSelected={true}
-        selectedIndex={1}
+        isSelectedIndex={isSelectedIndex}
         left={false}/>}
     </div>
   );

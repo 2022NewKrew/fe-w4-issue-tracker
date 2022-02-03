@@ -22,35 +22,40 @@
             "title": "첫번째 이슈",
             "status": "open",
             "userId": 1,
-            "timeStamp": 1640908800000
+            "timeStamp": 1640908800000,
+            "milestoneId": 1
         },
         {
             "id": 2,
             "title": "FE 이슈트래커 개발",
             "status": "open",
             "userId": 0,
-            "timeStamp": 1643206176368
+            "timeStamp": 1643206176368,
+            "milestoneId": 2
         },
         {
             "id": 3,
             "title": "이슈리스트 페이지 개발",
             "status": "close",
             "userId": 2,
-            "timeStamp": 1643794189926
+            "timeStamp": 1643794189926,
+            "milestoneId": 3
         },
         {
             "id": 4,
             "title": "닫힌 이슈",
             "status": "close",
             "userId": 1,
-            "timeStamp": 1643794820621
+            "timeStamp": 1643794820621,
+            "milestoneId": null
         },
         {
             "id": 5,
             "title": "커스텀훅 적용하기",
             "status": "open",
             "userId": 0,
-            "timeStamp": 1643794189926
+            "timeStamp": 1643794189926,
+            "milestoneId": 2
         }
     ],
     "comments": [
@@ -120,10 +125,22 @@
     ],
     "milestones": [
         {
-            "id": "마일스톤번호",
-            "title": "마일스톤 제목",
-            "dueDate": "종료날짜",
-            "description": "마일스톤 설명"
+            "id": 1,
+            "title": "마일스톤",
+            "dueDate": 1646838000000,
+            "description": "마일스톤 설명이 들어가는 자리"
+        },
+        {
+            "id": 2,
+            "title": "마스터즈 코스",
+            "dueDate": 1649516400000,
+            "description": "마스터즈 코스 - 이슈 트래커"
+        },
+        {
+            "id": 3,
+            "title": "기능구현",
+            "dueDate": 1647702000000,
+            "description": "기능구현 - api서버와 통신"
         }
     ],
     "assigned": [
@@ -173,13 +190,6 @@
             "id": 7,
             "labelId": 6,
             "issueId": 1
-        }
-    ],
-    "milestonings": [
-        {
-            "id": "milestoning(이슈에 마일스톤을 지정하는 relation)의 id",
-            "milestoneId": "마일스톤번호",
-            "issueId": "마일스톤이 지정된 이슈번호"
         }
     ]
 }

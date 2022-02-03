@@ -8,3 +8,7 @@ export const getIssues = () => {
 export const fetchLabels = () => {
     return fetch(`${process.env.SERVER_BASE_URL}/labels`);
 };
+
+export const fetchMilestones = () => {
+    return fetch(`${process.env.SERVER_BASE_URL}/milestones`);
+};

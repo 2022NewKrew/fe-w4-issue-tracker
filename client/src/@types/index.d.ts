@@ -13,6 +13,7 @@ declare module '@types' {
         userId: number;
         timeStamp: number;
         labelings: ILabeling[];
+        milestoneId: number | null;
     }
     interface IFilter {
         title: string;
@@ -29,5 +30,11 @@ declare module '@types' {
         id: number;
         issueId: number;
         labelId: number;
+    }
+    interface IMilestone {
+        id: number;
+        title: string;
+        dueDate: number;
+        description?: string;
     }
 }

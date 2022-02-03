@@ -16,7 +16,7 @@ const isYesterDay = (beforeTime: number, afterTime: number) => {
     return false;
 };
 
-const getDateString = (time: number) => {
+export const getDateString = (time: number) => {
     const date = new Date(time);
     const fullYear = date.getFullYear();
     const month = date.getMonth() + 1;

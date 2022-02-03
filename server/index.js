@@ -28,6 +28,12 @@ app.get('/labels', async (req, res) => {
     res.status('200').json({ data });
 });
 
+app.get('/milestones', async (req, res) => {
+    console.log('GET /milestones');
+    const { data } = await database.get('milestones');
+    res.status('200').json({ data });
+});
+
 app.get('*', (req, res) => {
     console.log(__dirname, process.env.SERVER_PORT);
     res.sendFile(path.resolve('../client/build/index.html'));

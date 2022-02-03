@@ -2,17 +2,10 @@ import React from 'react';
 import { useRecoilStateLoadable } from 'recoil';
 import { labelInfoAtom } from '@atoms';
 import styled from 'styled-components';
-import {
-    TextSmall,
-    TableData,
-    SmallIcon,
-    AlignXYCenter,
-    AlignYCenter,
-} from '@styles/styleTemplates';
+import { TextSmall, TableData, SmallIcon, AlignYCenter } from '@styles/styleTemplates';
 import { IIssue, ILabel } from '@types';
-import { TimeStampMessage, SmallLabel } from '@components/assets';
+import { TimeStampMessage, SmallLabel, MilestoneTag } from '@components/assets';
 import { ReactComponent as Alertcircle } from '@icons/AlertCircle.svg';
-import { ReactComponent as Milestone } from '@icons/Milestone.svg';
 
 interface IProps {
     issueData: IIssue;
@@ -33,7 +26,7 @@ const renderRightAria = (selectMode: boolean, issue: IIssue | undefined) => {
 };
 
 export const IssueRow = ({ issueData, selectMode }: IProps) => {
-    const { title, id, timeStamp, status, labelings } = issueData;
+    const { title, id, timeStamp, status, labelings, milestoneId } = issueData;
     const [labelInfo] = useRecoilStateLoadable<ILabel[]>(labelInfoAtom);
 
     const renderLabels = () => {
@@ -67,10 +60,7 @@ export const IssueRow = ({ issueData, selectMode }: IProps) => {
                         type={status}
                         author="임시유저"
                     />
-                    <MilestoneName>
-                        <Milestone />
-                        <div>마일스톤</div>
-                    </MilestoneName>
+                    <MilestoneTag id={milestoneId} />
                 </IssueItemBelowArea>
             </IssueItem>
             {renderRightAria(selectMode, issueData)}
@@ -113,11 +103,6 @@ const IssueItemBelowArea = styled.div`
     & div {
         margin-right: 16px;
     }
-`;
-
-const MilestoneName = styled.div`
-    ${AlignXYCenter};
-    ${SmallIcon('var(--label-color)', '8px')}
 `;
 
 const Assignee = styled.div`

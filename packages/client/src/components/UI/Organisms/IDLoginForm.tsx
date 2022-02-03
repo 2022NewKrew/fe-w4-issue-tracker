@@ -3,6 +3,7 @@ import Atoms from "@UI/Atoms";
 
 import { useInput } from "@hooks";
 import { FormEvent } from "react";
+import styled from "@emotion/styled";
 
 const IDLoginForm: React.FC = () => {
   const [id, onChangeId] = useInput("");
@@ -12,7 +13,7 @@ const IDLoginForm: React.FC = () => {
     e.preventDefault();
   };
   return (
-    <form onSubmit={IDLogin}>
+    <Wrapper onSubmit={IDLogin}>
       <TextInput size="large" label="아이디" value={id} onChange={onChangeId} />
       <TextInput
         size="large"
@@ -27,8 +28,14 @@ const IDLoginForm: React.FC = () => {
       <Atoms.Button size="large" disabled={!id || !password} link="/issue">
         아이디로 로그인
       </Atoms.Button>
-    </form>
+    </Wrapper>
   );
 };
 
 export default IDLoginForm;
+
+const Wrapper = styled.form`
+  & > .TextInput:nth-of-type(2) {
+    margin: 16px 0 24px;
+  }
+`;

@@ -18,7 +18,7 @@ interface Props {
 const TableCell = ({
   issue: { id, title, author, time, label, milestone },
 }: Props) => {
-  const onClickLink = useClickLink("id");
+  const onClickLink = useClickLink(id);
   return (
     <Wrapper className="TableCell" onClick={onClickLink}>
       <Icon name="check_box_initial" />

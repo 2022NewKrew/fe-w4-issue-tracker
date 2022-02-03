@@ -24,11 +24,6 @@ const Wrapper = styled.div`
       border: none;
     }
   }
-  form {
-    & > div:nth-of-type(2) {
-      margin: 16px 0 24px;
-    }
-  }
   & > span {
     ${({ theme }) => theme.FontSize.small};
     color: var(--placeholer);

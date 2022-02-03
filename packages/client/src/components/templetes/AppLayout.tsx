@@ -2,13 +2,15 @@ import Icon from "@UI/Icon";
 
 import { LayoutProps } from "@interface/components";
 import styled from "@emotion/styled";
+import { useClickLink } from "@hooks";
 
 const AppLayout = ({ children }: LayoutProps) => {
+  const onClickLink = useClickLink("/login");
   return (
     <Wrapper>
       <header>
         <Icon name="logo_medium" />
-        <Icon name="user_image_large" />
+        <Icon name="user_image_large" onClick={onClickLink} />
       </header>
       <main>{children}</main>
     </Wrapper>

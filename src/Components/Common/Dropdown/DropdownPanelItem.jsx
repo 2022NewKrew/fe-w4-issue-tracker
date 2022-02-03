@@ -5,6 +5,11 @@ import { COLOR, FONT } from '../../../Assets/Styles/commonStyle'
 import { ReactComponent as CheckedCircleIcon } from '../../../Assets/Icon/ic-checkcircle-checked.svg'
 import { ReactComponent as UncheckedCircleIcon } from '../../../Assets/Icon/ic-checkcircle-unchecked.svg'
 
+export const DROPDOWN_ITEM_TYPE = {
+  NORMAL: 'normal',
+  RADIO_BTN: 'radio'
+}
+
 const ItemImage = styled.img`
   width: 20px;
   height: 20px;
@@ -57,57 +62,46 @@ const ListItem = styled.li`
 /**
  * @param {string} imageSrc
  * @param {string} text
- * @param {boolean} isCheckCircleExists
+ * @param {string} type
  * @param {boolean} isSelected
  * @param {function} onClick
  * @return {JSX.Element}
  * @constructor
  */
-const DropdownPanelItem = ({
-                             imageSrc,
-                             text,
-                             isCheckCircleExists,
-                             isSelected,
-                             onClick
-                           }) => {
-  const checkBox = useMemo(() => {
-    if (isCheckCircleExists) {
-      if (isSelected) {
+const DropdownPanelItem = ({ imageSrc, text, type, isSelected, onClick }) => {
+  const icon = useMemo(() => {
+    switch (type) {
+      case DROPDOWN_ITEM_TYPE.NORMAL:
+        return null
+      
+      case DROPDOWN_ITEM_TYPE.RADIO_BTN:
         return (
           <CheckCircle>
-            <CheckedCircleIcon
-              width="16px"
-              height="16px" />
+            { isSelected
+              ? <CheckedCircleIcon width="16px" height="16px"/>
+              : <UncheckedCircleIcon width="16px" height="16px"/> }
           </CheckCircle>
         )
-      } else {
-        return (
-          <CheckCircle>
-            <UncheckedCircleIcon
-              width="16px"
-              height="16px" />
-          </CheckCircle>
-        )
-      }
+      
+      default:
+        return null
     }
-    
-    return null
-  }, [ isCheckCircleExists, isSelected ])
+  }, [ type, isSelected ])
   
   return (
     <ListItem
       isSelected={ isSelected }
       onClick={ onClick }>
-      { imageSrc ? <ItemImage src={ imageSrc } /> : null }
+      { imageSrc && <ItemImage src={ imageSrc }/> }
       <ItemText>{ text }</ItemText>
-      { checkBox }
+      { icon }
     </ListItem>
   )
 }
 
 DropdownPanelItem.propTypes = {
   imageSrc: PropTypes.string,
-  isCheckCircleExists: PropTypes.bool,
+  type: PropTypes.string,
   isSelected: PropTypes.bool,
   onClick: PropTypes.func,
   text: PropTypes.string.isRequired

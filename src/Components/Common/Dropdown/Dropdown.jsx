@@ -1,10 +1,10 @@
 import React, { useCallback, useRef, useState } from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import Button, { BUTTON_SIZE, BUTTON_TYPE } from '../Button/Button'
 import DropdownPanel from './DropdownPanel'
 import { ReactComponent as DropdownIcon } from '../../../Assets/Icon/ic-dropdown.svg'
 import useOutsideClickEventListener from '../../../Services/Hooks/useOutsideClickEventListener'
+import PropTypes from 'prop-types'
 
 const DropdownContainer = styled.div`
   width: 100%;
@@ -14,12 +14,15 @@ const DropdownContainer = styled.div`
   align-items: end;
 `
 
-const Dropdown = ({
-                    itemInfoList,
-                    panelTitle,
-                    isCheckCircleExists,
-                    indicatorText
-                  }) => {
+/**
+ * @param {Object[]} itemInfoList
+ * @param {string} panelTitle
+ * @param {string} type
+ * @param {string} indicatorText
+ * @return {JSX.Element}
+ * @constructor
+ */
+const Dropdown = ({ itemInfoList, panelTitle, type, indicatorText }) => {
   const dropdownRef = useRef()
   
   const [ isPanelShown, setIsPanelShown ] = useState(false)
@@ -34,24 +37,27 @@ const Dropdown = ({
   
   return (
     <DropdownContainer ref={ dropdownRef }>
-      <Button
-        type={ BUTTON_TYPE.TEXT }
-        size={ BUTTON_SIZE.MEDIUM }
-        onClickListener={ onButtonClick }>
+      <Button type={ BUTTON_TYPE.TEXT }
+              size={ BUTTON_SIZE.MEDIUM }
+              onClickListener={ onButtonClick }>
         <span>{ indicatorText }</span>
         <DropdownIcon
           width="10px"
-          height="6px" />
+          height="6px"/>
       </Button>
-      <DropdownPanel
-        itemInfoList={ itemInfoList }
-        title={ panelTitle }
-        isCheckCircleExists={ isCheckCircleExists }
-        isShown={ isPanelShown } />
+      <DropdownPanel itemInfoList={ itemInfoList }
+                     title={ panelTitle }
+                     type={ type }
+                     isShown={ isPanelShown }/>
     </DropdownContainer>
   )
 }
 
-Dropdown.propTypes = {}
+Dropdown.propTypes = {
+  indicatorText: PropTypes.string,
+  itemInfoList: PropTypes.array,
+  panelTitle: PropTypes.string,
+  type: PropTypes.string
+}
 
 export default Dropdown

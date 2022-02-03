@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { COLOR, FONT } from '../../../Assets/Styles/commonStyle'
@@ -40,7 +40,7 @@ const List = styled.ul`
 
 /**
  * @param {object[]} itemInfoList
- * @param {boolean} isCheckCircleExists
+ * @param {string} type
  * @param {string} title
  * @param {boolean} isShown
  * @return {JSX.Element}
@@ -48,7 +48,7 @@ const List = styled.ul`
  */
 const DropdownPanel = ({
                          itemInfoList,
-                         isCheckCircleExists,
+                         type,
                          title,
                          isShown
                        }) => {
@@ -56,21 +56,25 @@ const DropdownPanel = ({
   
   return (
     <ReferencePoint>
-      <Panel style={ isShown ? { visibility: 'visible' } : { visibility: 'hidden' } }>
+      <Panel style={ { visibility: isShown ? 'visible' : 'hidden' } }>
         <TitleText>{ title }</TitleText>
         <List>
           {
-            itemInfoList.map((itemInfo, idx) => (
-              <DropdownPanelItem
-                key={ itemInfo.text }
-                imageSrc={ itemInfo.imgSrc }
-                text={ itemInfo.text }
-                isCheckCircleExists={ isCheckCircleExists }
-                isSelected={ idx === selectedIdx }
-                onClick={ () => {
-                  setSelectedIdx(idx)
-                } } />
-            ))
+            itemInfoList.map((itemInfo, idx) => {
+              const { text, imgSrc } = itemInfo
+              
+              return (
+                <DropdownPanelItem
+                  key={ text }
+                  imageSrc={ imgSrc }
+                  text={ text }
+                  type={ type }
+                  isSelected={ idx === selectedIdx }
+                  onClick={ () => {
+                    setSelectedIdx(idx)
+                  } }/>
+              )
+            })
           }
         </List>
       </Panel>
@@ -79,7 +83,7 @@ const DropdownPanel = ({
 }
 
 DropdownPanel.propTypes = {
-  isCheckCircleExists: PropTypes.bool,
+  type: PropTypes.string,
   itemInfoList: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired,
   isShown: PropTypes.bool

@@ -38,6 +38,7 @@ export const IssueRow = ({ issueData, selectMode }: IProps) => {
 
     const renderLabels = () => {
         if (labelInfo.state === 'loading') return <div>loading...</div>;
+        if (labelInfo.state === 'hasError') return <div>label fetch failed</div>;
         if (labelInfo.state === 'hasValue') {
             return labelings.map(({ labelId }) => {
                 const labelTarget = labelInfo.contents.find(

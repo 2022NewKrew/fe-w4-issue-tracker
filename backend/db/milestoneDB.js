@@ -58,7 +58,7 @@ module.exports=function initMilestoneDB(db){
    * else Select only milestone with given `milestoneID`.
    * @param {string|undefined} milestoneID
    */
-  function select(milestoneID){
+  function selectAll(milestoneID){
     if(milestoneID===undefined){
       const rows=selectAllStmt.all();
       convertIsOpenBool(rows);
@@ -73,6 +73,6 @@ module.exports=function initMilestoneDB(db){
     insert,
     update,
     remove,
-    select
+    selectAll
   };
 };

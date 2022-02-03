@@ -8,8 +8,7 @@
     "start": "webpack serve --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
     "serve": "nodemon backend/app.js -w backend/*.js",
-    "delete-db": "rm backend/db/db.db",
-    "create-db": "node backend/db/createDB.js"
+    "init-db": "rm -f backend/db/db.db && node backend/db/createDB.js"
   },
   "repository": {
     "type": "git",
@@ -33,6 +32,7 @@
     "css-loader": "^6.5.1",
     "eslint": "^8.7.0",
     "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.2.1-rc.0-next-529dc3ce8-20220124",
     "html-webpack-plugin": "^5.5.0",
     "nodemon": "^2.0.15",
     "react-router-dom": "^6.2.1",

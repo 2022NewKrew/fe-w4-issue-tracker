@@ -70,7 +70,7 @@ function issuesReducer(state, action) {
         issue: error(action.error)
       }
     default:
-      throw new Error(`Unhanded action type: ${action.type}`)
+      throw new Error(`Unhandled action type: ${action.type}`)
   }
 }
 

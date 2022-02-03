@@ -30,10 +30,10 @@ module.exports=function initUserDB(db){
   }
 
   const selectByIDStmt=db.prepare(`
-    SELECT * FROM user WHERE userID LIKE @userID
+    SELECT userID FROM user WHERE userID LIKE @userID
   `);
   const selectAllStmt=db.prepare(`
-    SELECT * FROM user
+    SELECT userID FROM user
   `);
   /**
    * Select All users if `userID` not given,

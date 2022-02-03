@@ -116,3 +116,14 @@ app.get('/milestone-list', (_, res)=>{
     res.sendStatus(500);
   }
 });
+
+app.get('/user-list', (_, res)=>{
+  try{
+    const users=userDB.select();
+    const keyedUsers=createObjectWithKey(users, 'userID');
+    res.send(keyedUsers).status(200);
+  }catch(e){
+    console.error(e.message);
+    res.sendStatus(500);
+  }
+});

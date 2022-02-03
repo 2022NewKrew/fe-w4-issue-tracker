@@ -1,9 +1,10 @@
-import styled from "@emotion/styled";
 import Atoms from "@UI/Atoms";
-import Icon from "@styles/Icon";
+import Icon from "@UI/Icon";
+
+import { useInput } from "@hooks";
 
 import { v4 } from "uuid";
-import { useInput } from "@hooks";
+import styled from "@emotion/styled";
 
 interface Props {
   label: string;
@@ -13,7 +14,7 @@ const ColorCode = ({ label }: Props) => {
   const uuid = v4();
   const [value, onChange, reset] = useInput("");
   return (
-    <SInputWrapper>
+    <SInputWrapper className="ColorCode">
       <label htmlFor={uuid}>{label}</label>
       <input id={uuid} value={value} onChange={onChange} maxLength={7} />
       <Icon name="refresh" onClick={reset} />

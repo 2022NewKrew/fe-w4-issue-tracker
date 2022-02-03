@@ -11,7 +11,7 @@ interface Props extends SProps {
 const TextArea = ({ value, onChange, height, width }: Props) => {
   const uuid = v4();
   return (
-    <SInputWrapper width={width} height={height}>
+    <SInputWrapper width={width} height={height} className="TextArea">
       <textarea
         id={uuid}
         value={value}
@@ -54,7 +54,7 @@ const SInputWrapper = styled(Atoms.InputWrapper)<SProps>`
       padding-top: 24px;
     }
   }
-  & > button {
+  & > .Button {
     position: absolute;
     left: 0;
     bottom: 0;

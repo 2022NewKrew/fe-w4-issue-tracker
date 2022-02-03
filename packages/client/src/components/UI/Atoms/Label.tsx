@@ -1,12 +1,12 @@
 import styled from "@emotion/styled";
-import Icon from "@Icon";
+import Icon from "@UI/Icon";
 import { LayoutProps } from "@interface/components";
 
 export interface Props extends SProps, LayoutProps {}
 
 const Label = ({ type, color, children }: Props) => {
   return (
-    <SLabel type={type} color={color}>
+    <SLabel className="Label" type={type} color={color}>
       {type === "open" && [<Icon name="issue_open_blue" />, "열린 이슈"]}
       {type === "close" && [<Icon name="issue_close" />, "닫힌 이슈"]}
       {type === "athor" && "작성자"}
@@ -32,6 +32,7 @@ const SLabel = styled.label<SProps>`
     type !== "custom"
       ? typeList[type]
       : `
+        width: max-content;
         color: var(--offWhite);
         background: ${color};
         `}

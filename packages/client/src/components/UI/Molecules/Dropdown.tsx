@@ -1,4 +1,4 @@
-import Icon from "@Icon";
+import Icon from "@UI/Icon";
 import { useDropdown, useSelection } from "@hooks";
 
 import styled from "@emotion/styled";
@@ -40,11 +40,11 @@ const Dropdown = ({
   };
 
   return (
-    <Wrapper>
+    <Wrapper className="Dropdown">
       <Atoms.Button shape="text" size="medium" onClick={open} icon="arrow_down">
         {indicator}
       </Atoms.Button>
-      <Panel visible={visible} direction={direction}>
+      <Panel className="Panel" visible={visible} direction={direction}>
         <Atoms.Title type="panel">{listTitle}</Atoms.Title>
         <ul onClick={onClick}>{createList(list)}</ul>
       </Panel>
@@ -56,7 +56,7 @@ export default Dropdown;
 
 const Wrapper = styled.div`
   position: relative;
-  & > button {
+  & > .Button {
     flex-direction: row-reverse;
   }
 `;
@@ -73,12 +73,8 @@ export const Panel = styled.div<{
   position: absolute;
   top: 48px;
   overflow: hidden;
+  z-index: 10;
   ${({ direction }) => (direction === "left" ? "left : 0" : "right: 0")};
-  & > h2 {
-    background: var(--background);
-    padding: 8px 16px;
-    height: 48px;
-  }
   & > ul > li {
     ${({ theme }) => theme.FontSize.small}
     padding: 8px 16px;

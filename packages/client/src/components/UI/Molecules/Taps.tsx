@@ -1,4 +1,4 @@
-import Icon from "@styles/Icon";
+import Icon from "@UI/Icon";
 
 import { NavLink } from "react-router-dom";
 

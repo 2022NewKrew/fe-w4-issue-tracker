@@ -25,7 +25,7 @@ const TextInput = ({
   const uuid = v4();
 
   return (
-    <SInputWrapper size={size}>
+    <SInputWrapper size={size} className="TextInput">
       <input
         id={uuid}
         type={type}
@@ -62,7 +62,7 @@ const SInputWrapper = styled(Atoms.InputWrapper)<SProps>`
     padding-left: ${({ size }) => (size !== "small" ? "24px" : "112px")};
     :required:invalid:focus:not(:placeholder-shown) {
       ${vaildStyle("error")}
-      & ~ div {
+      & ~ .errormsg {
         height: min-content;
       }
     }

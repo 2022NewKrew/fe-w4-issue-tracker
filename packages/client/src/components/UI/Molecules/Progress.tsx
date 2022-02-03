@@ -6,7 +6,7 @@ interface Props {
 
 const Progress = ({ text = false }: Props) => {
   return (
-    <Wrapper percent={30}>
+    <Wrapper percent={30} className="Progress">
       <div className="bar">
         <span />
       </div>

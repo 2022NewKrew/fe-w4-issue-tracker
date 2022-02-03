@@ -7,11 +7,12 @@ import {
   Dropdown,
   OptionSelection,
   Progress,
+  TableHeader,
   Taps,
   TextArea,
   TextInput,
 } from "@UI/Molecules";
-import { FilterBar } from "@UI/Organisms";
+import { FilterBar, SideBar } from "@UI/Organisms";
 import Label from "@UI/Atoms/Label";
 
 const Test = () => {
@@ -61,6 +62,8 @@ const Test = () => {
       <OptionSelection label="Label" options={["Option1", "Option2"]} />
       <Progress />
       <Progress text />
+      <TableHeader />
+      <SideBar />
     </Wrapper>
   );
 };

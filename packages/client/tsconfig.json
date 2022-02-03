@@ -17,7 +17,6 @@
       "@UI/*": ["./src/components/UI/*"],
       "@hooks": ["./src/hooks"],
       "@assets/*": ["./src/assets/*"],
-      "@Icon": ["src/styles/Icon.tsx"],
       "@services/*": ["./src/services/*"],
       "@stores/*": ["./src/stores/*"],
       "@styles/*": ["./src/styles/*"],

@@ -1,10 +1,10 @@
 import { Dropdown } from "@UI/Molecules";
-import Icon from "@Icon";
-
-import { useState } from "react";
+import Icon from "@UI/Icon";
+import Atoms from "@UI/Atoms";
 
 import styled from "@emotion/styled";
-import Atoms from "@UI/Atoms";
+
+import { useState } from "react";
 
 const filterList = [
   "열린 이슈",
@@ -23,7 +23,7 @@ const FilterBar = () => {
   };
 
   return (
-    <Wrapper focus={focus}>
+    <Wrapper className="FilterBar" focus={focus}>
       <Dropdown
         indicator="Filter"
         listTitle="이슈 필터"
@@ -50,23 +50,25 @@ const Wrapper = styled(Atoms.InputWrapper)<{ focus: boolean }>`
   display: flex;
   width: 601px;
   height: 40px;
-  border: 1px solid var(--line);
   border-radius: 11px;
-  overflow: hidden;
-  & > div > button {
+  border: 1px solid var(--line);
+  & > .Dropdown > .Button {
     width: 128px;
-    min-height: 40px;
-    height: 100%;
-    padding: 0 24px;
+    height: 38px;
+    padding: 1px 24px 0;
     justify-content: space-between;
-    :hover {
+    border-radius: 11px 0 0 11px;
+    border-right: 1px solid var(--line);
+    background: var(--background);
+    &:hover:not(:focus) {
       background: var(--line);
     }
   }
   & > form {
     position: relative;
     flex: 1;
-    border-left: 1px solid var(--line);
+    border-radius: 0 11px 11px 0;
+    overflow: hidden;
     & > input {
       background: ${({ focus }) =>
         focus ? "var(--offwhite)" : "var(--inputBackground)"};

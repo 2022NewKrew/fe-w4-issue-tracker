@@ -23,30 +23,31 @@ const Router = () => {
         <Routes>
           <Route
             path="/login"
-            element={[<Helmet title="login page" />, <Login />]}
+            element={[<Helmet title="Login" />, <Login />]}
           ></Route>
           <Route path="/issue/*" element={<Outlet />}>
             <Route
               path=""
-              element={[<Helmet title="issue page" />, <Issue />]}
+              element={[<Helmet title="IssueList" />, <Issue />]}
             />
             <Route
-              path="new"
-              element={[<Helmet title="issue add page" />, <Add />]}
+              path="add"
+              element={[<Helmet title="Add Issue" />, <Add />]}
+            />
+            <Route
+              path=":id"
+              element={[<Helmet title="Issue Detail" />, <Add />]}
             />
           </Route>
           <Route
             path="/label"
-            element={[<Helmet title="label page" />, <Label />]}
+            element={[<Helmet title="Label" />, <Label />]}
           />
           <Route
             path="/milestone"
-            element={[<Helmet title="milestone page" />, <Milestone />]}
+            element={[<Helmet title="Milestone" />, <Milestone />]}
           />
-          <Route
-            path="/test"
-            element={[<Helmet title="test page" />, <Test />]}
-          />
+          <Route path="/test" element={[<Helmet title="Test" />, <Test />]} />
           <Route path="*" element={<Navigate replace to="/test" />} />
         </Routes>
       </ErrorBoundary>

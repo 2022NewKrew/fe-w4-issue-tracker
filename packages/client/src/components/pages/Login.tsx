@@ -2,7 +2,7 @@ import LoginLayout from "@templetes/LoginLayout";
 import Atoms from "@UI/Atoms";
 import { IDLoginForm } from "@UI/Organisms";
 
-import Icon from "@styles/Icon";
+import Icon from "@UI/Icon";
 
 const Login: React.FC = () => {
   return (

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import Icon from "@Icon";
+import Icon from "@UI/Icon";
 import Atoms from "@UI/Atoms";
 
 interface Props extends SProps {
@@ -8,7 +8,7 @@ interface Props extends SProps {
 
 const Comment = ({ width, text, state = "initial" }: Props) => {
   return (
-    <Wrapper width={width} state={state}>
+    <Wrapper width={width} state={state} className="Comment">
       <div className="header">
         UserName
         <span>TimeStamp</span>
@@ -56,12 +56,12 @@ const Wrapper = styled.article<SProps>`
       top: 24px;
       right: 24px;
     }
-    & > label {
+    & > .Label {
       position: absolute;
       top: 18px;
       right: 127px;
     }
-    & > button {
+    & > .Button {
       position: absolute;
       top: 12px;
       right: 60px;

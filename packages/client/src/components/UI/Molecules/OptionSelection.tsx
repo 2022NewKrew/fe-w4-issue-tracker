@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { useSelection } from "@hooks";
-import Icon from "@Icon";
+import Icon from "@UI/Icon";
 
 interface Props {
   label: string;
@@ -11,7 +11,7 @@ const OptionSelection = ({ label, options }: Props) => {
   const [select, onClick] = useSelection("");
 
   return (
-    <Wrapper onClick={onClick}>
+    <Wrapper onClick={onClick} className="OptionSelection">
       <span>{label}</span>
       {options.map((option) => [
         <input id={option} name={label} type="radio" />,

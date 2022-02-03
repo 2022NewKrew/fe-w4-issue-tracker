@@ -1,9 +1,8 @@
 import { Dropdown } from "@UI/Molecules";
 import Atoms from "@UI/Atoms";
-import Icon from "@styles/Icon";
+import Icon from "@UI/Icon";
 
 import styled from "@emotion/styled";
-import { css } from "@emotion/react";
 
 const labelList = ["레이블이 없는 이슈", "bug", "documentation"];
 const milestonList = ["마일스톤이 없는 이슈", "마스터즈 코스"];
@@ -62,17 +61,17 @@ const TableHeader = () => {
     ));
 
   return (
-    <Wrapper>
+    <Wrapper className="TableHeader">
       <Icon name="check_box_initial" />
       <Atoms.ButtonGroup gap={24}>
-        <Atoms.Button size="small" shape="text" icon="issue_open">
+        <Atoms.Button size="medium" shape="text" icon="issue_open">
           열린 이슈(2)
         </Atoms.Button>
-        <Atoms.Button size="small" shape="text" icon="archive">
+        <Atoms.Button size="medium" shape="text" icon="archive">
           열린 이슈(2)
         </Atoms.Button>
       </Atoms.ButtonGroup>
-      {createFilterTabs(filterTabs)}
+      <div className="filterTabs">{createFilterTabs(filterTabs)}</div>
     </Wrapper>
   );
 };
@@ -80,28 +79,28 @@ const TableHeader = () => {
 export default TableHeader;
 
 const Wrapper = styled.div`
-  ${({ theme: { Greyscale, FontSize } }) => css`
-    width: 100%;
-    height: 64px;
-    background: ${Greyscale.background};
-    padding: 16px 32px;
-    position: relative;
-    & > svg {
-      top: 24px;
+  width: 100%;
+  height: 64px;
+  background: var(--background);
+  padding: 16px 32px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  & > svg {
+    top: 24px;
+  }
+  & > .ButtonGroup {
+    margin-left: 48px;
+    & > .Button {
+      width: 105px;
+      height: 32px;
     }
-    & > div:first-of-type {
-      float: left;
-      margin-left: 48px;
-      & > button {
-        width: 105px;
-        height: 32px;
-        ${FontSize.small};
-      }
-    }
-    & > div:not(:first-of-type) {
-      float: right;
+  }
+  .filterTabs {
+    display: flex;
+    & > div {
       margin-left: 32px;
-      margin-top: 10px;
     }
-  `}
+  }
 `;

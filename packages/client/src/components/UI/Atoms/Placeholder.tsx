@@ -7,7 +7,12 @@ export interface Props extends SProps {
 
 const Placeholder = ({ id, label, size, typing }: Props) => {
   return (
-    <SPlaceholder htmlFor={id} size={size} typing={typing}>
+    <SPlaceholder
+      htmlFor={id}
+      size={size}
+      typing={typing}
+      className="Placeholder"
+    >
       {label}
     </SPlaceholder>
   );

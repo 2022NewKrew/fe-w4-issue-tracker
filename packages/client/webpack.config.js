@@ -28,7 +28,6 @@ module.exports = {
       "@UI": path.resolve(__dirname, "./src/components/UI"),
       "@hooks": path.resolve(__dirname, "./src/hooks"),
       "@assets": path.resolve(__dirname, "./src/assets"),
-      "@Icon": path.resolve(__dirname, "./src/styles/Icon.tsx"),
       "@services": path.resolve(__dirname, "./src/services"),
       "@stores": path.resolve(__dirname, "./src/stores"),
       "@styles": path.resolve(__dirname, "./src/styles"),

@@ -1,9 +1,6 @@
 import { TableHeader, TableCell } from "@UI/Molecules";
 
-import { useCallback } from "react";
-
 import styled from "@emotion/styled";
-import { css } from "@emotion/react";
 
 const issueList = [
   {
@@ -35,14 +32,11 @@ const issueList = [
 ];
 
 const IssueListTable = () => {
-  const createIssueList = useCallback(
-    (issueList) =>
-      issueList.map((issue: any) => <TableCell key={issue.id} issue={issue} />),
-    []
-  );
+  const createIssueList = (issueList: any) =>
+    issueList.map((issue: any) => <TableCell key={issue.id} issue={issue} />);
 
   return (
-    <Wrapper>
+    <Wrapper className="IssueListTable">
       <TableHeader />
       {createIssueList(issueList)}
     </Wrapper>
@@ -52,17 +46,15 @@ const IssueListTable = () => {
 export default IssueListTable;
 
 const Wrapper = styled.section`
-  ${({ theme: { FlexCenter, Greyscale } }) => css`
-    ${FlexCenter}
-    margin-top: 24px;
-    width: 100%;
-    border: 1px solid ${Greyscale.line};
-    border-radius: 16px;
-    & > div:first-of-type {
-      border-radius: 16px 16px 0 0;
-    }
-    & > li:last-child {
-      border-radius: 0 0 16px 16px;
-    }
-  `}
+  ${({ theme }) => theme.FlexCenter}
+  margin-top: 24px;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  & > .TableHeader {
+    border-radius: 16px 16px 0 0;
+  }
+  & > .TableCell:last-child {
+    border-radius: 0 0 16px 16px;
+  }
 `;

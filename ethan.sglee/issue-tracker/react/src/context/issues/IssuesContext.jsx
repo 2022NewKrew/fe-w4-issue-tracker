@@ -21,6 +21,7 @@ const loadingState = {
   data: null,
   error: null
 }
+Object.freeze(loadingState)
 
 // 성공했을 때의 상태 만들어주는 함수
 const success = data => ({

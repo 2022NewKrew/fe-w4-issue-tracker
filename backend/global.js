@@ -73,10 +73,26 @@ function createObjectWithKey(objectArray, key){
   }, {});
 }
 
+/**
+ * Create SQL WHERE condition from `queryValue` and `columnName`.
+ * Return empty string if `queryValue` is `undefined`.
+ * Return WHERE condition of null if `queryValue` is `null`.
+ * Else return WHERE condition of `queryValue`.
+ * @param {any} queryValue
+ * @param {string} columnName
+ * @returns {string}
+ */
+function createWhereCondition(queryValue, columnName){
+  return queryValue!==undefined ?
+    (queryValue!==null ? `${columnName}=@${columnName}` : `${columnName} IS NULL`)
+    : '';
+}
+
 module.exports={
   mergeTwoObjects,
   convertIsOpenBool,
   convertIsOpenInt,
   flatObjectArray,
-  createObjectWithKey
+  createObjectWithKey,
+  createWhereCondition
 };

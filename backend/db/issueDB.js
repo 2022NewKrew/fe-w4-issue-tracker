@@ -1,4 +1,4 @@
-const {convertIsOpenBool, convertIsOpenInt} = require('../global');
+const {convertIsOpenBool, convertIsOpenInt, createWhereCondition} = require('../global');
 
 /**
  * @param {import('better-sqlite3').Database} db
@@ -78,10 +78,10 @@ module.exports=function initIssueDB(db){
 
   function select({authorID, milestoneID, labelID, assigneeID}){
     const condition=[
-      authorID!==undefined ? 'authorID=@authorID' : '',
-      milestoneID!==undefined ? 'milestoneID=@milestoneID' : '',
-      labelID!==undefined ? 'labelID=@labelID' : '',
-      assigneeID!==undefined ? 'assigneeID=@assigneeID' : ''
+      createWhereCondition(authorID, 'authorID'),
+      createWhereCondition(milestoneID, 'milestoneID'),
+      createWhereCondition(labelID, 'labelID'),
+      createWhereCondition(assigneeID, 'assigneeID')
     ].filter((val)=>val.length).join(' AND ');
     const selectStmt=db.prepare(`
       SELECT * FROM

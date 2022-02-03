@@ -33,20 +33,28 @@ app.get('/issue-list', (req, res)=>{
     const {authorID, milestoneTitle, labelTitle, assigneeID}=parseFilter(rawFilter);
     db.transaction(()=>{
       let milestoneID, labelID;
-      if(milestoneTitle!==undefined){
+      if(milestoneTitle!==undefined && milestoneTitle!==null){
         const milestone=milestoneDB.selectByTitle(milestoneTitle);
         if(milestone===undefined){
           return res.send([]).status(200);
         }
         milestoneID=milestone.milestoneID;
       }
-      if(labelTitle!==undefined){
+      else if(milestoneTitle===null){
+        milestoneID=null;
+      }
+
+      if(labelTitle!==undefined && labelTitle!==null){
         const label=labelDB.selectByTitle(labelTitle);
         if(label===undefined){
           return res.send([]).status(200);
         }
         labelID=label.labelID;
       }
+      else if(labelTitle===null){
+        labelID=null;
+      }
+      
       const issues=issueDB.select({authorID, milestoneID, labelID, assigneeID});
       res.send(issues).status(200);
     })();
@@ -63,7 +71,10 @@ function parseFilter(rawFilter){
   const filterArray=rawFilter.split(' ').filter((val)=>val.length && val!==' ');
   let authorID, milestoneTitle, labelTitle, assigneeID;
   filterArray.forEach((val)=>{
-    const [key, value]=val.split(':');
+    let [key, value]=val.split(':');
+    if(!value.length){
+      value=null;
+    }
     switch(key){
     case 'author':
       authorID=value;

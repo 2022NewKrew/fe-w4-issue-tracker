@@ -8,6 +8,7 @@ import { ReactComponent as Archive } from '@icons/Archive.svg';
 
 interface IProps {
     selectMode: boolean;
+    onChangeHandler: (e: FormEvent<HTMLInputElement>) => void;
 }
 
 const FilterTypes: IFilter[] = [
@@ -28,11 +29,11 @@ const renderFilterButton = (selectMode: boolean, FilterTypes: IFilter[]) => {
     ));
 };
 
-export const IssueTableHeader = ({ selectMode }: IProps) => {
+export const IssueTableHeader = ({ selectMode, onChangeHandler }: IProps) => {
     return (
         <>
             <Checkbox>
-                <input type="checkbox" />
+                <input type="checkbox" onChange={onChangeHandler} />
             </Checkbox>
             <IssueStatuses>
                 <Status>

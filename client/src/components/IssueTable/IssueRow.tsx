@@ -9,10 +9,12 @@ import { ReactComponent as Alertcircle } from '@icons/AlertCircle.svg';
 
 interface IProps {
     issueData: IIssue;
+    checkStatus: boolean;
     selectMode: boolean;
+    onChangeHandler: () => void;
 }
 
-const renderRightAria = (selectMode: boolean, issue: IIssue | undefined) => {
+const renderRightArea = (selectMode: boolean, issue: IIssue | undefined) => {
     if (selectMode) return <EmptySpace />;
     return (
         <>
@@ -25,7 +27,7 @@ const renderRightAria = (selectMode: boolean, issue: IIssue | undefined) => {
     // TODO: issue의 작성자, 담당자 정보를 받아 렌더
 };
 
-export const IssueRow = ({ issueData, selectMode }: IProps) => {
+export const IssueRow = ({ issueData, checkStatus, selectMode, onChangeHandler }: IProps) => {
     const { title, id, timeStamp, status, labelings, milestoneId } = issueData;
     const [labelInfo] = useRecoilStateLoadable<ILabel[]>(labelInfoAtom);
 
@@ -41,10 +43,11 @@ export const IssueRow = ({ issueData, selectMode }: IProps) => {
             });
         }
     };
+
     return (
         <>
             <CheckBox>
-                <input type="checkbox" />
+                <input type="checkbox" checked={!!checkStatus} onChange={onChangeHandler} />
             </CheckBox>
             <IssueItem>
                 <IssueItemUpperArea>
@@ -63,7 +66,7 @@ export const IssueRow = ({ issueData, selectMode }: IProps) => {
                     <MilestoneTag id={milestoneId} />
                 </IssueItemBelowArea>
             </IssueItem>
-            {renderRightAria(selectMode, issueData)}
+            {renderRightArea(selectMode, issueData)}
         </>
     );
 };

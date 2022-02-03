@@ -53,6 +53,7 @@ const config: Configuration = {
             '@utils': path.resolve(process.cwd(), 'src/utils'),
             '@apis': path.resolve(process.cwd(), 'src/apis'),
             '@atoms': path.resolve(process.cwd(), 'src/atoms'),
+            '@reducers': path.resolve(process.cwd(), 'src/reducers'),
             '@types': path.resolve(process.cwd(), 'src/@types'),
         },
     },

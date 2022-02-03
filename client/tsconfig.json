@@ -24,6 +24,7 @@
             "@utils/*": ["src/utils/*"],
             "@apis/*": ["src/hooks"],
             "@atoms/*": ["src/atoms"],
+            "@reducers/*": ["src/reducers"],
             "@types/*": ["src/@types/*"]
         }
     },

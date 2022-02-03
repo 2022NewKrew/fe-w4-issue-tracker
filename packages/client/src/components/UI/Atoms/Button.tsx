@@ -1,16 +1,17 @@
-import Icon from "@Icon";
+import Icon from "@UI/Icon";
 
 import { IconName, LayoutProps } from "@interface/components";
 import styled from "@emotion/styled";
 import { Size } from "src/@types/emotion";
 import { Theme } from "@emotion/react";
-import { useButtonLink } from "@hooks";
+import { useClickLink } from "@hooks";
 
 export interface Props extends SProps, LayoutProps {
   onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
   icon?: IconName;
   link?: string;
+  type?: "button" | "submit";
 }
 
 const Button = ({
@@ -22,11 +23,14 @@ const Button = ({
   onClick,
   icon,
   link,
+  type = "button",
 }: Props) => {
-  const onClickLink = useButtonLink(link);
+  const onClickLink = useClickLink(link);
 
   return (
     <SButton
+      className="Button"
+      type={type}
       shape={shape}
       color={color}
       size={size}

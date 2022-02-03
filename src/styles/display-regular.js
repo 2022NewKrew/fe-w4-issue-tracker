@@ -1,4 +1,4 @@
-import { display } from "./mixin";
+import { display } from "../mixin";
 
 export default displayRegular = css`
   ${display}

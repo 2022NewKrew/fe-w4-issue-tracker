@@ -1,4 +1,4 @@
-import { link, small } from "./mixin";
+import { link, small } from "../mixin";
 
 export default linkSmall = css`
   ${link}

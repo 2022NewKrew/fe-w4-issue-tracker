@@ -1,4 +1,4 @@
-import { text, xSmall } from "./mixin";
+import { text, xSmall } from "../mixin";
 
 export default textXSmall = css`
   ${text}

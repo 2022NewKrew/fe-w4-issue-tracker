@@ -1,4 +1,4 @@
-import { medium, text } from "./mixin";
+import { medium, text } from "../mixin";
 
 export default textMedium = css`
   ${text}

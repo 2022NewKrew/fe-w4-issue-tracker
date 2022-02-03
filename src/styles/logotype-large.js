@@ -1,4 +1,4 @@
-import { logotype } from "./mixin";
+import { logotype } from "../mixin";
 
 export default logotypeLarge = css`
   ${logotype}

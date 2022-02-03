@@ -4,9 +4,11 @@ import { IssueListPageHeader, IssueTable } from "@organisms";
 function IssueList() {
   return (
     <div>
+    <>
       <IssueListPageHeader />
       <IssueTable />
     </div>
+    </>
   );
 }
 

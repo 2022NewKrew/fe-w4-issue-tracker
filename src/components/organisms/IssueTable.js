@@ -13,6 +13,16 @@ const ISSUE_DATA = [
     writer: "aiden",
     timestamp: "9",
     milestone: "1주차",
+    isOpened: true,
+  },
+  {
+    title: "재택근무",
+    labelList: ["아무라벨", "documentation"],
+    id: "2131512",
+    writer: "hollys",
+    timestamp: "22",
+    milestone: "4주차",
+    isOpened: false,
   },
   {
     title: "강의듣기",
@@ -21,6 +31,7 @@ const ISSUE_DATA = [
     writer: "dw",
     timestamp: "51",
     milestone: "2주차",
+    isOpened: true,
   },
 ];
 
@@ -39,13 +50,32 @@ const IssueList = styled(Wrapper)`
 
 function IssueTable() {
   const [issueList, setIssueList] = useState(ISSUE_DATA);
+  const [issueFilter, setIssueFilter] = useState({
+    key: "isOpened",
+    value: true,
+  });
 
   return (
     <IssueTableWrapper>
       <IssueTableHeader />
+      <IssueTableHeader
+        issueFilter={issueFilter}
+        setIssueFilter={setIssueFilter}
+      />
       <IssueList>
         {issueList.map((issue, idx) => {
           return <IssueCell key={`issue${idx}`} {...issue} />;
+        {issueList.map((issueData, idx) => {
+          if (issueData[issueFilter.key] === issueFilter.value) {
+            return (
+              <IssueCell
+                key={`issue${idx}`}
+                {...issueData}
+              />
+            );
+          } else {
+            return null;
+          }
         })}
       </IssueList>
     </IssueTableWrapper>

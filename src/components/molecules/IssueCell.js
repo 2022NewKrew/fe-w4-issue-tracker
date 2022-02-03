@@ -76,13 +76,21 @@ const LeftPart = styled(Wrapper)`
 `;
 
 function IssueCell({ title, labelList, id, writer, timestamp, milestone }) {
+function IssueCell({
+  ...issueData
+}) {
+  const { title, labelList, id, writer, timestamp, milestone } = issueData;
   //FIX: DB 연동시 writer profile img url 수정
   const auth = authService.getAuth();
   const url = auth.currentUser.photoURL;
+
   return (
     <IssueCellWrapper>
       <LeftPart>
         <input type="checkbox" />
+        <input
+          type="checkbox"
+        />
         <IssueInfoWrapper>
           <IssueTitleWrapper>
             <AlertCircleIcon />

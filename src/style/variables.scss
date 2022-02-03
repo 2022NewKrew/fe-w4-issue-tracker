@@ -41,16 +41,23 @@ $success-color: #34c759;
     color: $label-color;
 }
 
+.tab {
+    position: relative;
+    user-select: none;
+}
 .tab-first {
     @extend .flex-center;
+    @extend .tab;
     flex: 0 1 50px;
 }
 .tab-second {
     @extend %flex-vertical;
+    @extend .tab;
     flex: 1 1 500px;
 }
 .tab-rest {
     @extend .flex-center;
+    @extend .tab;
     flex: 0 1 100px;
 }
 .margin-right {

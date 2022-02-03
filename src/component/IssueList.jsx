@@ -3,6 +3,7 @@ import {getFromURL, issueListURL} from '../global';
 import {useArrayLength, useCheck, useNumObjectKeys} from '../hook';
 import {useCallback, useEffect, useState} from 'react';
 import {useRecoilState, useRecoilValue} from 'recoil';
+import AssigneeDropdown from './AssigneeDropdown';
 import ButtonMedium from '../item/ButtonMedium';
 import Header from './Header';
 import InputeMedium from '../item/InputMedium';
@@ -32,8 +33,8 @@ export default function IssueList(){
     numChecked, toggleCheck, toggleCheckAll}=useCheck(showingIssues);
   
   useEffect(()=>{
-    filterIssues();
-  }, [filterIssues, issueFilter]);
+    fetchIssues();
+  }, [fetchIssues, issueFilter]);
 
   useEffect(()=>{
     setShowingIssues(issueArray.filter(({isOpen})=>isOpen===showOpen));
@@ -75,7 +76,7 @@ export default function IssueList(){
     );
   }, [isIndexChecked, toggleCheck, showingIssues]);
 
-  const filterIssues=useCallback(()=>{
+  const fetchIssues=useCallback(()=>{
     getFromURL(issueListURL, {
       filter: issueFilter
     }).then(newIssueArray=>{
@@ -150,9 +151,7 @@ export default function IssueList(){
                 닫힌 이슈({numClosedIssues})
               </strong>
             </div>
-            <div className='tab-rest hover-item'>
-              <span className='margin-right'>담당자</span><MoreIcon/>
-            </div>
+            <AssigneeDropdown />
             <div className='tab-rest hover-item'>
               <span className='margin-right'>레이블</span><MoreIcon/>
             </div>

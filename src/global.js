@@ -5,6 +5,7 @@ export const issueListURL=new URL('issue-list', backendURL).href;
 export const issueLabelURL=new URL('issue-label', backendURL).href;
 export const labelListURL=new URL('label-list', backendURL).href;
 export const milestoneListURL=new URL('milestone-list', backendURL).href;
+export const userListURL=new URL('user-list', backendURL).href;
 
 export async function getFromURL(url, params){
   const {data}=await axios.get(url, {params: params});

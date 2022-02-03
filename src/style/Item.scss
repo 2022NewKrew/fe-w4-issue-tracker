@@ -63,7 +63,7 @@
     background-color: $primary-color;
     color: $off-white-color;
     &:hover {
-        background-color: #003DE3;
+        background-color: #003de3;
         cursor: pointer;
     }
 }
@@ -92,5 +92,60 @@
     }
     &:active {
         background-color: $line-color;
+    }
+}
+
+.Dropdown {
+    position: absolute;
+    top: 100%;
+    background-color: $background-color;
+    border-radius: 16px;
+    border: 1px solid $line-color;
+    overflow: hidden;
+    min-width: 160px;
+    z-index: 100;
+    box-shadow: 2px 2px 5px $body-color;
+
+    &.right {
+        right: 0;
+    }
+    &.left {
+        left: 0;
+    }
+
+    .title {
+        @extend %flex-vertical;
+        padding: 8px 12px;
+        margin: 0;
+        font-size: 1.05rem;
+        color: $label-color;
+        cursor: default;
+        border-bottom: 1px solid $line-color;
+    }
+    .item-container {
+        background-color: $off-white-color;
+        padding: 0;
+        margin: 0;
+
+        .item {
+            @extend .hover-item;
+            display: flex;
+            padding: 8px 12px;
+            font-size: 1rem;
+            justify-content: space-between;
+            &:not(:last-child) {
+                border-bottom: 1px solid $line-color;
+            }
+            &.selected {
+                color: $title-active-color;
+                stroke: $title-active-color;
+            }
+            .label {
+                justify-self: flex-start;
+            }
+            .checkbox {
+                justify-self: flex-end;
+            }
+        }
     }
 }

@@ -1,17 +1,43 @@
 import React from "react";
-import { AuthForm } from "@organisms";
-import { useLocation, Navigate } from "react-router-dom";
+import {
+  LargeButton,
+  LargeLogo,
+  LargeTextInput,
+  MediumText,
+  Wrapper,
+} from "@atoms";
+import { OAuthForm } from "@molecules";
+import { COLOR } from "@constants";
+import styled from "styled-components";
 
-function Auth({ isLoggedIn }) {
-  const location = useLocation();
+const AuthWrapper = styled(Wrapper)`
+  position: relative;
+  height: 100%;
+  width: 100%;
+`;
 
-  const from = location.state?.from?.pathname || "/";
+const AuthFormText = styled(MediumText)`
+  margin: 20px;
+`;
 
-  if (isLoggedIn) {
-    return <Navigate to={from} replace={true} />;
-  }
+const AuthFormInput = styled(LargeTextInput)`
+  margin-bottom: 20px;
+`;
 
-  return <AuthForm />;
+function Auth() {
+  return (
+    <AuthWrapper>
+      <LargeLogo>Issue Tracker</LargeLogo>
+      <OAuthForm />
+      <AuthFormText>or</AuthFormText>
+      <AuthFormInput type={"text"} placeholder={"아이디"} />
+      <AuthFormInput type={"password"} placeholder={"비밀번호"} />
+      <LargeButton color={COLOR.BLUE} disabled={true}>
+        아이디로 로그인
+      </LargeButton>
+      <AuthFormText>회원가입</AuthFormText>
+    </AuthWrapper>
+  );
 }
 
 export default Auth;

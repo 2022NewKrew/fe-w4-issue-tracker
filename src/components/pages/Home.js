@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Navigate, useLocation, Outlet } from "react-router-dom";
 import { Header } from "@molecules";
+import { Outlet } from "react-router-dom";
 import { Wrapper } from "@atoms";
 
 const Layout = styled(Wrapper)`
@@ -11,12 +11,7 @@ const Layout = styled(Wrapper)`
   justify-content: flex-start;
 `;
 
-function ProtectedRoutes({ isLoggedIn }) {
-  const location = useLocation();
-
-  if (!isLoggedIn) {
-    return <Navigate to="/auth" state={{ from: location }} replace />;
-  }
+function Home() {
   return (
     <Layout>
       <Header />
@@ -25,4 +20,4 @@ function ProtectedRoutes({ isLoggedIn }) {
   );
 }
 
-export default ProtectedRoutes;
+export default Home;

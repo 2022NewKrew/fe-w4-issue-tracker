@@ -1,4 +1,4 @@
-export default greyScale = {
+const greyScale = {
   offWhite: "#FEFEFE",
   background: "#F7F7FC",
   inputBackground: "#EFF0F6",
@@ -8,3 +8,5 @@ export default greyScale = {
   body: "#4E4B66",
   titleActive: "#14142B",
 };
+
+export default greyScale;

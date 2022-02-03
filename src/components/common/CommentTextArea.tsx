@@ -5,20 +5,20 @@ import { Color } from "@/common/designSystem";
 interface TextAreaProps {
   textAreaValue: string;
   onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  addFile: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onAddFile: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const CommentTextArea: FunctionComponent<TextAreaProps> = ({
   textAreaValue,
   onChange,
-  addFile,
+  onAddFile,
 }) => {
   const delayTime = 2000;
   const showTextLengthTimer = useRef<ReturnType<typeof setTimeout>>();
   const [textAreaLengthInfo, setTextAreaLengthInfo] = useState("");
   const fileInputRef = React.useRef<HTMLInputElement>(null);
 
-  const textAreaValueChange = (
+  const handleTextAreaValueChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     if (showTextLengthTimer.current) {
@@ -42,7 +42,7 @@ const CommentTextArea: FunctionComponent<TextAreaProps> = ({
     return textAreaLength === 0 ? "" : `띄어쓰기 포함 ${textAreaLength}자`;
   };
 
-  const addFileClick = () => {
+  const handleAddFileClick = () => {
     fileInputRef.current?.click();
   };
 
@@ -51,13 +51,13 @@ const CommentTextArea: FunctionComponent<TextAreaProps> = ({
       <TextAreaWrapper>
         <TextArea
           value={textAreaValue}
-          onChange={textAreaValueChange}
+          onChange={handleTextAreaValueChange}
         ></TextArea>
         <Label>코멘트를 입력하세요</Label>
         <TextLengthInfo>{textAreaLengthInfo}</TextLengthInfo>
       </TextAreaWrapper>
-      <AddFileWrapper onClick={addFileClick}>
-        <FileInput type="file" ref={fileInputRef} onChange={addFile} />
+      <AddFileWrapper onClick={handleAddFileClick}>
+        <FileInput type="file" ref={fileInputRef} onChange={onAddFile} />
         <FileNameSpan>파일 첨부하기</FileNameSpan>
       </AddFileWrapper>
     </Wrapper>

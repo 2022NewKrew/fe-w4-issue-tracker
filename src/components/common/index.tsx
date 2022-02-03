@@ -126,7 +126,7 @@ const Common = () => {
       <CommentTextArea
         textAreaValue={textAreaValue}
         onChange={textAreaChange}
-        addFile={addFile}
+        onAddFile={addFile}
       />
       <Input
         inputSize={Size.Large}

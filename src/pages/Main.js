@@ -9,6 +9,7 @@ import TextArea from "@components/atoms/TextAreas";
 import { ProgressIndicator } from "@components/molecules/ProgressIndicators";
 import { Sidebar } from "@components/molecules/Sidebars";
 import { RadioOption } from "@components/molecules/RadioOption";
+import { ColorCode } from "@components/molecules/ColorCode.js";
 
 import { firebaseAuth } from "../firebase";
 
@@ -60,6 +61,8 @@ export default function Main() {
       <Sidebar />
       <br />
       <RadioOption options={options} label='LABEL' />
+      <br />
+      <ColorCode label='Color'></ColorCode>
     </div>
   );
 }

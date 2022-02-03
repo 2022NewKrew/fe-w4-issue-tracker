@@ -1,29 +1,74 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { Button } from "../../atoms/Button";
-import { Icon } from "../../atoms/Icons";
-import { SmallLabel } from "../../atoms/Label";
-import { Text } from "../../atoms/Text";
+import { CheckBox } from "../../atoms/CheckBox";
 import { FilterBar } from "../../molecules/FilterBar";
+import { IssueItem } from "../../molecules/IssueItem";
 import { Taps } from "../../molecules/Taps";
 
-const issuelist = [
+const data = [
   {
     title: "이슈 제목",
-    num: 1,
+    issueId: 1,
     description: "이 이슈가 8분 전, Oni님에 의해 작성되었습니다",
+    labels: [
+      { name: "document", backgroundColor: "blue", isBright: true },
+      { name: "feature", backgroundColor: "red", isBright: false },
+      { name: "error", backgroundColor: "green", isBright: true },
+    ],
+    milestone: "마스터즈 코스",
+  },
+  {
+    title: "이슈 제목",
+    issueId: 2,
+    description: "이 이슈가 8분 전, Oni님에 의해 작성되었습니다",
+    labels: [],
+    milestone: "마스터즈 코스",
+  },
+  {
+    title: "이슈 제목",
+    issueId: 3,
+    description: "이 이슈가 8분 전, Oni님에 의해 작성되었습니다",
+    labels: [],
     milestone: "마스터즈 코스",
   },
 ];
 
 export const IssueHome = () => {
-  const [active, setCheckBox] = useState(false);
+  const [checked, setCheck] = useState(false);
+  const [issueList, setIssueList] = useState(data);
   const handleClick = () => {
-    setCheckBox((prev) => !prev);
+    if (checked) {
+      checkedIssues.current.clear();
+      setIssueList((prev) => prev.map((item) => ({ ...item, checked: false })));
+    } else {
+      //issueList.forEach((item) => checkedIssues.current.add(item.issueId));
+      checkedIssues.current = new Set(issueList.map((item) => item.issueId));
+      setIssueList((prev) => prev.map((item) => ({ ...item, checked: true })));
+    }
+    setCheck((prev) => !prev);
   };
 
-  const name = active ? "check-box-active" : "check-box-initial";
+  const checkedIssues = useRef(new Set());
+  const handleChecked = (id) => {
+    setIssueList((prev) =>
+      prev.map((item) =>
+        item.issueId === id
+          ? {
+              ...item,
+              checked: !item.checked,
+            }
+          : item
+      )
+    );
+    if (checkedIssues.current.delete(id)) {
+      return;
+    }
+    checkedIssues.current.add(id);
+  };
+
+  const issueItems = issueList.map((item) => <IssueItem key={item.issueId} item={item} handleCheckedList={handleChecked} checked={item.checked} />);
 
   return (
     <>
@@ -38,21 +83,13 @@ export const IssueHome = () => {
       </Header>
       <IssueTable>
         <IssueTableHeader>
-          <CheckBox name={name} onClick={handleClick} active={active} />
+          <CheckBox onClick={handleClick} checked={checked} />
           <Button options={{ type: "Medium-Text", prefixIcon: "alert-circle" }}>열린 이슈(2)</Button>
           <Button options={{ type: "Medium-Text", prefixIcon: "archive" }}>닫힌 이슈(0)</Button>
           <RightItems></RightItems>
         </IssueTableHeader>
-        <Issue>
-          <CheckBox name={name} onClick={handleClick} active={active} />
-          <Icon name="alert-circle" />
-          <Text options={{ size: "medium", isLink: true }}>이슈 제목</Text>
-          <SmallLabel name="documentation" backgroundColor="blue" isBright={true} />
-        </Issue>
+        {issueItems}
       </IssueTable>
-      <Link to="/test">
-        <Button options={{ type: "Medium-Standard" }}>테스트 페이지</Button>
-      </Link>
     </>
   );
 };
@@ -68,6 +105,7 @@ const RightItems = styled.div`
   margin-left: auto;
   display: flex;
   align-items: center;
+
   & > * {
     margin-left: 16px;
   }
@@ -96,23 +134,5 @@ const IssueTableHeader = styled.div(
     align-items: center;
     width: 100%;
     height: 64px;
-  `
-);
-
-const CheckBox = styled(Icon)(
-  ({ theme, active }) => css`
-    margin: 0px 32px;
-    color: ${active ? theme.color.blue.default : theme.grayscale.offWhite};
-    stroke: ${active ? theme.grayscale.offWhite : theme.grayscale.line};
-  `
-);
-
-const Issue = styled.div(
-  ({ theme }) => css`
-    background: ${theme.grayscale.offWhite};
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 16px 0px;
   `
 );

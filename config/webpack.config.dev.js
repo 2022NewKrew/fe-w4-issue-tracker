@@ -12,7 +12,7 @@ module.exports = (webpackEnv) =>
   merge(common(webpackEnv), {
     mode: "development",
     output: {
-      filename: "js/[name].[contenthash:8].js",
+      filename: "js/bundle.js",
     },
     module: {
       rules: [
@@ -36,5 +36,5 @@ module.exports = (webpackEnv) =>
         overlay: true,
       },
     },
-    devtool: "hidden-source-map",
+    devtool: "cheap-module-source-map", // react 에서 사용하는 devtool option
   });

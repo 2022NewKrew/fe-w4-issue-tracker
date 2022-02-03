@@ -57,6 +57,7 @@ const IssueTitle = styled.div`
   grid-area: issueTitle;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 
   & > * {
     margin-right: 4px;

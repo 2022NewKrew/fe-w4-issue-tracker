@@ -1,133 +1,86 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import styled, { css } from "styled-components";
-import { Text } from "./Text";
+import { cssFontSize } from "./Text";
 
-export const Input = ({ options, placeholder, disabled, onChange, onFocus, onBlur, className, ref, ...props }) => {
-  const [isFocus, setFocus] = useState(false);
-  const [isFilled, setFilled] = useState(false);
+export const Input = ({ size, placeholder, disabled, ref, ...props }) => {
   const inputRef = ref ?? useRef();
-
-  const handleFocus = (e) => {
-    setFocus(true);
-    onFocus && onFocus(e);
-  };
-  const handleBlur = (e) => {
-    setFocus(false);
-    onBlur && onBlur(e);
-  };
   const handleClick = () => {
     inputRef.current.focus();
   };
 
-  const handleChange = (e) => {
-    if (inputRef.current.value !== "") {
-      setFilled(true);
-    } else {
-      setFilled(false);
-    }
-    //inherit
-    onChange && onChange(e);
-  };
-
-  const wrapperClassName = (className ?? "") + ` ${isFocus ? "focus" : ""} ${isFilled ? "filled" : ""}`;
-
   return (
-    <InputWrapper options={options} className={wrapperClassName} onClick={handleClick} disabled={disabled}>
-      <Text as="label" options={{ size: isFocus || isFilled ? "xsmall" : "small" }}>
-        {placeholder}
-      </Text>
-      <Text as="input" options={{ size: "small" }} ref={inputRef} onFocus={handleFocus} onBlur={handleBlur} onChange={handleChange} disabled={disabled} {...props} />
+    <InputWrapper size={size} onClick={handleClick} disabled={disabled}>
+      <StyledInput size={size} pattern=".+" required ref={inputRef} disabled={disabled} {...props} />
+      <StyledLabel size={size}>{placeholder}</StyledLabel>
     </InputWrapper>
   );
 };
 
-const InputWrapper = styled.div`
-  ${({ options: { size } }) => sizeType[size]};
+const InputWrapper = styled.div(
+  ({ theme, size }) => css`
+    ${cssWrapperSize[size]};
 
-  position: relative;
+    position: relative;
+    cursor: text;
+    background-color: ${theme.grayscale.background};
+
+    &:focus-within {
+      background-color: ${theme.grayscale.offWhite};
+      outline: 1px solid ${theme.grayscale.titleActive};
+    }
+
+    &[disabled] {
+      opacity: 0.5;
+      cursor: inherit;
+    }
+  `
+);
+
+// StyledLabel 과 StyledInput 정의 순서가 바뀌면 제대로 동작 안함..
+
+const StyledLabel = styled.label`
+  position: absolute;
+  transition: 0.2s ease-in-out;
+  left: 24px;
+  top: ${({ size }) => cssLabelTop[size].default};
   color: ${({ theme }) => theme.grayscale.placeholder};
-  cursor: text;
-  background-color: ${({ theme }) => theme.grayscale.background};
+  ${cssFontSize["small"]}
+`;
 
-  label {
-    position: absolute;
-    transition: 0.2s ease-in-out;
-  }
+const StyledInput = styled.input`
+  ${cssFontSize["small"]}
+  color: ${({ theme }) => theme.grayscale.titleActive};
 
-  input {
-    color: ${({ theme }) => theme.grayscale.titleActive};
-  }
-
-  &.focus {
-    background-color: ${({ theme }) => theme.grayscale.offWhite};
-    outline: 1px solid ${({ theme }) => theme.grayscale.titleActive};
-  }
-
-  &.focus,
-  &.filled {
-    color: ${({ theme }) => theme.grayscale.label};
-  }
-
-  &[disabled] {
-    opacity: 0.5;
-    cursor: inherit;
+  &:focus,
+  &:valid {
+    & + ${StyledLabel} {
+      color: ${({ theme }) => theme.grayscale.label};
+      top: ${({ size }) => cssLabelTop[size].inputActive};
+      ${cssFontSize["xsmall"]};
+    }
   }
 `;
 
-const sizeType = {
+const cssWrapperSize = {
   large: css`
     height: 64px;
     padding: 28px 24px 8px 24px;
     border-radius: 16px;
-
-    label {
-      top: 18px;
-      left: 24px;
-    }
-
-    &.focus,
-    &.filled {
-      label {
-        top: 8px;
-      }
-    }
   `,
   medium: css`
     height: 56px;
     padding: 24px 24px 4px 24px;
     border-radius: 14px;
-
-    label {
-      top: 14px;
-      left: 24px;
-    }
-
-    &.focus,
-    &.filled {
-      label {
-        top: 4px;
-      }
-    }
   `,
   small: css`
     height: 40px;
-    padding: 0px 24px 0px 112px;
+    padding: 6px 24px 6px 112px;
     border-radius: 11px;
-
-    input {
-      height: 40px;
-    }
-
-    label {
-      top: 4px;
-      left: 24px;
-    }
-
-    &.focus,
-    &.filled {
-      label {
-        top: 10px;
-      }
-    }
   `,
+};
+
+const cssLabelTop = {
+  large: { default: "18px", inputActive: "8px" },
+  medium: { default: "14px", inputActive: "4px" },
+  small: { default: "4px", inputActive: "9px" },
 };

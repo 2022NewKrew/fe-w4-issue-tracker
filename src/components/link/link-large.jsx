@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import linkMixin from "./link-mixin";
-import { largeMixin } from "../../styles/styles-mixin";
+import { largeMixin } from "@styles/styles-mixin";
 
 const StyledLinkLarge = styled.a`
   ${linkMixin}

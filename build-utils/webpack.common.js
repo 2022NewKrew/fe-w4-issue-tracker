@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const commonPaths = require("./common-paths");
 
 const URL_LOADER_LIMIT = 10000;
+
 const config = {
   entry: {
     app: [`${commonPaths.appEntry}/index.jsx`],
@@ -71,6 +72,14 @@ const config = {
   ],
   resolve: {
     extensions: [".js", ".jsx", "..."],
+    alias: {
+      "@root": commonPaths.projectRoot,
+      "@src": commonPaths.appEntry,
+      "@dist": commonPaths.outputPath,
+      "@components": commonPaths.componentsPath,
+      "@static": commonPaths.staticPath,
+      "@styles": commonPaths.stylesPath,
+    },
   },
 };
 

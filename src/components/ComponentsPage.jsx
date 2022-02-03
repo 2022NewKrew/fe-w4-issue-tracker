@@ -1,15 +1,15 @@
-import DisplayBold from "../components/display/display-bold";
-import DisplayRegular from "../components/display/display-regular";
-import LinkLarge from "../components/link/link-large";
-import LinkMedium from "../components/link/link-medium";
-import LinkSmall from "../components/link/link-small";
-import LinkXSmall from "../components/link/link-x-small";
-import LogotypeLarge from "../components/logotype/logotype-large";
-import LogotypeRegular from "../components/logotype/logotype-regular";
-import TextLarge from "../components/text/text-large";
-import TextMedium from "../components/text/text-medium";
-import TextSmall from "../components/text/text-small";
-import TextXSmall from "../components/text/text-x-small";
+import DisplayBold from "@components/display/display-bold";
+import DisplayRegular from "@components/display/display-regular";
+import LinkLarge from "@components/link/link-large";
+import LinkMedium from "@components/link/link-medium";
+import LinkSmall from "@components/link/link-small";
+import LinkXSmall from "@components/link/link-x-small";
+import LogotypeLarge from "@components/logotype/logotype-large";
+import LogotypeRegular from "@components/logotype/logotype-regular";
+import TextLarge from "@components/text/text-large";
+import TextMedium from "@components/text/text-medium";
+import TextSmall from "@components/text/text-small";
+import TextXSmall from "@components/text/text-x-small";
 
 const ComponentsPage = () => {
   return (

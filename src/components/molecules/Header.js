@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { MediumLogo, SmallLinkText, Wrapper } from "@atoms";
+import { BigProfileImg, MediumLogo, SmallLinkText, Wrapper } from "@atoms";
 import { authService } from "@/firebase.js";
 
 const HeaderWrapper = styled(Wrapper)`
@@ -12,12 +12,7 @@ const HeaderWrapper = styled(Wrapper)`
   padding: 20px 0 40px 0;
 `;
 
-const ProfileImg = styled.img`
-  width: 44px;
-  height: 44px;
-  border-radius: 30px;
-  border: 1px solid #d9dbe9;
-  box-sizing: border-box;
+const ProfileImg = styled(BigProfileImg)`
   margin: 0 10px;
 `;
 

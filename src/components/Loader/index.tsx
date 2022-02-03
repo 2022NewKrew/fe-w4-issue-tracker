@@ -2,7 +2,7 @@ import React from "react";
 import { ClockLoader } from "react-spinners";
 import styled from "styled-components";
 
-export declare type LengthType = number | string;
+export type LengthType = number | string;
 
 export type LoaderType = {
   loading: boolean;

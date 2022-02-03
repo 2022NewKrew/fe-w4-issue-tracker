@@ -71,7 +71,7 @@ export default function IssueListHeader() {
       <FilterContainer>
         <FilterBar showPanel={showPanel} setShowPanel={setShowPanel} />
         <DropdownPanel
-          showPanel={showPanel}
+          show={showPanel}
           header='이슈 필터'
           type='text'
           menus={menus}

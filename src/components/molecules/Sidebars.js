@@ -11,6 +11,8 @@ import { ReactComponent as UserImageLarge } from "@assets/icons/userimageLarge.s
 
 const SidebarContainer = styled.div`
   width: 308px;
+  height: fit-content;
+
   border: 1px solid ${(props) => props.theme.greyscale.line};
   border-radius: 16px;
 
@@ -19,21 +21,46 @@ const SidebarContainer = styled.div`
   .wrapper + .wrapper {
     border-top: 1px solid ${(props) => props.theme.greyscale.line};
   }
+
+  .wrapper:first-child {
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+  }
+
+  .wrapper:last-child {
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+  }
+
+  .clearfix:before,
+  .clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    overflow: hidden;
+  }
+
+  .clearfix:after {
+    clear: both;
+  }
+
+  .clearfix {
+    zoom: 1;
+  }
 `;
 
 const Wrapper = styled.div`
+  width: 308px;
   position: relative;
   background: ${(props) => props.theme.greyscale.offWhite};
-
-  div:last-child {
-    z-index: 10;
-  }
 `;
 
 const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  width: 100%:
 
   svg {
     cursor: pointer;
@@ -72,6 +99,7 @@ export function Sidebar() {
   const assigneeMenus = ["Lin", "Min"];
   const labelMenus = ["documentation", "review"];
   const milestoneMenus = ["Milestone 1", "Milestone 2"];
+
   const [selectedAssignee, setSelectedAssignee] = useState([]);
   const [selectedLabel, setSelectedLabel] = useState([]);
   const [selectedMilestone, setSelectedMilestone] = useState([]);
@@ -120,14 +148,13 @@ export function Sidebar() {
   }
 
   return (
-    <SidebarContainer>
+    <SidebarContainer className='clearfix'>
       {/* 담당자 */}
       <Wrapper className='wrapper'>
         <Header value={selectedAssignee}>
           <SmallLink>담당자</SmallLink>
           <Plus onClick={() => handlePanel("assignee")} />
         </Header>
-        {AssigneeList()}
         <DropdownPanel
           show={showPanel["assignee"]}
           header='담당자 추가'
@@ -136,6 +163,7 @@ export function Sidebar() {
           selected={selectedAssignee}
           setSelected={setSelectedAssignee}
         />
+        {AssigneeList()}
       </Wrapper>
       {/* 레이블 */}
       <Wrapper className='wrapper'>
@@ -143,7 +171,6 @@ export function Sidebar() {
           <SmallLink>레이블</SmallLink>
           <Plus onClick={() => handlePanel("label")} />
         </Header>
-        {LabelList()}
         <DropdownPanel
           show={showPanel["label"]}
           header='레이블 추가'
@@ -152,6 +179,7 @@ export function Sidebar() {
           selected={selectedLabel}
           setSelected={setSelectedLabel}
         />
+        {LabelList()}
       </Wrapper>
       {/* 마일스톤 */}
       <Wrapper className='wrapper'>
@@ -159,7 +187,6 @@ export function Sidebar() {
           <SmallLink>마일스톤</SmallLink>
           <Plus onClick={() => handlePanel("milestone")} />
         </Header>
-        {MilestoneList()}
         <DropdownPanel
           show={showPanel["milestone"]}
           header='마일스톤 추가'
@@ -169,6 +196,7 @@ export function Sidebar() {
           setSelected={setSelectedMilestone}
           top='38'
         />
+        {MilestoneList()}
       </Wrapper>
     </SidebarContainer>
   );

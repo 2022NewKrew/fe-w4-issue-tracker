@@ -17,7 +17,9 @@ const Container = styled.div`
   border: 1px solid ${(props) => props.theme.greyscale.line};
   border-radius: 16px;
 
-  top: ${(props) => (props.position === "right" ? 45 : 0)}px;
+  z-index: 100;
+
+  top: ${(props) => (props.position === "right" ? 45 : null)}px;
   right: ${(props) => (props.position === "right" ? 0 : null)}px;
 `;
 

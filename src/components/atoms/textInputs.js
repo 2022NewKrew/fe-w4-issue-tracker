@@ -43,13 +43,14 @@ const Input = styled.input.attrs(({ type }) => ({
         `;
       case "medium":
         return css`
-          width: 320px;
+          /* width: 320px; */
+          width: 100%;
           height: 56px;
           border-radius: 14px;
         `;
       default:
         return css`
-          width: 340px;
+          width: 100%;
           height: 64px;
           border-radius: 16px;
         `;

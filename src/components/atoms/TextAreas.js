@@ -3,8 +3,9 @@ import styled, { css } from "styled-components";
 import { ReactComponent as Paperclip } from "@assets/icons/paperclip.svg";
 
 const TextInputContainer = styled.div`
-  width: 340px;
-  height: 200px;
+  /* width: 340px; */
+  width: 100%;
+  height: ${(props) => (props.height ? props.height : 200)}px;
 
   border-radius: 16px;
 
@@ -126,6 +127,7 @@ export default function TextArea({
   onChangeListener,
   onAttachClickListener,
   setTextAreaValue,
+  height,
 }) {
   const [active, setActive] = useState(false);
   const [disable, setDisable] = useState(false);
@@ -193,7 +195,10 @@ export default function TextArea({
   }, [isFocus, isPassedTwoSecondsAfterTyping]);
 
   return (
-    <TextInputContainer placeholder={placeholder || ""} isDisabled={isDisabled}>
+    <TextInputContainer
+      height={height}
+      placeholder={placeholder || ""}
+      isDisabled={isDisabled}>
       <TextAreaInput
         active={active}
         onChange={handleChange}

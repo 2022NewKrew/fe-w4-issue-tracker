@@ -1,25 +1,34 @@
 import styled, { css } from "styled-components";
 import { Icon } from "./Icons";
-import { Text } from "./Text";
+import { cssFontSize, cssLink } from "./Text";
 
 export const Button = ({ options, children, ...props }) => {
-  const { type, prefixIcon, color = "primary" } = options;
-  const buttonOption = { ...buttonType[type], color };
-  const textOption = buttonOption.textOption;
+  const { type, prefixIcon, suffixIcon, color = "primary" } = options;
+  const cssOptionProps = { ...buttonType[type], color };
 
   return (
-    <StyledButton options={buttonOption} {...props}>
+    <StyledButton {...cssOptionProps} {...props}>
       {prefixIcon && <Icon name={prefixIcon} />}
-      <Text options={textOption}>{children}</Text>
+      {children}
+      {suffixIcon && <Icon name={suffixIcon} />}
     </StyledButton>
   );
+};
+
+const buttonType = {
+  Large: { buttonSize: "large", buttonStyle: "filled", fontSize: "medium" },
+  "Medium-Standard": { buttonSize: "medium", buttonStyle: "filled", fontSize: "medium" },
+  "Small-Standard": { buttonSize: "small", buttonStyle: "filled", fontSize: "xsmall" },
+  "Small-Secondary": { buttonSize: "small", buttonStyle: "empty", fontSize: "xsmall" },
+  "Medium-Text": { buttonSize: "text", buttonStyle: "text", fontSize: "small" },
+  "Small-Text": { buttonSize: "text", buttonStyle: "text", fontSize: "xsmall" },
 };
 
 const StyledButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  * {
+  & > * {
     // 좀 더 좋은 방법 있으면 나중에 수정 예정..
     margin: 0px 2px;
   }
@@ -27,66 +36,13 @@ const StyledButton = styled.button`
     opacity: 0.5;
   }
 
-  ${({ theme, options }) => {
-    return css`
-      ${sizeType[options.size]}
-      ${styleType({ theme, style: options.style, color: options.color })}
-    `;
-  }}
+  ${({ buttonSize }) => cssButtonSize[buttonSize]}
+  ${({ buttonStyle }) => cssButtonStyle[buttonStyle]}
+  ${({ fontSize }) => cssFontSize[fontSize]}
+  ${cssLink}
 `;
 
-const buttonType = {
-  Large: {
-    size: "large",
-    style: "filled",
-    textOption: {
-      size: "medium",
-      isLink: true,
-    },
-  },
-  "Medium-Standard": {
-    size: "medium",
-    style: "filled",
-    textOption: {
-      size: "medium",
-      isLink: true,
-    },
-  },
-  "Small-Standard": {
-    size: "small",
-    style: "filled",
-    textOption: {
-      size: "xsmall",
-      isLink: true,
-    },
-  },
-  "Small-Secondary": {
-    size: "small",
-    style: "empty",
-    textOption: {
-      size: "xsmall",
-      isLink: true,
-    },
-  },
-  "Medium-Text": {
-    size: "text",
-    style: "text",
-    textOption: {
-      size: "small",
-      isLink: true,
-    },
-  },
-  "Small-Text": {
-    size: "text",
-    style: "text",
-    textOption: {
-      size: "xsmall",
-      isLink: true,
-    },
-  },
-};
-
-const sizeType = {
+const cssButtonSize = {
   large: css`
     width: 340px;
     height: 64px;
@@ -110,44 +66,39 @@ const sizeType = {
   `,
 };
 
-const styleType = ({ theme, style, color }) => {
-  const { default: base, dark, light } = theme.color[color];
-  switch (style) {
-    case "filled":
-      return css`
-        color: ${theme.grayscale.offWhite};
-        background-color: ${base};
-        &:enabled:hover {
-          background-color: ${dark};
-        }
-        &:enabled:focus {
-          box-shadow: 0 0 0 4px ${light};
-        }
-      `;
-    case "empty":
-      return css`
-        color: ${base};
-        background-color: ${theme.grayscale.offWhite};
-        border: 2px solid ${base};
-        &:enabled:hover {
-          color: ${dark};
-          border-color: ${dark};
-        }
-        &:enabled:focus {
-          box-shadow: 0 0 0 4px ${light};
-        }
-      `;
-    case "text":
-      return css`
-        color: ${theme.grayscale.label};
-        &:hover {
-          color: ${theme.grayscale.body};
-        }
-        &:active {
-          color: ${theme.grayscale.titleActive};
-        }
-      `;
-    default:
-      throw Error("button style error");
-  }
+const cssButtonStyle = {
+  filled: ({ theme, color }) =>
+    css`
+      color: ${theme.grayscale.offWhite};
+      background: ${theme.color[color].default};
+      &:enabled:hover {
+        background: ${theme.color[color].dark};
+      }
+      &:enabled:focus {
+        outline: 4px solid ${theme.color[color].light};
+      }
+    `,
+  empty: ({ theme, color }) =>
+    css`
+      color: ${theme.color[color].default};
+      background-color: ${theme.grayscale.offWhite};
+      border: 2px solid ${theme.color[color].default};
+      &:enabled:hover {
+        color: ${theme.color[color].dark};
+        border-color: ${theme.color[color].dark};
+      }
+      &:enabled:focus {
+        outline: 4px solid ${theme.color[color].light};
+      }
+    `,
+  text: ({ theme }) =>
+    css`
+      color: ${theme.grayscale.label};
+      &:hover {
+        color: ${theme.grayscale.body};
+      }
+      &:active {
+        color: ${theme.grayscale.titleActive};
+      }
+    `,
 };

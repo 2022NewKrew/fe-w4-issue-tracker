@@ -8,12 +8,6 @@ import { TestNew } from "./component/page/test/TestNew";
 import { Button } from "./component/atoms/Button";
 
 function App() {
-  // 배경색 설정
-  const theme = useTheme();
-  useEffect(() => {
-    document.body.style.backgroundColor = theme.grayscale.background;
-  }, []);
-
   const defaultElementForTest = (
     <>
       <p>미완성</p>

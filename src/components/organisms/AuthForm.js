@@ -1,10 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import { LargeLogo, LargeButton, MediumText, LargeTextInput } from "@atoms";
+import {
+  LargeLogo,
+  LargeButton,
+  MediumText,
+  LargeTextInput,
+  Wrapper,
+} from "@atoms";
 import { COLOR } from "@constants";
 import { OAuthForm } from "@molecules";
 
-const _Wrapper = styled.div`
+const AuthFormWrapper = styled(Wrapper)`
   position: relative;
   height: 100%;
   width: 100%;
@@ -20,7 +26,7 @@ const AuthFormInput = styled(LargeTextInput)`
 
 function AuthForm() {
   return (
-    <_Wrapper>
+    <AuthFormWrapper>
       <LargeLogo>Issue Tracker</LargeLogo>
       <OAuthForm />
       <AuthFormText>or</AuthFormText>
@@ -30,7 +36,7 @@ function AuthForm() {
         아이디로 로그인
       </LargeButton>
       <AuthFormText>회원가입</AuthFormText>
-    </_Wrapper>
+    </AuthFormWrapper>
   );
 }
 

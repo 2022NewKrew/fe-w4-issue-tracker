@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { MediumLogo, SmallLinkText, Wrapper } from "@atoms";
 import { authService } from "@/firebase.js";
 
-const _Wrapper = styled(Wrapper)`
+const HeaderWrapper = styled(Wrapper)`
   position: relative;
   flex-direction: row;
   justify-content: space-between;
@@ -29,13 +29,13 @@ function Header() {
   const auth = authService.getAuth();
   const url = auth.currentUser.photoURL;
   return (
-    <_Wrapper>
+    <HeaderWrapper>
       <MediumLogo>Issue Tracker</MediumLogo>
       <ProfileWrapper>
         <SmallLinkText onClick={() => auth.signOut()}>로그아웃</SmallLinkText>
         <ProfileImg src={url} />
       </ProfileWrapper>
-    </_Wrapper>
+    </HeaderWrapper>
   );
 }
 

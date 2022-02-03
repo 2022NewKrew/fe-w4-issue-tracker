@@ -5,7 +5,7 @@ import { AlertCircleIcon, ArchieveIcon, ChevronDownIcon } from "@icons";
 import { SmallLinkText } from "@atoms";
 import { COLOR } from "@constants";
 
-const _Wrapper = styled(Wrapper)`
+const IssueTableHeaderWrapper = styled(Wrapper)`
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
@@ -45,7 +45,7 @@ const OptionTabText = styled(SmallLinkText)`
 
 function IssueTableHeader() {
   return (
-    <_Wrapper>
+    <IssueTableHeaderWrapper>
       <FilterTabList>
         <input type="checkbox" />
         <FilterTab>
@@ -75,7 +75,7 @@ function IssueTableHeader() {
           <ChevronDownIcon />
         </OptionTab>
       </OptionTabList>
-    </_Wrapper>
+    </IssueTableHeaderWrapper>
   );
 }
 

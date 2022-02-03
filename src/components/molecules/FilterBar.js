@@ -4,7 +4,7 @@ import { COLOR } from "@constants";
 import { SmallText, TextInput, Wrapper } from "@atoms";
 import { ChevronDownIcon, SearchIcon } from "@icons";
 
-const _Wrapper = styled(Wrapper)`
+const FilterBarWrapper = styled(Wrapper)`
   flex-direction: row;
 
   border: 1px solid transparent;
@@ -107,7 +107,7 @@ function FilterBar() {
   };
 
   return (
-    <_Wrapper isActivated={activated}>
+    <FilterBarWrapper isActivated={activated}>
       <FilterDropdownButton isActivated={activated}>
         <FilterDropdownButtonText>필터</FilterDropdownButtonText>
         <ChevronDownIcon />
@@ -124,7 +124,7 @@ function FilterBar() {
           onBlur={handleBlur}
         />
       </FilterSearchWrapper>
-    </_Wrapper>
+    </FilterBarWrapper>
   );
 }
 

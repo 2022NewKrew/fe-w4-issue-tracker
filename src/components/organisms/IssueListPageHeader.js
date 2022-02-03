@@ -5,7 +5,7 @@ import { SmallStandardButton, Wrapper, XSmallText } from "@atoms";
 import { PlusIcon } from "@icons";
 import { COLOR, DIRECTION } from "@constants";
 
-const _Wrapper = styled(Wrapper)`
+const IssueListPageHeaderWrapper = styled(Wrapper)`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
@@ -29,7 +29,7 @@ const CreateIssueButton = styled(SmallStandardButton)`
 
 function IssueListPageHeader() {
   return (
-    <_Wrapper>
+    <IssueListPageHeaderWrapper>
       <FilterBar />
       <RightPart>
         <TabList />
@@ -38,7 +38,7 @@ function IssueListPageHeader() {
           <ButtonText>이슈 작성</ButtonText>
         </CreateIssueButton>
       </RightPart>
-    </_Wrapper>
+    </IssueListPageHeaderWrapper>
   );
 }
 

@@ -10,7 +10,7 @@ const LABEL_TYPE = {
   LIGHT_TEXT: "lightText",
 };
 
-const _Wrapper = styled(Wrapper)`
+const IssueCellWrapper = styled(Wrapper)`
   flex-direction: row;
   width: 100%;
   height: 100px;
@@ -75,12 +75,12 @@ const LeftPart = styled(Wrapper)`
   flex-direction: row;
 `;
 
-function IssueCell({ title, label, id, writer, timestamp, milestone }) {
+function IssueCell({ title, labelList, id, writer, timestamp, milestone }) {
   //FIX: DB 연동시 writer profile img url 수정
   const auth = authService.getAuth();
   const url = auth.currentUser.photoURL;
   return (
-    <_Wrapper>
+    <IssueCellWrapper>
       <LeftPart>
         <input type="checkbox" />
         <IssueInfoWrapper>
@@ -93,10 +93,10 @@ function IssueCell({ title, label, id, writer, timestamp, milestone }) {
             >
               {title}
             </MediumLinkText>
-            {label.map((_label, idx) => {
+            {labelList.map((label, idx) => {
               return (
-                <IssueLabel key={`${title}-label${idx}`} type={_label}>
-                  {_label}
+                <IssueLabel key={`${title}-label${idx}`} type={label}>
+                  {label}
                 </IssueLabel>
               );
             })}
@@ -123,7 +123,7 @@ function IssueCell({ title, label, id, writer, timestamp, milestone }) {
           margin-right: 30px;
         `}
       />
-    </_Wrapper>
+    </IssueCellWrapper>
   );
 }
 

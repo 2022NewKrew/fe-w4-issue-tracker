@@ -8,7 +8,7 @@ import { COLOR } from "@constants";
 const ISSUE_DATA = [
   {
     title: "PR날리기",
-    label: ["시간이없어요"],
+    labelList: ["시간이없어요"],
     id: "1519472103",
     writer: "aiden",
     timestamp: "9",
@@ -16,7 +16,7 @@ const ISSUE_DATA = [
   },
   {
     title: "강의듣기",
-    label: ["documentation"],
+    labelList: ["documentation"],
     id: "871594351",
     writer: "dw",
     timestamp: "51",
@@ -24,7 +24,7 @@ const ISSUE_DATA = [
   },
 ];
 
-const _Wrapper = styled(Wrapper)`
+const IssueTableWrapper = styled(Wrapper)`
   width: 100%;
   border-radius: 16px;
   border: 1px solid ${COLOR.GREYSCALE.LINE};
@@ -41,14 +41,14 @@ function IssueTable() {
   const [issueList, setIssueList] = useState(ISSUE_DATA);
 
   return (
-    <_Wrapper>
+    <IssueTableWrapper>
       <IssueTableHeader />
       <IssueList>
         {issueList.map((issue, idx) => {
           return <IssueCell key={`issue${idx}`} {...issue} />;
         })}
       </IssueList>
-    </_Wrapper>
+    </IssueTableWrapper>
   );
 }
 

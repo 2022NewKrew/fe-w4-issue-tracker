@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+
 import styled from "styled-components";
-import { authService } from "@/firebase";
-import { Auth } from "@pages";
-import { ProtectedRoutes } from "@components/routes";
+import { authService } from "@/firebase.js";
+import { Auth, IssueList } from "@pages";
+import { Route, Routes } from "react-router-dom";
+import { ProtectedRoutes, AppRouter } from "@routes";
 import { COLOR } from "@constants";
 
 const Main = styled.div`
@@ -37,7 +38,10 @@ function App() {
   return (
     <Main>
       <Routes>
-        <Route path="/" element={<ProtectedRoutes isLoggedIn={isLoggedIn} />} />
+        <Route path="/" element={<ProtectedRoutes isLoggedIn={isLoggedIn} />}>
+          <Route index element={<IssueList />} />
+          <Route path="issuelist" element={<IssueList />} />
+        </Route>
         <Route path="/auth" element={<Auth isLoggedIn={isLoggedIn} />} />
       </Routes>
     </Main>

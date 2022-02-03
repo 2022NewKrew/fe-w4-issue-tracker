@@ -10,7 +10,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
-      "@IssueContext": path.resolve(__dirname, "src/context/issues"),
+      "@Context": path.resolve(__dirname, "src/context"),
     },
   },
   output: {

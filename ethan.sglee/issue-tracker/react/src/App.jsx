@@ -1,6 +1,6 @@
 import React from 'react'
-import { IssuesProvider } from './context/issues/IssuesContext.jsx'
-import Issues from './context/issues/Issues.jsx'
+import { IssuesProvider } from '@Context/issues/IssuesContext.jsx'
+import Issues from '@Context/issues/Issues.jsx'
 
 const App = () => {
   return (

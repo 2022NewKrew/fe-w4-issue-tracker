@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { useIssuesState, useIssuesDispatch, getIssues } from '@IssueContext/IssuesContext'
-import Issue from '@IssueContext/Issue'
+import { useIssuesState, useIssuesDispatch, getIssues } from '@Context/issues/IssuesContext'
+import Issue from '@Context/issues/Issue'
 
 function Issues() {
   const [issueId, setIssueId] = useState(null)

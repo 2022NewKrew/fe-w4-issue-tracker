@@ -1,5 +1,4 @@
 import { initializeApp } from "firebase/app";
-import * as authService from "firebase/auth";
 
 const ENV = {
   API_KEY: "AIzaSyBTFAK3H7enl2Pqgbkp8fwSc1IUYqqTMcY",
@@ -21,4 +20,4 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig);
 
-export { authService };
+export * from "firebase/auth";

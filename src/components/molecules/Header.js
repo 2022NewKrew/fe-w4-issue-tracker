@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { BigProfileImg, MediumLogo, SmallLinkText, Wrapper } from "@atoms";
-import { authService } from "@/firebase.js";
+import { getAuth } from "@/firebase.js";
 
 const HeaderWrapper = styled(Wrapper)`
   position: relative;
@@ -21,7 +21,7 @@ const ProfileWrapper = styled(Wrapper)`
 `;
 
 function Header() {
-  const auth = authService.getAuth();
+  const auth = getAuth();
   const url = auth.currentUser.photoURL;
   return (
     <HeaderWrapper>

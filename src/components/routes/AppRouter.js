@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Auth, Home } from "@pages";
-import { authService } from "@/firebase.js";
+import { getAuth, onAuthStateChanged } from "@/firebase.js";
 import { IssueList } from "@templates";
 
 function AppRouter() {
@@ -9,8 +9,8 @@ function AppRouter() {
   const [init, setInit] = useState(false);
 
   useEffect(() => {
-    const auth = authService.getAuth();
-    authService.onAuthStateChanged(auth, (user) => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
       setIsLoggedIn(!!user);
       setInit(true);
     });

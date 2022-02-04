@@ -6,8 +6,8 @@
     "author": "miro-ring <miro.ring@kakaocorp.com>",
     "license": "MIT",
     "scripts": {
-        "start": "webpack-dev-server --open --config webpack.dev.js",
-        "build": "webpack --config webpack.prod.js"
+        "start": "concurrently --kill-others-on-fail \"yarn backend\" \"yarn --cwd client start\"",
+        "backend": "nodemon server/index.js"
     },
     "dependencies": {
         "bcrypt": "^5.0.1",

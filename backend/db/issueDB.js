@@ -64,7 +64,7 @@ module.exports=function initIssueDB(db){
   `);
   function updateIsOpen(issueID, {isOpen}){
     isOpen=convertIsOpenInt(isOpen);
-    updateIsOpenStmt.run({issueID, isOpen});
+    return updateIsOpenStmt.run({issueID, isOpen}).changes;
   }
 
   const selectAllStmt=db.prepare(`

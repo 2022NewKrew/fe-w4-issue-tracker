@@ -87,7 +87,7 @@ export function useCheck(array){
     isCheckedAll ? uncheckAll() : checkAll();
   }, [isCheckedAll, uncheckAll, checkAll]);
   return {
-    isChecked, isCheckedAll, isCheckedAny, numChecked,
+    checked, isChecked, isCheckedAll, isCheckedAny, numChecked,
     toggleCheck, checkAll, uncheckAll, toggleCheckAll
   };
 }

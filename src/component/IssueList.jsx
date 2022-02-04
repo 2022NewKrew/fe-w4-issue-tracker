@@ -10,12 +10,12 @@ import Header from './Header';
 import InputeMedium from '../item/InputMedium';
 import Issue from './Issue';
 import issueFilterState from '../store/issueFilterState';
+import IssueUpdateDropdown from './IssueUpdateDropdown';
 import LabelDropdown from './LabelDropdown';
 import labelsState from '../store/labelsState';
 import MilestoneDropdown from './MilestoneDropdown';
 import MilestoneIcon from '../svg/Milestone.svg';
 import milestonesState from '../store/milestonesState';
-import MoreIcon from '../svg/More.svg';
 import TagIcon from '../svg/Tag.svg';
 import Tap from '../item/Tap';
 import XIcon from '../svg/X.svg';
@@ -32,7 +32,7 @@ export default function IssueList(){
   const [issueFilter, setIssueFilter]=useRecoilState(issueFilterState);
   const [rawIssueFilter, setRawIssueFilter]=useState(issueFilter);
   const [showingIssues, setShowingIssues]=useState([]);
-  const {isChecked, isCheckedAll, isCheckedAny,
+  const {checked, isChecked, isCheckedAll, isCheckedAny,
     numChecked, toggleCheck, toggleCheckAll}=useCheck(showingIssues);
 
   useEffect(()=>{
@@ -60,7 +60,7 @@ export default function IssueList(){
       );
     }
     return showingIssues.map(
-      ({issueID, title, authorID, timestamp, isOpen, milestoneID, body}, index)=>{
+      ({issueID, title, authorID, timestamp, isOpen, milestoneID, body})=>{
         return (
           <Issue
             key={issueID}
@@ -71,8 +71,8 @@ export default function IssueList(){
             isOpen={isOpen}
             milestoneID={milestoneID}
             body={body}
-            isChecked={isIndexChecked(index)}
-            toggleCheck={()=>toggleCheck(index)}
+            isChecked={isIndexChecked(issueID)}
+            toggleCheck={()=>toggleCheck(issueID)}
           ></Issue>
         );
       }
@@ -136,9 +136,7 @@ export default function IssueList(){
             <div className='tab-second'>
               <strong className='grey-color'>{numChecked}개 이슈 선택</strong>
             </div>
-            <div className='tab-rest hover-item'>
-              <span className='margin-right'>상태 수정</span><MoreIcon/>
-            </div>
+            <IssueUpdateDropdown checked={checked} fetchIssues={fetchIssues} />
           </>
           :
           <>

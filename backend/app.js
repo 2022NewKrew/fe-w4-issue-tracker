@@ -54,7 +54,7 @@ app.get('/issue-list', (req, res)=>{
       else if(labelTitle===null){
         labelID=null;
       }
-      
+
       const issues=issueDB.select({authorID, milestoneID, labelID, assigneeID});
       res.send(issues).status(200);
     })();
@@ -133,6 +133,25 @@ app.get('/user-list', (_, res)=>{
     const users=userDB.select();
     const keyedUsers=createObjectWithKey(users, 'userID');
     res.send(keyedUsers).status(200);
+  }catch(e){
+    console.error(e.message);
+    res.sendStatus(500);
+  }
+});
+
+app.post('/api/update-issue', (req, res)=>{
+  try{
+    /** @type {number[]} */
+    const issueIDs=req.body.issueIDs;
+    const isOpen=req.body.isOpen;
+    db.transaction(()=>{
+      issueIDs.forEach((issueID)=>{
+        if(issueDB.updateIsOpen(Number(issueID), {isOpen})===0){
+          throw Error('Cannot update issue. ID:', issueID);
+        }
+      });
+    })();
+    res.sendStatus(200);
   }catch(e){
     console.error(e.message);
     res.sendStatus(500);

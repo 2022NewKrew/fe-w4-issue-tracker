@@ -6,10 +6,15 @@ export const issueLabelURL=new URL('issue-label', backendURL).href;
 export const labelListURL=new URL('label-list', backendURL).href;
 export const milestoneListURL=new URL('milestone-list', backendURL).href;
 export const userListURL=new URL('user-list', backendURL).href;
+export const issueUpdateURL=new URL('api/update-issue', backendURL).href;
 
 export async function getFromURL(url, params){
   const {data}=await axios.get(url, {params: params});
   return data;
+}
+
+export async function postToURL(url, data){
+  await axios.post(url, data);
 }
 
 export function getPrettyDate(date){

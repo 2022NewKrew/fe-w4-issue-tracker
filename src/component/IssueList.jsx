@@ -60,7 +60,7 @@ export default function IssueList(){
       );
     }
     return showingIssues.map(
-      ({issueID, title, authorID, timestamp, isOpen, milestoneID, body})=>{
+      ({issueID, title, authorID, timestamp, isOpen, milestoneID, body}, index)=>{
         return (
           <Issue
             key={issueID}
@@ -71,8 +71,8 @@ export default function IssueList(){
             isOpen={isOpen}
             milestoneID={milestoneID}
             body={body}
-            isChecked={isIndexChecked(issueID)}
-            toggleCheck={()=>toggleCheck(issueID)}
+            isChecked={isIndexChecked(index)}
+            toggleCheck={()=>toggleCheck(index)}
           ></Issue>
         );
       }
@@ -136,7 +136,11 @@ export default function IssueList(){
             <div className='tab-second'>
               <strong className='grey-color'>{numChecked}개 이슈 선택</strong>
             </div>
-            <IssueUpdateDropdown checked={checked} fetchIssues={fetchIssues} />
+            <IssueUpdateDropdown
+              checked={checked}
+              fetchIssues={fetchIssues}
+              showingIssues={showingIssues}
+            />
           </>
           :
           <>

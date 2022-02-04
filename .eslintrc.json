@@ -11,7 +11,10 @@
     ],
     "overrides": [
         {
-            "files": ["*.jsx", "*.js"],
+            "files": [
+                "*.jsx",
+                "*.js"
+            ],
             "rules": {
                 "indent": [
                     "error",
@@ -37,7 +40,7 @@
                     "error",
                     "never"
                 ],
-                "comma-spacing":"error",
+                "comma-spacing": "error",
                 "key-spacing": [
                     "error",
                     {
@@ -82,7 +85,8 @@
         "dist/**"
     ],
     "plugins": [
-        "react", "react-hooks"
+        "react",
+        "react-hooks"
     ],
     "settings": {
         "react": {

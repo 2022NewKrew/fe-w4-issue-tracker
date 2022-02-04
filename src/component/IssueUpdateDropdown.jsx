@@ -4,28 +4,33 @@ import Dropdown from '../item/Dropdown';
 import MoreIcon from '../svg/More.svg';
 
 /**
- * @param {object} prop
- * @param {Object.<number, boolean>} prop.checked
- * @param {function} prop.fetchIssues
+ * @param {object} props
+ * @param {Object.<number, boolean>} props.checked
+ * @param {function} props.fetchIssues
+ * @param {Object.<number, {issueID: number}>} props.showingIssues
  */
-export default function IssueUpdateDropdown({checked, fetchIssues}){
+export default function IssueUpdateDropdown({checked, fetchIssues, showingIssues}){
   const [show, setShow]=useState(false);
 
   const toggle=useCallback(()=>{
     setShow((show)=>!show);
   }, [setShow]);
 
+  const getIssueIDs=useCallback(()=>{
+    return Object.keys(checked).map((index)=>showingIssues[index].issueID);
+  }, [checked, showingIssues]);
+
   function getItemArray(){
     return [
       {itemTitle: '선택한 이슈 열기', onClick: ()=>{
         postToURL(issueUpdateURL, {
-          issueIDs: Object.keys(checked),
+          issueIDs: getIssueIDs(),
           isOpen: true
         }).then(fetchIssues);
       }},
       {itemTitle: '선택한 이슈 닫기', onClick: ()=>{
         postToURL(issueUpdateURL, {
-          issueIDs: Object.keys(checked),
+          issueIDs: getIssueIDs(),
           isOpen: false
         }).then(fetchIssues);
       }}

@@ -1,5 +1,6 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
+import greyScale from "@styles/greyscale";
 import { getFontWeight } from "@utils/helper";
 
 const StyledDisplay = styled.span`
@@ -7,7 +8,7 @@ const StyledDisplay = styled.span`
   font-style: normal;
   font-size: 32px;
   line-height: 48px;
-  color: #000000;
+  color: ${greyScale.default};
   ${() => getFontWeight}
 `;
 

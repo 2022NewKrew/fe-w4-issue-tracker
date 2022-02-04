@@ -1,12 +1,13 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
+import greyScale from "@styles/greyscale";
 import { getFontSize, getLineHeight } from "@utils/helper";
 
 const StyledText = styled.span`
   font-family: Noto Sans KR;
   font-style: normal;
   font-weight: normal;
-  color: #000000;
+  color: ${greyScale.default};
   ${() => getFontSize}
   ${() => getLineHeight}
 `;

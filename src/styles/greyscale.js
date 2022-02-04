@@ -1,4 +1,5 @@
 const greyScale = {
+  default: "#000000",
   offWhite: "#FEFEFE",
   background: "#F7F7FC",
   inputBackground: "#EFF0F6",

@@ -1,12 +1,13 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
+import greyScale from "@styles/greyscale";
 import { getFontSize, getLineHeight } from "@utils/helper";
 
 const StyledLink = styled.a`
   font-family: Noto Sans KR;
   font-style: normal;
   font-weight: bold;
-  color: #000000;
+  color: ${greyScale.default};
   ${() => getFontSize}
   ${() => getLineHeight}
 `;

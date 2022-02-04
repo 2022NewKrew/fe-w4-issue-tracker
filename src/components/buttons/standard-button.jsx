@@ -1,17 +1,20 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import colors from "@styles/colors";
 
 const getStandardButtonPadding = ({ type }) => {
   switch (type) {
+    case "large":
+    case "medium":
+      return css`
+        padding: 24px;
+      `;
     case "small":
       return css`
         padding: 16px;
       `;
     default:
-      return css`
-        padding: 24px;
-      `;
+      return css``;
   }
 };
 
@@ -36,16 +39,32 @@ const getStandardButtonHeight = ({ type }) => {
   switch (type) {
     case "large":
       return css`
-        height: 340px;
+        height: 64px;
       `;
     case "medium":
       return css`
-        height: 240px;
+        height: 56px;
       `;
     default:
       return css`
-        height: 120px;
+        height: 40px;
       `;
+  }
+};
+
+const getStandardButtonBorderRadius = ({ type }) => {
+  switch (type) {
+    case "large":
+    case "medium":
+      return css`
+        border-radius: 20px;
+      `;
+    case "small":
+      return css`
+        border-radius: 11px;
+      `;
+    default:
+      return css``;
   }
 };
 
@@ -57,12 +76,17 @@ const StyledStandardButton = styled.button`
   top: 20px;
   background: ${colors.blue};
   ${() => getStandardButtonPadding}
+  ${() => getStandardButtonWidth}
+  ${() => getStandardButtonHeight}
+  ${() => getStandardButtonBorderRadius}
 `;
 
 const StandardButton = ({ children, type }) => {
-  <StyledStandardButton type={type}>
-    <span>{children}</span>
-  </StyledStandardButton>;
+  return (
+    <StyledStandardButton type={type}>
+      <span>{children}</span>
+    </StyledStandardButton>
+  );
 };
 
 export default StandardButton;

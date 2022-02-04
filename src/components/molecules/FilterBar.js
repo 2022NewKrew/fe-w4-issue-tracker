@@ -7,22 +7,28 @@ import Dropdown from "@/components/molecules/Dropdown.js";
 
 const filterBarDropdownData = {
   title: "이슈 필터",
-  isMultipleOptionsAvailable: true,
+  isCheckIcon: true,
+  isMultiCheckAvailable: false,
   options: [
     {
       text: "열린 이슈",
+      isChecked: true,
     },
     {
       text: "내가 작성한 이슈",
+      isChecked: false,
     },
     {
       text: "나에게 할당된 이슈",
+      isChecked: false,
     },
     {
       text: "내가 댓글을 남긴 이슈",
+      isChecked: false,
     },
     {
       text: "닫힌 이슈",
+      isChecked: false,
     },
   ],
 };
@@ -82,7 +88,7 @@ const FilterDropdownButtonText = styled(SmallText)`
 const FilterDropdown = styled(Dropdown)`
   position: absolute;
   left: 0;
-  top: 40px;
+  top: 35px;
 `;
 
 const FilterTextInput = styled(TextInput)`

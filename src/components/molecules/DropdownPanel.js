@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { SmallProfileImg, SmallText, Wrapper } from "@atoms";
 import { COLOR } from "@constants";
@@ -23,22 +23,17 @@ const DropdownPanelInfoWrapper = styled(SmallText)`
 `;
 const ProfileImg = styled(SmallProfileImg)``;
 
-function DropdownPanel({ text, imgUrl, isMultipleOptionsAvailable }) {
-  const [isActivated, setIsActivated] = useState(false);
-  const clickPanel = () => {
-    setIsActivated(!isActivated);
-  };
+function DropdownPanel({ text, imgUrl, isCheckIcon, isChecked, onClick }) {
   return (
-    <DropdownPanelWrapper>
+    <DropdownPanelWrapper onClick={onClick}>
       {imgUrl ? <ProfileImg src={imgUrl} /> : <></>}
       <DropdownPanelInfoWrapper
         isImgContained={!!imgUrl}
-        onClick={clickPanel}
-        isActivated={isActivated}
+        isActivated={isChecked}
       >
         <span>{text}</span>
-        {isMultipleOptionsAvailable ? (
-          isActivated ? (
+        {isCheckIcon ? (
+          isChecked ? (
             <CheckOnCircleIcon />
           ) : (
             <CheckOffCircleIcon />

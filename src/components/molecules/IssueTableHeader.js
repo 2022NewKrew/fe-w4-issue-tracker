@@ -10,70 +10,86 @@ const TEMP_PROFILE_IMG_URL =
   "https://avatars.githubusercontent.com/u/62870938?v=4";
 
 // FIX: DB 연동시
-const optionTabData = [
+const tabDataList = [
   {
     title: "담당자",
-    isMultipleOptionsAvailable: true,
+    isMultiCheckAvailable: false,
+    isCheckIcon: true,
     options: [
       {
         text: "aiden",
         imgUrl: TEMP_PROFILE_IMG_URL,
+        isChecked: false,
       },
       {
         text: "dw",
         imgUrl: TEMP_PROFILE_IMG_URL,
+        isChecked: false,
       },
       {
         text: "hollys",
         imgUrl: TEMP_PROFILE_IMG_URL,
+        isChecked: false,
       },
     ],
   },
   {
     title: "레이블",
-    isMultipleOptionsAvailable: true,
+    isMultiCheckAvailable: false,
+    isCheckIcon: true,
     options: [
       {
         text: "아무 라벨",
+        isChecked: false,
       },
       {
         text: "documentation",
+        isChecked: false,
       },
       {
         text: "시간이 없어요",
+        isChecked: false,
       },
     ],
   },
   {
     title: "마일스톤",
-    isMultipleOptionsAvailable: true,
+    isMultiCheckAvailable: false,
+    isCheckIcon: true,
     options: [
       {
         text: "1주차",
+        isChecked: false,
       },
       {
         text: "2주차",
+        isChecked: false,
       },
       {
         text: "4주차",
+        isChecked: false,
       },
     ],
   },
   {
     title: "작성자",
-    isMultipleOptionsAvailable: true,
+    isMultiCheckAvailable: false,
+    isCheckIcon: true,
     options: [
       {
         text: "aiden",
         imgUrl: TEMP_PROFILE_IMG_URL,
+        isChecked: false,
       },
       {
         text: "dw",
         imgUrl: TEMP_PROFILE_IMG_URL,
+        isChecked: false,
       },
       {
         text: "hollys",
         imgUrl: TEMP_PROFILE_IMG_URL,
+        isChecked: false,
       },
     ],
   },
@@ -162,12 +178,11 @@ function IssueTableHeader({ setIssueFilter, issueFilter }) {
         </FilterTab>
       </FilterTabList>
       <OptionTabList>
-        {optionTabData.map((data, idx) => {
-          const { title } = data;
+        {tabDataList.map((tabData, idx) => {
           return (
             <IssueTableHeaderOptionTab
-              key={`filterTab-${title}-${idx}`}
-              {...data}
+              key={`filterTab-${tabData.title}-${idx}`}
+              tabData={tabData}
             />
           );
         })}

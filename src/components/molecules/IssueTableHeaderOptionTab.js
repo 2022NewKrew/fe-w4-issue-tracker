@@ -29,24 +29,15 @@ const OptionTabDropDown = styled(Dropdown)`
   right: 0;
 `;
 
-function IssueTableHeaderOptionTab({
-  title,
-  options,
-  isMultipleOptionsAvailable,
-}) {
+function IssueTableHeaderOptionTab({ tabData }) {
   const wrapper = useRef(null);
   return (
     <OptionTabWrapper ref={wrapper}>
       <OptionTabButton>
-        <OptionTabButtonText>{title}</OptionTabButtonText>
+        <OptionTabButtonText>{tabData.title}</OptionTabButtonText>
         <ChevronDownIcon />
       </OptionTabButton>
-      <OptionTabDropDown
-        title={title}
-        options={options}
-        isMultipleOptionsAvailable={isMultipleOptionsAvailable}
-        parentRef={wrapper}
-      />
+      <OptionTabDropDown {...tabData} parentRef={wrapper} />
     </OptionTabWrapper>
   );
 }

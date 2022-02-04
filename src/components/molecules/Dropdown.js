@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import styled from "styled-components";
 import { MediumText, Wrapper } from "@atoms";
 import { COLOR } from "@constants";
@@ -12,7 +12,7 @@ const DropdownWrapper = styled(Wrapper)`
   border-radius: 16px;
   overflow: hidden;
   z-index: 10;
-  visibility: ${({ isActivated }) => (isActivated ? "visible" : "hidden")};
+  visibility: ${({ isVisible }) => (isVisible ? "visible" : "hidden")};
 `;
 
 const DropdownTitle = styled(MediumText)`
@@ -27,38 +27,62 @@ const DropdownTitle = styled(MediumText)`
 function Dropdown({
   className,
   title,
+  isCheckIcon,
   options,
-  isMultipleOptionsAvailable,
   parentRef,
+  isMultiCheckAvailable,
 }) {
-  const [isActivated, setIsActivated] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [panelOptions, setPanelOptions] = useState(options);
+  const dropdownRef = useRef(null);
+
+  const clickPanel = useCallback(
+    (clickedPanelText) => {
+      const newPanelOptions = isMultiCheckAvailable
+        ? panelOptions.map((option) => {
+            return clickedPanelText === option.text
+              ? { ...option, isChecked: true }
+              : option;
+          })
+        : panelOptions.map((option) => {
+            return { ...option, isChecked: clickedPanelText === option.text };
+          });
+      setPanelOptions(newPanelOptions);
+    },
+    [panelOptions]
+  );
 
   useEffect(() => {
-    const clickEventHandler = (e) => {
+    const clickDropdown = (e) => {
       const { target } = e;
       const { current: parentNode } = parentRef;
-      if (isActivated && !parentNode.contains(target)) {
-        setIsActivated(false);
-      } else if (!isActivated && parentNode.contains(target)) {
-        setIsActivated(true);
+      const { current: thisNode } = dropdownRef;
+      if (isVisible && !thisNode.contains(target)) {
+        setIsVisible(false);
+      } else if (!isVisible && parentNode.contains(target)) {
+        setIsVisible(true);
       }
     };
-    document.addEventListener("click", clickEventHandler);
+    document.addEventListener("click", clickDropdown);
     return () => {
-      document.removeEventListener("click", clickEventHandler);
+      document.removeEventListener("click", clickDropdown);
     };
-  }, [isActivated]);
+  }, [isVisible]);
 
   return (
-    <DropdownWrapper className={className} isActivated={isActivated}>
+    <DropdownWrapper
+      ref={dropdownRef}
+      className={className}
+      isVisible={isVisible}
+    >
       <DropdownTitle>{title}</DropdownTitle>
-      {options.map((option, idx) => {
-        const { text, imgUrl } = option;
+      {panelOptions.map((panelOption, idx) => {
         return (
           <DropdownPanel
-            key={`dropdown-${title}-content-${idx}`}
-            {...option}
-            isMultipleOptionsAvailable={isMultipleOptionsAvailable}
+            onClick={() => clickPanel(panelOption.text)}
+            key={`dropdown-${title}-panel-${idx}`}
+            {...panelOption}
+            isCheckIcon={isCheckIcon}
           />
         );
       })}

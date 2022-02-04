@@ -8,7 +8,7 @@ import {
   XSmallText,
 } from "@atoms";
 import { COLOR } from "@constants";
-import { AlertCircleIcon, MilestoneIcon } from "@icons";
+import { AlertCircleIcon, ArchieveIcon, MilestoneIcon } from "@icons";
 import { getAuth } from "@/firebase.js";
 import { calculateTimeDiff } from "@/utils/timestampUtils.js";
 
@@ -81,7 +81,15 @@ const LeftPart = styled(Wrapper)`
   flex-direction: row;
 `;
 
-function IssueCell({ title, labelList, id, writer, timestamp, milestone }) {
+function IssueCell({
+  isOpened,
+  title,
+  labelList,
+  id,
+  writer,
+  timestamp,
+  milestone,
+}) {
   //FIX: 개인 프로필 기능 구현시 수정
   const auth = getAuth();
   const url = auth.currentUser.photoURL;
@@ -92,7 +100,7 @@ function IssueCell({ title, labelList, id, writer, timestamp, milestone }) {
         <input type="checkbox" />
         <IssueInfoWrapper>
           <IssueTitleWrapper>
-            <AlertCircleIcon />
+            {isOpened ? <AlertCircleIcon /> : <ArchieveIcon />}
             <MediumLinkText
               css={`
                 margin-left: 10px;

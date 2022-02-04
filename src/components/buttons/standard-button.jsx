@@ -1,6 +1,9 @@
 import styled, { css } from "styled-components";
 
+import Link from "@components/typography/link";
 import colors from "@styles/colors";
+import greyscale from "@styles/greyscale";
+import { allCenterAlign } from "@utils/helper";
 
 const getStandardButtonPadding = ({ type }) => {
   switch (type) {
@@ -68,13 +71,21 @@ const getStandardButtonBorderRadius = ({ type }) => {
   }
 };
 
+const getStandardButtonLinkType = ({ type }) => {
+  switch (type) {
+    case "large":
+    case "medium":
+      return "medium";
+    case "small":
+      return "x-small";
+    default:
+      return "";
+  }
+};
+
 const StyledStandardButton = styled.button`
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  left: 20px;
-  top: 20px;
   background: ${colors.blue};
+  ${allCenterAlign}
   ${() => getStandardButtonPadding}
   ${() => getStandardButtonWidth}
   ${() => getStandardButtonHeight}
@@ -84,7 +95,12 @@ const StyledStandardButton = styled.button`
 const StandardButton = ({ children, type }) => {
   return (
     <StyledStandardButton type={type}>
-      <span>{children}</span>
+      <Link
+        type={getStandardButtonLinkType({ type })}
+        color={greyscale.offWhite}
+      >
+        <span>{children}</span>
+      </Link>
     </StyledStandardButton>
   );
 };

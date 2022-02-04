@@ -1,4 +1,4 @@
-const greyScale = {
+const greyscale = {
   default: "#000000",
   offWhite: "#FEFEFE",
   background: "#F7F7FC",
@@ -10,4 +10,4 @@ const greyScale = {
   titleActive: "#14142B",
 };
 
-export default greyScale;
+export default greyscale;

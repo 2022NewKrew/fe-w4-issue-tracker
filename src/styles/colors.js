@@ -1,4 +1,5 @@
 const colors = {
+  default: "#7B61FF",
   blue: "#007AFF",
   lightBlue: "#C7EBFF",
   darkBlue: "#004DE3",

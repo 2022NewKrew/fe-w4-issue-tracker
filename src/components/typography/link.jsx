@@ -1,20 +1,19 @@
 import styled from "styled-components";
 
-import greyScale from "@styles/greyscale";
-import { getFontSize, getLineHeight } from "@utils/helper";
+import { getFontSize, getLineHeight, getColor } from "@utils/helper";
 
-const StyledLink = styled.a`
+const StyledLink = styled.span`
   font-family: Noto Sans KR;
   font-style: normal;
   font-weight: bold;
-  color: ${greyScale.default};
   ${() => getFontSize}
   ${() => getLineHeight}
+  ${() => getColor}
 `;
 
-const Link = ({ children, type }) => {
+const Link = ({ children, type, color }) => {
   return (
-    <StyledLink type={type}>
+    <StyledLink type={type} color={color}>
       <span>{children}</span>
     </StyledLink>
   );

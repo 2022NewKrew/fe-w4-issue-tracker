@@ -1,20 +1,19 @@
 import styled from "styled-components";
 
-import greyScale from "@styles/greyscale";
-import { getFontSize, getLineHeight } from "@utils/helper";
+import { getFontSize, getLineHeight, getColor } from "@utils/helper";
 
 const StyledText = styled.span`
   font-family: Noto Sans KR;
   font-style: normal;
   font-weight: normal;
-  color: ${greyScale.default};
   ${() => getFontSize}
   ${() => getLineHeight}
+  ${() => getColor}
 `;
 
-const Text = ({ children, type }) => {
+const Text = ({ children, type, color }) => {
   return (
-    <StyledText type={type}>
+    <StyledText type={type} color={color}>
       <span>{children}</span>
     </StyledText>
   );

@@ -1,5 +1,7 @@
 import { css } from "styled-components";
 
+import greyscale from "@styles/greyscale";
+
 export const getFontWeight = ({ type }) => {
   switch (type) {
     case "bold":
@@ -60,3 +62,15 @@ export const getLineHeight = ({ type }) => {
       return css``;
   }
 };
+
+export const getColor = ({ color }) => {
+  return css`
+    color: ${color ? color : greyscale.default};
+  `;
+};
+
+export const allCenterAlign = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

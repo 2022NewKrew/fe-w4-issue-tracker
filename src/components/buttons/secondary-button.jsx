@@ -13,7 +13,9 @@ import {
 } from "@utils/helper";
 
 const StyledSecondaryButton = styled.button`
-  background: ${colors.blue};
+  background: ${greyscale.offWhite};
+  border: 2px solid ${colors.blue};
+  box-sizing: border-box;
   ${allCenterAlign}
   ${() => getButtonPadding}
   ${() => getButtonWidth}
@@ -24,7 +26,7 @@ const StyledSecondaryButton = styled.button`
 const SecondaryButton = ({ children, type }) => {
   return (
     <StyledSecondaryButton type={type}>
-      <Link type={getButtonLinkType({ type })} color={greyscale.offWhite}>
+      <Link type={getButtonLinkType({ type })} color={colors.blue}>
         <span>{children}</span>
       </Link>
     </StyledSecondaryButton>

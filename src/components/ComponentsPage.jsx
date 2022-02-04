@@ -50,9 +50,9 @@ const ComponentsPage = () => {
         </Container>
         <Container>
           <h3>SecondaryButton</h3>
-          <StandardButton type="large">SecondaryButtonLarge</StandardButton>
-          <StandardButton type="medium">SecondaryButtonMedium</StandardButton>
-          <StandardButton type="small">SecondaryButtonSmall</StandardButton>
+          <SecondaryButton type="large">SecondaryButtonLarge</SecondaryButton>
+          <SecondaryButton type="medium">SecondaryButtonMedium</SecondaryButton>
+          <SecondaryButton type="small">SecondaryButtonSmall</SecondaryButton>
         </Container>
       </div>
     </div>

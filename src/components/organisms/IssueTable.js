@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Wrapper } from "@atoms";
 import { IssueCell, IssueTableHeader } from "@molecules";
@@ -57,19 +57,19 @@ function IssueTable() {
 
   return (
     <IssueTableWrapper>
-      <IssueTableHeader />
       <IssueTableHeader
         issueFilter={issueFilter}
         setIssueFilter={setIssueFilter}
       />
       <IssueList>
-        {issueList.map((issue, idx) => {
-          return <IssueCell key={`issue${idx}`} {...issue} />;
         {issueList.map((issueData, idx) => {
           if (issueData[issueFilter.key] === issueFilter.value) {
             return (
               <IssueCell
                 key={`issue${idx}`}
+                // isAllIssueSelected={isAllIssueSelected}
+                // increaseIssueCount={increaseIssueCount}
+                // decreaseIssueCount={decreaseIssueCount}
                 {...issueData}
               />
             );

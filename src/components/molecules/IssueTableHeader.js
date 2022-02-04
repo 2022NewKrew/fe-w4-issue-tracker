@@ -1,12 +1,86 @@
 import React from "react";
 import styled from "styled-components";
-import styled, { css } from "styled-components";
 import { Wrapper } from "@/components/atoms/Wrapper.js";
-import { AlertCircleIcon, ArchieveIcon, ChevronDownIcon } from "@icons";
+import { AlertCircleIcon, ArchieveIcon } from "@icons";
 import { SmallLinkText } from "@atoms";
 import { COLOR } from "@constants";
+import { IssueTableHeaderOptionTab } from "@/components/molecules/index.js";
+
+const TEMP_PROFILE_IMG_URL =
+  "https://avatars.githubusercontent.com/u/62870938?v=4";
+
+// FIX: DB 연동시
+const optionTabData = [
+  {
+    title: "담당자",
+    isMultipleOptionsAvailable: true,
+    options: [
+      {
+        text: "aiden",
+        imgUrl: TEMP_PROFILE_IMG_URL,
+      },
+      {
+        text: "dw",
+        imgUrl: TEMP_PROFILE_IMG_URL,
+      },
+      {
+        text: "hollys",
+        imgUrl: TEMP_PROFILE_IMG_URL,
+      },
+    ],
+  },
+  {
+    title: "레이블",
+    isMultipleOptionsAvailable: true,
+    options: [
+      {
+        text: "아무 라벨",
+      },
+      {
+        text: "documentation",
+      },
+      {
+        text: "시간이 없어요",
+      },
+    ],
+  },
+  {
+    title: "마일스톤",
+    isMultipleOptionsAvailable: true,
+    options: [
+      {
+        text: "1주차",
+      },
+      {
+        text: "2주차",
+      },
+      {
+        text: "4주차",
+      },
+    ],
+  },
+  {
+    title: "작성자",
+    isMultipleOptionsAvailable: true,
+    options: [
+      {
+        text: "aiden",
+        imgUrl: TEMP_PROFILE_IMG_URL,
+      },
+      {
+        text: "dw",
+        imgUrl: TEMP_PROFILE_IMG_URL,
+      },
+      {
+        text: "hollys",
+        imgUrl: TEMP_PROFILE_IMG_URL,
+      },
+    ],
+  },
+];
 
 const IssueTableHeaderWrapper = styled(Wrapper)`
+  position: relative;
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
@@ -19,10 +93,8 @@ const FilterTabList = styled(Wrapper)`
   flex-direction: row;
 `;
 
-const FilterTab = styled.div`
 const FilterTab = styled(SmallLinkText)`
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   flex-direction: row;
@@ -32,16 +104,10 @@ const FilterTab = styled(SmallLinkText)`
   &:hover {
     color: ${COLOR.GREYSCALE.BODY};
   }
-  ${({ activated }) =>
-    activated
-      ? css`
-          color: ${COLOR.GREYSCALE.BODY};
-        `
-      : css`
-          color: ${COLOR.GREYSCALE.LABEL};
-        `}
+
+  color: ${({ isActivated }) =>
+    isActivated ? COLOR.GREYSCALE.BODY : COLOR.GREYSCALE.LABEL};
 `;
-const FilterTabText = styled(SmallLinkText)`
 
 const FilterTabText = styled.span`
   margin-left: 10px;
@@ -51,22 +117,6 @@ const OptionTabList = styled(Wrapper)`
   flex-direction: row;
 `;
 
-const OptionTab = styled(Wrapper)`
-const OptionTab = styled(SmallLinkText)`
-  flex-direction: row;
-  margin: 0 20px;
-  color: ${COLOR.GREYSCALE.LABEL};
-  &:hover {
-    color: ${COLOR.GREYSCALE.BODY};
-  }
-`;
-
-const OptionTabText = styled(SmallLinkText)`
-const OptionTabText = styled.span`
-  margin-right: 10px;
-`;
-
-function IssueTableHeader() {
 function IssueTableHeader({
   setIssueFilter,
   issueFilter,
@@ -98,21 +148,18 @@ function IssueTableHeader({
   return (
     <IssueTableHeaderWrapper>
       <FilterTabList>
-        <input type="checkbox" />
-        <FilterTab>
         <input
           type="checkbox"
         />
         <FilterTab
-          activated={isOpenedIssueTabActivated()}
+          isActivated={isOpenedIssueTabActivated()}
           onClick={clickOpenedIssueTab}
         >
           <AlertCircleIcon />
           <FilterTabText>열린 이슈</FilterTabText>
         </FilterTab>
-        <FilterTab>
         <FilterTab
-          activated={isClosedIssueTabActivated()}
+          isActivated={isClosedIssueTabActivated()}
           onClick={clickClosedIssueTab}
         >
           <ArchieveIcon />
@@ -120,22 +167,17 @@ function IssueTableHeader({
         </FilterTab>
       </FilterTabList>
       <OptionTabList>
-        <OptionTab>
-          <OptionTabText>담당자</OptionTabText>
-          <ChevronDownIcon />
-        </OptionTab>
-        <OptionTab>
-          <OptionTabText>레이블</OptionTabText>
-          <ChevronDownIcon />
-        </OptionTab>
-        <OptionTab>
-          <OptionTabText>마일스톤</OptionTabText>
-          <ChevronDownIcon />
-        </OptionTab>
-        <OptionTab>
-          <OptionTabText>작성자</OptionTabText>
-          <ChevronDownIcon />
-        </OptionTab>
+        {optionTabData.map((data, idx) => {
+          const { title, options, isMultipleOptionsAvailable } = data;
+          return (
+            <IssueTableHeaderOptionTab
+              key={`filterTab-${title}-${idx}`}
+              title={title}
+              options={options}
+              isMultipleOptionsAvailable={isMultipleOptionsAvailable}
+            />
+          );
+        })}
       </OptionTabList>
     </IssueTableHeaderWrapper>
   );

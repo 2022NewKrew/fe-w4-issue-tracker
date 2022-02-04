@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled, { css } from "styled-components";
-import { MediumLinkText, SmallText, Wrapper, XSmallText } from "@atoms";
+import {
+  MediumLinkText,
+  SmallProfileImg,
+  SmallText,
+  Wrapper,
+  XSmallText,
+} from "@atoms";
 import { COLOR } from "@constants";
 import { AlertCircleIcon, MilestoneIcon } from "@icons";
 import { authService } from "@/firebase.js";
@@ -17,6 +23,7 @@ const IssueCellWrapper = styled(Wrapper)`
   justify-content: space-between;
   padding: 10px;
   box-sizing: border-box;
+  border-top: 1px solid ${COLOR.GREYSCALE.LINE};
 `;
 
 const IssueInfoWrapper = styled(Wrapper)`
@@ -64,18 +71,15 @@ const IssueLabel = styled(XSmallText)`
   }}
 `;
 
-const WriterProfile = styled.img`
-  width: 20px;
-  height: 20px;
+const WriterProfile = styled(SmallProfileImg)`
   top: 40px;
-  border-radius: 10px;
+  margin-right: 30px;
 `;
 
 const LeftPart = styled(Wrapper)`
   flex-direction: row;
 `;
 
-function IssueCell({ title, labelList, id, writer, timestamp, milestone }) {
 function IssueCell({
   ...issueData
 }) {
@@ -87,7 +91,6 @@ function IssueCell({
   return (
     <IssueCellWrapper>
       <LeftPart>
-        <input type="checkbox" />
         <input
           type="checkbox"
         />
@@ -125,12 +128,7 @@ function IssueCell({
           </IssueTagWrapper>
         </IssueInfoWrapper>
       </LeftPart>
-      <WriterProfile
-        src={url}
-        css={`
-          margin-right: 30px;
-        `}
-      />
+      <WriterProfile src={url} />
     </IssueCellWrapper>
   );
 }

@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { COLOR } from "@constants/color.js";
 
 export const Text = styled.span`
+  display: flex;
+  align-items: center;
   font-family: Noto Sans KR, sans-serif;
   color: ${COLOR.GREYSCALE.BODY};
   font-style: normal;

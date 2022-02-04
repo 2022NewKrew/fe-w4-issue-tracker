@@ -15,12 +15,12 @@ export default function AssigneeDropdown(){
   }, [setShow]);
 
   function getItemArray(){
-    const itemArray=[{label: '담당자가 없는 이슈', onClick: ()=>{
+    const itemArray=[{itemTitle: '담당자가 없는 이슈', onClick: ()=>{
       setIssueFilter('assignee:');
       toggle();
     }}];
     itemArray.push(...Object.values(users).map(({userID})=>{
-      return {label: userID, onClick: ()=>{
+      return {itemTitle: userID, onClick: ()=>{
         setIssueFilter(`assignee:${userID}`);
         toggle();
       }};
@@ -28,13 +28,13 @@ export default function AssigneeDropdown(){
     return itemArray;
   }
 
-  function isSelectedIndex({label}, index){
+  function isSelectedIndex({itemTitle}, index){
     const matchResult=issueFilter.match(/assignee:([\S]*)/);
     if(matchResult===null){
       return;
     }
     const curAssignee=matchResult[1];
-    if(curAssignee===label || (curAssignee.length===0 && index===0)){
+    if(curAssignee===itemTitle || (curAssignee.length===0 && index===0)){
       return true;
     }
     return false;

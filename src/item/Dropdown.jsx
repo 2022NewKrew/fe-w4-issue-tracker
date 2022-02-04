@@ -5,10 +5,10 @@ import CheckOnCircle from '../svg/CheckOnCircle.svg';
 /**
  * @param {object} props
  * @param {any} props.title
- * @param {{label: any, onClick: Function}[]} props.itemArray
+ * @param {{itemTitle: any, onClick: function}[]} props.itemArray
  * @param {boolean} props.showSelected
- * @param {Function} props.isSelectedIndex
- * @param {Function} props.hide
+ * @param {function} props.isSelectedIndex
+ * @param {function} props.toggle
  * @param {boolean} props.left
  */
 export default function Dropdown({title, itemArray, showSelected, isSelectedIndex, toggle, left}){
@@ -25,15 +25,15 @@ export default function Dropdown({title, itemArray, showSelected, isSelectedInde
   }, [toggle]);
 
   function getItems(){
-    return itemArray.map(({label, onClick}, index)=>(
-      <li key={label}
-        className={'item'+(isSelectedIndex({label}, index) ? ' selected' : '') }
+    return itemArray.map(({itemTitle, onClick}, index)=>(
+      <li key={itemTitle}
+        className={'item'+(isSelectedIndex({itemTitle}, index) ? ' selected' : '') }
         onClick={onClick}
       >
-        <span className='label'>{label}</span>
+        <span className='item-title'>{itemTitle}</span>
         {showSelected &&
           <span className='checkbox'>
-            {isSelectedIndex({label}, index) ? <CheckOnCircle /> : <CheckOffCircle />}
+            {isSelectedIndex({itemTitle}, index) ? <CheckOnCircle /> : <CheckOffCircle />}
           </span>
         }
       </li>

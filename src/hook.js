@@ -17,7 +17,7 @@ export function useNumObjectKeys(object){
 }
 
 /**
- * @param {Function} callback
+ * @param {function} callback
  * @param {number} time
  * @param {any[]} deps
  */
@@ -37,7 +37,7 @@ export function useCheck(array){
   const [numChecked, setNumChecked]=useState(0);
   const [isCheckedAll, setIsCheckedAll]=useState(false);
   const [isCheckedAny, setIsCheckedAny]=useState(false);
-  
+
   useEffect(()=>{
     setChecked({});
   }, [array]);
@@ -82,7 +82,7 @@ export function useCheck(array){
   const uncheckAll=useCallback(()=>{
     setChecked({});
   }, []);
-  
+
   const toggleCheckAll=useCallback(()=>{
     isCheckedAll ? uncheckAll() : checkAll();
   }, [isCheckedAll, uncheckAll, checkAll]);

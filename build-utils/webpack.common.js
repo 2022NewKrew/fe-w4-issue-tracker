@@ -70,7 +70,7 @@ const config = {
     }),
   ],
   resolve: {
-    extensions: [".js", ".jsx", "..."],
+    extensions: [".jsx", ".js", "..."],
     alias: {
       "@root": commonPaths.projectRoot,
       "@src": commonPaths.appEntry,

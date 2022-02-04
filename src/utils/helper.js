@@ -2,6 +2,12 @@ import { css } from "styled-components";
 
 import greyscale from "@styles/greyscale";
 
+export const allCenterAlign = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const getFontWeight = ({ customType }) => {
   switch (customType) {
     case "bold":
@@ -68,12 +74,6 @@ export const getColor = ({ color }) => {
     color: ${color ? color : greyscale.default};
   `;
 };
-
-export const allCenterAlign = css`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 
 export const getButtonPadding = ({ customType }) => {
   switch (customType) {

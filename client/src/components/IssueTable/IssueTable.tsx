@@ -5,64 +5,87 @@ import { IIssue } from '@types';
 import { IssueTableHeader, IssueRow } from '.';
 import { getIssues } from '@apis';
 
-type Action =
-    | { type: 'CHECK_ALL'; payload: { length: number; newStatus: boolean } }
-    | { type: 'CHECK'; rowNumber: number };
+type CheckAction =
+    | {
+          type: 'CHECK_ALL';
+          payload: {
+              length: number;
+              newStatus: boolean;
+              setSelectMode: React.Dispatch<React.SetStateAction<boolean>>;
+          };
+      }
+    | {
+          type: 'CHECK';
+          payload: {
+              length: number;
+              rowNumber: number;
+              setSelectMode: React.Dispatch<React.SetStateAction<boolean>>;
+          };
+      };
 
-const checkStatusReducer = (state: boolean[], action: Action): boolean[] => {
+const checkStatusReducer = (state: boolean[], action: CheckAction): boolean[] => {
+    if (state.length === 0) state = Array(action.payload.length).fill(false);
     switch (action.type) {
         case 'CHECK_ALL':
-            const { length, newStatus } = action.payload;
-            return Array(length).fill(newStatus);
+            action.payload.setSelectMode(action.payload.newStatus);
+            return state.map((_) => action.payload.newStatus);
         case 'CHECK':
+            const { rowNumber, setSelectMode } = action.payload;
             const newState = [...state];
-            newState[action.rowNumber] = !newState[action.rowNumber];
+            newState[rowNumber] = !newState[rowNumber];
+            if (newState.filter((status) => status).length > 0) setSelectMode(true);
+            else setSelectMode(false);
             return newState;
         default:
-            return state;
+            throw Error;
     }
-};
-
-const renderTableData = (
-    issueDatas: IIssue[],
-    checkStatus: boolean[],
-    selectMode: boolean,
-    dispatch: React.Dispatch<any>,
-    isFiltering = false
-) => {
-    const NO_ISSUE_MESSAGE = '등록된 이슈가 없습니다';
-    const NOTHING_FOUND_MESSAGE = '검색과 일치하는 결과가 없습니다';
-    if (issueDatas.length > 0)
-        return issueDatas.map((issue, i) => (
-            <IssueRow
-                issueData={issue}
-                checkStatus={checkStatus[i]}
-                selectMode={selectMode}
-                key={issue.id}
-                onChangeHandler={() => dispatch({ type: 'CHECK', rowNumber: i })}
-            />
-        ));
-    if (isFiltering) return <EmptyRow>{NOTHING_FOUND_MESSAGE}</EmptyRow>;
-    return <EmptyRow>{NO_ISSUE_MESSAGE}</EmptyRow>;
 };
 
 export const IssueTable = () => {
     const { data, errorMsg } = getIssues();
     const [selectMode, setSelectMode] = useState(false);
-
     const [checkStatus, dispatch] = useReducer(checkStatusReducer, []);
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+
+    const renderTableData = (issueDatas: IIssue[], isFiltering = false) => {
+        const NO_ISSUE_MESSAGE = '등록된 이슈가 없습니다';
+        const NOTHING_FOUND_MESSAGE = '검색과 일치하는 결과가 없습니다';
+        const onRowChangeHandler = (rowNumber: number) => () => {
+            dispatch({
+                type: 'CHECK',
+                payload: { length: data.length, rowNumber, setSelectMode },
+            });
+        };
+
+        if (issueDatas.length > 0)
+            return issueDatas.map((issue, i) => (
+                <IssueRow
+                    issueData={issue}
+                    checkStatus={checkStatus[i]}
+                    selectMode={selectMode}
+                    key={issue.id}
+                    onChangeHandler={onRowChangeHandler(i)}
+                />
+            ));
+        if (isFiltering) return <EmptyRow>{NOTHING_FOUND_MESSAGE}</EmptyRow>;
+        return <EmptyRow>{NO_ISSUE_MESSAGE}</EmptyRow>;
+    };
+
+    const onHeaderChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch({
             type: 'CHECK_ALL',
-            payload: { length: data.length, newStatus: e.target.checked },
+            payload: {
+                length: data.length,
+                newStatus: e.target.checked,
+                setSelectMode: setSelectMode,
+            },
         });
     };
 
     if (!!errorMsg) return <div>{errorMsg}</div>;
     return (
         <TableContainer selectMode={selectMode}>
-            <IssueTableHeader selectMode={selectMode} onChangeHandler={onChangeHandler} />
-            {renderTableData(data, checkStatus, selectMode, dispatch)}
+            <IssueTableHeader selectMode={selectMode} onChangeHandler={onHeaderChangeHandler} />
+            {renderTableData(data)}
         </TableContainer>
     );
 };

@@ -20,11 +20,11 @@ const StyledTextButton = styled.button`
   ${() => getButtonBorderRadius}
 `;
 
-const TextButton = ({ children, type }) => {
+const TextButton = ({ children, customType }) => {
   return (
-    <StyledTextButton type={type}>
+    <StyledTextButton customType={customType}>
       <CustomLink
-        type={getButtonCustomLinkType({ type })}
+        customType={getButtonCustomLinkType({ customType })}
         color={greyscale.label}
       >
         <span>{children}</span>

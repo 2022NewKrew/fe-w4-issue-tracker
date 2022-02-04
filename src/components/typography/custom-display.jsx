@@ -12,9 +12,9 @@ const StyledCustomDisplay = styled.span`
   ${() => getFontWeight}
 `;
 
-const CustomDisplay = ({ children, type }) => {
+const CustomDisplay = ({ children, customType }) => {
   return (
-    <StyledCustomDisplay type={type}>
+    <StyledCustomDisplay customType={customType}>
       <span>{children}</span>
     </StyledCustomDisplay>
   );

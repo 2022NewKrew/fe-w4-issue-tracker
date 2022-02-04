@@ -1,16 +1,9 @@
 import styled from "styled-components";
 
-import CustomLink from "@components/typography/custom-link";
-import colors from "@styles/colors";
+import Container from "@components/etc/container";
+import CustomText from "@components/typography/custom-text";
 import greyscale from "@styles/greyscale";
-import {
-  allCenterAlign,
-  getButtonPadding,
-  getButtonWidth,
-  getButtonHeight,
-  getButtonBorderRadius,
-  getButtonCustomLinkType,
-} from "@utils/helper";
+import { allCenterAlign } from "@utils/helper";
 
 const StyledTextInput = styled.input`
   font-family: Noto Sans KR;
@@ -19,18 +12,17 @@ const StyledTextInput = styled.input`
   font-size: 16px;
   line-height: 28px;
   color: ${greyscale.titleActive};
+  ${allCenterAlign}
 `;
 
-const TextInput = ({ children, type }) => {
+const TextInput = ({ children, customType }) => {
   return (
-    <StyledTextInput type={type}>
-      <CustomLink
-        type={getButtonCustomLinkType({ type })}
-        color={greyscale.offWhite}
-      >
+    <Container customType="text-input">
+      <CustomText customType="x-small" color={greyscale.label}>
         <span>{children}</span>
-      </CustomLink>
-    </StyledTextInput>
+      </CustomText>
+      <StyledTextInput type="text" customType={customType}></StyledTextInput>
+    </Container>
   );
 };
 

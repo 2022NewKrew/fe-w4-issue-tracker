@@ -23,10 +23,13 @@ const StyledSecondaryButton = styled.button`
   ${() => getButtonBorderRadius}
 `;
 
-const SecondaryButton = ({ children, type }) => {
+const SecondaryButton = ({ children, customType }) => {
   return (
-    <StyledSecondaryButton type={type}>
-      <CustomLink type={getButtonCustomLinkType({ type })} color={colors.blue}>
+    <StyledSecondaryButton customType={customType}>
+      <CustomLink
+        customType={getButtonCustomLinkType({ customType })}
+        color={colors.blue}
+      >
         <span>{children}</span>
       </CustomLink>
     </StyledSecondaryButton>

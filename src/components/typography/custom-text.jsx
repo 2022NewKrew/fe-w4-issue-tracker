@@ -11,9 +11,9 @@ const StyledCustomText = styled.span`
   ${() => getColor}
 `;
 
-const CustomText = ({ children, type, color }) => {
+const CustomText = ({ children, customType, color }) => {
   return (
-    <StyledCustomText type={type} color={color}>
+    <StyledCustomText customType={customType} color={color}>
       <span>{children}</span>
     </StyledCustomText>
   );

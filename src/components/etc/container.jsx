@@ -3,8 +3,8 @@ import styled, { css } from "styled-components";
 import colors from "@styles/colors";
 import greyscale from "@styles/greyscale";
 
-const getContainerBorder = ({ type }) => {
-  switch (type) {
+const getContainerBorder = ({ customType }) => {
+  switch (customType) {
     case "regular":
       return css`
         border: 1px dashed ${colors.default};
@@ -18,8 +18,8 @@ const getContainerBorder = ({ type }) => {
   }
 };
 
-const getContainerBorderRadius = ({ type }) => {
-  switch (type) {
+const getContainerBorderRadius = ({ customType }) => {
+  switch (customType) {
     case "regular":
       return css`
         border-radius: 5px;
@@ -40,9 +40,9 @@ const StyledContainer = styled.div`
   ${() => getContainerBorderRadius}
 `;
 
-const Container = ({ children, type }) => {
+const Container = ({ children, customType }) => {
   return (
-    <StyledContainer type={type}>
+    <StyledContainer customType={customType}>
       <span>{children}</span>
     </StyledContainer>
   );

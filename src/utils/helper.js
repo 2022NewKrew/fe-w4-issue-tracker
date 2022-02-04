@@ -2,8 +2,8 @@ import { css } from "styled-components";
 
 import greyscale from "@styles/greyscale";
 
-export const getFontWeight = ({ type }) => {
-  switch (type) {
+export const getFontWeight = ({ customType }) => {
+  switch (customType) {
     case "bold":
       return css`
         font-weight: bold;
@@ -17,8 +17,8 @@ export const getFontWeight = ({ type }) => {
   }
 };
 
-export const getFontSize = ({ type }) => {
-  switch (type) {
+export const getFontSize = ({ customType }) => {
+  switch (customType) {
     case "large":
       return css`
         font-size: 24px;
@@ -40,8 +40,8 @@ export const getFontSize = ({ type }) => {
   }
 };
 
-export const getLineHeight = ({ type }) => {
-  switch (type) {
+export const getLineHeight = ({ customType }) => {
+  switch (customType) {
     case "large":
       return css`
         line-height: 40px;
@@ -75,8 +75,8 @@ export const allCenterAlign = css`
   align-items: center;
 `;
 
-export const getButtonPadding = ({ type }) => {
-  switch (type) {
+export const getButtonPadding = ({ customType }) => {
+  switch (customType) {
     case "large":
     case "medium":
       return css`
@@ -91,8 +91,8 @@ export const getButtonPadding = ({ type }) => {
   }
 };
 
-export const getButtonWidth = ({ type }) => {
-  switch (type) {
+export const getButtonWidth = ({ customType }) => {
+  switch (customType) {
     case "large":
       return css`
         width: 340px;
@@ -108,8 +108,8 @@ export const getButtonWidth = ({ type }) => {
   }
 };
 
-export const getButtonHeight = ({ type }) => {
-  switch (type) {
+export const getButtonHeight = ({ customType }) => {
+  switch (customType) {
     case "large":
       return css`
         height: 64px;
@@ -125,8 +125,8 @@ export const getButtonHeight = ({ type }) => {
   }
 };
 
-export const getButtonBorderRadius = ({ type }) => {
-  switch (type) {
+export const getButtonBorderRadius = ({ customType }) => {
+  switch (customType) {
     case "large":
     case "medium":
       return css`
@@ -141,8 +141,8 @@ export const getButtonBorderRadius = ({ type }) => {
   }
 };
 
-export const getButtonCustomLinkType = ({ type }) => {
-  switch (type) {
+export const getButtonCustomLinkType = ({ customType }) => {
+  switch (customType) {
     case "large":
     case "medium":
       return "medium";

@@ -2,8 +2,8 @@ import styled, { css } from "styled-components";
 
 import greyscale from "@styles/greyscale";
 
-const getLogotypeFontWeight = ({ type }) => {
-  switch (type) {
+const getLogotypeFontWeight = ({ customType }) => {
+  switch (customType) {
     case "large":
       return css`
         font-weight: normal;
@@ -17,8 +17,8 @@ const getLogotypeFontWeight = ({ type }) => {
   }
 };
 
-const getLogotypeFontSize = ({ type }) => {
-  switch (type) {
+const getLogotypeFontSize = ({ customType }) => {
+  switch (customType) {
     case "large":
       return css`
         font-size: 56px;
@@ -32,8 +32,8 @@ const getLogotypeFontSize = ({ type }) => {
   }
 };
 
-const getLogotypeLineHeight = ({ type }) => {
-  switch (type) {
+const getLogotypeLineHeight = ({ customType }) => {
+  switch (customType) {
     case "large":
       return css`
         line-height: 72px;
@@ -57,9 +57,9 @@ const StyledLogotype = styled.span`
   ${() => getLogotypeLineHeight}
 `;
 
-const Logotype = ({ children, type }) => {
+const Logotype = ({ children, customType }) => {
   return (
-    <StyledLogotype type={type}>
+    <StyledLogotype customType={customType}>
       <span>{children}</span>
     </StyledLogotype>
   );

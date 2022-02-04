@@ -6,6 +6,7 @@ import CustomLink from "@components/typography/custom-link";
 import StandardButton from "@components/buttons/standard-button";
 import SecondaryButton from "@components/buttons/secondary-button";
 import TextButton from "@components/buttons/text-button";
+import TextInput from "@components/inputs/text-input";
 
 const ComponentsPage = () => {
   return (
@@ -13,64 +14,81 @@ const ComponentsPage = () => {
       <h1>ComponentsPage</h1>
       <div>
         <h2>Etc</h2>
-        <Container type="regular">
+        <Container customType="regular">
           <h3>Logotype</h3>
-          <Logotype type="large">LogotypeLarge</Logotype>
-          <Logotype type="medium">LogotypeMedium</Logotype>
+          <Logotype customType="large">LogotypeLarge</Logotype>
+          <Logotype customType="medium">LogotypeMedium</Logotype>
         </Container>
       </div>
       <div>
         <h2>Typography</h2>
-        <Container type="regular">
+        <Container customType="regular">
           <h3>CustomDisplay</h3>
-          <CustomDisplay type="bold">CustomDisplayBold</CustomDisplay>
-          <CustomDisplay type="regular">CustomDisplayRegular</CustomDisplay>
+          <CustomDisplay customType="bold">CustomDisplayBold</CustomDisplay>
+          <CustomDisplay customType="regular">
+            CustomDisplayRegular
+          </CustomDisplay>
         </Container>
-        <Container type="regular">
+        <Container customType="regular">
           <h3>CustomText</h3>
-          <CustomText type="large">CustomTextLarge</CustomText>
-          <CustomText type="medium">CustomTextMedium</CustomText>
-          <CustomText type="small">CustomTextSmall</CustomText>
-          <CustomText type="x-small">CustomTextXSmall</CustomText>
+          <CustomText customType="large">CustomTextLarge</CustomText>
+          <CustomText customType="medium">CustomTextMedium</CustomText>
+          <CustomText customType="small">CustomTextSmall</CustomText>
+          <CustomText customType="x-small">CustomTextXSmall</CustomText>
         </Container>
-        <Container type="regular">
+        <Container customType="regular">
           <h3>CustomLink</h3>
-          <CustomLink type="large">CustomLinkLarge</CustomLink>
-          <CustomLink type="medium">CustomLinkMedium</CustomLink>
-          <CustomLink type="small">CustomLinkSmall</CustomLink>
-          <CustomLink type="x-small">CustomLinkXSmall</CustomLink>
+          <CustomLink customType="large">CustomLinkLarge</CustomLink>
+          <CustomLink customType="medium">CustomLinkMedium</CustomLink>
+          <CustomLink customType="small">CustomLinkSmall</CustomLink>
+          <CustomLink customType="x-small">CustomLinkXSmall</CustomLink>
         </Container>
       </div>
       <div>
         <h2>Buttons</h2>
-        <Container type="regular">
+        <Container customType="regular">
           <h3>StandardButton</h3>
-          <StandardButton type="large">StandardButtonLarge</StandardButton>
-          <StandardButton type="medium">StandardButtonMedium</StandardButton>
-          <StandardButton type="small">StandardButtonSmall</StandardButton>
+          <StandardButton customType="large">
+            StandardButtonLarge
+          </StandardButton>
+          <StandardButton customType="medium">
+            StandardButtonMedium
+          </StandardButton>
+          <StandardButton customType="small">
+            StandardButtonSmall
+          </StandardButton>
         </Container>
-        <Container type="regular">
+        <Container customType="regular">
           <h3>SecondaryButton</h3>
-          <SecondaryButton type="large">SecondaryButtonLarge</SecondaryButton>
-          <SecondaryButton type="medium">SecondaryButtonMedium</SecondaryButton>
-          <SecondaryButton type="small">SecondaryButtonSmall</SecondaryButton>
+          <SecondaryButton customType="large">
+            SecondaryButtonLarge
+          </SecondaryButton>
+          <SecondaryButton customType="medium">
+            SecondaryButtonMedium
+          </SecondaryButton>
+          <SecondaryButton customType="small">
+            SecondaryButtonSmall
+          </SecondaryButton>
         </Container>
-        <Container type="regular">
+        <Container customType="regular">
           <h3>CustomTextButton</h3>
-          <TextButton type="large">TextButtonLarge</TextButton>
-          <TextButton type="medium">TextButtonMedium</TextButton>
-          <TextButton type="small">TextButtonSmall</TextButton>
+          <TextButton customType="large">TextButtonLarge</TextButton>
+          <TextButton customType="medium">TextButtonMedium</TextButton>
+          <TextButton customType="small">TextButtonSmall</TextButton>
         </Container>
       </div>
       <div>
         <h2>Inputs</h2>
-        <Container type="regular">
+        <Container customType="regular">
           <h3>TextInput</h3>
+          <TextInput customType="large">TextInputLarge</TextInput>
+          <TextInput customType="medium">TextInputMedium</TextInput>
+          <TextInput customType="small">TextInputSmall</TextInput>
         </Container>
-        <Container type="regular">
+        <Container customType="regular">
           <h3>TextArea</h3>
         </Container>
-        <Container type="regular">
+        <Container customType="regular">
           <h3>ColorCode</h3>
         </Container>
       </div>

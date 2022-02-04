@@ -11,9 +11,9 @@ const StyledCustomLink = styled.span`
   ${() => getColor}
 `;
 
-const CustomLink = ({ children, type, color }) => {
+const CustomLink = ({ children, customType, color }) => {
   return (
-    <StyledCustomLink type={type} color={color}>
+    <StyledCustomLink customType={customType} color={color}>
       <span>{children}</span>
     </StyledCustomLink>
   );

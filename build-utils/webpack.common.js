@@ -79,6 +79,7 @@ const config = {
       "@components": commonPaths.componentsPath,
       "@static": commonPaths.staticPath,
       "@styles": commonPaths.stylesPath,
+      "@utils": commonPaths.utilsPath,
     },
   },
 };

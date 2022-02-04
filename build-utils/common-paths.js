@@ -10,4 +10,5 @@ module.exports = {
   componentsPath: path.join(APP_ENTRY, "components"),
   staticPath: path.join(APP_ENTRY, "static"),
   stylesPath: path.join(APP_ENTRY, "styles"),
+  utilsPath: path.join(APP_ENTRY, "utils"),
 };

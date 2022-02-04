@@ -55,7 +55,6 @@ import { generateId } from '../Utils/idGenerator'
  * @property {string} textColor
  */
 
-
 /**
  * Issue 생성
  * @param {Object} issueOption
@@ -72,9 +71,9 @@ export function createIssue({ title, author, labels, milestone, assignees }) {
   const openHistory = createHistory({
     type: 'open',
     author: author,
-    content: ''
+    content: '',
   })
-  
+
   return {
     id: issueId,
     title: title,
@@ -84,7 +83,7 @@ export function createIssue({ title, author, labels, milestone, assignees }) {
     milestone: milestone,
     assignees: assignees,
     recentTime: currentTime,
-    histories: [ openHistory ]
+    histories: [openHistory],
   }
 }
 
@@ -99,13 +98,13 @@ export function createIssue({ title, author, labels, milestone, assignees }) {
 export function createHistory({ type, author, content }) {
   const id = generateId()
   const currentTime = new Date().getTime()
-  
+
   return {
     id: id,
     type: type,
     author: author,
     time: currentTime,
-    content: content
+    content: content,
   }
 }
 
@@ -119,11 +118,11 @@ export function createHistory({ type, author, content }) {
 export function createUser({ name, profileImgSrc }) {
   const id = generateId()
   const defaultProfileImgSrc = 'userProfile/nago.jpeg'
-  
+
   return {
     id: id,
     name: name,
-    profileImgSrc: profileImgSrc ? profileImgSrc : defaultProfileImgSrc
+    profileImgSrc: profileImgSrc ? profileImgSrc : defaultProfileImgSrc,
   }
 }
 
@@ -138,14 +137,14 @@ export function createUser({ name, profileImgSrc }) {
  */
 export function createMilestone({ title, description, state, deadlineDate }) {
   const id = generateId()
-  
+
   return {
     id: id,
     title: title,
     description: description,
     state: state,
     deadlineTime: deadlineDate.getTime(),
-    issueSummaries: []
+    issueSummaries: [],
   }
 }
 
@@ -160,13 +159,13 @@ export function createMilestone({ title, description, state, deadlineDate }) {
  */
 export function createLabel({ name, description, backgroundColor, textColor }) {
   const id = generateId()
-  
+
   return {
     id: id,
     name: name,
     description: description,
     backgroundColor: backgroundColor,
-    textColor: textColor
+    textColor: textColor,
   }
 }
 
@@ -179,6 +178,6 @@ export function convertIssueToSummary(issue) {
   return {
     id: issue.id,
     title: issue.title,
-    state: issue.state
+    state: issue.state,
   }
 }

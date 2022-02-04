@@ -18,7 +18,7 @@ export const COLOR = {
   LINE: '#D9DBE9',
   INPUT_BACKGROUND: '#EFF0F6',
   BACKGROUND: '#F7F7FC',
-  OFF_WHITE: '#FEFEFE'
+  OFF_WHITE: '#FEFEFE',
 }
 
 export const FONT = {
@@ -70,5 +70,5 @@ export const FONT = {
     font-size: 12px;
     line-height: 20px;
     font-weight: bold;
-  `
+  `,
 }

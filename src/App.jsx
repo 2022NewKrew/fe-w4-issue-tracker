@@ -43,66 +43,66 @@ const App = () => {
   return (
     <MarginDiv>
       <Tab>
-        <TabItem>
+        <>
           <TagIcon
             width="16px"
             height="16px" />
           <LeftMarginSpan>레이블</LeftMarginSpan>
           <LeftMarginSpan>(0)</LeftMarginSpan>
-        </TabItem>
-        <TabItem>
+        </>
+        <>
           <MilestonIcon
             width="16px"
             height="16px" />
           <LeftMarginSpan>마일스톤</LeftMarginSpan>
           <LeftMarginSpan>(0)</LeftMarginSpan>
-        </TabItem>
-        <TabItem>
+        </>
+        <>
           <PlusIcon
             width="16px"
             height="16px" />
           <LeftMarginSpan>무언가</LeftMarginSpan>
           <LeftMarginSpan>(2)</LeftMarginSpan>
-        </TabItem>
+        </>
       </Tab>
       <Tab>
-        <TabItem isSelected>
+        <>
           <TagIcon
             width="16px"
             height="16px" />
           <LeftMarginSpan>레이블</LeftMarginSpan>
           <LeftMarginSpan>(0)</LeftMarginSpan>
-        </TabItem>
-        <TabItem>
+        </>
+        <>
           <MilestonIcon
             width="16px"
             height="16px" />
           <LeftMarginSpan>마일스톤</LeftMarginSpan>
           <LeftMarginSpan>(0)</LeftMarginSpan>
-        </TabItem>
-        <TabItem>
+        </>
+        <>
           <PlusIcon
             width="16px"
             height="16px" />
           <LeftMarginSpan>무언가</LeftMarginSpan>
           <LeftMarginSpan>(2)</LeftMarginSpan>
-        </TabItem>
+        </>
       </Tab>
       <Tab>
-        <TabItem>
+        <>
           <TagIcon
             width="16px"
             height="16px" />
           <LeftMarginSpan>레이블</LeftMarginSpan>
           <LeftMarginSpan>(0)</LeftMarginSpan>
-        </TabItem>
-        <TabItem isSelected>
+        </>
+        <>
           <MilestonIcon
             width="16px"
             height="16px" />
           <LeftMarginSpan>마일스톤</LeftMarginSpan>
           <LeftMarginSpan>(0)</LeftMarginSpan>
-        </TabItem>
+        </>
       </Tab>
       <FlexDiv>
         <DropdownBox>

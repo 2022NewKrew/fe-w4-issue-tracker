@@ -5,6 +5,7 @@ import DropdownPanel from './DropdownPanel'
 import { ReactComponent as DropdownIcon } from '../../../Assets/Icon/ic-dropdown.svg'
 import useOutsideClickEventListener from '../../../Services/Hooks/useOutsideClickEventListener'
 import PropTypes from 'prop-types'
+import { DROPDOWN_ITEM_TYPE } from './DropdownPanelItem'
 
 const DropdownContainer = styled.div`
   width: 100%;
@@ -24,31 +25,36 @@ const DropdownContainer = styled.div`
  */
 const Dropdown = ({ itemInfoList, panelTitle, type, indicatorText }) => {
   const dropdownRef = useRef()
-  
-  const [ isPanelShown, setIsPanelShown ] = useState(false)
-  
+
+  const [isPanelShown, setIsPanelShown] = useState(false)
+
   const onButtonClick = useCallback(() => {
     setIsPanelShown((prev) => !prev)
   }, [])
-  
-  useOutsideClickEventListener(() => {
-    setIsPanelShown(false)
-  }, dropdownRef, [])
-  
+
+  useOutsideClickEventListener(
+    () => {
+      setIsPanelShown(false)
+    },
+    dropdownRef,
+    []
+  )
+
   return (
-    <DropdownContainer ref={ dropdownRef }>
-      <Button type={ BUTTON_TYPE.TEXT }
-              size={ BUTTON_SIZE.MEDIUM }
-              onClickListener={ onButtonClick }>
-        <span>{ indicatorText }</span>
-        <DropdownIcon
-          width="10px"
-          height="6px"/>
+    <DropdownContainer ref={dropdownRef}>
+      <Button
+        type={BUTTON_TYPE.TEXT}
+        size={BUTTON_SIZE.MEDIUM}
+        onClickListener={onButtonClick}>
+        <span>{indicatorText}</span>
+        <DropdownIcon width="10px" height="6px" />
       </Button>
-      <DropdownPanel itemInfoList={ itemInfoList }
-                     title={ panelTitle }
-                     type={ type }
-                     isShown={ isPanelShown }/>
+      <DropdownPanel
+        itemInfoList={itemInfoList}
+        title={panelTitle}
+        type={type}
+        isShown={isPanelShown}
+      />
     </DropdownContainer>
   )
 }
@@ -57,7 +63,7 @@ Dropdown.propTypes = {
   indicatorText: PropTypes.string,
   itemInfoList: PropTypes.array,
   panelTitle: PropTypes.string,
-  type: PropTypes.string
+  type: PropTypes.oneOf(Object.values(DROPDOWN_ITEM_TYPE)).isRequired,
 }
 
 export default Dropdown

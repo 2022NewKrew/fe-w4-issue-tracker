@@ -3,32 +3,6 @@ import styled from "styled-components";
 import { Wrapper } from "@atoms";
 import { IssueCell, IssueTableHeader } from "@molecules";
 import { COLOR } from "@constants";
-
-//FIX: DB 연동시 데이터 제거
-const ISSUE_DATA = [
-  {
-    title: "PR날리기",
-    labelList: ["시간이없어요"],
-    id: "1519472103",
-    writer: "aiden",
-    timestamp: "9",
-    milestone: "1주차",
-    isOpened: true,
-  },
-  {
-    title: "재택근무",
-    labelList: ["아무라벨", "documentation"],
-    id: "2131512",
-    writer: "hollys",
-    timestamp: "22",
-    milestone: "4주차",
-    isOpened: false,
-  },
-  {
-    title: "강의듣기",
-    labelList: ["documentation"],
-    id: "871594351",
-    writer: "dw",
     timestamp: "51",
     milestone: "2주차",
     isOpened: true,
@@ -54,6 +28,18 @@ function IssueTable() {
     key: "isOpened",
     value: true,
   });
+  const [issueList, setIssueList] = useState([]);
+  const [issueFilter, setIssueFilter] = useState([
+    {
+      key: "isOpened",
+      value: true,
+    },
+  ]);
+
+  useEffect(async () => {
+    const newIssueList = await getFilteredIssueList(issueFilter);
+    setIssueList(newIssueList);
+  }, []);
 
   return (
     <IssueTableWrapper>
@@ -62,21 +48,12 @@ function IssueTable() {
         setIssueFilter={setIssueFilter}
       />
       <IssueList>
-        {issueList.map((issueData, idx) => {
-          if (issueData[issueFilter.key] === issueFilter.value) {
-            return (
-              <IssueCell
-                key={`issue${idx}`}
-                // isAllIssueSelected={isAllIssueSelected}
-                // increaseIssueCount={increaseIssueCount}
-                // decreaseIssueCount={decreaseIssueCount}
-                {...issueData}
-              />
-            );
-          } else {
-            return null;
-          }
-        })}
+        {issueList.map((issueData) => (
+          <IssueCell
+            key={issueData.id}
+            {...issueData}
+          />
+        ))}
       </IssueList>
     </IssueTableWrapper>
   );

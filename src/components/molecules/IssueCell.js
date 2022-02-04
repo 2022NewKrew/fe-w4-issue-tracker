@@ -9,7 +9,8 @@ import {
 } from "@atoms";
 import { COLOR } from "@constants";
 import { AlertCircleIcon, MilestoneIcon } from "@icons";
-import { authService } from "@/firebase.js";
+import { getAuth } from "@/firebase.js";
+import { calculateTimeDiff } from "@/utils/timestampUtils.js";
 
 const LABEL_TYPE = {
   DOCUMENTATION: "documentation",
@@ -84,8 +85,8 @@ function IssueCell({
   ...issueData
 }) {
   const { title, labelList, id, writer, timestamp, milestone } = issueData;
-  //FIX: DB 연동시 writer profile img url 수정
-  const auth = authService.getAuth();
+  //FIX: 개인 프로필 기능 구현시 수정
+  const auth = getAuth();
   const url = auth.currentUser.photoURL;
 
   return (
@@ -115,7 +116,8 @@ function IssueCell({
           <IssueTagWrapper>
             <IssueTag>#{id}</IssueTag>
             <IssueTag>
-              이 이슈가 {timestamp}분 전, {writer}님에 의해 작성되었습니다
+              이 이슈가 {calculateTimeDiff(timestamp)} 전, {writer} 님에 의해
+              작성되었습니다
             </IssueTag>
             <IssueTag>
               <MilestoneIcon

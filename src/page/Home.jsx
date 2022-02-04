@@ -1,15 +1,13 @@
 import { Link } from "react-router-dom";
 
-import Layout from "./Layout";
-
 const Home = () => {
   return (
-    <Layout>
+    <div>
       <p>Hello World of KAKAO FrontEnd!</p>
       <p>
         <Link to="/components">Navigate to Components Page</Link>
       </p>
-    </Layout>
+    </div>
   );
 };
 

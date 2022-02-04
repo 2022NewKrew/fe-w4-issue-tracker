@@ -7,7 +7,6 @@ const URL_LOADER_LIMIT = 10000;
 const config = {
   entry: {
     app: [`${commonPaths.appEntry}/index.jsx`],
-    vendor: ["semantic-ui-react"],
   },
   output: {
     path: commonPaths.outputPath,
@@ -77,6 +76,8 @@ const config = {
       "@src": commonPaths.appEntry,
       "@dist": commonPaths.outputPath,
       "@components": commonPaths.componentsPath,
+      "@core": commonPaths.corePath,
+      "@page": commonPaths.pagePath,
       "@static": commonPaths.staticPath,
       "@styles": commonPaths.stylesPath,
       "@utils": commonPaths.utilsPath,

@@ -4,6 +4,7 @@ import Display from "@components/typography/display";
 import Text from "@components/typography/text";
 import Link from "@components/typography/link";
 import StandardButton from "@components/buttons/standard-button";
+import SecondaryButton from "@components/buttons/secondary-button";
 
 const ComponentsPage = () => {
   return (
@@ -46,6 +47,12 @@ const ComponentsPage = () => {
           <StandardButton type="large">StandardButtonLarge</StandardButton>
           <StandardButton type="medium">StandardButtonMedium</StandardButton>
           <StandardButton type="small">StandardButtonSmall</StandardButton>
+        </Container>
+        <Container>
+          <h3>SecondaryButton</h3>
+          <StandardButton type="large">SecondaryButtonLarge</StandardButton>
+          <StandardButton type="medium">SecondaryButtonMedium</StandardButton>
+          <StandardButton type="small">SecondaryButtonSmall</StandardButton>
         </Container>
       </div>
     </div>

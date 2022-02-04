@@ -12,7 +12,7 @@ import {
   getButtonLinkType,
 } from "@utils/helper";
 
-const StyledStandardButton = styled.button`
+const StyledSecondaryButton = styled.button`
   background: ${colors.blue};
   ${allCenterAlign}
   ${() => getButtonPadding}
@@ -21,14 +21,14 @@ const StyledStandardButton = styled.button`
   ${() => getButtonBorderRadius}
 `;
 
-const StandardButton = ({ children, type }) => {
+const SecondaryButton = ({ children, type }) => {
   return (
-    <StyledStandardButton type={type}>
+    <StyledSecondaryButton type={type}>
       <Link type={getButtonLinkType({ type })} color={greyscale.offWhite}>
         <span>{children}</span>
       </Link>
-    </StyledStandardButton>
+    </StyledSecondaryButton>
   );
 };
 
-export default StandardButton;
+export default SecondaryButton;

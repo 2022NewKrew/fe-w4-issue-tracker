@@ -12,7 +12,7 @@ import {
 } from "@utils/helper";
 
 const StyledTextButton = styled.button`
-  border-color: ${greyscale.offWhite};
+  border: 2px solid ${greyscale.offWhite};
   ${allCenterAlign}
   ${() => getButtonPadding}
   ${() => getButtonWidth}

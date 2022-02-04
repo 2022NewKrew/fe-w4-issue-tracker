@@ -14,6 +14,8 @@ import {
 
 const StyledStandardButton = styled.button`
   background: ${colors.blue};
+  border: 2px solid ${colors.blue};
+  border-style: solid;
   ${allCenterAlign}
   ${() => getButtonPadding}
   ${() => getButtonWidth}

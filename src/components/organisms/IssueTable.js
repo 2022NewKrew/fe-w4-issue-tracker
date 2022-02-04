@@ -3,11 +3,7 @@ import styled from "styled-components";
 import { Wrapper } from "@atoms";
 import { IssueCell, IssueTableHeader } from "@molecules";
 import { COLOR } from "@constants";
-    timestamp: "51",
-    milestone: "2주차",
-    isOpened: true,
-  },
-];
+import { getFilteredIssueList } from "@/firebase.js";
 
 const IssueTableWrapper = styled(Wrapper)`
   width: 100%;
@@ -23,11 +19,6 @@ const IssueList = styled(Wrapper)`
 `;
 
 function IssueTable() {
-  const [issueList, setIssueList] = useState(ISSUE_DATA);
-  const [issueFilter, setIssueFilter] = useState({
-    key: "isOpened",
-    value: true,
-  });
   const [issueList, setIssueList] = useState([]);
   const [issueFilter, setIssueFilter] = useState([
     {
@@ -49,10 +40,7 @@ function IssueTable() {
       />
       <IssueList>
         {issueList.map((issueData) => (
-          <IssueCell
-            key={issueData.id}
-            {...issueData}
-          />
+          <IssueCell key={issueData.id} {...issueData} />
         ))}
       </IssueList>
     </IssueTableWrapper>

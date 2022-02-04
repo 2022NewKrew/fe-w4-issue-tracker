@@ -57,8 +57,7 @@ function Dropdown({
         return (
           <DropdownPanel
             key={`dropdown-${title}-content-${idx}`}
-            text={text}
-            imgUrl={imgUrl}
+            {...option}
             isMultipleOptionsAvailable={isMultipleOptionsAvailable}
           />
         );

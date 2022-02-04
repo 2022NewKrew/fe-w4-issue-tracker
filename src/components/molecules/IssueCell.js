@@ -81,10 +81,7 @@ const LeftPart = styled(Wrapper)`
   flex-direction: row;
 `;
 
-function IssueCell({
-  ...issueData
-}) {
-  const { title, labelList, id, writer, timestamp, milestone } = issueData;
+function IssueCell({ title, labelList, id, writer, timestamp, milestone }) {
   //FIX: 개인 프로필 기능 구현시 수정
   const auth = getAuth();
   const url = auth.currentUser.photoURL;
@@ -92,9 +89,7 @@ function IssueCell({
   return (
     <IssueCellWrapper>
       <LeftPart>
-        <input
-          type="checkbox"
-        />
+        <input type="checkbox" />
         <IssueInfoWrapper>
           <IssueTitleWrapper>
             <AlertCircleIcon />

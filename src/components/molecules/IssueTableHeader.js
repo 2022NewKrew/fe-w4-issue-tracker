@@ -117,10 +117,7 @@ const OptionTabList = styled(Wrapper)`
   flex-direction: row;
 `;
 
-function IssueTableHeader({
-  setIssueFilter,
-  issueFilter,
-}) {
+function IssueTableHeader({ setIssueFilter, issueFilter }) {
   const { key: filterKey, value: filterValue } = issueFilter;
 
   const isOpenedIssueTabActivated = () => {
@@ -148,9 +145,7 @@ function IssueTableHeader({
   return (
     <IssueTableHeaderWrapper>
       <FilterTabList>
-        <input
-          type="checkbox"
-        />
+        <input type="checkbox" />
         <FilterTab
           isActivated={isOpenedIssueTabActivated()}
           onClick={clickOpenedIssueTab}
@@ -168,13 +163,11 @@ function IssueTableHeader({
       </FilterTabList>
       <OptionTabList>
         {optionTabData.map((data, idx) => {
-          const { title, options, isMultipleOptionsAvailable } = data;
+          const { title } = data;
           return (
             <IssueTableHeaderOptionTab
               key={`filterTab-${title}-${idx}`}
-              title={title}
-              options={options}
-              isMultipleOptionsAvailable={isMultipleOptionsAvailable}
+              {...data}
             />
           );
         })}

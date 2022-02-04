@@ -1,8 +1,8 @@
 import Container from "@components/etc/container";
 import Logotype from "@components/etc/logotype";
-import Display from "@components/typography/display";
-import Text from "@components/typography/text";
-import Link from "@components/typography/link";
+import CustomDisplay from "@components/typography/custom-display";
+import CustomText from "@components/typography/custom-text";
+import CustomLink from "@components/typography/custom-link";
 import StandardButton from "@components/buttons/standard-button";
 import SecondaryButton from "@components/buttons/secondary-button";
 import TextButton from "@components/buttons/text-button";
@@ -22,23 +22,23 @@ const ComponentsPage = () => {
       <div>
         <h2>Typography</h2>
         <Container>
-          <h3>Display</h3>
-          <Display type="bold">DisplayBold</Display>
-          <Display type="regular">DisplayRegular</Display>
+          <h3>CustomDisplay</h3>
+          <CustomDisplay type="bold">CustomDisplayBold</CustomDisplay>
+          <CustomDisplay type="regular">CustomDisplayRegular</CustomDisplay>
         </Container>
         <Container>
-          <h3>Text</h3>
-          <Text type="large">TextLarge</Text>
-          <Text type="medium">TextMedium</Text>
-          <Text type="small">TextSmall</Text>
-          <Text type="x-small">TextXSmall</Text>
+          <h3>CustomText</h3>
+          <CustomText type="large">CustomTextLarge</CustomText>
+          <CustomText type="medium">CustomTextMedium</CustomText>
+          <CustomText type="small">CustomTextSmall</CustomText>
+          <CustomText type="x-small">CustomTextXSmall</CustomText>
         </Container>
         <Container>
-          <h3>Link</h3>
-          <Link type="large">LinkLarge</Link>
-          <Link type="medium">LinkMedium</Link>
-          <Link type="small">LinkSmall</Link>
-          <Link type="x-small">LinkXSmall</Link>
+          <h3>CustomLink</h3>
+          <CustomLink type="large">CustomLinkLarge</CustomLink>
+          <CustomLink type="medium">CustomLinkMedium</CustomLink>
+          <CustomLink type="small">CustomLinkSmall</CustomLink>
+          <CustomLink type="x-small">CustomLinkXSmall</CustomLink>
         </Container>
       </div>
       <div>
@@ -56,10 +56,22 @@ const ComponentsPage = () => {
           <SecondaryButton type="small">SecondaryButtonSmall</SecondaryButton>
         </Container>
         <Container>
-          <h3>TextButton</h3>
+          <h3>CustomTextButton</h3>
           <TextButton type="large">TextButtonLarge</TextButton>
           <TextButton type="medium">TextButtonMedium</TextButton>
           <TextButton type="small">TextButtonSmall</TextButton>
+        </Container>
+      </div>
+      <div>
+        <h2>CustomTextInputs</h2>
+        <Container>
+          <h3>CustomTextInput</h3>
+        </Container>
+        <Container>
+          <h3>CustomTextArea</h3>
+        </Container>
+        <Container>
+          <h3>ColorCode</h3>
         </Container>
       </div>
     </div>

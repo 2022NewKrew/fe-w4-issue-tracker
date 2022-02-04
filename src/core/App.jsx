@@ -1,10 +1,10 @@
 import { Routes, BrowserRouter as Router, Route } from "react-router-dom";
 import importedComponent from "react-imported-component";
 
-import Home from "@page/Home";
+import Home from "@page/home";
 
 const AsyncComponentsPage = importedComponent(() =>
-  import("@page/ComponentsPage")
+  import("@page/components-page")
 );
 
 const App = () => {
@@ -13,7 +13,11 @@ const App = () => {
       <div>
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route exact path="/components" element={<AsyncComponentsPage />} />
+          <Route
+            exact
+            path="/components-page"
+            element={<AsyncComponentsPage />}
+          />
         </Routes>
       </div>
     </Router>

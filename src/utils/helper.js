@@ -141,7 +141,7 @@ export const getButtonBorderRadius = ({ type }) => {
   }
 };
 
-export const getButtonLinkType = ({ type }) => {
+export const getButtonCustomLinkType = ({ type }) => {
   switch (type) {
     case "large":
     case "medium":

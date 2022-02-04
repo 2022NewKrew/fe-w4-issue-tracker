@@ -5,7 +5,7 @@ const Home = () => {
     <div>
       <p>Hello World of KAKAO FrontEnd!</p>
       <p>
-        <Link to="/components">Navigate to Components Page</Link>
+        <Link to="/components-page">Navigate to Components Page</Link>
       </p>
     </div>
   );

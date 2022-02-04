@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import Link from "@components/typography/link";
+import CustomLink from "@components/typography/custom-link";
 import colors from "@styles/colors";
 import greyscale from "@styles/greyscale";
 import {
@@ -9,7 +9,7 @@ import {
   getButtonWidth,
   getButtonHeight,
   getButtonBorderRadius,
-  getButtonLinkType,
+  getButtonCustomLinkType,
 } from "@utils/helper";
 
 const StyledSecondaryButton = styled.button`
@@ -26,9 +26,9 @@ const StyledSecondaryButton = styled.button`
 const SecondaryButton = ({ children, type }) => {
   return (
     <StyledSecondaryButton type={type}>
-      <Link type={getButtonLinkType({ type })} color={colors.blue}>
+      <CustomLink type={getButtonCustomLinkType({ type })} color={colors.blue}>
         <span>{children}</span>
-      </Link>
+      </CustomLink>
     </StyledSecondaryButton>
   );
 };

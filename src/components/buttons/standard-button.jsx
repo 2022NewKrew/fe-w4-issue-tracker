@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import Link from "@components/typography/link";
+import CustomLink from "@components/typography/custom-link";
 import colors from "@styles/colors";
 import greyscale from "@styles/greyscale";
 import {
@@ -9,7 +9,7 @@ import {
   getButtonWidth,
   getButtonHeight,
   getButtonBorderRadius,
-  getButtonLinkType,
+  getButtonCustomLinkType,
 } from "@utils/helper";
 
 const StyledStandardButton = styled.button`
@@ -26,9 +26,12 @@ const StyledStandardButton = styled.button`
 const StandardButton = ({ children, type }) => {
   return (
     <StyledStandardButton type={type}>
-      <Link type={getButtonLinkType({ type })} color={greyscale.offWhite}>
+      <CustomLink
+        type={getButtonCustomLinkType({ type })}
+        color={greyscale.offWhite}
+      >
         <span>{children}</span>
-      </Link>
+      </CustomLink>
     </StyledStandardButton>
   );
 };

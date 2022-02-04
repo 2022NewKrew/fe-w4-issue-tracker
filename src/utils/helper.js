@@ -6,10 +6,12 @@ export const getFontWeight = ({ type }) => {
       return css`
         font-weight: bold;
       `;
-    default:
+    case "regular":
       return css`
         font-weight: normal;
       `;
+    default:
+      return css``;
   }
 };
 
@@ -27,10 +29,12 @@ export const getFontSize = ({ type }) => {
       return css`
         font-size: 16px;
       `;
-    default:
+    case "x-small":
       return css`
         font-size: 12px;
       `;
+    default:
+      return css``;
   }
 };
 
@@ -48,9 +52,11 @@ export const getLineHeight = ({ type }) => {
       return css`
         line-height: 28px;
       `;
-    default:
+    case "x-small":
       return css`
         line-height: 20px;
       `;
+    default:
+      return css``;
   }
 };

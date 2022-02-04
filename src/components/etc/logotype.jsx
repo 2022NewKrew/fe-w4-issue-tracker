@@ -8,10 +8,12 @@ const getLogotypeFontWeight = ({ type }) => {
       return css`
         font-weight: normal;
       `;
-    default:
+    case "regular":
       return css`
         font-weight: 500;
       `;
+    default:
+      return css``;
   }
 };
 
@@ -21,10 +23,12 @@ const getLogotypeFontSize = ({ type }) => {
       return css`
         font-size: 56px;
       `;
-    default:
+    case "regular":
       return css`
         font-size: 32px;
       `;
+    default:
+      return css``;
   }
 };
 
@@ -34,10 +38,12 @@ const getLogotypeLineHeight = ({ type }) => {
       return css`
         line-height: 72px;
       `;
-    default:
+    case "regular":
       return css`
         line-height: 40px;
       `;
+    default:
+      return css``;
   }
 };
 

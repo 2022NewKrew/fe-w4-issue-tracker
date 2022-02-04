@@ -45,6 +45,9 @@ const ComponentsPage = () => {
         </Container>
       </div>
       <div>
+        <h2>Icons</h2>
+      </div>
+      <div>
         <h2>Buttons</h2>
         <Container customType="regular">
           <h3>StandardButton</h3>

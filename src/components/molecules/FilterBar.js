@@ -3,8 +3,32 @@ import styled, { css } from "styled-components";
 import { COLOR } from "@constants";
 import { SmallText, TextInput, Wrapper } from "@atoms";
 import { ChevronDownIcon, SearchIcon } from "@icons";
+import Dropdown from "@/components/molecules/Dropdown.js";
+
+const filterBarDropdownData = {
+  title: "이슈 필터",
+  isMultipleOptionsAvailable: true,
+  options: [
+    {
+      text: "열린 이슈",
+    },
+    {
+      text: "내가 작성한 이슈",
+    },
+    {
+      text: "나에게 할당된 이슈",
+    },
+    {
+      text: "내가 댓글을 남긴 이슈",
+    },
+    {
+      text: "닫힌 이슈",
+    },
+  ],
+};
 
 const FilterBarWrapper = styled(Wrapper)`
+  position: relative;
   flex-direction: row;
 
   border: 1px solid transparent;
@@ -55,6 +79,12 @@ const FilterDropdownButtonText = styled(SmallText)`
   color: ${COLOR.GREYSCALE.LABEL};
 `;
 
+const FilterDropdown = styled(Dropdown)`
+  position: absolute;
+  left: 0;
+  top: 40px;
+`;
+
 const FilterTextInput = styled(TextInput)`
   width: 400px;
   height: 28px;
@@ -89,6 +119,7 @@ const FilterSearchWrapper = styled.div`
 function FilterBar() {
   const [activated, setActivated] = useState(false);
   const filterInput = useRef();
+  const dropdownWrapper = useRef();
 
   useEffect(() => {
     filterInput.current.value = "is:issue is:open";
@@ -108,9 +139,13 @@ function FilterBar() {
 
   return (
     <FilterBarWrapper isActivated={activated}>
-      <FilterDropdownButton isActivated={activated}>
+      <FilterDropdownButton ref={dropdownWrapper} isActivated={activated}>
         <FilterDropdownButtonText>필터</FilterDropdownButtonText>
         <ChevronDownIcon />
+        <FilterDropdown
+          {...filterBarDropdownData}
+          parentRef={dropdownWrapper}
+        />
       </FilterDropdownButton>
       <FilterSearchWrapper
         isActivated={activated}

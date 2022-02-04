@@ -11,6 +11,7 @@ const DropdownWrapper = styled(Wrapper)`
   border: 1px solid ${COLOR.GREYSCALE.LINE};
   border-radius: 16px;
   overflow: hidden;
+  z-index: 10;
   visibility: ${({ isActivated }) => (isActivated ? "visible" : "hidden")};
 `;
 

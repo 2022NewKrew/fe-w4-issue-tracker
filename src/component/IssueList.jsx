@@ -4,12 +4,15 @@ import {useArrayLength, useCheck, useNumObjectKeys} from '../hook';
 import {useCallback, useEffect, useState} from 'react';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import AssigneeDropdown from './AssigneeDropdown';
+import AuthorDropdown from './AuthorDropdown';
 import ButtonMedium from '../item/ButtonMedium';
 import Header from './Header';
 import InputeMedium from '../item/InputMedium';
 import Issue from './Issue';
 import issueFilterState from '../store/issueFilterState';
+import LabelDropdown from './LabelDropdown';
 import labelsState from '../store/labelsState';
+import MilestoneDropdown from './MilestoneDropdown';
 import MilestoneIcon from '../svg/Milestone.svg';
 import milestonesState from '../store/milestonesState';
 import MoreIcon from '../svg/More.svg';
@@ -31,7 +34,7 @@ export default function IssueList(){
   const [showingIssues, setShowingIssues]=useState([]);
   const {isChecked, isCheckedAll, isCheckedAny,
     numChecked, toggleCheck, toggleCheckAll}=useCheck(showingIssues);
-  
+
   useEffect(()=>{
     fetchIssues();
   }, [fetchIssues, issueFilter]);
@@ -47,7 +50,7 @@ export default function IssueList(){
   const isIndexChecked=useCallback((index)=>{
     return isChecked(index);
   }, [isChecked]);
-  
+
   const getIssues=useCallback(()=>{
     if(showingIssues.length===0){
       return (
@@ -112,7 +115,7 @@ export default function IssueList(){
           <ButtonMedium title='+ 이슈 작성' onClick={()=>console.log('Add Issue')}/>
         </div>
       </div>
-      
+
       {issueFilter.length>0 &&
       <div>
         <button className='delete-filter'
@@ -152,15 +155,9 @@ export default function IssueList(){
               </strong>
             </div>
             <AssigneeDropdown />
-            <div className='tab-rest hover-item'>
-              <span className='margin-right'>레이블</span><MoreIcon/>
-            </div>
-            <div className='tab-rest hover-item'>
-              <span className='margin-right'>마일스톤</span><MoreIcon/>
-            </div>
-            <div className='tab-rest hover-item'>
-              <span className='margin-right'>작성자</span><MoreIcon/>
-            </div>
+            <LabelDropdown />
+            <MilestoneDropdown />
+            <AuthorDropdown />
           </>
         }
       </div>

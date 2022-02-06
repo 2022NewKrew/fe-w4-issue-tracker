@@ -24,6 +24,9 @@ const LoginPage = () => {
     alert('회원가입 기능은 준비 중에 있습니다');
   };
 
+  const handleIdChange = (inputId: string) => setId(inputId);
+  const handlePasswordChange = (inputPassword: string) => setPassword(inputPassword);
+
   return (
     <div css={RootStyle}>
       <div css={WrapperStyle}>
@@ -34,12 +37,17 @@ const LoginPage = () => {
         <div css={[linkSmall, { color: placeHolder }]}>or</div>
         <TextInput
           type="text"
-          setValue={setId}
+          onChange={handleIdChange}
           size="large"
           placeholder="아이디"
           css={{ margin: '24px 0 16px' }}
         />
-        <TextInput setValue={setPassword} type="password" size="large" placeholder="비밀번호" />
+        <TextInput
+          onChange={handlePasswordChange}
+          type="password"
+          size="large"
+          placeholder="비밀번호"
+        />
         <Button
           type={ButtonType.Large}
           onClick={handleCustomLogin}

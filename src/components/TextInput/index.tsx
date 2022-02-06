@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import React, { useState, HTMLInputTypeAttribute, Dispatch, SetStateAction } from 'react';
+import React, { useState, HTMLInputTypeAttribute } from 'react';
 import { jsx, css } from '@emotion/react';
 import { theme } from '@styles/theme';
 import { TextInputStatus } from '@/types';
@@ -10,7 +10,7 @@ interface TextInputProps {
   size: 'large' | 'medium' | 'small';
   placeholder: string;
   disabled?: boolean;
-  setValue?: Dispatch<SetStateAction<string>>;
+  onChange?: (string) => void;
   valueEvaluator?: (string) => boolean;
   successMessage?: string;
   errorMessage?: string;
@@ -21,7 +21,7 @@ const TextInput = ({
   size = 'large',
   placeholder,
   disabled,
-  setValue,
+  onChange,
   valueEvaluator,
   successMessage,
   errorMessage,
@@ -47,7 +47,7 @@ const TextInput = ({
         <div>{placeholder}</div>
       )}
       <input
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         type={type}
         disabled={disabled}

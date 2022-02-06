@@ -9,7 +9,7 @@ interface DropdownProps {
   label: string;
   selected: number;
   setSelected: Dispatch<SetStateAction<number>>;
-  options: [string];
+  options: string[];
   type: 'Text' | 'ImageAndText' | 'Modify';
   images: JSX.Element[];
   customName?: string;

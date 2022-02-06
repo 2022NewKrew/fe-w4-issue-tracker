@@ -20,7 +20,7 @@ export const WithValueEvaluator = Template.bind({});
 WithValueEvaluator.args = {
   type: 'text',
   placeholder: '우리 집 강아지',
-  valueEvaluator: (value: string) => value == 'coco',
+  valueEvaluator: (value: string) => value === 'coco',
   successMessage: '강아지 이름은 코코입니다.',
   errorMessage: '잘못된 강아지 이름입니다.',
 };

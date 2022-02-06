@@ -11,7 +11,7 @@ interface TextInputProps {
   placeholder: string;
   disabled?: boolean;
   setValue?: Dispatch<SetStateAction<string>>;
-  valueEvaluator?: (string) => any;
+  valueEvaluator?: (string) => boolean;
   successMessage?: string;
   errorMessage?: string;
 }

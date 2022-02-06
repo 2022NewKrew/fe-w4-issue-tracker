@@ -13,25 +13,8 @@ interface ButtonProps {
 }
 
 const Button = ({ type = ButtonType.Large, children, disabled, ...props }: ButtonProps) => {
-  const getStyle = (type) => {
-    switch (type) {
-      case ButtonType.MediumStandard:
-        return [blockStyle, medium, linkMedium, filled];
-      case ButtonType.SmallStandard:
-        return [blockStyle, small, linkXSmall, filled, withIcon];
-      case ButtonType.SmallSecondary:
-        return [blockStyle, small, linkXSmall, bordered, withIcon];
-      case ButtonType.MediumText:
-        return [textStyle, linkSmall, withIcon];
-      case ButtonType.SmallText:
-        return [textStyle, linkXSmall, withIcon];
-      default:
-        return [blockStyle, large, linkMedium, filled];
-    }
-  };
-
   return (
-    <button css={[...getStyle(type), buttonStyle]} disabled={disabled} {...props}>
+    <button css={[...buttonTypeToStyles[type], buttonStyle]} disabled={disabled} {...props}>
       {children}
     </button>
   );
@@ -128,5 +111,14 @@ const bordered = css`
     border: 2px solid ${darkBlue};
   }
 `;
+
+const buttonTypeToStyles = {
+  MediumStandard: [blockStyle, medium, linkMedium, filled],
+  SmallStandard: [blockStyle, small, linkXSmall, filled, withIcon],
+  SmallSecondary: [blockStyle, small, linkXSmall, bordered, withIcon],
+  MediumText: [textStyle, linkSmall, withIcon],
+  SmallText: [textStyle, linkXSmall, withIcon],
+  Large: [blockStyle, large, linkMedium, filled],
+};
 
 export default Button;

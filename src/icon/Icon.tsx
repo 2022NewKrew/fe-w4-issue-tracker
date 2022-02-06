@@ -13,12 +13,12 @@ export type IconProps = {
 
 const Icon = ({ icon, size }: IconProps) => {
   const SVGIcon = icons[icon];
-  let style: any = { width: size, height: 'auto' };
-  if (!icon.startsWith('CheckBox') && icon !== 'Milestone')
-    style = {
-      ...style,
-      '& path': { stroke: 'currentColor' },
-    };
+  const style = {
+    width: size,
+    height: 'auto',
+    '& path':
+      icon.startsWith('CheckBox') && icon !== 'Milestone' ? { stroke: 'currentColor' } : undefined,
+  };
   return <SVGIcon css={style} />;
 };
 

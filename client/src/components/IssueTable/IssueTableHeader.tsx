@@ -1,7 +1,9 @@
 import React, { MouseEvent } from 'react';
-import styled from 'styled-components';
-import { TableHeader, AlignXYCenter, SmallIcon } from '@styles/styleTemplates';
-import { IFilter } from '@types';
+import { useRecoilState } from 'recoil';
+import { issueListFilterState } from '@atoms';
+import styled, { css } from 'styled-components';
+import { LinkSmall, TableHeader, AlignXYCenter, SmallIcon } from '@styles/styleTemplates';
+import { IFilter, IIssue } from '@types';
 import { FilterButton } from '@components/assets';
 import { ReactComponent as Alertcircle } from '@icons/AlertCircle.svg';
 import { ReactComponent as Archive } from '@icons/Archive.svg';
@@ -30,17 +32,21 @@ const renderFilterButton = (selectMode: boolean, FilterTypes: IFilter[]) => {
 };
 
 export const IssueTableHeader = ({ selectMode, onChangeHandler }: IProps) => {
+    const [issueFilterState, setIssueFilterState] = useRecoilState(issueListFilterState);
+    const filterOpen = () => setIssueFilterState('SHOW_OPEN');
+    const filterClose = () => setIssueFilterState('SHOW_CLOSE');
+
     return (
         <>
             <Checkbox>
                 <input type="checkbox" onChange={onChangeHandler} />
             </Checkbox>
             <IssueStatuses>
-                <Status>
+                <Status isActive={issueFilterState === 'SHOW_OPEN'} onClick={filterOpen}>
                     <Alertcircle />
                     열린 이슈({2})
                 </Status>
-                <Status>
+                <Status isActive={issueFilterState === 'SHOW_CLOSE'} onClick={filterClose}>
                     <Archive />
                     닫힌 이슈({0})
                 </Status>
@@ -64,10 +70,20 @@ const IssueStatuses = styled.div`
     line-height: normal;
 `;
 
-const Status = styled.div`
+const Status = styled.button<{ isActive: boolean }>`
     ${AlignXYCenter}
+    ${LinkSmall}
     padding: 12px;
+    color: var(--label-color);
     ${SmallIcon('var(--label-color)', '4px')}
+    cursor: pointer;
+    ${({ isActive }) => {
+        if (isActive)
+            return css`
+                color: var(--title-active-color);
+                ${SmallIcon('var(--title-active-color)', '4px')}
+            `;
+    }}
 `;
 
 const IssueFilterButton = styled(FilterButton)`

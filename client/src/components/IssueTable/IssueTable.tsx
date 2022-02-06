@@ -1,9 +1,10 @@
 import React, { useState, useReducer, ChangeEvent } from 'react';
+import { useRecoilStateLoadable } from 'recoil';
+import { allIssuesAtom } from '@atoms';
 import styled from 'styled-components';
 import { AlignXYCenter, TextSmall, RoundBorderDiv, TableData, Table } from '@styles/styleTemplates';
 import { IIssue } from '@types';
 import { IssueTableHeader, IssueRow } from '.';
-import { getIssues } from '@apis';
 
 type CheckAction =
     | {
@@ -42,7 +43,7 @@ const checkStatusReducer = (state: boolean[], action: CheckAction): boolean[] =>
 };
 
 export const IssueTable = () => {
-    const { data, errorMsg } = getIssues();
+    const [issueDatas] = useRecoilStateLoadable<IIssue[]>(allIssuesAtom);
     const [selectMode, setSelectMode] = useState(false);
     const [checkStatus, dispatch] = useReducer(checkStatusReducer, []);
 
@@ -52,7 +53,7 @@ export const IssueTable = () => {
         const onRowChangeHandler = (rowNumber: number) => () => {
             dispatch({
                 type: 'CHECK',
-                payload: { length: data.length, rowNumber, setSelectMode },
+                payload: { length: issueDatas.contents.length, rowNumber, setSelectMode },
             });
         };
 
@@ -74,20 +75,20 @@ export const IssueTable = () => {
         dispatch({
             type: 'CHECK_ALL',
             payload: {
-                length: data.length,
+                length: issueDatas.contents.length,
                 newStatus: e.target.checked,
                 setSelectMode: setSelectMode,
             },
         });
     };
-
-    if (!!errorMsg) return <div>{errorMsg}</div>;
-    return (
-        <TableContainer selectMode={selectMode}>
-            <IssueTableHeader selectMode={selectMode} onChangeHandler={onHeaderChangeHandler} />
-            {renderTableData(data)}
-        </TableContainer>
-    );
+    if (issueDatas.state === 'hasValue')
+        return (
+            <TableContainer selectMode={selectMode}>
+                <IssueTableHeader selectMode={selectMode} onChangeHandler={onHeaderChangeHandler} />
+                {renderTableData(issueDatas.contents)}
+            </TableContainer>
+        );
+    else return null;
 };
 
 const TableContainer = styled(RoundBorderDiv)<{ selectMode: boolean }>`

@@ -3,6 +3,7 @@
 import React, { useState, HTMLInputTypeAttribute, Dispatch, SetStateAction } from 'react';
 import { jsx, css } from '@emotion/react';
 import { theme } from '@styles/theme';
+import { TextInputStatus } from '@/types';
 
 interface TextInputProps {
   type: HTMLInputTypeAttribute;
@@ -26,23 +27,25 @@ const TextInput = ({
   errorMessage,
   ...props
 }: TextInputProps) => {
-  const [inputStatus, setInputStatus] = useState<
-    'Initial' | 'Typing' | 'Filled' | 'Success' | 'Error' | 'Disabled'
-  >(disabled ? 'Disabled' : 'Initial');
+  const [inputStatus, setInputStatus] = useState<TextInputStatus>(
+    disabled ? TextInputStatus.Disabled : TextInputStatus.Initial
+  );
 
-  const handleOnFocus = () => setInputStatus('Typing');
+  const handleOnFocus = () => setInputStatus(TextInputStatus.Typing);
 
   const handleOnBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    if (value === '') return setInputStatus('Initial');
+    if (value === '') return setInputStatus(TextInputStatus.Initial);
     valueEvaluator
-      ? setInputStatus(valueEvaluator(value) ? 'Success' : 'Error')
-      : setInputStatus('Filled');
+      ? setInputStatus(valueEvaluator(value) ? TextInputStatus.Success : TextInputStatus.Error)
+      : setInputStatus(TextInputStatus.Filled);
   };
 
   return (
     <div css={[initialStyle, sizeStyle[size], statusStyle[inputStatus]]} {...props}>
-      {inputStatus !== 'Initial' && inputStatus !== 'Disabled' && <div>{placeholder}</div>}
+      {![TextInputStatus.Initial, TextInputStatus.Disabled].includes(inputStatus) && (
+        <div>{placeholder}</div>
+      )}
       <input
         onChange={(e) => setValue(e.target.value)}
         placeholder={placeholder}
@@ -51,10 +54,10 @@ const TextInput = ({
         onFocus={handleOnFocus}
         onBlur={handleOnBlur}
       />
-      {inputStatus === 'Success' && (
+      {inputStatus === TextInputStatus.Success && (
         <span css={[messageStyle, { color: darkGreen }]}>{successMessage}</span>
       )}
-      {inputStatus === 'Error' && (
+      {inputStatus === TextInputStatus.Error && (
         <span css={[messageStyle, { color: darkRed }]}>{errorMessage}</span>
       )}
     </div>

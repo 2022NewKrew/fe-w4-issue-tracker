@@ -3,32 +3,27 @@
 import React from 'react';
 import { jsx, css } from '@emotion/react';
 import { theme } from '@styles/theme';
+import { ButtonType } from '@/types';
 
 interface ButtonProps {
-  type?:
-    | 'Large'
-    | 'MediumStandard'
-    | 'SmallStandard'
-    | 'SmallSecondary'
-    | 'MediumText'
-    | 'SmallText';
+  type?: ButtonType;
   children: React.ReactNode;
   onClick?: (event?: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
 }
 
-const Button = ({ type = 'Large', children, disabled, ...props }: ButtonProps) => {
+const Button = ({ type = ButtonType.Large, children, disabled, ...props }: ButtonProps) => {
   const getStyle = (type) => {
     switch (type) {
-      case 'MediumStandard':
+      case ButtonType.MediumStandard:
         return [blockStyle, medium, linkMedium, filled];
-      case 'SmallStandard':
+      case ButtonType.SmallStandard:
         return [blockStyle, small, linkXSmall, filled, withIcon];
-      case 'SmallSecondary':
+      case ButtonType.SmallSecondary:
         return [blockStyle, small, linkXSmall, bordered, withIcon];
-      case 'MediumText':
+      case ButtonType.MediumText:
         return [textStyle, linkSmall, withIcon];
-      case 'SmallText':
+      case ButtonType.SmallText:
         return [textStyle, linkXSmall, withIcon];
       default:
         return [blockStyle, large, linkMedium, filled];

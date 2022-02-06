@@ -6,6 +6,7 @@ import Icon from '@icon';
 import Button from '@components/Button';
 import { theme } from '@styles/theme';
 import TextInput from '@components/TextInput';
+import { ButtonType } from '@/types';
 
 const LoginPage = () => {
   const [id, setId] = useState('');
@@ -27,7 +28,7 @@ const LoginPage = () => {
     <div css={RootStyle}>
       <div css={WrapperStyle}>
         <Icon icon="LogotypeLarge" size={'340px'} />
-        <Button type="Large" css={LoginButtonStyle} onClick={handleGithubLogin}>
+        <Button type={ButtonType.Large} css={LoginButtonStyle} onClick={handleGithubLogin}>
           GitHub 계정으로 로그인
         </Button>
         <div css={[linkSmall, { color: placeHolder }]}>or</div>
@@ -40,14 +41,14 @@ const LoginPage = () => {
         />
         <TextInput setValue={setPassword} type="password" size="large" placeholder="비밀번호" />
         <Button
-          type="Large"
+          type={ButtonType.Large}
           onClick={handleCustomLogin}
           disabled={id === '' || password === ''}
           css={{ margin: '24px 0 30px' }}
         >
           아이디로 로그인
         </Button>
-        <Button type="SmallText" onClick={handleJoin}>
+        <Button type={ButtonType.SmallText} onClick={handleJoin}>
           회원가입
         </Button>
       </div>

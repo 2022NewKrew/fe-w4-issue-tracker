@@ -5,13 +5,11 @@
     "node": true
   },
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["@typescript-eslint", "prettier"],
   "extends": [
     "eslint:recommended", 
-    "plugin:react/recommended", 
-    "plugin:prettier/recommended", 
-    "eslint-config-prettier",
-    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
     "prettier/prettier": [
@@ -25,7 +23,7 @@
     ],
     "react/prop-types": "off",
     "no-unused-vars": "warn",
-    "@typescript-eslint/no-var-requires": 0,
+    "@typescript-eslint/no-var-requires": 0
   },
   "settings": {
     "react": {

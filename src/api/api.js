@@ -19,3 +19,4 @@ export const patchLabel = ({ id, editedLabel }) =>
       "Content-type": "application/json; charset=UTF-8",
     },
   }).then((res) => res.json());
+export const deleteLabel = ({ id }) => fetch(`${BaseURL}/labels/${id}`, { method: "DELETE" });

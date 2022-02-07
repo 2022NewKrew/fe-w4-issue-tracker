@@ -1,7 +1,7 @@
 import { useEffect, useReducer, useState } from "react";
 import { useMutation } from "react-query";
 import styled, { css } from "styled-components";
-import { patchLabel } from "../../api/api";
+import { deleteLabel, patchLabel } from "../../api/api";
 import { Button } from "../atoms/Button";
 import { Input } from "../atoms/Input";
 import { SmallLabel } from "../atoms/Label";
@@ -47,15 +47,21 @@ export const LabelItem = ({ label, refetchList }) => {
   const [editMode, setEdit] = useState(false);
   const [editState, dispatch] = useReducer(editReducer, {});
 
-  // patch
-  const { mutate: editLabel, isSuccess } = useMutation(patchLabel);
+  // patch and delete
+  const editMutation = useMutation(patchLabel);
   useEffect(() => {
-    console.log(isSuccess);
-    if (isSuccess) {
+    if (editMutation.isSuccess) {
       setEdit(false);
       refetchList();
     }
-  }, [isSuccess]);
+  }, [editMutation.isSuccess]);
+  const deleteMutation = useMutation(deleteLabel);
+  useEffect(() => {
+    if (deleteMutation.isSuccess) {
+      setEdit(false);
+      refetchList();
+    }
+  }, [deleteMutation.isSuccess]);
 
   // 편집창 오픈
   const openEdit = () => {
@@ -71,7 +77,11 @@ export const LabelItem = ({ label, refetchList }) => {
     dispatch({ type: "CHANGE_DESCRIPTION", description: event.target.value });
   };
 
-  const deleteLabel = () => {};
+  const handleRemoveButton = () => {
+    if (window.confirm(`${label.name} 을(를) 삭제하시겠습니까?`)) {
+      deleteMutation.mutate({ id: label.id });
+    }
+  };
 
   if (editMode) {
     return (
@@ -82,7 +92,7 @@ export const LabelItem = ({ label, refetchList }) => {
         <Button options={{ type: "Small-Secondary", prefixIcon: "x-square" }} onClick={() => setEdit(false)}>
           취소
         </Button>
-        <Button options={{ type: "Small-Standard", prefixIcon: "edit" }} onClick={() => editLabel({ id: label.id, editedLabel: editState })}>
+        <Button options={{ type: "Small-Standard", prefixIcon: "edit" }} onClick={() => editMutation.mutate({ id: label.id, editedLabel: editState })}>
           완료
         </Button>
       </LabelEdit>
@@ -95,9 +105,9 @@ export const LabelItem = ({ label, refetchList }) => {
         <Button options={{ type: "Small-Text", prefixIcon: "edit" }} onClick={openEdit}>
           편집
         </Button>
-        <Button options={{ type: "Small-Text", prefixIcon: "trash" }} onClick={deleteLabel}>
+        <RemoveButton options={{ type: "Small-Text", prefixIcon: "trash" }} onClick={handleRemoveButton}>
           삭제
-        </Button>
+        </RemoveButton>
       </LabelItemWrapper>
     );
   }
@@ -120,4 +130,15 @@ const LabelEdit = styled.div(
     align-items: center;
     padding: 32px;
   `
+);
+
+const RemoveButton = styled(Button)(
+  ({ theme }) =>
+    css`
+      color: ${theme.color.error.default};
+      &:hover,
+      &:active {
+        color: ${theme.color.error.dark};
+      }
+    `
 );

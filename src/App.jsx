@@ -1,11 +1,13 @@
-import { useEffect } from "react";
 import { Link, Navigate, Route, Routes } from "react-router-dom";
-import { useTheme } from "styled-components";
 import { MainTemplate } from "./component/page/MainTemplate";
 import { IssueHome } from "./component/page/issue/IssueHome";
 import { TestPage } from "./component/page/test/TestPage";
 import { TestNew } from "./component/page/test/TestNew";
 import { Button } from "./component/atoms/Button";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+
+const queryClient = new QueryClient();
 
 function App() {
   const defaultElementForTest = (
@@ -18,7 +20,7 @@ function App() {
   );
 
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <Routes>
         <Route path="/" element={<Navigate to="/issue" />} />
         <Route path="/login" element={defaultElementForTest} />
@@ -35,7 +37,8 @@ function App() {
           <Route path="*" element={<div>404</div>} />
         </Route>
       </Routes>
-    </>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }
 

@@ -72,9 +72,11 @@ export const LabelNew = ({ refetchList, closeFn }) => {
         <Input size="small" placeholder="레이블 이름" value={newLabel.name} onChange={(e) => dispatch({ type: "CHANGE_NAME", name: e.target.value })} />
         <Input size="small" placeholder="설명(선택)" value={newLabel.description} onChange={(e) => dispatch({ type: "CHANGE_DESCRIPTION", description: e.target.value })} />
       </LabelFormWrapper>
-      <NewLabelButton options={{ type: "Small-Standard", prefixIcon: "plus" }} onClick={() => newMutation.mutate({ newLabel })} disabled={disabled}>
-        완료
-      </NewLabelButton>
+      <LabelButtonWrapper>
+        <Button options={{ type: "Small-Standard", prefixIcon: "plus" }} onClick={() => newMutation.mutate({ newLabel })} disabled={disabled}>
+          완료
+        </Button>
+      </LabelButtonWrapper>
     </NewLabelWrapper>
   );
 };
@@ -119,7 +121,13 @@ const LabelFormWrapper = styled.div`
   }
 `;
 
-const NewLabelButton = styled(Button)`
+const LabelButtonWrapper = styled.div`
   grid-area: button;
   margin-left: auto;
+  display: flex;
+  align-items: center;
+
+  & > * {
+    margin-left: 8px;
+  }
 `;

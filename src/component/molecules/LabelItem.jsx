@@ -69,13 +69,15 @@ export const LabelItem = ({ label, refetchList }) => {
     setEdit(true);
   };
 
-  const handleNameChange = (event) => {
-    dispatch({ type: "CHANGE_NAME", name: event.target.value });
-  };
-
-  const handleDescriptionChange = (event) => {
-    dispatch({ type: "CHANGE_DESCRIPTION", description: event.target.value });
-  };
+  // name 이 없으면 버튼 disabled
+  const [disabled, setDisabled] = useState(true);
+  useEffect(() => {
+    if (disabled && editState.name !== "") {
+      setDisabled(false);
+    } else if (!disabled && editState.name === "") {
+      setDisabled(true);
+    }
+  }, [editState.name]);
 
   const handleRemoveButton = () => {
     if (window.confirm(`${label.name} 을(를) 삭제하시겠습니까?`)) {
@@ -85,29 +87,40 @@ export const LabelItem = ({ label, refetchList }) => {
 
   if (editMode) {
     return (
-      <LabelEdit>
-        <p css={cssFontSize["large"]}>레이블 편집</p>
-        <Input size="small" placeholder="레이블 이름" value={editState.name} onChange={handleNameChange} />
-        <Input size="small" placeholder="설명(선택)" value={editState.description} onChange={handleDescriptionChange} />
-        <Button options={{ type: "Small-Secondary", prefixIcon: "x-square" }} onClick={() => setEdit(false)}>
-          취소
-        </Button>
-        <Button options={{ type: "Small-Standard", prefixIcon: "edit" }} onClick={() => editMutation.mutate({ id: label.id, editedLabel: editState })}>
-          완료
-        </Button>
-      </LabelEdit>
+      <NewLabelWrapper>
+        <LabelHeader>레이블 편집</LabelHeader>
+        <LabelPreviewWrapper>
+          <SmallLabel name={editState.name} backgroundColor={editState.backgroundColor} color={editState.color} />
+        </LabelPreviewWrapper>
+        <LabelFormWrapper>
+          <Input size="small" placeholder="레이블 이름" value={editState.name} onChange={(e) => dispatch({ type: "CHANGE_NAME", name: e.target.value })} />
+          <Input size="small" placeholder="설명(선택)" value={editState.description} onChange={(e) => dispatch({ type: "CHANGE_DESCRIPTION", description: e.target.value })} />
+        </LabelFormWrapper>
+        <LabelButtonWrapper>
+          <Button options={{ type: "Small-Secondary", prefixIcon: "x-square" }} onClick={() => setEdit(false)}>
+            취소
+          </Button>
+          <Button options={{ type: "Small-Standard", prefixIcon: "edit" }} onClick={() => editMutation.mutate({ id: label.id, editedLabel: editState })} disabled={disabled}>
+            완료
+          </Button>
+        </LabelButtonWrapper>
+      </NewLabelWrapper>
     );
   } else {
     return (
       <LabelItemWrapper key={label.id}>
-        <SmallLabel {...label} />
-        <span css={[cssFontSize["small"]]}>{label.description}</span>
-        <Button options={{ type: "Small-Text", prefixIcon: "edit" }} onClick={openEdit}>
-          편집
-        </Button>
-        <RemoveButton options={{ type: "Small-Text", prefixIcon: "trash" }} onClick={handleRemoveButton}>
-          삭제
-        </RemoveButton>
+        <LabelWapper>
+          <SmallLabel {...label} />
+        </LabelWapper>
+        <Description>{label.description}</Description>
+        <ButtonWrapper>
+          <Button options={{ type: "Small-Text", prefixIcon: "edit" }} onClick={openEdit}>
+            편집
+          </Button>
+          <RemoveButton options={{ type: "Small-Text", prefixIcon: "trash" }} onClick={handleRemoveButton}>
+            삭제
+          </RemoveButton>
+        </ButtonWrapper>
       </LabelItemWrapper>
     );
   }
@@ -116,21 +129,32 @@ export const LabelItem = ({ label, refetchList }) => {
 const LabelItemWrapper = styled.div(
   ({ theme }) => css`
     background: ${theme.grayscale.offWhite};
-    display: flex;
-    align-items: center;
     width: 100%;
-    height: 64px;
+
+    display: grid;
+    grid-template-columns: 240px auto 240px;
   `
 );
 
-const LabelEdit = styled.div(
-  ({ theme }) => css`
-    background: ${theme.grayscale.offWhite};
-    display: flex;
-    align-items: center;
-    padding: 32px;
-  `
-);
+const LabelWapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: 32px;
+`;
+
+const Description = styled.span`
+  ${cssFontSize["small"]}
+  padding: 32px 0;
+`;
+
+const ButtonWrapper = styled.div`
+  margin: 0 32px 0 auto;
+  display: flex;
+  align-items: center;
+  & > * {
+    margin-left: 24px;
+  }
+`;
 
 const RemoveButton = styled(Button)(
   ({ theme }) =>
@@ -142,3 +166,54 @@ const RemoveButton = styled(Button)(
       }
     `
 );
+
+const NewLabelWrapper = styled.div(
+  ({ theme }) => css`
+    background: ${theme.grayscale.offWhite};
+    padding: 32px;
+    border: 1px solid ${theme.grayscale.line};
+    border-radius: 16px;
+    margin-bottom: 24px;
+
+    display: grid;
+    grid-template-columns: 312px auto;
+    grid-template-areas:
+      "header header"
+      "preview form"
+      ". button";
+  `
+);
+
+const LabelHeader = styled.p`
+  ${cssFontSize["large"]}
+  grid-area: header;
+`;
+
+const LabelPreviewWrapper = styled.div`
+  grid-area: preview;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const LabelFormWrapper = styled.div`
+  grid-area: form;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 16px;
+
+  & > * {
+    margin-bottom: 16px;
+  }
+`;
+
+const LabelButtonWrapper = styled.div`
+  grid-area: button;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+
+  & > * {
+    margin-left: 8px;
+  }
+`;

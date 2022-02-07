@@ -28,7 +28,7 @@ const renderRightArea = (selectMode: boolean, issue: IIssue | undefined) => {
 };
 
 export const IssueRow = ({ issueData, checkStatus, selectMode, onChangeHandler }: IProps) => {
-    const { title, id, timeStamp, status, labelings, milestoneId } = issueData;
+    const { title, id, userId, timeStamp, status, labelings, milestoneId } = issueData;
     const [labelInfo] = useRecoilStateLoadable<ILabel[]>(labelInfoAtom);
 
     const renderLabels = () => {

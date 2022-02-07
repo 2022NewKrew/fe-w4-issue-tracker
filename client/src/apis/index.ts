@@ -17,3 +17,7 @@ export const fetchLabels = () => {
 export const fetchMilestones = () => {
     return fetch(`${process.env.SERVER_BASE_URL}/milestones`);
 };
+
+export const fetchUsers = () => {
+    return fetch(`${process.env.SERVER_BASE_URL}/users`);
+};

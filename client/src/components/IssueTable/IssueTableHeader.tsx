@@ -4,7 +4,7 @@ import { issuesFilterState, issueStatusCountSelector } from '@atoms';
 import styled, { css } from 'styled-components';
 import { LinkSmall, TableHeader, AlignXYCenter, SmallIcon } from '@styles/styleTemplates';
 import { IFilter } from '@types';
-import { FilterButton } from '@components/assets';
+import { IssueFilterButton } from '.';
 import { ReactComponent as Alertcircle } from '@icons/AlertCircle.svg';
 import { ReactComponent as Archive } from '@icons/Archive.svg';
 
@@ -21,13 +21,10 @@ const FilterTypes: IFilter[] = [
 ];
 
 const renderFilterButton = (selectMode: boolean, FilterTypes: IFilter[]) => {
-    const onClickHandler = (e: MouseEvent<HTMLElement>) => {
-        e.preventDefault();
-        // TODO: 필터타입별로 options가 될 수 있는 리스트들을 fetch해와서 드롭다운으로 보여주기
-    };
-    if (selectMode) return <IssueFilterButton title="상태 수정" onClickHandler={onClickHandler} />;
-    return FilterTypes.map(({ title, type }: IFilter) => (
-        <IssueFilterButton title={title} onClickHandler={onClickHandler} key={type} />
+    if (selectMode)
+        return <IssueFilterButton filterProperty={{ title: '상태 수정', type: 'statusChange' }} />;
+    return FilterTypes.map((filter: IFilter, i) => (
+        <IssueFilterButton filterProperty={filter} key={i} />
     ));
 };
 
@@ -85,11 +82,4 @@ const Status = styled.button<{ isActive: boolean }>`
                 ${SmallIcon('var(--title-active-color)', '4px')}
             `;
     }}
-`;
-
-const IssueFilterButton = styled(FilterButton)`
-    ${TableHeader}
-    ${AlignXYCenter}
-    padding-left: 16px;
-    width: 100%;
 `;

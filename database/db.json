@@ -70,55 +70,55 @@
     "labels": [
         {
             "id": 0,
-            "title": "bug",
+            "name": "bug",
             "description": "Something isn't working",
             "color": "#FF0000"
         },
         {
             "id": 1,
-            "title": "documentation",
+            "name": "documentation",
             "description": "improvements or additions to ducumentation",
             "color": "#654ea3"
         },
         {
             "id": 2,
-            "title": "duplicate",
+            "name": "duplicate",
             "description": "This issue or pull request already exists",
             "color": "#ee9ca7"
         },
         {
             "id": 3,
-            "title": "enhancement",
+            "name": "enhancement",
             "description": "New feature or request",
             "color": "#59C173"
         },
         {
             "id": 4,
-            "title": "good first issue",
+            "name": "good first issue",
             "description": "Good for newcomers",
             "color": "#a8c0ff"
         },
         {
             "id": 5,
-            "title": "help wanted",
+            "name": "help wanted",
             "description": "Extra attention is needed",
             "color": "#ff9966"
         },
         {
             "id": 6,
-            "title": "invalid",
+            "name": "invalid",
             "description": "This doesn't seem right",
             "color": "#fdbb2d"
         },
         {
             "id": 7,
-            "title": "question",
+            "name": "question",
             "description": "Further information is requested",
             "color": "#22c1c3"
         },
         {
             "id": 8,
-            "title": "wontfix",
+            "name": "wontfix",
             "description": "This will not be worked on",
             "color": "#0575E6"
         }
@@ -126,19 +126,19 @@
     "milestones": [
         {
             "id": 1,
-            "title": "마일스톤",
+            "name": "마일스톤",
             "dueDate": 1646838000000,
             "description": "마일스톤 설명이 들어가는 자리"
         },
         {
             "id": 2,
-            "title": "마스터즈 코스",
+            "name": "마스터즈 코스",
             "dueDate": 1649516400000,
             "description": "마스터즈 코스 - 이슈 트래커"
         },
         {
             "id": 3,
-            "title": "기능구현",
+            "name": "기능구현",
             "dueDate": 1647702000000,
             "description": "기능구현 - api서버와 통신"
         }

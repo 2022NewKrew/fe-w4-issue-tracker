@@ -9,10 +9,10 @@ interface IProps {
     labelInfo: ILabel;
 }
 
-export const SmallLabel = ({ type, labelInfo: { title, color } }: IProps) => {
+export const SmallLabel = ({ type, labelInfo: { name, color } }: IProps) => {
     return (
         <StyledLabel type={type} mainColor={color}>
-            {title}
+            {name}
         </StyledLabel>
     );
 };

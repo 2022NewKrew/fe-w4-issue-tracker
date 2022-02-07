@@ -23,7 +23,7 @@ export const MilestoneTag = ({ id }: IProps) => {
         return (
             <MilestoneName>
                 <Milestone />
-                <div>{milestoneTarget.title}</div>
+                <div>{milestoneTarget.name}</div>
             </MilestoneName>
         );
     }

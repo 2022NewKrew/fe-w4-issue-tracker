@@ -9,6 +9,7 @@ const StyledCustomDisplay = styled.span`
   font-size: 32px;
   line-height: 48px;
   color: ${greyscale.default};
+
   ${() => getFontWeight}
 `;
 

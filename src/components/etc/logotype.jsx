@@ -52,6 +52,7 @@ const StyledLogotype = styled.span`
   font-style: italic;
   letter-spacing: -0.04em;
   color: ${greyscale.default};
+
   ${() => getLogotypeFontWeight}
   ${() => getLogotypeFontSize}
   ${() => getLogotypeLineHeight}

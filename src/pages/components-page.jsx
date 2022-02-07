@@ -15,19 +15,19 @@ const ComponentsPage = () => {
       <h1>ComponentsPage</h1>
       <div>
         <h2>Etc</h2>
-        <Container componentType={"regular"}>
+        <Container>
           <h3>Logotype</h3>
           <Logotype componentSize={"large"}>LogotypeLarge</Logotype>
           <Logotype componentSize={"medium"}>LogotypeMedium</Logotype>
         </Container>
-        <Container componentType={"regular"}>
+        <Container>
           <h3>CustomHeader</h3>
           <CustomHeader>CustomHeader</CustomHeader>
         </Container>
       </div>
       <div>
         <h2>Typography</h2>
-        <Container componentType={"regular"}>
+        <Container>
           <h3>CustomDisplay</h3>
           <CustomDisplay componentWeight={"bold"}>
             CustomDisplayBold
@@ -36,14 +36,14 @@ const ComponentsPage = () => {
             CustomDisplayRegular
           </CustomDisplay>
         </Container>
-        <Container componentType={"regular"}>
+        <Container>
           <h3>CustomText</h3>
           <CustomText componentSize={"large"}>CustomTextLarge</CustomText>
           <CustomText componentSize={"medium"}>CustomTextMedium</CustomText>
           <CustomText componentSize={"small"}>CustomTextSmall</CustomText>
           <CustomText componentSize={"x-small"}>CustomTextXSmall</CustomText>
         </Container>
-        <Container componentType={"regular"}>
+        <Container>
           <h3>CustomLink</h3>
           <CustomLink componentSize={"large"}>CustomLinkLarge</CustomLink>
           <CustomLink componentSize={"medium"}>CustomLinkMedium</CustomLink>
@@ -53,7 +53,7 @@ const ComponentsPage = () => {
       </div>
       <div>
         <h2>Buttons</h2>
-        <Container componentType={"regular"}>
+        <Container>
           <h3>StandardButton</h3>
           <StandardButton componentSize={"large"}>
             StandardButtonLarge
@@ -65,7 +65,7 @@ const ComponentsPage = () => {
             StandardButtonSmall
           </StandardButton>
         </Container>
-        <Container componentType={"regular"}>
+        <Container>
           <h3>StandardButtonDisabled</h3>
           <StandardButton componentSize={"large"} componentDisabled={true}>
             StandardButtonLargeDisabled
@@ -77,7 +77,7 @@ const ComponentsPage = () => {
             StandardButtonSmallDisabled
           </StandardButton>
         </Container>
-        <Container componentType={"regular"}>
+        <Container>
           <h3>SecondaryButton</h3>
           <SecondaryButton componentSize={"large"}>
             SecondaryButtonLarge
@@ -89,7 +89,7 @@ const ComponentsPage = () => {
             SecondaryButtonSmall
           </SecondaryButton>
         </Container>
-        <Container componentType={"regular"}>
+        <Container>
           <h3>SecondaryButtonDisabled</h3>
           <SecondaryButton componentSize={"large"} componentDisabled={true}>
             SecondaryButtonLargeDisabled
@@ -101,13 +101,13 @@ const ComponentsPage = () => {
             SecondaryButtonSmallDisabled
           </SecondaryButton>
         </Container>
-        <Container componentType={"regular"}>
+        <Container>
           <h3>CustomTextButton</h3>
           <TextButton componentSize={"large"}>TextButtonLarge</TextButton>
           <TextButton componentSize={"medium"}>TextButtonMedium</TextButton>
           <TextButton componentSize={"small"}>TextButtonSmall</TextButton>
         </Container>
-        <Container componentType={"regular"}>
+        <Container>
           <h3>CustomTextButtonDisabled</h3>
           <TextButton componentSize={"large"} componentDisabled={true}>
             TextButtonLargeDisabled
@@ -122,16 +122,28 @@ const ComponentsPage = () => {
       </div>
       <div>
         <h2>Inputs</h2>
-        <Container componentType={"regular"}>
+        <Container>
           <h3>TextInput</h3>
           <TextInput componentSize={"large"}>TextInputLarge</TextInput>
           <TextInput componentSize={"medium"}>TextInputMedium</TextInput>
           <TextInput componentSize={"small"}>TextInputSmall</TextInput>
         </Container>
-        <Container componentType={"regular"}>
+        <Container>
+          <h3>TextInputDisabled</h3>
+          <TextInput componentSize={"large"} componentDisabled={true}>
+            TextInputLargeDisabled
+          </TextInput>
+          <TextInput componentSize={"medium"} componentDisabled={true}>
+            TextInputMediumDisabled
+          </TextInput>
+          <TextInput componentSize={"small"} componentDisabled={true}>
+            TextInputSmallDisabled
+          </TextInput>
+        </Container>
+        <Container>
           <h3>TextArea</h3>
         </Container>
-        <Container componentType={"regular"}>
+        <Container>
           <h3>ColorCode</h3>
         </Container>
       </div>

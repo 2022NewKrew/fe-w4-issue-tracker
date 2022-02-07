@@ -6,6 +6,7 @@ const StyledCustomText = styled.span`
   font-family: Noto Sans KR;
   font-style: normal;
   font-weight: normal;
+
   ${() => getFontSize}
   ${() => getLineHeight}
   ${() => getColor}

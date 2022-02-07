@@ -136,6 +136,11 @@ const StyledTextInput = styled.div`
 
 const TextInput = ({ children, componentSize, componentDisabled }) => {
   const [disabled, setDisabled] = useState(componentDisabled);
+  const [value, setValue] = useState("value");
+
+  const onChange = (e) => {
+    setValue(e.target.value);
+  };
 
   return (
     <StyledTextInput componentSize={componentSize} componentDisabled={disabled}>
@@ -145,6 +150,8 @@ const TextInput = ({ children, componentSize, componentDisabled }) => {
       <TextInputTyping
         type={"text"}
         disabled={disabled}
+        onChange={onChange}
+        value={value}
         componentSize={componentSize}
       ></TextInputTyping>
     </StyledTextInput>

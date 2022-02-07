@@ -23,12 +23,12 @@ const DropdownPanelInfoWrapper = styled(SmallText)`
 `;
 const ProfileImg = styled(SmallProfileImg)``;
 
-function DropdownPanel({ text, imgUrl, isCheckIcon, isChecked, onClick }) {
+function DropdownPanel({ text, photoUrl, isCheckIcon, isChecked, onClick }) {
   return (
     <DropdownPanelWrapper onClick={onClick}>
-      {imgUrl ? <ProfileImg src={imgUrl} /> : <></>}
+      {photoUrl ? <ProfileImg src={photoUrl} /> : <></>}
       <DropdownPanelInfoWrapper
-        isImgContained={!!imgUrl}
+        isImgContained={!!photoUrl}
         isActivated={isChecked}
       >
         <span>{text}</span>

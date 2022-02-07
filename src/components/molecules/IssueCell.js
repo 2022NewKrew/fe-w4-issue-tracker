@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import styled, { css } from "styled-components";
 import {
   MediumLinkText,
@@ -9,7 +9,6 @@ import {
 } from "@atoms";
 import { COLOR } from "@constants";
 import { AlertCircleIcon, ArchieveIcon, MilestoneIcon } from "@icons";
-import { getAuth } from "@/firebase.js";
 import { calculateTimeDiff } from "@/utils/timestampUtils.js";
 
 const LABEL_TYPE = {
@@ -84,16 +83,12 @@ const LeftPart = styled(Wrapper)`
 function IssueCell({
   isOpened,
   title,
-  labelList,
+  label: labelList,
   id,
   writer,
   timestamp,
   milestone,
 }) {
-  //FIX: 개인 프로필 기능 구현시 수정
-  const auth = getAuth();
-  const url = auth.currentUser.photoURL;
-
   return (
     <IssueCellWrapper>
       <LeftPart>
@@ -119,8 +114,8 @@ function IssueCell({
           <IssueTagWrapper>
             <IssueTag>#{id}</IssueTag>
             <IssueTag>
-              이 이슈가 {calculateTimeDiff(timestamp)} 전, {writer} 님에 의해
-              작성되었습니다
+              이 이슈가 {calculateTimeDiff(timestamp)} 전, {writer.name} 님에
+              의해 작성되었습니다
             </IssueTag>
             <IssueTag>
               <MilestoneIcon
@@ -133,7 +128,7 @@ function IssueCell({
           </IssueTagWrapper>
         </IssueInfoWrapper>
       </LeftPart>
-      <WriterProfile src={url} />
+      <WriterProfile src={writer.photoUrl} />
     </IssueCellWrapper>
   );
 }

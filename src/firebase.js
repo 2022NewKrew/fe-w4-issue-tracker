@@ -1,12 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { collection, getDocs, query, where } from "firebase/firestore";
-
-const DOC_TYPE = {
-  LABEL: "label",
-  ISSUE: "issue",
-  MILESTONE: "milestone",
-};
+import { DATA_TYPE } from "@constants";
 
 const ENV = {
   API_KEY: "AIzaSyBTFAK3H7enl2Pqgbkp8fwSc1IUYqqTMcY",
@@ -46,24 +41,47 @@ const getDocList = async (docType) => {
 };
 
 export const getLabelList = async () => {
-  return await getDocList(DOC_TYPE.LABEL);
+  return await getDocList(DATA_TYPE.LABEL);
 };
 
 export const getMilestoneList = async () => {
-  return await getDocList(DOC_TYPE.MILESTONE);
-};
-export const getIssueList = async () => {
-  return await getDocList(DOC_TYPE.ISSUE);
+  return await getDocList(DATA_TYPE.MILESTONE);
 };
 
-export const getFilteredIssueList = async (filterList) => {
-  const issueListRef = await collection(db, DOC_TYPE.ISSUE);
-  console.log(filterList);
-  const filteredIssueRef = await filterList.reduce((ref, { key, value }) => {
-    return query(ref, where(key, "==", value));
-  }, issueListRef);
-  const filteredIssueListSnapshot = await getDocs(filteredIssueRef);
-  return convertDocListSnapshotToArray(filteredIssueListSnapshot);
+export const getUserList = async () => {
+  return await getDocList(DATA_TYPE.USER);
+};
+
+export const getIssueList = async () => {
+  return await getDocList(DATA_TYPE.ISSUE);
+};
+
+export const getOpenedIssueCount = async () => {
+  const openedIssueListRef = await query(
+    collection(db, DATA_TYPE.ISSUE),
+    where("isOpened", "==", true)
+  );
+  const openedIssueListSnapshot = await getDocs(openedIssueListRef);
+  return openedIssueListSnapshot.size;
+};
+
+export const getClosedIssueCount = async () => {
+  const closedIssueListRef = await query(
+    collection(db, DATA_TYPE.ISSUE),
+    where("isOpened", "==", false)
+  );
+  const closedIssueListSnapshot = await getDocs(closedIssueListRef);
+  return closedIssueListSnapshot.size;
+};
+
+export const getLabelListCount = async () => {
+  const labelList = await getDocs(collection(db, DATA_TYPE.LABEL));
+  return labelList.size;
+};
+
+export const getMilestoneListCount = async () => {
+  const milestoneList = await getDocs(collection(db, DATA_TYPE.MILESTONE));
+  return milestoneList.size;
 };
 
 export * from "firebase/auth";

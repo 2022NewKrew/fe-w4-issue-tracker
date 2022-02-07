@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { COLOR } from "@constants";
 import { MilestoneIcon, TagIcon } from "@icons";
 import { SmallText, Wrapper } from "@atoms";
+import { getLabelListCount, getMilestoneListCount } from "@/firebase.js";
 
 const TabListWrapper = styled(Wrapper)`
   flex-direction: row;
@@ -46,18 +47,26 @@ const TabText = styled(SmallText)`
 `;
 
 function TabList() {
+  const [labelCount, setLabelCount] = useState(null);
+  const [milestoneCount, setMilestoneCount] = useState(null);
+
+  useEffect(async () => {
+    setLabelCount(await getLabelListCount());
+    setMilestoneCount(await getMilestoneListCount());
+  }, []);
+
   return (
     <TabListWrapper>
       <LeftTab>
         <TagIcon />
         <TabText>
-          레이블 (<span>0</span>)
+          레이블 {labelCount ? <span>({labelCount})</span> : ""}
         </TabText>
       </LeftTab>
       <RightTab>
         <MilestoneIcon />
         <TabText>
-          마일스톤 (<span>0</span>)
+          마일스톤 {milestoneCount ? <span>({milestoneCount})</span> : ""}
         </TabText>
       </RightTab>
     </TabListWrapper>

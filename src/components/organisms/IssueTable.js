@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Wrapper } from "@atoms";
 import { IssueCell, IssueTableHeader } from "@molecules";
 import { COLOR } from "@constants";
-import { getFilteredIssueList } from "@/firebase.js";
+import { useRecoilValue } from "recoil";
+import { issueListState } from "@/store.js";
 
 const IssueTableWrapper = styled(Wrapper)`
   width: 100%;
+  margin-top: 20px;
   border-radius: 16px;
   border: 1px solid ${COLOR.GREYSCALE.LINE};
-  margin-top: 20px;
-  overflow: hidden;
 `;
 
 const IssueList = styled(Wrapper)`
@@ -19,29 +19,19 @@ const IssueList = styled(Wrapper)`
 `;
 
 function IssueTable() {
-  const [issueList, setIssueList] = useState([]);
-  const [issueFilter, setIssueFilter] = useState([
-    {
-      key: "isOpened",
-      value: true,
-    },
-  ]);
-
-  useEffect(async () => {
-    const newIssueList = await getFilteredIssueList(issueFilter);
-    setIssueList(newIssueList);
-  }, []);
+  const issueList = useRecoilValue(issueListState);
 
   return (
     <IssueTableWrapper>
-      <IssueTableHeader
-        issueFilter={issueFilter}
-        setIssueFilter={setIssueFilter}
-      />
+      <IssueTableHeader />
       <IssueList>
-        {issueList.map((issueData) => (
-          <IssueCell key={issueData.id} {...issueData} />
-        ))}
+        {issueList.length ? (
+          issueList.map((issueData) => (
+            <IssueCell key={issueData.id} {...issueData} />
+          ))
+        ) : (
+          <div> 필터에 맞는 이슈가 없습니다.</div>
+        )}
       </IssueList>
     </IssueTableWrapper>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import { MediumText, Wrapper } from "@atoms";
 import { COLOR } from "@constants";
@@ -30,28 +30,15 @@ function Dropdown({
   isCheckIcon,
   options,
   parentRef,
-  isMultiCheckAvailable,
+  callbackAfterPanelClickEvent,
 }) {
   const [isVisible, setIsVisible] = useState(false);
-  const [panelOptions, setPanelOptions] = useState(options);
   const dropdownRef = useRef(null);
 
-  const clickPanel = useCallback(
-    (clickedPanelText) => {
-      const newPanelOptions = isMultiCheckAvailable
-        ? panelOptions.map((option) => {
-            return clickedPanelText === option.text
-              ? { ...option, isChecked: true }
-              : option;
-          })
-        : panelOptions.map((option) => {
-            return { ...option, isChecked: clickedPanelText === option.text };
-          });
-      setPanelOptions(newPanelOptions);
-    },
-    [panelOptions]
-  );
-
+  const clickPanel = (clickedPanelData) => {
+    const { value } = clickedPanelData;
+    callbackAfterPanelClickEvent(value);
+  };
   useEffect(() => {
     const clickDropdown = (e) => {
       const { target } = e;
@@ -76,10 +63,10 @@ function Dropdown({
       isVisible={isVisible}
     >
       <DropdownTitle>{title}</DropdownTitle>
-      {panelOptions.map((panelOption, idx) => {
+      {options.map((panelOption, idx) => {
         return (
           <DropdownPanel
-            onClick={() => clickPanel(panelOption.text)}
+            onClick={() => clickPanel(panelOption)}
             key={`dropdown-${title}-panel-${idx}`}
             {...panelOption}
             isCheckIcon={isCheckIcon}

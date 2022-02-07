@@ -17,9 +17,9 @@ const App = () => {
 
   useEffect(() => {
     if (cookies.user) {
-      setUser(cookies);
+      setUser(cookies.user);
     }
-  }, []);
+  }, [cookies.user]);
   return (
     <Routes>
       <Route

@@ -28,17 +28,17 @@ export default function Login() {
   const [pd, setPd] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
 
-  function handleGithubLogin() {
-    firebaseAuth.signInWithPopup(provider).then((result) => {
-      const signedInUser = {
-        name: result.user.displayName,
-        email: result.user.email,
-      };
-      const accessToken = result.credential.accessToken;
-      setUser(signedInUser);
-      setCookie("user", accessToken);
-    });
-  }
+  // function handleGithubLogin() {
+  //   firebaseAuth.signInWithPopup(provider).then((result) => {
+  //     const signedInUser = {
+  //       name: result.user.displayName,
+  //       email: result.user.email,
+  //     };
+  //     const accessToken = result.credential.accessToken;
+  //     setUser(signedInUser);
+  //     setCookie("user", accessToken);
+  //   });
+  // }
 
   const changeDisable = () => {
     if (id.length > 0 && pd.length > 0) {

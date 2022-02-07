@@ -1,5 +1,4 @@
 import axios from "axios";
-// import cookies from "js-cookie";
 
 export const instance = axios.create({
   timeout: 10000,

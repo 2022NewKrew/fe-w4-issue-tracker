@@ -40,9 +40,9 @@ function useUserActions() {
         setCookie("user", JSON.stringify(user));
 
         const accessToken = res.data.accessToken;
-        instance.defaults.headers.common[
-          "Authorization"
-        ] = `Bearer ${accessToken}`;
+        instance.defaults.headers.common = {
+          Authorization: `Bearer ${accessToken}`,
+        };
 
         navigate("/", { replace: true });
       })

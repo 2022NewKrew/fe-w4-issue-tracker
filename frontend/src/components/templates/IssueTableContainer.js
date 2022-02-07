@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
 
 import IssueTableHeader from "@components/organisms/IssueTableHeader";
 import IssueTableCell from "../organisms/IssueTableCell";
+import { LargeText } from "@components/atoms/Text";
+
+import { useIssuesActions } from "../../_actions/issues.actions";
+import {
+  issuesState,
+  openIssuesState,
+  closedIssuesState,
+  activeIssueTabState,
+} from "../../_state";
+import { useRecoilValue } from "recoil";
 
 const Container = styled.div`
   margin: 0 80px;
-
-  /* border-radius: 16px; */
-  /* border: 1px solid ${(props) => props.theme.greyscale.line}; */
-
-  /* overflow: hidden; */
 
   .clearfix:before,
   .clearfix:after {
@@ -30,32 +35,16 @@ const Container = styled.div`
 `;
 
 export default function IssueTableContainer() {
-  const issues = [
-    {
-      id: 1,
-      title: "FE 이슈트래커 개발",
-      label: "documentation",
-      author: "Lin",
-      milestone: "마스터즈 코스",
-      date: "2022년 1월 27일",
-    },
-    {
-      id: 2,
-      title: "북카페 홈페이지 개발",
-      label: "documentation",
-      author: "Genie",
-      milestone: "비기너 코스",
-      date: "2022년 1월 28일",
-    },
-    {
-      id: 3,
-      title: "카카오톡 개발",
-      label: "documentation",
-      author: "Min",
-      milestone: "Advanced 코스",
-      date: "2022년 1월 29일",
-    },
-  ];
+  const issues = useRecoilValue(issuesState);
+  const openIssues = useRecoilValue(openIssuesState);
+  const closedIssues = useRecoilValue(closedIssuesState);
+  const activeIssueTab = useRecoilValue(activeIssueTabState);
+
+  const issuesActions = useIssuesActions();
+
+  useEffect(() => {
+    issuesActions.getIssues();
+  }, []);
 
   const [selectedIssueIds, setSelectedIssueIds] = useState([]);
 
@@ -64,15 +53,19 @@ export default function IssueTableContainer() {
     else return false;
   }
 
-  const issueList = issues.map((issue) => (
-    <IssueTableCell
-      key={issue.id}
-      selected={checkSelected(issue.id)}
-      selectedIssueIds={selectedIssueIds}
-      setSelectedIssueIds={setSelectedIssueIds}
-      info={issue}
-    />
-  ));
+  const currentIssues = activeIssueTab === "open" ? openIssues : closedIssues;
+
+  const issueList =
+    currentIssues &&
+    currentIssues.map((issue) => (
+      <IssueTableCell
+        key={issue.num}
+        selected={checkSelected(issue.id)}
+        selectedIssueIds={selectedIssueIds}
+        setSelectedIssueIds={setSelectedIssueIds}
+        info={issue}
+      />
+    ));
 
   return (
     <Container className='clearfix'>

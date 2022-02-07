@@ -69,8 +69,20 @@ const IssueInfoWrapper = styled.div`
 `;
 
 export default function IssueTableCell(props) {
-  const { id, title, label, author, milestone, date } = props.info;
+  const {
+    assignees,
+    comments,
+    id,
+    labels,
+    num,
+    status,
+    timestamp,
+    milestone,
+    title,
+    writer,
+  } = props.info;
   const color = "#004DE3";
+  const formattedDate = new Date(timestamp).toLocaleDateString();
 
   function handleCheckboxClick() {
     if (props.selectedIssueIds.includes(id)) {
@@ -97,17 +109,26 @@ export default function IssueTableCell(props) {
           <IssueTitleWrapper>
             <AlertCircle color='#007AFF' />
             <MediumLink>{title}</MediumLink>
-            <SmallLabel type='light' color={color} text={label} />
+            {labels.length >= 1 && (
+              <SmallLabel
+                type='light'
+                color={color}
+                text={labels[0].description}
+              />
+            )}
           </IssueTitleWrapper>
           <IssueInfoWrapper>
-            <SmallText color='label'>#{id}</SmallText>
+            <SmallText color='label'>#{num}</SmallText>
             <SmallText color='label'>
-              이 이슈가 {date}에, {author} 님에 의해 작성되었습니다.
+              이 이슈가 {formattedDate}에, {writer.name}님에 의해
+              작성되었습니다.
             </SmallText>
-            <SmallText color='label'>
-              <Milestone />
-              {milestone}
-            </SmallText>
+            {milestone && (
+              <SmallText color='label'>
+                <Milestone />
+                {milestone.title}
+              </SmallText>
+            )}
           </IssueInfoWrapper>
         </ContentWrapper>
       </Wrapper>

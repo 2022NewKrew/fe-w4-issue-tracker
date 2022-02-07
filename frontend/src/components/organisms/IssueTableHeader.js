@@ -10,6 +10,14 @@ import { ReactComponent as Archive } from "@assets/icons/archive.svg";
 import { ReactComponent as CheckboxInitial } from "@assets/icons/checkboxInitial.svg";
 import { ReactComponent as CheckboxActive } from "@assets/icons/checkboxActive.svg";
 
+import {
+  issuesState,
+  openIssuesState,
+  closedIssuesState,
+  activeIssueTabState,
+} from "../../_state";
+import { useRecoilValue, useRecoilState } from "recoil";
+
 const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -71,7 +79,8 @@ const DropdownContainer = styled.div`
 `;
 
 export default function IssueTableHeader(props) {
-  const [activeIssueType, setActiveIssueType] = useState("open");
+  const [activeIssueTab, setActiveIssueTab] =
+    useRecoilState(activeIssueTabState);
   const [showPanel, setShowPanel] = useState({
     statusModify: false,
     assignee: false,
@@ -92,7 +101,7 @@ export default function IssueTableHeader(props) {
   const writerChangeMenus = ["Lin", "Min", "Genie"];
 
   function clickIssueType(e) {
-    setActiveIssueType(e.target.attributes.type.value);
+    setActiveIssueTab(e.target.attributes.type.value);
   }
 
   function handleCheckboxClick(status) {
@@ -224,23 +233,27 @@ export default function IssueTableHeader(props) {
 
   function showButtonsOrIssueCounts() {
     const selectedIssuesCount = props.selectedIssueIds.length;
-    const issuesCount = props.issues.length;
+    const issuesCount = props.issues && props.issues.length;
+
+    const openIssues = useRecoilValue(openIssuesState);
+    const closedIssues = useRecoilValue(closedIssuesState);
+
     if (selectedIssuesCount < 1) {
       return (
         <>
           <MediumTextButton
             type='open'
             onClick={(e) => clickIssueType(e)}
-            active={activeIssueType === "open"}>
+            active={activeIssueTab === "open"}>
             <AlertCircle />
-            열린 이슈({issuesCount})
+            열린 이슈({(openIssues && openIssues.length) || 0})
           </MediumTextButton>
           <MediumTextButton
             type='closed'
             onClick={(e) => clickIssueType(e)}
-            active={activeIssueType === "closed"}>
+            active={activeIssueTab === "closed"}>
             <Archive />
-            닫힌 이슈(2)
+            닫힌 이슈({(closedIssues && closedIssues.length) || 0})
           </MediumTextButton>
         </>
       );

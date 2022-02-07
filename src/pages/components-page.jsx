@@ -64,13 +64,16 @@ const ComponentsPage = () => {
           <StandardButton componentSize={"small"}>
             StandardButtonSmall
           </StandardButton>
-          <StandardButton componentSize={"large"}>
+        </Container>
+        <Container componentType={"regular"}>
+          <h3>StandardButtonDisabled</h3>
+          <StandardButton componentSize={"large"} componentDisabled={true}>
             StandardButtonLargeDisabled
           </StandardButton>
-          <StandardButton componentSize={"medium"}>
+          <StandardButton componentSize={"medium"} componentDisabled={true}>
             StandardButtonMediumDisabled
           </StandardButton>
-          <StandardButton componentSize={"small"}>
+          <StandardButton componentSize={"small"} componentDisabled={true}>
             StandardButtonSmallDisabled
           </StandardButton>
         </Container>
@@ -85,13 +88,16 @@ const ComponentsPage = () => {
           <SecondaryButton componentSize={"small"}>
             SecondaryButtonSmall
           </SecondaryButton>
-          <SecondaryButton componentSize={"large"}>
+        </Container>
+        <Container componentType={"regular"}>
+          <h3>SecondaryButtonDisabled</h3>
+          <SecondaryButton componentSize={"large"} componentDisabled={true}>
             SecondaryButtonLargeDisabled
           </SecondaryButton>
-          <SecondaryButton componentSize={"medium"}>
+          <SecondaryButton componentSize={"medium"} componentDisabled={true}>
             SecondaryButtonMediumDisabled
           </SecondaryButton>
-          <SecondaryButton componentSize={"small"}>
+          <SecondaryButton componentSize={"small"} componentDisabled={true}>
             SecondaryButtonSmallDisabled
           </SecondaryButton>
         </Container>
@@ -100,6 +106,18 @@ const ComponentsPage = () => {
           <TextButton componentSize={"large"}>TextButtonLarge</TextButton>
           <TextButton componentSize={"medium"}>TextButtonMedium</TextButton>
           <TextButton componentSize={"small"}>TextButtonSmall</TextButton>
+        </Container>
+        <Container componentType={"regular"}>
+          <h3>CustomTextButtonDisabled</h3>
+          <TextButton componentSize={"large"} componentDisabled={true}>
+            TextButtonLargeDisabled
+          </TextButton>
+          <TextButton componentSize={"medium"} componentDisabled={true}>
+            TextButtonMediumDisabled
+          </TextButton>
+          <TextButton componentSize={"small"} componentDisabled={true}>
+            TextButtonSmallDisabled
+          </TextButton>
         </Container>
       </div>
       <div>

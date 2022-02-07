@@ -1,9 +1,11 @@
 import styled from "styled-components";
+import { useState } from "react";
 
 import CustomLink from "@components/typography/custom-link";
 import greyscale from "@styles/greyscale";
 import {
   allCenterAlign,
+  disabledOpacity,
   getButtonWidth,
   getButtonHeight,
   getButtonCustomLinkSize,
@@ -12,14 +14,18 @@ import {
 const StyledTextButton = styled.button`
   padding: 0px;
   border: 20px;
+
   ${allCenterAlign}
+  ${disabledOpacity}
   ${() => getButtonWidth}
   ${() => getButtonHeight}
 `;
 
-const TextButton = ({ children, componentSize }) => {
+const TextButton = ({ children, componentSize, componentDisabled }) => {
+  const [disabled, setDisabled] = useState(componentDisabled);
+
   return (
-    <StyledTextButton componentSize={componentSize}>
+    <StyledTextButton disabled={disabled} componentSize={componentSize}>
       <CustomLink
         componentSize={getButtonCustomLinkSize({ componentSize })}
         componentColor={greyscale.label}

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useState } from "react";
 
 import CustomLink from "@components/typography/custom-link";
 import colors from "@styles/colors";
@@ -26,9 +27,11 @@ const StyledSecondaryButton = styled.button`
   ${() => getButtonBorderRadius}
 `;
 
-const SecondaryButton = ({ children, componentSize }) => {
+const SecondaryButton = ({ children, componentSize, componentDisabled }) => {
+  const [disabled, setDisabled] = useState(componentDisabled);
+
   return (
-    <StyledSecondaryButton componentSize={componentSize}>
+    <StyledSecondaryButton disabled={disabled} componentSize={componentSize}>
       <CustomLink
         componentSize={getButtonCustomLinkSize({ componentSize })}
         componentColor={colors.blue}

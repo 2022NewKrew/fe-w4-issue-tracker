@@ -1,6 +1,5 @@
-import { useState } from "react";
-
 import styled from "styled-components";
+import { useState } from "react";
 
 import CustomLink from "@components/typography/custom-link";
 import colors from "@styles/colors";
@@ -27,9 +26,11 @@ const StyledStandardButton = styled.button`
   ${() => getButtonBorderRadius}
 `;
 
-const StandardButton = ({ children, componentSize }) => {
+const StandardButton = ({ children, componentSize, componentDisabled }) => {
+  const [disabled, setDisabled] = useState(componentDisabled);
+
   return (
-    <StyledStandardButton componentSize={componentSize}>
+    <StyledStandardButton disabled={disabled} componentSize={componentSize}>
       <CustomLink
         componentSize={getButtonCustomLinkSize({ componentSize })}
         componentColor={greyscale.offWhite}

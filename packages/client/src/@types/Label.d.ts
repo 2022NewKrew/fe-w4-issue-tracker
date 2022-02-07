@@ -1,5 +1,5 @@
 declare module "@types" {
-  interface LabelDTO {
+  interface Label {
     id: string;
     name: string;
     description: string;
@@ -8,7 +8,7 @@ declare module "@types" {
     userId: string;
   }
 
-  interface LabelRequestDTO {
+  interface LabelRequest {
     name: string;
     description: string;
     color: "light" | "dark";

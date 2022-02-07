@@ -3,7 +3,7 @@ declare module "@types" {
 
   interface MilestoneJSON {
     id: string;
-    title: string;
+    name: string;
     description: string;
     deadline: string;
     issues: string[];
@@ -12,7 +12,7 @@ declare module "@types" {
 
   interface MilestoneDTO {
     id: string;
-    title: string;
+    name: string;
     description: string;
     deadline: string;
     issues: IssueJSON[];
@@ -20,7 +20,7 @@ declare module "@types" {
   }
 
   interface MilestoneRequestDTO {
-    title: string;
+    name: string;
     description: string;
     deadline: string;
   }

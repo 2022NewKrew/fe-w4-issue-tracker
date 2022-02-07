@@ -8,6 +8,7 @@ export const TEXT_INPUT_TYPE = {
   MEDIUM: 'medium',
   SMALL: 'small',
   TEXT_AREA: 'text-area',
+  FILTER_BAR: 'filter-bar',
 }
 
 export const TEXT_INPUT_STATE = {
@@ -17,7 +18,6 @@ export const TEXT_INPUT_STATE = {
 }
 
 const LabelText = styled.div`
-  padding-top: 2px;
   display: flex;
   align-items: center;
   margin-right: 8px;
@@ -105,12 +105,10 @@ const errorWrapperStyle = css`
 `
 
 const largeWrapperStyle = css`
-  flex-direction: column;
   height: 64px;
 `
 
 const mediumWrapperStyle = css`
-  flex-direction: column;
   height: 56px;
 `
 
@@ -132,7 +130,22 @@ const textAreaWrapperStyle = css`
   height: 100%;
 `
 
+const filterBarWrapperStyle = css`
+  align-items: center;
+  height: 40px;
+  border: 1px solid ${COLOR.LINE};
+
+  ${LabelText} {
+    width: 15px;
+  }
+
+  input {
+    width: calc(100% - 23px);
+  }
+`
+
 const PaddingDiv = styled.div`
+  flex: 1;
   display: flex;
   justify-content: center;
   flex-direction: ${({ flexDirection }) => flexDirection};
@@ -146,6 +159,7 @@ const PaddingDiv = styled.div`
  * @param {string} type
  * @param {string} state
  * @param {string} placeholder
+ * @param {string} labelPlaceholder
  * @param {boolean?} isDisabled
  * @param {string?} inputValue
  * @param {function?} onInputValueChangeListener
@@ -158,6 +172,7 @@ const TextInput = ({
   type,
   state,
   placeholder,
+  labelPlaceholder,
   isDisabled,
   inputValue,
   onInputValueChangeListener,
@@ -242,6 +257,8 @@ const TextInput = ({
         ? smallWrapperStyle
         : type === TEXT_INPUT_TYPE.TEXT_AREA
         ? textAreaWrapperStyle
+        : type === TEXT_INPUT_TYPE.FILTER_BAR
+        ? filterBarWrapperStyle
         : mediumWrapperStyle
 
     if (isFocus) {
@@ -292,6 +309,10 @@ const TextInput = ({
       case TEXT_INPUT_TYPE.MEDIUM:
       case TEXT_INPUT_TYPE.LARGE:
       case TEXT_INPUT_TYPE.TEXT_AREA:
+      case TEXT_INPUT_TYPE.FILTER_BAR:
+        return placeholder
+
+      default:
         return placeholder
     }
   }, [type, placeholder])
@@ -349,12 +370,17 @@ const TextInput = ({
 
   return (
     <Wrapper onMouseDownCapture={focusToInput} customStyle={wrapperStyle}>
+      {type === TEXT_INPUT_TYPE.FILTER_BAR && children}
       <PaddingDiv
-        flexDirection={type === TEXT_INPUT_TYPE.SMALL ? 'row' : 'column'}>
-        <LabelText customStyle={labelStyle}>{placeholder}</LabelText>
+        flexDirection={
+          type === TEXT_INPUT_TYPE.SMALL || type === TEXT_INPUT_TYPE.FILTER_BAR
+            ? 'row'
+            : 'column'
+        }>
+        <LabelText customStyle={labelStyle}>{labelPlaceholder}</LabelText>
         {textInput}
       </PaddingDiv>
-      {children}
+      {type === TEXT_INPUT_TYPE.FILTER_BAR || children}
     </Wrapper>
   )
 }
@@ -365,6 +391,8 @@ TextInput.propTypes = {
   onInputValueChangeListener: PropTypes.func,
   onFocusChangeListener: PropTypes.func,
   placeholder: PropTypes.string.isRequired,
+  labelPlaceholder: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
+    .isRequired,
   state: PropTypes.oneOf(Object.values(TEXT_INPUT_STATE)).isRequired,
   type: PropTypes.oneOf(Object.values(TEXT_INPUT_TYPE)).isRequired,
   isDisabled: PropTypes.bool,

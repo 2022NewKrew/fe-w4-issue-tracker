@@ -73,6 +73,7 @@ const ColorCodeInput = ({ isDisabled, onChangeListener }) => {
       type={TEXT_INPUT_TYPE.SMALL}
       state={TEXT_INPUT_STATE.NORMAL}
       placeholder="Label"
+      labelPlaceholder="Label"
       onInputValueChangeListener={onChange}
       inputValue={inputValue}
       isDisabled={isDisabled}>

@@ -1,13 +1,14 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { COLOR } from '../../Assets/Styles/commonStyle'
+import { COLOR, FONT } from '../../../Assets/Styles/commonStyle'
+import PropTypes from 'prop-types'
 
-const LABEL_TYPE = {
+export const LABEL_SIZE = {
   LARGE: 'large',
   SMALL: 'small',
 }
 
-const LABEL_COLOR = {
+export const LABEL_COLOR = {
   NORMAL: 'normal',
   LIGHT: 'light',
   DARK: 'dark',
@@ -19,12 +20,13 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   padding: 0 16px;
+  ${FONT.TEXT_XSMALL};
 
   ${({ size, color }) => {
     const sizeStyle =
-      size === LABEL_TYPE.LARGE
+      size === LABEL_SIZE.LARGE
         ? largeSizeContainerStyle
-        : size === LABEL_TYPE.SMALL
+        : size === LABEL_SIZE.SMALL
         ? smallSizeContainerStyle
         : smallSizeContainerStyle
 
@@ -51,8 +53,8 @@ const largeSizeContainerStyle = css`
 `
 
 const smallSizeContainerStyle = css`
-  width: 90px;
   height: 28px;
+  border-radius: 14px;
 `
 
 const normalColorContainerStyle = css`
@@ -82,10 +84,25 @@ const purpleColorContainerStyle = css`
   color: ${COLOR.PURPLE};
 `
 
-const Label = (props) => {
-  return <></>
+/**
+ * @param {JSX.Element} children
+ * @param {string} size
+ * @param {string} color
+ * @return {JSX.Element}
+ * @constructor
+ */
+const Label = ({ children, size, color }) => {
+  return (
+    <Container color={color} size={size}>
+      {children}
+    </Container>
+  )
 }
 
-Label.propTypes = {}
+Label.propTypes = {
+  children: PropTypes.element,
+  color: PropTypes.oneOf(Object.values(LABEL_COLOR)),
+  size: PropTypes.oneOf(Object.values(LABEL_SIZE)),
+}
 
 export default Label

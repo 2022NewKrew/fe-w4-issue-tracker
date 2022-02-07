@@ -31,10 +31,6 @@ const TabItemContainer = styled.li`
     background-color: ${COLOR.INPUT_BACKGROUND};
   }
 
-  span {
-    padding-top: 4px;
-  }
-
   ${({ isSelected }) => {
     if (isSelected) {
       return activeStyle

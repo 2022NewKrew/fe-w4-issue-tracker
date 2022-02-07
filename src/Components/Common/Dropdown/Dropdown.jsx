@@ -12,6 +12,7 @@ const DropdownContainer = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: end;
 `
 
@@ -23,7 +24,7 @@ const DropdownContainer = styled.div`
  * @return {JSX.Element}
  * @constructor
  */
-const Dropdown = ({ itemInfoList, panelTitle, type, indicatorText }) => {
+const Dropdown = ({ itemInfoList, panelTitle, type, indicatorText, btnUserStyle }) => {
   const dropdownRef = useRef()
 
   const [isPanelShown, setIsPanelShown] = useState(false)
@@ -44,7 +45,8 @@ const Dropdown = ({ itemInfoList, panelTitle, type, indicatorText }) => {
     <DropdownContainer ref={dropdownRef}>
       <Button
         type={BUTTON_TYPE.TEXT}
-        size={BUTTON_SIZE.MEDIUM}
+        size={BUTTON_SIZE.SEMI_MEDIUM}
+        userStyle={btnUserStyle}
         onClickListener={onButtonClick}>
         <span>{indicatorText}</span>
         <DropdownIcon width="10px" height="6px" />
@@ -63,6 +65,7 @@ Dropdown.propTypes = {
   indicatorText: PropTypes.string,
   itemInfoList: PropTypes.array,
   panelTitle: PropTypes.string,
+  btnUserStyle: PropTypes.array,
   type: PropTypes.oneOf(Object.values(DROPDOWN_ITEM_TYPE)).isRequired,
 }
 

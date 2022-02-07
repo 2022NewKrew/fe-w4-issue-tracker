@@ -12,6 +12,7 @@ export const BUTTON_TYPE = {
 export const BUTTON_SIZE = {
   LARGE: 'large',
   MEDIUM: 'medium',
+  SEMI_MEDIUM: 'semi-medium',
   SMALL: 'small',
 }
 
@@ -38,7 +39,6 @@ const standardBtnStyle = css`
   border: 4px solid rgba(0, 0, 0, 0);
 
   span {
-    padding-top: 3px;
     color: ${COLOR.OFF_WHITE};
   }
 `
@@ -63,7 +63,6 @@ const secondaryBtnStyle = css`
   }
 
   span {
-    padding-top: 3px;
     color: ${COLOR.BLUE};
   }
 `
@@ -96,7 +95,7 @@ const secondaryBtnInteractionStyle = css`
 
 const textBtnStyle = css`
   width: 100%;
-  height: 28px;
+  height: 100%;
   justify-content: space-between;
   padding: 0 4px;
 
@@ -105,7 +104,6 @@ const textBtnStyle = css`
   }
 
   span {
-    padding-top: 4px;
     color: ${COLOR.LABEL};
   }
 
@@ -160,6 +158,12 @@ const mediumStyle = css`
   }
 `
 
+const semiMediumStyle = css`
+  span {
+    ${FONT.LINK_SMALL}
+  }
+`
+
 const smallStyle = css`
   width: 120px;
   height: 40px;
@@ -180,12 +184,20 @@ const disableBtnStyle = css`
  * @param {JSX.Element} children
  * @param {string} type
  * @param {string} size
+ * @param {Object[]} userStyle
  * @param {boolean} isDisabled
  * @param {function} onClickListener
  * @return {JSX.Element}
  * @constructor
  */
-const Button = ({ children, type, size, isDisabled, onClickListener }) => {
+const Button = ({
+  children,
+  type,
+  size,
+  userStyle,
+  isDisabled,
+  onClickListener,
+}) => {
   const onClick = useCallback(() => {
     if (!isDisabled) {
       onClickListener()
@@ -198,6 +210,8 @@ const Button = ({ children, type, size, isDisabled, onClickListener }) => {
         ? largeStyle
         : size === BUTTON_SIZE.MEDIUM
         ? mediumStyle
+        : size === BUTTON_SIZE.SEMI_MEDIUM
+        ? semiMediumStyle
         : size === BUTTON_SIZE.SMALL
         ? smallStyle
         : mediumStyle
@@ -224,6 +238,8 @@ const Button = ({ children, type, size, isDisabled, onClickListener }) => {
           : style.concat(standardBtnInteractionStyle)
     }
 
+    style = style.concat(userStyle)
+
     return style
   }, [type, size, isDisabled])
 
@@ -238,6 +254,7 @@ Button.propTypes = {
   children: PropTypes.element,
   type: PropTypes.oneOf(Object.values(BUTTON_TYPE)).isRequired,
   size: PropTypes.oneOf(Object.values(BUTTON_SIZE)).isRequired,
+  userStyle: PropTypes.array,
   onClickListener: PropTypes.func.isRequired,
   isDisabled: PropTypes.bool,
 }

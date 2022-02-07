@@ -25,7 +25,6 @@ const AttachWrapperActiveStyle = css`
 `
 
 const AttachText = styled.span`
-  padding-top: 2px;
   margin-left: 7px;
   color: ${COLOR.LABEL};
   ${FONT.LINK_XSMALL};
@@ -102,6 +101,7 @@ const TextArea = ({
       type={TEXT_INPUT_TYPE.TEXT_AREA}
       state={TEXT_INPUT_STATE.NORMAL}
       placeholder={placeholder || ''}
+      labelPlaceholder={placeholder || ''}
       isDisabled={isDisabled}
       onInputValueChangeListener={onInputValueChange}
       onFocusChangeListener={onFocusChange}>

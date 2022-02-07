@@ -17,7 +17,7 @@ export const Default = Template.bind({});
 Default.args = {
   label: '마일스톤',
   selected: 0,
-  setSelected: () => console.log('selected'),
+  onSelect: (index: number) => console.log(index),
   options: ['마일스톤이 없는 필터', '마스터즈 코스'],
   images: [icon, icon],
 };

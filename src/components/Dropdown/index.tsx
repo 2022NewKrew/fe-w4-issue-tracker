@@ -1,6 +1,6 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { useState, Dispatch, SetStateAction } from 'react';
+import { useState, useRef } from 'react';
 import { jsx, css } from '@emotion/react';
 import { theme } from '@styles/theme';
 import Icon from '@icon';
@@ -8,7 +8,7 @@ import Icon from '@icon';
 interface DropdownProps {
   label: string;
   selected: number;
-  setSelected: Dispatch<SetStateAction<number>>;
+  onSelect: (index: number) => boolean;
   options: string[];
   type: 'Text' | 'ImageAndText' | 'Modify';
   images: JSX.Element[];
@@ -18,16 +18,32 @@ interface DropdownProps {
 const Dropdown = ({
   label,
   selected,
-  setSelected,
+  onSelect,
   options,
   type = 'Text',
   images,
   customName,
 }: DropdownProps) => {
   const [open, setOpen] = useState(false);
-  const handleClickOption = (index: number) => {
-    setSelected(index);
+  const panelRef = useRef<HTMLUListElement>(null);
+
+  const handleClickOutside = (e: MouseEvent) => {
+    if (!panelRef.current?.contains(e.target as Node)) closePanel();
+  };
+
+  const closePanel = () => {
     setOpen(false);
+    document.removeEventListener('mousedown', handleClickOutside);
+  };
+
+  const handleClickOption = (index: number) => {
+    onSelect(index);
+    closePanel();
+  };
+
+  const handleClickIndicator = () => {
+    setOpen(true);
+    document.addEventListener('mousedown', handleClickOutside);
   };
 
   const optionEl = options.map((opt, idx) => (
@@ -42,12 +58,12 @@ const Dropdown = ({
 
   return (
     <div css={{ position: 'relative' }}>
-      <div css={IndicatorStyle} onClick={() => setOpen(true)}>
+      <div css={IndicatorStyle} onClick={handleClickIndicator}>
         <span>{label}</span>
         <Icon icon="Arrow" />
       </div>
       {open && (
-        <ul css={PannelStyle}>
+        <ul css={PannelStyle} ref={panelRef}>
           <li>{customName ?? `${label} 필터`}</li>
           {optionEl}
         </ul>

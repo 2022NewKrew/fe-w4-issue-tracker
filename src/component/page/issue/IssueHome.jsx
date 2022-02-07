@@ -1,93 +1,115 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
+import { getIssues, getLabels, getMilestones, patchCheckedIssue } from "../../../api/api";
 import { Button } from "../../atoms/Button";
 import { CheckBox } from "../../atoms/CheckBox";
+import { cssFontSize, cssLink } from "../../atoms/Text";
 import { FilterBar } from "../../molecules/FilterBar";
 import { IssueItem } from "../../molecules/IssueItem";
 import { Taps } from "../../molecules/Taps";
 
-const data = [
-  {
-    title: "이슈 제목",
-    issueId: 1,
-    description: "이 이슈가 8분 전, Oni님에 의해 작성되었습니다",
-    labels: [
-      { name: "document", backgroundColor: "blue", isBright: true },
-      { name: "feature", backgroundColor: "red", isBright: false },
-      { name: "error", backgroundColor: "green", isBright: true },
-    ],
-    milestone: "마스터즈 코스",
-  },
-  {
-    title: "이슈 제목",
-    issueId: 2,
-    description: "이 이슈가 8분 전, Oni님에 의해 작성되었습니다",
-    labels: [],
-    milestone: "마스터즈 코스",
-  },
-  {
-    title: "이슈 제목",
-    issueId: 3,
-    description: "이 이슈가 8분 전, Oni님에 의해 작성되었습니다",
-    labels: [],
-    milestone: "마스터즈 코스",
-  },
-];
-
 export const IssueHome = () => {
+  // local state
   const [checked, setCheck] = useState(false);
-  const [issueList, setIssueList] = useState(data);
-  const handleClick = () => {
+  const [issueList, setIssueList] = useState([]); // 나중에 필터 적용 예정
+  const checkedIssues = useRef(new Set());
+
+  // data fetch
+  const { data: labels } = useQuery(["labels"], getLabels);
+  const { data: milestones } = useQuery(["milestones"], getMilestones);
+  const { data: issues, refetch } = useQuery(["issues"], getIssues);
+  useEffect(() => {
+    if (Array.isArray(issues)) {
+      setIssueList(issues);
+      setCheck(false);
+      checkedIssues.current = new Set();
+    }
+  }, [issues]);
+
+  // 전체 선택, 해제
+  const handleTotalCheckBox = () => {
     if (checked) {
       checkedIssues.current.clear();
       setIssueList((prev) => prev.map((item) => ({ ...item, checked: false })));
     } else {
-      //issueList.forEach((item) => checkedIssues.current.add(item.issueId));
-      checkedIssues.current = new Set(issueList.map((item) => item.issueId));
+      checkedIssues.current = new Set(issueList.map((item) => item.id));
       setIssueList((prev) => prev.map((item) => ({ ...item, checked: true })));
     }
     setCheck((prev) => !prev);
   };
 
-  const checkedIssues = useRef(new Set());
-  const handleChecked = (id) => {
+  // 이슈별 체크박스
+  const handleCheckBoxById = (id) => {
     setIssueList((prev) =>
-      prev.map((item) =>
-        item.issueId === id
+      prev.map((issue) =>
+        issue.id === id
           ? {
-              ...item,
-              checked: !item.checked,
+              ...issue,
+              checked: !issue.checked,
             }
-          : item
+          : issue
       )
     );
     if (checkedIssues.current.delete(id)) {
+      setCheck(false);
       return;
     }
     checkedIssues.current.add(id);
   };
 
-  const issueItems = issueList.map((item) => <IssueItem key={item.issueId} item={item} handleCheckedList={handleChecked} checked={item.checked} />);
+  // 선택 이슈들 상태 변경
+  const changeStateCheckedIssue = async () => {
+    await patchCheckedIssue([...checkedIssues.current]);
+    refetch();
+  };
+
+  const issueItems = issueList.map((item) => <IssueItem key={item.id} item={item} handleCheckBoxById={handleCheckBoxById} checked={item.checked} />);
+  const numOpenIssue = issues?.reduce((prev, item) => (item.status === "open" ? prev + 1 : prev), 0) || 0;
+  const numCloseIssue = issues?.reduce((prev, item) => (item.status === "close" ? prev + 1 : prev), 0) || 0;
+  const numLabels = labels?.length || 0;
+  const numMilestones = milestones?.length || 0;
+  const numCheckedIssues = checkedIssues.current.size;
+
+  const issueTableHeader =
+    numCheckedIssues === 0 ? (
+      <IssueTableHeader>
+        <CheckBox onClick={handleTotalCheckBox} checked={checked} />
+        <Button options={{ type: "Medium-Text", prefixIcon: "alert-circle" }}>{`열린 이슈(${numOpenIssue})`}</Button>
+        <Button options={{ type: "Medium-Text", prefixIcon: "archive" }}>{`닫힌 이슈(${numCloseIssue})`}</Button>
+        <IssueRightItems>
+          <Button options={{ type: "Medium-Text", suffixIcon: "arrow-down" }}>담당자</Button>
+          <Button options={{ type: "Medium-Text", suffixIcon: "arrow-down" }}>레이블</Button>
+          <Button options={{ type: "Medium-Text", suffixIcon: "arrow-down" }}>마일스톤</Button>
+          <Button options={{ type: "Medium-Text", suffixIcon: "arrow-down" }}>작성자</Button>
+        </IssueRightItems>
+      </IssueTableHeader>
+    ) : (
+      <IssueTableHeader>
+        <CheckBox onClick={handleTotalCheckBox} checked={checked} />
+        <span css={[cssFontSize["small"], cssLink]}>{`${numCheckedIssues}개 이슈 선택`}</span>
+        <IssueRightItems>
+          <Button options={{ type: "Medium-Text", suffixIcon: "arrow-down" }} onClick={changeStateCheckedIssue}>
+            상태 수정
+          </Button>
+        </IssueRightItems>
+      </IssueTableHeader>
+    );
 
   return (
     <>
       <Header>
         <FilterBar />
         <RightItems>
-          <Taps labelCount={3} milestoneCount={2} />
+          <Taps labelCount={numLabels} milestoneCount={numMilestones} />
           <Link to="new">
             <Button options={{ type: "Small-Standard", prefixIcon: "plus" }}>이슈 작성</Button>
           </Link>
         </RightItems>
       </Header>
       <IssueTable>
-        <IssueTableHeader>
-          <CheckBox onClick={handleClick} checked={checked} />
-          <Button options={{ type: "Medium-Text", prefixIcon: "alert-circle" }}>열린 이슈(2)</Button>
-          <Button options={{ type: "Medium-Text", prefixIcon: "archive" }}>닫힌 이슈(0)</Button>
-          <RightItems></RightItems>
-        </IssueTableHeader>
+        {issueTableHeader}
         {issueItems}
       </IssueTable>
     </>
@@ -115,7 +137,6 @@ const IssueTable = styled.div(
   ({ theme }) => css`
     display: flex;
     flex-direction: column;
-    background: ${theme.grayscale.line};
     border: 1px solid ${theme.grayscale.line};
     border-radius: 16px;
     overflow: hidden;
@@ -134,5 +155,10 @@ const IssueTableHeader = styled.div(
     align-items: center;
     width: 100%;
     height: 64px;
+    color: ${theme.grayscale.label};
   `
 );
+
+const IssueRightItems = styled(RightItems)`
+  margin-right: 16px;
+`;

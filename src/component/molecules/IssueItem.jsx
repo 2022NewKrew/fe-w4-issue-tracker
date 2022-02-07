@@ -6,26 +6,26 @@ import { Icon } from "../atoms/Icons";
 import { SmallLabel } from "../atoms/Label";
 import { cssFontSize, cssLink } from "../atoms/Text";
 
-export const IssueItem = ({ item, handleCheckedList, checked, ...props }) => {
+export const IssueItem = ({ item, handleCheckBoxById, checked, ...props }) => {
   return (
     <Issue {...props}>
-      <IssueCheckBox onClick={() => handleCheckedList(item.issueId)} checked={checked} />
+      <IssueCheckBox onClick={() => handleCheckBoxById(item.id)} checked={checked} />
       <IssueTitle>
         <Icon name="alert-circle" />
-        <Link to={`${item.issueId}`}>
+        <Link to={`${item.id}`}>
           <span css={[cssFontSize["medium"], cssLink]}>{item.title}</span>
         </Link>
-        {item.labels.map((props, index) => (
-          <SmallLabel key={index} {...props} />
+        {item.labels.map((label) => (
+          <SmallLabel key={label.id} {...label} />
         ))}
       </IssueTitle>
       <IssueDescription>
-        <span>{`#${item.issueId}`}</span>
-        <span>{item.description}</span>
+        <span>{`#${item.id}`}</span>
+        <span>{item.timestamp}</span>
         {item.milestone && (
           <>
             <Icon name="milestone" />
-            <p>{item.milestone}</p>
+            <p>{item.milestone.title}</p>
           </>
         )}
       </IssueDescription>

@@ -14,9 +14,9 @@ export const LargeLabel = ({ isOpen, ...props }) => {
   );
 };
 
-export const SmallLabel = ({ name, backgroundColor, isBright, ...props }) => {
+export const SmallLabel = ({ name, backgroundColor, color, ...props }) => {
   return (
-    <Small backgroundColor={backgroundColor} isBright={isBright} {...props}>
+    <Small backgroundColor={backgroundColor} color={color} {...props}>
       <Text options={{ size: "xsmall" }}>{name}</Text>
     </Small>
   );
@@ -47,8 +47,8 @@ const Large = styled.div(({ theme, isOpen }) => {
   `;
 });
 
-const Small = styled.div(({ theme, backgroundColor, isBright }) => {
-  const color = isBright ? theme.grayscale.offWhite : theme.grayscale.titleActive;
+const Small = styled.div(({ theme, backgroundColor, color }) => {
+  //const color = isBright ? theme.grayscale.offWhite : theme.grayscale.titleActive;
   return css`
     height: 28px;
     padding: 0px 16px;

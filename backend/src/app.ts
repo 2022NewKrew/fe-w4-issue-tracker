@@ -12,6 +12,7 @@ const PORT = process.env.PORT || 1234;
 
 loadPassport();
 
+// app.use(cors({ credentials: true, origin: "https://localhost:3000" }));
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

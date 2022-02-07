@@ -14,7 +14,7 @@ import { ColorCode } from "@components/molecules/ColorCode.js";
 import { firebaseAuth } from "../firebase";
 
 import { useSetRecoilState } from "recoil";
-import { userState } from "../atoms/atoms";
+import { userState } from "../_state/users";
 
 import { useCookies } from "react-cookie";
 import IssueList from "./IssueList";
@@ -47,7 +47,7 @@ export default function Main() {
       <Button size='medium' color='blue' onClick={logout}>
         로그아웃 하러 가기
       </Button>
-
+      {/* 
       <TextArea
         placeholder='코멘트를 입력하세요'
         textAreaValue={textAreaValue}
@@ -62,7 +62,7 @@ export default function Main() {
       <br />
       <RadioOption options={options} label='LABEL' />
       <br />
-      <ColorCode label='Color'></ColorCode>
+      <ColorCode label='Color'></ColorCode> */}
     </div>
   );
 }

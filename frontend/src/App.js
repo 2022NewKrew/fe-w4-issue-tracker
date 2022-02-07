@@ -8,7 +8,7 @@ import CreateIssue from "./pages/CreateIssue";
 import IssueDetail from "./pages/IssueDetail";
 
 import { useRecoilState } from "recoil";
-import { userState } from "./atoms/atoms";
+import { userState } from "./_state/users";
 import { useCookies } from "react-cookie";
 
 const App = () => {
@@ -16,7 +16,7 @@ const App = () => {
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
 
   useEffect(() => {
-    if (cookies) {
+    if (cookies.user) {
       setUser(cookies);
     }
   }, []);

@@ -7,21 +7,25 @@ import { TextInput } from "@components/atoms/textInputs";
 import { SmallLink } from "@components/atoms/link";
 
 import { firebaseAuth, githubProvider } from "../firebase";
+import axios from "axios";
 
 import { useRecoilState } from "recoil";
-import { userState } from "../atoms/atoms";
+import { userState } from "../_state/users";
+import { useUserActions } from "../_actions";
 
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
 export default function Login() {
+  const userActions = useUserActions();
+
   const provider = githubProvider;
   const navigate = useNavigate();
 
   const [user, setUser] = useRecoilState(userState);
   const [disable, setDisable] = useState(true);
   const [id, setId] = useState("");
-  const [pwd, setPwd] = useState("");
+  const [pd, setPd] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
 
   function handleGithubLogin() {
@@ -37,15 +41,11 @@ export default function Login() {
   }
 
   const changeDisable = () => {
-    if (id.length > 0 && pwd.length > 0) {
+    if (id.length > 0 && pd.length > 0) {
       setDisable(false);
     } else {
       setDisable(true);
     }
-  };
-
-  const handleLogin = () => {
-    console.log(id, pwd);
   };
 
   useEffect(() => {
@@ -54,12 +54,12 @@ export default function Login() {
 
   useEffect(() => {
     changeDisable();
-  }, [id, pwd]);
+  }, [id, pd]);
 
   return (
     <LoginContainer>
       <Logo />
-      <Button size='large' color='black' onClick={handleGithubLogin}>
+      <Button size='large' color='black' onClick={userActions.githubLogin}>
         GitHub 계정으로 로그인
       </Button>
       <SmallLink>or</SmallLink>
@@ -73,12 +73,16 @@ export default function Login() {
       <TextInput
         size='large'
         type='password'
-        value={pwd}
-        handleValueChange={setPwd}
+        value={pd}
+        handleValueChange={setPd}
         setDisable={setDisable}
         text='비밀번호'
       />
-      <Button size='large' onClick={handleLogin} color='blue' disable={disable}>
+      <Button
+        size='large'
+        onClick={() => userActions.login(id, pd)}
+        color='blue'
+        disable={disable}>
         아이디로 로그인
       </Button>
       <SmallTextButton>회원가입</SmallTextButton>

@@ -13,6 +13,7 @@ module.exports = merge(common, {
     open: true,
     historyApiFallback: true,
     hot: true,
+    proxy: { "/api/**": { target: "http://localhost:1234", secure: false } },
   },
   plugins: [
     new Dotenv({

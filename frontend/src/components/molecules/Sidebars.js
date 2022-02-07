@@ -67,7 +67,7 @@ const Header = styled.div`
   }
 
   ${(props) => {
-    if (props.value.length > 0) {
+    if (props.value && props.value.length > 0) {
       return css`
         padding: 34px 32px 18px 32px;
       `;
@@ -95,14 +95,18 @@ const MilestoneWrapper = styled.div`
   }
 `;
 
-export function Sidebar() {
+export function Sidebar({
+  selectedAssignee,
+  setSelectedAssignee,
+  selectedLabel,
+  setSelectedLabel,
+  selectedMilestone,
+  setSelectedMilestone,
+}) {
   const assigneeMenus = ["Lin", "Min"];
   const labelMenus = ["documentation", "review"];
   const milestoneMenus = ["Milestone 1", "Milestone 2"];
 
-  const [selectedAssignee, setSelectedAssignee] = useState([]);
-  const [selectedLabel, setSelectedLabel] = useState([]);
-  const [selectedMilestone, setSelectedMilestone] = useState([]);
   const [showPanel, setShowPanel] = useState({
     assignee: false,
     label: false,
@@ -117,34 +121,43 @@ export function Sidebar() {
   }
 
   function AssigneeList() {
-    return selectedAssignee.map((assignee) => {
-      return (
-        <ListWrapper key={assignee}>
-          <UserImageLarge /> <SmallText>{assignee}</SmallText>
-        </ListWrapper>
-      );
-    });
+    return (
+      selectedAssignee &&
+      selectedAssignee.map((assignee) => {
+        return (
+          <ListWrapper key={assignee}>
+            <UserImageLarge /> <SmallText>{assignee}</SmallText>
+          </ListWrapper>
+        );
+      })
+    );
   }
 
   function LabelList() {
-    return selectedLabel.map((label) => {
-      return (
-        <ListWrapper key={label}>
-          <SmallLabel type='light' text={label} />
-        </ListWrapper>
-      );
-    });
+    return (
+      selectedLabel &&
+      selectedLabel.map((label) => {
+        return (
+          <ListWrapper key={label}>
+            <SmallLabel type='light' text={label} />
+          </ListWrapper>
+        );
+      })
+    );
   }
 
   function MilestoneList() {
-    return selectedMilestone.map((milestone) => {
-      return (
-        <MilestoneWrapper key={milestone}>
-          <ProgressIndicator openIssues={5} closedIssues={12} />
-          <SmallText color='label'>{milestone}</SmallText>
-        </MilestoneWrapper>
-      );
-    });
+    return (
+      selectedMilestone &&
+      selectedMilestone.map((milestone) => {
+        return (
+          <MilestoneWrapper key={milestone}>
+            <ProgressIndicator openIssues={5} closedIssues={12} />
+            <SmallText color='label'>{milestone}</SmallText>
+          </MilestoneWrapper>
+        );
+      })
+    );
   }
 
   return (

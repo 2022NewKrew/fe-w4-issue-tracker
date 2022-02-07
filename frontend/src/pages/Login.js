@@ -64,12 +64,14 @@ export default function Login() {
       </Button>
       <SmallLink>or</SmallLink>
       <TextInput
+        size='large'
         value={id}
         handleValueChange={setId}
         setDisable={setDisable}
         text='로그인'
       />
       <TextInput
+        size='large'
         type='password'
         value={pwd}
         handleValueChange={setPwd}

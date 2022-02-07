@@ -126,7 +126,8 @@ export default function TextArea({
   isDisabled,
   onChangeListener,
   onAttachClickListener,
-  setTextAreaValue,
+  value,
+  setValue,
   height,
 }) {
   const [active, setActive] = useState(false);
@@ -144,6 +145,7 @@ export default function TextArea({
     useState(false);
 
   const handleChange = (e) => {
+    setValue(e.currentTarget.value);
     changeDisable(e.currentTarget.value);
     changeActive(e.currentTarget.value);
     onInputValueChange(e.currentTarget.value);
@@ -204,6 +206,7 @@ export default function TextArea({
         onChange={handleChange}
         onFocus={onFocus}
         onBlur={onBlur}
+        value={value}
       />
       <Label active={active}>{placeholder}</Label>
       {inputLengthText}

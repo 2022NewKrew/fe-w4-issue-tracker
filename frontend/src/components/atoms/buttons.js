@@ -118,6 +118,10 @@ export const TextButton = styled.button`
 
   font-weight: 700;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   color: ${(props) => props.theme.greyscale.label};
   background-color: transparent;
 
@@ -147,6 +151,10 @@ export const MediumTextButton = styled(TextButton)`
   height: 40px;
 
   font-size: ${(props) => props.theme.fontSizes.small};
+
+  svg {
+    margin-right: 8.33px;
+  }
 `;
 
 export const SmallTextButton = styled(TextButton)`

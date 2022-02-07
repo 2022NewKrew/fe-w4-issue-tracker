@@ -52,8 +52,7 @@ module.exports = {
             '@pages': path.resolve(__dirname, 'src/pages'),
             '@style': path.resolve(__dirname, 'src/style'),
             '@utils': path.resolve(__dirname, 'src/utils'),
-
-            // '@api': path.resolve(__dirname, 'src/api'),
+            '@api': path.resolve(__dirname, 'src/api'),
         },
     },
 };

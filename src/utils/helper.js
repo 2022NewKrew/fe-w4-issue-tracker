@@ -119,10 +119,12 @@ export const getButtonWidth = ({ componentSize }) => {
       return css`
         width: 240px;
       `;
-    default:
+    case "small":
       return css`
         width: 120px;
       `;
+    default:
+      return css``;
   }
 };
 
@@ -136,10 +138,12 @@ export const getButtonHeight = ({ componentSize }) => {
       return css`
         height: 56px;
       `;
-    default:
+    case "small":
       return css`
         height: 40px;
       `;
+    default:
+      return css``;
   }
 };
 
@@ -168,5 +172,27 @@ export const getButtonCustomLinkSize = ({ componentSize }) => {
       return "x-small";
     default:
       return "";
+  }
+};
+
+export const getTextInputDisplay = ({ componentSize }) => {
+  switch (componentSize) {
+    case "small":
+      return css`
+        display: flex;
+      `;
+    default:
+      return css``;
+  }
+};
+
+export const getTextInputAlignItems = ({ componentSize }) => {
+  switch (componentSize) {
+    case "small":
+      return css`
+        align-items: center;
+      `;
+    default:
+      return css``;
   }
 };

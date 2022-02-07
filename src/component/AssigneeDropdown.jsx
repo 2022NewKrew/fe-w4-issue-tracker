@@ -4,6 +4,7 @@ import Dropdown from '../item/Dropdown';
 import issueFilterState from '../store/issueFilterState';
 import MoreIcon from '../svg/More.svg';
 import usersState from '../store/usersState';
+import {wrapInQuotes} from '../global';
 
 export default function AssigneeDropdown(){
   const users=useRecoilValue(usersState);
@@ -21,7 +22,7 @@ export default function AssigneeDropdown(){
     }}];
     itemArray.push(...Object.values(users).map(({userID})=>{
       return {itemTitle: userID, onClick: ()=>{
-        setIssueFilter(`assignee:${userID}`);
+        setIssueFilter(`assignee:${wrapInQuotes(userID)}`);
         toggle();
       }};
     }));
@@ -29,7 +30,7 @@ export default function AssigneeDropdown(){
   }
 
   function isSelectedIndex({itemTitle}, index){
-    const matchResult=issueFilter.match(/assignee:([\S]*)/);
+    const matchResult=issueFilter.match(/assignee:"*((?:[^"]*)|(?:[^\s"]*))"*/);
     if(matchResult===null){
       return;
     }
@@ -39,7 +40,7 @@ export default function AssigneeDropdown(){
     }
     return false;
   }
-  
+
   return (
     <div className='tab-rest hover-item' onClick={()=>{
       if(!show){

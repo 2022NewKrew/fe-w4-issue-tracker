@@ -4,6 +4,7 @@ import Dropdown from '../item/Dropdown';
 import issueFilterState from '../store/issueFilterState';
 import milestonesState from '../store/milestonesState';
 import MoreIcon from '../svg/More.svg';
+import {wrapInQuotes} from '../global';
 
 export default function MilestoneDropdown(){
   const milestones=useRecoilValue(milestonesState);
@@ -21,7 +22,7 @@ export default function MilestoneDropdown(){
     }}];
     itemArray.push(...Object.values(milestones).map(({title: milestoneTitle})=>{
       return {itemTitle: milestoneTitle, onClick: ()=>{
-        setIssueFilter(`milestone:${milestoneTitle}`);
+        setIssueFilter(`milestone:${wrapInQuotes(milestoneTitle)}`);
         toggle();
       }};
     }));
@@ -29,7 +30,7 @@ export default function MilestoneDropdown(){
   }
 
   function isSelectedIndex({itemTitle}, index){
-    const matchResult=issueFilter.match(/milestone:([\S]*)/);
+    const matchResult=issueFilter.match(/milestone:"*((?:[^"]*)|(?:[^\s"]*))"*/);
     if(matchResult===null){
       return;
     }

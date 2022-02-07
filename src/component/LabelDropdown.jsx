@@ -4,6 +4,7 @@ import Dropdown from '../item/Dropdown';
 import issueFilterState from '../store/issueFilterState';
 import labelsState from '../store/labelsState';
 import MoreIcon from '../svg/More.svg';
+import {wrapInQuotes} from '../global';
 
 export default function LabelDropdown(){
   const labels=useRecoilValue(labelsState);
@@ -21,7 +22,7 @@ export default function LabelDropdown(){
     }}];
     itemArray.push(...Object.values(labels).map(({title: labelTitle})=>{
       return {itemTitle: labelTitle, onClick: ()=>{
-        setIssueFilter(`label:${labelTitle}`);
+        setIssueFilter(`label:${wrapInQuotes(labelTitle)}`);
         toggle();
       }};
     }));
@@ -29,7 +30,7 @@ export default function LabelDropdown(){
   }
 
   function isSelectedIndex({itemTitle}, index){
-    const matchResult=issueFilter.match(/label:([\S]*)/);
+    const matchResult=issueFilter.match(/label:"*((?:[^"]*)|(?:[^\s"]*))"*/);
     if(matchResult===null){
       return;
     }

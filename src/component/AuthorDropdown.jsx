@@ -4,6 +4,7 @@ import Dropdown from '../item/Dropdown';
 import issueFilterState from '../store/issueFilterState';
 import MoreIcon from '../svg/More.svg';
 import usersState from '../store/usersState';
+import {wrapInQuotes} from '../global';
 
 export default function AuthorDropdown(){
   const users=useRecoilValue(usersState);
@@ -17,7 +18,7 @@ export default function AuthorDropdown(){
   function getItemArray(){
     const itemArray=Object.values(users).map(({userID})=>{
       return {itemTitle: userID, onClick: ()=>{
-        setIssueFilter(`author:${userID}`);
+        setIssueFilter(`author:${wrapInQuotes(userID)}`);
         toggle();
       }};
     });
@@ -25,7 +26,7 @@ export default function AuthorDropdown(){
   }
 
   function isSelectedIndex({itemTitle}){
-    const matchResult=issueFilter.match(/author:([\S]*)/);
+    const matchResult=issueFilter.match(/author:"*((?:[^"]*)|(?:[^\s"]*))"*/);
     if(matchResult===null){
       return;
     }

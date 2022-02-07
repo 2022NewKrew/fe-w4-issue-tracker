@@ -68,10 +68,13 @@ app.get('/issue-list', (req, res)=>{
  * @param {string} rawFilter
  */
 function parseFilter(rawFilter){
-  const filterArray=rawFilter.split(' ').filter((val)=>val.length && val!==' ');
+  const filterArray=rawFilter
+    .split(/\s+(?=([^"]*"[^"]*")*[^"]*$)/)
+    .filter((val)=>val.length && !val.match(/^\s+$/));
   let authorID, milestoneTitle, labelTitle, assigneeID;
   filterArray.forEach((val)=>{
     let [key, value]=val.split(':');
+    value=value.replace(/"/g, '');
     if(!value.length){
       value=null;
     }
@@ -89,7 +92,7 @@ function parseFilter(rawFilter){
       assigneeID=value;
       break;
     default:
-      throw Error('parseFilter: Invalid filter key.');
+      throw Error(`parseFilter: Invalid filter key: ${key}`);
     }
   });
   return {authorID, milestoneTitle, labelTitle, assigneeID};

@@ -23,3 +23,12 @@ export function getPrettyDate(date){
     ${date.getHours()}:${date.getMinutes()}`;
   return prettyDate;
 }
+
+/**
+ * Wrap given string in quotes if contains space.
+ * @param {string} str The given string to wrap.
+ * @param {string} quote Defaults to double quote.
+ */
+export function wrapInQuotes(str, quote='"'){
+  return str.includes(' ') ? `${quote}${str}${quote}` : str;
+}

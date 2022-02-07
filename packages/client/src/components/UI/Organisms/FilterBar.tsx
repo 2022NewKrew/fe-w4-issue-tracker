@@ -1,44 +1,60 @@
 import { Dropdown } from "@UI/Molecules";
-import Icon from "@UI/Icon";
 import Atoms from "@UI/Atoms";
 
 import styled from "@emotion/styled";
 
-import { useState } from "react";
-
-const filterList = [
-  "열린 이슈",
-  "내가 작성한 이슈",
-  "나에게 할당된 이슈",
-  "내가 댓글을 남긴 이슈",
-  "닫힌 이슈",
-];
+import { useCallback, useState } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { issueFilterBarState, selectFilterBarState } from "@recoils/filterbar";
 
 const FilterBar = () => {
   const [focus, setFocus] = useState(false);
+  const issueFilterBarList = useRecoilValue(issueFilterBarState);
+  const [selectFilterList, setSelectFilterList] =
+    useRecoilState(selectFilterBarState);
+
+  const onSelect = useCallback(
+    ({ target }: React.MouseEvent<HTMLLIElement>) => {
+      const filterId = (target as HTMLLIElement).dataset.id as string;
+      if (selectFilterList.includes(filterId)) {
+        const newFilter = selectFilterList.filter((ele) => ele !== filterId);
+        setSelectFilterList(newFilter);
+      } else {
+        const newFilter = [...selectFilterList, filterId];
+        setSelectFilterList(newFilter);
+      }
+    },
+    [selectFilterList]
+  );
 
   const handleSubmit = (e: React.BaseSyntheticEvent) => {
     e.preventDefault();
     console.log(e.target.search.value);
+    console.log(selectFilterList);
   };
+
+  const onFocus = useCallback(() => setFocus(true), []);
+  const onBlur = useCallback(() => setFocus(false), []);
 
   return (
     <Wrapper className="FilterBar" focus={focus}>
       <Dropdown
+        select={selectFilterList}
+        onSelect={onSelect}
         indicator="Filter"
         listTitle="이슈 필터"
         direction="left"
-        list={filterList}
+        list={issueFilterBarList}
         icon
       />
       <form onSubmit={handleSubmit}>
-        <Icon name="search" />
+        <Atoms.Button size="small" shape="text" icon="search" type="submit" />
         <input
           id="search"
           placeholder={focus ? "Search all issues" : "is:issue is:open"}
-          onFocus={() => setFocus(true)}
-          onBlur={() => setFocus(false)}
-        ></input>
+          onFocus={onFocus}
+          onBlur={onBlur}
+        />
       </form>
     </Wrapper>
   );
@@ -69,17 +85,20 @@ const Wrapper = styled(Atoms.InputWrapper)<{ focus: boolean }>`
     flex: 1;
     border-radius: 0 11px 11px 0;
     overflow: hidden;
+    & > .Button {
+      position: absolute;
+      width: min-content;
+      height: 16px;
+      top: 10px;
+      left: 24px;
+      opacity: ${({ focus }) => (focus ? "1" : "0.5")};
+    }
     & > input {
       background: ${({ focus }) =>
         focus ? "var(--offwhite)" : "var(--inputBackground)"};
       width: 100%;
       height: 100%;
       padding: 0 48px;
-    }
-    & > svg {
-      top: 10px;
-      left: 24px;
-      opacity: ${({ focus }) => (focus ? "1" : "0.5")};
     }
   }
 `;

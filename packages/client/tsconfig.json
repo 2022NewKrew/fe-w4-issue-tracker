@@ -18,7 +18,7 @@
       "@hooks": ["./src/hooks"],
       "@assets/*": ["./src/assets/*"],
       "@services/*": ["./src/services/*"],
-      "@stores/*": ["./src/stores/*"],
+      "@recoils/*": ["./src/recoils/*"],
       "@styles/*": ["./src/styles/*"],
       "@utils/*": ["./src/utils/*"],
       "@interface/*": ["./src/interface/*"]

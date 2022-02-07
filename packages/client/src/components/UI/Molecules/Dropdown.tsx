@@ -1,16 +1,23 @@
 import Icon from "@UI/Icon";
-import { useDropdown, useSelection } from "@hooks";
+import { useDropdown } from "@hooks";
 
 import styled from "@emotion/styled";
 import Atoms from "@UI/Atoms";
 
+interface FilterList {
+  id: string;
+  name: string;
+}
+
 interface Props {
   indicator: string;
   listTitle: string;
-  list: string[];
+  list: FilterList[];
   direction: "left" | "right";
   image?: boolean;
   icon?: boolean;
+  select: string[];
+  onSelect: (e: any) => void;
 }
 
 const Dropdown = ({
@@ -20,21 +27,17 @@ const Dropdown = ({
   direction,
   image = false,
   icon = true,
+  select,
+  onSelect,
 }: Props) => {
   const [visible, open] = useDropdown();
-  const [select, onClick] = useSelection("");
 
-  const createList = (list: string[]) => {
-    return list.map((item) => (
-      <li key={item} className={select === item ? "select" : ""}>
+  const createList = (list: FilterList[]) => {
+    return list.map(({ id, name }) => (
+      <li key={id} className={select.includes(id) ? "select" : ""} data-id={id}>
         {image && <Icon name="user_image_small" />}
-        {item}
-        {icon &&
-          (select === item ? (
-            <Icon name="check_on_circle" />
-          ) : (
-            <Icon name="check_off_circle" />
-          ))}
+        {name}
+        {icon && <Icon name={select.includes(id) ? "check" : "no_check"} />}
       </li>
     ));
   };
@@ -46,7 +49,7 @@ const Dropdown = ({
       </Atoms.Button>
       <Panel className="Panel" visible={visible} direction={direction}>
         <Atoms.Title type="panel">{listTitle}</Atoms.Title>
-        <ul onClick={onClick}>{createList(list)}</ul>
+        <ul onClick={onSelect}>{createList(list)}</ul>
       </Panel>
     </Wrapper>
   );

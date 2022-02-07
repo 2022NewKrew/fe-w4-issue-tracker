@@ -51,6 +51,7 @@ const StyledLabel = styled.label`
 const StyledInput = styled.input`
   ${cssFontSize["small"]}
   color: ${({ theme }) => theme.grayscale.titleActive};
+  width: 100%;
 
   &:focus,
   &:valid {

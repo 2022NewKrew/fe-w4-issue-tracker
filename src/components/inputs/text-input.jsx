@@ -15,13 +15,16 @@ const StyledTextInput = styled.input`
   ${allCenterAlign}
 `;
 
-const TextInput = ({ children, customType }) => {
+const TextInput = ({ children, componentSize }) => {
   return (
-    <Container customType={"text-input"}>
-      <CustomText customType={"x-small"} color={greyscale.label}>
+    <Container componentType={"text-input"}>
+      <CustomText componentSize={"x-small"} componentColor={greyscale.label}>
         <span>{children}</span>
       </CustomText>
-      <StyledTextInput type={"text"} customType={customType}></StyledTextInput>
+      <StyledTextInput
+        type={"text"}
+        componentSize={componentSize}
+      ></StyledTextInput>
     </Container>
   );
 };

@@ -6,7 +6,7 @@ import {
   allCenterAlign,
   getButtonWidth,
   getButtonHeight,
-  getButtonCustomLinkType,
+  getButtonCustomLinkSize,
 } from "@utils/helper";
 
 const StyledTextButton = styled.button`
@@ -17,12 +17,12 @@ const StyledTextButton = styled.button`
   ${() => getButtonHeight}
 `;
 
-const TextButton = ({ children, customType }) => {
+const TextButton = ({ children, componentSize }) => {
   return (
-    <StyledTextButton customType={customType}>
+    <StyledTextButton componentSize={componentSize}>
       <CustomLink
-        customType={getButtonCustomLinkType({ customType })}
-        color={greyscale.label}
+        componentSize={getButtonCustomLinkSize({ componentSize })}
+        componentColor={greyscale.label}
       >
         <span>{children}</span>
       </CustomLink>

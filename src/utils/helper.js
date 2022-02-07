@@ -26,8 +26,8 @@ export const buttonEvent = css`
   ${disabledOpacity}
 `;
 
-export const getFontWeight = ({ customType }) => {
-  switch (customType) {
+export const getFontWeight = ({ componentWeight }) => {
+  switch (componentWeight) {
     case "bold":
       return css`
         font-weight: bold;
@@ -41,8 +41,8 @@ export const getFontWeight = ({ customType }) => {
   }
 };
 
-export const getFontSize = ({ customType }) => {
-  switch (customType) {
+export const getFontSize = ({ componentSize }) => {
+  switch (componentSize) {
     case "large":
       return css`
         font-size: 24px;
@@ -64,8 +64,8 @@ export const getFontSize = ({ customType }) => {
   }
 };
 
-export const getLineHeight = ({ customType }) => {
-  switch (customType) {
+export const getLineHeight = ({ componentSize }) => {
+  switch (componentSize) {
     case "large":
       return css`
         line-height: 40px;
@@ -87,14 +87,14 @@ export const getLineHeight = ({ customType }) => {
   }
 };
 
-export const getColor = ({ color }) => {
+export const getColor = ({ componentColor }) => {
   return css`
-    color: ${color ? color : greyscale.default};
+    color: ${componentColor ? componentColor : greyscale.default};
   `;
 };
 
-export const getButtonPadding = ({ customType }) => {
-  switch (customType) {
+export const getButtonPadding = ({ componentSize }) => {
+  switch (componentSize) {
     case "large":
     case "medium":
       return css`
@@ -109,8 +109,8 @@ export const getButtonPadding = ({ customType }) => {
   }
 };
 
-export const getButtonWidth = ({ customType }) => {
-  switch (customType) {
+export const getButtonWidth = ({ componentSize }) => {
+  switch (componentSize) {
     case "large":
       return css`
         width: 340px;
@@ -126,8 +126,8 @@ export const getButtonWidth = ({ customType }) => {
   }
 };
 
-export const getButtonHeight = ({ customType }) => {
-  switch (customType) {
+export const getButtonHeight = ({ componentSize }) => {
+  switch (componentSize) {
     case "large":
       return css`
         height: 64px;
@@ -143,8 +143,8 @@ export const getButtonHeight = ({ customType }) => {
   }
 };
 
-export const getButtonBorderRadius = ({ customType }) => {
-  switch (customType) {
+export const getButtonBorderRadius = ({ componentSize }) => {
+  switch (componentSize) {
     case "large":
     case "medium":
       return css`
@@ -159,8 +159,8 @@ export const getButtonBorderRadius = ({ customType }) => {
   }
 };
 
-export const getButtonCustomLinkType = ({ customType }) => {
-  switch (customType) {
+export const getButtonCustomLinkSize = ({ componentSize }) => {
+  switch (componentSize) {
     case "large":
     case "medium":
       return "medium";

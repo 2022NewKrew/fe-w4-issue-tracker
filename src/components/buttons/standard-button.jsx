@@ -12,7 +12,7 @@ import {
   getButtonWidth,
   getButtonHeight,
   getButtonBorderRadius,
-  getButtonCustomLinkType,
+  getButtonCustomLinkSize,
 } from "@utils/helper";
 
 const StyledStandardButton = styled.button`
@@ -27,14 +27,12 @@ const StyledStandardButton = styled.button`
   ${() => getButtonBorderRadius}
 `;
 
-const StandardButton = ({ children, customType, customState }) => {
-  const [isDisabled, setIsDisabled] = useState(Boolean(customState));
-
+const StandardButton = ({ children, componentSize }) => {
   return (
-    <StyledStandardButton customType={customType}>
+    <StyledStandardButton componentSize={componentSize}>
       <CustomLink
-        customType={getButtonCustomLinkType({ customType })}
-        color={greyscale.offWhite}
+        componentSize={getButtonCustomLinkSize({ componentSize })}
+        componentColor={greyscale.offWhite}
       >
         <span>{children}</span>
       </CustomLink>

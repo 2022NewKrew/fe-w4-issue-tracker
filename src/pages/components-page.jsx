@@ -15,94 +15,105 @@ const ComponentsPage = () => {
       <h1>ComponentsPage</h1>
       <div>
         <h2>Etc</h2>
-        <Container customType={"regular"}>
+        <Container componentType={"regular"}>
           <h3>Logotype</h3>
-          <Logotype customType={"large"}>LogotypeLarge</Logotype>
-          <Logotype customType={"medium"}>LogotypeMedium</Logotype>
+          <Logotype componentSize={"large"}>LogotypeLarge</Logotype>
+          <Logotype componentSize={"medium"}>LogotypeMedium</Logotype>
         </Container>
-        <Container customType={"regular"}>
+        <Container componentType={"regular"}>
           <h3>CustomHeader</h3>
           <CustomHeader>CustomHeader</CustomHeader>
         </Container>
       </div>
       <div>
         <h2>Typography</h2>
-        <Container customType={"regular"}>
+        <Container componentType={"regular"}>
           <h3>CustomDisplay</h3>
-          <CustomDisplay customType={"bold"}>CustomDisplayBold</CustomDisplay>
-          <CustomDisplay customType={"regular"}>
+          <CustomDisplay componentWeight={"bold"}>
+            CustomDisplayBold
+          </CustomDisplay>
+          <CustomDisplay componentWeight={"regular"}>
             CustomDisplayRegular
           </CustomDisplay>
         </Container>
-        <Container customType={"regular"}>
+        <Container componentType={"regular"}>
           <h3>CustomText</h3>
-          <CustomText customType={"large"}>CustomTextLarge</CustomText>
-          <CustomText customType={"medium"}>CustomTextMedium</CustomText>
-          <CustomText customType={"small"}>CustomTextSmall</CustomText>
-          <CustomText customType={"x-small"}>CustomTextXSmall</CustomText>
+          <CustomText componentSize={"large"}>CustomTextLarge</CustomText>
+          <CustomText componentSize={"medium"}>CustomTextMedium</CustomText>
+          <CustomText componentSize={"small"}>CustomTextSmall</CustomText>
+          <CustomText componentSize={"x-small"}>CustomTextXSmall</CustomText>
         </Container>
-        <Container customType={"regular"}>
+        <Container componentType={"regular"}>
           <h3>CustomLink</h3>
-          <CustomLink customType={"large"}>CustomLinkLarge</CustomLink>
-          <CustomLink customType={"medium"}>CustomLinkMedium</CustomLink>
-          <CustomLink customType={"small"}>CustomLinkSmall</CustomLink>
-          <CustomLink customType={"x-small"}>CustomLinkXSmall</CustomLink>
+          <CustomLink componentSize={"large"}>CustomLinkLarge</CustomLink>
+          <CustomLink componentSize={"medium"}>CustomLinkMedium</CustomLink>
+          <CustomLink componentSize={"small"}>CustomLinkSmall</CustomLink>
+          <CustomLink componentSize={"x-small"}>CustomLinkXSmall</CustomLink>
         </Container>
       </div>
       <div>
         <h2>Buttons</h2>
-        <Container customType={"regular"}>
+        <Container componentType={"regular"}>
           <h3>StandardButton</h3>
-          <StandardButton customType={"large"}>
+          <StandardButton componentSize={"large"}>
             StandardButtonLarge
           </StandardButton>
-          <StandardButton customType={"medium"}>
+          <StandardButton componentSize={"medium"}>
             StandardButtonMedium
           </StandardButton>
-          <StandardButton customType={"small"}>
+          <StandardButton componentSize={"small"}>
             StandardButtonSmall
           </StandardButton>
-          <StandardButton customType={"large"} customState={"disabled"}>
+          <StandardButton componentSize={"large"}>
             StandardButtonLargeDisabled
           </StandardButton>
-          <StandardButton customType={"medium"} customState={"disabled"}>
+          <StandardButton componentSize={"medium"}>
             StandardButtonMediumDisabled
           </StandardButton>
-          <StandardButton customType={"small"} customState={"disabled"}>
+          <StandardButton componentSize={"small"}>
             StandardButtonSmallDisabled
           </StandardButton>
         </Container>
-        <Container customType={"regular"}>
+        <Container componentType={"regular"}>
           <h3>SecondaryButton</h3>
-          <SecondaryButton customType={"large"}>
+          <SecondaryButton componentSize={"large"}>
             SecondaryButtonLarge
           </SecondaryButton>
-          <SecondaryButton customType={"medium"}>
+          <SecondaryButton componentSize={"medium"}>
             SecondaryButtonMedium
           </SecondaryButton>
-          <SecondaryButton customType={"small"}>
+          <SecondaryButton componentSize={"small"}>
             SecondaryButtonSmall
           </SecondaryButton>
+          <SecondaryButton componentSize={"large"}>
+            SecondaryButtonLargeDisabled
+          </SecondaryButton>
+          <SecondaryButton componentSize={"medium"}>
+            SecondaryButtonMediumDisabled
+          </SecondaryButton>
+          <SecondaryButton componentSize={"small"}>
+            SecondaryButtonSmallDisabled
+          </SecondaryButton>
         </Container>
-        <Container customType={"regular"}>
+        <Container componentType={"regular"}>
           <h3>CustomTextButton</h3>
-          <TextButton customType={"large"}>TextButtonLarge</TextButton>
-          <TextButton customType={"medium"}>TextButtonMedium</TextButton>
-          <TextButton customType={"small"}>TextButtonSmall</TextButton>
+          <TextButton componentSize={"large"}>TextButtonLarge</TextButton>
+          <TextButton componentSize={"medium"}>TextButtonMedium</TextButton>
+          <TextButton componentSize={"small"}>TextButtonSmall</TextButton>
         </Container>
       </div>
       <div>
         <h2>Inputs</h2>
-        <Container customType={"regular"}>
+        <Container componentType={"regular"}>
           <h3>TextInput</h3>
-          <TextInput customType={"large"}>TextInputLarge</TextInput>
-          <TextInput customType={"medium"}>TextInputMedium</TextInput>
-          <TextInput customType={"small"}>TextInputSmall</TextInput>
+          <TextInput componentSize={"large"}>TextInputLarge</TextInput>
+          <TextInput componentSize={"medium"}>TextInputMedium</TextInput>
+          <TextInput componentSize={"small"}>TextInputSmall</TextInput>
         </Container>
-        <Container customType={"regular"}>
+        <Container componentType={"regular"}>
           <h3>TextArea</h3>
         </Container>
-        <Container customType={"regular"}>
+        <Container componentType={"regular"}>
           <h3>ColorCode</h3>
         </Container>
       </div>

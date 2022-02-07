@@ -10,7 +10,7 @@ import {
   getButtonWidth,
   getButtonHeight,
   getButtonBorderRadius,
-  getButtonCustomLinkType,
+  getButtonCustomLinkSize,
 } from "@utils/helper";
 
 const StyledSecondaryButton = styled.button`
@@ -26,12 +26,12 @@ const StyledSecondaryButton = styled.button`
   ${() => getButtonBorderRadius}
 `;
 
-const SecondaryButton = ({ children, customType }) => {
+const SecondaryButton = ({ children, componentSize }) => {
   return (
-    <StyledSecondaryButton customType={customType}>
+    <StyledSecondaryButton componentSize={componentSize}>
       <CustomLink
-        customType={getButtonCustomLinkType({ customType })}
-        color={colors.blue}
+        componentSize={getButtonCustomLinkSize({ componentSize })}
+        componentColor={colors.blue}
       >
         <span>{children}</span>
       </CustomLink>

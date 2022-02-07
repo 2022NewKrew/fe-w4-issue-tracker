@@ -11,7 +11,7 @@ const StyledCustomHeader = styled.header`
 const CustomHeader = ({ children }) => {
   return (
     <StyledCustomHeader>
-      <Logotype customType={"medium"}>
+      <Logotype componentSize={"medium"}>
         <span>{children}</span>
       </Logotype>
       <USER_IMAGE_LARGE />

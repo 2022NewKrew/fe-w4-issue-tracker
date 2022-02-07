@@ -33,7 +33,6 @@ module.exports = {
       "@querys": path.resolve(__dirname, "./src/querys"),
       "@styles": path.resolve(__dirname, "./src/styles"),
       "@utils": path.resolve(__dirname, "./src/utils"),
-      "@interface": path.resolve(__dirname, "./src/interface"),
     },
   },
   devServer: {

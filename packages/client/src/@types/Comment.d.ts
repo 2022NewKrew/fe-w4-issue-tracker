@@ -1,7 +1,7 @@
 declare module "@types" {
   type CommentStatus = "initial" | "closed" | "reopen";
 
-  interface CommentDTO {
+  interface Comment {
     id: string;
     content: string;
     /**
@@ -11,7 +11,7 @@ declare module "@types" {
     status: CommentStatus;
   }
 
-  interface CommentRequestDTO {
+  interface CommentRequest {
     content: string;
     status?: CommentStatus;
   }

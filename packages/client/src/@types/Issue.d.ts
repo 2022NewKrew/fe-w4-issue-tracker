@@ -1,20 +1,24 @@
 declare module "@types" {
   type IssueStatus = "open" | "close";
 
-  interface Issue {
+  interface IssueJSON {
     id: string;
     num: number;
     title: string;
     milestone: string | null;
-    labels: LabelDTO[];
+    labels: string[];
     author: string;
     status: IssueStatus;
     timestamp: string;
   }
 
+  interface Issue extends IssueJSON {
+    labels: Label[];
+  }
+
   interface IssueDetail extends Issue {
-    comments: CommentDTO[];
-    assignees: UserDTO[];
+    comments: Comment[];
+    assignees: User[];
   }
 
   interface IssueRequest {

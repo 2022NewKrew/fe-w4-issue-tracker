@@ -5,12 +5,12 @@ declare module "@types" {
     name: string;
   }
 
-  interface UserDTO {
+  interface User {
     id: string;
     name: string;
   }
 
-  interface UserLoginDTO {
+  interface UserLogin {
     id: string;
     pw: string;
   }

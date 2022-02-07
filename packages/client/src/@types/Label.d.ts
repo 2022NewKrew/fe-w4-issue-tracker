@@ -5,7 +5,6 @@ declare module "@types" {
     description: string;
     color: "light" | "dark";
     backgroundColor: string;
-    userId: string;
   }
 
   interface LabelRequest {

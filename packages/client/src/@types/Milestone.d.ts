@@ -10,7 +10,7 @@ declare module "@types" {
     status: MilestoneStatus;
   }
 
-  interface MilestoneDTO {
+  interface Milestone {
     id: string;
     name: string;
     description: string;
@@ -19,7 +19,7 @@ declare module "@types" {
     status: MilestoneStatus;
   }
 
-  interface MilestoneRequestDTO {
+  interface MilestoneRequest {
     name: string;
     description: string;
     deadline: string;

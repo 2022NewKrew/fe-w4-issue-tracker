@@ -21,8 +21,7 @@
       "@recoils/*": ["./src/recoils/*"],
       "@querys/*": ["./src/querys/*"],
       "@styles/*": ["./src/styles/*"],
-      "@utils/*": ["./src/utils/*"],
-      "@interface/*": ["./src/interface/*"]
+      "@utils/*": ["./src/utils/*"]
     }
   },
   //   "references": [

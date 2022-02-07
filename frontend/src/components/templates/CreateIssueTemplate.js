@@ -23,6 +23,7 @@ const InputContainer = styled.div`
 
 export default function CreateIssueTemplate(props) {
   const [title, setTitle] = useState("");
+  const [comment, setComment] = useState("");
   return (
     <Container>
       <UserimageLarge />

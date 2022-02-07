@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import Common from "./components/Common";
 import Login from "./components/Login";
 import Callback from "./components/Login/Callback";
+import IssueMain from "./components/Issue-Main";
 
 const App = () => (
   <Wrapper>
@@ -11,6 +12,7 @@ const App = () => (
       <Route path="/common" element={<Common />} />
       <Route path="/login" element={<Login />} />
       <Route path="/callback" element={<Callback />} />
+      <Route path="/main" element={<IssueMain />} />
     </Routes>
   </Wrapper>
 );

@@ -1,5 +1,4 @@
-import { LayoutProps } from "@interface/components";
-
+import { LayoutProps } from "@emotion/react";
 import styled from "@emotion/styled";
 
 const LoginLayout = ({ children }: LayoutProps) => {

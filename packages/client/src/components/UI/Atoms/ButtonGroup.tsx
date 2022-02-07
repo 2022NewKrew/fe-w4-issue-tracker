@@ -1,5 +1,5 @@
+import { LayoutProps } from "@emotion/react";
 import styled from "@emotion/styled";
-import { LayoutProps } from "@interface/components";
 
 const ButtonGroup = ({
   direction = "row",

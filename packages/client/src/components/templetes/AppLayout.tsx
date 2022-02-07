@@ -1,8 +1,8 @@
 import Icon from "@UI/Icon";
 
-import { LayoutProps } from "@interface/components";
 import styled from "@emotion/styled";
 import { useClickLink } from "@hooks";
+import { LayoutProps } from "@emotion/react";
 
 const AppLayout = ({ children }: LayoutProps) => {
   const onClickLink = useClickLink("/login");

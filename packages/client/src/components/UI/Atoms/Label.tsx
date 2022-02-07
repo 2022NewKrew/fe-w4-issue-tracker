@@ -1,6 +1,6 @@
+import { LayoutProps } from "@emotion/react";
 import styled from "@emotion/styled";
 import Icon from "@UI/Icon";
-import { LayoutProps } from "@interface/components";
 
 export interface Props extends SProps, LayoutProps {}
 

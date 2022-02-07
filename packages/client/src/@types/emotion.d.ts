@@ -1,4 +1,5 @@
 import "@emotion/react";
+import * as icons from "@assets/icons";
 
 type Greyscale =
   | "titleActive"
@@ -25,5 +26,16 @@ declare module "@emotion/react" {
     Greyscale: { [key in Greyscale]: string };
     Colors: { [key in color]: IColorDetail };
     FlexCenter: string;
+  }
+  export interface LayoutProps {
+    children?: React.ReactNode;
+  }
+
+  // icon
+  export type IconName = keyof typeof icons;
+
+  export interface IconProps extends React.SVGProps<SVGElement> {
+    name: IconName;
+    className?: string;
   }
 }

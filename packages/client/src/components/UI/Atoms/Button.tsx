@@ -1,9 +1,8 @@
 import Icon from "@UI/Icon";
 
-import { IconName, LayoutProps } from "@interface/components";
 import styled from "@emotion/styled";
 import { Size } from "src/@types/emotion";
-import { Theme } from "@emotion/react";
+import { IconName, LayoutProps, Theme } from "@emotion/react";
 import { useClickLink } from "@hooks";
 
 export interface Props extends SProps, LayoutProps {

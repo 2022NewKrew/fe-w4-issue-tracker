@@ -15,3 +15,10 @@ export enum TextInputStatus {
   Error,
   Disabled,
 }
+
+export enum TextareaStatus {
+  Initial = 'Initial',
+  Typing = 'Typing',
+  Filled = 'Filled',
+  Waiting = 'Waiting',
+}

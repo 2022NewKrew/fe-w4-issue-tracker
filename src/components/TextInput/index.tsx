@@ -10,8 +10,8 @@ interface TextInputProps {
   size: 'large' | 'medium' | 'small';
   placeholder: string;
   disabled?: boolean;
-  onChange?: (string) => void;
-  valueEvaluator?: (string) => boolean;
+  onChange?: (input: string) => void;
+  valueEvaluator?: (input: string) => boolean;
   successMessage?: string;
   errorMessage?: string;
 }

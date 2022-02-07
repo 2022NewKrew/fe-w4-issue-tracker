@@ -1,11 +1,29 @@
 import { css } from "styled-components";
 
+import colors from "@styles/colors";
 import greyscale from "@styles/greyscale";
 
 export const allCenterAlign = css`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const disabledOpacity = css`
+  &:disabled {
+    opacity: 0.5;
+  }
+`;
+
+export const buttonEvent = css`
+  &:hover {
+    border: 2px solid ${colors.darkBlue};
+  }
+  &:focus {
+    border: 4px solid ${colors.lightBlue};
+  }
+
+  ${disabledOpacity}
 `;
 
 export const getFontWeight = ({ customType }) => {

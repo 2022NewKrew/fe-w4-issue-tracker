@@ -4,20 +4,17 @@ import CustomLink from "@components/typography/custom-link";
 import greyscale from "@styles/greyscale";
 import {
   allCenterAlign,
-  getButtonPadding,
   getButtonWidth,
   getButtonHeight,
-  getButtonBorderRadius,
   getButtonCustomLinkType,
 } from "@utils/helper";
 
 const StyledTextButton = styled.button`
-  border: 2px solid ${greyscale.offWhite};
+  padding: 0px;
+  border: 20px;
   ${allCenterAlign}
-  ${() => getButtonPadding}
   ${() => getButtonWidth}
   ${() => getButtonHeight}
-  ${() => getButtonBorderRadius}
 `;
 
 const TextButton = ({ children, customType }) => {

@@ -5,6 +5,7 @@ import colors from "@styles/colors";
 import greyscale from "@styles/greyscale";
 import {
   allCenterAlign,
+  buttonEvent,
   getButtonPadding,
   getButtonWidth,
   getButtonHeight,
@@ -15,7 +16,9 @@ import {
 const StyledStandardButton = styled.button`
   background: ${colors.blue};
   border: 2px solid ${colors.blue};
+
   ${allCenterAlign}
+  ${buttonEvent}
   ${() => getButtonPadding}
   ${() => getButtonWidth}
   ${() => getButtonHeight}

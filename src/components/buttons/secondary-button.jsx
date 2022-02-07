@@ -5,6 +5,7 @@ import colors from "@styles/colors";
 import greyscale from "@styles/greyscale";
 import {
   allCenterAlign,
+  buttonEvent,
   getButtonPadding,
   getButtonWidth,
   getButtonHeight,
@@ -16,7 +17,9 @@ const StyledSecondaryButton = styled.button`
   background: ${greyscale.offWhite};
   border: 2px solid ${colors.blue};
   box-sizing: border-box;
+
   ${allCenterAlign}
+  ${buttonEvent}
   ${() => getButtonPadding}
   ${() => getButtonWidth}
   ${() => getButtonHeight}

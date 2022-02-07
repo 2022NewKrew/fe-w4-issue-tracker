@@ -11,8 +11,9 @@ interface DropdownProps {
   onSelect: (index: number) => boolean;
   options: string[];
   type: 'Text' | 'ImageAndText' | 'Modify';
-  images: JSX.Element[];
+  images?: JSX.Element[];
   customName?: string;
+  titleWidth?: number;
 }
 
 const Dropdown = ({
@@ -23,6 +24,7 @@ const Dropdown = ({
   type = 'Text',
   images,
   customName,
+  titleWidth,
 }: DropdownProps) => {
   const [open, setOpen] = useState(false);
   const panelRef = useRef<HTMLUListElement>(null);
@@ -59,7 +61,7 @@ const Dropdown = ({
   return (
     <div css={{ position: 'relative' }}>
       <div css={IndicatorStyle} onClick={handleClickIndicator}>
-        <span>{label}</span>
+        <span css={{ width: `${titleWidth}px` }}>{label}</span>
         <Icon icon="Arrow" />
       </div>
       {open && (

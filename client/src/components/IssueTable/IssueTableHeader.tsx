@@ -1,9 +1,9 @@
 import React, { MouseEvent } from 'react';
-import { useRecoilState } from 'recoil';
-import { issueListFilterState } from '@atoms';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { issuesFilterState, issueStatusCountSelector } from '@atoms';
 import styled, { css } from 'styled-components';
 import { LinkSmall, TableHeader, AlignXYCenter, SmallIcon } from '@styles/styleTemplates';
-import { IFilter, IIssue } from '@types';
+import { IFilter } from '@types';
 import { FilterButton } from '@components/assets';
 import { ReactComponent as Alertcircle } from '@icons/AlertCircle.svg';
 import { ReactComponent as Archive } from '@icons/Archive.svg';
@@ -32,7 +32,8 @@ const renderFilterButton = (selectMode: boolean, FilterTypes: IFilter[]) => {
 };
 
 export const IssueTableHeader = ({ selectMode, onChangeHandler }: IProps) => {
-    const [issueFilterState, setIssueFilterState] = useRecoilState(issueListFilterState);
+    const [openCount, closeCount] = useRecoilValue(issueStatusCountSelector);
+    const [issueFilterState, setIssueFilterState] = useRecoilState(issuesFilterState);
     const filterOpen = () => setIssueFilterState('SHOW_OPEN');
     const filterClose = () => setIssueFilterState('SHOW_CLOSE');
 
@@ -44,11 +45,11 @@ export const IssueTableHeader = ({ selectMode, onChangeHandler }: IProps) => {
             <IssueStatuses>
                 <Status isActive={issueFilterState === 'SHOW_OPEN'} onClick={filterOpen}>
                     <Alertcircle />
-                    열린 이슈({2})
+                    열린 이슈({openCount})
                 </Status>
                 <Status isActive={issueFilterState === 'SHOW_CLOSE'} onClick={filterClose}>
                     <Archive />
-                    닫힌 이슈({0})
+                    닫힌 이슈({closeCount})
                 </Status>
             </IssueStatuses>
             {renderFilterButton(selectMode, FilterTypes)}

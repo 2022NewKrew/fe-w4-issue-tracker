@@ -1,10 +1,10 @@
 import React, { useState, useReducer, ChangeEvent } from 'react';
-import { useRecoilStateLoadable } from 'recoil';
-import { allIssuesAtom } from '@atoms';
+import { useRecoilValueLoadable } from 'recoil';
+import { issueFilterSelector } from '@atoms';
 import styled from 'styled-components';
-import { AlignXYCenter, TextSmall, RoundBorderDiv, TableData, Table } from '@styles/styleTemplates';
+import { RoundBorderDiv, Table } from '@styles/styleTemplates';
 import { IIssue } from '@types';
-import { IssueTableHeader, IssueRow } from '.';
+import { IssueTableHeader, IssueRow, EmptyRow } from '.';
 
 type CheckAction =
     | {
@@ -43,17 +43,15 @@ const checkStatusReducer = (state: boolean[], action: CheckAction): boolean[] =>
 };
 
 export const IssueTable = () => {
-    const [issueDatas] = useRecoilStateLoadable<IIssue[]>(allIssuesAtom);
+    const issueDatas = useRecoilValueLoadable<IIssue[]>(issueFilterSelector);
     const [selectMode, setSelectMode] = useState(false);
     const [checkStatus, dispatch] = useReducer(checkStatusReducer, []);
 
     const renderTableData = (issueDatas: IIssue[], isFiltering = false) => {
-        const NO_ISSUE_MESSAGE = '등록된 이슈가 없습니다';
-        const NOTHING_FOUND_MESSAGE = '검색과 일치하는 결과가 없습니다';
         const onRowChangeHandler = (rowNumber: number) => () => {
             dispatch({
                 type: 'CHECK',
-                payload: { length: issueDatas.contents.length, rowNumber, setSelectMode },
+                payload: { length: issueDatas.length, rowNumber, setSelectMode },
             });
         };
 
@@ -67,8 +65,8 @@ export const IssueTable = () => {
                     onChangeHandler={onRowChangeHandler(i)}
                 />
             ));
-        if (isFiltering) return <EmptyRow>{NOTHING_FOUND_MESSAGE}</EmptyRow>;
-        return <EmptyRow>{NO_ISSUE_MESSAGE}</EmptyRow>;
+        if (isFiltering) return <EmptyRow emptyType="filter" />;
+        return <EmptyRow emptyType="none" />;
     };
 
     const onHeaderChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -81,27 +79,18 @@ export const IssueTable = () => {
             },
         });
     };
-    if (issueDatas.state === 'hasValue')
-        return (
+    return (
+        <React.Suspense fallback={<EmptyRow emptyType="error" />}>
             <TableContainer selectMode={selectMode}>
                 <IssueTableHeader selectMode={selectMode} onChangeHandler={onHeaderChangeHandler} />
                 {renderTableData(issueDatas.contents)}
             </TableContainer>
-        );
-    else return null;
+        </React.Suspense>
+    );
 };
 
 const TableContainer = styled(RoundBorderDiv)<{ selectMode: boolean }>`
     ${Table}
     grid-template-columns: 68px ${({ selectMode }) =>
         selectMode ? '1085px 1fr' : '790px auto auto auto auto'};
-`;
-
-const EmptyRow = styled.div`
-    ${TableData}
-    ${AlignXYCenter};
-    ${TextSmall};
-    color: var(--label-color);
-    grid-column: 1 / -1;
-    height: 100px;
 `;

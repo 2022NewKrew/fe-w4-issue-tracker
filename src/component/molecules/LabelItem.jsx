@@ -92,7 +92,7 @@ export const LabelItem = ({ label, refetchList }) => {
       <NewLabelWrapper>
         <LabelHeader>레이블 편집</LabelHeader>
         <LabelPreviewWrapper>
-          <SmallLabel name={editState.name} backgroundColor={editState.backgroundColor} color={editState.color} />
+          <SmallLabel name={editState.name !== "" ? editState.name : "레이블 이름"} backgroundColor={editState.backgroundColor} color={editState.color} />
         </LabelPreviewWrapper>
         <LabelFormWrapper>
           <Input size="small" placeholder="레이블 이름" value={editState.name} onChange={(e) => dispatch({ type: "CHANGE_NAME", name: e.target.value })} />

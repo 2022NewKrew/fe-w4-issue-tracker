@@ -67,7 +67,7 @@ export const LabelNew = ({ refetchList, closeFn }) => {
     <NewLabelWrapper>
       <LabelHeader>새로운 레이블 추가</LabelHeader>
       <LabelPreviewWrapper>
-        <SmallLabel name={newLabel.name} backgroundColor={newLabel.backgroundColor} color={newLabel.color} />
+        <SmallLabel name={newLabel.name !== "" ? newLabel.name : "레이블 이름"} backgroundColor={newLabel.backgroundColor} color={newLabel.color} />
       </LabelPreviewWrapper>
       <LabelFormWrapper>
         <Input size="small" placeholder="레이블 이름" value={newLabel.name} onChange={(e) => dispatch({ type: "CHANGE_NAME", name: e.target.value })} />

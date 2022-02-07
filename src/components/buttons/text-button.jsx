@@ -9,7 +9,7 @@ import {
   getButtonHeight,
   getButtonBorderRadius,
   getButtonCustomLinkType,
-} from "@utils/helper";
+} from "@utils/style-helper";
 
 const StyledTextButton = styled.button`
   border: 2px solid ${greyscale.offWhite};

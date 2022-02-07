@@ -10,7 +10,7 @@ import {
   getButtonHeight,
   getButtonBorderRadius,
   getButtonCustomLinkType,
-} from "@utils/helper";
+} from "@utils/style-helper";
 
 const StyledSecondaryButton = styled.button`
   background: ${greyscale.offWhite};

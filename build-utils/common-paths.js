@@ -9,8 +9,8 @@ module.exports = {
   outputPath: path.join(PROJECT_ROOT, "dist"),
   componentsPath: path.join(APP_ENTRY, "components"),
   corePath: path.join(APP_ENTRY, "core"),
-  pagePath: path.join(APP_ENTRY, "page"),
-  staticPath: path.join(APP_ENTRY, "static"),
+  imagesPath: path.join(APP_ENTRY, "images"),
+  pagesPath: path.join(APP_ENTRY, "pages"),
   stylesPath: path.join(APP_ENTRY, "styles"),
   utilsPath: path.join(APP_ENTRY, "utils"),
 };

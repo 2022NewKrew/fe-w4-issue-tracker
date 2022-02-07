@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import greyscale from "@styles/greyscale";
-import { getFontWeight } from "@utils/helper";
+import { getFontWeight } from "@utils/style-helper";
 
 const StyledCustomDisplay = styled.span`
   font-family: Noto Sans KR;

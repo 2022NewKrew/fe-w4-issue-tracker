@@ -10,12 +10,11 @@ import {
   getButtonHeight,
   getButtonBorderRadius,
   getButtonCustomLinkType,
-} from "@utils/helper";
+} from "@utils/style-helper";
 
 const StyledStandardButton = styled.button`
   background: ${colors.blue};
   border: 2px solid ${colors.blue};
-  border-style: solid;
   ${allCenterAlign}
   ${() => getButtonPadding}
   ${() => getButtonWidth}

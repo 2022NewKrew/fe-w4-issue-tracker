@@ -52,6 +52,7 @@ const config = {
     host: "localhost",
     port: port,
     historyApiFallback: true,
+    hot: true,
     open: true,
   },
 };

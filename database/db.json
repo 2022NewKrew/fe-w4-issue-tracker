@@ -145,9 +145,24 @@
     ],
     "assigned": [
         {
-            "id": "assigned(이슈를 할당하는 relation)번호",
-            "userId": "assignee의 userId",
-            "issueId": "할당된 이슈번호"
+            "id": 0,
+            "userId": 0,
+            "issueId": 1
+        },
+        {
+            "id": 1,
+            "userId": 2,
+            "issueId": 2
+        },
+        {
+            "id": 2,
+            "userId": 1,
+            "issueId": 3
+        },
+        {
+            "id": 3,
+            "userId": 2,
+            "issueId": 5
         }
     ],
     "labelings": [

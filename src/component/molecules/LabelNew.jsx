@@ -4,6 +4,7 @@ import styled, { css } from "styled-components";
 import { createNewLabel } from "../../api/api";
 import { randomHexColor } from "../../utils";
 import { Button } from "../atoms/Button";
+import { ColorCode } from "../atoms/ColorCode";
 import { Input } from "../atoms/Input";
 import { SmallLabel } from "../atoms/Label";
 import { cssFontSize } from "../atoms/Text";
@@ -71,6 +72,12 @@ export const LabelNew = ({ refetchList, closeFn }) => {
       <LabelFormWrapper>
         <Input size="small" placeholder="레이블 이름" value={newLabel.name} onChange={(e) => dispatch({ type: "CHANGE_NAME", name: e.target.value })} />
         <Input size="small" placeholder="설명(선택)" value={newLabel.description} onChange={(e) => dispatch({ type: "CHANGE_DESCRIPTION", description: e.target.value })} />
+        <ColorCode
+          label="배경 색상"
+          handleRefresh={() => dispatch({ type: "CHANGE_BACKGROUNDCOLOR", backgroundColor: randomHexColor() })}
+          value={newLabel.backgroundColor}
+          onChange={(e) => dispatch({ type: "CHANGE_BACKGROUNDCOLOR", backgroundColor: e.target.value })}
+        />
       </LabelFormWrapper>
       <LabelButtonWrapper>
         <Button options={{ type: "Small-Standard", prefixIcon: "plus" }} onClick={() => newMutation.mutate({ newLabel })} disabled={disabled}>

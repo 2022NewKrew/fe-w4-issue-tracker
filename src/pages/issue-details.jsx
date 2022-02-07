@@ -1,11 +1,7 @@
-import Logotype from "@components/etc/logotype";
+import CustomHeader from "@components/etc/custom-header";
 
 const IssueDetails = () => {
-  return (
-    <header>
-      <Logotype customType="medium">Issue Tracker</Logotype>
-    </header>
-  );
+  return <CustomHeader>Issue Tracker</CustomHeader>;
 };
 
 export default IssueDetails;

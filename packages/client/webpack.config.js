@@ -30,6 +30,7 @@ module.exports = {
       "@assets": path.resolve(__dirname, "./src/assets"),
       "@services": path.resolve(__dirname, "./src/services"),
       "@recoils": path.resolve(__dirname, "./src/recoils"),
+      "@querys": path.resolve(__dirname, "./src/querys"),
       "@styles": path.resolve(__dirname, "./src/styles"),
       "@utils": path.resolve(__dirname, "./src/utils"),
       "@interface": path.resolve(__dirname, "./src/interface"),

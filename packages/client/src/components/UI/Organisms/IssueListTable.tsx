@@ -1,44 +1,27 @@
 import { TableHeader, TableCell } from "@UI/Molecules";
 
 import styled from "@emotion/styled";
-
-const issueList = [
-  {
-    id: 1,
-    title: "이슈 제목",
-    author: "작성자",
-    time: "작성 시간",
-    label: [
-      {
-        title: "레이블 이름",
-        color: "#004de3",
-      },
-    ],
-    milestone: "마스터즈",
-  },
-  {
-    id: 2,
-    title: "이슈 제목2",
-    author: "작성자2",
-    time: "작성 시간",
-    label: [
-      {
-        title: "레이블 이름",
-        color: "#0fa123",
-      },
-    ],
-    milestone: "마스터즈",
-  },
-];
+import { useGetIssue } from "@querys/Issue";
+import { Issue } from "@types";
+import { useCallback } from "react";
 
 const IssueListTable = () => {
-  const createIssueList = (issueList: any) =>
-    issueList.map((issue: any) => <TableCell key={issue.id} issue={issue} />);
+  const { data: issueList, isLoading } = useGetIssue();
+
+  const createIssueList = useCallback(
+    (issueList: Issue[]) =>
+      issueList.map((issue: Issue) => (
+        <TableCell key={issue.id} issue={issue} />
+      )),
+    [issueList]
+  );
+
+  if (isLoading) return <div>로딩중</div>;
 
   return (
     <Wrapper className="IssueListTable">
       <TableHeader />
-      {createIssueList(issueList)}
+      {createIssueList(issueList as Issue[])}
     </Wrapper>
   );
 };

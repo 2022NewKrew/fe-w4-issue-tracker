@@ -17,8 +17,9 @@
       "@UI/*": ["./src/components/UI/*"],
       "@hooks": ["./src/hooks"],
       "@assets/*": ["./src/assets/*"],
-      "@services/*": ["./src/services/*"],
+      "@services": ["./src/services"],
       "@recoils/*": ["./src/recoils/*"],
+      "@querys/*": ["./src/querys/*"],
       "@styles/*": ["./src/styles/*"],
       "@utils/*": ["./src/utils/*"],
       "@interface/*": ["./src/interface/*"]

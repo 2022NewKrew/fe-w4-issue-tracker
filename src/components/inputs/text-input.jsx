@@ -17,11 +17,11 @@ const StyledTextInput = styled.input`
 
 const TextInput = ({ children, customType }) => {
   return (
-    <Container customType="text-input">
-      <CustomText customType="x-small" color={greyscale.label}>
+    <Container customType={"text-input"}>
+      <CustomText customType={"x-small"} color={greyscale.label}>
         <span>{children}</span>
       </CustomText>
-      <StyledTextInput type="text" customType={customType}></StyledTextInput>
+      <StyledTextInput type={"text"} customType={customType}></StyledTextInput>
     </Container>
   );
 };

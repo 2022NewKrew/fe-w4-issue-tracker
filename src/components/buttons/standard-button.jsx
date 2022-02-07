@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import styled from "styled-components";
 
 import CustomLink from "@components/typography/custom-link";
@@ -25,7 +27,9 @@ const StyledStandardButton = styled.button`
   ${() => getButtonBorderRadius}
 `;
 
-const StandardButton = ({ children, customType }) => {
+const StandardButton = ({ children, customType, customState }) => {
+  const [isDisabled, setIsDisabled] = useState(Boolean(customState));
+
   return (
     <StyledStandardButton customType={customType}>
       <CustomLink

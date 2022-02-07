@@ -1,77 +1,50 @@
-import { Dropdown } from "@UI/Molecules";
 import Atoms from "@UI/Atoms";
 import Icon from "@UI/Icon";
 
 import styled from "@emotion/styled";
-
-const labelList = ["레이블이 없는 이슈", "bug", "documentation"];
-const milestonList = ["마일스톤이 없는 이슈", "마스터즈 코스"];
-const managerList = ["담당자가 없는 이슈", "크롱", "죠니"];
-const authorList = ["ethan.3160"];
-
-interface IFilterTab {
-  id: number;
-  indicator: string;
-  panelTitle: string;
-  list: string[];
-  direction: string;
-}
-
-const filterTabs: IFilterTab[] = [
-  {
-    id: 1,
-    indicator: "담당자",
-    panelTitle: "담당자 필터",
-    list: managerList,
-    direction: "right",
-  },
-  {
-    id: 2,
-    indicator: "레이블",
-    panelTitle: "레이블 필터",
-    list: labelList,
-    direction: "right",
-  },
-  {
-    id: 3,
-    indicator: "마일스톤",
-    panelTitle: "마일스톤 필터",
-    list: milestonList,
-    direction: "right",
-  },
-  {
-    id: 4,
-    indicator: "작성자",
-    panelTitle: "작성자 필터",
-    list: authorList,
-    direction: "right",
-  },
-];
+import { MouseEvent } from "react";
+import { useRecoilState } from "recoil";
+import { currentTableIssueStatusState } from "@recoils/issueTable";
+import { FilterTabs } from ".";
 
 const TableHeader = () => {
-  const createFilterTabs = (filterTabs: IFilterTab[]) =>
-    filterTabs.map(({ indicator, panelTitle, list, direction }) => (
-      <Dropdown
-        key={indicator}
-        indicator={indicator}
-        listTitle={panelTitle}
-        list={list}
-        direction={direction as "left" | "right"}
-      />
-    ));
+  const [issueStatus, setIssueStatus] = useRecoilState(
+    currentTableIssueStatusState
+  );
+
+  const onClick = ({ target }: MouseEvent<HTMLButtonElement>) => {
+    const btn = (target as HTMLElement).closest("button");
+    if (!btn || !btn.dataset.status) return;
+    const issueStatus = btn.dataset.status as "open" | "close";
+    setIssueStatus(issueStatus);
+  };
 
   return (
     <Wrapper className="TableHeader">
       <Icon name="check_box_initial" />
       <Atoms.ButtonGroup gap={24}>
-        <Atoms.Button size="medium" shape="text" icon="issue_open">
+        <Atoms.Button
+          size="medium"
+          shape="text"
+          icon="open"
+          data-status="open"
+          onClick={onClick}
+          active={issueStatus === "open"}
+        >
           열린 이슈(2)
         </Atoms.Button>
-        <Atoms.Button size="medium" shape="text" icon="archive">
-          열린 이슈(2)
+        <Atoms.Button
+          size="medium"
+          shape="text"
+          icon="close"
+          data-status="close"
+          onClick={onClick}
+          active={issueStatus === "close"}
+        >
+          닫힌 이슈(2)
         </Atoms.Button>
       </Atoms.ButtonGroup>
-      <div className="filterTabs">{createFilterTabs(filterTabs)}</div>
+      <FilterTabs />
     </Wrapper>
   );
 };
@@ -95,12 +68,9 @@ const Wrapper = styled.div`
     & > .Button {
       width: 105px;
       height: 32px;
-    }
-  }
-  .filterTabs {
-    display: flex;
-    & > div {
-      margin-left: 32px;
+      .active {
+        color: var(--titleActive);
+      }
     }
   }
 `;

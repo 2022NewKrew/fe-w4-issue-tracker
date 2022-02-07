@@ -5,6 +5,7 @@ declare module "@types" {
     id: string;
     num: number;
     title: string;
+    assignees: string[];
     milestone: string | null;
     labels: string[];
     author: string;

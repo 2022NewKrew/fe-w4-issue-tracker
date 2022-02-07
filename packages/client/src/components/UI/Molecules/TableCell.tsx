@@ -3,22 +3,16 @@ import Atoms from "@UI/Atoms";
 import styled from "@emotion/styled";
 import Icon from "@UI/Icon";
 import { useClickLink } from "@hooks";
+import { Issue } from "@types";
 
 interface Props {
-  issue: {
-    id: number;
-    title: string;
-    author: string;
-    time: string;
-    label: { title: string; color: string }[];
-    milestone: string;
-  };
+  issue: Issue;
 }
 
-const TableCell = ({
-  issue: { id, title, author, time, label, milestone },
-}: Props) => {
+const TableCell = ({ issue }: Props) => {
+  const { id, num, title, author, timestamp, labels, milestone } = issue;
   const onClickLink = useClickLink(id);
+
   return (
     <Wrapper className="TableCell" onClick={onClickLink}>
       <Icon name="check_box_initial" />
@@ -26,15 +20,15 @@ const TableCell = ({
         <Atoms.Title type="issueList">
           <Icon name="issue_open_blue" />
           {title}
-          {label.map(({ title, color }, idx) => (
-            <Atoms.Label key={idx} type="custom" color={color}>
-              {title}
+          {labels.map(({ id, name, backgroundColor }) => (
+            <Atoms.Label key={id} type="custom" color={backgroundColor}>
+              {name}
             </Atoms.Label>
           ))}
         </Atoms.Title>
         <div className="table_content_info">
-          <span>#{id}</span>
-          <span>{`${author} ${time}`}</span>
+          <span>#{num}</span>
+          <span>{`${author} ${timestamp}`}</span>
           <span>
             <Icon name="milestone" />
             {milestone}

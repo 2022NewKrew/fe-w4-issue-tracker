@@ -1,12 +1,16 @@
 import { TableHeader, TableCell } from "@UI/Molecules";
 
 import styled from "@emotion/styled";
-import { useGetIssue } from "@querys/Issue";
+
 import { Issue } from "@types";
 import { useCallback } from "react";
+import { useRecoilValueLoadable } from "recoil";
+import { filteredIssueListState } from "@recoils/issueTable";
 
 const IssueListTable = () => {
-  const { data: issueList, isLoading } = useGetIssue();
+  const { state, contents: issueList } = useRecoilValueLoadable(
+    filteredIssueListState
+  );
 
   const createIssueList = useCallback(
     (issueList: Issue[]) =>
@@ -16,12 +20,16 @@ const IssueListTable = () => {
     [issueList]
   );
 
-  if (isLoading) return <div>로딩중</div>;
+  if (state === "loading") return <div>로딩중</div>;
 
   return (
     <Wrapper className="IssueListTable">
       <TableHeader />
-      {createIssueList(issueList as Issue[])}
+      {issueList.length ? (
+        createIssueList(issueList)
+      ) : (
+        <EmptyCell>등록된 이슈가 없습니다.</EmptyCell>
+      )}
     </Wrapper>
   );
 };
@@ -40,4 +48,14 @@ const Wrapper = styled.section`
   & > .TableCell:last-child {
     border-radius: 0 0 16px 16px;
   }
+`;
+
+const EmptyCell = styled.li`
+  width: 100%;
+  height: 100px;
+  background: var(--offWhite);
+  color: var(--label);
+  border-top: 1px solid var(--line);
+  ${({ theme }) => theme.FlexCenter}
+  border-radius: 0 0 16px 16px;
 `;

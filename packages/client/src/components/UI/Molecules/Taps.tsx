@@ -1,39 +1,37 @@
 import Icon from "@UI/Icon";
-
 import { NavLink } from "react-router-dom";
-
 import styled from "@emotion/styled";
-
-const tap = [
-  {
-    to: "label",
-    name: "레이블",
-    count: 0,
-  },
-  {
-    to: "milestone",
-    name: "마일스톤",
-    count: 0,
-  },
-];
+import { useGetLabelCount } from "@querys/labels";
+import { useGetMilestoneCount } from "@querys/milestone";
 
 const Taps = () => {
-  const createTap = () => {
-    return tap.map(({ to, name, count }) => (
-      <li key={to}>
+  const { data: labelCount } = useGetLabelCount();
+  const { data: milestoneCount } = useGetMilestoneCount();
+
+  return (
+    <Wrapper>
+      <li>
         <NavLink
-          to={`/${to}`}
+          to="/label"
           className={({ isActive }) => (isActive ? "activated" : "")}
         >
           <Icon name="label" />
-          {name}
-          <span>({count})</span>
+          레이블
+          <span>({labelCount})</span>
         </NavLink>
       </li>
-    ));
-  };
-
-  return <Wrapper>{createTap()}</Wrapper>;
+      <li>
+        <NavLink
+          to="/milestone"
+          className={({ isActive }) => (isActive ? "activated" : "")}
+        >
+          <Icon name="milestone" />
+          마일스톤
+          <span>({milestoneCount})</span>
+        </NavLink>
+      </li>
+    </Wrapper>
+  );
 };
 export default Taps;
 

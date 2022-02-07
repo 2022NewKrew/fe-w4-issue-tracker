@@ -5,8 +5,8 @@ const BasicButton = styled.button`
     &: hover {
         background-color: #004de3;
     }
-    ${(props) =>
-        props.large &&
+    ${({ large }) =>
+        large &&
         css`
             width: 340px;
             padding: 16px 24px;
@@ -15,8 +15,8 @@ const BasicButton = styled.button`
                 padding: 12px 24px;
             }
         `}
-    ${(props) =>
-        props.medium_standard &&
+    ${({ medium_standard }) =>
+        medium_standard &&
         css`
             width: 240px;
             padding: 12px 24px;
@@ -31,14 +31,14 @@ const BasicDisabledButton = styled.button`
     ${({ theme }) => theme.basicButton}
     cursor: default;
     opacity: 0.5;
-    ${(props) =>
-        props.large &&
+    ${({ large }) =>
+        large &&
         css`
             padding: 16px 24px;
             width: 340px;
         `}
-    ${(props) =>
-        props.medium_standard &&
+    ${({ medium_standard }) =>
+        medium_standard &&
         css`
             width: 240px;
             padding: 12px 24px;
@@ -47,8 +47,8 @@ const BasicDisabledButton = styled.button`
 
 const SmallButton = styled.button`
     ${({ theme }) => theme.smallButton}
-    ${(props) =>
-        props.small_standard &&
+    ${({ small_standard }) =>
+        small_standard &&
         css`
             background-color: #007aff;
             color: #fefefe;
@@ -61,8 +61,8 @@ const SmallButton = styled.button`
                 border: 4px solid #c7ebff;
             }
         `}
-    ${(props) =>
-        props.small_secondary &&
+    ${({ small_secondary }) =>
+        small_secondary &&
         css`
             background-color: #fff;
             color: #007aff;
@@ -84,14 +84,14 @@ const SmallDisabledButton = styled.button`
     ${({ theme }) => theme.smallButton}
     cursor: default;
     opacity: 0.5;
-    ${(props) =>
-        props.small_standard &&
+    ${({ small_standard }) =>
+        small_standard &&
         css`
             background-color: #007aff;
             color: #fefefe;
         `}
-    ${(props) =>
-        props.small_secondary &&
+    ${({ small_secondary }) =>
+        small_secondary &&
         css`
             background-color: #fff;
             color: #007aff;
@@ -108,15 +108,15 @@ const TextButton = styled.button`
     &: hover {
         color: #4e4b66;
     }
-    ${(props) =>
-        props.medium_text &&
+    ${({ medium_text }) =>
+        medium_text &&
         css`
             width: 87px;
             font-size: 16px;
             line-height: 32px;
         `}
-    ${(props) =>
-        props.small_text &&
+    ${({ small_text }) =>
+        small_text &&
         css`
             width: 70px;
             font-size: 12px;
@@ -128,15 +128,15 @@ const TextDisabledButton = styled.button`
     ${({ theme }) => theme.textButton}
     cursor: default;
     opacity: 0.5;
-    ${(props) =>
-        props.medium_text &&
+    ${({ medium_text }) =>
+        medium_text &&
         css`
             width: 87px;
             font-size: 16px;
             line-height: 32px;
         `}
-    ${(props) =>
-        props.small_text &&
+    ${({ small_text }) =>
+        small_text &&
         css`
             width: 70px;
             font-size: 12px;

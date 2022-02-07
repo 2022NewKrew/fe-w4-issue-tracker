@@ -11,3 +11,11 @@ export const patchCheckedIssue = (idList) =>
       "Content-type": "application/json; charset=UTF-8",
     },
   }).then((res) => res.json());
+export const patchLabel = ({ id, editedLabel }) =>
+  fetch(`${BaseURL}/labels/${id}`, {
+    method: "PATCH",
+    body: JSON.stringify(editedLabel),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  }).then((res) => res.json());

@@ -1,12 +1,4 @@
-import {
-  ErrorBoundary,
-  Login,
-  Issue,
-  Add,
-  Label,
-  Milestone,
-  Test,
-} from "@pages";
+import { ErrorBoundary, Login, Issue, Add, Label, Milestone } from "@pages";
 import { Helmet } from "react-helmet";
 import {
   BrowserRouter,
@@ -47,8 +39,7 @@ const Router = () => {
             path="/milestone"
             element={[<Helmet title="Milestone" />, <Milestone />]}
           />
-          <Route path="/test" element={[<Helmet title="Test" />, <Test />]} />
-          <Route path="*" element={<Navigate replace to="/test" />} />
+          <Route path="*" element={<Navigate replace to="/issue" />} />
         </Routes>
       </ErrorBoundary>
     </BrowserRouter>

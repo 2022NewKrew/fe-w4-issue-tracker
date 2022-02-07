@@ -4,7 +4,7 @@ import { Wrapper } from "@atoms";
 import { IssueCell, IssueTableHeader } from "@molecules";
 import { COLOR } from "@constants";
 import { useRecoilValue } from "recoil";
-import { issueListState } from "@/store.js";
+import { filteredIssueListState } from "@/store.js";
 
 const IssueTableWrapper = styled(Wrapper)`
   width: 100%;
@@ -19,7 +19,7 @@ const IssueList = styled(Wrapper)`
 `;
 
 function IssueTable() {
-  const issueList = useRecoilValue(issueListState);
+  const issueList = useRecoilValue(filteredIssueListState);
 
   return (
     <IssueTableWrapper>

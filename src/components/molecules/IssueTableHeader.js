@@ -5,15 +5,13 @@ import { AlertCircleIcon, ArchieveIcon } from "@icons";
 import { SmallLinkText } from "@atoms";
 import { COLOR, DATA_TYPE } from "@constants";
 import { IssueTableHeaderOptionTab } from "@/components/molecules/index.js";
-import { useRecoilState } from "recoil";
-import { filterState } from "@/store.js";
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
-  getClosedIssueCount,
-  getLabelList,
-  getMilestoneList,
-  getOpenedIssueCount,
-  getUserList,
-} from "@/firebase.js";
+  closedIssueListCountState,
+  filterState,
+  openedIssueListCountState,
+} from "@/store.js";
+import { getLabelList, getMilestoneList, getUserList } from "@/firebase.js";
 
 const TAB_LIST_METADATA = [
   { title: "담당자", filterKey: "assignee", dataKey: DATA_TYPE.USER },
@@ -62,14 +60,9 @@ const OptionTabList = styled(Wrapper)`
 
 function IssueTableHeader() {
   const [issueFilter, setIssueFilter] = useRecoilState(filterState);
-  const [openedIssueCount, setOpenedIssueCount] = useState(null);
-  const [closedIssueCount, setClosedIssueCount] = useState(null);
+  const openedIssueCount = useRecoilValue(openedIssueListCountState);
+  const closedIssueCount = useRecoilValue(closedIssueListCountState);
   const [headerOptionTabData, setHeaderOptionTabData] = useState([]);
-
-  useEffect(async () => {
-    setOpenedIssueCount(await getOpenedIssueCount());
-    setClosedIssueCount(await getClosedIssueCount());
-  });
 
   useEffect(() => {
     generateHeaderOptionTabData();
@@ -153,7 +146,7 @@ function IssueTableHeader() {
         >
           <AlertCircleIcon />
           <FilterTabText>
-            열린 이슈{openedIssueCount ? <span>({openedIssueCount})</span> : ""}
+            열린 이슈{<span>({openedIssueCount})</span>}
           </FilterTabText>
         </FilterTab>
         <FilterTab
@@ -162,7 +155,7 @@ function IssueTableHeader() {
         >
           <ArchieveIcon />
           <FilterTabText>
-            닫힌 이슈{closedIssueCount ? <span>({closedIssueCount})</span> : ""}
+            닫힌 이슈{<span>({closedIssueCount})</span>}
           </FilterTabText>
         </FilterTab>
       </FilterTabList>

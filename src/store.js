@@ -1,5 +1,5 @@
 import { atom, selector } from "recoil";
-import { getIssueList } from "@/firebase.js";
+import { getIssueList, getLabelList, getMilestoneList } from "@/firebase.js";
 
 export const filterState = atom({
   key: "filter",
@@ -37,9 +37,52 @@ const filterIssueList = (issueList, filter) =>
 
 export const issueListState = selector({
   key: "issueList",
-  get: async ({ get }) => {
-    const issueList = await getIssueList();
+  get: async () => await getIssueList(),
+});
+
+export const filteredIssueListState = selector({
+  key: "filteredIssueList",
+  get: ({ get }) => {
+    const issueList = get(issueListState);
     const filter = get(filterState);
     return filterIssueList(issueList, filter);
   },
+});
+
+export const openedIssueListCountState = selector({
+  key: "openedIssueListCount",
+  get: ({ get }) => {
+    const issueList = get(issueListState);
+    const filter = { isOpened: true };
+    return filterIssueList(issueList, filter).length;
+  },
+});
+
+export const closedIssueListCountState = selector({
+  key: "closedIssueListCount",
+  get: ({ get }) => {
+    const issueList = get(issueListState);
+    const filter = { isOpened: false };
+    return filterIssueList(issueList, filter).length;
+  },
+});
+
+export const milestoneListState = selector({
+  key: "milestoneList",
+  get: async () => await getMilestoneList(),
+});
+
+export const labelListState = selector({
+  key: "labelList",
+  get: async () => await getLabelList(),
+});
+
+export const milestoneListCountState = selector({
+  key: "milestoneListCount",
+  get: ({ get }) => get(milestoneListState).length,
+});
+
+export const labelListCountState = selector({
+  key: "labelListCount",
+  get: ({ get }) => get(labelListState).length,
 });

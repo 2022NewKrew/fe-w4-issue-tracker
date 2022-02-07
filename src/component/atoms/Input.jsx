@@ -23,7 +23,7 @@ const InputWrapper = styled.div(
     position: relative;
     cursor: text;
     width: 100%;
-    background-color: ${theme.grayscale.background};
+    background-color: ${theme.grayscale.inputBackground};
 
     &:focus-within {
       background-color: ${theme.grayscale.offWhite};

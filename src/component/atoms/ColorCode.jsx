@@ -17,7 +17,7 @@ const InputWrapper = styled.div(
     width: 240px;
     height: 40px;
     padding: 0 24px;
-    background-color: ${theme.grayscale.background};
+    background-color: ${theme.grayscale.inputBackground};
     border-radius: 11px;
     overflow: hidden;
     color: ${theme.grayscale.label};

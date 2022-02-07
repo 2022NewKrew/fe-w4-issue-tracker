@@ -10,7 +10,7 @@ import {
   getButtonHeight,
   getButtonBorderRadius,
   getButtonCustomLinkType,
-} from "@utils/style-helper";
+} from "@utils/helper";
 
 const StyledStandardButton = styled.button`
   background: ${colors.blue};

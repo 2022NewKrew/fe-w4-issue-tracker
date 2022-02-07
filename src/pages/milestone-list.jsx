@@ -1,7 +1,7 @@
 import CustomHeader from "@components/etc/custom-header";
 
-const IssueDetails = () => {
+const MilestoneList = () => {
   return <CustomHeader>Issue Tracker</CustomHeader>;
 };
 
-export default IssueDetails;
+export default MilestoneList;

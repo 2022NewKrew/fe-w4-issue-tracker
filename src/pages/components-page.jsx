@@ -1,5 +1,6 @@
 import Container from "@components/etc/container";
 import Logotype from "@components/etc/logotype";
+import CustomHeader from "@components/etc/custom-header";
 import CustomDisplay from "@components/typography/custom-display";
 import CustomText from "@components/typography/custom-text";
 import CustomLink from "@components/typography/custom-link";
@@ -18,6 +19,10 @@ const ComponentsPage = () => {
           <h3>Logotype</h3>
           <Logotype customType="large">LogotypeLarge</Logotype>
           <Logotype customType="medium">LogotypeMedium</Logotype>
+        </Container>
+        <Container customType="regular">
+          <h3>CustomHeader</h3>
+          <CustomHeader>CustomHeader</CustomHeader>
         </Container>
       </div>
       <div>

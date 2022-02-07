@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Container from "@components/etc/container";
 import CustomText from "@components/typography/custom-text";
 import greyscale from "@styles/greyscale";
-import { allCenterAlign } from "@utils/style-helper";
+import { allCenterAlign } from "@utils/helper";
 
 const StyledTextInput = styled.input`
   font-family: Noto Sans KR;

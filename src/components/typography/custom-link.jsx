@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { getFontSize, getLineHeight, getColor } from "@utils/style-helper";
+import { getFontSize, getLineHeight, getColor } from "@utils/helper";
 
 const StyledCustomLink = styled.span`
   font-family: Noto Sans KR;

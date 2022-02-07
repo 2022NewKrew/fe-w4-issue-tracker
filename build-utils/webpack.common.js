@@ -24,7 +24,7 @@ const config = {
         ],
       },
       {
-        test: /\.(ico|png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        test: /\.(ico|png|jpg|jpeg|gif|woff|woff2|ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         use: [
           {
             loader: "file-loader",
@@ -40,6 +40,14 @@ const config = {
               name: "[name].[ext]?[fullhash]",
               limit: URL_LOADER_LIMIT,
             },
+          },
+        ],
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: "@svgr/webpack",
           },
         ],
       },
@@ -79,8 +87,8 @@ const config = {
       "@dist": commonPaths.outputPath,
       "@components": commonPaths.componentsPath,
       "@core": commonPaths.corePath,
-      "@pages": commonPaths.pagesPath,
       "@images": commonPaths.imagesPath,
+      "@pages": commonPaths.pagesPath,
       "@styles": commonPaths.stylesPath,
       "@utils": commonPaths.utilsPath,
     },

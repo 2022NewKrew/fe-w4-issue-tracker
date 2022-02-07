@@ -56,32 +56,4 @@ export const getIssueList = async () => {
   return await getDocList(DATA_TYPE.ISSUE);
 };
 
-export const getOpenedIssueCount = async () => {
-  const openedIssueListRef = await query(
-    collection(db, DATA_TYPE.ISSUE),
-    where("isOpened", "==", true)
-  );
-  const openedIssueListSnapshot = await getDocs(openedIssueListRef);
-  return openedIssueListSnapshot.size;
-};
-
-export const getClosedIssueCount = async () => {
-  const closedIssueListRef = await query(
-    collection(db, DATA_TYPE.ISSUE),
-    where("isOpened", "==", false)
-  );
-  const closedIssueListSnapshot = await getDocs(closedIssueListRef);
-  return closedIssueListSnapshot.size;
-};
-
-export const getLabelListCount = async () => {
-  const labelList = await getDocs(collection(db, DATA_TYPE.LABEL));
-  return labelList.size;
-};
-
-export const getMilestoneListCount = async () => {
-  const milestoneList = await getDocs(collection(db, DATA_TYPE.MILESTONE));
-  return milestoneList.size;
-};
-
 export * from "firebase/auth";

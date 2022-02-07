@@ -1,5 +1,10 @@
 import { atom, selector } from "recoil";
-import { getIssueList, getLabelList, getMilestoneList } from "@/firebase.js";
+import {
+  getIssueList,
+  getLabelList,
+  getMilestoneList,
+  getUserList,
+} from "@/firebase.js";
 
 export const filterState = atom({
   key: "filter",
@@ -75,6 +80,11 @@ export const milestoneListState = selector({
 export const labelListState = selector({
   key: "labelList",
   get: async () => await getLabelList(),
+});
+
+export const userListState = selector({
+  key: "userList",
+  get: async () => await getUserList(),
 });
 
 export const milestoneListCountState = selector({

@@ -5,13 +5,15 @@ import { AlertCircleIcon, ArchieveIcon } from "@icons";
 import { SmallLinkText } from "@atoms";
 import { COLOR, DATA_TYPE } from "@constants";
 import { IssueTableHeaderOptionTab } from "@/components/molecules/index.js";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, waitForAll } from "recoil";
 import {
   closedIssueListCountState,
   filterState,
+  labelListState,
+  milestoneListState,
   openedIssueListCountState,
+  userListState,
 } from "@/store.js";
-import { getLabelList, getMilestoneList, getUserList } from "@/firebase.js";
 
 const TAB_LIST_METADATA = [
   { title: "담당자", filterKey: "assignee", dataKey: DATA_TYPE.USER },
@@ -63,6 +65,9 @@ function IssueTableHeader() {
   const openedIssueCount = useRecoilValue(openedIssueListCountState);
   const closedIssueCount = useRecoilValue(closedIssueListCountState);
   const [headerOptionTabData, setHeaderOptionTabData] = useState([]);
+  const [userList, milestoneList, labelList] = useRecoilValue(
+    waitForAll([userListState, milestoneListState, labelListState])
+  );
 
   useEffect(() => {
     generateHeaderOptionTabData();
@@ -71,11 +76,11 @@ function IssueTableHeader() {
   const getDataWithDataKey = async (dataKey) => {
     switch (dataKey) {
       case DATA_TYPE.USER:
-        return await getUserList();
+        return userList;
       case DATA_TYPE.LABEL:
-        return await getLabelList();
+        return labelList;
       case DATA_TYPE.MILESTONE:
-        return await getMilestoneList();
+        return milestoneList;
       default:
         return [];
     }

@@ -1,12 +1,18 @@
 import React from 'react'
-import { IssuesProvider } from './context/issues/IssuesContext.jsx'
-import Issues from './context/issues/Issues.jsx'
+import { IssuesProvider } from '@Context/issues/IssuesContext.jsx'
+import Issues from '@Context/issues/Issues.jsx'
+import Collections from '@Components/pages/collections'
 
 const App = () => {
   return (
-    <IssuesProvider>
-      <Issues></Issues>
-    </IssuesProvider>
+    <div>
+      <IssuesProvider>
+        <Issues></Issues>
+      </IssuesProvider>
+      <br/>
+      <br/>
+      <Collections></Collections>
+    </div>
   )
 }
 

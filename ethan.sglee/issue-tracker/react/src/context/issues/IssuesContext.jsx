@@ -21,6 +21,7 @@ const loadingState = {
   data: null,
   error: null
 }
+Object.freeze(loadingState)
 
 // 성공했을 때의 상태 만들어주는 함수
 const success = data => ({
@@ -70,7 +71,7 @@ function issuesReducer(state, action) {
         issue: error(action.error)
       }
     default:
-      throw new Error(`Unhanded action type: ${action.type}`)
+      throw new Error(`Unhandled action type: ${action.type}`)
   }
 }
 

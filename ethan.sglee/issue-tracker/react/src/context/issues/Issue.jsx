@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useIssuesState, useIssuesDispatch, getIssue } from '@IssueContext/IssuesContext'
+import { useIssuesState, useIssuesDispatch, getIssue } from '@Context/issues/IssuesContext'
 
 function Issue({ id }) {
   const state = useIssuesState()

@@ -4,12 +4,18 @@ import { Color } from "@/common/designSystem";
 import dropdownArrowImg from "@/asset/img/dropdown.svg";
 import checkOffImg from "@/asset/img/check-off-circle.svg";
 import checkOnImg from "@/asset/img/check-on-circle.svg";
+
 export interface DropdownItem {
   type: DropdownType;
   itemTitle: string;
   labelColor?: string;
   assignImgSrc?: string;
   isChecked: boolean;
+}
+
+export enum DropdownSize {
+  large,
+  medium,
 }
 
 export enum DropdownType {
@@ -28,6 +34,7 @@ interface DropdownProps {
   dropdwonGroupTitle: string;
   dropdownGroup: DropdownItem[];
   dropdownPopupFixPoint?: FixPoint;
+  size?: DropdownSize;
   clickItem: (index: number) => void;
 }
 
@@ -36,11 +43,12 @@ const Dropdown: FunctionComponent<DropdownProps> = ({
   dropdownGroup,
   dropdwonGroupTitle,
   dropdownPopupFixPoint = FixPoint.left,
+  size = DropdownSize.medium,
   clickItem,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const dropdownClick = () => setIsOpen(!isOpen);
-  const dropdownItemClick = (event: React.MouseEvent<HTMLDivElement>) => {
+  const handleDropdownClick = () => setIsOpen(!isOpen);
+  const handleDropdownItemClick = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
     const dropdownItem = (event.target as HTMLElement).closest(".DropdownItem");
 
@@ -57,12 +65,17 @@ const Dropdown: FunctionComponent<DropdownProps> = ({
     return isChecked ? checkOnImg : checkOffImg;
   };
   const ref = useRef<HTMLDivElement>(null);
-  const checkClickOutside = (event: MouseEvent) => {
-    if (isOpen && ref.current && !ref.current.contains(event.target as Node)) {
-      setIsOpen(false);
-    }
-  };
   useEffect(() => {
+    const checkClickOutside = (event: MouseEvent) => {
+      if (
+        isOpen &&
+        ref.current &&
+        !ref.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
     document.addEventListener("mousedown", checkClickOutside);
 
     return () => {
@@ -78,15 +91,15 @@ const Dropdown: FunctionComponent<DropdownProps> = ({
     </DropdownItem>
   ));
   return (
-    <Wrapper ref={ref}>
-      <DropdownTitleWrapper onClick={dropdownClick}>
+    <Wrapper ref={ref} size={size}>
+      <DropdownTitleWrapper onClick={handleDropdownClick}>
         <DropdownTitle>{dropdownTitle}</DropdownTitle>
         <DropdownImg src={dropdownArrowImg} />
       </DropdownTitleWrapper>
       <DropdownGroupWrapper
         isOpen={isOpen}
         dropdownPopupFixPoint={dropdownPopupFixPoint}
-        onClick={dropdownItemClick}
+        onClick={handleDropdownItemClick}
       >
         <DropdownGroupTitle>{dropdwonGroupTitle}</DropdownGroupTitle>
         {dropdownGroupForm}
@@ -95,11 +108,25 @@ const Dropdown: FunctionComponent<DropdownProps> = ({
   );
 };
 
-const Wrapper = styled.div`
-  margin: 5px; //TODO: 테스트용 값 변경 예장
+const largeSize = css`
+  padding-left: 24px;
+  padding-right: 28px;
+  width: 76px;
+`;
+
+const mediumSize = css`
   width: max-content;
-  min-width: 50px;
+  margin-right: 28px;
+`;
+
+const buttonSizeToStyles = {
+  [DropdownSize.large]: largeSize,
+  [DropdownSize.medium]: mediumSize,
+};
+
+const Wrapper = styled.div<{ size: DropdownSize }>`
   position: relative;
+  ${(props) => buttonSizeToStyles[props.size]}
 `;
 
 const DropdownTitle = styled.div`

@@ -1,6 +1,8 @@
 import React, { FunctionComponent } from "react";
 import styled, { css } from "styled-components";
 import { Color, Size } from "@/common/designSystem";
+import plusImg from "@/asset/img/plus.svg";
+import SVG from "react-inlinesvg";
 
 export enum ButtonMode {
   Standard,
@@ -25,14 +27,20 @@ const Button: FunctionComponent<ButtonProps> = ({
   message = "BUTTON",
 }) => {
   return (
-    <ButtonInput
-      type="button"
-      buttonSize={buttonSize}
-      buttonMode={buttonMode}
-      value={message}
-    />
+    <Wrapper>
+      <SvgImg src={plusImg} buttonSize={buttonSize} buttonMode={buttonMode} />
+      <ButtonInput
+        type="button"
+        buttonSize={buttonSize}
+        buttonMode={buttonMode}
+        value={message}
+      />
+    </Wrapper>
   );
 };
+const Wrapper = styled.div`
+  position: relative;
+`;
 
 const largeSize = css`
   height: 64px;
@@ -48,12 +56,26 @@ const mediumSize = css`
   line-height: 28px;
 `;
 
+const SvgImg = styled(SVG)<ButtonInputInfo>`
+  visibility: ${(props) =>
+    props.buttonSize === Size.Small ? "visible" : "hidden"};
+  position: absolute;
+  left: 24px;
+  top: 10px;
+  width: 16px;
+  height: 16px;
+  & path {
+    stroke: ${Color.offWhite};
+  }
+`;
+
 const smallSize = css`
   width: 120px;
   height: 40px;
   font-size: 12px;
   line-height: 20px;
   border-radius: 11px;
+  text-indent: 20px;
 `;
 
 const standardMode = css`
@@ -127,8 +149,6 @@ const buttonModeToStyles = {
 };
 
 const ButtonInput = styled.input<ButtonInputInfo>`
-  margin: 5px; //TODO: 테스트용 값 변경 예장
-
   padding: 0px 24px;
   border-radius: 20px;
 

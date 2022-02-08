@@ -5,7 +5,7 @@ const Dotenv = require("dotenv-webpack");
 
 // Path Config
 const PROJECT_ROOT = path.resolve(__dirname, "..");
-const ENV = path.resolve(PROJECT_ROOT, "env");
+const DEV_ENV_PATH = path.resolve(PROJECT_ROOT, "env/dev.env");
 const PORT = process.env.PORT || 3000;
 
 module.exports = (webpackEnv) =>
@@ -24,7 +24,7 @@ module.exports = (webpackEnv) =>
       ],
     },
     plugins: [
-      new Dotenv({ path: path.resolve(ENV, ".env.dev") }), // .env에 있는 변수를 가져오는 Plugin. process.env.XXX 로 접근 가능
+      new Dotenv({ path: DEV_ENV_PATH }), // .env에 있는 변수를 가져오는 Plugin. process.env.XXX 로 접근 가능
     ],
     devServer: {
       port: PORT, // port 설정

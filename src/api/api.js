@@ -1,4 +1,4 @@
-const BaseURL = "http://localhost:1234/api";
+const BaseURL = process.env.SERVER_BASE_URL;
 
 export const getIssues = () => fetch(`${BaseURL}/issues`).then((res) => res.json());
 export const getLabels = () => fetch(`${BaseURL}/labels`).then((res) => res.json());

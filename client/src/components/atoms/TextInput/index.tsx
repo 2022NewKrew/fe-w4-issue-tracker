@@ -11,6 +11,7 @@ import {
 import { theme } from "@/styles/theme";
 import { TEXT_INPUT_TYPE, INPUT_TYPE } from "@/constants/type";
 import useInput, { TextInputProps } from "@/hooks/useInput";
+import { IStyle } from "@/constants/type";
 
 // 여기서 button 의 타입에 맞게 css 를 반환해준다.
 type TYPE_LARGE = "large";
@@ -31,15 +32,8 @@ type inputType =
 export interface IInputProps {
   type: inputType;
   name: string;
-  styles?: IStyleProps;
+  styles?: IStyle;
   icon?: any;
-}
-interface IStyleProps {
-  color?: string;
-  backgroundColor?: string;
-  margin?: string;
-  padding?: string;
-  textAlign?: string;
 }
 
 const TextInput: React.FC<IInputProps> = ({ type, name, styles, icon }) => {
@@ -78,7 +72,7 @@ const TextInput: React.FC<IInputProps> = ({ type, name, styles, icon }) => {
 };
 
 const StyledWrap = styled.div<any>`
-  ${({ type }) => {
+  ${({ type, width, margin }) => {
     switch (type) {
       case TEXT_INPUT_TYPE.LARGE:
         return css`
@@ -89,7 +83,6 @@ const StyledWrap = styled.div<any>`
           ${inputWrapErrorStyle};
           ${StyledLabel} {
             font-size: 12px;
-            padding-top: 10px;
             width: 292px;
             height: 20px;
           }
@@ -102,11 +95,11 @@ const StyledWrap = styled.div<any>`
       case TEXT_INPUT_TYPE.MEDIUM:
         return css`
           flex-wrap: wrap;
-          width: 320px;
+          width: ${width ?? "320px"};
           height: 56px;
           ${StyledLabel} {
             font-size: 12px;
-            padding-top: 10px;
+            line-height: 20px;
             width: 80px;
             height: 20px;
           }
@@ -161,7 +154,7 @@ const StyledWrap = styled.div<any>`
     margin: ${margin};
   `}
 `;
-const StyledLabel = styled.label<any>`
+const StyledLabel = styled.label`
   ${inputLabelStyle};
   color: ${theme.color.label};
   &.filled,
@@ -181,7 +174,7 @@ const StyledInput = styled.input.attrs(({ name }) => {
   if (name === INPUT_TYPE.PASSWORD) {
     return { type: "password" };
   }
-})<any>`
+})`
   ${inputTagStyle};
   font-size: 16px;
 `;

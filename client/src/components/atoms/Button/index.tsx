@@ -4,6 +4,7 @@ import { flexCenter } from "@/styles/common";
 import { theme } from "@/styles/theme";
 import { BUTTON_TYPE } from "@/constants/type";
 import { Plus } from "@/components/atoms/Icons";
+import { IStyle } from "@/constants/type";
 
 // 여기서 button 의 타입에 맞게 css 를 반환해준다.
 type TYPE_LARGE = "large";
@@ -23,18 +24,12 @@ type buttonType =
 
 interface IButtonProps {
   type: buttonType;
-  styles?: {
-    color?: any;
-    backgroundColor?: string;
-    margin?: string;
-    padding?: string;
-    iconColor?: string;
-    textAlign?: string;
-  };
+  styles?: IStyle;
+  iconType?: any;
   onClick?: EventHandler<any & Event>;
 }
 
-const Button: React.FC<IButtonProps> = ({ type, styles, children, ...props }) => {
+const Button: React.FC<IButtonProps> = ({ type, styles, iconType, children, ...props }) => {
   const StyledButtonProps = {
     type,
     ...styles,
@@ -42,7 +37,7 @@ const Button: React.FC<IButtonProps> = ({ type, styles, children, ...props }) =>
   };
   return (
     <StyledButton {...StyledButtonProps}>
-      <Plus color={styles?.iconColor} />
+      {iconType ?? <Plus color={styles?.iconColor} />}
       {children ?? "BUTTON"}
     </StyledButton>
   );

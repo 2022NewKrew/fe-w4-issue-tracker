@@ -1,30 +1,68 @@
 const BaseURL = process.env.SERVER_BASE_URL;
 
-export const getIssues = () => fetch(`${BaseURL}/issues`).then((res) => res.json());
-export const getLabels = () => fetch(`${BaseURL}/labels`).then((res) => res.json());
-export const getMilestones = () => fetch(`${BaseURL}/milestones`).then((res) => res.json());
+const handleStatusError = async (response) => {
+  if (!response.ok) {
+    if (response.status === 500 && response.json) {
+      const { message } = await response.json();
+      throw { response: response, status: response.status, text: message };
+    }
+    throw { response: response, status: response.status, text: response.statusText };
+  }
+  return response;
+};
+
+const customFetch = async ({ url, option }) => {
+  const response = option ? await fetch(url, option) : await fetch(url);
+  const validResponse = await handleStatusError(response);
+  return validResponse.json ? await validResponse.json() : validResponse;
+};
+
+export const getIssues = () => customFetch({ url: `${BaseURL}/issues` });
+
+export const getLabels = () => customFetch({ url: `${BaseURL}/labels` });
+
+export const getMilestones = () => customFetch({ url: `${BaseURL}/milestones` });
+
 export const patchCheckedIssue = (idList) =>
-  fetch(`${BaseURL}/issues`, {
-    method: "PATCH",
-    body: JSON.stringify(idList),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
+  customFetch({
+    url: `${BaseURL}/issues`,
+    option: {
+      method: "PATCH",
+      body: JSON.stringify(idList),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
     },
-  }).then((res) => res.json());
+  });
+
 export const patchLabel = ({ id, editedLabel }) =>
-  fetch(`${BaseURL}/labels/${id}`, {
-    method: "PATCH",
-    body: JSON.stringify(editedLabel),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
+  customFetch({
+    url: `${BaseURL}/labels/${id}`,
+    option: {
+      method: "PATCH",
+      body: JSON.stringify(editedLabel),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
     },
-  }).then((res) => res.json());
-export const deleteLabel = ({ id }) => fetch(`${BaseURL}/labels/${id}`, { method: "DELETE" });
+  });
+
+export const deleteLabel = ({ id }) =>
+  customFetch({
+    url: `${BaseURL}/labels/${id}`,
+    option: {
+      method: "DELETE",
+    },
+  });
+
 export const createNewLabel = ({ newLabel }) =>
-  fetch(`${BaseURL}/labels`, {
-    method: "POST",
-    body: JSON.stringify(newLabel),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
+  customFetch({
+    url: `${BaseURL}/labels`,
+    option: {
+      method: "POST",
+      body: JSON.stringify(newLabel),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
     },
-  }).then((res) => res.json());
+  });

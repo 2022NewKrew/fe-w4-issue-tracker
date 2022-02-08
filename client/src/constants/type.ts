@@ -12,6 +12,7 @@ export const TEXT_TYPE = {
   MEDIUM: "medium",
   SMALL: "small",
   XSMALL: "xsmall",
+  ISSUE: "issue",
 };
 
 export const TEXT_INPUT_TYPE = {
@@ -24,6 +25,7 @@ export const TEXT_INPUT_TYPE = {
 export const INPUT_TYPE = {
   ID: "아이디",
   PASSWORD: "비밀번호",
+  FILTERBARS: "FilterBar",
 };
 
 export const INPUT_CLASS_TYPE = {
@@ -34,6 +36,19 @@ export const INPUT_CLASS_TYPE = {
   SUCCESS: "success",
   ERROR: "error",
 };
+
+export interface IStyle {
+  margin?: string;
+  width?: string;
+  height?: string;
+  background?: string;
+  borderColor?: string;
+  color?: string;
+  fontSize?: string;
+  iconColor?: string;
+  childCSS?: any;
+  padding?: string;
+}
 const GITHUB_AUTH_URL = "https://github.com/login/oauth/authorize";
 const CLIENT_ID = "0e4c6359e99345114044";
 const REDIRECT_URL = "http://localhost:3000/callback";

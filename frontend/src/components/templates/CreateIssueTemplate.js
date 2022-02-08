@@ -12,6 +12,8 @@ import { ReactComponent as XSquare } from "@assets/icons/xsquare.svg";
 
 import { Link } from "react-router-dom";
 
+import { useIssuesActions } from "../../_actions/issues.actions";
+
 const Container = styled.div`
   margin: 0px 80px;
 `;
@@ -52,6 +54,8 @@ export default function CreateIssueTemplate() {
   const [selectedLabel, setSelectedLabel] = useState([]);
   const [selectedMilestone, setSelectedMilestone] = useState([]);
 
+  const issuesActions = useIssuesActions();
+
   function handleIssueSubmit() {
     console.log(
       title,
@@ -60,7 +64,11 @@ export default function CreateIssueTemplate() {
       selectedLabel,
       selectedMilestone
     );
+    const data = {
+      title: title,
+    };
     console.log("Submitted!");
+    // issuesActions.createIssues();
   }
   return (
     <Container>

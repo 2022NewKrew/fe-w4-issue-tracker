@@ -30,18 +30,21 @@ const assigneesList = selector({
   key: "assigneeList",
   get: ({ get }) => {
     const issues = get(issuesState);
-    const assignees = [];
+    const assignees = [{ id: 0, name: "담당자가 없는 이슈" }];
     issues &&
       issues.map((issue) => {
         issue.assignees?.map((assignee) => {
-          if (assignee && !assignees.includes(assignee.id)) {
-            assignees.push(assignee.id);
+          if (assignee) {
+            assignees.push({ id: assignee.id, name: assignee.name });
           }
         });
       });
-    return assignees
-      ? ["담당자가 없는 이슈", ...assignees]
-      : ["담당자가 없는 이슈"];
+    const filteredAssignees = [
+      ...new Map(
+        assignees.map((assignee) => [assignee["id"], assignee])
+      ).values(),
+    ];
+    return filteredAssignees;
   },
 });
 
@@ -49,16 +52,19 @@ const labelList = selector({
   key: "labelList",
   get: ({ get }) => {
     const issues = get(issuesState);
-    const labels = [];
+    const labels = [{ id: 0, name: "레이블이 없는 이슈" }];
     issues &&
       issues.map((issue) => {
         issue.labels?.map((label) => {
-          if (label && !labels.includes(label.name)) {
-            labels.push(label.name);
+          if (label) {
+            labels.push({ id: label.id, name: label.name });
           }
         });
       });
-    return labels ? ["레이블이 없는 이슈", ...labels] : ["레이블이 없는 이슈"];
+    const filteredLabels = [
+      ...new Map(labels.map((label) => [label["id"], label])).values(),
+    ];
+    return filteredLabels;
   },
 });
 
@@ -66,19 +72,23 @@ const milestoneList = selector({
   key: "milestoneList",
   get: ({ get }) => {
     const issues = get(issuesState);
-    const milestones = [];
+    const milestones = [{ id: 0, name: "마일스톤이 없는 이슈" }];
     issues &&
       issues.map((issue) => {
-        if (
-          issue.milestone &&
-          !milestones.includes(issue.milestone.description)
-        ) {
-          milestones.push(issue.milestone.description);
+        if (issue.milestone) {
+          milestones.push({
+            id: issue.milestone.id,
+            name: issue.milestone.description,
+          });
         }
       });
-    return milestones
-      ? ["마일스톤이 없는 이슈", ...milestones]
-      : ["마일스톤이 없는 이슈"];
+
+    const filteredMilestones = [
+      ...new Map(
+        milestones.map((milestone) => [milestone["id"], milestone])
+      ).values(),
+    ];
+    return filteredMilestones;
   },
 });
 const writerList = selector({
@@ -89,16 +99,20 @@ const writerList = selector({
     issues &&
       issues.map((issue) => {
         if (!writers.includes(issue.writer.id)) {
-          writers.push(issue.writer.id);
+          writers.push({ id: issue.writer.id, name: issue.writer.name });
         }
       });
-    return writers;
+
+    const filteredWriters = [
+      ...new Map(writers.map((writer) => [writer["id"], writer])).values(),
+    ];
+    return filteredWriters;
   },
 });
 
 // 이슈 필터링
 // const filteredIssuesState = selector({
-//   key: 'filteredISsues',
+//   key: 'filteredIssues',
 //   get: ({ get}) => {
 //     const filter = get
 //   }

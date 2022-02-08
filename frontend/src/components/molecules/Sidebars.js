@@ -9,9 +9,13 @@ import { ProgressIndicator } from "@components/molecules/ProgressIndicators";
 import { ReactComponent as Plus } from "@assets/icons/plus.svg";
 import { ReactComponent as UserImageLarge } from "@assets/icons/userimageLarge.svg";
 
+import { assigneesList, labelList, milestoneList } from "../../_state";
+import { useRecoilValue } from "recoil";
+
 const SidebarContainer = styled.div`
   width: 308px;
   height: fit-content;
+  box-sizing: border-box;
 
   border: 1px solid ${(props) => props.theme.greyscale.line};
   border-radius: 16px;
@@ -60,7 +64,7 @@ const Header = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  width: 100%:
+  box-sizing: border-box;
 
   svg {
     cursor: pointer;
@@ -103,9 +107,9 @@ export function Sidebar({
   selectedMilestone,
   setSelectedMilestone,
 }) {
-  const assigneeMenus = ["Lin", "Min"];
-  const labelMenus = ["documentation", "review"];
-  const milestoneMenus = ["Milestone 1", "Milestone 2"];
+  const assigneeMenus = useRecoilValue(assigneesList);
+  const labelMenus = useRecoilValue(labelList);
+  const milestoneMenus = useRecoilValue(milestoneList);
 
   const [showPanel, setShowPanel] = useState({
     assignee: false,
@@ -125,8 +129,8 @@ export function Sidebar({
       selectedAssignee &&
       selectedAssignee.map((assignee) => {
         return (
-          <ListWrapper key={assignee}>
-            <UserImageLarge /> <SmallText>{assignee}</SmallText>
+          <ListWrapper key={assignee.id}>
+            <UserImageLarge /> <SmallText>{assignee.id}</SmallText>
           </ListWrapper>
         );
       })
@@ -138,8 +142,8 @@ export function Sidebar({
       selectedLabel &&
       selectedLabel.map((label) => {
         return (
-          <ListWrapper key={label}>
-            <SmallLabel type='light' text={label} />
+          <ListWrapper key={label.id}>
+            <SmallLabel type='light' text={label.name} />
           </ListWrapper>
         );
       })
@@ -151,9 +155,9 @@ export function Sidebar({
       selectedMilestone &&
       selectedMilestone.map((milestone) => {
         return (
-          <MilestoneWrapper key={milestone}>
+          <MilestoneWrapper key={milestone.id}>
             <ProgressIndicator openIssues={5} closedIssues={12} />
-            <SmallText color='label'>{milestone}</SmallText>
+            <SmallText color='label'>{milestone.name}</SmallText>
           </MilestoneWrapper>
         );
       })

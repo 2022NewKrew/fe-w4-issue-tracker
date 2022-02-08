@@ -119,12 +119,11 @@ export default function IssueTableHeader(props) {
   }
 
   function showDropdownIndicators() {
-    const openIssues = useRecoilValue(openIssuesState);
-    const closedIssues = useRecoilValue(closedIssuesState);
-
-    const asssignneeChangeMenus = useRecoilValue(assigneesList);
+    const assignneeChangeMenus = useRecoilValue(assigneesList);
     const labelChangeMenus = useRecoilValue(labelList);
+    // const labelChangeMenus = labels.map((label) => label.name);
     const milestoneChangeMenus = useRecoilValue(milestoneList);
+    // const milestoneChangeMenus = milestones.map((milestone) => milestone.name);
     const writerChangeMenus = useRecoilValue(writerList);
     const statusChangeMenus = ["이슈 열기", "이슈 닫기"];
 
@@ -148,7 +147,7 @@ export default function IssueTableHeader(props) {
               show={showPanel["assignee"]}
               header='담당자 필터'
               type='image'
-              menus={asssignneeChangeMenus}
+              menus={assignneeChangeMenus}
               position='right'
               selected={selectedAssignee}
               setSelected={setSelectedAssignee}

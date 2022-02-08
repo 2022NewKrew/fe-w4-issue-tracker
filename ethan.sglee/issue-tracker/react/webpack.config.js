@@ -11,6 +11,8 @@ module.exports = {
     extensions: ['.js', '.jsx'],
     alias: {
       "@Context": path.resolve(__dirname, "src/context"),
+      "@Components": path.resolve(__dirname, "src/components"),
+      "@Public": path.resolve(__dirname, "public")
     },
   },
   output: {
@@ -44,7 +46,7 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
-        test: /\.(jpeg|jpg)$/,
+        test: /\.(jpeg|jpg|svg)$/,
         loader: 'file-loader',
         options: {
           name: '[path][name].[ext]',

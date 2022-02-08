@@ -10,6 +10,7 @@ System.config({
     "@constants": "./src/constants",
     "@icons": "./src/assets/icons",
     "@stores": "./src/stores",
+    "@hooks": "./src/hooks",
     "@utils": "./src/utils",
     "@/*": "./src/*",
   },

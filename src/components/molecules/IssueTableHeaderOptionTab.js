@@ -41,7 +41,9 @@ function IssueTableHeaderOptionTab({ tabData }) {
   const setIssueFilter = useSetRecoilState(filterState);
   const [selectedIssueList, setSelectedIssueList] =
     useRecoilState(issueSelectionState);
-  const issueListUpdate = useSetRecoilState(forceIssueListUpdate);
+
+  const { refreshIssueList } = useRefreshRecoilState(issueListState);
+
   const wrapper = useRef(null);
 
   const clickDropdownPanel = async (actionType, { key, value }) => {
@@ -56,7 +58,7 @@ function IssueTableHeaderOptionTab({ tabData }) {
           return { id, key, value };
         });
         await updateIssue(dataForUpdate);
-        issueListUpdate((n) => n + 1);
+        refreshIssueList();
         setSelectedIssueList([]);
       },
     };

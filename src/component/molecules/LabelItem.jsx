@@ -7,6 +7,7 @@ import { Button } from "../atoms/Button";
 import { ColorCode } from "../atoms/ColorCode";
 import { Input } from "../atoms/Input";
 import { SmallLabel } from "../atoms/Label";
+import { RadioOptionSelection } from "../atoms/RadioOptionSelection";
 import { cssFontSize } from "../atoms/Text";
 
 const editReducer = (state, action) => {
@@ -48,23 +49,26 @@ export const LabelItem = ({ label }) => {
   // server state
   const queryClient = useQueryClient();
   const editMutation = useMutation(patchLabel, {
-    onSuccess: () => queryClient.invalidateQueries("labels"),
+    onSuccess: () => {
+      queryClient.invalidateQueries("labels");
+      setEditMode(false);
+    },
   });
   const deleteMutation = useMutation(deleteLabel, {
     onSuccess: () => queryClient.invalidateQueries("labels"),
   });
 
   // local state
-  const [editMode, setEdit] = useState(false);
+  const [editMode, setEditMode] = useState(false);
   const [editState, dispatch] = useReducer(editReducer, {});
 
-  // 편집창 오픈
+  // 편집창 활성화
   const openEdit = () => {
     dispatch({ type: "INIT", label });
-    setEdit(true);
+    setEditMode(true);
   };
 
-  // name 이 없으면 버튼 disabled
+  // 편집 완료 버튼 : name 이 없으면 비활성화
   const [disabled, setDisabled] = useState(true);
   useEffect(() => {
     if (disabled && editState.name !== "") {
@@ -74,6 +78,7 @@ export const LabelItem = ({ label }) => {
     }
   }, [editState.name]);
 
+  // 삭제 버튼
   const handleRemoveButton = () => {
     if (window.confirm(`${label.name} 을(를) 삭제하시겠습니까?`)) {
       deleteMutation.mutate({ id: label.id });
@@ -96,9 +101,18 @@ export const LabelItem = ({ label }) => {
             value={editState.backgroundColor}
             onChange={(e) => dispatch({ type: "CHANGE_BACKGROUNDCOLOR", backgroundColor: e.target.value })}
           />
+          <RadioOptionSelection
+            label="글자 색깔"
+            value={editState.color}
+            options={[
+              { label: "어두운색", value: "#14142B" },
+              { label: "밝은색", value: "#FEFEFE" },
+            ]}
+            onChange={(e) => dispatch({ type: "CHANGE_COLOR", color: e.target.value })}
+          />
         </LabelFormWrapper>
         <LabelButtonWrapper>
-          <Button options={{ type: "Small-Secondary", prefixIcon: "x-square" }} onClick={() => setEdit(false)}>
+          <Button options={{ type: "Small-Secondary", prefixIcon: "x-square" }} onClick={() => setEditMode(false)}>
             취소
           </Button>
           <Button options={{ type: "Small-Standard", prefixIcon: "edit" }} onClick={() => editMutation.mutate({ id: label.id, editedLabel: editState })} disabled={disabled}>
@@ -172,9 +186,6 @@ const NewLabelWrapper = styled.div(
   ({ theme }) => css`
     background: ${theme.grayscale.offWhite};
     padding: 32px;
-    border: 1px solid ${theme.grayscale.line};
-    border-radius: 16px;
-    margin-bottom: 24px;
 
     display: grid;
     grid-template-columns: 312px auto;

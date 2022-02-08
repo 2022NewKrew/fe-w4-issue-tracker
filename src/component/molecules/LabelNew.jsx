@@ -7,6 +7,7 @@ import { Button } from "../atoms/Button";
 import { ColorCode } from "../atoms/ColorCode";
 import { Input } from "../atoms/Input";
 import { SmallLabel } from "../atoms/Label";
+import { RadioOptionSelection } from "../atoms/RadioOptionSelection";
 import { cssFontSize } from "../atoms/Text";
 
 const reducer = (state, action) => {
@@ -54,7 +55,7 @@ export const LabelNew = ({ closeFn }) => {
     color: "#FEFEFE",
   });
 
-  // name 이 없으면 버튼 disabled
+  // 완료 버튼 : name 이 없으면 버튼 비활성화
   const [disabled, setDisabled] = useState(true);
   useEffect(() => {
     if (disabled && newLabel.name !== "") {
@@ -78,6 +79,15 @@ export const LabelNew = ({ closeFn }) => {
           handleRefresh={() => dispatch({ type: "CHANGE_BACKGROUNDCOLOR", backgroundColor: randomHexColor() })}
           value={newLabel.backgroundColor}
           onChange={(e) => dispatch({ type: "CHANGE_BACKGROUNDCOLOR", backgroundColor: e.target.value })}
+        />
+        <RadioOptionSelection
+          label="글자 색깔"
+          value={newLabel.color}
+          options={[
+            { label: "어두운색", value: "#14142B" },
+            { label: "밝은색", value: "#FEFEFE" },
+          ]}
+          onChange={(e) => dispatch({ type: "CHANGE_COLOR", color: e.target.value })}
         />
       </LabelFormWrapper>
       <LabelButtonWrapper>

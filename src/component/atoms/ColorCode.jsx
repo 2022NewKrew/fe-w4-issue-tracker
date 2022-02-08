@@ -40,7 +40,7 @@ const StyledLabel = styled.label`
 
 const StyledInput = styled.input(
   ({ theme }) => css`
-    ${cssFontSize["xsmall"]}
+    ${cssFontSize["small"]}
     width: 80px;
     margin-right: 8px;
     color: ${theme.grayscale.inputActive};

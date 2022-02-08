@@ -3,8 +3,8 @@ import { useState } from "react";
 
 import TemplateContainer from "@components/containers/template-container";
 import colors from "@styles/constants/colors";
-import numbers from "@styles/constants/numbers";
 import greyscale from "@styles/constants/greyscale";
+import numbers from "@styles/constants/numbers";
 import {
   allCenterAlign,
   buttonEvent,

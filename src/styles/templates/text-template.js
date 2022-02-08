@@ -1,7 +1,6 @@
 import { css } from "styled-components";
 
 import typography from "@styles/constants/typography";
-import greyscale from "@styles/constants/greyscale";
 import {
   largeTemplate,
   mediumTemplate,

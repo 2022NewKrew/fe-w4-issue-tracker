@@ -11,6 +11,17 @@ const getIssueLabels = async (req, res) => {
   }
 };
 
+const getIssueLabelsInIssue = async (req, res) => {
+  try {
+    const { issueId } = req.query;
+    const result = await IssueLabelService.getIssueLabelsInIssue(issueId);
+    return res.json({ success: true, result });
+  } catch (e) {
+    console.log(e);
+    return res.json({ success: false, message: error.GET_ISSUE_LABEL_ERROR });
+  }
+};
+
 const createIssueLabel = async (req, res) => {
   try {
     const body = req.body;
@@ -31,4 +42,9 @@ const deleteIssueLabel = async (req, res) => {
   }
 };
 
-export const IssueLabelController = { getIssueLabels, deleteIssueLabel, createIssueLabel };
+export const IssueLabelController = {
+  getIssueLabels,
+  getIssueLabelsInIssue,
+  deleteIssueLabel,
+  createIssueLabel,
+};

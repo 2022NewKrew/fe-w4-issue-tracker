@@ -16,9 +16,7 @@ const OptionSelection = ({ label, options }: Props) => {
       {options.map((option) => [
         <input id={option} name={label} type="radio" />,
         <label htmlFor={option}>
-          <Icon
-            name={select === option ? "check_on_circle" : "check_off_circle"}
-          />
+          <Icon name={select === option ? "check" : "no_check"} />
           {option}
         </label>,
       ])}

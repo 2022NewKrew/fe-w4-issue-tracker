@@ -6,11 +6,12 @@ import { IconName, LayoutProps, Theme } from "@emotion/react";
 import { useClickLink } from "@hooks";
 
 export interface Props extends SProps, LayoutProps {
-  onClick?: (e?: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (e?: any) => void;
   disabled?: boolean;
   icon?: IconName;
   link?: string;
   type?: "button" | "submit";
+  active?: boolean;
 }
 
 const Button = ({
@@ -23,18 +24,20 @@ const Button = ({
   icon,
   link,
   type = "button",
+  active = false,
+  ...props
 }: Props) => {
   const onClickLink = useClickLink(link);
-
   return (
     <SButton
-      className="Button"
+      className={`Button ${active ? "active" : ""}`}
       type={type}
       shape={shape}
       color={color}
       size={size}
       disabled={disabled}
       onClick={link ? onClickLink : onClick}
+      {...props}
     >
       {icon && <Icon className="btn_icon" name={icon} />}
       {children}
@@ -59,6 +62,12 @@ const SButton = styled.button<SProps>`
   font-weight: bold;
   ${({ shape = "standard", color = "primary" }) => shapeList(color)[shape]}
   ${({ size, shape = "standard", theme }) => sizeList(shape, theme)[size]}
+  &.active {
+    color: var(--titleActive);
+    .btn_icon {
+      opacity: 1;
+    }
+  }
   .btn_icon {
     position: static;
     margin-right: 4px;

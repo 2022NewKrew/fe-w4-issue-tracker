@@ -11,20 +11,20 @@ interface FilterList {
 
 interface Props {
   indicator: string;
-  listTitle: string;
-  list: FilterList[];
-  direction: "left" | "right";
+  listTitle?: string;
+  list: FilterList[] | undefined;
+  direction?: "left" | "right";
   image?: boolean;
   icon?: boolean;
-  select: string[];
+  select?: string | null;
   onSelect: (e: any) => void;
 }
 
 const Dropdown = ({
   indicator,
-  listTitle,
+  listTitle = `${indicator} 필터`,
   list,
-  direction,
+  direction = "right",
   image = false,
   icon = true,
   select,
@@ -34,10 +34,10 @@ const Dropdown = ({
 
   const createList = (list: FilterList[]) => {
     return list.map(({ id, name }) => (
-      <li key={id} className={select.includes(id) ? "select" : ""} data-id={id}>
+      <li key={id} className={select === id ? "select" : ""} data-id={id}>
         {image && <Icon name="user_image_small" />}
         {name}
-        {icon && <Icon name={select.includes(id) ? "check" : "no_check"} />}
+        {icon && <Icon name={select === id ? "check" : "no_check"} />}
       </li>
     ));
   };
@@ -49,7 +49,7 @@ const Dropdown = ({
       </Atoms.Button>
       <Panel className="Panel" visible={visible} direction={direction}>
         <Atoms.Title type="panel">{listTitle}</Atoms.Title>
-        <ul onClick={onSelect}>{createList(list)}</ul>
+        {list && <ul onClick={onSelect}>{createList(list)}</ul>}
       </Panel>
     </Wrapper>
   );

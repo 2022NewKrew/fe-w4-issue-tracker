@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { getIssues, getLabels, getMilestones, patchCheckedIssue } from "../../../api/api";
 import { Button } from "../../atoms/Button";
 import { CheckBox } from "../../atoms/CheckBox";
 import { cssFontSize, cssLink } from "../../atoms/Text";
+import { PageHeader, TableHeader, TableWrapper } from "../../commonLayout";
 import { FilterBar } from "../../molecules/FilterBar";
 import { IssueItem } from "../../molecules/IssueItem";
 import { Taps } from "../../molecules/Taps";
@@ -13,7 +14,7 @@ import { Taps } from "../../molecules/Taps";
 export const IssueHome = () => {
   // local state
   const [checked, setCheck] = useState(false);
-  const [issueList, setIssueList] = useState([]); // 나중에 필터 적용 예정
+  const [filteredIssueList, setIssueList] = useState([]); // 나중에 필터 적용 예정
   const checkedIssues = useRef(new Set());
 
   // data fetch
@@ -34,7 +35,7 @@ export const IssueHome = () => {
       checkedIssues.current.clear();
       setIssueList((prev) => prev.map((item) => ({ ...item, checked: false })));
     } else {
-      checkedIssues.current = new Set(issueList.map((item) => item.id));
+      checkedIssues.current = new Set(filteredIssueList.map((item) => item.id));
       setIssueList((prev) => prev.map((item) => ({ ...item, checked: true })));
     }
     setCheck((prev) => !prev);
@@ -65,7 +66,7 @@ export const IssueHome = () => {
     refetch();
   };
 
-  const issueItems = issueList.map((item) => <IssueItem key={item.id} item={item} handleCheckBoxById={handleCheckBoxById} checked={item.checked} />);
+  const issueItems = filteredIssueList.map((item) => <IssueItem key={item.id} item={item} handleCheckBoxById={handleCheckBoxById} checked={item.checked} />);
   const numOpenIssue = issues?.reduce((prev, item) => (item.status === "open" ? prev + 1 : prev), 0) || 0;
   const numCloseIssue = issues?.reduce((prev, item) => (item.status === "close" ? prev + 1 : prev), 0) || 0;
   const numLabels = labels?.length || 0;
@@ -74,19 +75,19 @@ export const IssueHome = () => {
 
   const issueTableHeader =
     numCheckedIssues === 0 ? (
-      <IssueTableHeader>
+      <TableHeader>
         <CheckBox onClick={handleTotalCheckBox} checked={checked} />
         <Button options={{ type: "Medium-Text", prefixIcon: "alert-circle" }}>{`열린 이슈(${numOpenIssue})`}</Button>
         <Button options={{ type: "Medium-Text", prefixIcon: "archive" }}>{`닫힌 이슈(${numCloseIssue})`}</Button>
-        <IssueRightItems>
+        <HeaderRightItems>
           <Button options={{ type: "Medium-Text", suffixIcon: "arrow-down" }}>담당자</Button>
           <Button options={{ type: "Medium-Text", suffixIcon: "arrow-down" }}>레이블</Button>
           <Button options={{ type: "Medium-Text", suffixIcon: "arrow-down" }}>마일스톤</Button>
           <Button options={{ type: "Medium-Text", suffixIcon: "arrow-down" }}>작성자</Button>
-        </IssueRightItems>
-      </IssueTableHeader>
+        </HeaderRightItems>
+      </TableHeader>
     ) : (
-      <IssueTableHeader>
+      <TableHeader>
         <CheckBox onClick={handleTotalCheckBox} checked={checked} />
         <span css={[cssFontSize["small"], cssLink]}>{`${numCheckedIssues}개 이슈 선택`}</span>
         <IssueRightItems>
@@ -94,71 +95,36 @@ export const IssueHome = () => {
             상태 수정
           </Button>
         </IssueRightItems>
-      </IssueTableHeader>
+      </TableHeader>
     );
 
   return (
     <>
-      <Header>
+      <PageHeader>
         <FilterBar />
-        <RightItems>
-          <Taps labelCount={numLabels} milestoneCount={numMilestones} />
-          <Link to="new">
-            <Button options={{ type: "Small-Standard", prefixIcon: "plus" }}>이슈 작성</Button>
-          </Link>
-        </RightItems>
-      </Header>
-      <IssueTable>
+        <StyledTaps labelCount={numLabels} milestoneCount={numMilestones} />
+        <Link to="new">
+          <Button options={{ type: "Small-Standard", prefixIcon: "plus" }}>이슈 작성</Button>
+        </Link>
+      </PageHeader>
+      <TableWrapper>
         {issueTableHeader}
         {issueItems}
-      </IssueTable>
+      </TableWrapper>
     </>
   );
 };
 
-const Header = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  margin-bottom: 24px;
+const StyledTaps = styled(Taps)`
+  margin: 0 16px 0 auto;
 `;
 
-const RightItems = styled.div`
-  margin-left: auto;
+const HeaderRightItems = styled.div`
+  margin: 0 16px 0 auto;
   display: flex;
   align-items: center;
 
   & > * {
     margin-left: 16px;
   }
-`;
-
-const IssueTable = styled.div(
-  ({ theme }) => css`
-    display: flex;
-    flex-direction: column;
-    border: 1px solid ${theme.grayscale.line};
-    border-radius: 16px;
-    overflow: hidden;
-    width: 100%;
-
-    & > *:not(:last-child) {
-      border-bottom: 1px solid ${theme.grayscale.line};
-    }
-  `
-);
-
-const IssueTableHeader = styled.div(
-  ({ theme }) => css`
-    background: ${theme.grayscale.background};
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: 64px;
-    color: ${theme.grayscale.label};
-  `
-);
-
-const IssueRightItems = styled(RightItems)`
-  margin-right: 16px;
 `;

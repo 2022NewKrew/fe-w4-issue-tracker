@@ -1,7 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { COLOR } from '../../../Assets/Styles/commonStyle'
+import TabItem from './TabItem'
+import PropTypes from 'prop-types'
 
 const TabItemList = styled.ul`
   display: inline-flex;
@@ -9,8 +10,8 @@ const TabItemList = styled.ul`
 
 const TabContainer = styled.div`
   display: inline-block;
-  background-color: ${ COLOR.BACKGROUND };
-  border: 1px solid ${ COLOR.LINE };
+  background-color: ${COLOR.BACKGROUND};
+  border: 1px solid ${COLOR.LINE};
   border-radius: 11px;
   overflow: hidden;
 `
@@ -21,15 +22,29 @@ const TabContainer = styled.div`
  * @constructor
  */
 const Tab = ({ children }) => {
+  const [selectedIdx, setSelectedIdx] = useState(-1)
+  const asd = { ss: '123', cc: '12344' }
+
   return (
     <TabContainer>
       <TabItemList>
-        { children }
+        {children.map((child, idx) => (
+          <TabItem
+            key={child.key}
+            isSelected={selectedIdx === idx}
+            onClick={() => {
+              setSelectedIdx(idx)
+            }}>
+            {child}
+          </TabItem>
+        ))}
       </TabItemList>
     </TabContainer>
   )
 }
 
-Tab.propTypes = {}
+Tab.propTypes = {
+  children: PropTypes.element,
+}
 
 export default Tab

@@ -3,30 +3,19 @@ import { TableHeader, TableCell } from "@UI/Molecules";
 import styled from "@emotion/styled";
 
 import { Issue } from "@types";
-import { useCallback } from "react";
-import { useRecoilValueLoadable } from "recoil";
-import { filteredIssueListState } from "@recoils/issueTable";
+import { useIssueList } from "@stores/issue";
+import withSuspense from "@templetes/withSuspense";
 
 const IssueListTable = () => {
-  const { state, contents: issueList } = useRecoilValueLoadable(
-    filteredIssueListState
-  );
-
-  const createIssueList = useCallback(
-    (issueList: Issue[]) =>
-      issueList.map((issue: Issue) => (
-        <TableCell key={issue.id} issue={issue} />
-      )),
-    [issueList]
-  );
-
-  if (state === "loading") return <div>로딩중</div>;
+  const { data: issueList } = useIssueList();
 
   return (
     <Wrapper className="IssueListTable">
       <TableHeader />
-      {issueList.length ? (
-        createIssueList(issueList)
+      {issueList?.length ? (
+        issueList?.map((issue: Issue) => (
+          <TableCell key={issue.id} issue={issue} />
+        ))
       ) : (
         <EmptyCell>등록된 이슈가 없습니다.</EmptyCell>
       )}
@@ -34,7 +23,7 @@ const IssueListTable = () => {
   );
 };
 
-export default IssueListTable;
+export default withSuspense(IssueListTable);
 
 const Wrapper = styled.section`
   ${({ theme }) => theme.FlexCenter}

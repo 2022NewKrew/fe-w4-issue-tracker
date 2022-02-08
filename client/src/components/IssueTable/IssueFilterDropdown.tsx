@@ -1,9 +1,15 @@
 import React from 'react';
-import { useRecoilValueLoadable } from 'recoil';
-import { userInfoAtom, labelInfoAtom, milestoneInfoAtom, statusInfoAtom } from '@atoms';
+import { useRecoilValueLoadable, useRecoilState, SetterOrUpdater } from 'recoil';
+import {
+    userInfoAtom,
+    labelInfoAtom,
+    milestoneInfoAtom,
+    statusInfoAtom,
+    issueFieldFilterState,
+} from '@atoms';
 import styled from 'styled-components';
 import { RoundBorderDiv, TextMedium, AlignYCenter } from '@styles/styleTemplates';
-import { IFilter, issueFilterType, IFilterInfo } from '@types';
+import { IFilter, issueFilterType, IFilterInfo, IFieldFilterState } from '@types';
 import { OptionField } from '@components/assets';
 
 interface IProps {
@@ -28,10 +34,29 @@ const getFilterAtom = (type: issueFilterType) => {
     }
 };
 
+const getOptionClickHandler = (
+    type: issueFilterType,
+    setState: SetterOrUpdater<IFieldFilterState>
+) => {
+    if (type === 'assignee' || type === 'milestone' || type === 'author')
+        return (value: number) =>
+            setState((prevState: IFieldFilterState) => {
+                return { ...prevState, [type]: value };
+            });
+    if (type === 'label')
+        return (value: number) =>
+            setState((prevState: IFieldFilterState) => {
+                const newLabelFilters = [...prevState['label'], value];
+                return { ...prevState, label: newLabelFilters };
+            });
+};
+
 export const IssueFilterDropdown = ({ dropdown, filterProperty }: IProps) => {
     const { title, type, emptyFilterOption } = filterProperty;
     const optionsAtom = getFilterAtom(type);
     const optionsData = useRecoilValueLoadable<IFilterInfo[]>(optionsAtom);
+    const [issueFieldFilter, setIssueFieldFilterState] =
+        useRecoilState<IFieldFilterState>(issueFieldFilterState);
 
     let optionsIncludeEmptyFilterOption: IFilterInfo[] = emptyFilterOption
         ? [{ id: -1, name: emptyFilterOption }]
@@ -46,9 +71,16 @@ export const IssueFilterDropdown = ({ dropdown, filterProperty }: IProps) => {
     return (
         <DropWrapper>
             <FilterTitle>{`${title} 필터`}</FilterTitle>
-            {optionsIncludeEmptyFilterOption.map((optionData: IFilterInfo, i) => (
-                <OptionField filterInfo={optionData} checkbox={type === 'statusChange'} key={i} />
-            ))}
+            {optionsIncludeEmptyFilterOption.map((optionData: IFilterInfo, i) => {
+                return (
+                    <OptionField
+                        filterInfo={optionData}
+                        checkbox={type !== 'statusChange'}
+                        key={i}
+                        onClickHandler={getOptionClickHandler(type, setIssueFieldFilterState)}
+                    />
+                );
+            })}
         </DropWrapper>
     );
 };

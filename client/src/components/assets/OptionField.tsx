@@ -7,12 +7,13 @@ import { CircleContainer } from '.';
 interface IProps {
     filterInfo: IFilterInfo;
     checkbox: boolean;
+    onClickHandler: () => void;
 }
 
-export const OptionField = ({ filterInfo, checkbox }: IProps) => {
+export const OptionField = ({ filterInfo, checkbox, onClickHandler }: IProps) => {
     const { id, name } = filterInfo;
     return (
-        <Option>
+        <Option onClick={() => onClickHandler(id)}>
             {filterInfo.profileImgSrc && (
                 <CircleContainer>
                     <img src={filterInfo.profileImgSrc} />

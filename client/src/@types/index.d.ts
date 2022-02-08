@@ -47,4 +47,10 @@ declare module '@types' {
         issueId: number;
         labelId: number;
     }
+    interface IFieldFilterState {
+        assignee: number;
+        label: number[];
+        milestone: number;
+        author: number;
+    }
 }

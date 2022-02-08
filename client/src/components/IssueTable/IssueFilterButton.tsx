@@ -15,6 +15,7 @@ import { FilterButton } from '@components/assets';
 
 interface IProps {
     filterProperty: IFilter;
+    isLast: boolean;
 }
 
 const getFilterAtom = (type: issueFilterType) => {
@@ -26,6 +27,8 @@ const getFilterAtom = (type: issueFilterType) => {
         case 'milestone':
             return milestoneInfoAtom;
         case 'author':
+            return userInfoAtom;
+        case 'statusChange':
             return userInfoAtom;
         default:
             throw Error('no match filter type');
@@ -59,7 +62,7 @@ const renderDropdown = (dropdown: boolean, filterProperty: IFilter) => {
     );
 };
 
-export const IssueFilterButton = ({ filterProperty }: IProps) => {
+export const IssueFilterButton = ({ filterProperty, isLast }: IProps) => {
     const [dropdown, setDropdown] = useState(false);
     const onClickHandler = (e: MouseEvent<HTMLElement>) => {
         e.preventDefault();
@@ -72,16 +75,21 @@ export const IssueFilterButton = ({ filterProperty }: IProps) => {
     };
 
     return (
-        <ButtonWrapper onMouseOver={onMouseOverHandler} onMouseLeave={onMouseLeaveHandler}>
+        <ButtonWrapper
+            onMouseOver={onMouseOverHandler}
+            onMouseLeave={onMouseLeaveHandler}
+            isLast={isLast}
+        >
             <DropButton title={filterProperty.title} onClickHandler={onClickHandler} />
             {renderDropdown(dropdown, filterProperty)}
         </ButtonWrapper>
     );
 };
 
-const ButtonWrapper = styled.div`
+const ButtonWrapper = styled.div<{ isLast: boolean }>`
     ${TableHeader}
     position: relative;
+    border-radius: ${({ isLast }) => (isLast ? '0 16px 0 0' : '0')};
 `;
 
 const DropButton = styled(FilterButton)`

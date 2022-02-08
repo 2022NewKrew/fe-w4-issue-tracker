@@ -22,9 +22,14 @@ const FilterTypes: IFilter[] = [
 
 const renderFilterButton = (selectMode: boolean, FilterTypes: IFilter[]) => {
     if (selectMode)
-        return <IssueFilterButton filterProperty={{ title: '상태 수정', type: 'statusChange' }} />;
+        return (
+            <IssueFilterButton
+                filterProperty={{ title: '상태 수정', type: 'statusChange' }}
+                isLast={true}
+            />
+        );
     return FilterTypes.map((filter: IFilter, i) => (
-        <IssueFilterButton filterProperty={filter} key={i} />
+        <IssueFilterButton filterProperty={filter} key={i} isLast={i === FilterTypes.length - 1} />
     ));
 };
 
@@ -61,6 +66,7 @@ const Checkbox = styled.div`
         width: 16px;
         height: 16px;
     }
+    border-radius: 16px 0 0 0;
 `;
 
 const IssueStatuses = styled.div`

@@ -12,22 +12,29 @@ interface IProps {
     checkStatus: boolean;
     selectMode: boolean;
     onChangeHandler: () => void;
+    isLast: boolean;
 }
 
-const renderRightArea = (selectMode: boolean, issue: IIssue | undefined) => {
-    if (selectMode) return <EmptySpace />;
+const renderRightArea = (selectMode: boolean, issue: IIssue | undefined, isLast: boolean) => {
+    if (selectMode) return <EmptySpace isLast={isLast} />;
     return (
         <>
             <Assignee></Assignee>
             <EmptySpace />
             <EmptySpace />
-            <Author></Author>
+            <Author isLast={isLast}></Author>
         </>
     );
     // TODO: issue의 작성자, 담당자 정보를 받아 렌더
 };
 
-export const IssueRow = ({ issueData, checkStatus, selectMode, onChangeHandler }: IProps) => {
+export const IssueRow = ({
+    issueData,
+    checkStatus,
+    selectMode,
+    onChangeHandler,
+    isLast,
+}: IProps) => {
     const { title, id, userId, timeStamp, status, labelings, milestoneId } = issueData;
     const [labelInfo] = useRecoilStateLoadable<ILabel[]>(labelInfoAtom);
 
@@ -46,7 +53,7 @@ export const IssueRow = ({ issueData, checkStatus, selectMode, onChangeHandler }
 
     return (
         <>
-            <CheckBox>
+            <CheckBox isLast={isLast}>
                 <input type="checkbox" checked={!!checkStatus} onChange={onChangeHandler} />
             </CheckBox>
             <IssueItem>
@@ -66,18 +73,19 @@ export const IssueRow = ({ issueData, checkStatus, selectMode, onChangeHandler }
                     <MilestoneTag id={milestoneId} />
                 </IssueItemBelowArea>
             </IssueItem>
-            {renderRightArea(selectMode, issueData)}
+            {renderRightArea(selectMode, issueData, isLast)}
         </>
     );
 };
 
-const CheckBox = styled.div`
+const CheckBox = styled.div<{ isLast: boolean }>`
     ${TableData}
     padding: 24px 20px 0 32px;
     & input {
         width: 16px;
         height: 16px;
     }
+    border-radius: ${({ isLast }) => (isLast ? '0 0 0 16px' : '0')};
 `;
 
 const IssueItem = styled.div`
@@ -116,6 +124,7 @@ const EmptySpace = styled.div`
     ${TableData}
 `;
 
-const Author = styled.div`
+const Author = styled.div<{ isLast: boolean }>`
     ${TableData}
+    border-radius: ${({ isLast }) => (isLast ? '0 0 16px 0' : '0')};
 `;

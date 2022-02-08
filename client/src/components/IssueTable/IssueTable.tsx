@@ -2,7 +2,7 @@ import React, { useState, useReducer, ChangeEvent } from 'react';
 import { useRecoilValueLoadable } from 'recoil';
 import { issueFilterSelector } from '@atoms';
 import styled from 'styled-components';
-import { RoundBorderDiv, Table } from '@styles/styleTemplates';
+import { Table } from '@styles/styleTemplates';
 import { IIssue } from '@types';
 import { IssueTableHeader, IssueRow, EmptyRow } from '.';
 
@@ -63,6 +63,7 @@ export const IssueTable = () => {
                     selectMode={selectMode}
                     key={issue.id}
                     onChangeHandler={onRowChangeHandler(i)}
+                    isLast={i === issueDatas.length - 1}
                 />
             ));
         if (isFiltering) return <EmptyRow emptyType="filter" />;
@@ -89,8 +90,10 @@ export const IssueTable = () => {
     );
 };
 
-const TableContainer = styled(RoundBorderDiv)<{ selectMode: boolean }>`
+const TableContainer = styled.div<{ selectMode: boolean }>`
     ${Table}
+    border: 1px solid var(--line-color);
+    border-radius: 16px;
     grid-template-columns: 68px ${({ selectMode }) =>
-        selectMode ? '1085px 1fr' : '790px auto auto auto auto'};
+            selectMode ? '1085px 1fr' : '790px auto auto auto auto'};
 `;

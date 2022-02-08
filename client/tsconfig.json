@@ -17,12 +17,15 @@
         "typeRoots": ["src/@types", "node_modules/@types"],
         "baseUrl": ".",
         "paths": {
-            "@icons/*": ["public/icons/*"],
-            "@images/*": ["public/images/*"],
-            "@components/*": ["src/components/*"],
+            "@icons": ["public/icons/*"],
+            "@images": ["public/images/*"],
+            "@components": ["src/components"],
             "@styles/*": ["src/styles/*"],
-            "@utils/*": ["src/utils/*"],
-            "@types/*": ["src/@types/*"]
+            "@utils": ["src/utils/*"],
+            "@apis": ["src/apis"],
+            "@atoms": ["src/atoms"],
+            "@reducers": ["src/reducers"],
+            "@types": ["src/@types/*"]
         }
     },
     "include": ["src", "images.d.ts"],

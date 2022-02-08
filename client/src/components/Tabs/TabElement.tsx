@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { LinkSmall, TextSmall, SmallIcon } from '@styles/styleTemplates';
 import { ITabElement } from '@types';
 
-export const TabElement = ({ icon, title, count, isLast }: ITabElement) => {
+export const TabElement = ({ icon, title, count, isLast = false }: ITabElement) => {
     return (
         <Tab isLast={isLast}>
             {icon}
@@ -36,9 +36,7 @@ const Tab = styled.button<{ isLast: boolean }>`
     &:active {
         background-color: var(--line-color);
         color: var(--body-color);
-        svg path {
-            stroke: var(--body-color);
-        }
+        ${SmallIcon('var(--body-color)')}
     }
 `;
 

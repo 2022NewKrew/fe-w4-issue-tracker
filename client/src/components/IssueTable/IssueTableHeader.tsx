@@ -1,13 +1,16 @@
 import React, { MouseEvent } from 'react';
-import styled from 'styled-components';
-import { TableHeader, AlignXYCenter, SmallIcon } from '@styles/styleTemplates';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { issuesFilterState, issueStatusCountSelector } from '@atoms';
+import styled, { css } from 'styled-components';
+import { LinkSmall, TableHeader, AlignXYCenter, SmallIcon } from '@styles/styleTemplates';
 import { IFilter } from '@types';
-import { FilterButton } from '@components/assets';
+import { IssueFilterButton } from '.';
 import { ReactComponent as Alertcircle } from '@icons/AlertCircle.svg';
 import { ReactComponent as Archive } from '@icons/Archive.svg';
 
 interface IProps {
     selectMode: boolean;
+    onChangeHandler: (e: FormEvent<HTMLInputElement>) => void;
 }
 
 const FilterTypes: IFilter[] = [
@@ -18,30 +21,37 @@ const FilterTypes: IFilter[] = [
 ];
 
 const renderFilterButton = (selectMode: boolean, FilterTypes: IFilter[]) => {
-    const onClickHandler = (e: MouseEvent<HTMLElement>) => {
-        e.preventDefault();
-        // TODO: 필터타입별로 options가 될 수 있는 리스트들을 fetch해와서 드롭다운으로 보여주기
-    };
-    if (selectMode) return <IssueFilterButton title="상태 수정" onClickHandler={onClickHandler} />;
-    return FilterTypes.map(({ title, type }: IFilter) => (
-        <IssueFilterButton title={title} onClickHandler={onClickHandler} key={type} />
+    if (selectMode)
+        return (
+            <IssueFilterButton
+                filterProperty={{ title: '상태 수정', type: 'statusChange' }}
+                isLast={true}
+            />
+        );
+    return FilterTypes.map((filter: IFilter, i) => (
+        <IssueFilterButton filterProperty={filter} key={i} isLast={i === FilterTypes.length - 1} />
     ));
 };
 
-export const IssueTableHeader = ({ selectMode }: IProps) => {
+export const IssueTableHeader = ({ selectMode, onChangeHandler }: IProps) => {
+    const [openCount, closeCount] = useRecoilValue(issueStatusCountSelector);
+    const [issueFilterState, setIssueFilterState] = useRecoilState(issuesFilterState);
+    const filterOpen = () => setIssueFilterState('SHOW_OPEN');
+    const filterClose = () => setIssueFilterState('SHOW_CLOSE');
+
     return (
         <>
             <Checkbox>
-                <input type="checkbox" />
+                <input type="checkbox" onChange={onChangeHandler} />
             </Checkbox>
             <IssueStatuses>
-                <Status>
+                <Status isActive={issueFilterState === 'SHOW_OPEN'} onClick={filterOpen}>
                     <Alertcircle />
-                    열린 이슈({2})
+                    열린 이슈({openCount})
                 </Status>
-                <Status>
+                <Status isActive={issueFilterState === 'SHOW_CLOSE'} onClick={filterClose}>
                     <Archive />
-                    닫힌 이슈({0})
+                    닫힌 이슈({closeCount})
                 </Status>
             </IssueStatuses>
             {renderFilterButton(selectMode, FilterTypes)}
@@ -56,27 +66,26 @@ const Checkbox = styled.div`
         width: 16px;
         height: 16px;
     }
+    border-radius: 16px 0 0 0;
 `;
 
 const IssueStatuses = styled.div`
     ${TableHeader}
     line-height: normal;
-    display: flex;
-    padding: 0 4px;
 `;
 
-const Status = styled.div`
+const Status = styled.button<{ isActive: boolean }>`
     ${AlignXYCenter}
+    ${LinkSmall}
     padding: 12px;
-    ${SmallIcon()}
-    & svg {
-        padding-right: 4px;
-    }
-`;
-
-const IssueFilterButton = styled(FilterButton)`
-    ${TableHeader}
-    ${AlignXYCenter}
-    padding-left: 16px;
-    width: 100%;
+    color: var(--label-color);
+    ${SmallIcon('var(--label-color)', '4px')}
+    cursor: pointer;
+    ${({ isActive }) => {
+        if (isActive)
+            return css`
+                color: var(--title-active-color);
+                ${SmallIcon('var(--title-active-color)', '4px')}
+            `;
+    }}
 `;

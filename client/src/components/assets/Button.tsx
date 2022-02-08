@@ -3,7 +3,13 @@ import styled, { css } from 'styled-components';
 import { LinkMedium, LinkXSmall } from '@styles/styleTemplates';
 import { ReactComponent as PlusIcon } from '@icons/Plus.svg';
 
-type buttonClasses = 'large' | 'medium-standard' | 'medium-text' | 'small-standard' | 'small-secondary' | 'small-text';
+type buttonClasses =
+    | 'large'
+    | 'medium-standard'
+    | 'medium-text'
+    | 'small-standard'
+    | 'small-secondary'
+    | 'small-text';
 
 interface IProps {
     innerText: string;
@@ -97,6 +103,7 @@ const StyledButton = styled.button<{ buttonType: buttonClasses }>`
     vertical-align: middle;
     font-weight: var(--link-font-weight);
     font-family: Noto Sans KR;
+    cursor: pointer;
 
     & svg {
         display: none;

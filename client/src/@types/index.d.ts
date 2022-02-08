@@ -1,4 +1,12 @@
 declare module '@types' {
+    type issueStatus = 'open' | 'close';
+    type issueFilterType =
+        | 'filter'
+        | 'assignee'
+        | 'label'
+        | 'milestone'
+        | 'author'
+        | 'statusChange';
     interface ITabElement {
         icon: string;
         title: string;
@@ -8,14 +16,35 @@ declare module '@types' {
     interface IIssue {
         id: number;
         title: string;
-        status: 'open' | 'close';
+        status: issueStatus;
         userId: number;
         timeStamp: number;
+        labelings?: ILabeling[];
+        milestoneId?: number;
     }
     interface IFilter {
         title: string;
-        type: 'filter' | 'assignee' | 'label' | 'milestone' | 'author';
+        type: issueFilterType;
         emptyFilterOption?: string;
     }
-    type messageType = 'open' | 'close';
+    interface IFilterInfo {
+        id: number;
+        name: string;
+    }
+    interface IUser extends IFilterInfo {
+        profileImgSrc: string;
+    }
+    interface ILabel extends IFilterInfo {
+        description: string;
+        color: string;
+    }
+    interface IMilestone extends IFilterInfo {
+        dueDate: number;
+        description?: string;
+    }
+    interface ILabeling {
+        id: number;
+        issueId: number;
+        labelId: number;
+    }
 }

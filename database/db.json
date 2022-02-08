@@ -1,18 +1,61 @@
 {
     "users": [
         {
-            "id": "유저번호",
-            "name": "유저이름",
-            "profileImgSrc": "프로필이미지 주소"
+            "id": "0",
+            "name": "milly",
+            "profileImgSrc": "https://yt3.ggpht.com/yti/APfAmoGb9GknvFP6JQRMR8iQApOWMifRAwZddAr1q5lqQA=s88-c-k-c0x00ffffff-no-rj-mo"
+        },
+        {
+            "id": "1",
+            "name": "subway",
+            "profileImgSrc": "https://i.pinimg.com/originals/d5/b0/4c/d5b04cc3dcd8c17702549ebc5f1acf1a.png"
+        },
+        {
+            "id": "2",
+            "name": "yasmin",
+            "profileImgSrc": "https://www.pngitem.com/pimgs/m/248-2483089_ubud-monkey-forest-flat-design-flat-icon-person.png"
         }
     ],
     "issues": [
         {
-            "id": "이슈번호",
-            "title": "제목",
-            "status": "open/close 상태",
-            "userId": "작성자 userId",
-            "timeStamp": "작성시간"
+            "id": 1,
+            "title": "첫번째 이슈",
+            "status": "open",
+            "userId": 1,
+            "timeStamp": 1640908800000,
+            "milestoneId": 1
+        },
+        {
+            "id": 2,
+            "title": "FE 이슈트래커 개발",
+            "status": "open",
+            "userId": 0,
+            "timeStamp": 1643206176368,
+            "milestoneId": 2
+        },
+        {
+            "id": 3,
+            "title": "이슈리스트 페이지 개발",
+            "status": "close",
+            "userId": 2,
+            "timeStamp": 1643794189926,
+            "milestoneId": 3
+        },
+        {
+            "id": 4,
+            "title": "닫힌 이슈",
+            "status": "close",
+            "userId": 1,
+            "timeStamp": 1643794820621,
+            "milestoneId": null
+        },
+        {
+            "id": 5,
+            "title": "커스텀훅 적용하기",
+            "status": "open",
+            "userId": 0,
+            "timeStamp": 1643794189926,
+            "milestoneId": 2
         }
     ],
     "comments": [
@@ -26,40 +69,142 @@
     ],
     "labels": [
         {
-            "id": "라벨번호",
-            "title": "라벨이름",
-            "description": "라벨설명",
-            "backgroundRGB": "배경색 rgb값",
-            "textRGB": "글씨 색 rgb값"
+            "id": 0,
+            "name": "bug",
+            "description": "Something isn't working",
+            "color": "#FF0000"
+        },
+        {
+            "id": 1,
+            "name": "documentation",
+            "description": "improvements or additions to ducumentation",
+            "color": "#654ea3"
+        },
+        {
+            "id": 2,
+            "name": "duplicate",
+            "description": "This issue or pull request already exists",
+            "color": "#ee9ca7"
+        },
+        {
+            "id": 3,
+            "name": "enhancement",
+            "description": "New feature or request",
+            "color": "#59C173"
+        },
+        {
+            "id": 4,
+            "name": "good first issue",
+            "description": "Good for newcomers",
+            "color": "#a8c0ff"
+        },
+        {
+            "id": 5,
+            "name": "help wanted",
+            "description": "Extra attention is needed",
+            "color": "#ff9966"
+        },
+        {
+            "id": 6,
+            "name": "invalid",
+            "description": "This doesn't seem right",
+            "color": "#fdbb2d"
+        },
+        {
+            "id": 7,
+            "name": "question",
+            "description": "Further information is requested",
+            "color": "#22c1c3"
+        },
+        {
+            "id": 8,
+            "name": "wontfix",
+            "description": "This will not be worked on",
+            "color": "#0575E6"
         }
     ],
     "milestones": [
         {
-            "id": "마일스톤번호",
-            "title": "마일스톤 제목",
-            "dueDate": "종료날짜",
-            "description": "마일스톤 설명"
+            "id": 1,
+            "name": "마일스톤",
+            "dueDate": 1646838000000,
+            "description": "마일스톤 설명이 들어가는 자리"
+        },
+        {
+            "id": 2,
+            "name": "마스터즈 코스",
+            "dueDate": 1649516400000,
+            "description": "마스터즈 코스 - 이슈 트래커"
+        },
+        {
+            "id": 3,
+            "name": "기능구현",
+            "dueDate": 1647702000000,
+            "description": "기능구현 - api서버와 통신"
         }
     ],
     "assigned": [
         {
-            "id": "assigned(이슈를 할당하는 relation)번호",
-            "userId": "assignee의 userId",
-            "issueId": "할당된 이슈번호"
+            "id": 0,
+            "userId": 0,
+            "issueId": 1
+        },
+        {
+            "id": 1,
+            "userId": 2,
+            "issueId": 2
+        },
+        {
+            "id": 2,
+            "userId": 1,
+            "issueId": 3
+        },
+        {
+            "id": 3,
+            "userId": 2,
+            "issueId": 5
         }
     ],
-    "labeling": [
+    "labelings": [
         {
-            "id": "labeling(라벨을 붙이는 relation)의 id",
-            "labelId": "라벨번호",
-            "issueId": "라벨이 붙여진 이슈번호"
-        }
-    ],
-    "milestoning": [
+            "id": 0,
+            "labelId": 0,
+            "issueId": 5
+        },
         {
-            "id": "milestoning(이슈에 마일스톤을 지정하는 relation)의 id",
-            "milestoneId": "마일스톤번호",
-            "issueId": "마일스톤이 지정된 이슈번호"
+            "id": 1,
+            "labelId": 1,
+            "issueId": 5
+        },
+        {
+            "id": 2,
+            "labelId": 4,
+            "issueId": 4
+        },
+        {
+            "id": 3,
+            "labelId": 2,
+            "issueId": 3
+        },
+        {
+            "id": 4,
+            "labelId": 3,
+            "issueId": 3
+        },
+        {
+            "id": 5,
+            "labelId": 4,
+            "issueId": 2
+        },
+        {
+            "id": 6,
+            "labelId": 5,
+            "issueId": 1
+        },
+        {
+            "id": 7,
+            "labelId": 6,
+            "issueId": 1
         }
     ]
 }

@@ -2,8 +2,8 @@ import Atoms from "@UI/Atoms";
 
 import styled from "@emotion/styled";
 import Icon from "@UI/Icon";
-import { useClickLink } from "@hooks";
 import { Issue } from "@types";
+import { useIssueStore } from "@stores/issue";
 
 interface Props {
   issue: Issue;
@@ -11,11 +11,23 @@ interface Props {
 
 const TableCell = ({ issue }: Props) => {
   const { id, num, title, author, timestamp, labels, milestone } = issue;
-  const onClickLink = useClickLink(id);
+
+  const { selectedIssue, setSelectedIssue } = useIssueStore();
 
   return (
-    <Wrapper className="TableCell" onClick={onClickLink}>
-      <Icon name="check_box_initial" />
+    <Wrapper className="TableCell">
+      <Icon
+        name={
+          selectedIssue.includes(id) ? "check_box_active" : "check_box_initial"
+        }
+        onClick={() => {
+          if (selectedIssue.includes(id)) {
+            setSelectedIssue((prev) => prev.filter((ele) => ele !== id));
+          } else {
+            setSelectedIssue((prev) => [...prev, id]);
+          }
+        }}
+      />
       <div className="table_content">
         <Atoms.Title type="issueList">
           <Icon name="issue_open_blue" />
@@ -31,7 +43,7 @@ const TableCell = ({ issue }: Props) => {
           <span>{`${author} ${timestamp}`}</span>
           <span>
             <Icon name="milestone" />
-            {milestone}
+            {milestone?.name}
           </span>
         </div>
         <Icon name="user_image_small" />

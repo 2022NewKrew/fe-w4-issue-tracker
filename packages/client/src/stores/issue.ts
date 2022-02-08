@@ -1,22 +1,71 @@
 import { IssueService } from "@services";
 import { Issue, IssueStatus } from "@types";
-import { useMutation, useQueries, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   atom,
-  atomFamily,
   selector,
+  useRecoilState,
   useRecoilValue,
   useSetRecoilState,
 } from "recoil";
 
-export const issueListState = atomFamily<Issue[], string>({
-  key: "issueListState",
-  default: [] as Issue[],
+export type IssueFilter = {
+  status: IssueStatus;
+  assignees: string | null;
+  label: string[];
+  milestone: string | null;
+  author: string | null;
+};
+
+const issueFilterState = atom<IssueFilter>({
+  key: "issueFilterState",
+  default: {
+    status: "open",
+    assignees: null,
+    label: [],
+    milestone: null,
+    author: null,
+  },
 });
 
-export const issueStatusFilterState = atom<IssueStatus>({
-  key: "issueStatusFilterState",
-  default: "open",
+const issueListState = atom<Issue[]>({
+  key: "issueListState",
+  default: [],
+});
+
+const filteredIssueListState = selector<Issue[]>({
+  key: "filteredIssueListState",
+  get: ({ get }) => {
+    const { assignees, label, milestone, author } = get(issueFilterState);
+    const issueList = get(issueListState);
+    if (assignees || milestone || author || label.length) {
+      return issueList.filter(
+        (issue) =>
+          (assignees && issue.assignees.includes(assignees)) ||
+          (milestone && issue.milestone?.id === milestone) ||
+          (author && issue.author === author) ||
+          (label.length &&
+            issue.labels.map(({ id }) => id).filter((id) => label.includes(id))
+              .length)
+      );
+    }
+    return issueList;
+  },
+});
+
+const issueListCountState = selector<{
+  [key in "openCount" | "closeCount"]: number;
+}>({
+  key: "issueListCountState",
+  get: ({ get }) => {
+    const filteredIssueList = get(filteredIssueListState);
+    return {
+      openCount: filteredIssueList.filter(({ status }) => status === "open")
+        .length,
+      closeCount: filteredIssueList.filter(({ status }) => status === "close")
+        .length,
+    };
+  },
 });
 
 export const selectedIssueState = atom<string[]>({
@@ -24,73 +73,56 @@ export const selectedIssueState = atom<string[]>({
   default: [],
 });
 
-export const useIssueList = () => {
-  const issueStatus = useRecoilValue(issueStatusFilterState);
-  const setIssueList = useSetRecoilState(issueListState(issueStatus));
-  return useQuery<Issue[], Error>(
-    ["issue", issueStatus],
-    () => IssueService.getAll(issueStatus),
-    {
-      staleTime: 5000,
-      cacheTime: Infinity,
-      suspense: true,
-      onSuccess: (data) => {
-        setIssueList(data);
-      },
-    }
-  );
-};
-
-export const selectedAllIssueState = selector<boolean>({
-  key: "selectedAllIssueState",
+export const selectedIssueAllState = selector<boolean>({
+  key: "selectedIssueAllState",
   get: ({ get }) => {
-    const issueStatus = get(issueStatusFilterState);
-    const total = get(issueListState(issueStatus)).length;
-    const current = get(selectedIssueState).length;
-    return total === current;
+    const filter = get(issueFilterState);
+    const total = get(filteredIssueListState).filter(
+      ({ status }) => status === filter.status
+    ).length;
+    const selected = get(selectedIssueState).length;
+    return total > 0 && total === selected;
   },
   set: ({ get, set }, newValue) => {
-    const issueStatus = get(issueStatusFilterState);
-    const total = get(issueListState(issueStatus));
+    const total = get(filteredIssueListState);
     set(selectedIssueState, newValue ? total.map(({ id }) => id) : []);
   },
 });
 
-export type IssueFilterKey = "assignees" | "label" | "milestone" | "author";
-
-export type IssueFilter = {
-  [key in IssueFilterKey]: string | null;
-};
-
-export const issueFilterState = atom<IssueFilter>({
-  key: "issueFilterState",
-  default: {
-    assignees: null,
-    label: null,
-    milestone: null,
-    author: null,
-  },
-});
-
-export const useIssueCountData = () =>
-  useQueries([
-    { queryKey: ["issue", "open"], queryFn: () => IssueService.getAll("open") },
-    {
-      queryKey: ["issue", "close"],
-      queryFn: () => IssueService.getAll("close"),
+export const useIssueStore = () => {
+  const issueList = useRecoilValue(filteredIssueListState);
+  const setIssueList = useSetRecoilState(issueListState);
+  const selectedIssue = useRecoilValue(selectedIssueState);
+  const issueListCount = useRecoilValue(issueListCountState);
+  const [filter, setFilter] = useRecoilState(issueFilterState);
+  const [selectAll, setSelectAll] = useRecoilState(selectedIssueAllState);
+  useQuery<Issue[], Error>("issueList", IssueService.getAll, {
+    onSuccess: (data) => {
+      setIssueList(data);
     },
-  ]);
+  });
+
+  return {
+    issueList,
+    issueListCount,
+    filter,
+    setFilter,
+    selectedIssue,
+    selectAll,
+    setSelectAll,
+  };
+};
 
 export const useModifyIssueStatusData = () => {
   const queryClient = useQueryClient();
+  const setSelectedIssue = useSetRecoilState(selectedIssueState);
   return useMutation(
-    ({ issueId, status }: { issueId: string; status: "open" | "close" }) =>
+    ({ issueId, status }: { issueId: string; status: IssueStatus }) =>
       IssueService.patchChangeStatus(issueId, status),
     {
-      onSuccess: (data) => {
-        queryClient.invalidateQueries(["issue", "open"]);
-        queryClient.invalidateQueries(["issue", "close"]);
-        queryClient.setQueryData(["issue", "open"], data);
+      onSuccess: () => {
+        queryClient.invalidateQueries("issueList");
+        setSelectedIssue([]);
       },
     }
   );

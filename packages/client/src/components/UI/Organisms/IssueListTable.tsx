@@ -3,17 +3,24 @@ import { TableHeader, TableCell } from "@UI/Molecules";
 import styled from "@emotion/styled";
 
 import { Issue } from "@types";
-import { useIssueList } from "@stores/issue";
+
 import withSuspense from "@templetes/withSuspense";
+import { useIssueStore } from "@stores/issue";
+import { useMemo } from "react";
 
 const IssueListTable = () => {
-  const { data: issueList } = useIssueList();
+  const { issueList, filter } = useIssueStore();
+
+  const filtedIssueList = useMemo(
+    () => issueList.filter(({ status }) => status === filter.status),
+    [issueList, filter]
+  );
 
   return (
     <Wrapper className="IssueListTable">
       <TableHeader />
-      {issueList?.length ? (
-        issueList?.map((issue: Issue) => (
+      {filtedIssueList.length ? (
+        filtedIssueList.map((issue: Issue) => (
           <TableCell key={issue.id} issue={issue} />
         ))
       ) : (

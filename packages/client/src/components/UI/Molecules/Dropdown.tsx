@@ -16,7 +16,7 @@ interface Props {
   direction?: "left" | "right";
   image?: boolean;
   icon?: boolean;
-  select?: string | null;
+  select?: string | string[] | null;
   onSelect: (e: any) => void;
 }
 
@@ -32,12 +32,21 @@ const Dropdown = ({
 }: Props) => {
   const [visible, open] = useDropdown();
 
+  const isSelect = (id: string) => {
+    if (typeof select === "string") {
+      return select === id;
+    } else if (Array.isArray(select)) {
+      return select.includes(id);
+    }
+    return false;
+  };
+
   const createList = (list: FilterList[]) => {
     return list.map(({ id, name }) => (
-      <li key={id} className={select === id ? "select" : ""} data-id={id}>
+      <li key={id} className={isSelect(id) ? "select" : ""} data-id={id}>
         {image && <Icon name="user_image_small" />}
         {name}
-        {icon && <Icon name={select === id ? "check" : "no_check"} />}
+        {icon && <Icon name={isSelect(id) ? "check" : "no_check"} />}
       </li>
     ));
   };

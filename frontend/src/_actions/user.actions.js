@@ -1,7 +1,6 @@
 import "regenerator-runtime";
 
-import { useRecoilState, useSetRecoilState, useResetRecoilState } from "recoil";
-import { instance } from "../_common/axios.js";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { userState, authState } from "../_state";
 import { useFetchWrapper } from "../_common/fetchWrapper.js";
 
@@ -38,7 +37,6 @@ function useUserActions() {
     fetchWrapper
       .post("/api/users/login", data)
       .then((res) => {
-        console.log(res);
         const user = res.user.name;
         setCookie("user", JSON.stringify(user));
 

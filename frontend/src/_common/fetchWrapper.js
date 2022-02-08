@@ -25,7 +25,6 @@ function useFetchWrapper() {
         requestOptions.headers["Content-Type"] = "application/json";
         requestOptions.body = JSON.stringify(body);
       }
-      console.log(url, requestOptions);
       return fetch(url, requestOptions).then(handleResponse);
       // return axios(url, requestOptions).then(handleResponse);
     };

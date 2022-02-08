@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 import IssueTableHeader from "@components/organisms/IssueTableHeader";
 import IssueTableCell from "../organisms/IssueTableCell";
-import { LargeText } from "@components/atoms/Text";
 
 import { useIssuesActions } from "../../_actions/issues.actions";
 import {
@@ -53,6 +52,7 @@ export default function IssueTableContainer() {
     else return false;
   }
 
+  // 열린이슈/닫힌이슈 탭에 따라 보여질 이슈 선택
   const currentIssues = activeIssueTab === "open" ? openIssues : closedIssues;
 
   const issueList =

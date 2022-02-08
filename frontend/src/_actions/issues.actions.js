@@ -1,8 +1,6 @@
 import { useRecoilState, useSetRecoilState, useResetRecoilState } from "recoil";
-import { userState, issuesState } from "../_state";
+import { issuesState } from "../_state";
 import { useFetchWrapper } from "../_common/fetchWrapper.js";
-
-import { instance } from "../_common/axios.js";
 
 export function useIssuesActions() {
   const [issues, setIssues] = useRecoilState(issuesState);

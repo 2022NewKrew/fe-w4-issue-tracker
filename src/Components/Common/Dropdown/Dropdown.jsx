@@ -21,10 +21,17 @@ const DropdownContainer = styled.div`
  * @param {string} panelTitle
  * @param {string} type
  * @param {string} indicatorText
+ * @param {object[]} btnUserStyle
  * @return {JSX.Element}
  * @constructor
  */
-const Dropdown = ({ itemInfoList, panelTitle, type, indicatorText, btnUserStyle }) => {
+const Dropdown = ({
+  itemInfoList,
+  panelTitle,
+  type,
+  indicatorText,
+  btnUserStyle,
+}) => {
   const dropdownRef = useRef()
 
   const [isPanelShown, setIsPanelShown] = useState(false)

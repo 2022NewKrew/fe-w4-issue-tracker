@@ -55,6 +55,11 @@ import { generateId } from '../Utils/idGenerator'
  * @property {string} textColor
  */
 
+export const STATE_TYPE = {
+  OPEN: 'open',
+  CLOSE: 'close',
+}
+
 /**
  * Issue 생성
  * @param {Object} issueOption
@@ -69,7 +74,7 @@ export function createIssue({ title, author, labels, milestone, assignees }) {
   const currentTime = new Date().getTime()
   const issueId = generateId()
   const openHistory = createHistory({
-    type: 'open',
+    type: STATE_TYPE.OPEN,
     author: author,
     content: '',
   })
@@ -78,7 +83,7 @@ export function createIssue({ title, author, labels, milestone, assignees }) {
     id: issueId,
     title: title,
     author: author,
-    state: 'open',
+    state: STATE_TYPE.OPEN,
     labels: labels,
     milestone: milestone,
     assignees: assignees,

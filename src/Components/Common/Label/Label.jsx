@@ -8,21 +8,13 @@ export const LABEL_SIZE = {
   SMALL: 'small',
 }
 
-export const LABEL_COLOR = {
-  NORMAL: 'normal',
-  LIGHT: 'light',
-  DARK: 'dark',
-  BLUE: 'blue',
-  PURPLE: 'purple',
-}
-
 const Container = styled.div`
   display: flex;
   align-items: center;
   padding: 0 16px;
   ${FONT.TEXT_XSMALL};
 
-  ${({ size, color }) => {
+  ${({ size, textColor, backgroundColor }) => {
     const sizeStyle =
       size === LABEL_SIZE.LARGE
         ? largeSizeContainerStyle
@@ -30,26 +22,20 @@ const Container = styled.div`
         ? smallSizeContainerStyle
         : smallSizeContainerStyle
 
-    const colorStyle =
-      color === LABEL_COLOR.NORMAL
-        ? normalColorContainerStyle
-        : color === LABEL_COLOR.LIGHT
-        ? lightColorContainerStyle
-        : color === LABEL_COLOR.DARK
-        ? darkColorContainerStyle
-        : color === LABEL_COLOR.BLUE
-        ? blueColorContainerStyle
-        : color === LABEL_COLOR.PURPLE
-        ? purpleColorContainerStyle
-        : normalColorContainerStyle
+    const userColorStyle = css`
+      color: ${textColor};
+      background-color: ${backgroundColor};
+      border-color: ${textColor};
+    `
 
-    return [...sizeStyle, ...colorStyle]
+    return [...sizeStyle, ...userColorStyle]
   }}
 `
 
 const largeSizeContainerStyle = css`
   height: 40px;
   border-radius: 20px;
+  border: 1px solid;
 `
 
 const smallSizeContainerStyle = css`
@@ -57,43 +43,20 @@ const smallSizeContainerStyle = css`
   border-radius: 14px;
 `
 
-const normalColorContainerStyle = css`
-  border: 1px solid ${COLOR.LINE};
-  color: ${COLOR.LABEL};
-`
-
-const lightColorContainerStyle = css`
-  background-color: ${COLOR.BACKGROUND};
-  color: ${COLOR.TITLE_ACTIVE};
-`
-
-const darkColorContainerStyle = css`
-  background-color: ${COLOR.BODY};
-  color: ${COLOR.OFF_WHITE};
-`
-
-const blueColorContainerStyle = css`
-  border: 1px solid ${COLOR.BLUE};
-  background-color: ${COLOR.LIGHT_BLUE};
-  color: ${COLOR.BLUE};
-`
-
-const purpleColorContainerStyle = css`
-  border: 1px solid ${COLOR.PURPLE};
-  background-color: ${COLOR.LIGHT_PURPLE};
-  color: ${COLOR.PURPLE};
-`
-
 /**
  * @param {JSX.Element} children
  * @param {string} size
- * @param {string} color
+ * @param {string} textColor
+ * @param {string} backgroundColor
  * @return {JSX.Element}
  * @constructor
  */
-const Label = ({ children, size, color }) => {
+const Label = ({ children, size, textColor, backgroundColor }) => {
   return (
-    <Container color={color} size={size}>
+    <Container
+      size={size}
+      textColor={textColor}
+      backgroundColor={backgroundColor}>
       {children}
     </Container>
   )
@@ -101,8 +64,9 @@ const Label = ({ children, size, color }) => {
 
 Label.propTypes = {
   children: PropTypes.element,
-  color: PropTypes.oneOf(Object.values(LABEL_COLOR)),
-  size: PropTypes.oneOf(Object.values(LABEL_SIZE)),
+  size: PropTypes.oneOf(Object.values(LABEL_SIZE)).isRequired,
+  textColor: PropTypes.string.isRequired,
+  backgroundColor: PropTypes.string.isRequired,
 }
 
 export default Label

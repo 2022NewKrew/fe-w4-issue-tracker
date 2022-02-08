@@ -43,7 +43,7 @@ export const openedIssueListCountState = selector({
   key: "openedIssueListCount",
   get: ({ get }) => {
     const issueList = get(issueListState);
-    const filter = { isOpened: "true" };
+    const filter = { isOpened: true };
     return filterIssueList(issueList, filter).length;
   },
 });
@@ -52,7 +52,7 @@ export const closedIssueListCountState = selector({
   key: "closedIssueListCount",
   get: ({ get }) => {
     const issueList = get(issueListState);
-    const filter = { isOpened: "false" };
+    const filter = { isOpened: false };
     return filterIssueList(issueList, filter).length;
   },
 });

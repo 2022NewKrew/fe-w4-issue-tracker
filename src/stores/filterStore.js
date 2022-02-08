@@ -3,7 +3,7 @@ import { atom } from "recoil";
 export const filterState = atom({
   key: "filter",
   default: {
-    isOpened: "true",
+    isOpened: true,
     writer: "*",
     label: "*",
     milestone: "*",

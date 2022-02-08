@@ -132,13 +132,13 @@ function IssueTableHeader() {
 
   const clickOpenedIssueTab = () => {
     setIssueFilter((prev) => {
-      return { ...prev, isOpened: "true" };
+      return { ...prev, isOpened: true };
     });
   };
 
   const clickClosedIssueTab = () => {
     setIssueFilter((prev) => {
-      return { ...prev, isOpened: "false" };
+      return { ...prev, isOpened: false };
     });
   };
   return (

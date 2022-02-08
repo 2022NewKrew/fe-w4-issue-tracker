@@ -9,11 +9,11 @@ import { filterState } from "@stores";
 import { getAuth } from "@/firebase.js";
 
 const FILTER_BAR_DROPDOWN_METADATA = [
-  { title: "열린 이슈", filterKey: "isOpened", value: "true" },
+  { title: "열린 이슈", filterKey: "isOpened", value: true },
   { title: "내가 작성한 이슈", filterKey: "writer", value: "@me" },
   { title: "내게 할당된 이슈", filterKey: "assignee", value: "@me" },
   { title: "내가 댓글을 단 이슈", filterKey: "comment", value: "@me" },
-  { title: "닫힌 이슈", filterKey: "isOpened", value: "false" },
+  { title: "닫힌 이슈", filterKey: "isOpened", value: false },
 ];
 
 const FilterBarWrapper = styled(Wrapper)`

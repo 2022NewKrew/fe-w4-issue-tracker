@@ -70,9 +70,10 @@ export default function CreateIssueTemplate() {
       assignees:
         selectedAssignee && selectedAssignee.map((assignee) => assignee.id),
       labels: selectedLabel && selectedLabel.map((label) => label.id),
-      milestones:
+      milestone:
         selectedMilestone && selectedMilestone.map((milestone) => milestone.id),
     };
+    // console.log(data);
     issuesActions.createIssues(data);
   }
   return (

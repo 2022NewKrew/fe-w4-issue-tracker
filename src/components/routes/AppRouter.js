@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import { Auth, Home } from "@pages";
-import { getAuth, onAuthStateChanged } from "@/firebase.js";
+
 import { IssueCreation, IssueList } from "@templates";
+import { Auth, Home } from "@pages";
+
+import { getAuth, onAuthStateChanged } from "@/firebase.js";
 
 function AppRouter() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

@@ -1,3 +1,5 @@
+export { default as DropdownPanel } from "./DropdownPanel";
+export { default as Dropdown } from "./Dropdown";
 export { default as Header } from "./Header";
 export { default as OAuthForm } from "./OAuthForm";
 export { default as TabList } from "./TabList";
@@ -5,5 +7,3 @@ export { default as FilterBar } from "./FilterBar";
 export { default as IssueTableHeader } from "./IssueTableHeader";
 export { default as IssueTableHeaderOptionTab } from "./IssueTableHeaderOptionTab";
 export { default as IssueCell } from "./IssueCell";
-export { default as DropdownPanel } from "./DropdownPanel";
-export { default as Dropdown } from "./Dropdown";

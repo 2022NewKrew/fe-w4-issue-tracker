@@ -1,5 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
+import { useRecoilState } from "recoil";
+
+import { AlertCircleIcon, ArchieveIcon, MilestoneIcon } from "@icons";
 import {
   MediumLinkText,
   SmallProfileImg,
@@ -7,11 +10,11 @@ import {
   Wrapper,
   XSmallText,
 } from "@atoms";
+
 import { COLOR } from "@constants";
-import { AlertCircleIcon, ArchieveIcon, MilestoneIcon } from "@icons";
-import { calculateTimeDiff } from "@/utils/timestampUtils.js";
-import { useRecoilState } from "recoil";
 import { issueSelectionState } from "@stores";
+
+import { calculateTimeDiff } from "@utils";
 
 const LABEL_TYPE = {
   DOCUMENTATION: "documentation",
@@ -93,21 +96,20 @@ function IssueCell({
 }) {
   const [selectedIssueList, setSelectedIssueList] =
     useRecoilState(issueSelectionState);
+
   const checkboxRef = useRef();
 
   useEffect(() => {
-    checkboxRef.current.checked = selectedIssueList.indexOf(id) !== -1;
+    checkboxRef.current.checked = selectedIssueList.includes(id);
   }, [selectedIssueList]);
 
   const changeCheckbox = (e) => {
     const { target } = e;
-    if (target.checked) {
-      setSelectedIssueList((prev) => [...prev, id]);
-    } else {
-      setSelectedIssueList((prev) =>
-        prev.filter((selectedId) => selectedId !== id)
-      );
-    }
+    setSelectedIssueList(
+      target.checked
+        ? (prev) => [...prev, id]
+        : (prev) => prev.filter((selectedId) => selectedId !== id)
+    );
   };
   return (
     <IssueCellWrapper>
@@ -123,13 +125,11 @@ function IssueCell({
             >
               {title}
             </MediumLinkText>
-            {labelList.map((label, idx) => {
-              return (
-                <IssueLabel key={`${title}-label${idx}`} type={label}>
-                  {label}
-                </IssueLabel>
-              );
-            })}
+            {labelList.map((label, idx) => (
+              <IssueLabel key={`${title}-label${idx}`} type={label}>
+                {label}
+              </IssueLabel>
+            ))}
           </IssueTitleWrapper>
           <IssueTagWrapper>
             <IssueTag>#{id}</IssueTag>

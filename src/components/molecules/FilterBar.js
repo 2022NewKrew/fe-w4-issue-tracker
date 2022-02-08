@@ -1,11 +1,14 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
-import { ACTION_TYPE, COLOR, ISSUE_PROP_TYPE } from "@constants";
-import { SmallText, TextInput, Wrapper } from "@atoms";
-import { ChevronDownIcon, SearchIcon } from "@icons";
-import Dropdown from "@/components/molecules/Dropdown.js";
 import { useRecoilState, useResetRecoilState } from "recoil";
+
+import { ChevronDownIcon, SearchIcon } from "@icons";
+import { SmallText, TextInput, Wrapper } from "@atoms";
+import { Dropdown } from "@molecules";
+
+import { ACTION_TYPE, COLOR, ISSUE_PROP_TYPE } from "@constants";
 import { filterState } from "@stores";
+
 import { getAuth } from "@/firebase.js";
 
 const FILTER_SELF = "@me";
@@ -35,15 +38,8 @@ const FilterBarWrapper = styled(Wrapper)`
   flex-direction: row;
 
   border: 1px solid transparent;
-
-  ${({ isActivated }) =>
-    isActivated
-      ? css`
-          border-color: ${COLOR.GREYSCALE.TITLE_ACTIVE};
-        `
-      : css`
-          border-color: ${COLOR.GREYSCALE.LINE};
-        `}
+  border-color: ${({ isActivated }) =>
+    isActivated ? COLOR.GREYSCALE.TITLE_ACTIVE : COLOR.GREYSCALE.LINE};
 
   border-radius: 11px;
 `;
@@ -58,14 +54,9 @@ const FilterDropdownButton = styled.button`
   height: 40px;
   border: 1px solid transparent;
 
-  ${({ isActivated }) =>
-    isActivated
-      ? css`
-          background: ${COLOR.GREYSCALE.OFF_WHITE};
-        `
-      : css`
-          background: ${COLOR.GREYSCALE.BACKGROUND};
-        `}
+  background: ${({ isActivated }) =>
+    isActivated ? COLOR.GREYSCALE.OFF_WHITE : COLOR.GREYSCALE.BACKGROUND};
+
   border-radius: 11px 0px 0px 11px;
 
   &:hover {
@@ -107,23 +98,21 @@ const FilterSearchWrapper = styled.div`
   align-items: center;
   width: 472px;
   height: 40px;
-  ${({ isActivated }) =>
-    isActivated
-      ? css`
-          background: ${COLOR.GREYSCALE.OFF_WHITE};
-        `
-      : css`
-          background: ${COLOR.GREYSCALE.INPUT_BACKGROUND};
-        `}
-  border-radius: 0px 11px 11px 0px;
+
+  background: ${({ isActivated }) =>
+    isActivated ? COLOR.GREYSCALE.OFF_WHITE : COLOR.GREYSCALE.BACKGROUND};
+
+  border-radius: 0 11px 11px 0;
   border-left: 1px solid ${COLOR.GREYSCALE.LINE};
 `;
 
 function FilterBar() {
   const [issueFilter, setIssueFilter] = useRecoilState(filterState);
   const resetIssueFilter = useResetRecoilState(filterState);
+
   const [activated, setActivated] = useState(false);
   const [filterBarDropdownData, setFilterBarDropdownData] = useState({});
+
   const filterInput = useRef();
   const dropdownWrapper = useRef();
 
@@ -151,17 +140,18 @@ function FilterBar() {
   };
 
   const generateFilterBarDropdownData = () => {
-    const options = FILTER_BAR_DROPDOWN_METADATA.map((meta) => {
-      const { title, filterKey, value } = meta;
-      return {
-        text: title,
-        isChecked: issueFilter[filterKey] === interpretTextValue(value),
-        value: {
-          key: filterKey,
-          value,
-        },
-      };
-    });
+    const options = FILTER_BAR_DROPDOWN_METADATA.map(
+      ({ title, filterKey, value }) => {
+        return {
+          text: title,
+          isChecked: issueFilter[filterKey] === interpretTextValue(value),
+          value: {
+            key: filterKey,
+            value,
+          },
+        };
+      }
+    );
     return {
       title: "이슈 필터",
       actionType: ACTION_TYPE.FILTER_ISSUE,
@@ -171,8 +161,7 @@ function FilterBar() {
   };
 
   const clickDropdownPanel = useCallback(
-    async (actionType, filter) => {
-      const { key, value } = filter;
+    async (actionType, { key, value }) => {
       resetIssueFilter();
       setIssueFilter((prev) => {
         return {

@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+
 import { BigProfileImg, MediumLogo, SmallLinkText, Wrapper } from "@atoms";
+
 import { getAuth } from "@/firebase.js";
 
 const HeaderWrapper = styled(Wrapper)`

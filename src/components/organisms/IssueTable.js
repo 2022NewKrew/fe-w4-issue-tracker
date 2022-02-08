@@ -1,9 +1,11 @@
-import React, { useCallback, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
+import { useRecoilValue } from "recoil";
+
 import { Wrapper } from "@atoms";
 import { IssueCell, IssueTableHeader } from "@molecules";
+
 import { COLOR } from "@constants";
-import { useRecoilValue } from "recoil";
 import { filteredIssueListState } from "@stores";
 
 const IssueTableWrapper = styled(Wrapper)`

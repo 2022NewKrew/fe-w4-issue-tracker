@@ -1,15 +1,16 @@
-import React, { useCallback, useRef } from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
+import { useRecoilState, useSetRecoilState } from "recoil";
+
 import { ChevronDownIcon } from "@icons";
 import { SmallLinkText, Wrapper } from "@atoms";
+import { Dropdown } from "@molecules";
+
+import { useRefreshRecoilState } from "@hooks";
+
 import { ACTION_TYPE, COLOR } from "@constants";
-import Dropdown from "./Dropdown";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import {
-  filterState,
-  forceIssueListUpdate,
-  issueSelectionState,
-} from "@stores";
+import { filterState, issueListState, issueSelectionState } from "@stores";
+
 import { updateIssue } from "@/firebase.js";
 
 const OptionTabWrapper = styled(Wrapper)`
@@ -43,26 +44,23 @@ function IssueTableHeaderOptionTab({ tabData }) {
   const issueListUpdate = useSetRecoilState(forceIssueListUpdate);
   const wrapper = useRef(null);
 
-  const clickDropdownPanel = async (actionType, panelValue) => {
-    const { key, value } = panelValue;
-    let dataForUpdate;
-    switch (actionType) {
-      case ACTION_TYPE.FILTER_ISSUE:
+  const clickDropdownPanel = async (actionType, { key, value }) => {
+    const action = {
+      [ACTION_TYPE.FILTER_ISSUE]: () => {
         setIssueFilter((prev) => {
           return { ...prev, [key]: prev[key] === value ? "*" : value };
         });
-        break;
-      case ACTION_TYPE.UPDATE_ISSUE:
-        dataForUpdate = selectedIssueList.map((id) => {
+      },
+      [ACTION_TYPE.UPDATE_ISSUE]: async () => {
+        const dataForUpdate = selectedIssueList.map((id) => {
           return { id, key, value };
         });
         await updateIssue(dataForUpdate);
         issueListUpdate((n) => n + 1);
         setSelectedIssueList([]);
-        break;
-      default:
-        throw new Error("actionType is not valuable");
-    }
+      },
+    };
+    action[actionType]();
   };
 
   return (

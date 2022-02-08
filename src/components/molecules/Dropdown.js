@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
+
 import { MediumText, Wrapper } from "@atoms";
-import { COLOR } from "@constants";
 import { DropdownPanel } from "@molecules";
+
+import { COLOR } from "@constants";
 
 const DropdownWrapper = styled(Wrapper)`
   align-items: flex-start;
@@ -36,10 +38,10 @@ function Dropdown({
   const [isVisible, setIsVisible] = useState(false);
   const dropdownRef = useRef(null);
 
-  const clickPanel = (clickedPanelData) => {
-    const { value } = clickedPanelData;
-    callbackAfterPanelClickEvent(actionType, value);
+  const clickPanel = ({ value: panelValue }) => {
+    callbackAfterPanelClickEvent(actionType, panelValue);
   };
+
   useEffect(() => {
     const clickDropdown = (e) => {
       const { target } = e;
@@ -64,16 +66,14 @@ function Dropdown({
       isVisible={isVisible}
     >
       <DropdownTitle>{title}</DropdownTitle>
-      {options?.map((panelOption, idx) => {
-        return (
-          <DropdownPanel
-            onClick={() => clickPanel(panelOption)}
-            key={`dropdown-${title}-panel-${idx}`}
-            {...panelOption}
-            isCheckIcon={isCheckIcon}
-          />
-        );
-      })}
+      {options?.map((panelOption, idx) => (
+        <DropdownPanel
+          onClick={() => clickPanel(panelOption)}
+          key={`dropdown-${title}-panel-${idx}`}
+          {...panelOption}
+          isCheckIcon={isCheckIcon}
+        />
+      ))}
     </DropdownWrapper>
   );
 }

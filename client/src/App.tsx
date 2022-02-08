@@ -8,6 +8,7 @@ import {
   IssueDetail,
   Atoms,
   Molecules,
+  Organism,
 } from "./pages";
 import { useRoutes } from "react-router-dom";
 
@@ -21,6 +22,7 @@ const App: React.FC = () => {
       children: [
         { path: "atoms", element: <Atoms /> },
         { path: "molecules", element: <Molecules /> },
+        { path: "organism", element: <Organism /> },
       ],
     },
     { path: "login", element: <Login /> },

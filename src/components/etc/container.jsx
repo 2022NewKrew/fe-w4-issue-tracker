@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-import colors from "@styles/colors";
-import greyscale from "@styles/greyscale";
+import colors from "@styles/theme/colors";
+import greyscale from "@styles/theme/greyscale";
 
 const StyledContainer = styled.div`
   background: ${greyscale.offWhite};

@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import greyscale from "@styles/greyscale";
+import greyscale from "@styles/theme/greyscale";
 
 const getLogotypeFontWeight = ({ componentSize }) => {
   switch (componentSize) {

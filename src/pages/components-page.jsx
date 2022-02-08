@@ -1,13 +1,13 @@
 import Container from "@components/etc/container";
 import Logotype from "@components/etc/logotype";
 import CustomHeader from "@components/etc/custom-header";
-import CustomDisplay from "@components/typography/custom-display";
-import CustomText from "@components/typography/custom-text";
-import CustomLink from "@components/typography/custom-link";
 import StandardButton from "@components/buttons/standard-button";
 import SecondaryButton from "@components/buttons/secondary-button";
 import TextButton from "@components/buttons/text-button";
 import TextInput from "@components/inputs/text-input";
+import Display from "@styles/typography/display";
+import Text from "@styles/typography/text";
+import Link from "@styles/typography/link";
 
 const ComponentsPage = () => {
   return (
@@ -28,27 +28,23 @@ const ComponentsPage = () => {
       <div>
         <h2>Typography</h2>
         <Container>
-          <h3>CustomDisplay</h3>
-          <CustomDisplay componentWeight={"bold"}>
-            CustomDisplayBold
-          </CustomDisplay>
-          <CustomDisplay componentWeight={"regular"}>
-            CustomDisplayRegular
-          </CustomDisplay>
+          <h3>Display</h3>
+          <Display componentWeight={"bold"}>DisplayBold</Display>
+          <Display componentWeight={"regular"}>DisplayRegular</Display>
         </Container>
         <Container>
-          <h3>CustomText</h3>
-          <CustomText componentSize={"large"}>CustomTextLarge</CustomText>
-          <CustomText componentSize={"medium"}>CustomTextMedium</CustomText>
-          <CustomText componentSize={"small"}>CustomTextSmall</CustomText>
-          <CustomText componentSize={"x-small"}>CustomTextXSmall</CustomText>
+          <h3>Text</h3>
+          <Text componentSize={"large"}>TextLarge</Text>
+          <Text componentSize={"medium"}>TextMedium</Text>
+          <Text componentSize={"small"}>TextSmall</Text>
+          <Text componentSize={"x-small"}>TextXSmall</Text>
         </Container>
         <Container>
-          <h3>CustomLink</h3>
-          <CustomLink componentSize={"large"}>CustomLinkLarge</CustomLink>
-          <CustomLink componentSize={"medium"}>CustomLinkMedium</CustomLink>
-          <CustomLink componentSize={"small"}>CustomLinkSmall</CustomLink>
-          <CustomLink componentSize={"x-small"}>CustomLinkXSmall</CustomLink>
+          <h3>Link</h3>
+          <Link componentSize={"large"}>LinkLarge</Link>
+          <Link componentSize={"medium"}>LinkMedium</Link>
+          <Link componentSize={"small"}>LinkSmall</Link>
+          <Link componentSize={"x-small"}>LinkXSmall</Link>
         </Container>
       </div>
       <div>
@@ -102,13 +98,13 @@ const ComponentsPage = () => {
           </SecondaryButton>
         </Container>
         <Container>
-          <h3>CustomTextButton</h3>
+          <h3>TextButton</h3>
           <TextButton componentSize={"large"}>TextButtonLarge</TextButton>
           <TextButton componentSize={"medium"}>TextButtonMedium</TextButton>
           <TextButton componentSize={"small"}>TextButtonSmall</TextButton>
         </Container>
         <Container>
-          <h3>CustomTextButtonDisabled</h3>
+          <h3>TextButtonDisabled</h3>
           <TextButton componentSize={"large"} componentDisabled={true}>
             TextButtonLargeDisabled
           </TextButton>

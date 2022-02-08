@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import greyscale from "@styles/greyscale";
+import greyscale from "@styles/theme/greyscale";
 import { getTextInputDisplay, getTextInputAlignItems } from "@utils/helper";
 
 const getLabelWidth = ({ componentSize }) => {

@@ -1,7 +1,7 @@
 import { css } from "styled-components";
 
-import colors from "@styles/colors";
-import greyscale from "@styles/greyscale";
+import colors from "@styles/theme/colors";
+import greyscale from "@styles/theme/greyscale";
 
 export const allCenterAlign = css`
   display: flex;
@@ -163,7 +163,7 @@ export const getButtonBorderRadius = ({ componentSize }) => {
   }
 };
 
-export const getButtonCustomLinkSize = ({ componentSize }) => {
+export const getButtonLinkSize = ({ componentSize }) => {
   switch (componentSize) {
     case "large":
     case "medium":

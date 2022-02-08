@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { useState } from "react";
 
-import CustomLink from "@components/typography/custom-link";
-import colors from "@styles/colors";
-import greyscale from "@styles/greyscale";
+import colors from "@styles/theme/colors";
+import greyscale from "@styles/theme/greyscale";
+import Link from "@styles/typography/link";
 import {
   allCenterAlign,
   buttonEvent,
@@ -11,7 +11,7 @@ import {
   getButtonWidth,
   getButtonHeight,
   getButtonBorderRadius,
-  getButtonCustomLinkSize,
+  getButtonLinkSize,
 } from "@utils/helper";
 
 const StyledSecondaryButton = styled.button`
@@ -32,12 +32,12 @@ const SecondaryButton = ({ children, componentSize, componentDisabled }) => {
 
   return (
     <StyledSecondaryButton disabled={disabled} componentSize={componentSize}>
-      <CustomLink
-        componentSize={getButtonCustomLinkSize({ componentSize })}
+      <Link
+        componentSize={getButtonLinkSize({ componentSize })}
         componentColor={colors.blue}
       >
         <span>{children}</span>
-      </CustomLink>
+      </Link>
     </StyledSecondaryButton>
   );
 };

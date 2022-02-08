@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import TextInputLabel from "@components/inputs/text-input-label";
 import TextInputTyping from "@components/inputs/text-input-typing";
-import greyscale from "@styles/greyscale";
+import greyscale from "@styles/theme/greyscale";
 
 const getTextInputOpacity = ({ componentDisabled }) => {
   switch (componentDisabled) {
@@ -136,7 +136,7 @@ const StyledTextInput = styled.div`
 
 const TextInput = ({ children, componentSize, componentDisabled }) => {
   const [disabled, setDisabled] = useState(componentDisabled);
-  const [value, setValue] = useState("value");
+  const [value, setValue] = useState("");
 
   const onChange = (e) => {
     setValue(e.target.value);
@@ -150,8 +150,8 @@ const TextInput = ({ children, componentSize, componentDisabled }) => {
       <TextInputTyping
         type={"text"}
         disabled={disabled}
-        onChange={onChange}
         value={value}
+        onChange={onChange}
         componentSize={componentSize}
       ></TextInputTyping>
     </StyledTextInput>

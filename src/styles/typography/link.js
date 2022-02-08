@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { getFontSize, getLineHeight, getColor } from "@utils/helper";
 
-const StyledCustomLink = styled.span`
+const StyledLink = styled.span`
   font-family: Noto Sans KR;
   font-style: normal;
   font-weight: bold;
@@ -12,15 +12,12 @@ const StyledCustomLink = styled.span`
   ${() => getColor}
 `;
 
-const CustomLink = ({ children, componentSize, componentColor }) => {
+const Link = ({ children, componentSize, componentColor }) => {
   return (
-    <StyledCustomLink
-      componentSize={componentSize}
-      componentColor={componentColor}
-    >
+    <StyledLink componentSize={componentSize} componentColor={componentColor}>
       <span>{children}</span>
-    </StyledCustomLink>
+    </StyledLink>
   );
 };
 
-export default CustomLink;
+export default Link;

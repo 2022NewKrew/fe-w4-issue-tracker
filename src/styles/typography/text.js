@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { getFontSize, getLineHeight, getColor } from "@utils/helper";
 
-const StyledCustomText = styled.span`
+const StyledText = styled.span`
   font-family: Noto Sans KR;
   font-style: normal;
   font-weight: normal;
@@ -12,15 +12,12 @@ const StyledCustomText = styled.span`
   ${() => getColor}
 `;
 
-const CustomText = ({ children, componentSize, componentColor }) => {
+const Text = ({ children, componentSize, componentColor }) => {
   return (
-    <StyledCustomText
-      componentSize={componentSize}
-      componentColor={componentColor}
-    >
+    <StyledText componentSize={componentSize} componentColor={componentColor}>
       <span>{children}</span>
-    </StyledCustomText>
+    </StyledText>
   );
 };
 
-export default CustomText;
+export default Text;

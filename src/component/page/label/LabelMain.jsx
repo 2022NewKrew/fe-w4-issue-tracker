@@ -10,7 +10,7 @@ import { Taps } from "../../molecules/Taps";
 
 export const LabelMain = () => {
   // local state
-  const [newLabelMode, setNewLabel] = useState(false);
+  const [newMode, setNewMode] = useState(false);
 
   // server state
   const { data: labels } = useQuery("labels", getLabels, { staleTime: 5000 });
@@ -24,17 +24,17 @@ export const LabelMain = () => {
     <>
       <Header>
         <Taps labelCount={numLabels} milestoneCount={numMilestones} />
-        {newLabelMode ? (
-          <StyledButton options={{ type: "Small-Secondary", prefixIcon: "x-square" }} onClick={() => setNewLabel(false)}>
+        {newMode ? (
+          <StyledButton options={{ type: "Small-Secondary", prefixIcon: "x-square" }} onClick={() => setNewMode(false)}>
             닫기
           </StyledButton>
         ) : (
-          <StyledButton options={{ type: "Small-Standard", prefixIcon: "plus" }} onClick={() => setNewLabel(true)}>
+          <StyledButton options={{ type: "Small-Standard", prefixIcon: "plus" }} onClick={() => setNewMode(true)}>
             추가
           </StyledButton>
         )}
       </Header>
-      {newLabelMode && <LabelNew closeFn={() => setNewLabel(false)} />}
+      {newMode && <LabelNew closeFn={() => setNewMode(false)} />}
       <IssueTable>
         <IssueTableHeader>
           <span css={[cssFontSize["small"], cssLink]}>{`${numLabels}개의 레이블`}</span>

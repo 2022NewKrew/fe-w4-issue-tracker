@@ -10,7 +10,9 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
-      "@IssueContext": path.resolve(__dirname, "src/context/issues"),
+      "@Context": path.resolve(__dirname, "src/context"),
+      "@Components": path.resolve(__dirname, "src/components"),
+      "@Public": path.resolve(__dirname, "public")
     },
   },
   output: {
@@ -36,7 +38,7 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        exclude: '/node_modules/',
+        exclude: /node_modules\/(?!(axios|@redux-saga|redux-logger))/,
         loader: 'babel-loader',
       },
       {
@@ -44,7 +46,7 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
-        test: /\.(jpeg|jpg)$/,
+        test: /\.(jpeg|jpg|svg)$/,
         loader: 'file-loader',
         options: {
           name: '[path][name].[ext]',

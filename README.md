@@ -9,7 +9,7 @@
 
 ##### - `3주` 동안 갈려버린 `1인 풀스택` 개발
 
-##### - `Deploy URL` : https://fleek-tracker.herokuapp.com/main
+##### - `Deploy URL` : https://fleek-tracker.herokuapp.com/
 
 ---
 

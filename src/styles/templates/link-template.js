@@ -1,16 +1,16 @@
 import { css } from "styled-components";
 
-import fonts from "@styles/constants/greyscale";
+import typography from "@styles/constants/greyscale";
 import greyscale from "@styles/constants/greyscale";
 import {
   largeTemplate,
   mediumTemplate,
   smallTemplate,
   xSmallTemplate,
-} from "@styles/templates/size-template";
+} from "@styles/templates/type-template";
 
 const linkTemplate = css`
-  font-family: ${fonts.DEFAULT_FONT_FAMILY};
+  font-family: ${typography.DEFAULT_FONT_FAMILY};
   font-style: normal;
   font-weight: bold;
 `;

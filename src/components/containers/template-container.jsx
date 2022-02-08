@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 
 import greyscale from "@styles/constants/greyscale";
+import sizes from "@styles/constants/sizes";
 
 import {
   logotypeLarge,
@@ -23,31 +24,31 @@ import {
   linkXSmall,
 } from "@styles/templates/link-template";
 
-const getTemplate = ({ componentType }) => {
-  switch (componentType) {
-    case "logotypeLarge":
+const getTemplate = ({ componentSize }) => {
+  switch (componentSize) {
+    case sizes.LOGOTYPE_LARGE:
       return logotypeLarge;
-    case "logotypeMedium":
+    case sizes.LOGOTYPE_MEDIUM:
       return logotypeMedium;
-    case "displayBold":
+    case sizes.DISPLAY_BOLD:
       return displayBold;
-    case "displayRegular":
+    case sizes.DISPLAY_REGULAR:
       return displayRegular;
-    case "textLarge":
+    case sizes.TEXT_LARGE:
       return textLarge;
-    case "textMedium":
+    case sizes.TEXT_MEDIUM:
       return textMedium;
-    case "textSmall":
+    case sizes.TEXT_SMALL:
       return textSmall;
-    case "textXSmall":
+    case sizes.TEXT_X_SMALL:
       return textXSmall;
-    case "linkLarge":
+    case sizes.LINK_LARGE:
       return linkLarge;
-    case "linkMedium":
+    case sizes.LINK_MEDIUM:
       return linkMedium;
-    case "linkSmall":
+    case sizes.LINK_SMALL:
       return linkSmall;
-    case "linkXSmall":
+    case sizes.LINK_X_SMALL:
       return linkXSmall;
   }
 };
@@ -63,10 +64,10 @@ const StyledTemplateContainer = styled.span`
   ${() => getColor}
 `;
 
-const TemplateContainer = ({ children, componentType, componentColor }) => {
+const TemplateContainer = ({ children, componentSize, componentColor }) => {
   return (
     <StyledTemplateContainer
-      componentType={componentType}
+      componentSize={componentSize}
       componentColor={componentColor}
     >
       {children}

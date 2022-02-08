@@ -1,13 +1,13 @@
 import { css } from "styled-components";
 
-import fonts from "@styles/constants/fonts";
+import typography from "@styles/constants/typography";
 import greyscale from "@styles/constants/greyscale";
 
 const displayTemplate = css`
-  font-family: ${fonts.DEFAULT_FONT_FAMILY};
+  font-family: ${typography.DEFAULT_FONT_FAMILY};
   font-style: normal;
-  font-size: ${fonts.DISPLAY_FONT_SIZE};
-  line-height: ${fonts.DISPLAY_LINE_HEIGHT};
+  font-size: ${typography.DISPLAY_FONT_SIZE};
+  line-height: ${typography.DISPLAY_LINE_HEIGHT};
 `;
 
 export const displayBold = css`

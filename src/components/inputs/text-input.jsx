@@ -4,17 +4,18 @@ import { useState } from "react";
 import TextInputLabel from "@components/inputs/text-input-label";
 import TextInputTyping from "@components/inputs/text-input-typing";
 import greyscale from "@styles/constants/greyscale";
+import numbers from "@styles/constants/numbers";
 import sizes from "@styles/constants/sizes";
 import { disabledOpacity } from "@utils/helper";
 
 const getTextInputFlexDirection = ({ componentSize }) => {
   switch (componentSize) {
-    case "large":
-    case "medium":
+    case sizes.LARGE:
+    case sizes.MEDIUM:
       return css`
         flex-direction: column;
       `;
-    case "small":
+    case sizes.SMALL:
       return css`
         flex-direction: row;
       `;
@@ -25,8 +26,8 @@ const getTextInputFlexDirection = ({ componentSize }) => {
 
 const getTextInputJustifyContent = ({ componentSize }) => {
   switch (componentSize) {
-    case "large":
-    case "medium":
+    case sizes.LARGE:
+    case sizes.MEDIUM:
       return css`
         justify-content: center;
       `;
@@ -37,12 +38,12 @@ const getTextInputJustifyContent = ({ componentSize }) => {
 
 const getTextInputAlignItems = ({ componentSize }) => {
   switch (componentSize) {
-    case "large":
-    case "medium":
+    case sizes.LARGE:
+    case sizes.MEDIUM:
       return css`
         align-items: flex-start;
       `;
-    case "small":
+    case sizes.SMALL:
       return css`
         align-items: center;
       `;
@@ -53,17 +54,17 @@ const getTextInputAlignItems = ({ componentSize }) => {
 
 const getTextInputWidth = ({ componentSize }) => {
   switch (componentSize) {
-    case "large":
+    case sizes.LARGE:
       return css`
-        width: ${sizes.TEXT_INPUT_LARGE_WIDTH};
+        width: ${numbers.TEXT_INPUT_LARGE_WIDTH};
       `;
-    case "medium":
+    case sizes.MEDIUM:
       return css`
-        width: ${sizes.TEXT_INPUT_MEDIUM_WIDTH};
+        width: ${numbers.TEXT_INPUT_MEDIUM_WIDTH};
       `;
-    case "small":
+    case sizes.SMALL:
       return css`
-        width: ${sizes.TEXT_INPUT_SMALL_WIDTH};
+        width: ${numbers.TEXT_INPUT_SMALL_WIDTH};
       `;
     default:
       return css``;
@@ -72,17 +73,17 @@ const getTextInputWidth = ({ componentSize }) => {
 
 const getTextInputHeight = ({ componentSize }) => {
   switch (componentSize) {
-    case "large":
+    case sizes.LARGE:
       return css`
-        height: ${sizes.TEXT_INPUT_LARGE_HEIGHT};
+        height: ${numbers.TEXT_INPUT_LARGE_HEIGHT};
       `;
-    case "medium":
+    case sizes.MEDIUM:
       return css`
-        height: ${sizes.TEXT_INPUT_MEDIUM_HEIGHT};
+        height: ${numbers.TEXT_INPUT_MEDIUM_HEIGHT};
       `;
-    case "small":
+    case sizes.SMALL:
       return css`
-        height: ${sizes.TEXT_INPUT_SMALL_HEIGHT};
+        height: ${numbers.TEXT_INPUT_SMALL_HEIGHT};
       `;
     default:
       return css``;
@@ -91,17 +92,17 @@ const getTextInputHeight = ({ componentSize }) => {
 
 const getTextInputBorderRadius = ({ componentSize }) => {
   switch (componentSize) {
-    case "large":
+    case sizes.LARGE:
       return css`
-        border-radius: ${sizes.TEXT_INPUT_LARGE_BORDER_RADIUS};
+        border-radius: ${numbers.TEXT_INPUT_LARGE_BORDER_RADIUS};
       `;
-    case "medium":
+    case sizes.MEDIUM:
       return css`
-        border-radius: ${sizes.TEXT_INPUT_MEDIUM_BORDER_RADIUS};
+        border-radius: ${numbers.TEXT_INPUT_MEDIUM_BORDER_RADIUS};
       `;
-    case "small":
+    case sizes.SMALL:
       return css`
-        border-radius: ${sizes.TEXT_INPUT_SMALL_BORDER_RADIUS};
+        border-radius: ${numbers.TEXT_INPUT_SMALL_BORDER_RADIUS};
       `;
     default:
       return css``;
@@ -110,9 +111,9 @@ const getTextInputBorderRadius = ({ componentSize }) => {
 
 const StyledTextInput = styled.div`
   display: flex;
-  padding: ${sizes.TEXT_INPUT_PADDING};
+  padding: ${numbers.TEXT_INPUT_PADDING};
   background: ${greyscale.OFF_WHITE};
-  border: ${sizes.TEXT_INPUT_BORDER_WIDTH} solid ${greyscale.TITLE_ACTIVE};
+  border: ${numbers.TEXT_INPUT_BORDER_WIDTH} solid ${greyscale.TITLE_ACTIVE};
   box-sizing: border-box;
 
   ${disabledOpacity}

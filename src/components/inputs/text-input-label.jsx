@@ -1,23 +1,24 @@
 import styled, { css } from "styled-components";
 
 import greyscale from "@styles/constants/greyscale";
+import numbers from "@styles/constants/numbers";
 import sizes from "@styles/constants/sizes";
 import { textXSmall } from "@styles/templates/text-template";
 import { getTextInputDisplay, getTextInputAlignItems } from "@utils/helper";
 
 const getLabelWidth = ({ componentSize }) => {
   switch (componentSize) {
-    case "large":
+    case sizes.LARGE:
       return css`
-        width: ${sizes.TEXT_INPUT_LABEL_LARGE_WIDTH};
+        width: ${numbers.TEXT_INPUT_LABEL_LARGE_WIDTH};
       `;
-    case "medium":
+    case sizes.MEDIUM:
       return css`
-        width: ${sizes.TEXT_INPUT_LABEL_MEDIUM_WIDTH};
+        width: ${numbers.TEXT_INPUT_LABEL_MEDIUM_WIDTH};
       `;
-    case "small":
+    case sizes.SMALL:
       return css`
-        width: ${sizes.TEXT_INPUT_LABEL_SMALL_WIDTH};
+        width: ${numbers.TEXT_INPUT_LABEL_SMALL_WIDTH};
       `;
     default:
       return css``;
@@ -26,17 +27,17 @@ const getLabelWidth = ({ componentSize }) => {
 
 const getLabelHeight = ({ componentSize }) => {
   switch (componentSize) {
-    case "large":
+    case sizes.LARGE:
       return css`
-        height: ${sizes.TEXT_INPUT_LABEL_LARGE_HEIGHT};
+        height: ${numbers.TEXT_INPUT_LABEL_LARGE_HEIGHT};
       `;
-    case "medium":
+    case sizes.MEDIUM:
       return css`
-        height: ${sizes.TEXT_INPUT_LABEL_MEDIUM_HEIGHT};
+        height: ${numbers.TEXT_INPUT_LABEL_MEDIUM_HEIGHT};
       `;
-    case "small":
+    case sizes.SMALL:
       return css`
-        height: ${sizes.TEXT_INPUT_LABEL_SMALL_HEIGHT};
+        height: ${numbers.TEXT_INPUT_LABEL_SMALL_HEIGHT};
       `;
     default:
       return css``;

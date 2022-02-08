@@ -1,4 +1,4 @@
-const fonts = {
+const typography = {
   DEFAULT_FONT_FAMILY: "Noto Sans KR",
   LOGOTYPE_FONT_FAMILY: "Montserrat",
   LOGOTYPE_LETTER_SPACING: "-0.04em",
@@ -19,4 +19,4 @@ const fonts = {
   X_SMALL_TEMPLATE_LINE_HEIGHT: "20px",
 };
 
-export default fonts;
+export default typography;

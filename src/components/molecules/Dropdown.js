@@ -46,7 +46,7 @@ function Dropdown({
       const { current: thisNode } = dropdownRef;
       if (isVisible && !thisNode.contains(target)) {
         setIsVisible(false);
-      } else if (!isVisible && parentNode.contains(target)) {
+      } else if (!isVisible && parentNode?.contains(target)) {
         setIsVisible(true);
       }
     };

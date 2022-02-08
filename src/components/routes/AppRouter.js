@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Auth, Home } from "@pages";
 import { getAuth, onAuthStateChanged } from "@/firebase.js";
-import { IssueList } from "@templates";
+import { IssueCreation, IssueList } from "@templates";
 
 function AppRouter() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -29,6 +29,7 @@ function AppRouter() {
       <Route path="/" element={<Home />}>
         <Route index element={<IssueList />} />
         <Route path="issuelist" element={<IssueList />} />
+        <Route path="issuecreation" element={<IssueCreation />} />
       </Route>
     </Routes>
   );

@@ -4,8 +4,16 @@ import { inputWrapMediaStyle, inputWrapErrorStyle, inputLabelStyle } from "@/sty
 import { theme } from "@/styles/theme";
 import useTextArea, { TextAreaProps } from "@/hooks/useTextArea";
 import { Text, FileInput, TextArea } from "@/components/atoms";
+import { IStyle } from "@/constants/type";
 
-const ContentTextArea = ({ name }: any) => {
+interface IContentTextAreaProps {
+  name?: string;
+  styles?: IStyle;
+}
+const ContentTextArea: React.FC<IContentTextAreaProps> = ({
+  name = "코멘트를 입력하세요",
+  styles,
+}) => {
   const { value, type, count, ...props }: TextAreaProps = useTextArea({
     initialValue: name,
   });
@@ -13,6 +21,10 @@ const ContentTextArea = ({ name }: any) => {
   const Props = {
     WrapProps: {
       className: type,
+      styles: {
+        margin: styles?.margin,
+        width: styles?.width,
+      },
     },
     TextLabelProps: {
       className: type,
@@ -23,11 +35,21 @@ const ContentTextArea = ({ name }: any) => {
     TextAreaProps: {
       className: type,
       name: value,
+      styles: {
+        margin: "16px 24px",
+        width: styles?.width,
+        height: styles?.height,
+      },
       ...props,
     },
     TextCountProps: {
       className: type,
-      styles: { childCSS: TextAreaCount },
+      styles: { childCSS: TextAreaCount, width: "" },
+    },
+    FileInputProps: {
+      styles: {
+        margin: "16px 24px",
+      },
     },
   };
 
@@ -37,11 +59,10 @@ const ContentTextArea = ({ name }: any) => {
         코멘트를 입력하세요
       </Text>
       <TextArea {...Props.TextAreaProps} />
-      <TextAreaDivLine />
       <Text type="xsmall" {...Props.TextCountProps}>
         {count}
       </Text>
-      <FileInput />
+      <FileInput {...Props.FileInputProps} />
     </WrapEl>
   );
 };
@@ -50,32 +71,20 @@ export default ContentTextArea;
 const WrapEl = styled.div<any>`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 16px 24px;
-  width: 340px;
-  height: 200px;
-  border-radius: 16px;
   position: relative;
+  border-radius: 16px;
+  width: fit-content;
   ${inputWrapMediaStyle}
   ${inputWrapErrorStyle}
+  ${({ styles }) => css`
+    margin: ${styles.margin ?? ""};
+  `}
 `;
-
-const TextAreaDivLine = styled.div<any>`
-  left: 0%;
-  right: 0%;
-  top: 74%;
-  bottom: 26%;
-  position: absolute;
-  border: 1px dashed ${theme.color.line};
-  height: 0px;
-  width: 340px;
-`;
-
 const TextAreaTitle = css`
   ${inputLabelStyle}
-  width: 292px;
   height: 20px;
+  margin-top: 16px;
+  margin-left: 24px;
   color: ${theme.color.label};
   opacity: 0;
   &.typing,
@@ -90,10 +99,8 @@ const TextAreaTitle = css`
 `;
 const TextAreaCount = css`
   position: absolute;
-  left: 62.65%;
-  right: 8.82%;
-  top: 54%;
-  bottom: 36%;
+  right: 30px;
+  bottom: 60px;
   font-weight: 500;
   display: none;
   color: ${theme.color.label};

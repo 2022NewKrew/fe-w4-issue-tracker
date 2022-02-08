@@ -3,6 +3,7 @@ import {
   Login,
   Component,
   Issue,
+  IssueList,
   IssueDetail,
 } from "./pages";
 import { useRoutes } from "react-router-dom";
@@ -20,6 +21,7 @@ const App: React.FC = () => {
       path: "issue",
       element: <Issue />,
       children: [
+        { path: "list", element: <IssueList /> },
         { path: ":id", element: <IssueDetail /> },
       ],
     },

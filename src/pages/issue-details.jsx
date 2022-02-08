@@ -1,7 +1,7 @@
-import CustomHeader from "@components/etc/custom-header";
+import HeaderContainer from "@components/containers/header-container";
 
 const IssueDetails = () => {
-  return <CustomHeader>Issue Tracker</CustomHeader>;
+  return <HeaderContainer>Issue Tracker</HeaderContainer>;
 };
 
 export default IssueDetails;

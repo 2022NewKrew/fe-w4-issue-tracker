@@ -7,6 +7,7 @@ import {
   IssueNew,
   IssueDetail,
   Atoms,
+  Molecules,
 } from "./pages";
 import { useRoutes } from "react-router-dom";
 
@@ -19,6 +20,7 @@ const App: React.FC = () => {
       element: <Component />,
       children: [
         { path: "atoms", element: <Atoms /> },
+        { path: "molecules", element: <Molecules /> },
       ],
     },
     { path: "login", element: <Login /> },

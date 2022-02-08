@@ -4,42 +4,90 @@ import Icon from "@UI/Icon";
 
 import styled from "@emotion/styled";
 
-const athorList = ["Oni", "Daniel"];
+import { useUserStore } from "@stores/user";
+import { useMilestoneStore } from "@stores/milestone";
+import { useLabelStore } from "@stores/label";
+import { Milestone } from "@types";
 
-const SideBar = () => {
+interface Props {
+  assignees: string[];
+  setAssignees: (e: any) => void;
+  labels: string[];
+  setLabels: (e: any) => void;
+  milestone: string | null;
+  setMilestone: (e: any) => void;
+}
+
+const SideBar = ({
+  assignees,
+  setAssignees,
+  labels,
+  setLabels,
+  milestone,
+  setMilestone,
+}: Props) => {
+  const { userList } = useUserStore();
+  const { labelList } = useLabelStore();
+  const { milestoneList } = useMilestoneStore();
+
   return (
     <Wrapper className="SideBar">
       <div>
         <Dropdown
+          select={assignees}
+          onSelect={setAssignees}
           indicator="담장자"
           listTitle="담당자 추가"
-          list={athorList}
+          list={userList}
           direction="right"
         />
-        <li className="athorlist">
-          <Icon name="user_image_large" />
-          Oni
-        </li>
+        <ul>
+          {userList
+            .filter(({ id }) => assignees.includes(id))
+            .map(({ id, name }) => (
+              <li key={id} className="athorlist">
+                <Icon name="user_image_large" />
+                {name}
+              </li>
+            ))}
+        </ul>
       </div>
       <div>
         <Dropdown
+          select={labels}
+          onSelect={setLabels}
           indicator="레이블"
           listTitle="레이블 추가"
-          list={athorList}
+          list={labelList}
           direction="right"
         />
-        <Atoms.Label type="custom" color="#0025E7">
-          document
-        </Atoms.Label>
+        <ul>
+          {labelList
+            .filter(({ id }) => labels.includes(id))
+            .map(({ id, name, backgroundColor }) => (
+              <Atoms.Label key={id} type="custom" color={backgroundColor}>
+                {name}
+              </Atoms.Label>
+            ))}
+        </ul>
       </div>
       <div>
         <Dropdown
+          select={milestone}
+          onSelect={setMilestone}
           indicator="마일스톤"
           listTitle="마일스톤 추가"
-          list={athorList}
+          list={milestoneList}
           direction="right"
         />
-        <Progress />
+        {milestone && (
+          <Progress
+            title
+            milestone={
+              milestoneList.find(({ id }) => id === milestone) as Milestone
+            }
+          />
+        )}
       </div>
     </Wrapper>
   );
@@ -49,11 +97,13 @@ export default SideBar;
 
 const Wrapper = styled.aside`
   width: 308px;
-  position: absolute;
   & > div {
     border: 1px solid var(--line);
     min-height: 96px;
     padding: 32px;
+    & > ul > * {
+      margin-bottom: 16px;
+    }
     & > .Dropdown > .Button {
       width: 244px;
       height: 32px;

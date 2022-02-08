@@ -1,11 +1,14 @@
 import { IssueService } from "@services";
-import { Issue, IssueStatus } from "@types";
+import { Issue, IssueForm, IssueStatus } from "@types";
+import { arrayToggle } from "@utils/helper";
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useNavigate } from "react-router-dom";
 import {
   atom,
   selector,
   useRecoilState,
   useRecoilValue,
+  useResetRecoilState,
   useSetRecoilState,
 } from "recoil";
 
@@ -130,4 +133,57 @@ export const useModifyIssueStatusData = () => {
       },
     }
   );
+};
+
+export const issueFormState = atom<IssueForm>({
+  key: "issueFormState",
+  default: {
+    title: "",
+    comment: "",
+    assignees: [],
+    labels: [],
+    milestone: null,
+  },
+});
+
+export const useAddIssueStore = () => {
+  const queryClient = useQueryClient();
+  const resetIssueForm = useResetRecoilState(issueFormState);
+  const navigate = useNavigate();
+  const [issueForm, setIssueForm] = useRecoilState(issueFormState);
+
+  const addIssue = useMutation(
+    async () => IssueService.post("user1", issueForm),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("issueList");
+        resetIssueForm();
+        navigate("/issue");
+      },
+    }
+  );
+
+  return {
+    addIssue: () => addIssue.mutate(),
+    issueForm,
+    setTitle: ({ target }: any) =>
+      setIssueForm((prev) => ({ ...prev, title: target.value })),
+    setComment: ({ target }: any) =>
+      setIssueForm((prev) => ({ ...prev, comment: target.value })),
+    setAssignees: ({ target }: any) =>
+      setIssueForm((prev) => ({
+        ...prev,
+        assignees: arrayToggle(prev.assignees, target.dataset.id),
+      })),
+    setLabels: ({ target }: any) =>
+      setIssueForm((prev) => ({
+        ...prev,
+        labels: arrayToggle(prev.labels, target.dataset.id),
+      })),
+    setMilestone: ({ target }: any) =>
+      setIssueForm((prev) => ({
+        ...prev,
+        milestone: target.dataset.id,
+      })),
+  };
 };

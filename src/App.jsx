@@ -7,6 +7,7 @@ import { Button } from "./component/atoms/Button";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { LabelMain } from "./component/page/label/LabelMain";
+import { MilestoneMain } from "./component/page/milestone/MilestoneMain";
 
 const queryClient = new QueryClient();
 
@@ -31,7 +32,7 @@ function App() {
             <Route path="new" element={defaultElementForTest} />
           </Route>
           <Route path="labels" element={<LabelMain />} />
-          <Route path="milestones" element={defaultElementForTest} />
+          <Route path="milestones" element={<MilestoneMain />} />
           <Route path="test" element={<TestPage />}>
             <Route path="new" element={<TestNew />} />
           </Route>

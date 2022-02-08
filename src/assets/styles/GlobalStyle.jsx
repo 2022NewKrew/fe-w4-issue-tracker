@@ -19,6 +19,11 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 400;
   }
 
+  button {
+    outline: none;
+    border: none;
+  }
+
   ul {
     list-style: none;
   }

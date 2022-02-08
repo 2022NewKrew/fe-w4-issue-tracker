@@ -19,16 +19,12 @@ module.exports = {
     rules: [
       {
         test: /\.(png|jpe?g|gif|ico|webp)$/i,
-        use: { 
-          loader: 'file-loader',
-          options: {
-            name: '[name].[contenthash].[ext]',
-          },
-        },
+        use: ['file-loader'],
       },
       {
-        test: /\.(svg)$/,
-        use: ['@svgr/webpack', 'file-loader'],
+        test: /\.svg$/,
+        issuer: /\.[jt]sx?$/,
+        use: ['@svgr/webpack'],
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,

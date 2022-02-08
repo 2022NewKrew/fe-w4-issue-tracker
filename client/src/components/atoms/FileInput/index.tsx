@@ -1,49 +1,59 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { PaperClip } from "@/components/atoms/Icons";
 import { theme } from "@/styles/theme";
+import { IStyle } from "@/constants/type";
 
-interface IInputProps {
+interface IFileInput {
   name?: string;
   className?: string;
-  styles?: IStyleProps;
+  styles?: IStyle;
 }
-interface IStyleProps {
-  margin?: string;
-  padding?: string;
-  textAlign?: string;
-  childCSS?: any;
-}
-
-const FileInput: React.FC<IInputProps> = ({ ...props }) => {
+const FileInput: React.FC<IFileInput> = ({ styles, ...props }) => {
+  const Props = {
+    FileInputWrapProps: {
+      ...styles,
+    },
+    FileLabelProps: {
+      className: "input-file-button",
+      htmlFor: "input-file",
+      ...styles,
+    },
+  };
   return (
-    <>
-      <TextAreaFileLabel className="input-file-button" htmlFor={"input-file"}>
-        <PaperClip color="#6E7191"></PaperClip>
+    <FileInputWrap {...Props.FileInputWrapProps}>
+      <TextAreaFileLabel {...Props.FileLabelProps}>
+        <PaperClip color="#6E7191" />
         <div>파일 첨부하기</div>
       </TextAreaFileLabel>
-      <input type="file" id={"input-file"} style={{ display: "none" }}></input>
-    </>
+      <HiddenInput />
+    </FileInputWrap>
   );
 };
 
-const TextAreaFileLabel = styled.label<IStyleProps>`
-  color: ${theme.color.label};
-  display: flex;
-  cursor: pointer;
-  align-items: center;
-  position: absolute;
-  left: 7.06%;
-  right: 65.59%;
-  top: 82%;
-  bottom: 8%;
-  width: 340px;
-  height: 20px;
-  width: 292px;
-  & > div {
-    line-height: 16px;
-    font-size: small;
-    margin-left: 8px;
-  }
+const FileInputWrap = styled.div`
+  width: 200px;
+`;
+const HiddenInput = styled.input.attrs(() => ({
+  type: "file",
+  id: "input-file",
+  style: { display: "none" },
+}))``;
+const TextAreaFileLabel = styled.label<IStyle>`
+  ${({ margin, width, childCSS }) => css`
+    color: ${theme.color.label};
+    margin: ${margin ?? ""};
+    width: ${width ?? "200px"};
+    display: flex;
+    justify-content: flex-start;
+    cursor: pointer;
+    height: 20px;
+    & > div {
+      line-height: 16px;
+      font-size: small;
+      margin-left: 8px;
+    }
+    ${childCSS ?? ""};
+  `}
 `;
 export default FileInput;

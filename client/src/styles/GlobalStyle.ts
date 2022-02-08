@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { theme } from "@/styles/theme";
 
 const GlobalStyles = createGlobalStyle` 
     html, body, div, span, applet, object, iframe,
@@ -28,6 +29,7 @@ const GlobalStyles = createGlobalStyle`
     }
     body {
         line-height: 1;
+        background-color: ${theme.color.background};
     }
     ol, ul {
         list-style: none;
@@ -100,6 +102,7 @@ const GlobalStyles = createGlobalStyle`
         opacity: 0;
         }
     }
+    
 `;
 
 export default GlobalStyles;

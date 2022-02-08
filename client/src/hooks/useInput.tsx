@@ -12,10 +12,10 @@ export interface TextInputProps {
 }
 export interface UseInputProps {
   initialValue?: string;
-  inputType?: string;
+  inputType?: string | "FilterBar";
   loginType?: "아이디" | "비밀번호" | string;
 }
-const useInput = ({ initialValue, inputType = "", loginType = "" }: UseInputProps) => {
+const useInput = ({ initialValue = "", inputType = "", loginType = "" }: UseInputProps) => {
   const [value, setValue] = useState(initialValue);
   const [className, setClassName] = useState(INPUT_CLASS_TYPE.INITIAL);
   const largeSuccessData = useSWR(
@@ -35,13 +35,20 @@ const useInput = ({ initialValue, inputType = "", loginType = "" }: UseInputProp
   };
   const onFocus: FocusEventHandler = () => {
     setClassName(INPUT_CLASS_TYPE.ACTIVE);
+    if (inputType === INPUT_TYPE.FILTERBARS) setValue("Search all issues");
   };
   const onBlur: FocusEventHandler = () => {
-    if (value !== "" && value !== initialValue) {
-      setClassName(INPUT_CLASS_TYPE.FILLED);
-    } else {
+    if (inputType === INPUT_TYPE.FILTERBARS && value === "Search all issues") {
       setClassName(INPUT_CLASS_TYPE.INITIAL);
       setValue(initialValue);
+    } else {
+      if (value !== "" && value !== initialValue) {
+        setClassName(INPUT_CLASS_TYPE.FILLED);
+      } else {
+        console.log(initialValue);
+        setClassName(INPUT_CLASS_TYPE.INITIAL);
+        setValue(initialValue);
+      }
     }
   };
 

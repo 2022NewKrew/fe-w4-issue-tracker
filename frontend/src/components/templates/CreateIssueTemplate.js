@@ -53,7 +53,7 @@ export default function CreateIssueTemplate() {
   const [selectedAssignee, setSelectedAssignee] = useState([]);
   const [selectedLabel, setSelectedLabel] = useState([]);
   const [selectedMilestone, setSelectedMilestone] = useState([]);
-
+  const [inputDisable, setInputDisable] = useState(false);
   const issuesActions = useIssuesActions();
 
   function handleIssueSubmit() {
@@ -66,9 +66,14 @@ export default function CreateIssueTemplate() {
     );
     const data = {
       title: title,
+      comments: comment,
+      assignees:
+        selectedAssignee && selectedAssignee.map((assignee) => assignee.id),
+      labels: selectedLabel && selectedLabel.map((label) => label.id),
+      milestones:
+        selectedMilestone && selectedMilestone.map((milestone) => milestone.id),
     };
-    console.log("Submitted!");
-    // issuesActions.createIssues();
+    issuesActions.createIssues(data);
   }
   return (
     <Container>
@@ -81,6 +86,7 @@ export default function CreateIssueTemplate() {
             value={title}
             handleValueChange={setTitle}
             className='input'
+            setDisable={setInputDisable}
           />
           <TextArea
             height='343'

@@ -17,9 +17,9 @@ export function useIssuesActions() {
       .catch((err) => console.log(err));
   }
 
-  function createIssues() {
+  function createIssues(data) {
     fetchWrapper
-      .post("/api/issues")
+      .post("/api/issues", data)
       .then((res) => {
         console.log(res);
       })

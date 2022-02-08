@@ -81,6 +81,7 @@ export default function IssueTableCell(props) {
     title,
     writer,
   } = props.info;
+  console.log(props.info);
   const color = "#004DE3";
   const formattedDate = new Date(timestamp).toLocaleDateString();
 
@@ -111,17 +112,16 @@ export default function IssueTableCell(props) {
             <MediumLink>{title}</MediumLink>
             {labels.length >= 1 && (
               <SmallLabel
-                type='light'
-                color={color}
-                text={labels[0].description}
+                type={labels[0].color}
+                color={labels[0].backgroundColor}
+                text={labels[0].name}
               />
             )}
           </IssueTitleWrapper>
           <IssueInfoWrapper>
             <SmallText color='label'>#{num}</SmallText>
             <SmallText color='label'>
-              이 이슈가 {formattedDate}에, {writer.name}님에 의해
-              작성되었습니다.
+              이 이슈가 {formattedDate}에 {writer.name}님에 의해 작성되었습니다.
             </SmallText>
             {milestone && (
               <SmallText color='label'>

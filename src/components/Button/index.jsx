@@ -1,29 +1,95 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { primary, softPrimary, darkPrimary } from '@/assets/styles/Palette';
 
-export default function Button({
+export default function CustomButton({
   onClick = () => {},
   disable = false,
-  hover = true,
   text = '내용 없음',
-  bgColor,
-  fontColor,
-  size,
+  fontColor = white,
+  size = 3,
 }) {
   return (
     <Button
       onClick={onClick}
       disable={disable}
-      hover={hover}
-      bgColor={bgColor}
       fontColor={fontColor}
       size={size}
     >
-      <Text text={text} />
+      <span>{text}</span>
     </Button>
   );
 }
 
-const Button = styled.button``;
+const Button = styled.button`
+  background-color: ${primary};
+  color: ${(props) => props.fontColor};
+  font-weight: bold;
+  ${() => getButtonSize}
+  ${() => getHoverCSS}
 
-const Text = styled.span``;
+  .span {
+    color: ${(props) => props.fontColor};
+    font-weight: 700;
+  }
+`;
+
+const getHoverCSS = ({ disable }) => {
+  switch (disable) {
+    case true:
+      return css`
+        cursor: not-allowed;
+        opacity: 0.5;
+      `;
+
+    case false:
+      return css`
+        cursor: pointer;
+        &:hover {
+          background-color: ${darkPrimary};
+        }
+        &:active {
+          border: 4px solid ${softPrimary};
+        }
+      `;
+  }
+};
+
+const getButtonSize = ({ size }) => {
+  switch (size) {
+    case 1:
+      return css`
+        font-size: 12px;
+        width: 120px;
+        height: 40px;
+        border-radius: 11px;
+      `;
+
+    case 2:
+      return css`
+        font-size: 15px;
+        width: 240px;
+        height: 56px;
+        border-radius: 20px;
+      `;
+
+    case 3:
+      return css`
+        font-size: 18px;
+        width: 340px;
+        height: 64px;
+        border-radius: 20px;
+      `;
+
+    default:
+      console.warn(
+        '버튼의 사이즈는 1 2 3 중 하나입니다. 범위를 벗어나거나 타입이 잘못되어 기본값(3)을 적용합니다.',
+      );
+      return css`
+        font-size: 18px;
+        width: 340px;
+        height: 64px;
+        border-radius: 20px;
+      `;
+  }
+};

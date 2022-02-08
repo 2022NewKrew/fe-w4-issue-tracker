@@ -6,7 +6,7 @@ import Components from '@/pages/Components';
 
 export default function App() {
   return (
-    <React.Fragment>
+    <>
       <GlobalStyle />
       <BrowserRouter>
         <Routes>
@@ -14,6 +14,6 @@ export default function App() {
           <Route path="components" element={<Components />} />
         </Routes>
       </BrowserRouter>
-    </React.Fragment>
+    </>
   );
 }

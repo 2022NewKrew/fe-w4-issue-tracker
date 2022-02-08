@@ -16,7 +16,6 @@ export const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
     font-family: "NotoSans";
-    font-weight: 400;
   }
 
   button {

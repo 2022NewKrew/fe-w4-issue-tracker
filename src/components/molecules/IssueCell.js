@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
 import {
   MediumLinkText,
@@ -10,6 +10,8 @@ import {
 import { COLOR } from "@constants";
 import { AlertCircleIcon, ArchieveIcon, MilestoneIcon } from "@icons";
 import { calculateTimeDiff } from "@/utils/timestampUtils.js";
+import { useRecoilState } from "recoil";
+import { issueSelectionState } from "@stores";
 
 const LABEL_TYPE = {
   DOCUMENTATION: "documentation",
@@ -89,10 +91,28 @@ function IssueCell({
   timestamp,
   milestone,
 }) {
+  const [selectedIssueList, setSelectedIssueList] =
+    useRecoilState(issueSelectionState);
+  const checkboxRef = useRef();
+
+  useEffect(() => {
+    checkboxRef.current.checked = selectedIssueList.indexOf(id) !== -1;
+  }, [selectedIssueList]);
+
+  const changeCheckbox = (e) => {
+    const { target } = e;
+    if (target.checked) {
+      setSelectedIssueList((prev) => [...prev, id]);
+    } else {
+      setSelectedIssueList((prev) =>
+        prev.filter((selectedId) => selectedId !== id)
+      );
+    }
+  };
   return (
     <IssueCellWrapper>
       <LeftPart>
-        <input type="checkbox" />
+        <input type="checkbox" ref={checkboxRef} onChange={changeCheckbox} />
         <IssueInfoWrapper>
           <IssueTitleWrapper>
             {isOpened ? <AlertCircleIcon /> : <ArchieveIcon />}

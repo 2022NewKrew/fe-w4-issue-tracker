@@ -2,10 +2,15 @@ import React, { useCallback, useRef } from "react";
 import styled from "styled-components";
 import { ChevronDownIcon } from "@icons";
 import { SmallLinkText, Wrapper } from "@atoms";
-import { COLOR } from "@constants";
+import { ACTION_TYPE, COLOR } from "@constants";
 import Dropdown from "./Dropdown";
-import { useRecoilState } from "recoil";
-import { filterState } from "@stores";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import {
+  filterState,
+  forceIssueListUpdate,
+  issueSelectionState,
+} from "@stores";
+import { updateIssue } from "@/firebase.js";
 
 const OptionTabWrapper = styled(Wrapper)`
   position: relative;
@@ -32,20 +37,33 @@ const OptionTabDropDown = styled(Dropdown)`
 `;
 
 function IssueTableHeaderOptionTab({ tabData }) {
-  const [issueFilter, setIssueFilter] = useRecoilState(filterState);
+  const setIssueFilter = useSetRecoilState(filterState);
+  const [selectedIssueList, setSelectedIssueList] =
+    useRecoilState(issueSelectionState);
+  const issueListUpdate = useSetRecoilState(forceIssueListUpdate);
   const wrapper = useRef(null);
 
-  const clickDropdownPanel = useCallback(
-    (filter) => {
-      const { key, value } = filter;
-      const newIssueFilter =
-        issueFilter[key] === value
-          ? { ...issueFilter, [key]: "*" }
-          : { ...issueFilter, [key]: value };
-      setIssueFilter(newIssueFilter);
-    },
-    [issueFilter]
-  );
+  const clickDropdownPanel = async (actionType, panelValue) => {
+    const { key, value } = panelValue;
+    let dataForUpdate;
+    switch (actionType) {
+      case ACTION_TYPE.FILTER_ISSUE:
+        setIssueFilter((prev) => {
+          return { ...prev, [key]: prev[key] === value ? "*" : value };
+        });
+        break;
+      case ACTION_TYPE.UPDATE_ISSUE:
+        dataForUpdate = selectedIssueList.map((id) => {
+          return { id, key, value };
+        });
+        await updateIssue(dataForUpdate);
+        issueListUpdate((n) => n + 1);
+        setSelectedIssueList([]);
+        break;
+      default:
+        throw new Error("actionType is not valuable");
+    }
+  };
 
   return (
     <OptionTabWrapper ref={wrapper}>

@@ -27,6 +27,7 @@ const DropdownTitle = styled(MediumText)`
 function Dropdown({
   className,
   title,
+  actionType,
   isCheckIcon,
   options,
   parentRef,
@@ -37,14 +38,14 @@ function Dropdown({
 
   const clickPanel = (clickedPanelData) => {
     const { value } = clickedPanelData;
-    callbackAfterPanelClickEvent(value);
+    callbackAfterPanelClickEvent(actionType, value);
   };
   useEffect(() => {
     const clickDropdown = (e) => {
       const { target } = e;
       const { current: parentNode } = parentRef;
       const { current: thisNode } = dropdownRef;
-      if (isVisible && !thisNode.contains(target)) {
+      if (isVisible && !thisNode?.contains(target)) {
         setIsVisible(false);
       } else if (!isVisible && parentNode?.contains(target)) {
         setIsVisible(true);

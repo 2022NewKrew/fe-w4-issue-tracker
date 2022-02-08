@@ -1,6 +1,11 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { collection, getDocs } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  doc,
+  writeBatch,
+} from "firebase/firestore";
 import { DATA_TYPE } from "@constants";
 
 const ENV = {
@@ -54,6 +59,17 @@ export const getUserList = async () => {
 
 export const getIssueList = async () => {
   return await getDocList(DATA_TYPE.ISSUE);
+};
+
+export const updateIssue = async (updateData) => {
+  const batch = writeBatch(db);
+  updateData.map((data) => {
+    const { id, key, value } = data;
+    const issueRef = doc(db, DATA_TYPE.ISSUE, id);
+    batch.update(issueRef, { [key]: value });
+  });
+  await batch.commit();
+  return await getIssueList();
 };
 
 export * from "firebase/auth";

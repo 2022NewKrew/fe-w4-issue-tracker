@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import styled from "styled-components";
 import { Wrapper } from "@atoms";
 import { IssueCell, IssueTableHeader } from "@molecules";
@@ -19,14 +19,14 @@ const IssueList = styled(Wrapper)`
 `;
 
 function IssueTable() {
-  const issueList = useRecoilValue(filteredIssueListState);
+  const filteredIssueList = useRecoilValue(filteredIssueListState);
 
   return (
     <IssueTableWrapper>
       <IssueTableHeader />
       <IssueList>
-        {issueList.length ? (
-          issueList.map((issueData) => (
+        {filteredIssueList.length ? (
+          filteredIssueList.map((issueData) => (
             <IssueCell key={issueData.id} {...issueData} />
           ))
         ) : (

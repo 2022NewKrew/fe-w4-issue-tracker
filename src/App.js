@@ -22,5 +22,4 @@ function App() {
     </Main>
   );
 }
-
 export default App;

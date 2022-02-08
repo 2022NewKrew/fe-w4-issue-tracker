@@ -1,33 +1,18 @@
-import { selector } from "recoil";
+import { selector, atom } from "recoil";
 import { getIssueList } from "@/firebase.js";
 import { filterState } from "@/stores/filterStore.js";
 
-const filterIssueList = (issueList, filter) =>
-  issueList.filter((issue) => {
-    const issueEntries = Object.entries(issue);
-    return issueEntries.every(([key, issueValue]) => {
-      const filterValue = filter[key];
-      if (filterValue === undefined || filterValue === "*") {
-        return true;
-      }
-      if (Array.isArray(issueValue)) {
-        // for "label", "assignee" prop
-        return issueValue.some(
-          (value) => value === filterValue || value.name === filterValue
-        );
-      } else if (issueValue instanceof Object) {
-        // for "writer" prop
-        return issueValue.name === filterValue;
-      } else {
-        // for "isOpened", "milestone" prop
-        return issueValue === filterValue;
-      }
-    });
-  });
+export const forceIssueListUpdate = atom({
+  key: "issueListUpdater",
+  default: 0,
+});
 
 export const issueListState = selector({
   key: "issueList",
-  get: async () => await getIssueList(),
+  get: async ({ get }) => {
+    get(forceIssueListUpdate);
+    return await getIssueList();
+  },
 });
 
 export const filteredIssueListState = selector({
@@ -56,3 +41,44 @@ export const closedIssueListCountState = selector({
     return filterIssueList(issueList, filter).length;
   },
 });
+
+const filterIssueList = (issueList, filter) => {
+  return issueList.filter((issue) => {
+    return filterIssue(issue, filter);
+  });
+};
+
+const filterIssue = (issue, filter) => {
+  const issuePropEntries = Object.entries(issue);
+  return issuePropEntries.every(([property, propertyValue]) => {
+    return checkPropValidity(property, propertyValue, filter);
+  });
+};
+
+const checkPropValidity = (property, propertyValue, filter) => {
+  const filterValue = filter[property];
+
+  if (filterValue === undefined || filterValue === "*") {
+    return true;
+  }
+  if (Array.isArray(propertyValue)) {
+    // for "label", "assignee" prop
+    return filterArrayValue(propertyValue, filterValue);
+  } else if (propertyValue instanceof Object) {
+    // for "writer" prop
+    return filterObjectValue(propertyValue, filterValue);
+  } else {
+    // for "isOpened", "milestone" prop
+    return propertyValue === filterValue;
+  }
+};
+
+const filterArrayValue = (propertyValue, filterValue) => {
+  return propertyValue.some(
+    (value) => value === filterValue || value.name === filterValue
+  );
+};
+
+const filterObjectValue = (propertyValue, filterValue) => {
+  return propertyValue.name === filterValue;
+};

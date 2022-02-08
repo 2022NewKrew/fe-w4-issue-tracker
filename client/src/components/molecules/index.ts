@@ -1,4 +1,5 @@
 export { default as CommentTextArea } from "./CommentTextArea";
+export { default as Panel } from "./Panel";
 export { default as IssueListTitle } from "./IssueListTitle";
 export { default as IssueListItem } from "./IssueListItem";
 export { default as IssueNewSubmit } from "./IssueNewSubmit";

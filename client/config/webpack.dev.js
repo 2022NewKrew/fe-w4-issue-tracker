@@ -8,7 +8,7 @@ module.exports = merge(common, {
     historyApiFallback: true, // URL로 '/'경로 이외의 Router 설정해준 경로를 접근 할 수 있도록
     host: "localhost",
     port: 3000,
-    open: true,
+    open: false,
   },
   mode: "development",
 

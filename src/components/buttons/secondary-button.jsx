@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { useState } from "react";
 
-import colors from "@styles/theme/colors";
-import greyscale from "@styles/theme/greyscale";
+import themeColors from "@styles/theme/theme-colors";
+import themeGreyscale from "@styles/theme/theme-greyscale";
 import Link from "@styles/typography/link";
 import {
   allCenterAlign,
@@ -15,8 +15,8 @@ import {
 } from "@utils/helper";
 
 const StyledSecondaryButton = styled.button`
-  background: ${greyscale.offWhite};
-  border: 2px solid ${colors.blue};
+  background: ${themeGreyscale.offWhite};
+  border: 2px solid ${themeColors.blue};
   box-sizing: border-box;
 
   ${allCenterAlign}
@@ -34,7 +34,7 @@ const SecondaryButton = ({ children, componentSize, componentDisabled }) => {
     <StyledSecondaryButton disabled={disabled} componentSize={componentSize}>
       <Link
         componentSize={getButtonLinkSize({ componentSize })}
-        componentColor={colors.blue}
+        componentColor={themeColors.blue}
       >
         <span>{children}</span>
       </Link>

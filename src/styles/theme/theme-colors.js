@@ -1,4 +1,4 @@
-const colors = {
+const themeColors = {
   default: "#7B61FF",
   blue: "#007AFF",
   lightBlue: "#C7EBFF",
@@ -14,4 +14,4 @@ const colors = {
   darkGreen: "#00A028",
 };
 
-export default colors;
+export default themeColors;

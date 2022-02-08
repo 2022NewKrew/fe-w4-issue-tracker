@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 
-import greyscale from "@styles/theme/greyscale";
+import themeGreyscale from "@styles/theme/theme-greyscale";
 import Link from "@styles/typography/link";
 import {
   allCenterAlign,
@@ -28,7 +28,7 @@ const TextButton = ({ children, componentSize, componentDisabled }) => {
     <StyledTextButton disabled={disabled} componentSize={componentSize}>
       <Link
         componentSize={getButtonLinkSize({ componentSize })}
-        componentColor={greyscale.label}
+        componentColor={themeGreyscale.label}
       >
         <span>{children}</span>
       </Link>

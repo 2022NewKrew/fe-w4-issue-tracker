@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import greyscale from "@styles/theme/greyscale";
+import themeGreyscale from "@styles/theme/theme-greyscale";
 import { getTextInputDisplay, getTextInputAlignItems } from "@utils/helper";
 
 const getLabelWidth = ({ componentSize }) => {
@@ -44,7 +44,7 @@ const TextInputLabel = styled.span`
   font-weight: 500;
   font-size: 12px;
   line-height: 20px;
-  color: ${greyscale.label};
+  color: ${themeGreyscale.label};
 
   ${() => getLabelWidth}
   ${() => getLabelHeight}

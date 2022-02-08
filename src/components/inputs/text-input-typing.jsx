@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import greyscale from "@styles/theme/greyscale";
+import themeGreyscale from "@styles/theme/theme-greyscale";
 import { getTextInputDisplay, getTextInputAlignItems } from "@utils/helper";
 
 const getTypingWidth = ({ componentSize }) => {
@@ -55,7 +55,7 @@ const TextInputTyping = styled.input`
   font-weight: normal;
   font-size: 16px;
   line-height: 28px;
-  color: ${greyscale.titleActive};
+  color: ${themeGreyscale.titleActive};
   border: 0px;
 
   ${() => getTypingWidth}

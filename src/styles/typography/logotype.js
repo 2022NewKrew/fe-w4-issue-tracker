@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import greyscale from "@styles/theme/greyscale";
+import themeGreyscale from "@styles/theme/theme-greyscale";
 
 const getLogotypeFontWeight = ({ componentSize }) => {
   switch (componentSize) {
@@ -51,7 +51,7 @@ const StyledLogotype = styled.span`
   font-family: Montserrat;
   font-style: italic;
   letter-spacing: -0.04em;
-  color: ${greyscale.default};
+  color: ${themeGreyscale.default};
 
   ${() => getLogotypeFontWeight}
   ${() => getLogotypeFontSize}

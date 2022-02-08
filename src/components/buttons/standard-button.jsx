@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { useState } from "react";
 
-import colors from "@styles/theme/colors";
-import greyscale from "@styles/theme/greyscale";
+import themeColors from "@styles/theme/theme-colors";
+import themeGreyscale from "@styles/theme/theme-greyscale";
 import Link from "@styles/typography/link";
 import {
   allCenterAlign,
@@ -15,8 +15,8 @@ import {
 } from "@utils/helper";
 
 const StyledStandardButton = styled.button`
-  background: ${colors.blue};
-  border: 2px solid ${colors.blue};
+  background: ${themeColors.blue};
+  border: 2px solid ${themeColors.blue};
 
   ${allCenterAlign}
   ${buttonEvent}
@@ -33,7 +33,7 @@ const StandardButton = ({ children, componentSize, componentDisabled }) => {
     <StyledStandardButton disabled={disabled} componentSize={componentSize}>
       <Link
         componentSize={getButtonLinkSize({ componentSize })}
-        componentColor={greyscale.offWhite}
+        componentColor={themeGreyscale.offWhite}
       >
         <span>{children}</span>
       </Link>

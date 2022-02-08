@@ -3,16 +3,16 @@ import styled from "@emotion/styled";
 
 import { useIssueStore, useModifyIssueStatusData } from "@stores/issue";
 import { MouseEvent, useCallback } from "react";
-import { useMilestoneList } from "@stores/milestone";
-import { useUserList } from "@stores/user";
-import { useLabelList } from "@stores/label";
+import { useMilestoneStore } from "@stores/milestone";
+import { useUserStore } from "@stores/user";
+import { useLabelStore } from "@stores/label";
 import { arrayToggle } from "@utils/helper";
 import { IssueStatus } from "@types";
 
 const FilterTabs = () => {
-  const { data: labelList } = useLabelList();
-  const { data: milestoneList } = useMilestoneList();
-  const { data: userList } = useUserList();
+  const { labelList } = useLabelStore();
+  const { milestoneList } = useMilestoneStore();
+  const { userList } = useUserStore();
 
   const { mutate: modifyIssueStatus } = useModifyIssueStatusData();
 

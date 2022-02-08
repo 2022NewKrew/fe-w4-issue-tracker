@@ -15,6 +15,7 @@ declare module "@types" {
 
   interface Issue extends IssueJSON {
     labels: Label[];
+    milestone: MilestoneJSON | null;
   }
 
   interface IssueDetail extends Issue {

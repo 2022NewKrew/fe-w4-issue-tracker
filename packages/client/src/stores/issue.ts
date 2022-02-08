@@ -92,7 +92,7 @@ export const selectedIssueAllState = selector<boolean>({
 export const useIssueStore = () => {
   const issueList = useRecoilValue(filteredIssueListState);
   const setIssueList = useSetRecoilState(issueListState);
-  const selectedIssue = useRecoilValue(selectedIssueState);
+  const [selectedIssue, setSelectedIssue] = useRecoilState(selectedIssueState);
   const issueListCount = useRecoilValue(issueListCountState);
   const [filter, setFilter] = useRecoilState(issueFilterState);
   const [selectAll, setSelectAll] = useRecoilState(selectedIssueAllState);
@@ -108,6 +108,7 @@ export const useIssueStore = () => {
     filter,
     setFilter,
     selectedIssue,
+    setSelectedIssue,
     selectAll,
     setSelectAll,
   };

@@ -1,4 +1,4 @@
-import { atom, selector, useSetRecoilState } from "recoil";
+import { atom, selector, useRecoilState, useRecoilValue } from "recoil";
 import { useQuery } from "react-query";
 
 import { Label } from "@types";
@@ -9,22 +9,24 @@ const labelListState = atom<Label[]>({
   default: [] as Label[],
 });
 
-export const useLabelList = () => {
-  const setLabelList = useSetRecoilState(labelListState);
-  return useQuery<Label[], Error>("labels", LabelService.getAll, {
-    staleTime: 5000,
-    cacheTime: Infinity,
-    suspense: true,
-    onSuccess: (data) => {
-      setLabelList(data);
-    },
-  });
-};
-
-export const labelListCountState = selector({
+const labelListCountState = selector({
   key: "labelListCountState",
   get: ({ get }) => {
     const labelList = get(labelListState);
     return labelList.length;
   },
 });
+
+export const useLabelStore = () => {
+  const [labelList, setLabelList] = useRecoilState(labelListState);
+  const labelListCount = useRecoilValue(labelListCountState);
+  useQuery<Label[], Error>("labels", LabelService.getAll, {
+    onSuccess: (data) => {
+      setLabelList(data);
+    },
+  });
+  return {
+    labelList,
+    labelListCount,
+  };
+};

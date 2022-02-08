@@ -14,7 +14,12 @@ export function Routes({ children }) {
     };
 
     const getCurrentPathProps = () => {
-        const currentPathProps = children.find(({ props: { path } }) => {
+        const routesArr =
+            toString.call(children) === '[object Object]'
+                ? [children]
+                : children;
+
+        const currentPathProps = routesArr.find(({ props: { path } }) => {
             if (path === '*') {
                 return;
             }
@@ -23,7 +28,7 @@ export function Routes({ children }) {
             }
         })?.props;
 
-        const notFoundProps = children.find(
+        const notFoundProps = routesArr.find(
             ({ props: { path } }) => path === '*'
         ).props;
 

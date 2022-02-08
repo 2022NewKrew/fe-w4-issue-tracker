@@ -46,6 +46,9 @@ psd
 thumb
 sketch
 
+### node ###
+server/config/dev.js
+
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json

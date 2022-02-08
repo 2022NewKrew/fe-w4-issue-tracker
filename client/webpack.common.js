@@ -1,6 +1,7 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -19,6 +20,11 @@ module.exports = {
             inject: true,
             template: './public/index.html',
         }),
+        new CopyPlugin({
+            patterns: [
+                { from: path.resolve(__dirname, 'src/assets'), to: 'assets' },
+            ],
+        }),
     ],
     module: {
         rules: [
@@ -28,8 +34,11 @@ module.exports = {
                 use: ['babel-loader'],
             },
             {
-                test: /\.(png|jpg)$/,
-                use: ['file-loader'],
+                test: /\.(png|jpg|svg)$/,
+                loader: 'file-loader',
+                options: {
+                    name: '[path][name].[ext]',
+                },
             },
         ],
     },
@@ -40,9 +49,10 @@ module.exports = {
             '@context': path.resolve(__dirname, 'src/context'),
             '@core': path.resolve(__dirname, 'src/core'),
             '@hooks': path.resolve(__dirname, 'src/hooks'),
+            '@pages': path.resolve(__dirname, 'src/pages'),
             '@style': path.resolve(__dirname, 'src/style'),
             '@utils': path.resolve(__dirname, 'src/utils'),
-            // '@api': path.resolve(__dirname, 'src/api'),
+            '@api': path.resolve(__dirname, 'src/api'),
         },
     },
 };

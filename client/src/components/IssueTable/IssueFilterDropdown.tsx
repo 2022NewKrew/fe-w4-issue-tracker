@@ -49,6 +49,7 @@ const getOptionClickHandler = (
                 const newLabelFilters = [...prevState['label'], value];
                 return { ...prevState, label: newLabelFilters };
             });
+    return () => setState((prevState) => prevState);
 };
 
 export const IssueFilterDropdown = ({ dropdown, filterProperty }: IProps) => {

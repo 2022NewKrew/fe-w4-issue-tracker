@@ -7,7 +7,7 @@ import { CircleContainer } from '.';
 interface IProps {
     filterInfo: IFilterInfo;
     checkbox: boolean;
-    onClickHandler: () => void;
+    onClickHandler: (value: number) => void;
 }
 
 export const OptionField = ({ filterInfo, checkbox, onClickHandler }: IProps) => {

@@ -21,6 +21,7 @@ const App: React.FC = () => {
       path: "issue",
       element: <Issue />,
       children: [
+        { path: "add", element: <IssueNew /> },
         { path: "list", element: <IssueList /> },
         { path: ":id", element: <IssueDetail /> },
       ],

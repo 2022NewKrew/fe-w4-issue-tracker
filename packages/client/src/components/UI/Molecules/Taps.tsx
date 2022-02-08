@@ -1,12 +1,13 @@
 import Icon from "@UI/Icon";
 import { NavLink } from "react-router-dom";
 import styled from "@emotion/styled";
-import { useGetLabelCount } from "@querys/labels";
-import { useGetMilestoneCount } from "@querys/milestone";
+import { useRecoilValue } from "recoil";
+import { labelListCountState } from "@stores/label";
+import { milestoneListCountState } from "@stores/milestone";
 
 const Taps = () => {
-  const { data: labelCount } = useGetLabelCount();
-  const { data: milestoneCount } = useGetMilestoneCount();
+  const labelListCount = useRecoilValue(labelListCountState);
+  const milestoneListCount = useRecoilValue(milestoneListCountState);
 
   return (
     <Wrapper>
@@ -17,7 +18,7 @@ const Taps = () => {
         >
           <Icon name="label" />
           레이블
-          <span>({labelCount})</span>
+          <span>({labelListCount})</span>
         </NavLink>
       </li>
       <li>
@@ -27,7 +28,7 @@ const Taps = () => {
         >
           <Icon name="milestone" />
           마일스톤
-          <span>({milestoneCount})</span>
+          <span>({milestoneListCount})</span>
         </NavLink>
       </li>
     </Wrapper>

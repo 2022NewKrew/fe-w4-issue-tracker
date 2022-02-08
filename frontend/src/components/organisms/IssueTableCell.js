@@ -81,6 +81,7 @@ export default function IssueTableCell(props) {
     title,
     writer,
   } = props.info;
+  console.log(props.info);
   const color = "#004DE3";
   const formattedDate = new Date(timestamp).toLocaleDateString();
 

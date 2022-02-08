@@ -1,12 +1,12 @@
 import { useRecoilState } from "recoil";
+import { authState } from "../_state";
 
-import { history } from "_helpers";
-import { authAtom } from "_state";
+import axios from "axios";
 
 export { useFetchWrapper };
 
 function useFetchWrapper() {
-  const [auth, setAuth] = useRecoilState(authAtom);
+  const [auth, setAuth] = useRecoilState(authState);
 
   return {
     get: request("GET"),
@@ -19,24 +19,25 @@ function useFetchWrapper() {
     return (url, body) => {
       const requestOptions = {
         method,
-        headers: authHeader(url),
+        headers: authHeader(),
       };
       if (body) {
         requestOptions.headers["Content-Type"] = "application/json";
         requestOptions.body = JSON.stringify(body);
       }
+      console.log(url, requestOptions);
       return fetch(url, requestOptions).then(handleResponse);
+      // return axios(url, requestOptions).then(handleResponse);
     };
   }
 
   // helper functions
 
-  function authHeader(url) {
+  function authHeader() {
     // return auth header with jwt if user is logged in and request is to the api url
-    const token = auth?.token;
+    const token = auth?.accessToken;
     const isLoggedIn = !!token;
-    const isApiUrl = url.startsWith(process.env.REACT_APP_API_URL);
-    if (isLoggedIn && isApiUrl) {
+    if (isLoggedIn) {
       return { Authorization: `Bearer ${token}` };
     } else {
       return {};
@@ -52,7 +53,7 @@ function useFetchWrapper() {
           // auto logout if 401 Unauthorized or 403 Forbidden response returned from api
           localStorage.removeItem("user");
           setAuth(null);
-          history.push("/account/login");
+          history.push("/login");
         }
 
         const error = (data && data.message) || response.statusText;

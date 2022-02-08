@@ -11,10 +11,13 @@ import { ReactComponent as CheckboxInitial } from "@assets/icons/checkboxInitial
 import { ReactComponent as CheckboxActive } from "@assets/icons/checkboxActive.svg";
 
 import {
-  issuesState,
   openIssuesState,
   closedIssuesState,
   activeIssueTabState,
+  assigneesList,
+  labelList,
+  milestoneList,
+  writerList,
 } from "../../_state";
 import { useRecoilValue, useRecoilState } from "recoil";
 
@@ -81,6 +84,7 @@ const DropdownContainer = styled.div`
 export default function IssueTableHeader(props) {
   const [activeIssueTab, setActiveIssueTab] =
     useRecoilState(activeIssueTabState);
+
   const [showPanel, setShowPanel] = useState({
     statusModify: false,
     assignee: false,
@@ -89,16 +93,6 @@ export default function IssueTableHeader(props) {
     writer: false,
     status: false,
   });
-
-  const statusChangeMenus = ["선택한 이슈 열기", "선택한 이슈 닫기"];
-  const asssignneeChangeMenus = ["담당자가 없는 이슈", "Lin", "Genie"];
-  const labelChangeMenus = ["레이블이 없는 이슈", "documentation", "bug"];
-  const milestoneChangeMenus = [
-    "마일스톤이 없는 필터",
-    "마스터즈 코스",
-    "비기너 코스",
-  ];
-  const writerChangeMenus = ["Lin", "Min", "Genie"];
 
   function clickIssueType(e) {
     setActiveIssueTab(e.target.attributes.type.value);
@@ -125,6 +119,15 @@ export default function IssueTableHeader(props) {
   }
 
   function showDropdownIndicators() {
+    const openIssues = useRecoilValue(openIssuesState);
+    const closedIssues = useRecoilValue(closedIssuesState);
+
+    const asssignneeChangeMenus = useRecoilValue(assigneesList);
+    const labelChangeMenus = useRecoilValue(labelList);
+    const milestoneChangeMenus = useRecoilValue(milestoneList);
+    const writerChangeMenus = useRecoilValue(writerList);
+    const statusChangeMenus = ["이슈 열기", "이슈 닫기"];
+
     const [selectedAssignee, setSelectedAssignee] = useState([]);
     const [selectedLabel, setSelectedLabel] = useState([]);
     const [selectedMilestone, setSelectedMilestone] = useState([]);

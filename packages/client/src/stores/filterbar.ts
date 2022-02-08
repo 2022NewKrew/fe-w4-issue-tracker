@@ -1,7 +1,7 @@
 import { atom } from "recoil";
 
-export const issueFilterBar = atom<{ id: string; name: string }[]>({
-  key: "issueFilterBar",
+export const issueFilterBarState = atom<{ id: string; name: string }[]>({
+  key: "issueFilterBarState",
   default: [
     { id: "1", name: "열린 이슈" },
     { id: "2", name: "내가 작성한 이슈" },
@@ -11,7 +11,7 @@ export const issueFilterBar = atom<{ id: string; name: string }[]>({
   ],
 });
 
-export const selectFilterBarState = atom<string[]>({
+export const selectFilterBarState = atom<string | null>({
   key: "selectFilterBarState",
-  default: [],
+  default: null,
 });

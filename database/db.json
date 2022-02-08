@@ -8,12 +8,12 @@
         {
             "id": "1",
             "name": "subway",
-            "profileImgSrc": "chrome://favicon2/?size=24&scale_factor=1x&show_fallback_monogram=&page_url=https%3A%2F%2Fgithub.com%2Fvvvpiano"
+            "profileImgSrc": "https://i.pinimg.com/originals/d5/b0/4c/d5b04cc3dcd8c17702549ebc5f1acf1a.png"
         },
         {
             "id": "2",
             "name": "yasmin",
-            "profileImgSrc": "chrome://favicon2/?size=24&scale_factor=1x&show_fallback_monogram=&page_url=https%3A%2F%2Fwww.youtube.com%2F"
+            "profileImgSrc": "https://www.pngitem.com/pimgs/m/248-2483089_ubud-monkey-forest-flat-design-flat-icon-person.png"
         }
     ],
     "issues": [

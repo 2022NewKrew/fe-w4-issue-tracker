@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ProfileImage } from './assets';
+import { CircleContainer } from './assets';
 import { ReactComponent as Logo } from '@images/LogotypeMedium.svg';
 import { ReactComponent as UserImage } from '@images/UserImageLarge.svg';
 
@@ -8,9 +8,9 @@ export const Header = () => {
     return (
         <Wrapper>
             <Logo width="199px" height="40px" />
-            <ProfileImage>
+            <CircleContainer size={44}>
                 <UserImage />
-            </ProfileImage>
+            </CircleContainer>
         </Wrapper>
     );
 };

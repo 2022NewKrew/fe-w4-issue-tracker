@@ -2,8 +2,9 @@ import React from 'react';
 import { useRecoilValueLoadable } from 'recoil';
 import { userInfoAtom, labelInfoAtom, milestoneInfoAtom, statusInfoAtom } from '@atoms';
 import styled from 'styled-components';
-import { RoundBorderDiv, TextMedium, AlignYCenter, TextSmall } from '@styles/styleTemplates';
+import { RoundBorderDiv, TextMedium, AlignYCenter } from '@styles/styleTemplates';
 import { IFilter, issueFilterType, IFilterInfo } from '@types';
+import { OptionField } from '@components/assets';
 
 interface IProps {
     dropdown: boolean;
@@ -27,10 +28,6 @@ const getFilterAtom = (type: issueFilterType) => {
     }
 };
 
-const renderOptions = ({ id, name }: IFilterInfo, index: number) => {
-    return <Option key={id}>{name}</Option>;
-};
-
 export const IssueFilterDropdown = ({ dropdown, filterProperty }: IProps) => {
     const { title, type, emptyFilterOption } = filterProperty;
     const optionsAtom = getFilterAtom(type);
@@ -49,9 +46,9 @@ export const IssueFilterDropdown = ({ dropdown, filterProperty }: IProps) => {
     return (
         <DropWrapper>
             <FilterTitle>{`${title} 필터`}</FilterTitle>
-            {optionsIncludeEmptyFilterOption.map((optionData: IFilterInfo, i) =>
-                renderOptions(optionData, i)
-            )}
+            {optionsIncludeEmptyFilterOption.map((optionData: IFilterInfo, i) => (
+                <OptionField filterInfo={optionData} checkbox={type === 'statusChange'} key={i} />
+            ))}
         </DropWrapper>
     );
 };
@@ -75,11 +72,4 @@ const FilterTitle = styled.div`
     ${TextMedium}
     height: 48px;
     background-color: var(--background-color);
-`;
-
-const Option = styled.div`
-    ${TextSmall}
-    height: 44px;
-    border-top: 1px solid var(--line-color);
-    cursor: pointer;
 `;

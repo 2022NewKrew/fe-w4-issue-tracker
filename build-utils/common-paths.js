@@ -1,10 +1,12 @@
 const path = require("path");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../");
+const PUBLIC_PATH = path.join(PROJECT_ROOT, "public");
 const APP_ENTRY = path.join(PROJECT_ROOT, "src");
 
 module.exports = {
   projectRoot: PROJECT_ROOT,
+  publicPath: PUBLIC_PATH,
   appEntry: APP_ENTRY,
   outputPath: path.join(PROJECT_ROOT, "dist"),
   componentsPath: path.join(APP_ENTRY, "components"),

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import USER_IMAGE_LARGE from "@images/icons/user-image-large.svg";
+import USER_IMAGE_LARGE from "@public/icons/user-image-large.svg";
 import TypographyLogotype from "@styles/typography/typography-logotype";
 
 const StyledHeaderContainer = styled.header`

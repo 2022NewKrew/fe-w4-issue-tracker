@@ -83,6 +83,7 @@ const config = {
     extensions: [".jsx", ".js", "..."],
     alias: {
       "@root": commonPaths.projectRoot,
+      "@public": commonPaths.publicPath,
       "@src": commonPaths.appEntry,
       "@dist": commonPaths.outputPath,
       "@components": commonPaths.componentsPath,

@@ -23,7 +23,7 @@ const IssueMain = () => {
             <Button
               buttonMode={ButtonMode.Standard}
               buttonSize={Size.Small}
-              message="+ 이슈 작성"
+              message="이슈 작성"
             />
           </TapWrapper>
         </IssueHeader>
@@ -34,6 +34,7 @@ const IssueMain = () => {
 };
 
 const Wrapper = styled.div`
+  max-height: 1440px;
   display: flex;
   flex-direction: column;
   align-items: center;

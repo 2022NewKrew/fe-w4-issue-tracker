@@ -21,7 +21,7 @@ interface IssueInfo {
   issueTitle: string;
   labelGroup: LabelInfo[];
   milestoneGroup: string[]; //TODO 마일스톤 형식 정의되면 바꿀 예정
-  reportDate: string;
+  reportDate: Date;
   register: string; //TODO user 형식 정의되면 바꿀 예정
   issueId: string;
   assignGroup: string[]; //TODO 담당자 형식 정의되면 바꿀 예정
@@ -55,11 +55,36 @@ const IssueList = () => {
           labelColor: Color.DarkBlue,
           labelName: "documentation",
         },
+        {
+          labelID: "2",
+          labelColor: Color.DarkGreen,
+          labelName: "documentation2",
+        },
       ],
-      milestoneGroup: ["마스터즈 코스"],
-      reportDate: "reportDate",
+      milestoneGroup: ["마스터즈 코스", "마스터즈 코스2"],
+      reportDate: new Date("2022-02-08T10:56:00"),
       register: "Oni",
       issueId: "1",
+      assignGroup: ["assigUser"],
+    },
+    {
+      issueTitle: "FE 이슈트래커 개발2",
+      labelGroup: [
+        {
+          labelID: "1",
+          labelColor: Color.DarkBlue,
+          labelName: "documentation",
+        },
+        {
+          labelID: "3",
+          labelColor: Color.DarkPurple,
+          labelName: "documentation3",
+        },
+      ],
+      milestoneGroup: ["마스터즈 코스2", "마스터즈 코스3"],
+      reportDate: new Date("2022-02-07T10:56:00"),
+      register: "Choi",
+      issueId: "2",
       assignGroup: ["assigUser"],
     },
   ]);
@@ -70,9 +95,31 @@ const IssueList = () => {
       !newDropdownGroup[clickItemIndex].isChecked;
     setDropdownGroup(newDropdownGroup);
   };
-  const reportDateInfo = (reportDate: string, register: string) => {
-    //TODO: 현재 시간이랑 작성시간 비교해서 작성 내용 바꾸는 함수 구현 예정
-    return `이 이슈가 8분 전, ${register}님에 의해 작성되었습니다`;
+  const displayedAt = (createdAt: Date) => {
+    const currentDate = new Date();
+    const milliSeconds = currentDate.getTime() - createdAt.getTime();
+    console.log(currentDate, createdAt, milliSeconds);
+
+    const seconds = milliSeconds / 1000;
+    if (seconds < 60) return `방금 전`;
+    const minutes = seconds / 60;
+    if (minutes < 60) return `${Math.floor(minutes)}분 전`;
+    const hours = minutes / 60;
+    if (hours < 24) return `${Math.floor(hours)}시간 전`;
+    const days = hours / 24;
+    if (days < 7) return `${Math.floor(days)}일 전`;
+    const weeks = days / 7;
+    if (weeks < 5) return `${Math.floor(weeks)}주 전`;
+    const months = days / 30;
+    if (months < 12) return `${Math.floor(months)}개월 전`;
+    const years = days / 365;
+    return `${Math.floor(years)}년 전`;
+  };
+  //TODO: 매 시간 비교를 할지 아니면 첫  조회 시간만 비교할지 고민
+  const reportDateInfo = (reportDate: Date, register: string) => {
+    return `이 이슈가 ${displayedAt(
+      reportDate
+    )}, ${register}님에 의해 작성되었습니다`;
   };
   const labelList = (labelGroup: LabelInfo[]) =>
     labelGroup.map((labelItem, labelItemIndex) => {
@@ -93,7 +140,7 @@ const IssueList = () => {
     });
   const issueInfoList = issueGroup.map((issueItem, issueItemIndex) => (
     <IssueItem key={issueItemIndex}>
-      <IssueInfoGroup>
+      <IssueItemInfoGroup>
         <CheckBox type="checkbox" />
         <IssueInfo>
           <IssueTitleWrapper>
@@ -113,7 +160,7 @@ const IssueList = () => {
             {milestoneList(issueItem.milestoneGroup)}
           </IssueContextWrapper>
         </IssueInfo>
-      </IssueInfoGroup>
+      </IssueItemInfoGroup>
       <IssueInfoGroup></IssueInfoGroup>
     </IssueItem>
   ));
@@ -180,7 +227,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  width: 880px;
+  width: 100%;
 `;
 
 const Head = styled.div`
@@ -195,6 +242,7 @@ const Head = styled.div`
 `;
 
 const IssueItem = styled.div`
+  margin: 1px 0px;
   width: 100%;
   height: 100px;
   background: ${Color.offWhite};
@@ -208,6 +256,12 @@ const IssueItem = styled.div`
 `;
 
 const IssueInfoGroup = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const IssueItemInfoGroup = styled.div`
   display: flex;
   flex-direction: row;
 `;
@@ -256,6 +310,8 @@ const SvgImg = styled(SVG)`
 
 const IssueSpan = styled.span`
   color: ${Color.Label};
+  align-items: center;
+  display: flex;
 `;
 
 const IssueLink = styled.a`

@@ -94,16 +94,18 @@ export default function IssueList(){
     setIssueFilter('');
   }, [setIssueFilter]);
 
+  const onFilterSubmit=useCallback((e)=>{
+    e.preventDefault();
+    setIssueFilter(rawIssueFilter);
+  }, [setIssueFilter, rawIssueFilter]);
+
   return (
     <div className='IssueList'>
       <Header />
 
       <div className='issue-searchbar'>
         <div className='align-left'>
-          <form onSubmit={(e)=>{
-            e.preventDefault();
-            setIssueFilter(rawIssueFilter);
-          }}>
+          <form onSubmit={onFilterSubmit}>
             <InputeMedium title='필터' value={rawIssueFilter} onChange={setRawIssueFilter}/>
           </form>
         </div>

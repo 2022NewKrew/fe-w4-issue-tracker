@@ -20,25 +20,18 @@ export default function IssueUpdateDropdown({checked, fetchIssues, showingIssues
     return Object.keys(checked).map((index)=>showingIssues[index].issueID);
   }, [checked, showingIssues]);
 
-  function getItemArray(){
-    return [
-      {itemTitle: '선택한 이슈 열기', onClick: ()=>{
-        postToURL(issueUpdateURL, {
-          issueIDs: getIssueIDs(),
-          isOpen: true
-        }).then(fetchIssues);
-      }},
-      {itemTitle: '선택한 이슈 닫기', onClick: ()=>{
-        postToURL(issueUpdateURL, {
-          issueIDs: getIssueIDs(),
-          isOpen: false
-        }).then(fetchIssues);
-      }}
-    ];
+  function onClickItem(openIssues){
+    postToURL(issueUpdateURL, {
+      issueIDs: getIssueIDs(),
+      isOpen: openIssues==='true'
+    }).then(fetchIssues);
   }
 
-  function isSelectedIndex(){
-    return false;
+  function getItemArray(){
+    return [
+      {itemTitle: '선택한 이슈 열기', value: true},
+      {itemTitle: '선택한 이슈 닫기', value: false}
+    ];
   }
 
   return (
@@ -52,7 +45,7 @@ export default function IssueUpdateDropdown({checked, fetchIssues, showingIssues
         itemArray={getItemArray()}
         toggle={toggle}
         showSelected={false}
-        isSelectedIndex={isSelectedIndex}
+        onClickItem={onClickItem}
         left={false}/>}
     </div>
   );

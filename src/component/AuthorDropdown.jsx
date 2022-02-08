@@ -15,25 +15,21 @@ export default function AuthorDropdown(){
     setShow((show)=>!show);
   }, [setShow]);
 
+  function onClickItem(userID){
+    setIssueFilter(`author:${wrapInQuotes(userID)}`);
+    toggle();
+  }
+
   function getItemArray(){
-    const itemArray=Object.values(users).map(({userID})=>{
-      return {itemTitle: userID, onClick: ()=>{
-        setIssueFilter(`author:${wrapInQuotes(userID)}`);
-        toggle();
-      }};
-    });
+    const itemArray=Object.values(users).map(({userID})=>(
+      {itemTitle: userID, value: userID}
+    ));
     return itemArray;
   }
 
   function isSelectedIndex({itemTitle}){
     const curAuthor=searchFilterWithKey('author', issueFilter);
-    if(curAuthor===null){
-      return;
-    }
-    if(curAuthor===itemTitle){
-      return true;
-    }
-    return false;
+    return curAuthor===itemTitle;
   }
 
   return (
@@ -48,6 +44,7 @@ export default function AuthorDropdown(){
         toggle={toggle}
         showSelected={true}
         isSelectedIndex={isSelectedIndex}
+        onClickItem={onClickItem}
         left={false}/>}
     </div>
   );

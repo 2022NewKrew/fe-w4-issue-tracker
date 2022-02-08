@@ -150,7 +150,7 @@ app.post('/api/update-issue', (req, res)=>{
     db.transaction(()=>{
       issueIDs.forEach((issueID)=>{
         if(issueDB.updateIsOpen(Number(issueID), {isOpen})===0){
-          throw Error('Cannot update issue. ID:', issueID);
+          throw Error(`Cannot update issue. ID: ${issueID}`);
         }
       });
     })();

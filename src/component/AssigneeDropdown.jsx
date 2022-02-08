@@ -15,29 +15,23 @@ export default function AssigneeDropdown(){
     setShow((show)=>!show);
   }, [setShow]);
 
+  function onClickItem(userID){
+    setIssueFilter(`assignee:${wrapInQuotes(userID)}`);
+    toggle();
+  }
+
   function getItemArray(){
-    const itemArray=[{itemTitle: '담당자가 없는 이슈', onClick: ()=>{
-      setIssueFilter('assignee:');
-      toggle();
-    }}];
-    itemArray.push(...Object.values(users).map(({userID})=>{
-      return {itemTitle: userID, onClick: ()=>{
-        setIssueFilter(`assignee:${wrapInQuotes(userID)}`);
-        toggle();
-      }};
-    }));
+    const itemArray=[{itemTitle: '담당자가 없는 이슈', value: ''}];
+    itemArray.push(...Object.values(users).map(({userID})=>(
+      {itemTitle: userID, value: userID}
+    )));
     return itemArray;
   }
 
   function isSelectedIndex({itemTitle}, index){
     const curAssignee=searchFilterWithKey('assignee', issueFilter);
-    if(curAssignee===null){
-      return;
-    }
-    if(curAssignee===itemTitle || (curAssignee.length===0 && index===0)){
-      return true;
-    }
-    return false;
+    return (curAssignee!==null &&
+      (curAssignee===itemTitle || (curAssignee.length===0 && index===0)));
   }
 
   return (
@@ -52,6 +46,7 @@ export default function AssigneeDropdown(){
         toggle={toggle}
         showSelected={true}
         isSelectedIndex={isSelectedIndex}
+        onClickItem={onClickItem}
         left={false}/>}
     </div>
   );

@@ -15,29 +15,23 @@ export default function LabelDropdown(){
     setShow((show)=>!show);
   }, [setShow]);
 
+  function onClickItem(labelTitle){
+    setIssueFilter(`label:${wrapInQuotes(labelTitle)}`);
+    toggle();
+  }
+
   function getItemArray(){
-    const itemArray=[{itemTitle: '레이블이 없는 이슈', onClick: ()=>{
-      setIssueFilter('label:');
-      toggle();
-    }}];
-    itemArray.push(...Object.values(labels).map(({title: labelTitle})=>{
-      return {itemTitle: labelTitle, onClick: ()=>{
-        setIssueFilter(`label:${wrapInQuotes(labelTitle)}`);
-        toggle();
-      }};
-    }));
+    const itemArray=[{itemTitle: '레이블이 없는 이슈', value: ''}];
+    itemArray.push(...Object.values(labels).map(({title: labelTitle})=>(
+      {itemTitle: labelTitle, value: labelTitle}
+    )));
     return itemArray;
   }
 
   function isSelectedIndex({itemTitle}, index){
     const curLabel=searchFilterWithKey('label', issueFilter);
-    if(curLabel===null){
-      return;
-    }
-    if(curLabel===itemTitle || (curLabel.length===0 && index===0)){
-      return true;
-    }
-    return false;
+    return (curLabel!==null &&
+      (curLabel===itemTitle || (curLabel.length===0 && index===0)));
   }
 
   return (
@@ -52,6 +46,7 @@ export default function LabelDropdown(){
         toggle={toggle}
         showSelected={true}
         isSelectedIndex={isSelectedIndex}
+        onClickItem={onClickItem}
         left={false}/>}
     </div>
   );

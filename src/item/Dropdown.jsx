@@ -9,9 +9,11 @@ import CheckOnCircle from '../svg/CheckOnCircle.svg';
  * @param {boolean} props.showSelected
  * @param {function} props.isSelectedIndex
  * @param {function} props.toggle
+ * @param {function} props.onClickItem
  * @param {boolean} props.left
  */
-export default function Dropdown({title, itemArray, showSelected, isSelectedIndex, toggle, left}){
+export default function Dropdown({title, itemArray, showSelected, isSelectedIndex,
+  toggle, onClickItem, left}){
   const dropdownRef=useRef(null);
 
   useEffect(()=>{
@@ -25,15 +27,17 @@ export default function Dropdown({title, itemArray, showSelected, isSelectedInde
   }, [toggle]);
 
   function getItems(){
-    return itemArray.map(({itemTitle, onClick}, index)=>(
+    return itemArray.map(({itemTitle, value}, index)=>(
       <li key={itemTitle}
-        className={'item'+(isSelectedIndex({itemTitle}, index) ? ' selected' : '') }
-        onClick={onClick}
+        className={'item'+(showSelected && isSelectedIndex({itemTitle}, index) ? ' selected' : '') }
+        data-value={value}
       >
         <span className='item-title'>{itemTitle}</span>
         {showSelected &&
           <span className='checkbox'>
-            {isSelectedIndex({itemTitle}, index) ? <CheckOnCircle /> : <CheckOffCircle />}
+            {showSelected && isSelectedIndex({itemTitle}, index)
+              ? <CheckOnCircle />
+              : <CheckOffCircle />}
           </span>
         }
       </li>
@@ -45,7 +49,10 @@ export default function Dropdown({title, itemArray, showSelected, isSelectedInde
       <h2 className='title'>
         {title}
       </h2>
-      <ul className='item-container'>
+      <ul className='item-container' onClick={(e)=>{
+        const value=e.target.closest('li').getAttribute('data-value');
+        onClickItem(value);
+      }}>
         {getItems()}
       </ul>
     </div>

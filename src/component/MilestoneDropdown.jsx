@@ -15,29 +15,23 @@ export default function MilestoneDropdown(){
     setShow((show)=>!show);
   }, [setShow]);
 
+  function onClickItem(milestoneTitle){
+    setIssueFilter(`milestone:${wrapInQuotes(milestoneTitle)}`);
+    toggle();
+  }
+
   function getItemArray(){
-    const itemArray=[{itemTitle: '마일스톤이 없는 이슈', onClick: ()=>{
-      setIssueFilter('milestone:');
-      toggle();
-    }}];
-    itemArray.push(...Object.values(milestones).map(({title: milestoneTitle})=>{
-      return {itemTitle: milestoneTitle, onClick: ()=>{
-        setIssueFilter(`milestone:${wrapInQuotes(milestoneTitle)}`);
-        toggle();
-      }};
-    }));
+    const itemArray=[{itemTitle: '마일스톤이 없는 이슈', value: ''}];
+    itemArray.push(...Object.values(milestones).map(({title: milestoneTitle})=>(
+      {itemTitle: milestoneTitle, value: milestoneTitle}
+    )));
     return itemArray;
   }
 
   function isSelectedIndex({itemTitle}, index){
     const curMilestone=searchFilterWithKey('milestone', issueFilter);
-    if(curMilestone===null){
-      return;
-    }
-    if(curMilestone===itemTitle || (curMilestone.length===0 && index===0)){
-      return true;
-    }
-    return false;
+    return (curMilestone!==null &&
+      (curMilestone===itemTitle || (curMilestone.length===0 && index===0)));
   }
 
   return (
@@ -52,6 +46,7 @@ export default function MilestoneDropdown(){
         toggle={toggle}
         showSelected={true}
         isSelectedIndex={isSelectedIndex}
+        onClickItem={onClickItem}
         left={false}/>}
     </div>
   );

@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Color } from "@/common/designSystem";
-import Dropdown, { DropdownItem, DropdownType } from "../Common/Dropdown";
+import Dropdown, {
+  DropdownItem,
+  DropdownSize,
+  DropdownType,
+} from "../Common/Dropdown";
 import searchImg from "@/asset/img/search.svg";
 import SVG from "react-inlinesvg";
 
@@ -47,6 +51,7 @@ const FilterBar = () => {
     <FilterBarWrapper>
       <FilterWrapper>
         <Dropdown
+          size={DropdownSize.large}
           dropdownTitle="필터"
           dropdwonGroupTitle="이슈 필터"
           dropdownGroup={issueGroup}
@@ -69,11 +74,7 @@ const FilterBarWrapper = styled.div`
   border-radius: 11px;
 `;
 
-const FilterWrapper = styled.div`
-  padding-left: 24px;
-  padding-right: 28px;
-  width: 76px;
-`;
+const FilterWrapper = styled.div``;
 
 const FilterContent = styled.div`
   display: flex;
@@ -85,6 +86,7 @@ const FilterContent = styled.div`
 
   width: 472px;
   height: 40px;
+  border-radius: 0px 11px 11px 0px;
 
   background: ${Color.InputBackground};
 `;

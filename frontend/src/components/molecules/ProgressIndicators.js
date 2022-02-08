@@ -42,13 +42,13 @@ const TextContainer = styled.div`
 `;
 
 export function ProgressIndicator({ openIssues, closedIssues, type }) {
-  const value = (closedIssues / (openIssues + closedIssues)) * 100;
+  const progressPercentage = (closedIssues / (openIssues + closedIssues)) * 100;
 
   function showText() {
     if (type === "text") {
       return (
         <TextContainer>
-          <XSmallText>{Math.round(value)}%</XSmallText>
+          <XSmallText>{Math.round(progressPercentage)}%</XSmallText>
           <XSmallText>
             열린 이슈 {openIssues} 닫힌 이슈 {closedIssues}
           </XSmallText>

@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { XSmallText, SmallText } from "@components/atoms/Text";
 import { ReactComponent as CheckoffCircle } from "@assets/icons/checkoffCircle.svg";
 import { ReactComponent as CheckonCircle } from "@assets/icons/checkonCircle.svg";
 
 export const Container = styled.div`
-  /* width: 352px; */
   display: flex;
 
   .radioContainer + .radioContainer {
@@ -39,17 +38,13 @@ const RadioContainer = styled.div`
 export function RadioOption(props) {
   const [selectedValue, setSelectedValue] = useState(props.options[0]);
 
-  function handleCircleClick(selectedOption) {
-    setSelectedValue(selectedOption);
-  }
-
   function checkSelected(option) {
     if (selectedValue === option) {
       return (
         <>
           <CheckonCircle
             color='#14142b'
-            onClick={() => handleCircleClick(option)}
+            onClick={() => setSelectedValue(option)}
           />
           <SmallText color='titleActive'>{option}</SmallText>
         </>
@@ -59,7 +54,7 @@ export function RadioOption(props) {
         <>
           <CheckoffCircle
             color='#4e4b66'
-            onClick={() => handleCircleClick(option)}
+            onClick={() => setSelectedValue(option)}
           />
           <SmallText color='body'>{option}</SmallText>
         </>

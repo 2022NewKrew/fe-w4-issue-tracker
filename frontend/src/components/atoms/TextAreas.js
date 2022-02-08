@@ -3,7 +3,6 @@ import styled, { css } from "styled-components";
 import { ReactComponent as Paperclip } from "@assets/icons/paperclip.svg";
 
 const TextInputContainer = styled.div`
-  /* width: 340px; */
   width: 100%;
   height: ${(props) => (props.height ? props.height : 200)}px;
 
@@ -124,7 +123,6 @@ const InputLengthText = styled.div`
 export default function TextArea({
   placeholder,
   isDisabled,
-  onChangeListener,
   onAttachClickListener,
   value,
   setValue,
@@ -135,9 +133,6 @@ export default function TextArea({
 
   // 입력이 끝난 후 2초 후에 입력 길이를 보이도록 하기 위한 timeId
   const timeRef = useRef(0);
-
-  // TextArea 값의 길이에 대한 state
-  const [inputLength, setInputLength] = useState(0);
   // TextArea가 focus되고 있는지에 대한 state
   const [isFocus, setIsFocus] = useState(false);
   // TextArea의 값이 변경되고 2초가 지났는지에 대한 state
@@ -159,23 +154,14 @@ export default function TextArea({
     if (!value) setDisable(true);
   };
 
-  const onInputValueChange = useCallback(
-    (inputValue, setInputValue) => {
-      setInputLength(inputValue.length);
+  const onInputValueChange = useCallback(() => {
+    clearTimeout(timeRef.current);
+    setIsPassedTwoSecondsAfterTyping(false);
 
-      clearTimeout(timeRef.current);
-      setIsPassedTwoSecondsAfterTyping(false);
-
-      timeRef.current = setTimeout(() => {
-        setIsPassedTwoSecondsAfterTyping(true);
-      }, 2000);
-
-      if (onChangeListener) {
-        onChangeListener(inputValue, setInputValue);
-      }
-    },
-    [onChangeListener]
-  );
+    timeRef.current = setTimeout(() => {
+      setIsPassedTwoSecondsAfterTyping(true);
+    }, 2000);
+  }, []);
 
   const onFocus = useCallback((isFocus) => {
     setIsFocus(true);
@@ -186,15 +172,15 @@ export default function TextArea({
   }, []);
 
   // focus인 상태에서 input 값이 바뀐지 2초가 지나면 몇자를 입력했는지 보여주도록 함
-  const inputLengthText = useMemo(() => {
+  function inputLengthText() {
     if (isFocus && isPassedTwoSecondsAfterTyping) {
       return (
-        <InputLengthText>{`띄어쓰기 포함 ${inputLength}자`}</InputLengthText>
+        <InputLengthText>{`띄어쓰기 포함 ${value.length}자`}</InputLengthText>
       );
     } else {
       return null;
     }
-  }, [isFocus, isPassedTwoSecondsAfterTyping]);
+  }
 
   return (
     <TextInputContainer
@@ -209,7 +195,7 @@ export default function TextArea({
         value={value}
       />
       <Label active={active}>{placeholder}</Label>
-      {inputLengthText}
+      {inputLengthText()}
       <AttachWrapper
         customStyle={isFocus ? AttachWrapperActiveStyle : {}}
         onClick={onAttachClickListener}>

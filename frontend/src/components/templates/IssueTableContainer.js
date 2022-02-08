@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import IssueTableHeader from "@components/organisms/IssueTableHeader";
@@ -52,20 +52,23 @@ export default function IssueTableContainer() {
     else return false;
   }
 
-  // 열린이슈/닫힌이슈 탭에 따라 보여질 이슈 선택
-  const currentIssues = activeIssueTab === "open" ? openIssues : closedIssues;
+  function issueList() {
+    // 열린이슈/닫힌이슈 탭에 따라 보여질 이슈 선택
+    const currentIssues = activeIssueTab === "open" ? openIssues : closedIssues;
 
-  const issueList =
-    currentIssues &&
-    currentIssues.map((issue) => (
-      <IssueTableCell
-        key={issue.num}
-        selected={checkSelected(issue.id)}
-        selectedIssueIds={selectedIssueIds}
-        setSelectedIssueIds={setSelectedIssueIds}
-        info={issue}
-      />
-    ));
+    const issueList =
+      currentIssues &&
+      currentIssues.map((issue) => (
+        <IssueTableCell
+          key={issue.num}
+          selected={checkSelected(issue.id)}
+          selectedIssueIds={selectedIssueIds}
+          setSelectedIssueIds={setSelectedIssueIds}
+          info={issue}
+        />
+      ));
+    return issueList;
+  }
 
   return (
     <Container className='clearfix'>
@@ -74,7 +77,7 @@ export default function IssueTableContainer() {
         setSelectedIssueIds={setSelectedIssueIds}
         issues={issues}
       />
-      {issueList}
+      {issueList()}
     </Container>
   );
 }

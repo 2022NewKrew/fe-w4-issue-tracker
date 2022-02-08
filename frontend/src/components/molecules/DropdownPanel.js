@@ -57,30 +57,32 @@ const ImageTextContainer = styled.div`
 
 export function DropdownPanel(props) {
   const type = props.type;
-  const selected = props.selected;
-  const setSelected = props.setSelected;
+  const selectedMenus = props.selected;
+  const setSelectedMenus = props.setSelected;
 
-  function handleClick(id, menu) {
+  function handleClick(id, clickedMenu) {
     if (type === "modify") {
-      props.setSelected(menu);
+      setSelectedMenus(clickedMenu);
       // 선택 시 해당 패널 닫기
       props.setShowPanel({
         ...props.showPanel,
         [props.name]: !props.showPanel[props.name],
       });
     } else {
-      if (selected && selected.includes(menu)) {
-        const tempSelected = selected.filter((each) => each !== menu);
-        setSelected(tempSelected);
+      if (selectedMenus && selectedMenus.includes(clickedMenu)) {
+        const selectedMenusWihtoutRedundancy = selectedMenus.filter(
+          (menu) => menu !== clickedMenu
+        );
+        setSelectedMenus(selectedMenusWihtoutRedundancy);
       } else {
-        setSelected([...selected, menu]);
+        setSelectedMenus([...selectedMenus, clickedMenu]);
       }
     }
   }
 
   function showSelectionIcon(type, menu) {
     if (type !== "modify") {
-      if (selected && selected.includes(menu)) {
+      if (selectedMenus && selectedMenus.includes(menu)) {
         return <CheckonCircle />;
       } else {
         return <CheckoffCircle />;

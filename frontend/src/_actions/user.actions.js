@@ -23,7 +23,7 @@ function useUserActions() {
   };
 
   async function githubLogin() {
-    await instance
+    fetchWrapper
       .get("/api/auth/github")
       .then((res) => console.log(res))
       .catch((err) => console.log(err));

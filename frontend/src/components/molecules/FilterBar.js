@@ -117,7 +117,7 @@ export function FilterBar({ setShowPanel, showPanel, value }) {
 
   return (
     <Container isFocus={isFocus}>
-      <Button isFocus={isFocus} onClick={() => handleFilterClick()}>
+      <Button isFocus={isFocus} onClick={handleFilterClick()}>
         <Text>필터</Text>
         <Down></Down>
       </Button>

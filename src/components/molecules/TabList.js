@@ -3,8 +3,10 @@ import styled from "styled-components";
 import { COLOR } from "@constants";
 import { MilestoneIcon, TagIcon } from "@icons";
 import { SmallText, Wrapper } from "@atoms";
+import { useRecoilValue } from "recoil";
+import { labelListCountState, milestoneListCountState } from "@stores";
 
-const _Wrapper = styled(Wrapper)`
+const TabListWrapper = styled(Wrapper)`
   flex-direction: row;
   overflow: hidden;
 
@@ -46,21 +48,20 @@ const TabText = styled(SmallText)`
 `;
 
 function TabList() {
+  const labelCount = useRecoilValue(labelListCountState);
+  const milestoneCount = useRecoilValue(milestoneListCountState);
+
   return (
-    <_Wrapper>
+    <TabListWrapper>
       <LeftTab>
         <TagIcon />
-        <TabText>
-          레이블 (<span>0</span>)
-        </TabText>
+        <TabText>레이블 {<span>({labelCount})</span>}</TabText>
       </LeftTab>
       <RightTab>
         <MilestoneIcon />
-        <TabText>
-          마일스톤 (<span>0</span>)
-        </TabText>
+        <TabText>마일스톤 {<span>({milestoneCount})</span>}</TabText>
       </RightTab>
-    </_Wrapper>
+    </TabListWrapper>
   );
 }
 

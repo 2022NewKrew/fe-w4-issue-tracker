@@ -1,0 +1,4 @@
+export const ACTION_TYPE = {
+  FILTER_ISSUE: "FILTER_ISSUE",
+  UPDATE_ISSUE: "UPDATE_ISSUE",
+};

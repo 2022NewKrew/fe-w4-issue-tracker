@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { COLOR } from "@constants";
 import { LargeButton, Wrapper } from "@atoms";
-import { authService } from "@/firebase.js";
+import { GithubAuthProvider, getAuth, signInWithPopup } from "@/firebase.js";
 
 const OAuthButton = styled(LargeButton)`
   margin: 10px;
@@ -10,9 +10,9 @@ const OAuthButton = styled(LargeButton)`
 
 function OAuthForm() {
   const signInWithGithub = () => {
-    const authProvider = new authService.GithubAuthProvider();
-    const auth = authService.getAuth();
-    authService.signInWithPopup(auth, authProvider);
+    const authProvider = new GithubAuthProvider();
+    const auth = getAuth();
+    signInWithPopup(auth, authProvider);
   };
 
   return (

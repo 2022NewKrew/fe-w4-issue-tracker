@@ -28,6 +28,7 @@ module.exports = {
       "@components": path.resolve(__dirname, "src/components"),
       "@constants": path.resolve(__dirname, "src/constants"),
       "@icons": path.resolve(__dirname, "src/assets/icons"),
+      "@stores": path.resolve(__dirname, "src/stores"),
       "@": path.resolve(__dirname, "src"),
     },
   },

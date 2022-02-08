@@ -1,22 +1,31 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
-import { MediumLinkText, SmallText, Wrapper, XSmallText } from "@atoms";
+import {
+  MediumLinkText,
+  SmallProfileImg,
+  SmallText,
+  Wrapper,
+  XSmallText,
+} from "@atoms";
 import { COLOR } from "@constants";
-import { AlertCircleIcon, MilestoneIcon } from "@icons";
-import { authService } from "@/firebase.js";
+import { AlertCircleIcon, ArchieveIcon, MilestoneIcon } from "@icons";
+import { calculateTimeDiff } from "@/utils/timestampUtils.js";
+import { useRecoilState } from "recoil";
+import { issueSelectionState } from "@stores";
 
 const LABEL_TYPE = {
   DOCUMENTATION: "documentation",
   LIGHT_TEXT: "lightText",
 };
 
-const _Wrapper = styled(Wrapper)`
+const IssueCellWrapper = styled(Wrapper)`
   flex-direction: row;
   width: 100%;
   height: 100px;
   justify-content: space-between;
   padding: 10px;
   box-sizing: border-box;
+  border-top: 1px solid ${COLOR.GREYSCALE.LINE};
 `;
 
 const IssueInfoWrapper = styled(Wrapper)`
@@ -64,28 +73,49 @@ const IssueLabel = styled(XSmallText)`
   }}
 `;
 
-const WriterProfile = styled.img`
-  width: 20px;
-  height: 20px;
+const WriterProfile = styled(SmallProfileImg)`
   top: 40px;
-  border-radius: 10px;
+  margin-right: 30px;
 `;
 
 const LeftPart = styled(Wrapper)`
   flex-direction: row;
 `;
 
-function IssueCell({ title, label, id, writer, timestamp, milestone }) {
-  //FIX: DB 연동시 writer profile img url 수정
-  const auth = authService.getAuth();
-  const url = auth.currentUser.photoURL;
+function IssueCell({
+  isOpened,
+  title,
+  label: labelList,
+  id,
+  writer,
+  timestamp,
+  milestone,
+}) {
+  const [selectedIssueList, setSelectedIssueList] =
+    useRecoilState(issueSelectionState);
+  const checkboxRef = useRef();
+
+  useEffect(() => {
+    checkboxRef.current.checked = selectedIssueList.indexOf(id) !== -1;
+  }, [selectedIssueList]);
+
+  const changeCheckbox = (e) => {
+    const { target } = e;
+    if (target.checked) {
+      setSelectedIssueList((prev) => [...prev, id]);
+    } else {
+      setSelectedIssueList((prev) =>
+        prev.filter((selectedId) => selectedId !== id)
+      );
+    }
+  };
   return (
-    <_Wrapper>
+    <IssueCellWrapper>
       <LeftPart>
-        <input type="checkbox" />
+        <input type="checkbox" ref={checkboxRef} onChange={changeCheckbox} />
         <IssueInfoWrapper>
           <IssueTitleWrapper>
-            <AlertCircleIcon />
+            {isOpened ? <AlertCircleIcon /> : <ArchieveIcon />}
             <MediumLinkText
               css={`
                 margin-left: 10px;
@@ -93,10 +123,10 @@ function IssueCell({ title, label, id, writer, timestamp, milestone }) {
             >
               {title}
             </MediumLinkText>
-            {label.map((_label, idx) => {
+            {labelList.map((label, idx) => {
               return (
-                <IssueLabel key={`${title}-label${idx}`} type={_label}>
-                  {_label}
+                <IssueLabel key={`${title}-label${idx}`} type={label}>
+                  {label}
                 </IssueLabel>
               );
             })}
@@ -104,7 +134,8 @@ function IssueCell({ title, label, id, writer, timestamp, milestone }) {
           <IssueTagWrapper>
             <IssueTag>#{id}</IssueTag>
             <IssueTag>
-              이 이슈가 {timestamp}분 전, {writer}님에 의해 작성되었습니다
+              이 이슈가 {calculateTimeDiff(timestamp)} 전, {writer.name} 님에
+              의해 작성되었습니다
             </IssueTag>
             <IssueTag>
               <MilestoneIcon
@@ -117,13 +148,8 @@ function IssueCell({ title, label, id, writer, timestamp, milestone }) {
           </IssueTagWrapper>
         </IssueInfoWrapper>
       </LeftPart>
-      <WriterProfile
-        src={url}
-        css={`
-          margin-right: 30px;
-        `}
-      />
-    </_Wrapper>
+      <WriterProfile src={writer.photoUrl} />
+    </IssueCellWrapper>
   );
 }
 

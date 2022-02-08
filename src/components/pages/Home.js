@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import { authService } from "@/firebase";
 import { Header } from "@molecules";
-import { IssueListPageHeader, IssueTable } from "@organisms";
+import { Outlet } from "react-router-dom";
 import { Wrapper } from "@atoms";
 
-const _Wrapper = styled(Wrapper)`
+const Layout = styled(Wrapper)`
   position: relative;
   width: 1280px;
   height: 100%;
@@ -14,11 +13,10 @@ const _Wrapper = styled(Wrapper)`
 
 function Home() {
   return (
-    <_Wrapper>
+    <Layout>
       <Header />
-      <IssueListPageHeader />
-      <IssueTable />
-    </_Wrapper>
+      <Outlet />
+    </Layout>
   );
 }
 

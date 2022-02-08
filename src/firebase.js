@@ -1,5 +1,12 @@
 import { initializeApp } from "firebase/app";
-import * as authService from "firebase/auth";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  doc,
+  writeBatch,
+} from "firebase/firestore";
+import { DATA_TYPE } from "@constants";
 
 const ENV = {
   API_KEY: "AIzaSyBTFAK3H7enl2Pqgbkp8fwSc1IUYqqTMcY",
@@ -21,4 +28,48 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig);
 
-export { authService };
+const db = getFirestore();
+
+const convertDocListSnapshotToArray = (docListSnapshot) => {
+  const docList = [];
+  docListSnapshot.forEach((docSnapshot) => {
+    const { id } = docSnapshot;
+    const issueData = docSnapshot.data();
+    docList.push({ id, ...issueData });
+  });
+  return docList;
+};
+
+const getDocList = async (docType) => {
+  const docListSnapshot = await getDocs(collection(db, docType));
+  return convertDocListSnapshotToArray(docListSnapshot);
+};
+
+export const getLabelList = async () => {
+  return await getDocList(DATA_TYPE.LABEL);
+};
+
+export const getMilestoneList = async () => {
+  return await getDocList(DATA_TYPE.MILESTONE);
+};
+
+export const getUserList = async () => {
+  return await getDocList(DATA_TYPE.USER);
+};
+
+export const getIssueList = async () => {
+  return await getDocList(DATA_TYPE.ISSUE);
+};
+
+export const updateIssue = async (updateData) => {
+  const batch = writeBatch(db);
+  updateData.map((data) => {
+    const { id, key, value } = data;
+    const issueRef = doc(db, DATA_TYPE.ISSUE, id);
+    batch.update(issueRef, { [key]: value });
+  });
+  await batch.commit();
+  return await getIssueList();
+};
+
+export * from "firebase/auth";

@@ -1,1 +1,1 @@
-export { default as ProtectedRoutes } from "./ProtectedRoutes";
+export { default as AppRouter } from "./AppRouter";

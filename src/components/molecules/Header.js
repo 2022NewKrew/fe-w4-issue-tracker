@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { MediumLogo, SmallLinkText, Wrapper } from "@atoms";
-import { authService } from "@/firebase.js";
+import { BigProfileImg, MediumLogo, SmallLinkText, Wrapper } from "@atoms";
+import { getAuth } from "@/firebase.js";
 
-const _Wrapper = styled(Wrapper)`
+const HeaderWrapper = styled(Wrapper)`
   position: relative;
   flex-direction: row;
   justify-content: space-between;
@@ -12,12 +12,7 @@ const _Wrapper = styled(Wrapper)`
   padding: 20px 0 40px 0;
 `;
 
-const ProfileImg = styled.img`
-  width: 44px;
-  height: 44px;
-  border-radius: 30px;
-  border: 1px solid #d9dbe9;
-  box-sizing: border-box;
+const ProfileImg = styled(BigProfileImg)`
   margin: 0 10px;
 `;
 
@@ -26,16 +21,16 @@ const ProfileWrapper = styled(Wrapper)`
 `;
 
 function Header() {
-  const auth = authService.getAuth();
+  const auth = getAuth();
   const url = auth.currentUser.photoURL;
   return (
-    <_Wrapper>
+    <HeaderWrapper>
       <MediumLogo>Issue Tracker</MediumLogo>
       <ProfileWrapper>
         <SmallLinkText onClick={() => auth.signOut()}>로그아웃</SmallLinkText>
         <ProfileImg src={url} />
       </ProfileWrapper>
-    </_Wrapper>
+    </HeaderWrapper>
   );
 }
 

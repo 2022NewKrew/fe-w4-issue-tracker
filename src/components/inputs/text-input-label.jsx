@@ -1,7 +1,10 @@
 import styled, { css } from "styled-components";
 
 import themeGreyscale from "@styles/theme/theme-greyscale";
-import { getTextInputDisplay, getTextInputAlignItems } from "@utils/helper";
+import {
+  getTextInputTypographyDisplay,
+  getTextInputAlignItems,
+} from "@utils/helper";
 
 const getLabelWidth = ({ componentSize }) => {
   switch (componentSize) {
@@ -48,7 +51,7 @@ const TextInputLabel = styled.span`
 
   ${() => getLabelWidth}
   ${() => getLabelHeight}
-  ${() => getTextInputDisplay}
+  ${() => getTextInputTypographyDisplay}
   ${() => getTextInputAlignItems}
 `;
 

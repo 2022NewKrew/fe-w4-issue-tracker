@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import themeColors from "@styles/theme/theme-colors";
 import themeGreyscale from "@styles/theme/theme-greyscale";
-import Link from "@styles/typography/link";
+import TypographyLink from "@styles/typography/typography-link";
 import {
   allCenterAlign,
   buttonEvent,
@@ -11,7 +11,7 @@ import {
   getButtonWidth,
   getButtonHeight,
   getButtonBorderRadius,
-  getButtonLinkSize,
+  getButtonTypographyLinkSize,
 } from "@utils/helper";
 
 const StyledSecondaryButton = styled.button`
@@ -32,12 +32,12 @@ const SecondaryButton = ({ children, componentSize, componentDisabled }) => {
 
   return (
     <StyledSecondaryButton disabled={disabled} componentSize={componentSize}>
-      <Link
-        componentSize={getButtonLinkSize({ componentSize })}
+      <TypographyLink
+        componentSize={getButtonTypographyLinkSize({ componentSize })}
         componentColor={themeColors.blue}
       >
         <span>{children}</span>
-      </Link>
+      </TypographyLink>
     </StyledSecondaryButton>
   );
 };

@@ -163,7 +163,7 @@ export const getButtonBorderRadius = ({ componentSize }) => {
   }
 };
 
-export const getButtonLinkSize = ({ componentSize }) => {
+export const getButtonTypographyLinkSize = ({ componentSize }) => {
   switch (componentSize) {
     case "large":
     case "medium":
@@ -175,7 +175,7 @@ export const getButtonLinkSize = ({ componentSize }) => {
   }
 };
 
-export const getTextInputDisplay = ({ componentSize }) => {
+export const getTextInputTypographyDisplay = ({ componentSize }) => {
   switch (componentSize) {
     case "small":
       return css`

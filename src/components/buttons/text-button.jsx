@@ -2,13 +2,13 @@ import styled from "styled-components";
 import { useState } from "react";
 
 import themeGreyscale from "@styles/theme/theme-greyscale";
-import Link from "@styles/typography/link";
+import TypographyLink from "@styles/typography/typography-link";
 import {
   allCenterAlign,
   disabledOpacity,
   getButtonWidth,
   getButtonHeight,
-  getButtonLinkSize,
+  getButtonTypographyLinkSize,
 } from "@utils/helper";
 
 const StyledTextButton = styled.button`
@@ -26,12 +26,12 @@ const TextButton = ({ children, componentSize, componentDisabled }) => {
 
   return (
     <StyledTextButton disabled={disabled} componentSize={componentSize}>
-      <Link
-        componentSize={getButtonLinkSize({ componentSize })}
+      <TypographyLink
+        componentSize={getButtonTypographyLinkSize({ componentSize })}
         componentColor={themeGreyscale.label}
       >
         <span>{children}</span>
-      </Link>
+      </TypographyLink>
     </StyledTextButton>
   );
 };

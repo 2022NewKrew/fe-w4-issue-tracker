@@ -3,7 +3,7 @@ import styled from "styled-components";
 import themeGreyscale from "@styles/theme/theme-greyscale";
 import { getFontWeight } from "@utils/helper";
 
-const StyledDisplay = styled.span`
+const StyledTypographyDisplay = styled.span`
   font-family: Noto Sans KR;
   font-style: normal;
   font-size: 32px;
@@ -13,12 +13,12 @@ const StyledDisplay = styled.span`
   ${() => getFontWeight}
 `;
 
-const Display = ({ children, componentWeight }) => {
+const TypographyDisplay = ({ children, componentWeight }) => {
   return (
-    <StyledDisplay componentWeight={componentWeight}>
+    <StyledTypographyDisplay componentWeight={componentWeight}>
       <span>{children}</span>
-    </StyledDisplay>
+    </StyledTypographyDisplay>
   );
 };
 
-export default Display;
+export default TypographyDisplay;

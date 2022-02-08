@@ -4,10 +4,10 @@ import StandardButton from "@components/buttons/standard-button";
 import SecondaryButton from "@components/buttons/secondary-button";
 import TextButton from "@components/buttons/text-button";
 import TextInput from "@components/inputs/text-input";
-import Logotype from "@styles/typography/logotype";
-import Display from "@styles/typography/display";
-import Text from "@styles/typography/text";
-import Link from "@styles/typography/link";
+import TypographyLogotype from "@styles/typography/typography-logotype";
+import TypographyDisplay from "@styles/typography/typography-display";
+import TypographyText from "@styles/typography/typography-text";
+import TypographyLink from "@styles/typography/typography-link";
 
 const ComponentsPage = () => {
   return (
@@ -16,9 +16,13 @@ const ComponentsPage = () => {
       <div>
         <h2>Etc</h2>
         <ComponentContainer>
-          <h3>Logotype</h3>
-          <Logotype componentSize={"large"}>LogotypeLarge</Logotype>
-          <Logotype componentSize={"medium"}>LogotypeMedium</Logotype>
+          <h3>TypographyLogotype</h3>
+          <TypographyLogotype componentSize={"large"}>
+            TypographyLogotypeLarge
+          </TypographyLogotype>
+          <TypographyLogotype componentSize={"medium"}>
+            TypographyLogotypeMedium
+          </TypographyLogotype>
         </ComponentContainer>
         <ComponentContainer>
           <h3>HeaderContainer</h3>
@@ -28,23 +32,43 @@ const ComponentsPage = () => {
       <div>
         <h2>Typography</h2>
         <ComponentContainer>
-          <h3>Display</h3>
-          <Display componentWeight={"bold"}>DisplayBold</Display>
-          <Display componentWeight={"regular"}>DisplayRegular</Display>
+          <h3>TypographyDisplay</h3>
+          <TypographyDisplay componentWeight={"bold"}>
+            TypographyDisplayBold
+          </TypographyDisplay>
+          <TypographyDisplay componentWeight={"regular"}>
+            TypographyDisplayRegular
+          </TypographyDisplay>
         </ComponentContainer>
         <ComponentContainer>
-          <h3>Text</h3>
-          <Text componentSize={"large"}>TextLarge</Text>
-          <Text componentSize={"medium"}>TextMedium</Text>
-          <Text componentSize={"small"}>TextSmall</Text>
-          <Text componentSize={"x-small"}>TextXSmall</Text>
+          <h3>TypographyText</h3>
+          <TypographyText componentSize={"large"}>
+            TypographyTextLarge
+          </TypographyText>
+          <TypographyText componentSize={"medium"}>
+            TypographyTextMedium
+          </TypographyText>
+          <TypographyText componentSize={"small"}>
+            TypographyTextSmall
+          </TypographyText>
+          <TypographyText componentSize={"x-small"}>
+            TypographyTextXSmall
+          </TypographyText>
         </ComponentContainer>
         <ComponentContainer>
-          <h3>Link</h3>
-          <Link componentSize={"large"}>LinkLarge</Link>
-          <Link componentSize={"medium"}>LinkMedium</Link>
-          <Link componentSize={"small"}>LinkSmall</Link>
-          <Link componentSize={"x-small"}>LinkXSmall</Link>
+          <h3>TypographyLink</h3>
+          <TypographyLink componentSize={"large"}>
+            TypographyLinkLarge
+          </TypographyLink>
+          <TypographyLink componentSize={"medium"}>
+            TypographyLinkMedium
+          </TypographyLink>
+          <TypographyLink componentSize={"small"}>
+            TypographyLinkSmall
+          </TypographyLink>
+          <TypographyLink componentSize={"x-small"}>
+            TypographyLinkXSmall
+          </TypographyLink>
         </ComponentContainer>
       </div>
       <div>

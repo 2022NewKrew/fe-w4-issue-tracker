@@ -2,22 +2,22 @@ import styled from "styled-components";
 
 import { getFontSize, getLineHeight, getColor } from "@utils/helper";
 
-const StyledLink = styled.span`
+const StyledText = styled.span`
   font-family: Noto Sans KR;
   font-style: normal;
-  font-weight: bold;
+  font-weight: normal;
 
   ${() => getFontSize}
   ${() => getLineHeight}
   ${() => getColor}
 `;
 
-const Link = ({ children, componentSize, componentColor }) => {
+const TypographyText = ({ children, componentSize, componentColor }) => {
   return (
-    <StyledLink componentSize={componentSize} componentColor={componentColor}>
+    <StyledText componentSize={componentSize} componentColor={componentColor}>
       <span>{children}</span>
-    </StyledLink>
+    </StyledText>
   );
 };
 
-export default Link;
+export default TypographyText;

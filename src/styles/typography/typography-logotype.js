@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 import themeGreyscale from "@styles/theme/theme-greyscale";
 
-const getLogotypeFontWeight = ({ componentSize }) => {
+const getTypographyLogotypeFontWeight = ({ componentSize }) => {
   switch (componentSize) {
     case "large":
       return css`
@@ -17,7 +17,7 @@ const getLogotypeFontWeight = ({ componentSize }) => {
   }
 };
 
-const getLogotypeFontSize = ({ componentSize }) => {
+const getTypographyLogotypeFontSize = ({ componentSize }) => {
   switch (componentSize) {
     case "large":
       return css`
@@ -32,7 +32,7 @@ const getLogotypeFontSize = ({ componentSize }) => {
   }
 };
 
-const getLogotypeLineHeight = ({ componentSize }) => {
+const getTypographyLogotypeLineHeight = ({ componentSize }) => {
   switch (componentSize) {
     case "large":
       return css`
@@ -47,23 +47,23 @@ const getLogotypeLineHeight = ({ componentSize }) => {
   }
 };
 
-const StyledLogotype = styled.span`
+const StyledTypographyLogotype = styled.span`
   font-family: Montserrat;
   font-style: italic;
   letter-spacing: -0.04em;
   color: ${themeGreyscale.default};
 
-  ${() => getLogotypeFontWeight}
-  ${() => getLogotypeFontSize}
-  ${() => getLogotypeLineHeight}
+  ${() => getTypographyLogotypeFontWeight}
+  ${() => getTypographyLogotypeFontSize}
+  ${() => getTypographyLogotypeLineHeight}
 `;
 
-const Logotype = ({ children, componentSize }) => {
+const TypographyLogotype = ({ children, componentSize }) => {
   return (
-    <StyledLogotype componentSize={componentSize}>
+    <StyledTypographyLogotype componentSize={componentSize}>
       <span>{children}</span>
-    </StyledLogotype>
+    </StyledTypographyLogotype>
   );
 };
 
-export default Logotype;
+export default TypographyLogotype;

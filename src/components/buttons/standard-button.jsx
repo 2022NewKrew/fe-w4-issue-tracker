@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import themeColors from "@styles/theme/theme-colors";
 import themeGreyscale from "@styles/theme/theme-greyscale";
-import Link from "@styles/typography/link";
+import TypographyLink from "@styles/typography/typography-link";
 import {
   allCenterAlign,
   buttonEvent,
@@ -11,7 +11,7 @@ import {
   getButtonWidth,
   getButtonHeight,
   getButtonBorderRadius,
-  getButtonLinkSize,
+  getButtonTypographyLinkSize,
 } from "@utils/helper";
 
 const StyledStandardButton = styled.button`
@@ -31,12 +31,12 @@ const StandardButton = ({ children, componentSize, componentDisabled }) => {
 
   return (
     <StyledStandardButton disabled={disabled} componentSize={componentSize}>
-      <Link
-        componentSize={getButtonLinkSize({ componentSize })}
+      <TypographyLink
+        componentSize={getButtonTypographyLinkSize({ componentSize })}
         componentColor={themeGreyscale.offWhite}
       >
         <span>{children}</span>
-      </Link>
+      </TypographyLink>
     </StyledStandardButton>
   );
 };

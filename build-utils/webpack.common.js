@@ -3,10 +3,10 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const commonPaths = require("./common-paths");
 
 const URL_LOADER_LIMIT = 10000;
+
 const config = {
   entry: {
     app: [`${commonPaths.appEntry}/index.jsx`],
-    vendor: ["semantic-ui-react"],
   },
   output: {
     path: commonPaths.outputPath,
@@ -24,7 +24,7 @@ const config = {
         ],
       },
       {
-        test: /\.(ico|png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        test: /\.(ico|png|jpg|jpeg|gif|woff|woff2|ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         use: [
           {
             loader: "file-loader",
@@ -42,6 +42,16 @@ const config = {
             },
           },
         ],
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: "@svgr/webpack",
+          },
+        ],
+      },
+      {
         test: /\.txt$/,
         use: [
           {
@@ -70,7 +80,19 @@ const config = {
     }),
   ],
   resolve: {
-    extensions: [".js", ".jsx", "..."],
+    extensions: [".jsx", ".js", "..."],
+    alias: {
+      "@root": commonPaths.projectRoot,
+      "@public": commonPaths.publicPath,
+      "@src": commonPaths.appEntry,
+      "@dist": commonPaths.outputPath,
+      "@components": commonPaths.componentsPath,
+      "@core": commonPaths.corePath,
+      "@images": commonPaths.imagesPath,
+      "@pages": commonPaths.pagesPath,
+      "@styles": commonPaths.stylesPath,
+      "@utils": commonPaths.utilsPath,
+    },
   },
 };
 

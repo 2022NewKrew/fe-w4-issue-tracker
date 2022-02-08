@@ -28,7 +28,6 @@
     "react-imported-component": "^6.5.3",
     "react-prop-types": "^0.4.0",
     "react-router-dom": "^6.2.1",
-    "semantic-ui-react": "^2.0.4",
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
@@ -36,9 +35,11 @@
     "@babel/core": "^7.16.12",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
+    "@svgr/webpack": "^6.2.1",
     "babel-loader": "^8.2.3",
     "cross-env": "^7.0.3",
     "css-loader": "^6.5.1",
+    "eslint-plugin-react-hooks": "^4.3.0",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.5.2",

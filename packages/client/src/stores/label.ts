@@ -25,8 +25,5 @@ export const useLabelStore = () => {
       setLabelList(data);
     },
   });
-  return {
-    labelList,
-    labelListCount,
-  };
+  return { labelList, labelListCount };
 };

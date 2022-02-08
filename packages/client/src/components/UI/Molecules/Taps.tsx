@@ -5,8 +5,8 @@ import { useLabelStore } from "@stores/label";
 import { useMilestoneStore } from "@stores/milestone";
 
 const Taps = () => {
-  const labelListCount = useLabelStore();
-  const milestoneListCount = useMilestoneStore();
+  const { labelListCount } = useLabelStore();
+  const { milestoneListCount } = useMilestoneStore();
 
   return (
     <Wrapper>

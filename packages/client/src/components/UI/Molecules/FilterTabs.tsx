@@ -3,8 +3,8 @@ import styled from "@emotion/styled";
 
 import { useIssueStore, useModifyIssueStatusData } from "@stores/issue";
 import { MouseEvent, useCallback } from "react";
-import { useMilestoneStore } from "@stores/milestone";
 import { useUserStore } from "@stores/user";
+import { useMilestoneStore } from "@stores/milestone";
 import { useLabelStore } from "@stores/label";
 import { arrayToggle } from "@utils/helper";
 import { IssueStatus } from "@types";
@@ -13,30 +13,32 @@ const FilterTabs = () => {
   const { labelList } = useLabelStore();
   const { milestoneList } = useMilestoneStore();
   const { userList } = useUserStore();
+  const { filter, setFilter, selectedIssue } = useIssueStore();
 
   const { mutate: modifyIssueStatus } = useModifyIssueStatusData();
 
-  const { filter, setFilter, selectedIssue } = useIssueStore();
-
-  const onSelect = (
-    { target }: MouseEvent<HTMLElement>,
-    type: "assignees" | "label" | "milestone" | "author"
-  ) => {
-    const li = (target as HTMLElement).closest("li");
-    if (!li || !li.dataset.id) return;
-    const selectedValue = li.dataset.id;
-    if (type === "label") {
-      setFilter((prev) => ({
-        ...prev,
-        label: arrayToggle(prev.label, selectedValue),
-      }));
-    } else {
-      setFilter((prev) => ({
-        ...prev,
-        [type]: prev[type] === selectedValue ? null : selectedValue,
-      }));
-    }
-  };
+  const onSelect = useCallback(
+    (
+      { target }: MouseEvent<HTMLElement>,
+      type: "assignees" | "label" | "milestone" | "author"
+    ) => {
+      const li = (target as HTMLElement).closest("li");
+      if (!li || !li.dataset.id) return;
+      const selectedValue = li.dataset.id;
+      if (type === "label") {
+        setFilter((prev) => ({
+          ...prev,
+          label: arrayToggle(prev.label, selectedValue),
+        }));
+      } else {
+        setFilter((prev) => ({
+          ...prev,
+          [type]: prev[type] === selectedValue ? null : selectedValue,
+        }));
+      }
+    },
+    []
+  );
 
   const changeIssuesState = useCallback(
     async ({ target }: React.MouseEvent) => {

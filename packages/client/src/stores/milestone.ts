@@ -24,8 +24,5 @@ export const useMilestoneStore = () => {
       setMilestoneList(data);
     },
   });
-  return {
-    milestoneList,
-    milestoneListCount,
-  };
+  return { milestoneList, milestoneListCount };
 };

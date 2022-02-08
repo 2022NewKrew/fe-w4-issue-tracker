@@ -37,17 +37,20 @@ const filteredIssueListState = selector<Issue[]>({
   key: "filteredIssueListState",
   get: ({ get }) => {
     const { assignees, label, milestone, author } = get(issueFilterState);
-    const issueList = get(issueListState);
+    let issueList = get(issueListState);
     if (assignees || milestone || author || label.length) {
-      return issueList.filter(
-        (issue) =>
-          (assignees && issue.assignees.includes(assignees)) ||
-          (milestone && issue.milestone?.id === milestone) ||
-          (author && issue.author === author) ||
-          (label.length &&
-            issue.labels.map(({ id }) => id).filter((id) => label.includes(id))
-              .length)
-      );
+      return issueList.filter((issue) => {
+        if (assignees && !issue.assignees.includes(assignees)) return false;
+        if (milestone && issue.milestone?.id !== milestone) return false;
+        if (author && issue.author !== author) return false;
+        if (
+          label.length &&
+          !issue.labels.map(({ id }) => id).filter((id) => label.includes(id))
+            .length
+        )
+          return false;
+        return true;
+      });
     }
     return issueList;
   },

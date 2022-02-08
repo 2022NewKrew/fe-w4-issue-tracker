@@ -10,9 +10,8 @@ interface Props {
 }
 
 const TableCell = ({ issue }: Props) => {
-  const { id, num, title, author, timestamp, labels, milestone } = issue;
-
   const { selectedIssue, setSelectedIssue } = useIssueStore();
+  const { id, num, title, author, timestamp, labels, milestone } = issue;
 
   return (
     <Wrapper className="TableCell">

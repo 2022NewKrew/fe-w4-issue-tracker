@@ -5,7 +5,7 @@ import { SmallLinkText, Wrapper } from "@atoms";
 import { COLOR } from "@constants";
 import Dropdown from "./Dropdown";
 import { useRecoilState } from "recoil";
-import { filterState } from "@/store.js";
+import { filterState } from "@stores";
 
 const OptionTabWrapper = styled(Wrapper)`
   position: relative;

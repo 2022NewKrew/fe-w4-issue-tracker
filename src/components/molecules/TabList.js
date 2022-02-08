@@ -4,7 +4,7 @@ import { COLOR } from "@constants";
 import { MilestoneIcon, TagIcon } from "@icons";
 import { SmallText, Wrapper } from "@atoms";
 import { useRecoilValue } from "recoil";
-import { labelListCountState, milestoneListCountState } from "@/store.js";
+import { labelListCountState, milestoneListCountState } from "@stores";
 
 const TabListWrapper = styled(Wrapper)`
   flex-direction: row;

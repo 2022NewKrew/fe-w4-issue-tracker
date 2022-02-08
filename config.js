@@ -9,6 +9,7 @@ System.config({
     "@components": "./src/components",
     "@constants": "./src/constants",
     "@icons": "./src/assets/icons",
+    "@stores": "./src/stores/",
     "@/*": "./src/*",
   },
 });

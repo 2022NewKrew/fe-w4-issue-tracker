@@ -1,21 +1,6 @@
-import { atom, selector } from "recoil";
-import {
-  getIssueList,
-  getLabelList,
-  getMilestoneList,
-  getUserList,
-} from "@/firebase.js";
-
-export const filterState = atom({
-  key: "filter",
-  default: {
-    isOpened: "true",
-    writer: "*",
-    label: "*",
-    milestone: "*",
-    assignee: "*",
-  },
-});
+import { selector } from "recoil";
+import { getIssueList } from "@/firebase.js";
+import { filterState } from "@/stores/filterStore.js";
 
 const filterIssueList = (issueList, filter) =>
   issueList.filter((issue) => {
@@ -70,29 +55,4 @@ export const closedIssueListCountState = selector({
     const filter = { isOpened: "false" };
     return filterIssueList(issueList, filter).length;
   },
-});
-
-export const milestoneListState = selector({
-  key: "milestoneList",
-  get: async () => await getMilestoneList(),
-});
-
-export const labelListState = selector({
-  key: "labelList",
-  get: async () => await getLabelList(),
-});
-
-export const userListState = selector({
-  key: "userList",
-  get: async () => await getUserList(),
-});
-
-export const milestoneListCountState = selector({
-  key: "milestoneListCount",
-  get: ({ get }) => get(milestoneListState).length,
-});
-
-export const labelListCountState = selector({
-  key: "labelListCount",
-  get: ({ get }) => get(labelListState).length,
 });

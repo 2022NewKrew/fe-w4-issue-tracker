@@ -13,7 +13,7 @@ import {
   milestoneListState,
   openedIssueListCountState,
   userListState,
-} from "@/store.js";
+} from "@stores";
 
 const TAB_LIST_METADATA = [
   { title: "담당자", filterKey: "assignee", dataKey: DATA_TYPE.USER },

@@ -5,7 +5,7 @@ import { SmallText, TextInput, Wrapper } from "@atoms";
 import { ChevronDownIcon, SearchIcon } from "@icons";
 import Dropdown from "@/components/molecules/Dropdown.js";
 import { useRecoilState, useResetRecoilState } from "recoil";
-import { filterState } from "@/store.js";
+import { filterState } from "@stores";
 import { getAuth } from "@/firebase.js";
 
 const FILTER_BAR_DROPDOWN_METADATA = [

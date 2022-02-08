@@ -1,7 +1,7 @@
 import { css } from "styled-components";
 
-import themeColors from "@styles/theme/theme-colors";
-import themeGreyscale from "@styles/theme/theme-greyscale";
+import themeColors from "@styles/themes/theme-colors";
+import themeGreyscale from "@styles/themes/theme-greyscale";
 
 export const allCenterAlign = css`
   display: flex;

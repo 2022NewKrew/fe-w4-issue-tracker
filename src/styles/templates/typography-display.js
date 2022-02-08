@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import themeGreyscale from "@styles/theme/theme-greyscale";
+import themeGreyscale from "@styles/themes/theme-greyscale";
 import { getFontWeight } from "@utils/helper";
 
 const StyledTypographyDisplay = styled.span`

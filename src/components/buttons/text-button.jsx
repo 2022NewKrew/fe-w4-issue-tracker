@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { useState } from "react";
 
-import themeGreyscale from "@styles/theme/theme-greyscale";
-import TypographyLink from "@styles/typography/typography-link";
+import themeGreyscale from "@styles/themes/theme-greyscale";
+import TypographyLink from "@styles/templates/typography-link";
 import {
   allCenterAlign,
   disabledOpacity,

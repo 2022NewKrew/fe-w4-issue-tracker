@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { useState } from "react";
 
-import themeColors from "@styles/theme/theme-colors";
-import themeGreyscale from "@styles/theme/theme-greyscale";
-import TypographyLink from "@styles/typography/typography-link";
+import themeColors from "@styles/themes/theme-colors";
+import themeGreyscale from "@styles/themes/theme-greyscale";
+import TypographyLink from "@styles/templates/typography-link";
 import {
   allCenterAlign,
   buttonEvent,

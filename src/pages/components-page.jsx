@@ -4,10 +4,10 @@ import StandardButton from "@components/buttons/standard-button";
 import SecondaryButton from "@components/buttons/secondary-button";
 import TextButton from "@components/buttons/text-button";
 import TextInput from "@components/inputs/text-input";
-import TypographyLogotype from "@styles/typography/typography-logotype";
-import TypographyDisplay from "@styles/typography/typography-display";
-import TypographyText from "@styles/typography/typography-text";
-import TypographyLink from "@styles/typography/typography-link";
+import TypographyLogotype from "@styles/templates/typography-logotype";
+import TypographyDisplay from "@styles/templates/typography-display";
+import TypographyText from "@styles/templates/typography-text";
+import TypographyLink from "@styles/templates/typography-link";
 
 const ComponentsPage = () => {
   return (

@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import TextInputLabel from "@components/inputs/text-input-label";
 import TextInputTyping from "@components/inputs/text-input-typing";
-import themeGreyscale from "@styles/theme/theme-greyscale";
+import themeGreyscale from "@styles/themes/theme-greyscale";
 
 const getTextInputOpacity = ({ componentDisabled }) => {
   switch (componentDisabled) {

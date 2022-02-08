@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import USER_IMAGE_LARGE from "@public/icons/user-image-large.svg";
-import TypographyLogotype from "@styles/typography/typography-logotype";
+import TypographyLogotype from "@styles/templates/typography-logotype";
 
 const StyledHeaderContainer = styled.header`
   display: flex;

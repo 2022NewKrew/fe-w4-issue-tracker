@@ -108,7 +108,7 @@ function IssueDetailMain() {
     <IssueDetailMainContainer theme={theme}>
       <CommentContainer>
         {comments?.map((comment) => (
-          <Comment info={comment} />
+          <Comment key={comment._id} info={comment} />
         ))}
 
         <WritingPart>
@@ -128,7 +128,7 @@ function IssueDetailMain() {
         </CommentButtonContainer>
       </CommentContainer>
       <RightContainer>
-        <IssueOptionContainer />
+        <IIssueOptionContainer refreshState={() => {}} mode="EDIT" />
         <DeleteIssueButton onClick={handleClickDeleteIssueButton}>
           <img src={TRASH} />
           <span>이슈 삭제</span>
@@ -177,7 +177,12 @@ const DeleteIssueButton = styled.div`
   margin-top: 20px;
   justify-content: flex-end;
   cursor: pointer;
+  margin-bottom: 100px;
   span {
     color: ${({ theme }) => theme.colors.red};
   }
+`;
+
+const IIssueOptionContainer = styled(IssueOptionContainer)`
+  width: 268px;
 `;

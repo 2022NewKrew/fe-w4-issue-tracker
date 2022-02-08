@@ -1,7 +1,6 @@
 import { css } from "styled-components";
 
 import colors from "@styles/constants/colors";
-import greyscale from "@styles/constants/greyscale";
 
 export const allCenterAlign = css`
   display: flex;
@@ -87,12 +86,6 @@ export const getLineHeight = ({ componentSize }) => {
   }
 };
 
-export const getColor = ({ componentColor }) => {
-  return css`
-    color: ${componentColor ? componentColor : greyscale.default};
-  `;
-};
-
 export const getButtonPadding = ({ componentSize }) => {
   switch (componentSize) {
     case "large":
@@ -163,19 +156,19 @@ export const getButtonBorderRadius = ({ componentSize }) => {
   }
 };
 
-export const getButtonTypographyLinkSize = ({ componentSize }) => {
+export const getButtoncomponentType = ({ componentSize }) => {
   switch (componentSize) {
     case "large":
     case "medium":
-      return "medium";
+      return "linkMedium";
     case "small":
-      return "x-small";
+      return "linkXSmall";
     default:
       return "";
   }
 };
 
-export const getTextInputTypographyDisplay = ({ componentSize }) => {
+export const getTextInputDisplay = ({ componentSize }) => {
   switch (componentSize) {
     case "small":
       return css`

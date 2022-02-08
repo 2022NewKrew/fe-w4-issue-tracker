@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
+import TemplateContainer from "@components/containers/template-container";
 import USER_IMAGE_LARGE from "@public/icons/user-image-large.svg";
-import TypographyLogotype from "@styles/templates/typography-logotype";
 
 const StyledHeaderContainer = styled.header`
   display: flex;
@@ -11,9 +11,9 @@ const StyledHeaderContainer = styled.header`
 const HeaderContainer = ({ children }) => {
   return (
     <StyledHeaderContainer>
-      <TypographyLogotype componentSize={"medium"}>
+      <TemplateContainer componentType={"logotypeMedium"}>
         <span>{children}</span>
-      </TypographyLogotype>
+      </TemplateContainer>
       <USER_IMAGE_LARGE />
     </StyledHeaderContainer>
   );

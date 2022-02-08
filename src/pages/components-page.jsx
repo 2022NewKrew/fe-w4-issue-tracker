@@ -1,13 +1,10 @@
 import ComponentContainer from "@components/containers/component-container";
 import HeaderContainer from "@components/containers/header-container";
+import TemplateContainer from "@components/containers/template-container";
 import StandardButton from "@components/buttons/standard-button";
 import SecondaryButton from "@components/buttons/secondary-button";
 import TextButton from "@components/buttons/text-button";
 import TextInput from "@components/inputs/text-input";
-import TypographyLogotype from "@styles/templates/typography-logotype";
-import TypographyDisplay from "@styles/templates/typography-display";
-import TypographyText from "@styles/templates/typography-text";
-import TypographyLink from "@styles/templates/typography-link";
 
 const ComponentsPage = () => {
   return (
@@ -16,13 +13,13 @@ const ComponentsPage = () => {
       <div>
         <h2>Etc</h2>
         <ComponentContainer>
-          <h3>TypographyLogotype</h3>
-          <TypographyLogotype componentSize={"large"}>
-            TypographyLogotypeLarge
-          </TypographyLogotype>
-          <TypographyLogotype componentSize={"medium"}>
-            TypographyLogotypeMedium
-          </TypographyLogotype>
+          <h3>Logotype</h3>
+          <TemplateContainer componentType={"logotypeLarge"}>
+            LogotypeLarge
+          </TemplateContainer>
+          <TemplateContainer componentType={"logotypeMedium"}>
+            LogotypeMedium
+          </TemplateContainer>
         </ComponentContainer>
         <ComponentContainer>
           <h3>HeaderContainer</h3>
@@ -30,45 +27,45 @@ const ComponentsPage = () => {
         </ComponentContainer>
       </div>
       <div>
-        <h2>Typography</h2>
+        <h2></h2>
         <ComponentContainer>
-          <h3>TypographyDisplay</h3>
-          <TypographyDisplay componentWeight={"bold"}>
-            TypographyDisplayBold
-          </TypographyDisplay>
-          <TypographyDisplay componentWeight={"regular"}>
-            TypographyDisplayRegular
-          </TypographyDisplay>
+          <h3>Display</h3>
+          <TemplateContainer componentType={"displayBold"}>
+            DisplayBold
+          </TemplateContainer>
+          <TemplateContainer componentType={"displayRegular"}>
+            DisplayRegular
+          </TemplateContainer>
         </ComponentContainer>
         <ComponentContainer>
-          <h3>TypographyText</h3>
-          <TypographyText componentSize={"large"}>
-            TypographyTextLarge
-          </TypographyText>
-          <TypographyText componentSize={"medium"}>
-            TypographyTextMedium
-          </TypographyText>
-          <TypographyText componentSize={"small"}>
-            TypographyTextSmall
-          </TypographyText>
-          <TypographyText componentSize={"x-small"}>
-            TypographyTextXSmall
-          </TypographyText>
+          <h3>Text</h3>
+          <TemplateContainer componentType={"textLarge"}>
+            TextLarge
+          </TemplateContainer>
+          <TemplateContainer componentType={"textMedium"}>
+            TextMedium
+          </TemplateContainer>
+          <TemplateContainer componentType={"textSmall"}>
+            TextSmall
+          </TemplateContainer>
+          <TemplateContainer componentType={"textXSmall"}>
+            TextXSmall
+          </TemplateContainer>
         </ComponentContainer>
         <ComponentContainer>
-          <h3>TypographyLink</h3>
-          <TypographyLink componentSize={"large"}>
-            TypographyLinkLarge
-          </TypographyLink>
-          <TypographyLink componentSize={"medium"}>
-            TypographyLinkMedium
-          </TypographyLink>
-          <TypographyLink componentSize={"small"}>
-            TypographyLinkSmall
-          </TypographyLink>
-          <TypographyLink componentSize={"x-small"}>
-            TypographyLinkXSmall
-          </TypographyLink>
+          <h3>Link</h3>
+          <TemplateContainer componentType={"linkLarge"}>
+            LinkLarge
+          </TemplateContainer>
+          <TemplateContainer componentType={"linkMedium"}>
+            LinkMedium
+          </TemplateContainer>
+          <TemplateContainer componentType={"linkSmall"}>
+            LinkSmall
+          </TemplateContainer>
+          <TemplateContainer componentType={"linkXSmall"}>
+            LinkXSmall
+          </TemplateContainer>
         </ComponentContainer>
       </div>
       <div>

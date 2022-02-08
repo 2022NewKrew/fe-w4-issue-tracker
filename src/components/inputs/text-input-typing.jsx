@@ -1,10 +1,7 @@
 import styled, { css } from "styled-components";
 
 import greyscale from "@styles/constants/greyscale";
-import {
-  getTextInputTypographyDisplay,
-  getTextInputAlignItems,
-} from "@utils/helper";
+import { getTextInputDisplay, getTextInputAlignItems } from "@utils/helper";
 
 const getTypingWidth = ({ componentSize }) => {
   switch (componentSize) {
@@ -63,7 +60,7 @@ const TextInputTyping = styled.input`
 
   ${() => getTypingWidth}
   ${() => getTypingHeight}
-  ${() => getTextInputTypographyDisplay}
+  ${() => getTextInputDisplay}
   ${() => getTextInputAlignItems}
   ${() => getTypingAlignSelf}
 

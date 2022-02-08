@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { useState } from "react";
 
+import TemplateContainer from "@components/containers/template-container";
 import colors from "@styles/constants/colors";
 import greyscale from "@styles/constants/greyscale";
-import TypographyLink from "@styles/templates/typography-link";
 import {
   allCenterAlign,
   buttonEvent,
@@ -11,7 +11,7 @@ import {
   getButtonWidth,
   getButtonHeight,
   getButtonBorderRadius,
-  getButtonTypographyLinkSize,
+  getButtoncomponentType,
 } from "@utils/helper";
 
 const StyledSecondaryButton = styled.button`
@@ -32,12 +32,12 @@ const SecondaryButton = ({ children, componentSize, componentDisabled }) => {
 
   return (
     <StyledSecondaryButton disabled={disabled} componentSize={componentSize}>
-      <TypographyLink
-        componentSize={getButtonTypographyLinkSize({ componentSize })}
+      <TemplateContainer
+        componentType={getButtoncomponentType({ componentSize })}
         componentColor={colors.blue}
       >
         <span>{children}</span>
-      </TypographyLink>
+      </TemplateContainer>
     </StyledSecondaryButton>
   );
 };

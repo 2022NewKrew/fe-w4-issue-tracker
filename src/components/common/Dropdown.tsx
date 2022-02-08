@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useEffect, useRef, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Color } from "@/common/designSystem";
 import dropdownArrowImg from "@/asset/img/dropdown.svg";
 import checkOffImg from "@/asset/img/check-off-circle.svg";
@@ -11,6 +11,11 @@ export interface DropdownItem {
   labelColor?: string;
   assignImgSrc?: string;
   isChecked: boolean;
+}
+
+export enum DropdownSize {
+  large,
+  medium,
 }
 
 export enum DropdownType {
@@ -29,6 +34,7 @@ interface DropdownProps {
   dropdwonGroupTitle: string;
   dropdownGroup: DropdownItem[];
   dropdownPopupFixPoint?: FixPoint;
+  size?: DropdownSize;
   clickItem: (index: number) => void;
 }
 
@@ -37,6 +43,7 @@ const Dropdown: FunctionComponent<DropdownProps> = ({
   dropdownGroup,
   dropdwonGroupTitle,
   dropdownPopupFixPoint = FixPoint.left,
+  size = DropdownSize.medium,
   clickItem,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -84,7 +91,7 @@ const Dropdown: FunctionComponent<DropdownProps> = ({
     </DropdownItem>
   ));
   return (
-    <Wrapper ref={ref}>
+    <Wrapper ref={ref} size={size}>
       <DropdownTitleWrapper onClick={handleDropdownClick}>
         <DropdownTitle>{dropdownTitle}</DropdownTitle>
         <DropdownImg src={dropdownArrowImg} />
@@ -101,11 +108,25 @@ const Dropdown: FunctionComponent<DropdownProps> = ({
   );
 };
 
-const Wrapper = styled.div`
-  margin: 5px; //TODO: 테스트용 값 변경 예장
-  width: 100%;
-  min-width: 50px;
+const largeSize = css`
+  padding-left: 24px;
+  padding-right: 28px;
+  width: 76px;
+`;
+
+const mediumSize = css`
+  width: max-content;
+  margin-right: 28px;
+`;
+
+const buttonSizeToStyles = {
+  [DropdownSize.large]: largeSize,
+  [DropdownSize.medium]: mediumSize,
+};
+
+const Wrapper = styled.div<{ size: DropdownSize }>`
   position: relative;
+  ${(props) => buttonSizeToStyles[props.size]}
 `;
 
 const DropdownTitle = styled.div`

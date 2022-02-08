@@ -11,6 +11,16 @@ const getAssignees = async (req, res) => {
   }
 };
 
+const getIssueAssignees = async (req, res) => {
+  try {
+    const { issueId } = req.query;
+    const result = await AssigneeService.getIssueAssignees(issueId);
+    return res.json({ success: true, result });
+  } catch (e) {
+    return res.json({ success: false, message: error.GET_ASSIGNEE_ERROR });
+  }
+};
+
 const createAssignee = async (req, res) => {
   try {
     const body = req.body;
@@ -31,4 +41,9 @@ const deleteAssignee = async (req, res) => {
   }
 };
 
-export const AssigneeController = { getAssignees, deleteAssignee, createAssignee };
+export const AssigneeController = {
+  getAssignees,
+  getIssueAssignees,
+  deleteAssignee,
+  createAssignee,
+};

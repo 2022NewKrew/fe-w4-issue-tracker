@@ -13,12 +13,12 @@ export const LabelMain = () => {
   const [newLabelMode, setNewLabel] = useState(false);
 
   // server state
-  const { data: labels, refetch: refetchLabelList } = useQuery("labels", getLabels);
+  const { data: labels } = useQuery("labels", getLabels);
   const { data: milestones } = useQuery("milestones", getMilestones);
 
   const numLabels = labels?.length || 0;
   const numMilestones = milestones?.length || 0;
-  const labelItems = labels?.map((label) => <LabelItem key={label.id} label={label} refetchList={refetchLabelList} />);
+  const labelItems = labels?.map((label) => <LabelItem key={label.id} label={label} />);
 
   return (
     <>
@@ -34,7 +34,7 @@ export const LabelMain = () => {
           </StyledButton>
         )}
       </Header>
-      {newLabelMode && <LabelNew refetchList={refetchLabelList} closeFn={() => setNewLabel(false)} />}
+      {newLabelMode && <LabelNew closeFn={() => setNewLabel(false)} />}
       <IssueTable>
         <IssueTableHeader>
           <span css={[cssFontSize["small"], cssLink]}>{`${numLabels}개의 레이블`}</span>

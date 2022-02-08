@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useState } from "react";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import styled, { css } from "styled-components";
 import { createNewLabel } from "../../api/api";
 import { randomHexColor } from "../../utils";
@@ -36,8 +36,17 @@ const reducer = (state, action) => {
   }
 };
 
-export const LabelNew = ({ refetchList, closeFn }) => {
-  const newMutation = useMutation(createNewLabel);
+export const LabelNew = ({ closeFn }) => {
+  // server state
+  const queryClient = useQueryClient();
+  const newMutation = useMutation(createNewLabel, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("labels");
+      closeFn();
+    },
+  });
+
+  // local state
   const [newLabel, dispatch] = useReducer(reducer, {
     name: "",
     description: "",
@@ -54,14 +63,6 @@ export const LabelNew = ({ refetchList, closeFn }) => {
       setDisabled(true);
     }
   }, [newLabel.name]);
-
-  useEffect(() => {
-    if (newMutation.isSuccess) {
-      window.alert("추가되었습니다!");
-      closeFn();
-      refetchList();
-    }
-  }, [newMutation.isSuccess]);
 
   return (
     <NewLabelWrapper>

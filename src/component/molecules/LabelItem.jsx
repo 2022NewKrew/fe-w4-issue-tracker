@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useState } from "react";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import styled, { css } from "styled-components";
 import { deleteLabel, patchLabel } from "../../api/api";
 import { randomHexColor } from "../../utils";
@@ -44,26 +44,19 @@ const editReducer = (state, action) => {
   }
 };
 
-export const LabelItem = ({ label, refetchList }) => {
+export const LabelItem = ({ label }) => {
+  // server state
+  const queryClient = useQueryClient();
+  const editMutation = useMutation(patchLabel, {
+    onSuccess: () => queryClient.invalidateQueries("labels"),
+  });
+  const deleteMutation = useMutation(deleteLabel, {
+    onSuccess: () => queryClient.invalidateQueries("labels"),
+  });
+
   // local state
   const [editMode, setEdit] = useState(false);
   const [editState, dispatch] = useReducer(editReducer, {});
-
-  // patch and delete
-  const editMutation = useMutation(patchLabel);
-  useEffect(() => {
-    if (editMutation.isSuccess) {
-      setEdit(false);
-      refetchList();
-    }
-  }, [editMutation.isSuccess]);
-  const deleteMutation = useMutation(deleteLabel);
-  useEffect(() => {
-    if (deleteMutation.isSuccess) {
-      setEdit(false);
-      refetchList();
-    }
-  }, [deleteMutation.isSuccess]);
 
   // 편집창 오픈
   const openEdit = () => {

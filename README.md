@@ -18,11 +18,15 @@
 │   ├── src
 │   │   ├── @types - 공통 타입 정의
 │   │   │   └── index.d.ts
+│   │   ├── apis - 서버 요청 함수 정의
+│   │   ├── atoms - recoil의 atom, selector 정의
 │   │   ├── App.tsx
 │   │   ├── components - React Components
 │   │   │   ├── assets - 단독파일로서 비즈니스로직 없이 재사용이 많이 되는 작은 컴포넌트뷰
 │   │   │   └── pages - App.tsx의 페이지 라우팅 컴포넌트
 │   │   ├── index.tsx
+│   │   ├── hooks - custom hook 정의
+│   │   ├── reducers - useReducer의 파라미터로 들어갈 리듀서 정의
 │   │   ├── styles - styled components 관련된 글로벌, 테마
 │   │   │   ├── styleTemplates - 재사용되는 css 혹은 styled components
 │   │   └── utils - 유틸 함수
@@ -48,3 +52,4 @@
 > 6. 단독으로 사용하는 컴포넌트 (/client/src/components)
 > 7. svg 컴포넌트 (/client/public/icons, /client/public/images)
 > 8. 기타 util 함수 (/client/src/utils)
+> 9. api함수 (/client/apis)

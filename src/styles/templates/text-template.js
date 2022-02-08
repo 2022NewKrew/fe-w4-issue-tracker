@@ -1,5 +1,6 @@
 import { css } from "styled-components";
 
+import fonts from "@styles/constants/fonts";
 import greyscale from "@styles/constants/greyscale";
 import {
   largeTemplate,
@@ -9,10 +10,9 @@ import {
 } from "@styles/templates/size-template";
 
 const textTemplate = css`
-  font-family: Noto Sans KR;
+  font-family: ${fonts.DEFAULT_FONT_FAMILY};
   font-style: normal;
   font-weight: normal;
-  color: ${greyscale.default};
 `;
 
 export const textLarge = css`

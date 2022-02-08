@@ -1,6 +1,7 @@
 import { css } from "styled-components";
 
 import colors from "@styles/constants/colors";
+import sizes from "@styles/constants/sizes";
 
 export const allCenterAlign = css`
   display: flex;
@@ -8,94 +9,42 @@ export const allCenterAlign = css`
   align-items: center;
 `;
 
+export const allBorderRemove = css`
+  border: none;
+  box-shadow: none;
+  outline: none;
+`;
+
 export const disabledOpacity = css`
   &:disabled {
-    opacity: 0.5;
+    opacity: ${sizes.DISABLED_OPACITY};
   }
 `;
 
 export const buttonEvent = css`
   &:hover {
-    border: 2px solid ${colors.darkBlue};
+    border: ${sizes.BUTTON_HOVER_BORDER_WIDTH} solid ${colors.DARK_BLUE};
   }
   &:focus {
-    border: 4px solid ${colors.lightBlue};
+    border: ${sizes.BUTTON_FOCUS_BORDER_WIDTH} solid ${colors.LIGHT_BLUE};
   }
 
   ${disabledOpacity}
 `;
 
-export const getFontWeight = ({ componentWeight }) => {
-  switch (componentWeight) {
-    case "bold":
-      return css`
-        font-weight: bold;
-      `;
-    case "regular":
-      return css`
-        font-weight: normal;
-      `;
-    default:
-      return css``;
-  }
-};
-
-export const getFontSize = ({ componentSize }) => {
-  switch (componentSize) {
-    case "large":
-      return css`
-        font-size: 24px;
-      `;
-    case "medium":
-      return css`
-        font-size: 18px;
-      `;
-    case "small":
-      return css`
-        font-size: 16px;
-      `;
-    case "x-small":
-      return css`
-        font-size: 12px;
-      `;
-    default:
-      return css``;
-  }
-};
-
-export const getLineHeight = ({ componentSize }) => {
-  switch (componentSize) {
-    case "large":
-      return css`
-        line-height: 40px;
-      `;
-    case "medium":
-      return css`
-        line-height: 32px;
-      `;
-    case "small":
-      return css`
-        line-height: 28px;
-      `;
-    case "x-small":
-      return css`
-        line-height: 20px;
-      `;
-    default:
-      return css``;
-  }
-};
-
 export const getButtonPadding = ({ componentSize }) => {
   switch (componentSize) {
     case "large":
+      return css`
+        padding: ${sizes.BUTTON_LARGE_PADDING};
+      `;
     case "medium":
       return css`
-        padding: 24px;
+        padding: ${sizes.BUTTON_MEDIUM_PADDING};
       `;
     case "small":
       return css`
-        padding: 16px;
+        padding: ${sizes.BUTTON_SMALL_PADDING};
       `;
     default:
       return css``;
@@ -106,15 +55,15 @@ export const getButtonWidth = ({ componentSize }) => {
   switch (componentSize) {
     case "large":
       return css`
-        width: 340px;
+        width: ${sizes.BUTTON_LARGE_WIDTH};
       `;
     case "medium":
       return css`
-        width: 240px;
+        width: ${sizes.BUTTON_MEDIUM_WIDTH};
       `;
     case "small":
       return css`
-        width: 120px;
+        width: ${sizes.BUTTON_SMALL_WIDTH};
       `;
     default:
       return css``;
@@ -125,15 +74,15 @@ export const getButtonHeight = ({ componentSize }) => {
   switch (componentSize) {
     case "large":
       return css`
-        height: 64px;
+        height: ${sizes.BUTTON_LARGE_HEIGHT};
       `;
     case "medium":
       return css`
-        height: 56px;
+        height: ${sizes.BUTTON_MEDIUM_HEIGHT};
       `;
     case "small":
       return css`
-        height: 40px;
+        height: ${sizes.BUTTON_SMALL_HEIGHT};
       `;
     default:
       return css``;
@@ -143,13 +92,16 @@ export const getButtonHeight = ({ componentSize }) => {
 export const getButtonBorderRadius = ({ componentSize }) => {
   switch (componentSize) {
     case "large":
+      return css`
+        border-radius: ${sizes.BUTTON_LARGE_BORDER_RADIUS};
+      `;
     case "medium":
       return css`
-        border-radius: 20px;
+        border-radius: ${sizes.BUTTON_MEDIUM_BORDER_RADIUS};
       `;
     case "small":
       return css`
-        border-radius: 11px;
+        border-radius: ${sizes.BUTTON_SMALL_BORDER_RADIUS};
       `;
     default:
       return css``;

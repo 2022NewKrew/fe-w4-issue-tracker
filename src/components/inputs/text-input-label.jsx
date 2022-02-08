@@ -1,21 +1,23 @@
 import styled, { css } from "styled-components";
 
 import greyscale from "@styles/constants/greyscale";
+import sizes from "@styles/constants/sizes";
+import { textXSmall } from "@styles/templates/text-template";
 import { getTextInputDisplay, getTextInputAlignItems } from "@utils/helper";
 
 const getLabelWidth = ({ componentSize }) => {
   switch (componentSize) {
     case "large":
       return css`
-        width: 292px;
+        width: ${sizes.TEXT_INPUT_LABEL_LARGE_WIDTH};
       `;
     case "medium":
       return css`
-        width: 272px;
+        width: ${sizes.TEXT_INPUT_LABEL_MEDIUM_WIDTH};
       `;
     case "small":
       return css`
-        width: 80px;
+        width: ${sizes.TEXT_INPUT_LABEL_SMALL_WIDTH};
       `;
     default:
       return css``;
@@ -25,13 +27,16 @@ const getLabelWidth = ({ componentSize }) => {
 const getLabelHeight = ({ componentSize }) => {
   switch (componentSize) {
     case "large":
+      return css`
+        height: ${sizes.TEXT_INPUT_LABEL_LARGE_HEIGHT};
+      `;
     case "medium":
       return css`
-        height: 20px;
+        height: ${sizes.TEXT_INPUT_LABEL_MEDIUM_HEIGHT};
       `;
     case "small":
       return css`
-        height: 36px;
+        height: ${sizes.TEXT_INPUT_LABEL_SMALL_HEIGHT};
       `;
     default:
       return css``;
@@ -39,13 +44,9 @@ const getLabelHeight = ({ componentSize }) => {
 };
 
 const TextInputLabel = styled.span`
-  font-family: Noto Sans KR;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 20px;
-  color: ${greyscale.label};
+  color: ${greyscale.LABEL};
 
+  ${textXSmall}
   ${() => getLabelWidth}
   ${() => getLabelHeight}
   ${() => getTextInputDisplay}

@@ -11,7 +11,14 @@ const ComponentsPage = () => {
     <div>
       <h1>ComponentsPage</h1>
       <div>
-        <h2>Etc</h2>
+        <h2>Containers</h2>
+        <ComponentContainer>
+          <h3>HeaderContainer</h3>
+          <HeaderContainer>HeaderContainer</HeaderContainer>
+        </ComponentContainer>
+      </div>
+      <div>
+        <h2>Templates</h2>
         <ComponentContainer>
           <h3>Logotype</h3>
           <TemplateContainer componentType={"logotypeLarge"}>
@@ -21,13 +28,6 @@ const ComponentsPage = () => {
             LogotypeMedium
           </TemplateContainer>
         </ComponentContainer>
-        <ComponentContainer>
-          <h3>HeaderContainer</h3>
-          <HeaderContainer>HeaderContainer</HeaderContainer>
-        </ComponentContainer>
-      </div>
-      <div>
-        <h2></h2>
         <ComponentContainer>
           <h3>Display</h3>
           <TemplateContainer componentType={"displayBold"}>

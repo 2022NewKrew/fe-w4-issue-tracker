@@ -1,21 +1,23 @@
 import { css } from "styled-components";
 
+import fonts from "@styles/constants/fonts";
+
 export const largeTemplate = css`
-  font-size: 24px;
-  line-height: 40px;
+  font-size: ${fonts.LARGE_TEMPLATE_FONT_SIZE};
+  line-height: ${fonts.LARGE_TEMPLATE_LINE_HEIGHT};
 `;
 
 export const mediumTemplate = css`
-  font-size: 18px;
-  line-height: 32px;
+  font-size: ${fonts.MEDIUM_TEMPLATE_FONT_SIZE};
+  line-height: ${fonts.MEDIUM_TEMPLATE_LINE_HEIGHT};
 `;
 
 export const smallTemplate = css`
-  font-size: 16px;
-  line-height: 28px;
+  font-size: ${fonts.SMALL_TEMPLATE_FONT_SIZE};
+  line-height: ${fonts.SMALL_TEMPLATE_LINE_HEIGHT};
 `;
 
 export const xSmallTemplate = css`
-  font-size: 12px;
-  line-height: 20px;
+  font-size: ${fonts.X_SMALL_TEMPLATE_FONT_SIZE};
+  line-height: ${fonts.X_SMALL_TEMPLATE_LINE_HEIGHT};
 `;

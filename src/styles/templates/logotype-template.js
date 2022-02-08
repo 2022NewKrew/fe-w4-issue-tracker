@@ -1,24 +1,24 @@
 import { css } from "styled-components";
 
+import fonts from "@styles/constants/fonts";
 import greyscale from "@styles/constants/greyscale";
 
 const logotypeTemplate = css`
-  font-family: Montserrat;
+  font-family: ${fonts.LOGOTYPE_FONT_FAMILY};
   font-style: italic;
-  letter-spacing: -0.04em;
-  color: ${greyscale.default};
+  letter-spacing: ${fonts.LOGOTYPE_LETTER_SPACING};
 `;
 
 export const logotypeLarge = css`
   ${logotypeTemplate}
   font-weight: normal;
-  font-size: 56px;
-  line-height: 72px;
+  font-size: ${fonts.LOGOTYPE_LARGE_FONT_SIZE};
+  line-height: ${fonts.LOGOTYPE_LARGE_LINE_HEIGHT};
 `;
 
 export const logotypeMedium = css`
   ${logotypeTemplate}
-  font-weight: 500;
-  font-size: 32px;
-  line-height: 40px;
+  font-weight: ${fonts.LOGOTYPE_MEDIUM_FONT_WEIGHT};
+  font-size: ${fonts.LOGOTYPE_MEDIUM_FONT_SIZE};
+  line-height: ${fonts.LOGOTYPE_MEDIUM_LINE_HEIGHT};
 `;

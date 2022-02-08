@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import TemplateContainer from "@components/containers/template-container";
 import greyscale from "@styles/constants/greyscale";
+import sizes from "@styles/constants/sizes";
 import {
   allCenterAlign,
   disabledOpacity,
@@ -12,8 +13,9 @@ import {
 } from "@utils/helper";
 
 const StyledTextButton = styled.button`
-  padding: 0px;
-  border: 20px;
+  padding: ${sizes.TEXT_BUTTON_PADDING};
+  border: ${sizes.TEXT_BUTTON_BORDER_WIDTH};
+  background: ${greyscale.OFF_WHITE};
 
   ${allCenterAlign}
   ${disabledOpacity}
@@ -28,7 +30,7 @@ const TextButton = ({ children, componentSize, componentDisabled }) => {
     <StyledTextButton disabled={disabled} componentSize={componentSize}>
       <TemplateContainer
         componentType={getButtoncomponentType({ componentSize })}
-        componentColor={greyscale.label}
+        componentColor={greyscale.LABEL}
       >
         <span>{children}</span>
       </TemplateContainer>

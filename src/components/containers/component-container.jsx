@@ -2,12 +2,13 @@ import styled from "styled-components";
 
 import colors from "@styles/constants/colors";
 import greyscale from "@styles/constants/greyscale";
+import sizes from "@styles/constants/sizes";
 
 const StyledComponentContainer = styled.div`
-  background: ${greyscale.offWhite};
-  border: 1px dashed ${colors.default};
+  background: ${greyscale.OFF_WHITE};
+  border: ${sizes.COMPONENT_CONTAINER_BORDER_WIDTH} dashed ${colors.DEFAULT};
   box-sizing: border-box;
-  border-radius: 5px;
+  border-radius: ${sizes.COMPONENT_CONTAINER_BORDER_RADIUS};
 `;
 
 const ComponentContainer = ({ children }) => {

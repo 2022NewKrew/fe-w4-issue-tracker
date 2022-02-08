@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import TemplateContainer from "@components/containers/template-container";
 import colors from "@styles/constants/colors";
+import sizes from "@styles/constants/sizes";
 import greyscale from "@styles/constants/greyscale";
 import {
   allCenterAlign,
@@ -15,8 +16,8 @@ import {
 } from "@utils/helper";
 
 const StyledSecondaryButton = styled.button`
-  background: ${greyscale.offWhite};
-  border: 2px solid ${colors.blue};
+  background: ${greyscale.OFF_WHITE};
+  border: ${sizes.SECONDARY_BUTTON_BORDER_WIDTH} solid ${colors.BLUE};
   box-sizing: border-box;
 
   ${allCenterAlign}
@@ -34,7 +35,7 @@ const SecondaryButton = ({ children, componentSize, componentDisabled }) => {
     <StyledSecondaryButton disabled={disabled} componentSize={componentSize}>
       <TemplateContainer
         componentType={getButtoncomponentType({ componentSize })}
-        componentColor={colors.blue}
+        componentColor={colors.BLUE}
       >
         <span>{children}</span>
       </TemplateContainer>

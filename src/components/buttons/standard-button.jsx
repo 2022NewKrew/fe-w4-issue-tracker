@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import TemplateContainer from "@components/containers/template-container";
 import colors from "@styles/constants/colors";
+import sizes from "@styles/constants/sizes";
 import greyscale from "@styles/constants/greyscale";
 import {
   allCenterAlign,
@@ -15,8 +16,8 @@ import {
 } from "@utils/helper";
 
 const StyledStandardButton = styled.button`
-  background: ${colors.blue};
-  border: 2px solid ${colors.blue};
+  background: ${colors.BLUE};
+  border: ${sizes.STANDARD_BUTTON_BORDER_WIDTH} solid ${colors.BLUE};
 
   ${allCenterAlign}
   ${buttonEvent}
@@ -33,7 +34,7 @@ const StandardButton = ({ children, componentSize, componentDisabled }) => {
     <StyledStandardButton disabled={disabled} componentSize={componentSize}>
       <TemplateContainer
         componentType={getButtoncomponentType({ componentSize })}
-        componentColor={greyscale.offWhite}
+        componentColor={greyscale.OFF_WHITE}
       >
         <span>{children}</span>
       </TemplateContainer>

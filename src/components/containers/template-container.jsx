@@ -23,7 +23,7 @@ import {
   linkXSmall,
 } from "@styles/templates/link-template";
 
-const getType = ({ componentType }) => {
+const getTemplate = ({ componentType }) => {
   switch (componentType) {
     case "logotypeLarge":
       return logotypeLarge;
@@ -54,12 +54,12 @@ const getType = ({ componentType }) => {
 
 const getColor = ({ componentColor }) => {
   return css`
-    color: ${componentColor ? componentColor : greyscale.default};
+    color: ${componentColor ? componentColor : greyscale.DEFAULT};
   `;
 };
 
 const StyledTemplateContainer = styled.span`
-  ${() => getType}
+  ${() => getTemplate}
   ${() => getColor}
 `;
 

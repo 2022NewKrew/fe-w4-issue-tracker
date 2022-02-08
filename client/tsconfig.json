@@ -19,12 +19,12 @@
         "paths": {
             "@icons": ["public/icons/*"],
             "@images": ["public/images/*"],
-            "@components/*": ["src/components/*"],
+            "@components": ["src/components"],
             "@styles/*": ["src/styles/*"],
             "@utils": ["src/utils/*"],
             "@apis": ["src/apis"],
             "@atoms": ["src/atoms"],
-            "@reducers/*": ["src/reducers"],
+            "@reducers": ["src/reducers"],
             "@types": ["src/@types/*"]
         }
     },

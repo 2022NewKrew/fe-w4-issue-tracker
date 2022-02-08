@@ -41,11 +41,12 @@ export const IssueRow = ({
     const renderLabels = () => {
         if (labelInfo.state === 'loading') return <div>loading...</div>;
         if (labelInfo.state === 'hasError') return <div>label fetch failed</div>;
-        if (labelInfo.state === 'hasValue') {
+        if (labelInfo.state === 'hasValue' && labelings) {
             return labelings.map(({ labelId }) => {
                 const labelTarget = labelInfo.contents.find(
                     (label: ILabel) => label.id === labelId
                 );
+                if (!labelTarget) return <div></div>;
                 return <SmallLabel type="light-text" labelInfo={labelTarget} key={labelId} />;
             });
         }

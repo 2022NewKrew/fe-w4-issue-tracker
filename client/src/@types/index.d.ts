@@ -19,8 +19,8 @@ declare module '@types' {
         status: issueStatus;
         userId: number;
         timeStamp: number;
-        labelings: ILabeling[];
-        milestoneId: number | null;
+        labelings?: ILabeling[];
+        milestoneId?: number;
     }
     interface IFilter {
         title: string;

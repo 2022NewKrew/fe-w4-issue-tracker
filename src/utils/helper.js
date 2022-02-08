@@ -1,7 +1,7 @@
 import { css } from "styled-components";
 
-import themeColors from "@styles/themes/theme-colors";
-import themeGreyscale from "@styles/themes/theme-greyscale";
+import colors from "@styles/constants/colors";
+import greyscale from "@styles/constants/greyscale";
 
 export const allCenterAlign = css`
   display: flex;
@@ -17,10 +17,10 @@ export const disabledOpacity = css`
 
 export const buttonEvent = css`
   &:hover {
-    border: 2px solid ${themeColors.darkBlue};
+    border: 2px solid ${colors.darkBlue};
   }
   &:focus {
-    border: 4px solid ${themeColors.lightBlue};
+    border: 4px solid ${colors.lightBlue};
   }
 
   ${disabledOpacity}
@@ -89,7 +89,7 @@ export const getLineHeight = ({ componentSize }) => {
 
 export const getColor = ({ componentColor }) => {
   return css`
-    color: ${componentColor ? componentColor : themeGreyscale.default};
+    color: ${componentColor ? componentColor : greyscale.default};
   `;
 };
 

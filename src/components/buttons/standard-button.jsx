@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { useState } from "react";
 
-import themeColors from "@styles/themes/theme-colors";
-import themeGreyscale from "@styles/themes/theme-greyscale";
+import colors from "@styles/constants/colors";
+import greyscale from "@styles/constants/greyscale";
 import TypographyLink from "@styles/templates/typography-link";
 import {
   allCenterAlign,
@@ -15,8 +15,8 @@ import {
 } from "@utils/helper";
 
 const StyledStandardButton = styled.button`
-  background: ${themeColors.blue};
-  border: 2px solid ${themeColors.blue};
+  background: ${colors.blue};
+  border: 2px solid ${colors.blue};
 
   ${allCenterAlign}
   ${buttonEvent}
@@ -33,7 +33,7 @@ const StandardButton = ({ children, componentSize, componentDisabled }) => {
     <StyledStandardButton disabled={disabled} componentSize={componentSize}>
       <TypographyLink
         componentSize={getButtonTypographyLinkSize({ componentSize })}
-        componentColor={themeGreyscale.offWhite}
+        componentColor={greyscale.offWhite}
       >
         <span>{children}</span>
       </TypographyLink>

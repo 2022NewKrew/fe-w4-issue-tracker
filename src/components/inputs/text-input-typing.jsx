@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import themeGreyscale from "@styles/themes/theme-greyscale";
+import greyscale from "@styles/constants/greyscale";
 import {
   getTextInputTypographyDisplay,
   getTextInputAlignItems,
@@ -58,7 +58,7 @@ const TextInputTyping = styled.input`
   font-weight: normal;
   font-size: 16px;
   line-height: 28px;
-  color: ${themeGreyscale.titleActive};
+  color: ${greyscale.titleActive};
   border: 0px;
 
   ${() => getTypingWidth}

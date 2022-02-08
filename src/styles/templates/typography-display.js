@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import themeGreyscale from "@styles/themes/theme-greyscale";
+import greyscale from "@styles/constants/greyscale";
 import { getFontWeight } from "@utils/helper";
 
 const StyledTypographyDisplay = styled.span`
@@ -8,7 +8,7 @@ const StyledTypographyDisplay = styled.span`
   font-style: normal;
   font-size: 32px;
   line-height: 48px;
-  color: ${themeGreyscale.default};
+  color: ${greyscale.default};
 
   ${() => getFontWeight}
 `;

@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import TextInputLabel from "@components/inputs/text-input-label";
 import TextInputTyping from "@components/inputs/text-input-typing";
-import themeGreyscale from "@styles/themes/theme-greyscale";
+import greyscale from "@styles/constants/greyscale";
 
 const getTextInputOpacity = ({ componentDisabled }) => {
   switch (componentDisabled) {
@@ -120,9 +120,9 @@ const getTextInputBorderRadius = ({ componentSize }) => {
 const StyledTextInput = styled.div`
   display: flex;
   padding: 0px 24px;
-  color: ${themeGreyscale.inputBackground};
-  background: ${themeGreyscale.offWhite};
-  border: 1px solid ${themeGreyscale.titleActive};
+  color: ${greyscale.inputBackground};
+  background: ${greyscale.offWhite};
+  border: 1px solid ${greyscale.titleActive};
   box-sizing: border-box;
 
   ${() => getTextInputOpacity}

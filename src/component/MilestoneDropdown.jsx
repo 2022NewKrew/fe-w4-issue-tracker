@@ -1,10 +1,10 @@
+import {searchFilterWithKey, wrapInQuotes} from '../global';
 import {useCallback, useState} from 'react';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import Dropdown from '../item/Dropdown';
 import issueFilterState from '../store/issueFilterState';
 import milestonesState from '../store/milestonesState';
 import MoreIcon from '../svg/More.svg';
-import {wrapInQuotes} from '../global';
 
 export default function MilestoneDropdown(){
   const milestones=useRecoilValue(milestonesState);
@@ -30,11 +30,10 @@ export default function MilestoneDropdown(){
   }
 
   function isSelectedIndex({itemTitle}, index){
-    const matchResult=issueFilter.match(/milestone:"*((?:[^"]*)|(?:[^\s"]*))"*/);
-    if(matchResult===null){
+    const curMilestone=searchFilterWithKey('milestone', issueFilter);
+    if(curMilestone===null){
       return;
     }
-    const curMilestone=matchResult[1];
     if(curMilestone===itemTitle || (curMilestone.length===0 && index===0)){
       return true;
     }

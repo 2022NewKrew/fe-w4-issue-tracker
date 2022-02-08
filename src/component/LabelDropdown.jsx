@@ -1,10 +1,10 @@
+import {searchFilterWithKey, wrapInQuotes} from '../global';
 import {useCallback, useState} from 'react';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import Dropdown from '../item/Dropdown';
 import issueFilterState from '../store/issueFilterState';
 import labelsState from '../store/labelsState';
 import MoreIcon from '../svg/More.svg';
-import {wrapInQuotes} from '../global';
 
 export default function LabelDropdown(){
   const labels=useRecoilValue(labelsState);
@@ -30,11 +30,10 @@ export default function LabelDropdown(){
   }
 
   function isSelectedIndex({itemTitle}, index){
-    const matchResult=issueFilter.match(/label:"*((?:[^"]*)|(?:[^\s"]*))"*/);
-    if(matchResult===null){
+    const curLabel=searchFilterWithKey('label', issueFilter);
+    if(curLabel===null){
       return;
     }
-    const curLabel=matchResult[1];
     if(curLabel===itemTitle || (curLabel.length===0 && index===0)){
       return true;
     }

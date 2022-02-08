@@ -1,10 +1,10 @@
+import {searchFilterWithKey, wrapInQuotes} from '../global';
 import {useCallback, useState} from 'react';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import Dropdown from '../item/Dropdown';
 import issueFilterState from '../store/issueFilterState';
 import MoreIcon from '../svg/More.svg';
 import usersState from '../store/usersState';
-import {wrapInQuotes} from '../global';
 
 export default function AssigneeDropdown(){
   const users=useRecoilValue(usersState);
@@ -30,11 +30,10 @@ export default function AssigneeDropdown(){
   }
 
   function isSelectedIndex({itemTitle}, index){
-    const matchResult=issueFilter.match(/assignee:"*((?:[^"]*)|(?:[^\s"]*))"*/);
-    if(matchResult===null){
+    const curAssignee=searchFilterWithKey('assignee', issueFilter);
+    if(curAssignee===null){
       return;
     }
-    const curAssignee=matchResult[1];
     if(curAssignee===itemTitle || (curAssignee.length===0 && index===0)){
       return true;
     }

@@ -1,10 +1,10 @@
+import {searchFilterWithKey, wrapInQuotes} from '../global';
 import {useCallback, useState} from 'react';
 import {useRecoilState, useRecoilValue} from 'recoil';
 import Dropdown from '../item/Dropdown';
 import issueFilterState from '../store/issueFilterState';
 import MoreIcon from '../svg/More.svg';
 import usersState from '../store/usersState';
-import {wrapInQuotes} from '../global';
 
 export default function AuthorDropdown(){
   const users=useRecoilValue(usersState);
@@ -26,11 +26,10 @@ export default function AuthorDropdown(){
   }
 
   function isSelectedIndex({itemTitle}){
-    const matchResult=issueFilter.match(/author:"*((?:[^"]*)|(?:[^\s"]*))"*/);
-    if(matchResult===null){
+    const curAuthor=searchFilterWithKey('author', issueFilter);
+    if(curAuthor===null){
       return;
     }
-    const curAuthor=matchResult[1];
     if(curAuthor===itemTitle){
       return true;
     }

@@ -32,3 +32,14 @@ export function getPrettyDate(date){
 export function wrapInQuotes(str, quote='"'){
   return str.includes(' ') ? `${quote}${str}${quote}` : str;
 }
+
+/**
+ * Find value with the key and return from the issue filter.
+ * @param {string} key
+ * @param {string} filter
+ */
+export function searchFilterWithKey(key, filter){
+  const regex=new RegExp(`${key}:"*((?:[^"]*)|(?:[^\\s"]*))"*`);
+  const result=filter.match(regex);
+  return result===null ? null : result[1];
+}

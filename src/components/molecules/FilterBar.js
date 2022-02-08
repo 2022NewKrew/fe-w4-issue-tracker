@@ -1,37 +1,20 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
-import { COLOR } from "@constants";
+import { COLOR, FILTER_TYPE } from "@constants";
 import { SmallText, TextInput, Wrapper } from "@atoms";
 import { ChevronDownIcon, SearchIcon } from "@icons";
 import Dropdown from "@/components/molecules/Dropdown.js";
+import { useRecoilState, useResetRecoilState } from "recoil";
+import { filterState } from "@/store.js";
+import { getAuth } from "@/firebase.js";
 
-const filterBarDropdownData = {
-  title: "이슈 필터",
-  isCheckIcon: true,
-  isMultiCheckAvailable: false,
-  options: [
-    {
-      text: "열린 이슈",
-      isChecked: true,
-    },
-    {
-      text: "내가 작성한 이슈",
-      isChecked: false,
-    },
-    {
-      text: "나에게 할당된 이슈",
-      isChecked: false,
-    },
-    {
-      text: "내가 댓글을 남긴 이슈",
-      isChecked: false,
-    },
-    {
-      text: "닫힌 이슈",
-      isChecked: false,
-    },
-  ],
-};
+const FILTER_BAR_DROPDOWN_METADATA = [
+  { title: "열린 이슈", filterKey: "isOpened", value: "true" },
+  { title: "내가 작성한 이슈", filterKey: "writer", value: "@me" },
+  { title: "내게 할당된 이슈", filterKey: "assignee", value: "@me" },
+  { title: "내가 댓글을 단 이슈", filterKey: "comment", value: "@me" },
+  { title: "닫힌 이슈", filterKey: "isOpened", value: "false" },
+];
 
 const FilterBarWrapper = styled(Wrapper)`
   position: relative;
@@ -123,25 +106,101 @@ const FilterSearchWrapper = styled.div`
 `;
 
 function FilterBar() {
+  const [issueFilter, setIssueFilter] = useRecoilState(filterState);
+  const resetIssueFilter = useResetRecoilState(filterState);
   const [activated, setActivated] = useState(false);
+  const [filterBarDropdownData, setFilterBarDropdownData] = useState({});
   const filterInput = useRef();
   const dropdownWrapper = useRef();
 
   useEffect(() => {
-    filterInput.current.value = "is:issue is:open";
-  }, []);
+    filterInput.current.value = generateTextWithFilter();
+    const filterBarDropdownData = generateFilterBarDropdownData();
+    setFilterBarDropdownData(filterBarDropdownData);
+  }, [issueFilter]);
 
-  const handleFocus = () => {
+  const generateTextWithFilter = () => {
+    const issueFilterEntries = Object.entries(issueFilter);
+    return issueFilterEntries.reduce((text, [key, value]) => {
+      if (value === "*") {
+        return text;
+      }
+      return `${text} ${key}:${value}`;
+    }, "");
+  };
+
+  const interpretTextValue = (value) => {
+    const auth = getAuth();
+    return value === "@me" ? auth.currentUser.reloadUserInfo.screenName : value;
+  };
+
+  const generateFilterBarDropdownData = () => {
+    const options = FILTER_BAR_DROPDOWN_METADATA.map((meta) => {
+      const { title, filterKey, value } = meta;
+      return {
+        text: title,
+        isChecked: issueFilter[filterKey] === interpretTextValue(value),
+        value: {
+          key: filterKey,
+          value,
+        },
+      };
+    });
+    return {
+      title: "이슈 필터",
+      isCheckIcon: true,
+      options: options,
+    };
+  };
+
+  const clickDropdownPanel = useCallback(
+    async (filter) => {
+      const { key, value } = filter;
+      resetIssueFilter();
+      setIssueFilter((prev) => {
+        return {
+          ...prev,
+          isOpened: "*",
+          [key]: interpretTextValue(value),
+        };
+      });
+    },
+    [issueFilter]
+  );
+
+  const focusSearchBar = () => {
     setActivated(true);
   };
 
-  const handleBlur = () => {
+  const blurFilterBarTextInput = () => {
     setActivated(false);
   };
 
-  const handleClick = () => {
+  const clickSearchBar = () => {
     filterInput.current.focus();
   };
+
+  const submitSearchForm = useCallback(
+    (e) => {
+      e.preventDefault();
+      const filterText = filterInput.current.value;
+      const splittedFilterText = filterText.split(" ");
+      resetIssueFilter();
+      const generatedFilterFromText = splittedFilterText.reduce(
+        (filter, entry) => {
+          const [key, value] = entry.split(":");
+          if (FILTER_TYPE.indexOf(key) === -1) {
+            return filter;
+          }
+          return { ...filter, [key]: interpretTextValue(value) };
+        },
+        {}
+      );
+      console.log(filterText, generatedFilterFromText);
+      setIssueFilter(generatedFilterFromText);
+    },
+    [issueFilter]
+  );
 
   return (
     <FilterBarWrapper isActivated={activated}>
@@ -151,19 +210,22 @@ function FilterBar() {
         <FilterDropdown
           {...filterBarDropdownData}
           parentRef={dropdownWrapper}
+          callbackAfterPanelClickEvent={clickDropdownPanel}
         />
       </FilterDropdownButton>
       <FilterSearchWrapper
         isActivated={activated}
-        onFocus={handleFocus}
-        onClick={handleClick}
+        onFocus={focusSearchBar}
+        onClick={clickSearchBar}
       >
         <SearchIcon />
-        <FilterTextInput
-          placeholder={"Search all issues"}
-          ref={filterInput}
-          onBlur={handleBlur}
-        />
+        <form onSubmit={submitSearchForm}>
+          <FilterTextInput
+            placeholder={"Search all issues"}
+            ref={filterInput}
+            onBlur={blurFilterBarTextInput}
+          />
+        </form>
       </FilterSearchWrapper>
     </FilterBarWrapper>
   );

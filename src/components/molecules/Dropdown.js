@@ -63,7 +63,7 @@ function Dropdown({
       isVisible={isVisible}
     >
       <DropdownTitle>{title}</DropdownTitle>
-      {options.map((panelOption, idx) => {
+      {options?.map((panelOption, idx) => {
         return (
           <DropdownPanel
             onClick={() => clickPanel(panelOption)}

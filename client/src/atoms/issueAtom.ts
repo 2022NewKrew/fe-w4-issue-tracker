@@ -43,7 +43,6 @@ export const issueFieldFilterSelector = selector<IIssue[]>({
     key: 'issueFieldFilterSelector',
     get: ({ get }) => {
         const issues = get(allIssuesAtom);
-        console.log(issues);
         const fieldFilter = get(issueFieldFilterState);
         const isMatchWithFieldFilter = (issue: IIssue, fieldType: issueFilterType) => {
             switch (fieldType) {

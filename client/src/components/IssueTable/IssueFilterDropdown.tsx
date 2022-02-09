@@ -74,27 +74,35 @@ export const IssueFilterDropdown = ({ dropdown, filterProperty }: IProps) => {
     const optionsData = useRecoilValueLoadable<IFilterInfo[]>(optionsAtom);
     const [issueFieldFilter, setIssueFieldFilterState] =
         useRecoilState<IFieldFilterState>(issueFieldFilterState);
-    console.log(issueFieldFilter);
-    const renderOptions = () =>
-        getOptionsIncludeEmptyFilterOption(type, emptyFilterOption, optionsData.contents).map(
-            (optionData: IFilterInfo, i) => {
-                return (
-                    <OptionField
-                        filterInfo={optionData}
-                        checkbox={type !== 'statusChange'}
-                        key={i}
-                        onClickHandler={getOptionClickHandler(type, setIssueFieldFilterState)}
-                    />
-                );
-            }
-        );
+
+    const getIsChecked = (type: issueFilterType, id: number | null): boolean => {
+        if (type === 'label') {
+            if (issueFieldFilter[type] === null) return id === null;
+            return issueFieldFilter[type].includes(id);
+        }
+        return issueFieldFilter[type] === id;
+    };
 
     if (!dropdown) return null;
     return (
         <React.Suspense fallback={<EmptyRow type="error" />}>
             <DropWrapper>
                 <FilterTitle>{`${title} 필터`}</FilterTitle>
-                {renderOptions()}
+                {getOptionsIncludeEmptyFilterOption(
+                    type,
+                    emptyFilterOption,
+                    optionsData.contents
+                ).map((optionData: IFilterInfo, i) => {
+                    return (
+                        <OptionField
+                            key={i}
+                            filterInfo={optionData}
+                            checkbox={type !== 'statusChange'}
+                            onClickHandler={getOptionClickHandler(type, setIssueFieldFilterState)}
+                            isChecked={getIsChecked(type, optionData.id)}
+                        />
+                    );
+                })}
             </DropWrapper>
         </React.Suspense>
     );

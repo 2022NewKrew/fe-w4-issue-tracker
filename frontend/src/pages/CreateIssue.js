@@ -4,13 +4,13 @@ import Header from "@components/organisms/Header";
 import { Display } from "@components/atoms/display";
 import CreateIssueTemplate from "@components/templates/CreateIssueTemplate";
 
-export default function CreateIssue() {
-  const Container = styled.div`
-    .title {
-      margin-left: 80px;
-    }
-  `;
+const Container = styled.div`
+  .title {
+    margin-left: 80px;
+  }
+`;
 
+export default function CreateIssue() {
   return (
     <Container>
       <Header />

@@ -11,6 +11,7 @@ import {
   useResetRecoilState,
   useSetRecoilState,
 } from "recoil";
+import { FormMode } from "@stores/label";
 
 export type IssueFilter = {
   status: IssueStatus;
@@ -120,21 +121,6 @@ export const useIssueStore = () => {
   };
 };
 
-export const useModifyIssueStatusData = () => {
-  const queryClient = useQueryClient();
-  const setSelectedIssue = useSetRecoilState(selectedIssueState);
-  return useMutation(
-    ({ issueId, status }: { issueId: string; status: IssueStatus }) =>
-      IssueService.patchChangeStatus(issueId, status),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("issueList");
-        setSelectedIssue([]);
-      },
-    }
-  );
-};
-
 const issueFormState = atom<IssueForm>({
   key: "issueFormState",
   default: {
@@ -146,26 +132,27 @@ const issueFormState = atom<IssueForm>({
   },
 });
 
-export const useAddIssueStore = () => {
-  const queryClient = useQueryClient();
-  const resetIssueForm = useResetRecoilState(issueFormState);
+const IssueFormModeState = atom<FormMode>({
+  key: "IssueFormModeState",
+  default: "close",
+});
+
+const IssueTitleModifyState = atom<boolean>({
+  key: "IssueTitleModifyState",
+  default: false,
+});
+
+export const useIssueFormStore = () => {
   const [issueForm, setIssueForm] = useRecoilState(issueFormState);
-  const navigate = useNavigate();
-
-  const addIssue = useMutation(
-    async () => IssueService.post("user1", issueForm),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("issueList");
-        resetIssueForm();
-        navigate("/issue");
-      },
-    }
+  const [issueFormMode, setIssueFormMode] = useRecoilState(IssueFormModeState);
+  const resetIssueForm = useResetRecoilState(issueFormState);
+  const [issueTitleModify, setIssueTitleModify] = useRecoilState(
+    IssueTitleModifyState
   );
-
   return {
-    addIssue: () => addIssue.mutate(),
     issueForm,
+    setIssueForm,
+    resetIssueForm,
     setTitle: (e: any) =>
       setIssueForm((prev) => ({ ...prev, title: e.target.value })),
     setComment: (e: any) =>
@@ -185,5 +172,48 @@ export const useAddIssueStore = () => {
         ...prev,
         milestone,
       })),
+    issueFormMode,
+    setIssueFormMode,
+    issueTitleModify,
+    setIssueTitleModify,
+  };
+};
+
+export const useIssueMutation = () => {
+  const resetIssueForm = useResetRecoilState(issueFormState);
+  const issueForm = useRecoilValue(issueFormState);
+  const setSelectedIssue = useSetRecoilState(selectedIssueState);
+  const setIssueFormMode = useSetRecoilState(IssueFormModeState);
+
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
+  const addIssue = useMutation(
+    async () => IssueService.post("user1", issueForm),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("issueList");
+        setIssueFormMode("close");
+        resetIssueForm();
+        navigate("/issue");
+      },
+    }
+  );
+
+  const modifyIssueStatus = useMutation(
+    ({ issueId, status }: { issueId: string; status: IssueStatus }) =>
+      IssueService.patchChangeStatus(issueId, status),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("issueList");
+        setSelectedIssue([]);
+      },
+    }
+  );
+
+  return {
+    addIssue: () => addIssue.mutate(),
+    modifyIssueStatus: (issueId: string, status: IssueStatus) =>
+      modifyIssueStatus.mutate({ issueId, status }),
   };
 };

@@ -8,27 +8,16 @@ import { useUserStore } from "@stores/user";
 import { useMilestoneStore } from "@stores/milestone";
 import { useLabelStore } from "@stores/label";
 import { Milestone } from "@types";
+import { useIssueFormStore } from "@stores/issue";
 
-interface Props {
-  assignees: string[];
-  setAssignees: (e: any) => void;
-  labels: string[];
-  setLabels: (e: any) => void;
-  milestone: string | null;
-  setMilestone: (e: any) => void;
-}
-
-const SideBar = ({
-  assignees,
-  setAssignees,
-  labels,
-  setLabels,
-  milestone,
-  setMilestone,
-}: Props) => {
+const SideBar = () => {
   const { userList } = useUserStore();
   const { labelList } = useLabelStore();
   const { milestoneList } = useMilestoneStore();
+
+  const { issueForm, setAssignees, setLabels, setMilestone } =
+    useIssueFormStore();
+  const { assignees, labels, milestone } = issueForm;
 
   const Aside = Wrapper.withComponent("aside");
 

@@ -8,6 +8,7 @@ import { useClickLink } from "@hooks";
 export interface Props extends SProps, LayoutProps {
   onClick?: (e?: any) => void;
   disabled?: boolean;
+  text?: string;
   icon?: IconName;
   link?: string;
   type?: "button" | "submit";
@@ -25,6 +26,7 @@ const Button = ({
   link,
   type = "button",
   active = false,
+  text,
   ...props
 }: Props) => {
   const onClickLink = useClickLink(link);
@@ -40,6 +42,7 @@ const Button = ({
       {...props}
     >
       {icon && <Icon className="btn_icon" name={icon} />}
+      {text}
       {children}
     </SButton>
   );

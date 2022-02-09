@@ -1,42 +1,30 @@
 import styled from "@emotion/styled";
+import { Size } from "src/@types/emotion";
 
 export interface SProps {
-  type?: "title" | "panel" | "issueList";
+  size: "display" | Size;
 }
 
 const Title = styled.h2<SProps>`
-  ${({ type = "title" }) => typeList[type]};
   color: var(--titleActive);
+  ${({ size }) => sizeList[size]};
 `;
 
 export default Title;
 
-const typeList = {
-  title: `
+const sizeList = {
+  display: `
   font-size: 32px;
   line-height: 48px;
-  height: 48px;
-  align-self: flex-start;
   `,
-  panel: `
-  font-size: 18px;
-  line-height: 32px;
+  large: `
+  font-size: 24px;
+  line-height: 40px;
   `,
-  issueList: `
+  medium: `
   font-size: 1.125rem;
   line-height: 178%;
-  height:32px;
-  display: flex;
-  align-items: center;
-  padding-left: 24px;
-  position: relative;
-  font-weight: bold;
-  svg {
-    top: 5px;
-    left: 0;
-  }
-  label {
-    margin-left: 8px;
-  }
+  `,
+  small: `
   `,
 };

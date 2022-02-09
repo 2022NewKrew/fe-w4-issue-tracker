@@ -135,7 +135,7 @@ export const useModifyIssueStatusData = () => {
   );
 };
 
-export const issueFormState = atom<IssueForm>({
+const issueFormState = atom<IssueForm>({
   key: "issueFormState",
   default: {
     title: "",
@@ -149,8 +149,8 @@ export const issueFormState = atom<IssueForm>({
 export const useAddIssueStore = () => {
   const queryClient = useQueryClient();
   const resetIssueForm = useResetRecoilState(issueFormState);
-  const navigate = useNavigate();
   const [issueForm, setIssueForm] = useRecoilState(issueFormState);
+  const navigate = useNavigate();
 
   const addIssue = useMutation(
     async () => IssueService.post("user1", issueForm),
@@ -166,10 +166,10 @@ export const useAddIssueStore = () => {
   return {
     addIssue: () => addIssue.mutate(),
     issueForm,
-    setTitle: ({ target }: any) =>
-      setIssueForm((prev) => ({ ...prev, title: target.value })),
-    setComment: ({ target }: any) =>
-      setIssueForm((prev) => ({ ...prev, comment: target.value })),
+    setTitle: (e: any) =>
+      setIssueForm((prev) => ({ ...prev, title: e.target.value })),
+    setComment: (e: any) =>
+      setIssueForm((prev) => ({ ...prev, comment: e.target.value })),
     setAssignees: (id: string) =>
       setIssueForm((prev) => ({
         ...prev,
@@ -180,10 +180,10 @@ export const useAddIssueStore = () => {
         ...prev,
         labels: arrayToggle(prev.labels, id),
       })),
-    setMilestone: (id: string) =>
+    setMilestone: (milestone: string) =>
       setIssueForm((prev) => ({
         ...prev,
-        milestone: id,
+        milestone,
       })),
   };
 };

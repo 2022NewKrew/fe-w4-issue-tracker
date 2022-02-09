@@ -1,4 +1,4 @@
-import { Label } from "@types";
+import { Label, LabelForm } from "@types";
 import _axios from "@utils/axios";
 
 const baseUrl = "/labels";
@@ -13,6 +13,17 @@ class LabelService {
     const { data } = await _axios.get<Label>(`${baseUrl}/${id}`);
     return data;
   }
+  static async post(payload: LabelForm) {
+    const newLabel = {
+      ...payload,
+      id: uuidv4(),
+    };
+    const { data } = await _axios.post<Label>(baseUrl, newLabel);
+    return data;
+  }
 }
 
 export default LabelService;
+function uuidv4() {
+  throw new Error("Function not implemented.");
+}

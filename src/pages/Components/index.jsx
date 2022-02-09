@@ -7,6 +7,7 @@ export default function Components() {
   return (
     <Wrapper>
       <h1>버튼</h1>
+
       <Button
         size={1}
         disable={false}
@@ -14,6 +15,7 @@ export default function Components() {
         fontColor={offWhiteGS}
         onClick={() => {}}
       />
+
       <Button
         size={2}
         disable={true}
@@ -21,6 +23,7 @@ export default function Components() {
         fontColor={offWhiteGS}
         onClick={() => {}}
       />
+
       <Button
         size={3}
         disable={false}
@@ -28,6 +31,8 @@ export default function Components() {
         fontColor={offWhiteGS}
         onClick={() => {}}
       />
+
+      <h1>인풋</h1>
     </Wrapper>
   );
 }

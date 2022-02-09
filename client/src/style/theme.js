@@ -20,13 +20,22 @@ export const theme = {
         white-space: nowrap;
     `,
     multiElip(lineHeight, rowNum) {
-        css`
+        return css`
             max-height: ${lineHeight * rowNum};
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: ${rowNum};
+        `;
+    },
+    icon(url) {
+        return css`
+            display: inline-block;
+            vertical-align: top;
+            background: url(${url}) no-repeat;
+            width: 16px;
+            height: 16px;
         `;
     },
     basicButton: css`

@@ -8,12 +8,8 @@ const DropDownButton = styled.button`
 
     &:after {
         content: '';
-        display: inline-block;
-        vertical-align: top;
         margin: 3px 0 0 4px;
-        background: url('/assets/img/dropdown.png') no-repeat;
-        width: 16px;
-        height: 16px;
+        ${({ theme }) => theme.icon('/assets/img/dropdown.png')}
     }
 `;
 

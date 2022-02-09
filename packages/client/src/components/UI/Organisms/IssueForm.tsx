@@ -1,22 +1,16 @@
 import { SideBar } from "@UI/Organisms";
-import { TextArea, TextInput } from "@UI/Molecules";
+import { CustomButton, TextArea, TextInput } from "@UI/Molecules";
 import Atoms from "@UI/Atoms";
 import Icon from "@UI/Icon";
 
 import styled from "@emotion/styled";
-import { useAddIssueStore } from "@stores/issue";
+import { useIssueFormStore, useIssueMutation } from "@stores/issue";
 import { FormEvent, useCallback } from "react";
 
-const IssueRegisterForm = () => {
-  const {
-    addIssue,
-    issueForm,
-    setTitle,
-    setComment,
-    setAssignees,
-    setLabels,
-    setMilestone,
-  } = useAddIssueStore();
+const IssueForm = () => {
+  const { issueForm, setTitle, setComment } = useIssueFormStore();
+
+  const { addIssue } = useIssueMutation();
 
   const onSubmit = useCallback(
     (e: FormEvent) => {
@@ -45,35 +39,14 @@ const IssueRegisterForm = () => {
             height={343}
           />
         </div>
-        <SideBar
-          assignees={issueForm.assignees}
-          setAssignees={setAssignees}
-          labels={issueForm.labels}
-          setLabels={setLabels}
-          milestone={issueForm.milestone}
-          setMilestone={setMilestone}
-        />
+        <SideBar />
       </div>
-      <Atoms.ButtonGroup direction="row" gap={32}>
-        <Atoms.Button
-          size="medium"
-          shape="text"
-          icon="x_square"
-          link="/issue"
-          text="작성 취소"
-        />
-        <Atoms.Button
-          size="medium"
-          type="submit"
-          disabled={!(issueForm.title && issueForm.comment)}
-          text="완료"
-        />
-      </Atoms.ButtonGroup>
+      <CustomButton.IssueFormButton />
     </Wrapper>
   );
 };
 
-export default IssueRegisterForm;
+export default IssueForm;
 
 const Wrapper = styled.form`
   width: 1280px;

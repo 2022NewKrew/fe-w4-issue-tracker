@@ -78,7 +78,7 @@ const milestoneList = selector({
         if (issue.milestone) {
           milestones.push({
             id: issue.milestone.id,
-            name: issue.milestone.description,
+            name: issue.milestone.title,
           });
         }
       });

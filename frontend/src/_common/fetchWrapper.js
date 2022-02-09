@@ -1,8 +1,6 @@
 import { useRecoilState } from "recoil";
 import { authState } from "../_state";
 
-import axios from "axios";
-
 export { useFetchWrapper };
 
 function useFetchWrapper() {
@@ -26,7 +24,6 @@ function useFetchWrapper() {
         requestOptions.body = JSON.stringify(body);
       }
       return fetch(url, requestOptions).then(handleResponse);
-      // return axios(url, requestOptions).then(handleResponse);
     };
   }
 

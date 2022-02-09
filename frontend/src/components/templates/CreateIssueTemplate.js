@@ -64,14 +64,19 @@ export default function CreateIssueTemplate() {
       selectedLabel,
       selectedMilestone
     );
+
+    const milestone =
+      selectedMilestone.length >= 1
+        ? selectedMilestone.map((milestone) => milestone.id)
+        : null;
+
     const data = {
       title: title,
       comments: comment,
       assignees:
         selectedAssignee && selectedAssignee.map((assignee) => assignee.id),
       labels: selectedLabel && selectedLabel.map((label) => label.id),
-      milestone:
-        selectedMilestone && selectedMilestone.map((milestone) => milestone.id),
+      milestone: milestone,
     };
     // console.log(data);
     issuesActions.createIssues(data);

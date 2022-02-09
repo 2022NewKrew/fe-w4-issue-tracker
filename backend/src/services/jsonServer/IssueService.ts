@@ -76,7 +76,6 @@ class IssueService {
     const issueId = uuidv4();
     const commentId = uuidv4();
     const milestoneId = payload.milestone;
-    console.log(payload.milestone);
 
     const newIssue: IssueJSON = {
       id: issueId,

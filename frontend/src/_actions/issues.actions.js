@@ -50,7 +50,8 @@ export function useIssuesActions() {
     fetchWrapper
       .post("/api/issues", data)
       .then((res) => {
-        navigate("/");
+        const createdIssueId = res.id;
+        navigate(`/issues/${createdIssueId}`);
       })
       .catch((err) => console.log(err));
   }

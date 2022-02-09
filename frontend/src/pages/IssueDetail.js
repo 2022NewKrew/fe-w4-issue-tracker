@@ -2,20 +2,21 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router";
 
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { issueState } from "../_state";
+import { useIssuesActions } from "../_actions/issues.actions";
 
 import Header from "@components/organisms/Header";
 import IssueDetailHeader from "@components/organisms/IssueDetailHeader";
 import IssueDetailContent from "@components/organisms/IssueDetailContent";
-
-import { useIssuesActions } from "../_actions/issues.actions";
 
 import { Comment } from "@components/molecules/Comment";
 
 export default function IssueDetail() {
   const issuesActions = useIssuesActions();
   const params = useParams();
+
+  const [issue, setIssue] = useRecoilState(issueState);
 
   useEffect(() => {
     const currentId = params.id;

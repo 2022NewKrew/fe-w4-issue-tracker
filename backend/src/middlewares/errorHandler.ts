@@ -12,6 +12,7 @@ export const asyncErrorCatcher =
     try {
       await fn(req, res, next);
     } catch (e: any) {
+      console.log(e);
       next(e);
     }
   };

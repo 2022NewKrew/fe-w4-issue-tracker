@@ -75,8 +75,6 @@ export default function CreateIssueTemplate() {
       milestone: milestone,
     };
 
-    console.log(data);
-
     issuesActions.createIssues(data);
   }
   return (

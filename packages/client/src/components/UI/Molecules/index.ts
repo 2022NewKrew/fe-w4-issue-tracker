@@ -4,8 +4,8 @@ import Dropdown from "./Dropdown";
 import FilterTabs from "./FilterTabs";
 import OptionSelection from "./OptionSelection";
 import Progress from "./Progress";
-import TableCell from "./TableCell";
-import TableHeader from "./TableHeader";
+import IssueTableCell from "./IssueTableCell";
+import IssueTableHeader from "./IssueTableHeader";
 import Taps from "./Taps";
 import TextArea from "./TextArea";
 import TextInput from "./TextInput";
@@ -17,8 +17,8 @@ export {
   FilterTabs,
   OptionSelection,
   Progress,
-  TableCell,
-  TableHeader,
+  IssueTableCell,
+  IssueTableHeader,
   Taps,
   TextArea,
   TextInput,

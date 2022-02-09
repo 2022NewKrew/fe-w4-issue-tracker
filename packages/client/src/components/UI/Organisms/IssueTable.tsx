@@ -1,4 +1,4 @@
-import { TableHeader, TableCell } from "@UI/Molecules";
+import { IssueTableHeader, IssueTableCell } from "@UI/Molecules";
 
 import styled from "@emotion/styled";
 
@@ -7,8 +7,9 @@ import { Issue } from "@types";
 import withSuspense from "@templetes/withSuspense";
 import { useIssueStore } from "@stores/issue";
 import { useMemo } from "react";
+import Atoms from "@UI/Atoms";
 
-const IssueListTable = () => {
+const IssueTable = () => {
   const { issueList, filter } = useIssueStore();
 
   const filtedIssueList = useMemo(
@@ -18,10 +19,10 @@ const IssueListTable = () => {
 
   return (
     <Wrapper className="IssueListTable">
-      <TableHeader />
+      <IssueTableHeader />
       {filtedIssueList.length ? (
         filtedIssueList.map((issue: Issue) => (
-          <TableCell key={issue.id} issue={issue} />
+          <IssueTableCell key={issue.id} issue={issue} />
         ))
       ) : (
         <EmptyCell>등록된 이슈가 없습니다.</EmptyCell>
@@ -30,28 +31,16 @@ const IssueListTable = () => {
   );
 };
 
-export default withSuspense(IssueListTable);
+export default withSuspense(IssueTable);
 
-const Wrapper = styled.section`
+const Wrapper = styled(Atoms.Ul)`
   ${({ theme }) => theme.FlexCenter}
   margin-top: 24px;
   width: 100%;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  & > .TableHeader {
-    border-radius: 16px 16px 0 0;
-  }
-  & > .TableCell:last-child {
-    border-radius: 0 0 16px 16px;
-  }
 `;
 
-const EmptyCell = styled.li`
-  width: 100%;
+const EmptyCell = styled(Atoms.Li)`
   height: 100px;
-  background: var(--offWhite);
   color: var(--label);
-  border-top: 1px solid var(--line);
   ${({ theme }) => theme.FlexCenter}
-  border-radius: 0 0 16px 16px;
 `;

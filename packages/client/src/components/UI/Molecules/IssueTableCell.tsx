@@ -9,7 +9,7 @@ interface Props {
   issue: Issue;
 }
 
-const TableCell = ({ issue }: Props) => {
+const IssueTableCell = ({ issue }: Props) => {
   const { selectedIssue, setSelectedIssue } = useIssueStore();
   const { id, num, title, author, timestamp, labels, milestone } = issue;
 
@@ -40,43 +40,38 @@ const TableCell = ({ issue }: Props) => {
         <div className="table_content_info">
           <span>#{num}</span>
           <span>{`${author} ${timestamp}`}</span>
-          <span>
-            <Icon name="milestone" />
-            {milestone?.name}
-          </span>
+          {milestone && (
+            <span>
+              <Icon name="milestone" />
+              {milestone.name}
+            </span>
+          )}
         </div>
-        <Icon name="user_image_small" />
       </div>
+      <Icon name="user_image_small" />
     </Wrapper>
   );
 };
 
-export default TableCell;
+export default IssueTableCell;
 
-const Wrapper = styled.li`
-  width: 100%;
+const Wrapper = styled(Atoms.Li)`
   height: 100px;
-  background: var(--offWhite);
-  border-top: 1px solid var(--line);
-  padding: 16px 32px;
-  position: relative;
+  padding-left: 80px;
   & > svg {
     top: 24px;
+    left: 32px;
+    :last-of-type {
+      position: static;
+      margin-right: 32px;
+    }
   }
   .table_content {
-    float: left;
-    margin-left: 48px;
-    width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
     cursor: pointer;
-    & > svg {
-      top: 20px;
-      right: 54px;
-    }
     .table_content_info span {
       margin-right: 16px;
       ${({ theme }) => theme.FontSize.small};

@@ -7,7 +7,7 @@ import { useIssueStore } from "@stores/issue";
 import { FilterTabs } from ".";
 import { IssueStatus } from "@types";
 
-const TableHeader = () => {
+const IssueTableHeader = () => {
   const {
     issueListCount,
     filter,
@@ -25,7 +25,7 @@ const TableHeader = () => {
   };
 
   return (
-    <Wrapper className="TableHeader">
+    <Wrapper className="TableHeader" header>
       <Icon
         name={selectAll ? "check_box_active" : "check_box_initial"}
         onClick={() => {
@@ -63,18 +63,11 @@ const TableHeader = () => {
   );
 };
 
-export default TableHeader;
+export default IssueTableHeader;
 
-const Wrapper = styled.div`
-  width: 100%;
+const Wrapper = styled(Atoms.Li)`
   height: 64px;
-  background: var(--background);
-  padding: 16px 32px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-left: 80px;
+  padding: 0 32px 0 80px;
   & > svg {
     top: 24px;
     left: 32px;
@@ -83,9 +76,8 @@ const Wrapper = styled.div`
     font-weight: bold;
     color: var(--label);
   }
-  & > .ButtonGroup > .Button {
+  & > .ButtonGroup > button {
     width: 105px;
-    height: 32px;
     .active {
       color: var(--titleActive);
     }

@@ -30,9 +30,11 @@ const SideBar = ({
   const { labelList } = useLabelStore();
   const { milestoneList } = useMilestoneStore();
 
+  const Aside = Wrapper.withComponent("aside");
+
   return (
-    <Wrapper className="SideBar">
-      <div>
+    <Aside className="SideBar">
+      <Atoms.Li>
         <Dropdown
           select={assignees}
           onSelect={setAssignees}
@@ -51,8 +53,8 @@ const SideBar = ({
               </li>
             ))}
         </ul>
-      </div>
-      <div>
+      </Atoms.Li>
+      <Atoms.Li>
         <Dropdown
           select={labels}
           onSelect={setLabels}
@@ -70,8 +72,8 @@ const SideBar = ({
               </Atoms.Label>
             ))}
         </ul>
-      </div>
-      <div>
+      </Atoms.Li>
+      <Atoms.Li>
         <Dropdown
           select={milestone}
           onSelect={setMilestone}
@@ -88,47 +90,44 @@ const SideBar = ({
             }
           />
         )}
-      </div>
-    </Wrapper>
+      </Atoms.Li>
+    </Aside>
   );
 };
 
 export default SideBar;
 
-const Wrapper = styled.aside`
+const Wrapper = styled(Atoms.Ul)`
   width: 308px;
-  & > div {
-    border: 1px solid var(--line);
+  height: min-content;
+  & > li {
     min-height: 96px;
     padding: 32px;
-    & > ul > * {
-      margin-bottom: 16px;
-    }
-    & > .Dropdown > .Button {
+    flex-direction: column;
+    & > .Dropdown > button {
       width: 244px;
-      height: 32px;
       justify-content: space-between;
-      margin-bottom: 18px;
+      margin-bottom: 2px;
+      & > svg {
+        position: static;
+      }
       + .Panel {
-        top: 38px;
+        top: 48px;
+      }
+    }
+    & > ul {
+      width: 100%;
+      & > * {
+        margin-top: 16px;
       }
     }
     .athorlist {
-      height: 44px;
       display: flex;
       align-items: center;
-      padding-left: 48px;
-      position: relative;
       & > svg {
-        left: 0;
-        top: 0;
+        position: static;
+        margin-right: 4px;
       }
-    }
-    :first-of-type {
-      border-radius: 16px 16px 0 0;
-    }
-    :last-of-type {
-      border-radius: 0 0 16px 16px;
     }
   }
 `;

@@ -125,9 +125,14 @@ const StyledTextInput = styled.div`
   ${() => getTextInputBorderRadius}
 `;
 
-const TextInput = ({ children, componentSize, componentDisabled }) => {
+const TextInput = ({
+  children,
+  componentSize,
+  componentDisabled,
+  componentValue,
+}) => {
   const [disabled, setDisabled] = useState(componentDisabled);
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(componentValue);
 
   return (
     <StyledTextInput componentSize={componentSize} componentDisabled={disabled}>

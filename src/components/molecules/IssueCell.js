@@ -95,7 +95,13 @@ function IssueCell({
               {title}
             </MediumLinkText>
             {labelList.map((label, idx) => (
-              <IssueLabel key={`${title}-label${idx}`} {...label} />
+              <IssueLabel
+                key={`${title}-label${idx}`}
+                {...label}
+                css={`
+                  margin-left: 10px;
+                `}
+              />
             ))}
           </IssueTitleWrapper>
           <IssueTagWrapper>

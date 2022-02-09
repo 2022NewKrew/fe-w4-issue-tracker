@@ -5,6 +5,10 @@ import {
   getDocs,
   doc,
   updateDoc,
+  addDoc,
+  setDoc,
+  query,
+  where,
 } from "firebase/firestore";
 import { DATA_TYPE } from "@constants";
 
@@ -61,15 +65,20 @@ export const getIssueList = async () => {
   return await getDocList(DATA_TYPE.ISSUE);
 };
 
-export const updateIssue = async (updateData) => {
+export const updateIssue = async (issueData) => {
   return await Promise.all(
-    updateData.map(async ({ id, key, value }) => {
+    issueData.map(async ({ id, key, value }) => {
       const issueRef = doc(db, DATA_TYPE.ISSUE, id);
       await updateDoc(issueRef, {
         [key]: value,
       });
     })
   );
+};
+
+export const putIssue = async (issueData) => {
+  const issueCollection = collection(db, DATA_TYPE.ISSUE);
+  return await addDoc(issueCollection, issueData);
 };
 
 export const putUser = async ({ id, ...userData }) => {

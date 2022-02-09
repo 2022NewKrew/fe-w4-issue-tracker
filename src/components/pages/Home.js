@@ -16,7 +16,9 @@ function Home() {
   return (
     <Layout>
       <Header />
-      <Outlet />
+      <React.Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+      </React.Suspense>
     </Layout>
   );
 }

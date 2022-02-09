@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 
@@ -6,7 +6,8 @@ import { Wrapper } from "@atoms";
 import { IssueCell, IssueTableHeader } from "@molecules";
 
 import { COLOR } from "@constants";
-import { filteredIssueListState } from "@stores";
+import { filteredIssueListState, issueListState } from "@stores";
+import { useRefreshRecoilState } from "@hooks";
 
 const IssueTableWrapper = styled(Wrapper)`
   width: 100%;
@@ -21,8 +22,12 @@ const IssueList = styled(Wrapper)`
 `;
 
 function IssueTable() {
+  const { refreshIssueList } = useRefreshRecoilState(issueListState);
   const filteredIssueList = useRecoilValue(filteredIssueListState);
 
+  useEffect(() => {
+    refreshIssueList();
+  }, []);
   return (
     <IssueTableWrapper>
       <IssueTableHeader />

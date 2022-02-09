@@ -45,9 +45,9 @@ const LabelFormState = atom<LabelForm>({
   },
 });
 
-export type LabelFormMode = "add" | "close" | string;
+export type FormMode = "add" | "close" | string;
 
-const LabelFormModeState = atom<LabelFormMode>({
+const LabelFormModeState = atom<FormMode>({
   key: "LabelFormModeState",
   default: "close",
 });

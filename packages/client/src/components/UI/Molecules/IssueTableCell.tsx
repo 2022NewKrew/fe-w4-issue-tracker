@@ -5,6 +5,8 @@ import Icon from "@UI/Icon";
 import { Issue } from "@types";
 import { useIssueStore } from "@stores/issue";
 
+import { useClickLink } from "@hooks";
+
 interface Props {
   issue: Issue;
 }
@@ -12,6 +14,8 @@ interface Props {
 const IssueTableCell = ({ issue }: Props) => {
   const { selectedIssue, setSelectedIssue } = useIssueStore();
   const { id, num, title, labels, author, timestamp, milestone } = issue;
+
+  const onClickLink = useClickLink(id);
 
   return (
     <Wrapper className="TableCell">
@@ -27,7 +31,7 @@ const IssueTableCell = ({ issue }: Props) => {
           }
         }}
       />
-      <div className="table_content">
+      <div className="table_content" onClick={onClickLink}>
         <Atoms.Title size="medium">
           <Icon name="issue_open_blue" />
           {title}

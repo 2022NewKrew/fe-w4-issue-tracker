@@ -10,6 +10,7 @@ interface Props extends SProps {
   required?: boolean;
   pattern?: string;
   errormsg?: string;
+  autoFocus?: boolean;
 }
 
 const TextInput = ({
@@ -21,6 +22,7 @@ const TextInput = ({
   label,
   type = "FontSize",
   errormsg,
+  autoFocus = false,
 }: Props) => {
   const uuid = v4();
 
@@ -34,6 +36,7 @@ const TextInput = ({
         required={required}
         pattern={pattern}
         placeholder=" "
+        autoFocus={autoFocus}
       />
       <Atoms.Placeholder
         id={uuid}

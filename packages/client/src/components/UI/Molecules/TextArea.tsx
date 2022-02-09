@@ -24,9 +24,12 @@ const TextArea = ({ value, onChange, height, width }: Props) => {
         size="large"
         typing={value !== ""}
       />
-      <Atoms.Button shape="text" icon="paperclip" size="small">
-        파일 첨부하기
-      </Atoms.Button>
+      <Atoms.Button
+        shape="text"
+        icon="paperclip"
+        size="small"
+        text="파일 첨부하기"
+      />
     </SInputWrapper>
   );
 };

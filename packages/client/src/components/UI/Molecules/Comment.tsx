@@ -15,9 +15,7 @@ const Comment = ({ width, text, state = "initial" }: Props) => {
         <Icon name="smile" />
         {state === "initial" && [
           <Atoms.Label type="athor" />,
-          <Atoms.Button shape="text" size="small" icon="edit">
-            편집
-          </Atoms.Button>,
+          <Atoms.Button shape="text" size="small" icon="edit" text="편집" />,
         ]}
       </div>
       {text}

@@ -25,7 +25,7 @@ const IssueRegisterForm = () => {
 
   return (
     <Wrapper className="IssueRegisterForm" onSubmit={onSubmit}>
-      <Atoms.Title>새로운 이슈 작성</Atoms.Title>
+      <Atoms.Title size="display">새로운 이슈 작성</Atoms.Title>
       <div className="formBody">
         <Icon name="user_image_large" />
         <div>
@@ -52,16 +52,19 @@ const IssueRegisterForm = () => {
         />
       </div>
       <Atoms.ButtonGroup direction="row" gap={32}>
-        <Atoms.Button size="medium" shape="text" icon="x_square" link="/issue">
-          작성 취소
-        </Atoms.Button>
+        <Atoms.Button
+          size="medium"
+          shape="text"
+          icon="x_square"
+          link="/issue"
+          text="작성 취소"
+        />
         <Atoms.Button
           size="medium"
           type="submit"
           disabled={!(issueForm.title && issueForm.comment)}
-        >
-          완료
-        </Atoms.Button>
+          text="완료"
+        />
       </Atoms.ButtonGroup>
     </Wrapper>
   );

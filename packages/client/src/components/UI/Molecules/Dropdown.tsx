@@ -57,9 +57,13 @@ const Dropdown = ({
 
   return (
     <Wrapper className="Dropdown">
-      <Atoms.Button shape="text" size="medium" onClick={open} icon="arrow_down">
-        {indicator}
-      </Atoms.Button>
+      <Atoms.Button
+        shape="text"
+        size="medium"
+        onClick={open}
+        icon="arrow_down"
+        text={indicator}
+      />
       <Panel className="Panel" visible={visible} direction={direction}>
         <Atoms.Li header>{listTitle}</Atoms.Li>
         {createList(list)}

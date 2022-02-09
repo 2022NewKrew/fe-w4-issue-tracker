@@ -37,9 +37,8 @@ const IssueTableCell = ({ issue }: Props) => {
               type="custom"
               color={textColor}
               bgColor={backgroundColor}
-            >
-              {name}
-            </Atoms.Label>
+              text={name}
+            />
           ))}
         </Atoms.Title>
         <div className="table_content_info">

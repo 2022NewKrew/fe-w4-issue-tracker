@@ -8,12 +8,10 @@ const Login: React.FC = () => {
   return (
     <LoginLayout>
       <Icon name="logo_large" />
-      <Atoms.Button size="large">GitHub 계정으로 로그인</Atoms.Button>
+      <Atoms.Button size="large" text="GitHub 계정으로 로그인" />
       <span>or</span>
       <IDLoginForm />
-      <Atoms.Button size="small" shape="text" link="/issue">
-        회원가입
-      </Atoms.Button>
+      <Atoms.Button size="small" shape="text" link="/issue" text="회원가입" />
     </LoginLayout>
   );
 };

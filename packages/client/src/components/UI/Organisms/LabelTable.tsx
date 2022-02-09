@@ -15,17 +15,17 @@ const LabelTable = () => {
             type="custom"
             color={textColor}
             bgColor={backgroundColor}
-          >
-            {name}
-          </Atoms.Label>
+            text={name}
+          />
           {description}
           <Atoms.ButtonGroup gap={24}>
-            <Atoms.Button size="small" shape="text" icon="edit">
-              편집
-            </Atoms.Button>
-            <Atoms.Button size="small" shape="text" icon="trash_red">
-              삭제
-            </Atoms.Button>
+            <Atoms.Button size="small" shape="text" icon="edit" text="편집" />
+            <Atoms.Button
+              size="small"
+              shape="text"
+              icon="trash_red"
+              text="삭제"
+            />
           </Atoms.ButtonGroup>
         </Atoms.Li>
       )),

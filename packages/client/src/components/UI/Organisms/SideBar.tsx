@@ -72,9 +72,8 @@ const SideBar = ({
                 type="custom"
                 color={textColor}
                 bgColor={backgroundColor}
-              >
-                {name}
-              </Atoms.Label>
+                text={name}
+              />
             ))}
         </ul>
       </Atoms.Li>

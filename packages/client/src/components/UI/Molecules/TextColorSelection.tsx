@@ -16,18 +16,16 @@ const TextColorSelection = ({ value, onChange }: Props) => {
         size="medium"
         icon={value === "dark" ? "check" : "no_check"}
         active={value === "dark"}
-      >
-        어두운 색
-      </Atoms.Button>
+        text="어두운 색"
+      />
       <Atoms.Button
         onClick={() => onChange("light")}
         shape="text"
         size="medium"
         icon={value === "light" ? "check" : "no_check"}
         active={value === "light"}
-      >
-        밝은 색
-      </Atoms.Button>
+        text="밝은 색"
+      />
     </Wrapper>
   );
 };

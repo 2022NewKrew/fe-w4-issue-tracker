@@ -43,9 +43,8 @@ const IssueTableHeader = () => {
             data-status="open"
             onClick={onClick}
             active={filter.status === "open"}
-          >
-            열린 이슈({issueListCount.openCount})
-          </Atoms.Button>
+            text={`열린 이슈(${issueListCount.openCount})`}
+          />
           <Atoms.Button
             size="medium"
             shape="text"
@@ -53,9 +52,8 @@ const IssueTableHeader = () => {
             data-status="close"
             onClick={onClick}
             active={filter.status === "close"}
-          >
-            닫힌 이슈({issueListCount.closeCount})
-          </Atoms.Button>
+            text={`닫힌 이슈(${issueListCount.closeCount})`}
+          />
         </Atoms.ButtonGroup>
       )}
       <FilterTabs />

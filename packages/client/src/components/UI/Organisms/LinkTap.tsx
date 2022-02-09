@@ -7,9 +7,12 @@ const LinkTap = () => {
   return (
     <Wrapper className="LinkTap">
       <Taps />
-      <Atoms.Button size="small" link="/issue/new" icon="plus_white">
-        이슈 작성
-      </Atoms.Button>
+      <Atoms.Button
+        size="small"
+        link="/issue/new"
+        icon="plus_white"
+        text="이슈 작성"
+      />
     </Wrapper>
   );
 };

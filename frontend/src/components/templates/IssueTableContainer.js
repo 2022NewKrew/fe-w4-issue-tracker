@@ -43,7 +43,7 @@ export default function IssueTableContainer() {
 
   useEffect(() => {
     issuesActions.getIssues();
-    return () => setIssues(false);
+    return () => setIssues();
   }, []);
 
   const [selectedIssueIds, setSelectedIssueIds] = useState([]);

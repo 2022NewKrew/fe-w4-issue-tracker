@@ -4,7 +4,7 @@ import Header from "@components/organisms/Header";
 import IssueListHeader from "@components/organisms/IssueListHeader";
 import IssueTableContainer from "@components/templates/IssueTableContainer";
 
-import { Button } from "@components/atoms/buttons";
+import { Button } from "@components/atoms/Buttons";
 import { useUserActions } from "../_actions";
 
 export default function Main() {

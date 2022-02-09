@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
-import { SmallLink } from "@components/atoms/link";
+import { SmallLink } from "@components/atoms/Link";
 import { SmallText } from "@components/atoms/Text";
 import { DropdownPanel } from "@components/molecules/DropdownPanel";
 import { SmallLabel } from "@components/molecules/Labels";

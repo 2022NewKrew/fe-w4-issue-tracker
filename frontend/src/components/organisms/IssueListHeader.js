@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-import { FilterBar } from "@components/molecules/filterBar.js";
+import { FilterBar } from "@components/molecules/FilterBar.js";
 import { DropdownPanel } from "@components/molecules/DropdownPanel";
 import { Taps } from "@components/molecules/Taps.js";
-import { Button } from "@components/atoms/buttons";
+import { Button } from "@components/atoms/Buttons";
 import { ReactComponent as Plus } from "@assets/icons/plus.svg";
 
 const HeaderContainer = styled.div`

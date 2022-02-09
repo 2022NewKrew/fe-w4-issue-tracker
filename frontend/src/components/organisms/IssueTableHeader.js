@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-import { MediumTextButton } from "@components/atoms/buttons";
-import { SmallLink } from "@components/atoms/link";
-import { DropdownIndicators } from "@components/molecules/dropdownIndicators";
+import { MediumTextButton } from "@components/atoms/Buttons";
+import { SmallLink } from "@components/atoms/Link";
+import { DropdownIndicators } from "@components/molecules/DropdownIndicators";
 import { DropdownPanel } from "@components/molecules/DropdownPanel";
+
 import { ReactComponent as AlertCircle } from "@assets/icons/alertCircle.svg";
 import { ReactComponent as Archive } from "@assets/icons/archive.svg";
 import { ReactComponent as CheckboxInitial } from "@assets/icons/checkboxInitial.svg";
@@ -74,6 +75,10 @@ const Wrapper = styled.div`
 
   svg + p {
     margin-left: 32px;
+  }
+
+  button {
+    width: fit-content;
   }
 `;
 
@@ -147,6 +152,7 @@ export default function IssueTableHeader(props) {
     const [selectedStatus, setSelectedStatus] = useState("");
 
     const issuesActions = useIssuesActions();
+
     useEffect(() => {
       issuesActions.getAllUsers();
       issuesActions.getAllLabels();

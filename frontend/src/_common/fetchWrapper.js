@@ -52,7 +52,7 @@ function useFetchWrapper() {
           history.push("/login");
         }
 
-        const error = (data && data.message) || response.statusText;
+        const error = (data && data.message) || response;
         alert(error);
         return Promise.reject(error);
       }

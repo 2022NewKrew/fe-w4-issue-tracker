@@ -5,6 +5,11 @@ const issuesState = atom({
   default: null,
 });
 
+const issueState = atom({
+  key: "issue",
+  default: null,
+});
+
 const activeIssueTabState = atom({
   key: "activeIssueTab",
   default: "open",
@@ -136,6 +141,7 @@ const writerList = selector({
 
 export {
   issuesState,
+  issueState,
   activeIssueTabState,
   openIssuesState,
   closedIssuesState,

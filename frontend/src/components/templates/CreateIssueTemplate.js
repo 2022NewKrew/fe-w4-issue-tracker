@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import { TextInput } from "@components/atoms/textInputs";
+import { TextInput } from "@components/atoms/TextInputs";
 import TextArea from "@components/atoms/TextAreas";
 import { Sidebar } from "@components/molecules/Sidebars";
-import { MediumTextButton, Button } from "@components/atoms/buttons";
-import { SmallLink, MediumLink } from "@components/atoms/link";
+import { MediumTextButton, Button } from "@components/atoms/Buttons";
+import { SmallLink, MediumLink } from "@components/atoms/Link";
 
 import { ReactComponent as UserimageLarge } from "@assets/icons/userimageLarge.svg";
 import { ReactComponent as XSquare } from "@assets/icons/xsquare.svg";
@@ -54,31 +54,29 @@ export default function CreateIssueTemplate() {
   const [selectedLabel, setSelectedLabel] = useState([]);
   const [selectedMilestone, setSelectedMilestone] = useState([]);
   const [inputDisable, setInputDisable] = useState(false);
+
   const issuesActions = useIssuesActions();
 
   function handleIssueSubmit() {
-    console.log(
-      title,
-      comment,
-      selectedAssignee,
-      selectedLabel,
-      selectedMilestone
-    );
-
     const milestone =
-      selectedMilestone.length >= 1
-        ? selectedMilestone.map((milestone) => milestone.id)
-        : null;
+      selectedMilestone.length >= 1 ? selectedMilestone[0].id : null;
+
+    const assignees = selectedAssignee
+      ? selectedAssignee.map((assignee) => assignee.id)
+      : [];
+
+    const labels = selectedLabel ? selectedLabel.map((label) => label.id) : [];
 
     const data = {
       title: title,
       comments: comment,
-      assignees:
-        selectedAssignee && selectedAssignee.map((assignee) => assignee.id),
-      labels: selectedLabel && selectedLabel.map((label) => label.id),
+      assignees: assignees,
+      labels: labels,
       milestone: milestone,
     };
-    // console.log(data);
+
+    console.log(data);
+
     issuesActions.createIssues(data);
   }
   return (

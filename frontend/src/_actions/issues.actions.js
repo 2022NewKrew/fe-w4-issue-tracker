@@ -1,12 +1,19 @@
 import { useRecoilState, useSetRecoilState, useResetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 
-import { issuesState, milestoneList, labelList, usersList } from "../_state";
+import {
+  issuesState,
+  issueState,
+  milestoneList,
+  labelList,
+  usersList,
+} from "../_state";
 import { useFetchWrapper } from "../_common/fetchWrapper.js";
 
 export function useIssuesActions() {
   const [users, setUsers] = useRecoilState(usersList);
   const [issues, setIssues] = useRecoilState(issuesState);
+  const [issue, setIssue] = useRecoilState(issueState);
   const [milestones, setMilestones] = useRecoilState(milestoneList);
   const [labels, setLabels] = useRecoilState(labelList);
   const fetchWrapper = useFetchWrapper();
@@ -14,6 +21,7 @@ export function useIssuesActions() {
 
   return {
     getIssues,
+    getIssue,
     createIssues,
     getAllUsers,
     getAllMilestones,
@@ -21,10 +29,20 @@ export function useIssuesActions() {
   };
 
   async function getIssues() {
-    fetchWrapper
+    await fetchWrapper
       .get("/api/issues")
       .then((res) => {
         setIssues(res);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  async function getIssue(issueId) {
+    await fetchWrapper
+      .get(`/api/issues/${issueId}`)
+      .then((res) => {
+        setIssue(res);
+        console.log("RESRES", res);
       })
       .catch((err) => console.log(err));
   }
@@ -38,8 +56,8 @@ export function useIssuesActions() {
       .catch((err) => console.log(err));
   }
 
-  function getAllUsers() {
-    fetchWrapper
+  async function getAllUsers() {
+    await fetchWrapper
       .get("/api/users")
       .then((res) => {
         setUsers(res);
@@ -47,8 +65,8 @@ export function useIssuesActions() {
       .catch((err) => console.log(err));
   }
 
-  function getAllMilestones() {
-    fetchWrapper
+  async function getAllMilestones() {
+    await fetchWrapper
       .get("/api/milestones")
       .then((res) => {
         setMilestones(res);
@@ -56,8 +74,8 @@ export function useIssuesActions() {
       .catch((err) => console.log(err));
   }
 
-  function getAllLabels() {
-    fetchWrapper
+  async function getAllLabels() {
+    await fetchWrapper
       .get("/api/labels")
       .then((res) => {
         setLabels(res);

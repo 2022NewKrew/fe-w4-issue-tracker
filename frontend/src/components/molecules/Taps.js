@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 
-import { SmallLink } from "@components/atoms/link";
+import { SmallLink } from "@components/atoms/Link";
 import { SmallText } from "@components/atoms/Text";
 
 import { ReactComponent as Tag } from "@assets/icons/tag.svg";

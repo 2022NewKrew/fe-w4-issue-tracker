@@ -9,6 +9,7 @@ import IssueTableHeader from "./IssueTableHeader";
 import Taps from "./Taps";
 import TextArea from "./TextArea";
 import TextInput from "./TextInput";
+import * as CustomButton from "./CustomButton";
 
 export {
   ColorCode,
@@ -22,4 +23,5 @@ export {
   Taps,
   TextArea,
   TextInput,
+  CustomButton,
 };

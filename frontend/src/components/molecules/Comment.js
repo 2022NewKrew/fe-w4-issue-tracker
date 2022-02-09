@@ -52,7 +52,7 @@ const Header = styled.div`
   ${(props) => {
     if (props.type === "initial") {
       return css`
-        background-color: ${(props) => props.theme.greyscale.offWhite};
+        background-color: ${(props) => props.theme.greyscale.background};
         border-bottom: 1px solid ${(props) => props.theme.greyscale.line};
       `;
     } else if (props.type === "open") {

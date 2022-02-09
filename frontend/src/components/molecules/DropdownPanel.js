@@ -82,7 +82,13 @@ export function DropdownPanel(props) {
 
   function showSelectionIcon(type, menu) {
     if (type !== "modify") {
-      if (selectedMenus && selectedMenus.includes(menu)) {
+      if (
+        selectedMenus &&
+        selectedMenus.filter(
+          (selectedMenu) =>
+            JSON.stringify(selectedMenu) === JSON.stringify(menu)
+        ).length >= 1
+      ) {
         return <CheckonCircle />;
       } else {
         return <CheckoffCircle />;

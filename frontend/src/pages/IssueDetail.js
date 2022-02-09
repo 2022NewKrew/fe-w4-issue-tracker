@@ -7,6 +7,7 @@ import { issueState } from "../_state";
 
 import Header from "@components/organisms/Header";
 import IssueDetailHeader from "@components/organisms/IssueDetailHeader";
+import IssueDetailContent from "@components/organisms/IssueDetailContent";
 
 import { useIssuesActions } from "../_actions/issues.actions";
 
@@ -26,6 +27,7 @@ export default function IssueDetail() {
       <Header />
       <IssueDetailHeader />
       <LineTop />
+      <IssueDetailContent />
       <Comment
         username='user1'
         type='initial'

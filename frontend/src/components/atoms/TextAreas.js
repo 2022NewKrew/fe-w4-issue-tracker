@@ -20,6 +20,7 @@ const TextInputContainer = styled.div`
 
 const TextAreaInput = styled.textarea`
   width: 100%;
+  height: 80%;
 
   background: none;
   border: none;

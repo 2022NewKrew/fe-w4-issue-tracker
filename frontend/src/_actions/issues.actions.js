@@ -42,7 +42,6 @@ export function useIssuesActions() {
       .get(`/api/issues/${issueId}`)
       .then((res) => {
         setIssue(res);
-        console.log("RESRES", res);
       })
       .catch((err) => console.log(err));
   }

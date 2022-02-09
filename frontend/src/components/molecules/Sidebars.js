@@ -93,7 +93,7 @@ const ListWrapper = styled.div`
 `;
 
 const MilestoneWrapper = styled.div`
-  padding: 0 32px;
+  padding: 0 32px 32px 32px;
   margin-top: 4px;
 
   progress {
@@ -176,7 +176,7 @@ export function Sidebar({
         return (
           <MilestoneWrapper key={milestone.id}>
             <ProgressIndicator openIssues={5} closedIssues={12} />
-            <SmallText color='label'>{milestone.name}</SmallText>
+            <SmallText color='label'>{milestone.title}</SmallText>
           </MilestoneWrapper>
         );
       })

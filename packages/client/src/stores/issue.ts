@@ -170,20 +170,20 @@ export const useAddIssueStore = () => {
       setIssueForm((prev) => ({ ...prev, title: target.value })),
     setComment: ({ target }: any) =>
       setIssueForm((prev) => ({ ...prev, comment: target.value })),
-    setAssignees: ({ target }: any) =>
+    setAssignees: (id: string) =>
       setIssueForm((prev) => ({
         ...prev,
-        assignees: arrayToggle(prev.assignees, target.dataset.id),
+        assignees: arrayToggle(prev.assignees, id),
       })),
-    setLabels: ({ target }: any) =>
+    setLabels: (id: string) =>
       setIssueForm((prev) => ({
         ...prev,
-        labels: arrayToggle(prev.labels, target.dataset.id),
+        labels: arrayToggle(prev.labels, id),
       })),
-    setMilestone: ({ target }: any) =>
+    setMilestone: (id: string) =>
       setIssueForm((prev) => ({
         ...prev,
-        milestone: target.dataset.id,
+        milestone: id,
       })),
   };
 };

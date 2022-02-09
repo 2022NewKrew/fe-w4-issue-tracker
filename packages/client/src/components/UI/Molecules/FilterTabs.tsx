@@ -2,7 +2,7 @@ import { Dropdown } from "@UI/Molecules";
 import styled from "@emotion/styled";
 
 import { useIssueStore, useModifyIssueStatusData } from "@stores/issue";
-import { MouseEvent, useCallback } from "react";
+import { useCallback } from "react";
 import { useUserStore } from "@stores/user";
 import { useMilestoneStore } from "@stores/milestone";
 import { useLabelStore } from "@stores/label";
@@ -18,22 +18,16 @@ const FilterTabs = () => {
   const { mutate: modifyIssueStatus } = useModifyIssueStatusData();
 
   const onSelect = useCallback(
-    (
-      { target }: MouseEvent<HTMLElement>,
-      type: "assignees" | "label" | "milestone" | "author"
-    ) => {
-      const li = (target as HTMLElement).closest("li");
-      if (!li || !li.dataset.id) return;
-      const selectedValue = li.dataset.id;
+    (type: "assignees" | "label" | "milestone" | "author", id: string) => {
       if (type === "label") {
         setFilter((prev) => ({
           ...prev,
-          label: arrayToggle(prev.label, selectedValue),
+          label: arrayToggle(prev.label, id),
         }));
       } else {
         setFilter((prev) => ({
           ...prev,
-          [type]: prev[type] === selectedValue ? null : selectedValue,
+          [type]: prev[type] === id ? null : id,
         }));
       }
     },
@@ -41,12 +35,11 @@ const FilterTabs = () => {
   );
 
   const changeIssuesState = useCallback(
-    async ({ target }: React.MouseEvent) => {
-      const li = (target as HTMLElement).closest("li");
-      if (!li || !li.dataset.id) return;
-      const status = li.dataset.id as IssueStatus;
-      await Promise.all(
-        selectedIssue.map((issueId) => modifyIssueStatus({ issueId, status }))
+    (id: string) => {
+      Promise.all(
+        selectedIssue.map((issueId) =>
+          modifyIssueStatus({ issueId, status: id as IssueStatus })
+        )
       );
     },
     [selectedIssue]
@@ -69,28 +62,28 @@ const FilterTabs = () => {
           <Dropdown
             key="assignees"
             select={filter.assignees}
-            onSelect={(e) => onSelect(e, "assignees")}
+            onSelect={(id) => onSelect("assignees", id)}
             indicator="담당자"
             list={userList}
           />,
           <Dropdown
             key="label"
             select={filter.label}
-            onSelect={(e) => onSelect(e, "label")}
+            onSelect={(id) => onSelect("label", id)}
             indicator="레이블"
             list={labelList}
           />,
           <Dropdown
             key="milestone"
             select={filter.milestone}
-            onSelect={(e) => onSelect(e, "milestone")}
+            onSelect={(id) => onSelect("milestone", id)}
             indicator="마일스톤"
             list={milestoneList}
           />,
           <Dropdown
             key="author"
             select={filter.author}
-            onSelect={(e) => onSelect(e, "author")}
+            onSelect={(id) => onSelect("author", id)}
             indicator="작성자"
             list={userList}
           />,

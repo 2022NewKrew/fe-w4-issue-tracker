@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import { Size } from "src/@types/emotion";
 import { IconName, LayoutProps, Theme } from "@emotion/react";
 import { useClickLink } from "@hooks";
+import classnames from "classnames";
 
 export interface Props extends SProps, LayoutProps {
   onClick?: (e?: any) => void;
@@ -13,6 +14,7 @@ export interface Props extends SProps, LayoutProps {
   link?: string;
   type?: "button" | "submit";
   active?: boolean;
+  className?: string;
 }
 
 const Button = ({
@@ -27,12 +29,13 @@ const Button = ({
   type = "button",
   active = false,
   text,
+  className,
   ...props
 }: Props) => {
   const onClickLink = useClickLink(link);
   return (
     <SButton
-      className={active ? "active" : ""}
+      className={classnames({ active }, className)}
       type={type}
       shape={shape}
       color={color}

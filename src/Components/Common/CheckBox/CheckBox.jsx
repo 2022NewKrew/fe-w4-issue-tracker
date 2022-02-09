@@ -11,6 +11,10 @@ export const CHECK_BOX_TYPE = {
   CIRCLE: 'circle',
 }
 
+const CheckBoxContainer = styled.div`
+  cursor: pointer;
+`
+
 const CheckBox = ({ type, isSelected, onClick }) => {
   const checkedIcon = useMemo(() => {
     return type === CHECK_BOX_TYPE.RECT ? (
@@ -28,7 +32,7 @@ const CheckBox = ({ type, isSelected, onClick }) => {
     ) : null
   }, [type])
 
-  return <div onClick={onClick}>{isSelected ? checkedIcon : uncheckedIcon}</div>
+  return <CheckBoxContainer onClick={onClick}>{isSelected ? checkedIcon : uncheckedIcon}</CheckBoxContainer>
 }
 
 CheckBox.propTypes = {

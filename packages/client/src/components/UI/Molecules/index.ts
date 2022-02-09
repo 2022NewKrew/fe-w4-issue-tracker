@@ -4,6 +4,7 @@ import Dropdown from "./Dropdown";
 import FilterTabs from "./FilterTabs";
 import TextColorSelection from "./TextColorSelection";
 import Progress from "./Progress";
+import IssueInfo from "./IssueInfo";
 import IssueTableCell from "./IssueTableCell";
 import IssueTableHeader from "./IssueTableHeader";
 import Taps from "./Taps";
@@ -18,6 +19,7 @@ export {
   FilterTabs,
   TextColorSelection,
   Progress,
+  IssueInfo,
   IssueTableCell,
   IssueTableHeader,
   Taps,

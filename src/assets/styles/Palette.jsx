@@ -5,7 +5,7 @@ export const labelGS = '#6E7191';
 export const placeHolderGS = '#A0A3BD';
 export const lineGS = '#D9DBE9';
 export const inputBackgroundGS = '#EFF0F6';
-export const backgroundGS = '#D9DBE9';
+export const backgroundGS = '#F7F7FC';
 export const offWhiteGS = '#FEFEFE';
 
 // Colors

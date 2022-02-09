@@ -10,15 +10,17 @@ export const EmptyRow = ({ emptyType }: IProps) => {
     const NO_ISSUE_MESSAGE = '등록된 이슈가 없습니다';
     const NOTHING_FOUND_MESSAGE = '검색과 일치하는 결과가 없습니다';
     const ERROR_OCCURED_MESSAGE = '에러가 발생했습니다';
-
     let message = '';
     switch (emptyType) {
         case 'none':
             message = NO_ISSUE_MESSAGE;
+            break;
         case 'filter':
             message = NOTHING_FOUND_MESSAGE;
+            break;
         case 'error':
             message = ERROR_OCCURED_MESSAGE;
+            break;
     }
     return <EmptyRowStyle>{message}</EmptyRowStyle>;
 };

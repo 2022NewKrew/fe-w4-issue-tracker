@@ -143,7 +143,7 @@
             "description": "기능구현 - api서버와 통신"
         }
     ],
-    "assigned": [
+    "assignments": [
         {
             "id": 0,
             "userId": 0,
@@ -163,6 +163,11 @@
             "id": 3,
             "userId": 2,
             "issueId": 5
+        },
+        {
+            "id": 4,
+            "userId": 2,
+            "issueId": 3
         }
     ],
     "labelings": [

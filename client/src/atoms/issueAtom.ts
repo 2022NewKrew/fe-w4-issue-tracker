@@ -75,7 +75,6 @@ export const issueFieldFilterSelector = selector<IIssue[]>({
 export const issueStatusCountSelector = selector<number[]>({
     key: 'issueStatusCountSelector',
     get: ({ get }) => {
-        // const issues = get(allIssuesAtom);
         const issues = get(issueFieldFilterSelector);
         const openCount = issues.filter((issue: IIssue) => issue.status === 'open').length;
         const closeCount = issues.filter((issue: IIssue) => issue.status === 'close').length;
@@ -86,7 +85,6 @@ export const issueStatusCountSelector = selector<number[]>({
 export const issueFilterSelector = selector<IIssue[]>({
     key: 'issueFilterSelector',
     get: ({ get }) => {
-        // const issues = get(allIssuesAtom);
         const issues = get(issueFieldFilterSelector);
         const filter = get(issuesFilterState);
 

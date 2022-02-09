@@ -47,6 +47,11 @@ declare module '@types' {
         issueId: number;
         labelId: number;
     }
+    interface IAssign {
+        id: number;
+        userId: number;
+        issueId: number;
+    }
     interface IFieldFilterState {
         assignee: number;
         label: number[];

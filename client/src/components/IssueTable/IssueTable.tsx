@@ -80,9 +80,9 @@ export const IssueTable = () => {
             },
         });
     };
-    // fallback을 state타입별로 다르게 줄 수 있는지 알아보기
+    // [TODO] fallback을 state타입별로 다르게 줄 수 있는지 알아보기
     return (
-        <React.Suspense fallback={<EmptyRow emptyType="error" />}>
+        <React.Suspense fallback={<EmptyRow emptyType="none" />}>
             <TableContainer selectMode={selectMode}>
                 <IssueTableHeader selectMode={selectMode} onChangeHandler={onHeaderChangeHandler} />
                 {renderTableData(issueDatas.contents)}

@@ -1,10 +1,11 @@
 import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+
 import { ReactComponent as CheckedBoxIcon } from '../../../Assets/Icon/ic-checkbox-checked.svg'
 import { ReactComponent as CheckedCircleIcon } from '../../../Assets/Icon/ic-checkcircle-checked.svg'
 import { ReactComponent as UncheckedBoxIcon } from '../../../Assets/Icon/ic-checkbox-unchecked.svg'
 import { ReactComponent as UncheckedCircleIcon } from '../../../Assets/Icon/ic-checkcircle-unchecked.svg'
-import styled from 'styled-components'
 
 export const CHECK_BOX_TYPE = {
   RECT: 'rect',

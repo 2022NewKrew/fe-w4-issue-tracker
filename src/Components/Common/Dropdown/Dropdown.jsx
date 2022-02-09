@@ -1,11 +1,13 @@
 import React, { useCallback, useRef, useState } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
+
 import Button, { BUTTON_SIZE, BUTTON_TYPE } from '../Button/Button'
 import DropdownPanel from './DropdownPanel'
-import { ReactComponent as DropdownIcon } from '../../../Assets/Icon/ic-dropdown.svg'
 import useOutsideClickEventListener from '../../../Services/Hooks/useOutsideClickEventListener'
-import PropTypes from 'prop-types'
 import { DROPDOWN_ITEM_TYPE } from './DropdownPanelItem'
+
+import { ReactComponent as DropdownIcon } from '../../../Assets/Icon/ic-dropdown.svg'
 
 const DropdownContainer = styled.div`
   width: 100%;

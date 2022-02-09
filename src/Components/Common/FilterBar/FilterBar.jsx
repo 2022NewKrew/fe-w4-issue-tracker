@@ -1,14 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
+
 import TextInput, {
   TEXT_INPUT_STATE,
   TEXT_INPUT_TYPE,
 } from '../Input/TextInput'
-import { ReactComponent as SearchIcon } from '../../../Assets/Icon/ic-search.svg'
 import Dropdown from '../Dropdown/Dropdown'
-import { COLOR } from '../../../Assets/Styles/commonStyle'
 import { DROPDOWN_ITEM_TYPE } from '../Dropdown/DropdownPanelItem'
+
+import { ReactComponent as SearchIcon } from '../../../Assets/Icon/ic-search.svg'
+
+import { COLOR } from '../../../Assets/Styles/commonStyle'
 
 const DropdownContainer = styled.div`
   width: 128px;
@@ -24,7 +27,7 @@ const buttonPaddingStyle = css`
   padding: 0 24px;
 `
 
-const FilterBar = (props) => {
+const FilterBar = () => {
   return (
     <TextInput
       type={TEXT_INPUT_TYPE.FILTER_BAR}

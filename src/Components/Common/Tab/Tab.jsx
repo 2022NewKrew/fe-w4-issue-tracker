@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { COLOR } from '../../../Assets/Styles/commonStyle'
-import TabItem from './TabItem'
 import PropTypes from 'prop-types'
+
+import TabItem from './TabItem'
+
+import { COLOR } from '../../../Assets/Styles/commonStyle'
 
 const TabItemList = styled.ul`
   display: inline-flex;

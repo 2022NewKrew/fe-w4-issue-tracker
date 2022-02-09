@@ -1,11 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { COLOR } from '../../Assets/Styles/commonStyle'
+
 import IssueItem from './IssueItem'
 import Dropdown from '../Common/Dropdown/Dropdown'
 import { DROPDOWN_ITEM_TYPE } from '../Common/Dropdown/DropdownPanelItem'
 
+import { COLOR } from '../../Assets/Styles/commonStyle'
+
+//TODO: 이슈가 하나도 없을때 Header의 border 아래 모서리에 생기는 문제 해결
 const Container = styled.div`
   width: 1280px;
   border: 1px solid ${COLOR.LINE};

@@ -1,25 +1,22 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+
+import { readIssue } from '../Services/DB/firebase'
+
 import FilterBar from '../Components/Common/FilterBar/FilterBar'
-import { ReactComponent as TagIcon } from '../Assets/Icon/ic-tag.svg'
-import { ReactComponent as MilestonIcon } from '../Assets/Icon/ic-milestone.svg'
 import Tab from '../Components/Common/Tab/Tab'
+import IssueList from '../Components/Issue/IssueList'
 import Button, {
   BUTTON_SIZE,
   BUTTON_TYPE,
 } from '../Components/Common/Button/Button'
+
+import { ReactComponent as TagIcon } from '../Assets/Icon/ic-tag.svg'
+import { ReactComponent as MilestonIcon } from '../Assets/Icon/ic-milestone.svg'
 import { ReactComponent as PlusIcon } from '../Assets/Icon/ic-plus.svg'
-import IssueList from '../Components/Issue/IssueList'
-import {
-  createIssue,
-  createLabel,
-  createMilestone,
-  createUser,
-  STATE_TYPE,
-} from '../Services/DB/data'
-import { COLOR } from '../Assets/Styles/commonStyle'
-import { readIssue } from '../Services/DB/firebase'
+
+import { STATE_TYPE } from '../Services/DB/data'
 
 const Container = styled.div`
   width: 100%;

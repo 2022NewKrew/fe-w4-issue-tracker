@@ -1,7 +1,8 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { COLOR, FONT } from '../../../Assets/Styles/commonStyle'
 import PropTypes from 'prop-types'
+
+import { FONT } from '../../../Assets/Styles/commonStyle'
 
 export const LABEL_SIZE = {
   LARGE: 'large',

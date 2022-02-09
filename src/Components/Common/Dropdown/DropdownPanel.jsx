@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { COLOR, FONT } from '../../../Assets/Styles/commonStyle'
+
 import DropdownPanelItem, { DROPDOWN_ITEM_TYPE } from './DropdownPanelItem'
+
+import { COLOR, FONT } from '../../../Assets/Styles/commonStyle'
 
 const ReferencePoint = styled.div`
   position: relative;

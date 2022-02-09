@@ -1,11 +1,14 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { COLOR, FONT } from '../../Assets/Styles/commonStyle'
+
 import CheckBox, { CHECK_BOX_TYPE } from '../Common/CheckBox/CheckBox'
+import Label, { LABEL_SIZE } from '../Common/Label/Label'
+
 import { ReactComponent as AlertIcon } from '../../Assets/Icon/ic-alert.svg'
 import { ReactComponent as MilestoneIcon } from '../../Assets/Icon/ic-milestone.svg'
-import Label, { LABEL_SIZE } from '../Common/Label/Label'
+
+import { COLOR, FONT } from '../../Assets/Styles/commonStyle'
 import { STATE_TYPE } from '../../Services/DB/data'
 
 const IssueItemContainer = styled.div`

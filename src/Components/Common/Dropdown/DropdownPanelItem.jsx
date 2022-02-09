@@ -1,9 +1,11 @@
 import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { COLOR, FONT } from '../../../Assets/Styles/commonStyle'
+
 import { ReactComponent as CheckedCircleIcon } from '../../../Assets/Icon/ic-checkcircle-checked.svg'
 import { ReactComponent as UncheckedCircleIcon } from '../../../Assets/Icon/ic-checkcircle-unchecked.svg'
+
+import { COLOR, FONT } from '../../../Assets/Styles/commonStyle'
 
 export const DROPDOWN_ITEM_TYPE = {
   NORMAL: 'normal',

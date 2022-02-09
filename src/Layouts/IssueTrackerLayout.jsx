@@ -2,7 +2,9 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+
 import { ReactComponent as HeaderLogo } from '../Assets/Logo/logo-medium.svg'
+
 import { COLOR } from '../Assets/Styles/commonStyle'
 
 const Container = styled.div`

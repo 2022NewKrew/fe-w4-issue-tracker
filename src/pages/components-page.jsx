@@ -10,7 +10,7 @@ import sizes from "@styles/constants/sizes";
 const ComponentsPage = () => {
   return (
     <div>
-      <h1>ComponentsPage</h1>
+      <h1>TEST</h1>
       <div>
         <h2>Containers</h2>
         <ComponentContainer>

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 import HeaderContainer from "@components/containers/header-container";
 import StandardButton from "@components/buttons/standard-button";
@@ -114,11 +115,17 @@ const IssueList = () => {
         ></TextInput>
       </FilterBar>
       <TapsLabelMilestone>
-        <StandardButton componentSize={sizes.SMALL}>레이블</StandardButton>
-        <StandardButton componentSize={sizes.SMALL}>마일스톤</StandardButton>
+        <Link to="/label-list">
+          <StandardButton componentSize={sizes.SMALL}>레이블</StandardButton>
+        </Link>
+        <Link to="/milestone-list">
+          <StandardButton componentSize={sizes.SMALL}>마일스톤</StandardButton>
+        </Link>
       </TapsLabelMilestone>
       <ButtonIssueAdd>
-        <StandardButton componentSize={sizes.SMALL}>이슈 작성</StandardButton>
+        <Link to="/new-issue">
+          <StandardButton componentSize={sizes.SMALL}>이슈 작성</StandardButton>
+        </Link>
       </ButtonIssueAdd>
       <IssueTable>
         <IssueTableHeader>

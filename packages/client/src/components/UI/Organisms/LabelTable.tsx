@@ -9,9 +9,13 @@ const LabelTable = () => {
 
   const createLabelList = useCallback(
     (labelList: Label[]) =>
-      labelList.map(({ id, name, description, backgroundColor }) => (
+      labelList.map(({ id, name, description, backgroundColor, textColor }) => (
         <Atoms.Li key={id}>
-          <Atoms.Label type="custom" color={backgroundColor}>
+          <Atoms.Label
+            type="custom"
+            color={textColor}
+            bgColor={backgroundColor}
+          >
             {name}
           </Atoms.Label>
           {description}
@@ -44,6 +48,7 @@ const Wrapper = styled.ul`
   border-radius: 16px;
   overflow: hidden;
   & > li {
+    padding: 0 32px;
     & > .Label {
       position: absolute;
       left: 32px;
@@ -53,6 +58,13 @@ const Wrapper = styled.ul`
       & > svg {
         opacity: 1;
       }
+    }
+    &:first-of-type {
+      height: 64px;
+    }
+    &:not(:first-of-type) {
+      height: 100px;
+      padding-left: 240px;
     }
   }
 `;

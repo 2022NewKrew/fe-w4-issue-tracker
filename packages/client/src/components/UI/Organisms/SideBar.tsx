@@ -66,8 +66,13 @@ const SideBar = ({
         <ul>
           {labelList
             .filter(({ id }) => labels.includes(id))
-            .map(({ id, name, backgroundColor }) => (
-              <Atoms.Label key={id} type="custom" color={backgroundColor}>
+            .map(({ id, name, backgroundColor, textColor }) => (
+              <Atoms.Label
+                key={id}
+                type="custom"
+                color={textColor}
+                bgColor={backgroundColor}
+              >
                 {name}
               </Atoms.Label>
             ))}

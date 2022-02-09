@@ -2,7 +2,7 @@ import ColorCode from "./ColorCode";
 import Comment from "./Comment";
 import Dropdown from "./Dropdown";
 import FilterTabs from "./FilterTabs";
-import OptionSelection from "./OptionSelection";
+import TextColorSelection from "./TextColorSelection";
 import Progress from "./Progress";
 import IssueTableCell from "./IssueTableCell";
 import IssueTableHeader from "./IssueTableHeader";
@@ -15,7 +15,7 @@ export {
   Comment,
   Dropdown,
   FilterTabs,
-  OptionSelection,
+  TextColorSelection,
   Progress,
   IssueTableCell,
   IssueTableHeader,

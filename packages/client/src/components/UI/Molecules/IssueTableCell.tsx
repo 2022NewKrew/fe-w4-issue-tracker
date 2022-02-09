@@ -11,7 +11,7 @@ interface Props {
 
 const IssueTableCell = ({ issue }: Props) => {
   const { selectedIssue, setSelectedIssue } = useIssueStore();
-  const { id, num, title, author, timestamp, labels, milestone } = issue;
+  const { id, num, title, labels, author, timestamp, milestone } = issue;
 
   return (
     <Wrapper className="TableCell">
@@ -28,11 +28,16 @@ const IssueTableCell = ({ issue }: Props) => {
         }}
       />
       <div className="table_content">
-        <Atoms.Title type="issueList">
+        <Atoms.Title size="medium">
           <Icon name="issue_open_blue" />
           {title}
-          {labels.map(({ id, name, backgroundColor }) => (
-            <Atoms.Label key={id} type="custom" color={backgroundColor}>
+          {labels.map(({ id, name, backgroundColor, textColor }) => (
+            <Atoms.Label
+              key={id}
+              type="custom"
+              color={textColor}
+              bgColor={backgroundColor}
+            >
               {name}
             </Atoms.Label>
           ))}
@@ -72,6 +77,20 @@ const Wrapper = styled(Atoms.Li)`
     justify-content: space-between;
     position: relative;
     cursor: pointer;
+    & > h2 {
+      display: flex;
+      align-items: center;
+      padding-left: 24px;
+      position: relative;
+      font-weight: bold;
+      svg {
+        top: 5px;
+        left: 0;
+      }
+      label {
+        margin-left: 8px;
+      }
+    }
     .table_content_info span {
       margin-right: 16px;
       ${({ theme }) => theme.FontSize.small};

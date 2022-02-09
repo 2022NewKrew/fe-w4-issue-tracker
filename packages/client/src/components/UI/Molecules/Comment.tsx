@@ -61,7 +61,7 @@ const Wrapper = styled.article<SProps>`
       top: 18px;
       right: 127px;
     }
-    & > .Button {
+    & > button {
       position: absolute;
       top: 12px;
       right: 60px;

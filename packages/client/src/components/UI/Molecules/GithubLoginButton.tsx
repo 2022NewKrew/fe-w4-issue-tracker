@@ -12,7 +12,7 @@ const GithubLoginButton = () => {
 export default GithubLoginButton;
 
 const Wrapper = styled.div`
-  & > .Button {
+  & > button {
     background: #14142b;
     & > a {
       color: var(--offWhite);

@@ -5,12 +5,13 @@ import { useClickLink } from "@hooks";
 import { LayoutProps } from "@emotion/react";
 
 const AppLayout = ({ children }: LayoutProps) => {
-  const onClickLink = useClickLink("/login");
+  const goIssue = useClickLink("/issue");
+  const goLogin = useClickLink("/login");
   return (
     <Wrapper>
       <header>
-        <Icon name="logo_medium" />
-        <Icon name="user_image_large" onClick={onClickLink} />
+        <Icon name="logo_medium" onClick={goIssue} />
+        <Icon name="user_image_large" onClick={goLogin} />
       </header>
       <main>{children}</main>
     </Wrapper>

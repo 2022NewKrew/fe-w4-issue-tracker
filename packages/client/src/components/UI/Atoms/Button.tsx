@@ -30,7 +30,7 @@ const Button = ({
   const onClickLink = useClickLink(link);
   return (
     <SButton
-      className={`Button ${active ? "active" : ""}`}
+      className={active ? "active" : ""}
       type={type}
       shape={shape}
       color={color}

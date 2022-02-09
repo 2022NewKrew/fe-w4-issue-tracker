@@ -20,7 +20,7 @@ const Wrapper = styled.div`
   position: absolute;
   right: 0;
   display: flex;
-  & > .Button:last-of-type {
+  & > button:last-of-type {
     margin-left: 16px;
   }
 `;

@@ -54,7 +54,7 @@ const SInputWrapper = styled(Atoms.InputWrapper)<SProps>`
       padding-top: 24px;
     }
   }
-  & > .Button {
+  & > button {
     position: absolute;
     left: 0;
     bottom: 0;

@@ -61,6 +61,10 @@ const liArray=itemArray.map({itemName}=>{
 })
 ```
 
+It is not optimal to pass a new anonymous function instead of an exisiting function,
+but latter one is against the React's policy. Though the latter one has better
+performance.
+
 ## useMemo or useCallback with Object or Array Deps
 Are React's useMemo or useCallback useful when the dependencies are
 `Array` or `Object`? Consider the following component.
@@ -84,3 +88,6 @@ React uses `Object.is` function to determin whether deps have been changed.
 Isn't it the same case for `useCallback` and `useMemo`?
 That is, are they really use memo when deps had been changed and
 return to the previous value?
+
+Yes, React does not know whether they are comparable even if objects and arrays
+have the same keys and values. If it is too costly, then serialize them such as JSON.

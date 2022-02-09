@@ -9,7 +9,7 @@ import {
 } from "@styles/templates/type-template";
 
 const textTemplate = css`
-  font-family: ${typography.DEFAULT_FONT_FAMILY};
+  font-family: ${typography.FONT_FAMILY};
   font-style: normal;
   font-weight: normal;
 `;

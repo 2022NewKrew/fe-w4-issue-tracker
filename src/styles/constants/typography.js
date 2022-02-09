@@ -1,5 +1,5 @@
 const typography = {
-  DEFAULT_FONT_FAMILY: "Noto Sans KR",
+  FONT_FAMILY: "Noto Sans KR",
   LOGOTYPE_FONT_FAMILY: "Montserrat",
   LOGOTYPE_LETTER_SPACING: "-0.04em",
   LOGOTYPE_LARGE_FONT_SIZE: "56px",

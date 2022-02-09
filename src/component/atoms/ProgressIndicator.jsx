@@ -1,8 +1,19 @@
 import styled, { css } from "styled-components";
 import { cssFontSize } from "./Text";
 
-export const ProgressIndicatorBar = styled.div(({ openIssueLength, closeIssueLength }) => {
+const milestoneInfo = (milestone) => {
+  const openIssueLength = milestone.issues.filter(({ status }) => status === "open").length;
+  const closeIssueLength = milestone.issues.length - openIssueLength;
   const percentage = openIssueLength + closeIssueLength > 0 ? (closeIssueLength * 100) / (openIssueLength + closeIssueLength) : 0;
+
+  return { openIssueLength, closeIssueLength, percentage };
+};
+
+export const ProgressIndicatorBar = styled.div(({ milestone, percentage }) => {
+  if (percentage === undefined) {
+    const { percentage: generated } = milestoneInfo(milestone);
+    percentage = generated;
+  }
 
   return css`
     width: 244px;
@@ -12,12 +23,12 @@ export const ProgressIndicatorBar = styled.div(({ openIssueLength, closeIssueLen
   `;
 });
 
-export const ProgressIndicator = ({ openIssueLength, closeIssueLength, ...props }) => {
-  const percentage = openIssueLength + closeIssueLength > 0 ? (closeIssueLength * 100) / (openIssueLength + closeIssueLength) : 0;
+export const ProgressIndicator = ({ milestone, ...props }) => {
+  const { openIssueLength, closeIssueLength, percentage } = milestoneInfo(milestone);
 
   return (
     <div {...props}>
-      <ProgressIndicatorBar openIssueLength={openIssueLength} closeIssueLength={closeIssueLength} />
+      <ProgressIndicatorBar milestone={milestone} />
       <TextWrapper>
         <span>{`${percentage.toFixed(0)}%`}</span>
         <StyledSpan>{`열린 이슈 ${openIssueLength}`}</StyledSpan>

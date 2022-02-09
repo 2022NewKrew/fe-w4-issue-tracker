@@ -1,22 +1,7 @@
 import "@emotion/react";
+import * as icons from "@assets/icons";
 
-type LARGE = "large";
-type MEDIUM = "medium";
-type SMALL = "small";
-
-type TITLE = "title";
-type XSMALL = "xsmall";
-
-type STANDARD = "standard";
-type SECONDARY = "secondary";
-type TEXT = "text";
-
-type PRIMARY = "primary";
-type SECONDARY = "secondary";
-type ERROR = "error";
-type SUCCESS = "success";
-
-type greyscaleKey =
+type Greyscale =
   | "titleActive"
   | "body"
   | "label"
@@ -26,13 +11,8 @@ type greyscaleKey =
   | "background"
   | "offWhite";
 
-type sizeType = LARGE | MEDIUM | SMALL;
-type textSizeType = TITLE | sizeType | XSMALL;
-
-type colorType = PRIMARY | SECONDARY | ERROR | SUCCESS;
-// type colorsTone = "default" | "dark" | "light";
-
-type buttonType = STANDARD | SECONDARY | TEXT;
+type Size = "large" | "medium" | "small";
+type FontSize = "title" | Size | "xsmall";
 
 interface IColorDetail {
   default: string;
@@ -42,13 +22,20 @@ interface IColorDetail {
 
 declare module "@emotion/react" {
   export interface Theme {
-    text: { [key in textSizeType]: SerializedStyles };
-    greyscale: {
-      [key in greyscaleKey]: string;
-    };
-    colors: {
-      [key in colorType]: IColorDetail;
-    };
-    flexCenter: SerializedStyles;
+    FontSize: { [key in FontSize]: string };
+    Greyscale: { [key in Greyscale]: string };
+    Colors: { [key in color]: IColorDetail };
+    FlexCenter: string;
+  }
+  export interface LayoutProps {
+    children?: React.ReactNode;
+  }
+
+  // icon
+  export type IconName = keyof typeof icons;
+
+  export interface IconProps extends React.SVGProps<SVGElement> {
+    name: IconName;
+    className?: string;
   }
 }

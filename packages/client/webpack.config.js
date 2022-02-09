@@ -23,16 +23,15 @@ module.exports = {
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx"],
     alias: {
-      "@components": path.resolve(__dirname, "./src/components"),
+      "@pages": path.resolve(__dirname, "./src/components/pages"),
+      "@templetes": path.resolve(__dirname, "./src/components/templetes"),
+      "@UI": path.resolve(__dirname, "./src/components/UI"),
       "@hooks": path.resolve(__dirname, "./src/hooks"),
       "@assets": path.resolve(__dirname, "./src/assets"),
-      "@icon": path.resolve(__dirname, "./src/components/common/Icon.tsx"),
-      "@pages": path.resolve(__dirname, "./src/pages"),
       "@services": path.resolve(__dirname, "./src/services"),
       "@stores": path.resolve(__dirname, "./src/stores"),
       "@styles": path.resolve(__dirname, "./src/styles"),
       "@utils": path.resolve(__dirname, "./src/utils"),
-      "@interface": path.resolve(__dirname, "./src/interface"),
     },
   },
   devServer: {

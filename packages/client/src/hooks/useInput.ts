@@ -8,5 +8,8 @@ export const useInput = (initValue: string) => {
     },
     []
   );
-  return [value, onChange] as const;
+  const reset = useCallback(() => {
+    setValue(initValue);
+  }, []);
+  return [value, onChange, reset] as const;
 };

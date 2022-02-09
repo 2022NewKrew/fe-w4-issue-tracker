@@ -27,7 +27,6 @@ import { COLOR } from './Assets/Styles/commonStyle'
 import IssueItem from './Components/Issue/IssueItem'
 import { STATE_TYPE } from './Services/DB/data'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import IssueListPage from './Pages/IssueListPage'
 import IssueTrackerLayout from './Layouts/IssueTrackerLayout'
 import IssueListLayout from './Layouts/IssueListLayout'
 

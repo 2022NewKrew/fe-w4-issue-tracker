@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { LabelMain } from "./component/page/label/LabelMain";
 import { MilestoneMain } from "./component/page/milestone/MilestoneMain";
+import { IssueDetail } from "./component/page/issue/IssueDetail";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -36,6 +37,7 @@ function App() {
         <Route path="*" element={<MainTemplate />}>
           <Route path="issue">
             <Route path="" element={<IssueHome />} />
+            <Route path=":issueId" element={<IssueDetail />} />
             <Route path="new" element={defaultElementForTest} />
           </Route>
           <Route path="labels" element={<LabelMain />} />

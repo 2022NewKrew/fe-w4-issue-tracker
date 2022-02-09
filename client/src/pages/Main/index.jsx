@@ -1,41 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
-import { useTheme } from '@emotion/react';
+import { useSetRecoilState } from 'recoil';
 
 import Header from '@/components/Header';
-import IssueSideButton from '@/components/IssueSideButton';
-import CustomButton from '@/components/CustomButton';
-import Filter from './Filter';
+import MainTop from './MainTop';
+import MainContent from './MainContent';
+import IssuePagination from './IssuePagination';
 
-import { defaultPagePadding } from '@/static/style/mixin';
-import { PLUS_WHITE } from '@/static/constants/image-path';
-import { useNavigate } from '@/core/Router';
+import { defaultPageFrame } from '@/static/style/mixin';
+import { paramGetIssueAtom } from '@/store/getIssueParamState';
 
 function Main() {
-  const theme = useTheme();
-  const navigateTo = useNavigate();
+  const setParamGetIssue = useSetRecoilState(paramGetIssueAtom);
 
-  const handleClickWritingIssueBtn = () => {
-    alert('이슈 작성 페이지로 이동');
-  };
+  useEffect(() => {
+    setParamGetIssue({ status: 'open', filter: -1, page: 1 });
+  }, []);
 
   return (
     <MainContainer>
       <Header />
-      <MainTopContainer>
-        <Filter />
-        <MainTopRightContainer>
-          <IssueSideButton />
-          <CustomButton
-            onClick={handleClickWritingIssueBtn}
-            sizeLevel={1}
-            bgColor={theme.colors.blue}
-          >
-            <img src={PLUS_WHITE} alt="이슈 작성 아이콘" />
-            이슈 작성
-          </CustomButton>
-        </MainTopRightContainer>
-      </MainTopContainer>
+      <MainTop />
+      <MainContent />
+      <IssuePagination />
     </MainContainer>
   );
 }
@@ -43,15 +30,5 @@ function Main() {
 export default Main;
 
 const MainContainer = styled.div`
-  ${defaultPagePadding}
-`;
-
-const MainTopContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 30px;
-`;
-
-const MainTopRightContainer = styled.div`
-  display: flex;
+  ${defaultPageFrame}
 `;

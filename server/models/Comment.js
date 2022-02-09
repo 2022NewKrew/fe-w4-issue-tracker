@@ -10,14 +10,18 @@ const commentSchema = new Schema(
       ref: 'User',
       required: true,
     },
-    postId: {
+    issueId: {
       type: Schema.Types.ObjectId,
-      ref: 'Board',
+      ref: 'Issue',
       required: true,
     },
     content: {
       type: String,
       required: true,
+    },
+    images: {
+      type: Array,
+      default: [],
     },
   },
   { timestamps: true }

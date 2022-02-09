@@ -2,68 +2,40 @@ import axios from 'axios';
 
 const API_PREFIX = process.env.API_PREFIX;
 
-export const api = {
-  get: async (url) => {
-    try {
-      const { data } = await axios.get(`${API_PREFIX}${url}`);
-      if (!data.success) throw new Error(data.message);
-      return {
-        isSuccess: true,
-        data,
-      };
-    } catch (e) {
-      return {
-        isSuccess: false,
-        message: e.message,
-      };
-    }
-  },
-
-  post: async (url, body) => {
-    try {
-      const { data } = await axios.post(`${API_PREFIX}${url}`, body);
-      if (!data.success) throw data;
-      return {
-        isSuccess: true,
-        data,
-      };
-    } catch (e) {
-      return {
-        isSuccess: false,
-        message: e.message,
-      };
-    }
-  },
-
-  update: async (url, body) => {
-    try {
-      const { data } = await axios.put(`${API_PREFIX}${url}`, body);
-      if (!data.success) throw new Error(data.message);
-      return {
-        isSuccess: true,
-        data,
-      };
-    } catch (e) {
-      return {
-        isSuccess: false,
-        message: e.message,
-      };
-    }
-  },
-
-  delete: async (url) => {
-    try {
-      const { data } = await axios.delete(`${API_PREFIX}${url}`);
-      if (!data.success) throw new Error(data.message);
-      return {
-        isSuccess: true,
-        data,
-      };
-    } catch (e) {
-      return {
-        isSuccess: false,
-        message: e.message,
-      };
-    }
-  },
+const config = {
+  withCredentials: true,
 };
+
+const request = async (url, method, body = {}) => {
+  try {
+    const API_ENDPOINT = API_PREFIX + url;
+    const { data } =
+      (method === 'get' && (await axios.get(API_ENDPOINT, config))) ||
+      (method === 'post' && (await axios.post(API_ENDPOINT, body, config))) ||
+      (method === 'patch' && (await axios.patch(API_ENDPOINT, body, config))) ||
+      (method === 'delete' && (await axios.delete(API_ENDPOINT, config)));
+
+    if (!data.success) throw new Error(data.message);
+    return {
+      isSuccess: true,
+      data,
+    };
+  } catch (e) {
+    return {
+      isSuccess: false,
+      message: e.message,
+    };
+  }
+};
+export const api = {
+  get: async (url) => await request(url, 'get'),
+  post: async (url, body) => await request(url, 'post', body),
+  update: async (url, body) => await request(url, 'patch', body),
+  delete: async (url) => await request(url, 'delete', body),
+};
+
+// API for React Query
+export const GET = (url) => axios.get(`${API_PREFIX}${url}`, config);
+export const POST = (url, body) => axios.post(`${API_PREFIX}${url}`, body, config);
+export const PATCH = (url, body) => axios.patch(`${API_PREFIX}${url}`, body, config);
+export const DELETE = (url) => axios.delete(`${API_PREFIX}${url}`, config);

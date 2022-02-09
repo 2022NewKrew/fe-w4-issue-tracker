@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 const model = mongoose.model;
 
-const boardSchema = new Schema(
+const issueSchema = new Schema(
   {
     writer: {
       type: Schema.Types.ObjectId,
@@ -13,14 +13,6 @@ const boardSchema = new Schema(
     title: {
       type: String,
       required: true,
-    },
-    description: {
-      type: String,
-      required: true,
-    },
-    images: {
-      type: Array,
-      default: [],
     },
     isOpen: {
       type: Boolean,
@@ -33,6 +25,6 @@ const boardSchema = new Schema(
   { timestamps: true }
 );
 
-const Board = model('Board', boardSchema);
+const Issue = model('Issue', issueSchema);
 
-export { Board };
+export { Issue };

@@ -5,14 +5,14 @@ const model = mongoose.model;
 
 const assigneeSchema = new Schema(
   {
-    writer: {
+    userId: {
       type: Schema.Types.ObjectId,
       ref: 'User',
       required: true,
     },
-    postId: {
+    issueId: {
       type: Schema.Types.ObjectId,
-      ref: 'Board',
+      ref: 'Issue',
       required: true,
     },
   },

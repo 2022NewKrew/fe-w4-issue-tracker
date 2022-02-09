@@ -1,23 +1,48 @@
-<h2 align='center'>ISSUE TRACKER</h2>
+<h2 align='center' style='font-family: Montserrat;
+  font-style: italic; font-size: 2rem'>ISSUE TRACKER</h2>
 
-### `descripton`
+![bg3](https://user-images.githubusercontent.com/50862052/152633093-9de97626-fe6d-456c-a820-2c53ee53de5a.jpg)
 
-    깃헙의 이슈 관리 시스템을 나만의 스타일로 만들어 현실 이슈를 관리하는 용도로 사용
+### `프로젝트 내용`
 
-### `기술스택 `
+##### - `깃헙의 이슈 관리 시스템`을 `나만의 스타일`로 만들어 `현실 이슈를 관리`한다
+
+##### - `3주` 동안 갈려버린 `1인 풀스택` 개발
+
+##### - `Deploy URL` : https://fleek-tracker.herokuapp.com/
+
+---
+
+### `기술스택`
 
 ```
 Frontend
-├── React (SSR using 18ver)
-├── Emotion
-├── Recoil & ReactQuery
-└── Webpack & Babel
+    React(ver18) | Emotion | Recoil
+    ReactQuery | Webpack | Babel
 ```
 
 ```
 Backend
-├── MongoDB
-├── Express
+     MongoDB | Express | AWS S3
+```
+
+### `주요기술`
+
+```
+Frontend
+├── Custom React Router & Router Guard
+├── Dynamic Import & Prefetch
+├── Suspense & Error-Boundary
+├── Github OAuth
+├── Recoil for UI State & ReactQuery for Async State
+└── Webpack & Babel Custom Setting
+```
+
+```
+Backend
+├── Github OAuth
+├── Access Token & Refresh Token Using JWT
+├── Split All N:M relationship for Efficicient API
 └── AWS S3
 ```
 
@@ -36,6 +61,7 @@ client
     ├── /components
     ├── /core
     ├── /hooks
+        ├── /querys
     ├── /pages
     ├── /static
         ├── /constants
@@ -49,10 +75,6 @@ client
 
 ```
 server
-
-├── .env
-├── .env.dev
-├── package.json
 ├── app.js
 ├── /middlewares
 ├── /routes
@@ -65,10 +87,35 @@ server
 
 ```
 others
-
+├── .env
+├── .env.dev
 ├── .gitignore
 ├── prettier.config.js
 ├── .prettierignore
 ├── LICENSE
+├── package.json
 └── README.md
+```
+
+### `개선사항`
+
+```
+Common
+└── Complete More Features
+```
+
+```
+Frontend
+├── Migrate TypeScript
+├── Reactive Web
+├── Memoization
+└── Use SSR
+```
+
+```
+Backend
+├── Migrate TypeScript
+├── Migrate MYSQL
+├── Use Token using Github OAuth
+└── Deploy using AWS
 ```

@@ -4,7 +4,7 @@ import {
   collection,
   getDocs,
   doc,
-  writeBatch,
+  updateDoc,
 } from "firebase/firestore";
 import { DATA_TYPE } from "@constants";
 
@@ -62,14 +62,14 @@ export const getIssueList = async () => {
 };
 
 export const updateIssue = async (updateData) => {
-  const batch = writeBatch(db);
-  updateData.map((data) => {
-    const { id, key, value } = data;
-    const issueRef = doc(db, DATA_TYPE.ISSUE, id);
-    batch.update(issueRef, { [key]: value });
-  });
-  await batch.commit();
-  return await getIssueList();
+  return await Promise.all(
+    updateData.map(async ({ id, key, value }) => {
+      const issueRef = doc(db, DATA_TYPE.ISSUE, id);
+      await updateDoc(issueRef, {
+        [key]: value,
+      });
+    })
+  );
 };
 
 export * from "firebase/auth";

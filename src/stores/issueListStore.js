@@ -28,8 +28,9 @@ export const openedIssueListCountState = selector({
   key: "openedIssueListCount",
   get: ({ get }) => {
     const issueList = get(issueListState);
-    const filter = { isOpened: true };
-    return filterIssueList(issueList, filter).length;
+    const filter = get(filterState);
+    const filterWithOpened = { ...filter, isOpened: true };
+    return filterIssueList(issueList, filterWithOpened).length;
   },
 });
 
@@ -37,8 +38,9 @@ export const closedIssueListCountState = selector({
   key: "closedIssueListCount",
   get: ({ get }) => {
     const issueList = get(issueListState);
-    const filter = { isOpened: false };
-    return filterIssueList(issueList, filter).length;
+    const filter = get(filterState);
+    const filterWithNotOpened = { ...filter, isOpened: false };
+    return filterIssueList(issueList, filterWithNotOpened).length;
   },
 });
 

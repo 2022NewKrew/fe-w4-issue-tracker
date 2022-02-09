@@ -8,6 +8,7 @@ import TextInput, {
 import { ReactComponent as SearchIcon } from '../../../Assets/Icon/ic-search.svg'
 import Dropdown from '../Dropdown/Dropdown'
 import { COLOR } from '../../../Assets/Styles/commonStyle'
+import { DROPDOWN_ITEM_TYPE } from '../Dropdown/DropdownPanelItem'
 
 const DropdownContainer = styled.div`
   width: 128px;
@@ -33,6 +34,7 @@ const FilterBar = (props) => {
       placeholder="is:open is:issue">
       <DropdownContainer>
         <Dropdown
+          type={DROPDOWN_ITEM_TYPE.NORMAL}
           indicatorText="필터"
           panelTitle="이슈 필터"
           btnUserStyle={buttonPaddingStyle}

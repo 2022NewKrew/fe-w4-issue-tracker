@@ -14,7 +14,6 @@ const DropdownContainer = styled.div`
   width: 128px;
   height: 100%;
   border-right: 1px solid ${COLOR.LINE};
-  border-radius: 15px 0 0 15px;
 
   &:hover {
     background-color: ${COLOR.LINE};

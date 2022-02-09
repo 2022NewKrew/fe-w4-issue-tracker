@@ -24,7 +24,6 @@ const TabContainer = styled.div`
  */
 const Tab = ({ children }) => {
   const [selectedIdx, setSelectedIdx] = useState(-1)
-  const asd = { ss: '123', cc: '12344' }
 
   return (
     <TabContainer>

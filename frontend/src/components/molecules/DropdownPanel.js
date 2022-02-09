@@ -103,7 +103,7 @@ export function DropdownPanel(props) {
             <ItemContainer key={menu.id} onClick={() => handleClick(id, menu)}>
               <ImageTextContainer>
                 {type === "image" ? <UserimageSmall /> : null}
-                <SmallText>{menu.name}</SmallText>
+                <SmallText>{menu.name || menu.title}</SmallText>
               </ImageTextContainer>
               {showSelectionIcon(type, menu)}
             </ItemContainer>

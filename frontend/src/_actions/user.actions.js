@@ -12,6 +12,7 @@ export { useUserActions };
 function useUserActions() {
   const setUser = useSetRecoilState(userState);
   const [auth, setAuth] = useRecoilState(authState);
+
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const navigate = useNavigate();
   const fetchWrapper = useFetchWrapper();

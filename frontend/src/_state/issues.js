@@ -26,71 +26,87 @@ const closedIssuesState = selector({
   },
 });
 
-const assigneesList = selector({
-  key: "assigneeList",
-  get: ({ get }) => {
-    const issues = get(issuesState);
-    const assignees = [{ id: 0, name: "담당자가 없는 이슈" }];
-    issues &&
-      issues.map((issue) => {
-        issue.assignees?.map((assignee) => {
-          if (assignee) {
-            assignees.push({ id: assignee.id, name: assignee.name });
-          }
-        });
-      });
-    const filteredAssignees = [
-      ...new Map(
-        assignees.map((assignee) => [assignee["id"], assignee])
-      ).values(),
-    ];
-    return filteredAssignees;
-  },
+const usersList = atom({
+  key: "usersList",
+  default: [],
 });
 
-const labelList = selector({
-  key: "labelList",
-  get: ({ get }) => {
-    const issues = get(issuesState);
-    const labels = [{ id: 0, name: "레이블이 없는 이슈" }];
-    issues &&
-      issues.map((issue) => {
-        issue.labels?.map((label) => {
-          if (label) {
-            labels.push({ id: label.id, name: label.name });
-          }
-        });
-      });
-    const filteredLabels = [
-      ...new Map(labels.map((label) => [label["id"], label])).values(),
-    ];
-    return filteredLabels;
-  },
-});
-
-const milestoneList = selector({
+const milestoneList = atom({
   key: "milestoneList",
-  get: ({ get }) => {
-    const issues = get(issuesState);
-    const milestones = [{ id: 0, name: "마일스톤이 없는 이슈" }];
-    issues &&
-      issues.map((issue) => {
-        if (issue.milestone) {
-          milestones.push({
-            id: issue.milestone.id,
-            name: issue.milestone.title,
-          });
-        }
-      });
-
-    const filteredMilestones = [
-      ...new Map(
-        milestones.map((milestone) => [milestone["id"], milestone])
-      ).values(),
-    ];
-    return filteredMilestones;
-  },
+  default: [],
 });
+
+const labelList = atom({
+  key: "labelList",
+  default: [],
+});
+
+// const assigneesList = selector({
+//   key: "assigneeList",
+//   get: ({ get }) => {
+//     const issues = get(issuesState);
+//     const assignees = [{ id: 0, name: "담당자가 없는 이슈" }];
+//     issues &&
+//       issues.map((issue) => {
+//         issue.assignees?.map((assignee) => {
+//           if (assignee) {
+//             assignees.push({ id: assignee.id, name: assignee.name });
+//           }
+//         });
+//       });
+//     const filteredAssignees = [
+//       ...new Map(
+//         assignees.map((assignee) => [assignee["id"], assignee])
+//       ).values(),
+//     ];
+//     return filteredAssignees;
+//   },
+// });
+
+// const labelList = selector({
+//   key: "labelList",
+//   get: ({ get }) => {
+//     const issues = get(issuesState);
+//     const labels = [{ id: 0, name: "레이블이 없는 이슈" }];
+//     issues &&
+//       issues.map((issue) => {
+//         issue.labels?.map((label) => {
+//           if (label) {
+//             labels.push({ id: label.id, name: label.name });
+//           }
+//         });
+//       });
+//     const filteredLabels = [
+//       ...new Map(labels.map((label) => [label["id"], label])).values(),
+//     ];
+//     return filteredLabels;
+//   },
+// });
+
+// const milestoneList = selector({
+//   key: "milestoneList",
+//   get: ({ get }) => {
+//     const issues = get(issuesState);
+//     const milestones = [{ id: 0, name: "마일스톤이 없는 이슈" }];
+//     issues &&
+//       issues.map((issue) => {
+//         if (issue.milestone) {
+//           milestones.push({
+//             id: issue.milestone.id,
+//             name: issue.milestone.title,
+//           });
+//         }
+//       });
+
+//     const filteredMilestones = [
+//       ...new Map(
+//         milestones.map((milestone) => [milestone["id"], milestone])
+//       ).values(),
+//     ];
+//     return filteredMilestones;
+//   },
+// });
+
 const writerList = selector({
   key: "writerList",
   get: ({ get }) => {
@@ -123,7 +139,8 @@ export {
   activeIssueTabState,
   openIssuesState,
   closedIssuesState,
-  assigneesList,
+  usersList,
+  // assigneesList,
   labelList,
   milestoneList,
   writerList,

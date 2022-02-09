@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import { SmallLink } from "@components/atoms/link";
 import { SmallText } from "@components/atoms/Text";
@@ -9,8 +9,10 @@ import { ProgressIndicator } from "@components/molecules/ProgressIndicators";
 import { ReactComponent as Plus } from "@assets/icons/plus.svg";
 import { ReactComponent as UserImageLarge } from "@assets/icons/userimageLarge.svg";
 
-import { assigneesList, labelList, milestoneList } from "../../_state";
-import { useRecoilValue } from "recoil";
+import { useIssuesActions } from "../../_actions/issues.actions";
+
+import { usersList, labelList, milestoneList } from "../../_state";
+import { useRecoilValue, useRecoilState } from "recoil";
 
 const SidebarContainer = styled.div`
   width: 308px;
@@ -107,15 +109,32 @@ export function Sidebar({
   selectedMilestone,
   setSelectedMilestone,
 }) {
-  const assigneeMenus = useRecoilValue(assigneesList);
-  const labelMenus = useRecoilValue(labelList);
-  const milestoneMenus = useRecoilValue(milestoneList);
+  // const assigneeMenus = useRecoilValue(usersList);
+  const [assigneeMenus, setAssigneeMenus] = useRecoilState(usersList);
+  // const labelMenus = useRecoilValue(labelList);
+  const [labelMenus, setLabelMenus] = useRecoilState(labelList);
+  const [milestoneMenus, setMilestoneMenus] = useRecoilState(milestoneList);
+  // const milestoneMenus = useRecoilValue(milestoneList);
 
   const [showPanel, setShowPanel] = useState({
     assignee: false,
     label: false,
     milestone: false,
   });
+
+  const issuesActions = useIssuesActions();
+
+  useEffect(() => {
+    issuesActions.getAllUsers();
+    issuesActions.getAllLabels();
+    issuesActions.getAllMilestones();
+
+    return () => {
+      setAssigneeMenus([]);
+      setLabelMenus([]);
+      setMilestoneMenus([]);
+    };
+  }, []);
 
   function handlePanel(name) {
     setShowPanel({

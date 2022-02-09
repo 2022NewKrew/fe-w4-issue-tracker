@@ -11,7 +11,7 @@ import {
   closedIssuesState,
   activeIssueTabState,
 } from "../../_state";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
 
 const Container = styled.div`
   margin: 0 80px;
@@ -34,7 +34,7 @@ const Container = styled.div`
 `;
 
 export default function IssueTableContainer() {
-  const issues = useRecoilValue(issuesState);
+  const [issues, setIssues] = useRecoilState(issuesState);
   const openIssues = useRecoilValue(openIssuesState);
   const closedIssues = useRecoilValue(closedIssuesState);
   const activeIssueTab = useRecoilValue(activeIssueTabState);
@@ -43,6 +43,7 @@ export default function IssueTableContainer() {
 
   useEffect(() => {
     issuesActions.getIssues();
+    return () => setIssues(false);
   }, []);
 
   const [selectedIssueIds, setSelectedIssueIds] = useState([]);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import { MediumTextButton } from "@components/atoms/buttons";
@@ -14,11 +14,12 @@ import {
   openIssuesState,
   closedIssuesState,
   activeIssueTabState,
-  assigneesList,
+  usersList,
   labelList,
   milestoneList,
   writerList,
 } from "../../_state";
+import { useIssuesActions } from "../../_actions/issues.actions";
 import { useRecoilValue, useRecoilState } from "recoil";
 
 const HeaderContainer = styled.div`
@@ -119,12 +120,24 @@ export default function IssueTableHeader(props) {
   }
 
   function showDropdownIndicators() {
-    const assignneeChangeMenus = useRecoilValue(assigneesList);
-    const labelChangeMenus = useRecoilValue(labelList);
-    // const labelChangeMenus = labels.map((label) => label.name);
-    const milestoneChangeMenus = useRecoilValue(milestoneList);
-    // const milestoneChangeMenus = milestones.map((milestone) => milestone.name);
-    const writerChangeMenus = useRecoilValue(writerList);
+    const [assigneeMenus, setAssigneeMenus] = useRecoilState(usersList);
+    const assigneeChangeMenus = [
+      { id: "0", name: "담당자가 없는 이슈" },
+      ...assigneeMenus,
+    ];
+
+    const [labelMenus, setLabelMenus] = useRecoilState(labelList);
+    const labelChangeMenus = [
+      { id: "0", name: "레이블이 없는 이슈" },
+      ...labelMenus,
+    ];
+    const [milestoneMenus, setMilestoneMenus] = useRecoilState(milestoneList);
+    const milestoneChangeMenus = [
+      { id: "0", name: "마일스톤이 없는 이슈" },
+      ...milestoneMenus,
+    ];
+
+    const writerChangeMenus = useRecoilValue(usersList);
     const statusChangeMenus = ["이슈 열기", "이슈 닫기"];
 
     const [selectedAssignee, setSelectedAssignee] = useState([]);
@@ -132,6 +145,18 @@ export default function IssueTableHeader(props) {
     const [selectedMilestone, setSelectedMilestone] = useState([]);
     const [selectedWriter, setSelectedWriter] = useState([]);
     const [selectedStatus, setSelectedStatus] = useState("");
+
+    const issuesActions = useIssuesActions();
+    useEffect(() => {
+      issuesActions.getAllUsers();
+      issuesActions.getAllLabels();
+      issuesActions.getAllMilestones();
+      return () => {
+        setAssigneeMenus([]);
+        setLabelMenus([]);
+        setMilestoneMenus([]);
+      };
+    }, []);
 
     if (props.selectedIssueIds.length < 1) {
       return (
@@ -147,7 +172,7 @@ export default function IssueTableHeader(props) {
               show={showPanel["assignee"]}
               header='담당자 필터'
               type='image'
-              menus={assignneeChangeMenus}
+              menus={assigneeChangeMenus}
               position='right'
               selected={selectedAssignee}
               setSelected={setSelectedAssignee}

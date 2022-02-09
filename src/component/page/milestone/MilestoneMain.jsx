@@ -5,6 +5,8 @@ import { getLabels, getMilestones } from "../../../api/api";
 import { Button } from "../../atoms/Button";
 import { cssFontSize, cssLink } from "../../atoms/Text";
 import { PageHeader, TableHeader, TableWrapper } from "../../commonLayout";
+import { MilestoneItem } from "../../molecules/MilestoneItem";
+import { MilestoneNew } from "../../molecules/MilestoneNew";
 import { Taps } from "../../molecules/Taps";
 
 export const MilestoneMain = () => {
@@ -17,7 +19,7 @@ export const MilestoneMain = () => {
 
   const numLabels = labels?.length || 0;
   const numMilestones = milestones?.length || 0;
-  const milestoneItems = milestones?.map((milestone) => <div>{milestone.title}</div>);
+  const milestoneItems = milestones?.map((milestone) => <MilestoneItem key={milestone.id} milestone={milestone} />);
 
   return (
     <>
@@ -33,6 +35,7 @@ export const MilestoneMain = () => {
           </StyledButton>
         )}
       </PageHeader>
+      {newMode && <MilestoneNew closeFn={() => setNewMode(false)} />}
       <TableWrapper>
         <TableHeader>
           <span css={[cssFontSize["small"], cssLink]}>{`${numMilestones}개의 마일스톤`}</span>

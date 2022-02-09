@@ -1,5 +1,3 @@
-import PageHeader from "./PageHeader";
-import TableWrapper from "./TableWrapper";
-import TableHeader from "./TableHeader";
-
-export { TableWrapper, TableHeader, PageHeader };
+export { default as PageHeader } from "./PageHeader";
+export { default as TableWrapper } from "./TableWrapper";
+export { default as TableHeader } from "./TableHeader";

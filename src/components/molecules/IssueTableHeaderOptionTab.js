@@ -44,36 +44,37 @@ function IssueTableHeaderOptionTab({ tabData }) {
 
   const { refreshIssueList } = useRefreshRecoilState(issueListState);
 
-  const wrapper = useRef(null);
+  const wrapperRef = useRef(null);
+
+  const panelClickAction = {
+    [ACTION_TYPE.FILTER_ISSUE]: (key, value) => {
+      setIssueFilter((prev) => {
+        return { ...prev, [key]: prev[key] === value ? "*" : value };
+      });
+    },
+    [ACTION_TYPE.UPDATE_ISSUE]: async (key, value) => {
+      const dataForUpdate = selectedIssueList.map((id) => {
+        return { id, key, value };
+      });
+      await updateIssue(dataForUpdate);
+      refreshIssueList();
+      setSelectedIssueList([]);
+    },
+  };
 
   const clickDropdownPanel = async (actionType, { key, value }) => {
-    const action = {
-      [ACTION_TYPE.FILTER_ISSUE]: () => {
-        setIssueFilter((prev) => {
-          return { ...prev, [key]: prev[key] === value ? "*" : value };
-        });
-      },
-      [ACTION_TYPE.UPDATE_ISSUE]: async () => {
-        const dataForUpdate = selectedIssueList.map((id) => {
-          return { id, key, value };
-        });
-        await updateIssue(dataForUpdate);
-        refreshIssueList();
-        setSelectedIssueList([]);
-      },
-    };
-    action[actionType]();
+    panelClickAction[actionType](key, value);
   };
 
   return (
-    <OptionTabWrapper ref={wrapper}>
+    <OptionTabWrapper ref={wrapperRef}>
       <OptionTabButton>
         <OptionTabButtonText>{tabData.title}</OptionTabButtonText>
         <ChevronDownIcon />
       </OptionTabButton>
       <OptionTabDropDown
         {...tabData}
-        parentRef={wrapper}
+        parentRef={wrapperRef}
         callbackAfterPanelClickEvent={clickDropdownPanel}
       />
     </OptionTabWrapper>

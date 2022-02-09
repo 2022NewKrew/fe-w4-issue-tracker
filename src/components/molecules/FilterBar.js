@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { useRecoilState, useResetRecoilState } from "recoil";
 
 import { ChevronDownIcon, SearchIcon } from "@icons";
@@ -124,16 +124,20 @@ function FilterBar() {
 
   const generateTextWithFilter = () => {
     const issueFilterEntries = Object.entries(issueFilter);
-    return issueFilterEntries.reduce((text, [key, value]) => {
+    return issueFilterEntries.reduce((filterText, [key, value]) => {
       if (value === "*") {
-        return text;
+        return filterText;
       }
-      return `${text} ${key}:${value}`;
+
+      return filterText + ` ${key}:"${value}"`;
     }, "");
   };
 
-  const interpretTextValue = (value) => {
+  const convertTextValue = (key, value) => {
     const auth = getAuth();
+    if (key === ISSUE_PROP_TYPE.IS_OPENED) {
+      return !!value;
+    }
     return value === FILTER_SELF
       ? auth.currentUser.reloadUserInfo.screenName
       : value;
@@ -144,7 +148,8 @@ function FilterBar() {
       ({ title, filterKey, value }) => {
         return {
           text: title,
-          isChecked: issueFilter[filterKey] === interpretTextValue(value),
+          isChecked:
+            issueFilter[filterKey] === convertTextValue(filterKey, value),
           value: {
             key: filterKey,
             value,
@@ -167,7 +172,7 @@ function FilterBar() {
         return {
           ...prev,
           isOpened: "*",
-          [key]: interpretTextValue(value),
+          [key]: convertTextValue(key, value),
         };
       });
     },
@@ -190,16 +195,22 @@ function FilterBar() {
     (e) => {
       e.preventDefault();
       const filterText = filterInput.current.value;
-      const splittedFilterText = filterText.split(" ");
+      const filterTextRegExp = /\s\w*:"[^"]*"/g;
+      const splittedFilterText = filterText.match(filterTextRegExp);
       resetIssueFilter();
       const filterTypes = Object.values(ISSUE_PROP_TYPE);
       const generatedFilterFromText = splittedFilterText.reduce(
-        (filter, entry) => {
-          const [key, value] = entry.split(":");
-          if (filterTypes.indexOf(key) === -1) {
+        (filter, filterText) => {
+          const [dirtyKey, dirtyValue] = filterText.split(":");
+          const key = dirtyKey.replaceAll(" ", "");
+          const value = dirtyValue.replaceAll('"', "");
+          if (!filterTypes.includes(key)) {
             return filter;
           }
-          return { ...filter, [key]: interpretTextValue(value) };
+          return {
+            ...filter,
+            [key]: convertTextValue(key, value),
+          };
         },
         {}
       );

@@ -1,6 +1,14 @@
 import { selector, atom } from "recoil";
 import { getIssueList } from "@/firebase.js";
 import { filterState } from "@/stores/filterStore.js";
+import { labelListState } from "@/stores/labelListStore.js";
+import { milestoneListState } from "@/stores/milestoneListStore.js";
+import { userListState } from "@/stores/userListStore.js";
+import {
+  findObjectListWithIdFromList,
+  findObjectWithIdFromList,
+  findObjectWithTextFromList,
+} from "@utils";
 
 export const forceIssueListUpdate = atom({
   key: "issueListUpdater",
@@ -11,14 +19,29 @@ export const issueListState = selector({
   key: "issueList",
   get: async ({ get }) => {
     get(forceIssueListUpdate);
-    return await getIssueList();
+    const rawIssueList = await getIssueList();
+    const labelList = await get(labelListState);
+    const milestoneList = await get(milestoneListState);
+    const userList = await get(userListState);
+    const processedIssueList = rawIssueList.map(
+      ({ label, milestone, writer, assignee, ...restData }) => {
+        return {
+          ...restData,
+          label: findObjectListWithIdFromList(label, labelList),
+          milestone: findObjectWithIdFromList(milestone, milestoneList),
+          assignee: findObjectListWithIdFromList(assignee, userList),
+          writer: findObjectWithIdFromList(writer, userList),
+        };
+      }
+    );
+    return processedIssueList;
   },
 });
 
 export const filteredIssueListState = selector({
   key: "filteredIssueList",
-  get: ({ get }) => {
-    const issueList = get(issueListState);
+  get: async ({ get }) => {
+    const issueList = await get(issueListState);
     const filter = get(filterState);
     return filterIssueList(issueList, filter);
   },
@@ -46,41 +69,37 @@ export const closedIssueListCountState = selector({
 
 const filterIssueList = (issueList, filter) => {
   return issueList.filter((issue) => {
-    return filterIssue(issue, filter);
+    const isIssueValidate = checkIssueValidity(issue, filter);
+    return isIssueValidate;
   });
 };
 
-const filterIssue = (issue, filter) => {
+const checkIssueValidity = (issue, filter) => {
   const issuePropEntries = Object.entries(issue);
   return issuePropEntries.every(([property, propertyValue]) => {
-    return checkPropValidity(property, propertyValue, filter);
+    const isPropValidate = checkPropValidity(property, propertyValue, filter);
+    return isPropValidate;
   });
 };
 
 const checkPropValidity = (property, propertyValue, filter) => {
   const filterValue = filter[property];
-
   if (filterValue === undefined || filterValue === "*") {
     return true;
   }
   if (Array.isArray(propertyValue)) {
     // for "label", "assignee" prop
-    return filterArrayValue(propertyValue, filterValue);
-  } else if (propertyValue instanceof Object) {
-    // for "writer" prop
-    return filterObjectValue(propertyValue, filterValue);
-  } else {
-    // for "isOpened", "milestone" prop
+    const validateObject = findObjectWithTextFromList(
+      filterValue,
+      propertyValue
+    );
+    return validateObject;
+  } else if (typeof propertyValue === "boolean") {
+    // for "isOpened" prop
     return propertyValue === filterValue;
+  } else {
+    // for "milestone", "writer" prop
+    const propertyText = propertyValue.text || propertyValue.name;
+    return propertyText === filterValue;
   }
-};
-
-const filterArrayValue = (propertyValue, filterValue) => {
-  return propertyValue.some(
-    (value) => value === filterValue || value.name === filterValue
-  );
-};
-
-const filterObjectValue = (propertyValue, filterValue) => {
-  return propertyValue.name === filterValue;
 };

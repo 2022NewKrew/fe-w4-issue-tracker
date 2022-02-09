@@ -1,25 +1,15 @@
 import React, { useEffect, useRef } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { useRecoilState } from "recoil";
 
 import { AlertCircleIcon, ArchieveIcon, MilestoneIcon } from "@icons";
-import {
-  MediumLinkText,
-  SmallProfileImg,
-  SmallText,
-  Wrapper,
-  XSmallText,
-} from "@atoms";
+import { MediumLinkText, SmallProfileImg, SmallText, Wrapper } from "@atoms";
+import { IssueLabel } from "@molecules";
 
 import { COLOR } from "@constants";
 import { issueSelectionState } from "@stores";
 
 import { calculateTimeDiff } from "@utils";
-
-const LABEL_TYPE = {
-  DOCUMENTATION: "documentation",
-  LIGHT_TEXT: "lightText",
-};
 
 const IssueCellWrapper = styled(Wrapper)`
   flex-direction: row;
@@ -53,27 +43,6 @@ const IssueTag = styled(SmallText)`
   justify-content: center;
   align-items: center;
   margin: 0 10px;
-`;
-
-const IssueLabel = styled(XSmallText)`
-  border-radius: 30px;
-  padding: 4px 16px;
-  margin-left: 10px;
-  ${({ type }) => {
-    const { BLUE, GREYSCALE } = COLOR;
-    switch (type) {
-      case LABEL_TYPE.DOCUMENTATION:
-        return css`
-          background-color: ${BLUE.DARK_BLUE};
-          color: ${GREYSCALE.OFF_WHITE};
-        `;
-      default:
-        return css`
-          background-color: ${GREYSCALE.BODY};
-          color: ${GREYSCALE.OFF_WHITE};
-        `;
-    }
-  }}
 `;
 
 const WriterProfile = styled(SmallProfileImg)`
@@ -126,9 +95,7 @@ function IssueCell({
               {title}
             </MediumLinkText>
             {labelList.map((label, idx) => (
-              <IssueLabel key={`${title}-label${idx}`} type={label}>
-                {label}
-              </IssueLabel>
+              <IssueLabel key={`${title}-label${idx}`} {...label} />
             ))}
           </IssueTitleWrapper>
           <IssueTagWrapper>
@@ -143,7 +110,7 @@ function IssueCell({
                   margin-right: 10px;
                 `}
               />
-              {milestone}
+              {milestone.text}
             </IssueTag>
           </IssueTagWrapper>
         </IssueInfoWrapper>

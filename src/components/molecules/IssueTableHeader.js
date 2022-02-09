@@ -129,6 +129,7 @@ function IssueTableHeader() {
 
   useEffect(() => {
     checkboxRef.current.checked =
+      selectedIssueList.length &&
       selectedIssueList.length === filteredIssueList.length;
   }, [selectedIssueList]);
 

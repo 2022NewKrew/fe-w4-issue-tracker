@@ -5,14 +5,14 @@ const Dotenv = require("dotenv-webpack");
 
 // Path Config
 const PROJECT_ROOT = path.resolve(__dirname, "..");
-const ENV = path.resolve(PROJECT_ROOT, "env");
+const DEV_ENV_PATH = path.resolve(PROJECT_ROOT, "env/dev.env");
 const PORT = process.env.PORT || 3000;
 
 module.exports = (webpackEnv) =>
   merge(common(webpackEnv), {
     mode: "development",
     output: {
-      filename: "js/[name].[contenthash:8].js",
+      filename: "js/bundle.js",
     },
     module: {
       rules: [
@@ -24,7 +24,7 @@ module.exports = (webpackEnv) =>
       ],
     },
     plugins: [
-      new Dotenv({ path: path.resolve(ENV, ".env.dev") }), // .env에 있는 변수를 가져오는 Plugin. process.env.XXX 로 접근 가능
+      new Dotenv({ path: DEV_ENV_PATH }), // .env에 있는 변수를 가져오는 Plugin. process.env.XXX 로 접근 가능
     ],
     devServer: {
       port: PORT, // port 설정
@@ -36,5 +36,5 @@ module.exports = (webpackEnv) =>
         overlay: true,
       },
     },
-    devtool: "hidden-source-map",
+    devtool: "cheap-module-source-map", // react 에서 사용하는 devtool option
   });

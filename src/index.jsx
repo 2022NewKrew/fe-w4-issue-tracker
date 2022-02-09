@@ -6,9 +6,11 @@ import "./style/reset.css";
 import { ThemeProvider } from "styled-components";
 import theme from "./style/theme";
 import { BrowserRouter } from "react-router-dom";
+import { GlobalStyle } from "./style/GlobalStyle";
 
 ReactDOM.render(
   <React.StrictMode>
+    <GlobalStyle />
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <App />

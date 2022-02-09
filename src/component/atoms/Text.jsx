@@ -1,15 +1,11 @@
 import styled, { css } from "styled-components";
 
 export const Text = styled.p`
-  font-family: Noto Sans KR, sans-serif;
-  font-style: normal;
-  font-weight: 300;
-
-  ${({ options: { size } }) => sizeType[size]}
-  ${({ options: { isLink } }) => (isLink ? link : null)}
+  ${({ options: { size } }) => cssFontSize[size]}
+  ${({ options: { isLink } }) => (isLink ? cssLink : null)}
 `;
 
-const sizeType = {
+export const cssFontSize = {
   large: css`
     font-size: 24px;
     line-height: 40px;
@@ -28,6 +24,6 @@ const sizeType = {
   `,
 };
 
-const link = css`
+export const cssLink = css`
   font-weight: 500;
 `;

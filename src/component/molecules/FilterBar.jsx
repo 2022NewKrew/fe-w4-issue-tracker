@@ -1,17 +1,17 @@
 import styled, { css } from "styled-components";
 import { Icon } from "../atoms/Icons";
-import { Text } from "../atoms/Text";
+import { cssFontSize, cssLink } from "../atoms/Text";
 
 export const FilterBar = ({ wrapperProps, buttonProps, inputProps }) => {
   return (
     <FilterWrapper {...wrapperProps}>
-      <Button {...buttonProps}>
-        <Text options={{ size: "small", isLink: true }}>필터</Text>
-        <ButtonIcon name="arrow-down" />
-      </Button>
+      <button css={cssFilterButton} {...buttonProps}>
+        <p css={[cssFontSize["small"], cssLink]}>필터</p>
+        <Icon css={cssButtonIcon} name="arrow-down" />
+      </button>
       <InputWrapper>
-        <InputIcon name="search" />
-        <Input as="input" options={{ size: "small" }} {...inputProps} />
+        <Icon css={cssInputIcon} name="search" />
+        <input css={[cssFontSize["small"], cssFilterInput]} pattern=".+" required {...inputProps} />
       </InputWrapper>
     </FilterWrapper>
   );
@@ -25,58 +25,59 @@ const FilterWrapper = styled.div(
     border: 1px solid ${theme.grayscale.line};
     border-radius: 11px;
     overflow: hidden;
-    color: ${theme.grayscale.placeholder};
-    background-color: ${theme.grayscale.background};
 
     &:active,
-    &.focus {
-      background-color: ${theme.grayscale.offWhite};
+    &:focus-within {
       border: 1px solid ${theme.grayscale.titleActive};
-      color: ${theme.grayscale.titleActive};
-    }
-
-    &.filled {
-      color: ${theme.grayscale.titleActive};
     }
   `
 );
 
-const Button = styled.button(
-  ({ theme }) => css`
-    width: 128px;
-    padding: 6px 48px 6px 24px;
-    position: relative;
+const cssFilterButton = ({ theme }) => css`
+  width: 128px;
+  padding: 6px 48px 6px 24px;
+  position: relative;
+  border-right: 1px solid ${theme.grayscale.line};
+  color: ${theme.grayscale.label};
 
-    border-right: 1px solid ${theme.grayscale.line};
-    color: ${theme.grayscale.label};
-
-    &:hover {
-      background-color: ${theme.grayscale.line};
-      color: ${theme.grayscale.body};
-    }
-  `
-);
+  &:hover {
+    background-color: ${theme.grayscale.line};
+    color: ${theme.grayscale.body};
+  }
+`;
 
 const InputWrapper = styled.div(
   ({ theme }) => css`
     width: 472px;
     position: relative;
     padding: 6px 24px 6px 48px;
+    background-color: ${theme.grayscale.inputBackground};
     color: ${theme.grayscale.placeholder};
+
+    &:focus-within {
+      background-color: ${theme.grayscale.offWhite};
+      color: ${theme.grayscale.label};
+    }
   `
 );
 
-const Input = styled(Text)`
+const cssFilterInput = ({ theme }) => css`
   width: 100%;
+  color: ${theme.grayscale.placeholder};
+
+  &:focus,
+  &:valid {
+    color: ${theme.grayscale.titleActive};
+  }
 `;
 
-const ButtonIcon = styled(Icon)`
+const cssButtonIcon = css`
   position: absolute;
   top: 18px;
   right: 18px;
 `;
 
-const InputIcon = styled(Icon)`
+const cssInputIcon = css`
   position: absolute;
   top: 12px;
   left: 24px;

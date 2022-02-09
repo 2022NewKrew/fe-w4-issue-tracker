@@ -7,7 +7,7 @@ export const MainTemplate = () => (
   <BodyWrapper>
     <MainHeader>
       <MediumLogo />
-      <img src={userImageLarge} />
+      <UserImage src={userImageLarge} />
     </MainHeader>
 
     <Outlet />
@@ -24,8 +24,8 @@ const MainHeader = styled.div`
   height: 94px;
   display: flex;
   align-items: center;
+`;
 
-  & > *:last-child {
-    margin-left: auto;
-  }
+const UserImage = styled.img`
+  margin-left: auto;
 `;

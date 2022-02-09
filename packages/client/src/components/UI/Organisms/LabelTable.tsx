@@ -5,7 +5,7 @@ import Atoms from "@UI/Atoms";
 import { useCallback } from "react";
 
 const LabelTable = () => {
-  const { labelList } = useLabelStore();
+  const { labelList, labelListCount } = useLabelStore();
 
   const createLabelList = useCallback(
     (labelList: Label[]) =>
@@ -34,7 +34,7 @@ const LabelTable = () => {
 
   return (
     <Wrapper>
-      <Atoms.Li header>3개의 레이블</Atoms.Li>
+      <Atoms.Li header>{labelListCount}개의 레이블</Atoms.Li>
       {createLabelList(labelList)}
     </Wrapper>
   );
@@ -53,10 +53,14 @@ const Wrapper = styled.ul`
       position: absolute;
       left: 32px;
     }
-    & > .ButtonGroup > button:last-child {
-      color: red;
-      & > svg {
-        opacity: 1;
+    & > .ButtonGroup {
+      position: absolute;
+      right: 32px;
+      & > button:last-child {
+        color: red;
+        & > svg {
+          opacity: 1;
+        }
       }
     }
     &:first-of-type {

@@ -1,5 +1,6 @@
 import { Label, LabelForm } from "@types";
 import _axios from "@utils/axios";
+import { v4 as uuidv4 } from "uuid";
 
 const baseUrl = "/labels";
 
@@ -24,6 +25,3 @@ class LabelService {
 }
 
 export default LabelService;
-function uuidv4() {
-  throw new Error("Function not implemented.");
-}

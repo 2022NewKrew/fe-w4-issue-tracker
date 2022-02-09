@@ -18,10 +18,13 @@ const IssueRegisterForm = () => {
     setMilestone,
   } = useAddIssueStore();
 
-  const onSubmit = useCallback((e: FormEvent) => {
-    e.preventDefault();
-    addIssue();
-  }, []);
+  const onSubmit = useCallback(
+    (e: FormEvent) => {
+      e.preventDefault();
+      addIssue();
+    },
+    [addIssue]
+  );
 
   return (
     <Wrapper className="IssueRegisterForm" onSubmit={onSubmit}>

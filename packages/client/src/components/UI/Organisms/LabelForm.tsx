@@ -1,9 +1,19 @@
 import styled from "@emotion/styled";
-import { useLabelFormStore } from "@stores/label";
+import {
+  LabelFormMode,
+  useLabelFormStore,
+  useLabelMutation,
+} from "@stores/label";
 import Atoms from "@UI/Atoms";
-import { ColorCode, TextColorSelection, TextInput } from "@UI/Molecules";
+import {
+  ColorCode,
+  CustomButton,
+  TextColorSelection,
+  TextInput,
+} from "@UI/Molecules";
+import { FormEvent, useCallback } from "react";
 
-const LabelForm = () => {
+const LabelForm = ({ mode }: SProps) => {
   const {
     labelForm,
     setName,
@@ -12,10 +22,20 @@ const LabelForm = () => {
     setTextColor,
   } = useLabelFormStore();
 
+  const { addLabel } = useLabelMutation();
+
   const { name, description, textColor, backgroundColor } = labelForm;
 
+  const onSubmit = useCallback(
+    (e: FormEvent) => {
+      e.preventDefault();
+      addLabel();
+    },
+    [addLabel]
+  );
+
   return (
-    <Wrapper>
+    <Wrapper onSubmit={onSubmit} mode={mode}>
       <Atoms.Title size="large">새로운 레이블 추가</Atoms.Title>
       <TextInput
         label="레이블 이름"
@@ -37,12 +57,7 @@ const LabelForm = () => {
         />
         <TextColorSelection value={textColor} onChange={setTextColor} />
       </div>
-      <Atoms.Button
-        size="small"
-        icon="plus_white"
-        text="완료"
-        disabled={!name}
-      />
+      <CustomButton.LabelFormButton />
       <PreView
         type="custom"
         color={labelForm.textColor}
@@ -55,14 +70,23 @@ const LabelForm = () => {
 
 export default LabelForm;
 
-const PreView = styled(Atoms.Label)``;
+interface SProps {
+  mode: LabelFormMode;
+}
 
-const Wrapper = styled.form`
+const Wrapper = styled.form<SProps>`
+  display: ${({ mode }) => (mode === "add" ? "flex" : "none")};
+  ${({ mode }) =>
+    mode === "add"
+      ? `
+  border: 1px solid var(--line);
+  margin-top: 24px;`
+      : ""}
+  border-radius: 16px;
   width: 1280px;
   height: 345px;
   background: var(--offWhite);
   padding: 96px 32px 32px 344px;
-  display: flex;
   flex-direction: column;
   position: relative;
   & > h2 {
@@ -79,7 +103,7 @@ const Wrapper = styled.form`
     width: 608px;
     justify-content: space-between;
   }
-  & > button {
+  & > .LabelFormButton {
     margin-top: 24px;
     align-self: flex-end;
   }
@@ -89,3 +113,5 @@ const Wrapper = styled.form`
     left: 131px;
   }
 `;
+
+const PreView = styled(Atoms.Label)``;

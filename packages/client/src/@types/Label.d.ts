@@ -1,16 +1,12 @@
 declare module "@types" {
-  interface Label {
+  interface Label extends LabelForm {
     id: string;
-    name: string;
-    description: string;
-    color: "light" | "dark";
-    backgroundColor: string;
   }
 
-  interface LabelRequest {
+  interface LabelForm {
     name: string;
     description: string;
-    color: "light" | "dark";
+    textColor: "light" | "dark";
     backgroundColor: string;
   }
 }

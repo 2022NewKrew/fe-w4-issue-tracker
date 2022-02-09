@@ -40,4 +40,8 @@ const Wrapper = styled.div`
       top: 25px;
     }
   }
+  .LabelAddButton {
+    position: absolute;
+    right: 0;
+  }
 `;

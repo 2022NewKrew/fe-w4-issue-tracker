@@ -79,22 +79,22 @@ export const IssueHome = () => {
         <CheckBox onClick={handleTotalCheckBox} checked={checked} />
         <Button options={{ type: "Medium-Text", prefixIcon: "alert-circle" }}>{`열린 이슈(${numOpenIssue})`}</Button>
         <Button options={{ type: "Medium-Text", prefixIcon: "archive" }}>{`닫힌 이슈(${numCloseIssue})`}</Button>
-        <HeaderRightItems>
+        <RightItemWrapper>
           <Button options={{ type: "Medium-Text", suffixIcon: "arrow-down" }}>담당자</Button>
           <Button options={{ type: "Medium-Text", suffixIcon: "arrow-down" }}>레이블</Button>
           <Button options={{ type: "Medium-Text", suffixIcon: "arrow-down" }}>마일스톤</Button>
           <Button options={{ type: "Medium-Text", suffixIcon: "arrow-down" }}>작성자</Button>
-        </HeaderRightItems>
+        </RightItemWrapper>
       </TableHeader>
     ) : (
       <TableHeader>
         <CheckBox onClick={handleTotalCheckBox} checked={checked} />
         <span css={[cssFontSize["small"], cssLink]}>{`${numCheckedIssues}개 이슈 선택`}</span>
-        <IssueRightItems>
+        <RightItemWrapper>
           <Button options={{ type: "Medium-Text", suffixIcon: "arrow-down" }} onClick={changeStateCheckedIssue}>
             상태 수정
           </Button>
-        </IssueRightItems>
+        </RightItemWrapper>
       </TableHeader>
     );
 
@@ -119,8 +119,8 @@ const StyledTaps = styled(Taps)`
   margin: 0 16px 0 auto;
 `;
 
-const HeaderRightItems = styled.div`
-  margin: 0 16px 0 auto;
+const RightItemWrapper = styled.div`
+  margin-left: auto;
   display: flex;
   align-items: center;
 

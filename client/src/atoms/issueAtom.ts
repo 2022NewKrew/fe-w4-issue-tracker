@@ -1,6 +1,11 @@
 import { atom, selector } from 'recoil';
 import { fetchIssues } from '@apis';
-import { IIssue, IFieldFilterState } from '@types';
+import { IIssue, IFieldFilterState, ILabeling, IAssignments, issueFilterType } from '@types';
+
+const UNSET = null;
+const UNSET_ARRAY = [];
+const ISSUE_WITHOUT_FIELD = -1;
+const ISSUE_WITHOUT_LABEL = null;
 
 export const issuesFilterState = atom({
     key: 'issuesFilterState',
@@ -27,10 +32,10 @@ export const allIssuesAtom = atom<IIssue[]>({
 export const issueFieldFilterState = atom<IFieldFilterState>({
     key: 'issueFieldFilterState',
     default: {
-        assignee: -1,
-        label: [],
-        milestone: -1,
-        author: -1,
+        assignee: UNSET,
+        label: UNSET_ARRAY,
+        milestone: UNSET,
+        author: UNSET,
     },
 });
 
@@ -38,14 +43,26 @@ export const issueFieldFilterSelector = selector<IIssue[]>({
     key: 'issueFieldFilterSelector',
     get: ({ get }) => {
         const issues = get(allIssuesAtom);
+        console.log(issues);
         const fieldFilter = get(issueFieldFilterState);
         const isMatchWithFieldFilter = (issue: IIssue, fieldType: issueFilterType) => {
             switch (fieldType) {
                 case 'assignee':
-                    return true; // [TODO] 서버에서 assignee 연결 후 로직 수정
+                    if (fieldFilter.assignee === ISSUE_WITHOUT_FIELD)
+                        // 담당자가 없는 이슈
+                        return issue.assignments === undefined;
+
+                    let issueAssignees: number[] = [];
+                    if (issue.assignments)
+                        issueAssignees = issue.assignments.map((assignment) => assignment.userId);
+                    return (
+                        fieldFilter.assignee === UNSET ||
+                        issueAssignees.includes(fieldFilter.assignee)
+                    );
                 case 'label':
-                    if (fieldFilter.label.length === 0) return true; // 필터링할 라벨이 없으면 무조건 true
                     if (!issue.labelings) return false;
+                    if (fieldFilter.label === ISSUE_WITHOUT_LABEL)
+                        return issue.labelings.length === 0;
                     const issueLabelingIds = issue.labelings.map(
                         (labeling: ILabeling) => labeling.labelId
                     );
@@ -55,11 +72,14 @@ export const issueFieldFilterSelector = selector<IIssue[]>({
                         true
                     );
                 case 'milestone':
+                    if (fieldFilter.milestone === ISSUE_WITHOUT_FIELD)
+                        return issue.milestoneId === undefined;
                     return (
-                        fieldFilter.milestone === -1 || fieldFilter.milestone === issue.milestoneId
+                        fieldFilter.milestone === UNSET ||
+                        fieldFilter.milestone === issue.milestoneId
                     );
                 case 'author':
-                    return fieldFilter.author === -1 || fieldFilter.author === issue.userId;
+                    return fieldFilter.author === UNSET || fieldFilter.author === issue.userId;
             }
         };
 

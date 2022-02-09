@@ -25,8 +25,8 @@ app.get('/issues', async (req, res) => {
     assignmentsRes.data.forEach((assignment) => {
         const targetIssue = data.find((issue) => issue.id === assignment.issueId);
         if (targetIssue) {
-            if (targetIssue.assignees) targetIssue.assignees.push(assignment);
-            else targetIssue.assignees = [{ assignment }];
+            if (targetIssue.assignments) targetIssue.assignments.push(assignment);
+            else targetIssue.assignments = [assignment];
         }
     });
     res.status('200').json({ data });

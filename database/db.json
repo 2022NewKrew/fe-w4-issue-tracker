@@ -56,6 +56,20 @@
             "userId": 0,
             "timeStamp": 1643794189926,
             "milestoneId": 2
+        },
+        {
+            "id": 6,
+            "title": "코드 리팩토링",
+            "status": "open",
+            "userId": 0,
+            "timeStamp": 1643794189926
+        },
+        {
+            "id": 7,
+            "title": "타입스크립트 에러 고치기",
+            "status": "open",
+            "userId": 1,
+            "timeStamp": 1643794189926
         }
     ],
     "comments": [
@@ -210,6 +224,11 @@
             "id": 7,
             "labelId": 6,
             "issueId": 1
+        },
+        {
+            "id": 8,
+            "labelId": 3,
+            "issueId": 6
         }
     ]
 }

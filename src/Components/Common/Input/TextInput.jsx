@@ -77,7 +77,6 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  border-radius: 16px;
   background-color: ${COLOR.INPUT_BACKGROUND};
   border: 1px solid rgba(0, 0, 0, 0);
   cursor: text;
@@ -106,15 +105,18 @@ const errorWrapperStyle = css`
 
 const largeWrapperStyle = css`
   height: 64px;
+  border-radius: 16px;
 `
 
 const mediumWrapperStyle = css`
   height: 56px;
+  border-radius: 14px;
 `
 
 const smallWrapperStyle = css`
   align-items: center;
   height: 40px;
+  border-radius: 11px;
 
   ${LabelText} {
     width: 80px;
@@ -128,12 +130,14 @@ const smallWrapperStyle = css`
 const textAreaWrapperStyle = css`
   flex-direction: column;
   height: 100%;
+  border-radius: 16px;
 `
 
 const filterBarWrapperStyle = css`
   align-items: center;
   height: 40px;
   border: 1px solid ${COLOR.LINE};
+  border-radius: 11px;
 
   ${LabelText} {
     width: 15px;

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
 import styled, { css } from "styled-components";
-import { getLabels, getMilestones } from "../../../api/api";
+import { getLabels, getMilestones } from "../../../api";
 import { Button } from "../../atoms/Button";
 import { cssFontSize, cssLink } from "../../atoms/Text";
 import { PageHeader, TableHeader, TableWrapper } from "../../commonLayout";

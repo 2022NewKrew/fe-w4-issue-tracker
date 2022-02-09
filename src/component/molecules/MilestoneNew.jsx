@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "react-query";
-import { postMilestone } from "../../api/api";
+import { postMilestone } from "../../api";
 import { useNewMilestone } from "../../hooks/useNewMilestone";
 import { Button } from "../atoms/Button";
 import { MilestoneButtonWrapper, NewMilestoneForm, NewMilestoneHeader, NewMilestoneWrapper } from "./MilestoneGenerateCommon";

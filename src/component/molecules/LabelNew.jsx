@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "react-query";
-import { createNewLabel } from "../../api/api";
+import { createNewLabel } from "../../api";
 import { useNewLabel } from "../../hooks/useNewLabel";
 import { randomHexColor } from "../../utils";
 import { Button } from "../atoms/Button";

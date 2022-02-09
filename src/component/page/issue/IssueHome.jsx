@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { getIssues, getLabels, getMilestones, patchCheckedIssue } from "../../../api/api";
+import { getIssues, getLabels, getMilestones, patchCheckedIssue } from "../../../api";
 import { Button } from "../../atoms/Button";
 import { CheckBox } from "../../atoms/CheckBox";
 import { cssFontSize, cssLink } from "../../atoms/Text";

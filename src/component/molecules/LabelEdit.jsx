@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "react-query";
-import { patchLabel } from "../../api/api";
+import { patchLabel } from "../../api";
 import { useNewLabel } from "../../hooks/useNewLabel";
 import { Button } from "../atoms/Button";
 import { LabelButtonWrapper, NewLabelForm, NewLabelHeader, NewLabelPreview, EditLabelWrapper } from "./LabelGenerateCommon";

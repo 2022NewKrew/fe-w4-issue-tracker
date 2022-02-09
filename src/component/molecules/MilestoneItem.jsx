@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import styled, { css } from "styled-components";
-import { deleteMilestone, patchMilestone } from "../../api/api";
+import { deleteMilestone, patchMilestone } from "../../api";
 import { Button } from "../atoms/Button";
 import { Icon } from "../atoms/Icons";
 import { ProgressIndicator } from "../atoms/ProgressIndicator";

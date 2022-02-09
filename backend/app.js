@@ -25,13 +25,78 @@ app.listen(appPort, ()=>{
 
 app.get('/issue-list', (req, res)=>{
   try{
-    const issues=issueDB.select();
-    res.send(issues).status(200);
+    const rawFilter=req.query.filter;
+    if(rawFilter===undefined || rawFilter.match(/^\s*$/)){
+      const issues=issueDB.selectAll();
+      return res.send(issues).status(200);
+    }
+    const {authorID, milestoneTitle, labelTitle, assigneeID}=parseFilter(rawFilter);
+    db.transaction(()=>{
+      let milestoneID, labelID;
+      if(milestoneTitle!==undefined && milestoneTitle!==null){
+        const milestone=milestoneDB.selectByTitle(milestoneTitle);
+        if(milestone===undefined){
+          return res.send([]).status(200);
+        }
+        milestoneID=milestone.milestoneID;
+      }
+      else if(milestoneTitle===null){
+        milestoneID=null;
+      }
+
+      if(labelTitle!==undefined && labelTitle!==null){
+        const label=labelDB.selectByTitle(labelTitle);
+        if(label===undefined){
+          return res.send([]).status(200);
+        }
+        labelID=label.labelID;
+      }
+      else if(labelTitle===null){
+        labelID=null;
+      }
+
+      const issues=issueDB.select({authorID, milestoneID, labelID, assigneeID});
+      res.send(issues).status(200);
+    })();
   }catch(e){
     console.error(e.message);
     res.sendStatus(500);
   }
 });
+
+/**
+ * @param {string} rawFilter
+ */
+function parseFilter(rawFilter){
+  const filterArray=rawFilter
+    .split(/\s+(?=([^"]*"[^"]*")*[^"]*$)/)
+    .filter((val)=>val.length && !val.match(/^\s+$/));
+  let authorID, milestoneTitle, labelTitle, assigneeID;
+  filterArray.forEach((val)=>{
+    let [key, value]=val.split(':');
+    value=value.replace(/"/g, '');
+    if(!value.length){
+      value=null;
+    }
+    switch(key){
+    case 'author':
+      authorID=value;
+      break;
+    case 'milestone':
+      milestoneTitle=value;
+      break;
+    case 'label':
+      labelTitle=value;
+      break;
+    case 'assignee':
+      assigneeID=value;
+      break;
+    default:
+      throw Error(`parseFilter: Invalid filter key: ${key}`);
+    }
+  });
+  return {authorID, milestoneTitle, labelTitle, assigneeID};
+}
 
 app.get('/issue-label', (req, res)=>{
   try{
@@ -60,6 +125,36 @@ app.get('/milestone-list', (_, res)=>{
     const milestones=milestoneDB.selectAll();
     const keyedMilestones=createObjectWithKey(milestones, 'milestoneID');
     res.send(keyedMilestones).status(200);
+  }catch(e){
+    console.error(e.message);
+    res.sendStatus(500);
+  }
+});
+
+app.get('/user-list', (_, res)=>{
+  try{
+    const users=userDB.select();
+    const keyedUsers=createObjectWithKey(users, 'userID');
+    res.send(keyedUsers).status(200);
+  }catch(e){
+    console.error(e.message);
+    res.sendStatus(500);
+  }
+});
+
+app.post('/api/update-issue', (req, res)=>{
+  try{
+    /** @type {number[]} */
+    const issueIDs=req.body.issueIDs;
+    const isOpen=req.body.isOpen;
+    db.transaction(()=>{
+      issueIDs.forEach((issueID)=>{
+        if(issueDB.updateIsOpen(Number(issueID), {isOpen})===0){
+          throw Error(`Cannot update issue. ID: ${issueID}`);
+        }
+      });
+    })();
+    res.sendStatus(200);
   }catch(e){
     console.error(e.message);
     res.sendStatus(500);

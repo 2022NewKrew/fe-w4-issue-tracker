@@ -1,4 +1,4 @@
-const {convertIsOpenBool, convertIsOpenInt} = require('../global');
+const {convertIsOpenBool, convertIsOpenInt, createWhereCondition} = require('../global');
 
 /**
  * @param {import('better-sqlite3').Database} db
@@ -64,14 +64,35 @@ module.exports=function initIssueDB(db){
   `);
   function updateIsOpen(issueID, {isOpen}){
     isOpen=convertIsOpenInt(isOpen);
-    updateIsOpenStmt.run({issueID, isOpen});
+    return updateIsOpenStmt.run({issueID, isOpen}).changes;
   }
 
-  const selectStmt=db.prepare(`
+  const selectAllStmt=db.prepare(`
     SELECT * FROM issue
   `);
-  function select(){
-    const result=selectStmt.all();
+  function selectAll(){
+    const result=selectAllStmt.all();
+    convertIsOpenBool(result);
+    return result;
+  }
+
+  function select({authorID, milestoneID, labelID, assigneeID}){
+    const condition=[
+      createWhereCondition(authorID, 'authorID'),
+      createWhereCondition(milestoneID, 'milestoneID'),
+      createWhereCondition(labelID, 'labelID'),
+      createWhereCondition(assigneeID, 'assigneeID')
+    ].filter((val)=>val.length).join(' AND ');
+    const selectStmt=db.prepare(`
+      SELECT * FROM
+      (issue LEFT JOIN issueLabel USING (issueID))
+      LEFT JOIN
+      (SELECT userID assigneeID, issueID FROM assignee)
+      USING (issueID)
+      WHERE ${condition}
+      GROUP BY issueID
+    `);
+    const result=selectStmt.all({authorID, milestoneID, labelID, assigneeID});
     convertIsOpenBool(result);
     return result;
   }
@@ -82,6 +103,7 @@ module.exports=function initIssueDB(db){
     updateMilestone,
     updateBody,
     updateIsOpen,
-    select
+    select,
+    selectAll
   };
 };

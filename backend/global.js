@@ -15,13 +15,19 @@ function mergeTwoObjects(a, b){
 
 /**
  * Convert `isOpen` property value type to `bool` for row in rows in-place.
- * @param {Array.<{isOpen:int}>} rows
+ * @param {Array.<{isOpen:int}>|{isOpen:int}} target
  */
-function convertIsOpenBool(rows){
-  for(const row of rows){
-    if(row.isOpen!==undefined){
-      row.isOpen=row.isOpen===1 ? true : false;
+function convertIsOpenBool(target){
+  if(Array.isArray(target)){
+    for(const row of target){
+      if(row.isOpen!==undefined){
+        row.isOpen=row.isOpen===1 ? true : false;
+      }
     }
+    return;
+  }
+  if(target!==undefined && target.isOpen!==undefined){
+    target.isOpen=target.isOpen===1 ? true: false;
   }
 }
 /**
@@ -67,10 +73,26 @@ function createObjectWithKey(objectArray, key){
   }, {});
 }
 
+/**
+ * Create SQL WHERE condition from `queryValue` and `columnName`.
+ * Return empty string if `queryValue` is `undefined`.
+ * Return WHERE condition of null if `queryValue` is `null`.
+ * Else return WHERE condition of `queryValue`.
+ * @param {any} queryValue
+ * @param {string} columnName
+ * @returns {string}
+ */
+function createWhereCondition(queryValue, columnName){
+  return queryValue!==undefined ?
+    (queryValue!==null ? `${columnName}=@${columnName}` : `${columnName} IS NULL`)
+    : '';
+}
+
 module.exports={
   mergeTwoObjects,
   convertIsOpenBool,
   convertIsOpenInt,
   flatObjectArray,
-  createObjectWithKey
+  createObjectWithKey,
+  createWhereCondition
 };

@@ -23,6 +23,7 @@
             font-weight: bold;
             font-size: 1.1rem;
             flex:1;
+            stroke: $title-active-color;
         }
         .issue-info {
             flex: 1;
@@ -33,7 +34,7 @@
         }
     }
     .rest-container {
-        @extend %flex-center;
+        @extend .flex-center;
         @extend .tab-rest;
     }
 }

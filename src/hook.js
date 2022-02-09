@@ -9,7 +9,15 @@ export function useArrayLength(array){
 }
 
 /**
- * @param {Function} callback
+ * @param {{}} object
+ */
+export function useNumObjectKeys(object){
+  const numKeys=useMemo(()=>Object.keys(object).length, [object]);
+  return numKeys;
+}
+
+/**
+ * @param {function} callback
  * @param {number} time
  * @param {any[]} deps
  */
@@ -26,8 +34,10 @@ export function useDebounce(callback, time, deps){
  */
 export function useCheck(array){
   const [checked, setChecked]=useState({});
+  const [numChecked, setNumChecked]=useState(0);
   const [isCheckedAll, setIsCheckedAll]=useState(false);
-  
+  const [isCheckedAny, setIsCheckedAny]=useState(false);
+
   useEffect(()=>{
     setChecked({});
   }, [array]);
@@ -35,6 +45,11 @@ export function useCheck(array){
   useEffect(()=>{
     setIsCheckedAll(array.length && Object.keys(checked).length===array.length);
   }, [checked, array]);
+
+  useEffect(()=>{
+    setIsCheckedAny(Object.keys(checked).length>0);
+    setNumChecked(Object.keys(checked).length);
+  }, [checked]);
 
   const isChecked=useCallback((index)=>{
     return (index in checked);
@@ -67,11 +82,12 @@ export function useCheck(array){
   const uncheckAll=useCallback(()=>{
     setChecked({});
   }, []);
-  
+
   const toggleCheckAll=useCallback(()=>{
     isCheckedAll ? uncheckAll() : checkAll();
   }, [isCheckedAll, uncheckAll, checkAll]);
   return {
-    isChecked, isCheckedAll, toggleCheck, checkAll, uncheckAll, toggleCheckAll
+    checked, isChecked, isCheckedAll, isCheckedAny, numChecked,
+    toggleCheck, checkAll, uncheckAll, toggleCheckAll
   };
 }

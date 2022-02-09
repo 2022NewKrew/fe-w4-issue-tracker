@@ -1,7 +1,7 @@
 /**
  * @param {import('better-sqlite3').Database} db
  */
-module.exports=function initassigneeDB(db){
+module.exports=function initAssigneeDB(db){
   function createTable(){
     const stmt=db.prepare(`
       CREATE TABLE IF NOT EXISTS assignee(

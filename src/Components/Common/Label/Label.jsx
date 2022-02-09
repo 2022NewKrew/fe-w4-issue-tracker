@@ -63,7 +63,7 @@ const Label = ({ children, size, textColor, backgroundColor }) => {
 }
 
 Label.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
   size: PropTypes.oneOf(Object.values(LABEL_SIZE)).isRequired,
   textColor: PropTypes.string.isRequired,
   backgroundColor: PropTypes.string.isRequired,

@@ -251,7 +251,7 @@ const Button = ({
 }
 
 Button.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.arrayOf(PropTypes.element),
   type: PropTypes.oneOf(Object.values(BUTTON_TYPE)).isRequired,
   size: PropTypes.oneOf(Object.values(BUTTON_SIZE)).isRequired,
   userStyle: PropTypes.array,

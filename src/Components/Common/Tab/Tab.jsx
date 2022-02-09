@@ -44,7 +44,7 @@ const Tab = ({ children }) => {
 }
 
 Tab.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.arrayOf(PropTypes.element),
 }
 
 export default Tab

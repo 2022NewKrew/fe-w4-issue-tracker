@@ -22,6 +22,17 @@ class LabelService {
     const { data } = await _axios.post<Label>(baseUrl, newLabel);
     return data;
   }
+  static async patch(id: string, payload: LabelForm) {
+    const { data } = await _axios.patch<Label>(`${baseUrl}/${id}`, {
+      ...payload,
+      id,
+    });
+    return data;
+  }
+  static async delete(id: string) {
+    const { data } = await _axios.delete(`${baseUrl}/${id}`);
+    return data;
+  }
 }
 
 export default LabelService;

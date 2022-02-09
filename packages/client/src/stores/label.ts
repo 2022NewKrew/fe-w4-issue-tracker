@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import {
   atom,
   selector,
@@ -44,11 +45,21 @@ const LabelFormState = atom<LabelForm>({
   },
 });
 
+export type LabelFormMode = "add" | "close" | string;
+
+const LabelFormModeState = atom<LabelFormMode>({
+  key: "LabelFormModeState",
+  default: "close",
+});
+
 export const useLabelFormStore = () => {
   const [labelForm, setLabelForm] = useRecoilState(LabelFormState);
-
+  const resetLabelForm = useResetRecoilState(LabelFormState);
+  const [labelFormMode, setLabelFormMode] = useRecoilState(LabelFormModeState);
   return {
     labelForm,
+    setLabelForm,
+    resetLabelForm,
     setName: (e: any) =>
       setLabelForm((prev) => ({ ...prev, name: e.target.value })),
     setDescription: (e: any) =>
@@ -57,22 +68,44 @@ export const useLabelFormStore = () => {
       setLabelForm((prev) => ({ ...prev, backgroundColor: e.target.value })),
     setTextColor: (textColor: "light" | "dark") =>
       setLabelForm((prev) => ({ ...prev, textColor })),
+    labelFormMode,
+    setLabelFormMode,
   };
 };
 
 export const useLabelMutation = () => {
   const queryClient = useQueryClient();
-  const resetIssueForm = useResetRecoilState(LabelFormState);
+  const resetLabelForm = useResetRecoilState(LabelFormState);
   const labelForm = useRecoilValue(LabelFormState);
+  const [labelFormMode, setLabelFormMode] = useRecoilState(LabelFormModeState);
+
+  const onSuccess = useCallback(() => {
+    queryClient.invalidateQueries("labelList");
+    resetLabelForm();
+    setLabelFormMode("close");
+  }, []);
 
   const addLabel = useMutation(async () => LabelService.post(labelForm), {
-    onSuccess: () => {
-      queryClient.invalidateQueries("labelList");
-      resetIssueForm();
-    },
+    onSuccess,
   });
+
+  const modifyLabel = useMutation(
+    async () => LabelService.patch(labelFormMode, labelForm),
+    {
+      onSuccess,
+    }
+  );
+
+  const removeLabel = useMutation(
+    async (id: string) => LabelService.delete(id),
+    {
+      onSuccess,
+    }
+  );
 
   return {
     addLabel: () => addLabel.mutate(),
+    modifyLabel: () => modifyLabel.mutate(),
+    removeLabel: (id: string) => removeLabel.mutate(id),
   };
 };

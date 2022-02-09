@@ -1,35 +1,46 @@
 import styled from "@emotion/styled";
-import { useLabelStore } from "@stores/label";
+import {
+  useLabelFormStore,
+  useLabelMutation,
+  useLabelStore,
+} from "@stores/label";
 import { Label } from "@types";
 import Atoms from "@UI/Atoms";
+import { CustomButton } from "@UI/Molecules";
 import { useCallback } from "react";
+import { LabelForm } from ".";
 
 const LabelTable = () => {
   const { labelList, labelListCount } = useLabelStore();
+  const { labelFormMode, setLabelForm, setLabelFormMode } = useLabelFormStore();
+  const { removeLabel } = useLabelMutation();
 
   const createLabelList = useCallback(
     (labelList: Label[]) =>
-      labelList.map(({ id, name, description, backgroundColor, textColor }) => (
-        <Atoms.Li key={id}>
-          <Atoms.Label
-            type="custom"
-            color={textColor}
-            bgColor={backgroundColor}
-            text={name}
-          />
-          {description}
-          <Atoms.ButtonGroup gap={24}>
-            <Atoms.Button size="small" shape="text" icon="edit" text="편집" />
-            <Atoms.Button
-              size="small"
-              shape="text"
-              icon="trash_red"
-              text="삭제"
+      labelList.map(({ id, name, description, backgroundColor, textColor }) => {
+        const onClick = () => {
+          setLabelForm({ name, description, backgroundColor, textColor });
+          setLabelFormMode(id);
+        };
+        return labelFormMode === id ? (
+          <LabelForm mode={labelFormMode} />
+        ) : (
+          <Atoms.Li key={id}>
+            <Atoms.Label
+              type="custom"
+              color={textColor}
+              bgColor={backgroundColor}
+              text={name}
             />
-          </Atoms.ButtonGroup>
-        </Atoms.Li>
-      )),
-    [labelList]
+            <span> {description}</span>
+            <Atoms.ButtonGroup gap={24}>
+              <CustomButton.EditButton onClick={onClick} />
+              <CustomButton.RemoveButton onClick={() => removeLabel(id)} />
+            </Atoms.ButtonGroup>
+          </Atoms.Li>
+        );
+      }),
+    [labelList, labelFormMode]
   );
 
   return (
@@ -48,6 +59,7 @@ const Wrapper = styled.ul`
   border-radius: 16px;
   overflow: hidden;
   & > li {
+    height: min-content;
     padding: 0 32px;
     & > .Label {
       position: absolute;

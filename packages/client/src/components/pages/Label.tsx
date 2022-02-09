@@ -10,7 +10,7 @@ const Label = () => {
     <AppLayout>
       <Taps />
       <CustomButton.LabelAddButton />
-      <LabelForm mode={labelFormMode} />
+      {labelFormMode === "add" && <LabelForm mode={labelFormMode} />}
       <LabelTable />
     </AppLayout>
   );

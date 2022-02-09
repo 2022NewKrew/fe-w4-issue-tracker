@@ -20,18 +20,23 @@ const LabelForm = ({ mode }: SProps) => {
     setDescription,
     setBackgroundColor,
     setTextColor,
+    labelFormMode,
   } = useLabelFormStore();
 
-  const { addLabel } = useLabelMutation();
+  const { addLabel, modifyLabel } = useLabelMutation();
 
   const { name, description, textColor, backgroundColor } = labelForm;
 
   const onSubmit = useCallback(
     (e: FormEvent) => {
       e.preventDefault();
-      addLabel();
+      if (labelFormMode === "add") {
+        addLabel();
+      } else {
+        modifyLabel();
+      }
     },
-    [addLabel]
+    [addLabel, labelFormMode]
   );
 
   return (
@@ -75,14 +80,14 @@ interface SProps {
 }
 
 const Wrapper = styled.form<SProps>`
-  display: ${({ mode }) => (mode === "add" ? "flex" : "none")};
+  display: ${({ mode }) => (mode === "close" ? "none" : "flex")};
   ${({ mode }) =>
     mode === "add"
       ? `
-  border: 1px solid var(--line);
-  margin-top: 24px;`
+      border-radius: 16px;
+      margin-top: 24px;`
       : ""}
-  border-radius: 16px;
+  border: 1px solid var(--line);
   width: 1280px;
   height: 345px;
   background: var(--offWhite);
@@ -104,6 +109,10 @@ const Wrapper = styled.form<SProps>`
     justify-content: space-between;
   }
   & > .LabelFormButton {
+    margin-top: 24px;
+    align-self: flex-end;
+  }
+  & > .ButtonGroup {
     margin-top: 24px;
     align-self: flex-end;
   }

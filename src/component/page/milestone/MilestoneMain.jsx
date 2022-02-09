@@ -14,8 +14,8 @@ export const MilestoneMain = () => {
   const [newMode, setNewMode] = useState(false);
 
   // server state
-  const { data: labels } = useQuery("labels", getLabels, { staleTime: 5000 });
-  const { data: milestones } = useQuery("milestones", getMilestones, { staleTime: 5000 });
+  const { data: labels } = useQuery("labels", getLabels);
+  const { data: milestones } = useQuery("milestones", getMilestones);
 
   const numLabels = labels?.length || 0;
   const numMilestones = milestones?.length || 0;

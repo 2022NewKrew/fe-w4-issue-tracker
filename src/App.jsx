@@ -9,7 +9,14 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import { LabelMain } from "./component/page/label/LabelMain";
 import { MilestoneMain } from "./component/page/milestone/MilestoneMain";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 10000,
+      cacheTime: Infinity,
+    },
+  },
+});
 
 function App() {
   const defaultElementForTest = (

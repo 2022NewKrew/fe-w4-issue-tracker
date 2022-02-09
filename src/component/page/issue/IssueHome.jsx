@@ -18,9 +18,9 @@ export const IssueHome = () => {
   const checkedIssues = useRef(new Set());
 
   // data fetch
-  const { data: labels } = useQuery(["labels"], getLabels, { staleTime: 5000 });
-  const { data: milestones } = useQuery(["milestones"], getMilestones, { staleTime: 5000 });
-  const { data: issues, refetch } = useQuery(["issues"], getIssues, { staleTime: 5000 });
+  const { data: labels } = useQuery(["labels"], getLabels);
+  const { data: milestones } = useQuery(["milestones"], getMilestones);
+  const { data: issues, refetch } = useQuery(["issues"], getIssues);
   useEffect(() => {
     if (Array.isArray(issues)) {
       setIssueList(issues);

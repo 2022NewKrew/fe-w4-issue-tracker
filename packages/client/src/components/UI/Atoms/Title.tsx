@@ -21,9 +21,6 @@ const typeList = {
   panel: `
   font-size: 18px;
   line-height: 32px;
-  background: var(--background);
-  padding: 8px 16px;
-  height: 48px;
   `,
   issueList: `
   font-size: 1.125rem;

@@ -7,8 +7,6 @@ const StyledIssueTableCell = styled.div`
   position: static;
   width: 1280px;
   height: 160px;
-  left: 0px;
-  top: 65px;
   background: ${greyscale.OFF_WHITE};
   flex: none;
   order: 1;
@@ -26,7 +24,7 @@ const IssueTableCell = ({
   initialTimestamp,
   initialMilestone,
 }) => {
-  const [checked, setChecked] = useState(false);
+  const [value, setValue] = useState(false);
   const [opened, setOpened] = useState(initialOpened);
   const [title, setTitle] = useState(initialTitle);
   const [label, setLabel] = useState(initialLabel);
@@ -37,7 +35,10 @@ const IssueTableCell = ({
 
   return (
     <StyledIssueTableCell>
-      <input type={"checkbox"}></input>
+      <input
+        type={"checkbox"}
+        onChange={(e) => setValue(e.target.value)}
+      ></input>
       <div>opened: {opened}</div>
       <div>이슈 제목: {title}</div>
       <div>레이블 이름: {label}</div>

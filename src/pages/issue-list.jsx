@@ -40,6 +40,10 @@ const TapsLabelMilestone = styled.div`
 `;
 
 const ButtonIssueAdd = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   padding: 0px 16px;
   position: absolute;
   width: 120px;

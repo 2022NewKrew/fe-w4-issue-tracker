@@ -7,8 +7,6 @@ const StyledIssueTableHeader = styled.div`
   position: static;
   width: 1280px;
   height: 64px;
-  left: 0px;
-  top: 0px;
   background: ${greyscale.BACKGROUND};
   border-radius: 16px 16px 0px 0px;
   flex: none;
@@ -18,9 +16,14 @@ const StyledIssueTableHeader = styled.div`
 `;
 
 const IssueTableHeader = ({ children }) => {
+  const [value, setValue] = useState(false);
+
   return (
     <StyledIssueTableHeader>
-      <input type={"checkbox"}></input>
+      <input
+        type={"checkbox"}
+        onChange={(e) => setValue(e.target.value)}
+      ></input>
       <span>{children}</span>
     </StyledIssueTableHeader>
   );

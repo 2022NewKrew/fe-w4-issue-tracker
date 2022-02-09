@@ -10,6 +10,12 @@ import {
 import styled from 'styled-components';
 import { RoundBorderDiv, TextMedium, AlignYCenter } from '@styles/styleTemplates';
 import { IFilter, issueFilterType, IFilterInfo, IFieldFilterState } from '@types';
+import {
+    UNSET,
+    UNSET_ARRAY,
+    ISSUE_WITHOUT_FIELD,
+    ISSUE_WITHOUT_LABEL,
+} from '@types/globalConstants';
 import { OptionField } from '@components/assets';
 import { EmptyRow } from '@components/';
 
@@ -39,18 +45,28 @@ const getOptionClickHandler = (
     type: issueFilterType,
     setState: SetterOrUpdater<IFieldFilterState>
 ) => {
-    if (type === 'assignee' || type === 'milestone' || type === 'author')
+    if (type === 'assignee' || type === 'milestone' || type === 'author') {
         return (value: number) =>
             setState((prevState: IFieldFilterState) => {
-                return { ...prevState, [type]: value };
+                const newValue = prevState[type] === value ? UNSET : value;
+                return { ...prevState, [type]: newValue };
             });
+    }
     if (type === 'label')
         return (value: number) =>
             setState((prevState: IFieldFilterState) => {
-                if (prevState.label === null) return { ...prevState, label: [value] };
-
-                const newLabelFilters = value === null ? null : [...prevState.label, value];
-                return { ...prevState, label: newLabelFilters };
+                let newValue;
+                if (value === ISSUE_WITHOUT_LABEL) {
+                    newValue = prevState.label === value ? UNSET_ARRAY : value;
+                } else {
+                    if (prevState.label === ISSUE_WITHOUT_LABEL) newValue = [value];
+                    else {
+                        newValue = prevState.label.includes(value)
+                            ? prevState.label.filter((id) => id !== value)
+                            : [...prevState.label, value];
+                    }
+                }
+                return { ...prevState, label: newValue };
             });
     return () => setState((prevState) => prevState);
 };
@@ -60,7 +76,8 @@ const getOptionsIncludeEmptyFilterOption = (
     emptyFilterOption: string | undefined,
     optionsDataContents: IFilterInfo[]
 ) => {
-    const emptyFilterOptionValue: number | null = type === 'label' ? null : -1;
+    const emptyFilterOptionValue: number | null =
+        type === 'label' ? ISSUE_WITHOUT_LABEL : ISSUE_WITHOUT_FIELD;
     let optionsIncludeEmptyFilterOption: IFilterInfo[] = emptyFilterOption
         ? [{ id: emptyFilterOptionValue, name: emptyFilterOption }]
         : [];

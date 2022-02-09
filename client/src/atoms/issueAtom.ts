@@ -1,11 +1,12 @@
 import { atom, selector } from 'recoil';
 import { fetchIssues } from '@apis';
-import { IIssue, IFieldFilterState, ILabeling, IAssignments, issueFilterType } from '@types';
-
-const UNSET = null;
-const UNSET_ARRAY = [];
-const ISSUE_WITHOUT_FIELD = -1;
-const ISSUE_WITHOUT_LABEL = null;
+import { IIssue, IFieldFilterState, ILabeling, issueFilterType } from '@types';
+import {
+    UNSET,
+    UNSET_ARRAY,
+    ISSUE_WITHOUT_FIELD,
+    ISSUE_WITHOUT_LABEL,
+} from '@types/globalConstants';
 
 export const issuesFilterState = atom({
     key: 'issuesFilterState',

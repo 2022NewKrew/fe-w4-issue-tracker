@@ -14,6 +14,7 @@ const activeStyle = css`
 
 const TabItemContainer = styled.li`
   width: 160px;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

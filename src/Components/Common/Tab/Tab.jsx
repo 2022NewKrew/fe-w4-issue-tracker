@@ -9,7 +9,8 @@ const TabItemList = styled.ul`
 `
 
 const TabContainer = styled.div`
-  display: inline-block;
+  height: 40px;
+  display: inline-flex;
   background-color: ${COLOR.BACKGROUND};
   border: 1px solid ${COLOR.LINE};
   border-radius: 11px;

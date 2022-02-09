@@ -17,7 +17,7 @@ interface TapProps {
   onClickOption: (index: number) => void;
 }
 
-const Tap = ({ options, selected, onClickOption }: TapProps) => {
+const Tap = ({ options, selected, onClickOption, ...props }: TapProps) => {
   const tabElems = options.map(({ icon, name, count }, idx) => (
     <a key={name} css={idx === selected ? SelectedStyle : []} onClick={() => onClickOption(idx)}>
       <Icon icon={icon} />
@@ -25,7 +25,11 @@ const Tap = ({ options, selected, onClickOption }: TapProps) => {
     </a>
   ));
 
-  return <div css={TapStyle}>{tabElems}</div>;
+  return (
+    <div css={TapStyle} {...props}>
+      {tabElems}
+    </div>
+  );
 };
 
 const { line, background, inputBackground, body, label } = theme.greyScale;

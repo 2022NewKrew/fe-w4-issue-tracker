@@ -6,14 +6,14 @@ import Icon, { IconType } from '@icon';
 
 interface LabelProps {
   type: 'Blue' | 'Purple' | 'DarkText' | 'LightText' | 'Line';
-  icon: IconType;
+  icon?: IconType;
   name: string;
 }
 
 const Label = ({ type, icon, name }: LabelProps) => {
   return (
     <div css={[DefaultStyle, ...LabelStyle[type]]}>
-      {['Blue', 'Purple'].includes(type) && <Icon icon={icon} />}
+      {icon && <Icon icon={icon} />}
       <span>{name}</span>
     </div>
   );

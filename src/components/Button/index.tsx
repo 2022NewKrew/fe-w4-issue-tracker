@@ -25,6 +25,7 @@ const { blue, lightBlue, darkBlue } = theme.colors.primary;
 const { linkMedium, linkSmall, linkXSmall } = theme.textStyles;
 
 const buttonStyle = css`
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;

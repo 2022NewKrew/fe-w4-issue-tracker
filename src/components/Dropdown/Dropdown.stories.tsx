@@ -1,4 +1,7 @@
+/** @jsxRuntime classic */
+/** @jsx jsx */
 import React from 'react';
+import { jsx, css } from '@emotion/react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Icon from '@icon';
 
@@ -9,7 +12,9 @@ export default {
   component: Dropdown,
 } as ComponentMeta<typeof Dropdown>;
 
-const Template: ComponentStory<typeof Dropdown> = (args) => <Dropdown {...args} />;
+const Template: ComponentStory<typeof Dropdown> = (args) => (
+  <Dropdown {...args} css={{ marginLeft: 100 }} />
+);
 
 const icon = <Icon icon="UserImageSmall" />;
 

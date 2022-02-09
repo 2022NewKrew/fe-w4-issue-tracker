@@ -8,7 +8,7 @@ import Icon from '@icon';
 interface DropdownProps {
   label: string;
   selected: number;
-  onSelect: (index: number) => boolean;
+  onSelect: (index: number) => void;
   options: string[];
   type: 'Text' | 'ImageAndText' | 'Modify';
   images?: JSX.Element[];
@@ -25,6 +25,7 @@ const Dropdown = ({
   images,
   customName,
   titleWidth,
+  ...props
 }: DropdownProps) => {
   const [open, setOpen] = useState(false);
   const panelRef = useRef<HTMLUListElement>(null);
@@ -59,7 +60,7 @@ const Dropdown = ({
   ));
 
   return (
-    <div css={{ position: 'relative' }}>
+    <div css={{ position: 'relative' }} {...props}>
       <div css={IndicatorStyle} onClick={handleClickIndicator}>
         <span css={{ width: `${titleWidth}px` }}>{label}</span>
         <Icon icon="Arrow" />
@@ -74,7 +75,7 @@ const Dropdown = ({
   );
 };
 
-const { label, body, line, background } = theme.greyScale;
+const { label, body, line, background, offWhite } = theme.greyScale;
 const { linkSmall, textMedium, textSmall } = theme.textStyles;
 
 const IndicatorStyle = css`
@@ -101,9 +102,11 @@ const IndicatorStyle = css`
 
 const PannelStyle = css`
   position: absolute;
+  left: -80px;
   display: flex;
   flex-direction: column;
   width: 240px;
+  background: ${offWhite};
 
   border: 1px solid ${line};
   border-radius: 16px;

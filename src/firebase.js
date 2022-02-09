@@ -72,4 +72,26 @@ export const updateIssue = async (updateData) => {
   );
 };
 
+export const putUser = async ({ id, ...userData }) => {
+  const userCollection = collection(db, DATA_TYPE.USER);
+  const queryForCheckRedundant = query(
+    userCollection,
+    where("name", "==", userData.name)
+  );
+  const redundantUser = await getDocs(queryForCheckRedundant);
+  if (redundantUser.empty) {
+    if (id) {
+      const userRef = doc(db, DATA_TYPE.USER, id);
+      await setDoc(userRef, userData);
+      return true;
+    } else {
+      await setDoc(userCollection, userData);
+      return true;
+    }
+  } else {
+    const redundantUserId = redundantUser.docs[0].id;
+    return redundantUserId === id;
+  }
+};
+
 export * from "firebase/auth";

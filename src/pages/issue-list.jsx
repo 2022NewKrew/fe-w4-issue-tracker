@@ -4,10 +4,12 @@ import { Link } from "react-router-dom";
 import HeaderContainer from "@components/containers/header-container";
 import StandardButton from "@components/buttons/standard-button";
 import TextInput from "@components/inputs/text-input";
+import IssueTable from "@components/etc/issue-table";
+import IssueTableCell from "@components/etc/issue-table-cell";
+import IssueTableHeader from "@components/etc/issue-table-header";
 import colors from "@styles/constants/colors";
 import greyscale from "@styles/constants/greyscale";
 import sizes from "@styles/constants/sizes";
-import { allCenterAlign } from "@utils/helper";
 
 const FilterBar = styled.div`
   display: flex;
@@ -38,10 +40,6 @@ const TapsLabelMilestone = styled.div`
 `;
 
 const ButtonIssueAdd = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
   padding: 0px 16px;
   position: absolute;
   width: 120px;
@@ -50,57 +48,6 @@ const ButtonIssueAdd = styled.div`
   top: 126px;
   background: ${colors.BLUE};
   border-radius: 11px;
-`;
-
-const IssueTable = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
-  position: absolute;
-  width: 1280px;
-  height: 270px;
-  left: 80px;
-  top: 190px;
-  background: ${greyscale.LINE};
-  border: 1px solid ${greyscale.LINE};
-  border-radius: 16px;
-`;
-
-const IssueTableHeader = styled.div`
-  ${allCenterAlign}
-  position: static;
-  width: 1280px;
-  height: 64px;
-  left: 0px;
-  top: 0px;
-  background: ${greyscale.BACKGROUND};
-  border-radius: 16px 16px 0px 0px;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-  margin: 1px 0px;
-`;
-
-const HeaderCheckBox = styled.input`
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  left: 32px;
-  top: 24px;
-`;
-
-const IssueTableCell = styled.div`
-  position: static;
-  width: 1280px;
-  height: 100px;
-  left: 0px;
-  top: 65px;
-  background: ${greyscale.OFF_WHITE};
-  flex: none;
-  order: 1;
-  flex-grow: 0;
-  margin: 1px 0px;
 `;
 
 const IssueList = () => {
@@ -129,14 +76,23 @@ const IssueList = () => {
       </ButtonIssueAdd>
       <IssueTable>
         <IssueTableHeader>
-          <HeaderCheckBox type={"checkbox"}></HeaderCheckBox>
-          <StandardButton componentSize={sizes.SMALL}>열린 이슈</StandardButton>
-          <StandardButton componentSize={sizes.SMALL}>닫힌 이슈</StandardButton>
-          <StandardButton componentSize={sizes.SMALL}>담당자</StandardButton>
-          <StandardButton componentSize={sizes.SMALL}>레이블</StandardButton>
-          <StandardButton componentSize={sizes.SMALL}>마일스톤</StandardButton>
-          <StandardButton componentSize={sizes.SMALL}>작성자</StandardButton>
+          <button>열린 이슈</button>
+          <button>닫힌 이슈</button>
+          <button>담당자</button>
+          <button>레이블</button>
+          <button>마일스톤</button>
+          <button>작성자</button>
+          <button>선택한 이슈 열기</button>
+          <button>선택한 이슈 닫기</button>
         </IssueTableHeader>
+        <IssueTableCell></IssueTableCell>
+        <IssueTableCell></IssueTableCell>
+        <IssueTableCell></IssueTableCell>
+        <IssueTableCell></IssueTableCell>
+        <IssueTableCell></IssueTableCell>
+        <IssueTableCell></IssueTableCell>
+        <IssueTableCell></IssueTableCell>
+        <IssueTableCell></IssueTableCell>
         <IssueTableCell></IssueTableCell>
         <IssueTableCell></IssueTableCell>
       </IssueTable>

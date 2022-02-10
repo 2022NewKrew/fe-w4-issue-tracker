@@ -48,9 +48,6 @@ export const MilestoneItem = ({ milestone }) => {
     }
   };
 
-  const openIssueLength = milestone.issues.filter(({ status }) => status === "open").length;
-  const closeIssueLength = milestone.issues.length - openIssueLength;
-
   if (editMode) {
     return <MilestoneEdit initState={initState} closeFn={() => setEditMode(false)} />;
   } else {
@@ -83,7 +80,7 @@ export const MilestoneItem = ({ milestone }) => {
               삭제
             </RemoveButton>
           </ButtonWrapper>
-          <ProgressIndicator openIssueLength={openIssueLength} closeIssueLength={closeIssueLength} />
+          <ProgressIndicator milestone={milestone} />
         </RightItemWrapper>
       </MilestoneItemWrapper>
     );

@@ -2,6 +2,14 @@ import styled, { css } from "styled-components";
 import { cssFontSize } from "./Text";
 
 const milestoneInfo = (milestone) => {
+  if (milestone.issues === undefined) {
+    return {
+      openIssueLength: 0,
+      closeIssueLength: 0,
+      percentage: 0,
+    };
+  }
+
   const openIssueLength = milestone.issues.filter(({ status }) => status === "open").length;
   const closeIssueLength = milestone.issues.length - openIssueLength;
   const percentage = openIssueLength + closeIssueLength > 0 ? (closeIssueLength * 100) / (openIssueLength + closeIssueLength) : 0;

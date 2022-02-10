@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from '@/components/Button';
+import TextInput from '@/components/TextInput';
 import { offWhiteGS } from '@/assets/styles/Palette';
 
 export default function Components() {
@@ -33,6 +34,9 @@ export default function Components() {
       />
 
       <h1>인풋</h1>
+
+      <TextInput label={'아이디'} />
+      <TextInput label={'비밀번호'} inputType={'password'} />
     </Wrapper>
   );
 }

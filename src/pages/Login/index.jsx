@@ -9,3 +9,5 @@ export default function Login() {
     </div>
   );
 }
+
+const Wrapper = styled.div``;

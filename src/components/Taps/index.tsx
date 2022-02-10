@@ -32,28 +32,17 @@ const Taps: FunctionComponent<TapsProps> = ({
     [TabGroup.Label]: goToLabelPage,
     [TabGroup.Milestone]: goToMilestonPage,
   };
-  const handleTapClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    event.preventDefault();
-
-    const tapItem = (event.target as HTMLElement).closest(".Tap");
-    if (!tapItem) {
-      return;
-    }
-
-    const tapItemKey = (tapItem as HTMLElement).dataset["key"];
-    if (!tapItemKey) {
-      return;
-    }
+  const handleTapClick = (tapItemKey: string) => {
     tapClick[tapItemKey]();
   };
   return (
-    <TapsWrapper onClick={handleTapClick}>
-      <Tap className="Tap" data-key={TabGroup.Label}>
+    <TapsWrapper>
+      <Tap className="Tap" onClick={() => handleTapClick(TabGroup.Label)}>
         <TapIcon src={tag} />
         <TapSpan>{TabGroup.Label}</TapSpan>
         <TapSpan>({labelGroupCount})</TapSpan>
       </Tap>
-      <Tap className="Tap" data-key={TabGroup.Milestone}>
+      <Tap className="Tap" onClick={() => handleTapClick(TabGroup.Milestone)}>
         <TapIcon src={milestone} />
         <TapSpan>{TabGroup.Milestone}</TapSpan>
         <TapSpan>({milestoneGroupCount})</TapSpan>

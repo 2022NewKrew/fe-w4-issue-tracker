@@ -10,6 +10,9 @@ import openIssueImg from "@/asset/img/alert-circle.svg";
 import closeIssueImg from "@/asset/img/archive.svg";
 import milestonImg from "@/asset/img/milestone.svg";
 import SVG from "react-inlinesvg";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import "dayjs/locale/ko";
 
 interface LabelInfo {
   labelID: string;
@@ -26,6 +29,9 @@ interface IssueInfo {
   issueId: string;
   assignGroup: string[]; //TODO 담당자 형식 정의되면 바꿀 예정
 }
+
+dayjs.extend(relativeTime);
+dayjs.locale("ko");
 
 const IssueList = () => {
   //TODO: 더미데이터
@@ -96,24 +102,7 @@ const IssueList = () => {
     setDropdownGroup(newDropdownGroup);
   };
   const displayedAt = (createdAt: Date) => {
-    const currentDate = new Date();
-    const milliSeconds = currentDate.getTime() - createdAt.getTime();
-    console.log(currentDate, createdAt, milliSeconds);
-
-    const seconds = milliSeconds / 1000;
-    if (seconds < 60) return `방금 전`;
-    const minutes = seconds / 60;
-    if (minutes < 60) return `${Math.floor(minutes)}분 전`;
-    const hours = minutes / 60;
-    if (hours < 24) return `${Math.floor(hours)}시간 전`;
-    const days = hours / 24;
-    if (days < 7) return `${Math.floor(days)}일 전`;
-    const weeks = days / 7;
-    if (weeks < 5) return `${Math.floor(weeks)}주 전`;
-    const months = days / 30;
-    if (months < 12) return `${Math.floor(months)}개월 전`;
-    const years = days / 365;
-    return `${Math.floor(years)}년 전`;
+    return dayjs().to(createdAt);
   };
   //TODO: 매 시간 비교를 할지 아니면 첫  조회 시간만 비교할지 고민
   const reportDateInfo = (reportDate: Date, register: string) => {

@@ -4,13 +4,20 @@ import BigLogo from '@/assets/logo/LogotypeLarge.svg';
 import TextInput from '@/components/TextInput';
 import Button from '@/components/Button';
 import { placeholderGS } from '@/assets/styles/Palette';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
-  const onClickGihubLoginButton = () => {};
+  const navigate = useNavigate();
+
+  const onClickGihubLoginButton = () => {
+    navigate('/');
+  };
 
   const onClickLoginButton = () => {
-    alert('죄송합니다. 깃허브 로그인을 사용해주세요');
+    navigate('/');
   };
+
+  const requestGithubLogin = async () => {};
 
   return (
     <Wrapper>

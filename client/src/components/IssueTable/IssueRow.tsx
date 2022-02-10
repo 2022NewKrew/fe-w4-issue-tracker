@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRecoilStateLoadable, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { labelInfoAtom, userInfoAtom } from '@atoms';
 import styled from 'styled-components';
 import { TextSmall, TableData, SmallIcon, AlignYCenter } from '@styles/styleTemplates';
@@ -50,6 +50,7 @@ export const IssueRow = ({
 
     const getAuthorName = (userId: number) => {
         const userInfo = useRecoilValue<IUser[]>(userInfoAtom);
+
         const targetUser = userInfo.find((user) => user.id === userId);
         if (!targetUser) throw Error('유저를 찾을 수 없습니다');
         return targetUser.name;
@@ -60,25 +61,27 @@ export const IssueRow = ({
             <CheckBox isLast={isLast}>
                 <input type="checkbox" checked={!!checkStatus} onChange={onChangeHandler} />
             </CheckBox>
-            <React.Suspense fallback={<div>loading...</div>}>
-                <IssueItem>
-                    <IssueItemUpperArea>
-                        <Alertcircle />
-                        <div>{title}</div>
+            <IssueItem>
+                <IssueItemUpperArea>
+                    <Alertcircle />
+                    <div>{title}</div>
+                    <React.Suspense fallback={<div>loading...</div>}>
                         {renderLabels()}
-                    </IssueItemUpperArea>
-                    <IssueItemBelowArea>
-                        <div>#{id}</div>
+                    </React.Suspense>
+                </IssueItemUpperArea>
+                <IssueItemBelowArea>
+                    <div>#{id}</div>
+                    <React.Suspense fallback={<div>loading...</div>}>
                         <TimeStampMessage
                             timeStamp={timeStamp}
                             current={new Date().getTime()}
                             type={status}
-                            author={getAuthorName(issueData.userId)}
+                            author={getAuthorName(userId)}
                         />
-                        <MilestoneTag id={milestoneId} />
-                    </IssueItemBelowArea>
-                </IssueItem>
-            </React.Suspense>
+                    </React.Suspense>
+                    <MilestoneTag id={milestoneId} />
+                </IssueItemBelowArea>
+            </IssueItem>
             {renderRightArea(selectMode, issueData, isLast)}
         </>
     );

@@ -6,3 +6,4 @@ export * from './LargeLabel';
 export * from './MilestoneTag';
 export * from './OptionField';
 export * from './CircleContainer';
+export * from './errorFallbackComponent';

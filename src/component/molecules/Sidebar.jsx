@@ -5,15 +5,17 @@ import UserImageLarge from "../../assets/UserImageLarge.png";
 import { SmallLabel } from "../atoms/Label";
 import { ProgressIndicatorBar } from "../atoms/ProgressIndicator";
 
-export const Sidebar = ({ issue, milestone }) => {
-  const assigneeItems = issue.assignees.map((assignee) => (
-    <AssigneeWrapper>
+export const Sidebar = ({ issue }) => {
+  const { assignees, labels, milestone } = issue;
+
+  const assigneeItems = assignees.map((assignee) => (
+    <AssigneeWrapper key={assignee.id}>
       <img src={UserImageLarge} />
       <AssigneeName>{assignee.name}</AssigneeName>
     </AssigneeWrapper>
   ));
-  const labelItems = issue.labels.map((label) => (
-    <LabelWrapper>
+  const labelItems = labels.map((label) => (
+    <LabelWrapper key={label.id}>
       <SmallLabel {...label} />
     </LabelWrapper>
   ));
@@ -26,33 +28,27 @@ export const Sidebar = ({ issue, milestone }) => {
 
   return (
     <SidebarWrapper>
-      <TypeWrapper>
-        <HeaderWrapper>
-          <AddButton>
-            <ButtonLabel>담당자</ButtonLabel>
-            <Icon name="plus" />
-          </AddButton>
-        </HeaderWrapper>
+      <SidebarItemWrapper key="assignees">
+        <AddButton>
+          <ButtonLabel>담당자</ButtonLabel>
+          <Icon name="plus" />
+        </AddButton>
         {assigneeItems}
-      </TypeWrapper>
-      <TypeWrapper>
-        <HeaderWrapper>
-          <AddButton>
-            <ButtonLabel>레이블</ButtonLabel>
-            <Icon name="plus" />
-          </AddButton>
-        </HeaderWrapper>
+      </SidebarItemWrapper>
+      <SidebarItemWrapper key="labels">
+        <AddButton>
+          <ButtonLabel>레이블</ButtonLabel>
+          <Icon name="plus" />
+        </AddButton>
         {labelItems}
-      </TypeWrapper>
-      <TypeWrapper>
-        <HeaderWrapper>
-          <AddButton>
-            <ButtonLabel>마일스톤</ButtonLabel>
-            <Icon name="plus" />
-          </AddButton>
-        </HeaderWrapper>
+      </SidebarItemWrapper>
+      <SidebarItemWrapper key="milestone">
+        <AddButton>
+          <ButtonLabel>마일스톤</ButtonLabel>
+          <Icon name="plus" />
+        </AddButton>
         {milestoneItem}
-      </TypeWrapper>
+      </SidebarItemWrapper>
     </SidebarWrapper>
   );
 };
@@ -68,15 +64,11 @@ const SidebarWrapper = styled.div`
   }
 `;
 
-const TypeWrapper = styled.div`
+const SidebarItemWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 32px;
   background-color: ${({ theme }) => theme.grayscale.offWhite};
-`;
-
-const HeaderWrapper = styled.div`
-  display: flex;
 `;
 
 const AddButton = styled.button`

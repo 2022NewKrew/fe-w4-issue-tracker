@@ -1,9 +1,9 @@
 import React from 'react';
-import { useRecoilStateLoadable } from 'recoil';
-import { labelInfoAtom } from '@atoms';
+import { useRecoilStateLoadable, useRecoilValue } from 'recoil';
+import { labelInfoAtom, userInfoAtom } from '@atoms';
 import styled from 'styled-components';
 import { TextSmall, TableData, SmallIcon, AlignYCenter } from '@styles/styleTemplates';
-import { IIssue, ILabel } from '@types';
+import { IIssue, ILabel, IUser } from '@types';
 import { TimeStampMessage, SmallLabel, MilestoneTag } from '@components/assets';
 import { ReactComponent as Alertcircle } from '@icons/AlertCircle.svg';
 
@@ -36,20 +36,23 @@ export const IssueRow = ({
     isLast,
 }: IProps) => {
     const { title, id, userId, timeStamp, status, labelings, milestoneId } = issueData;
-    const [labelInfo] = useRecoilStateLoadable<ILabel[]>(labelInfoAtom);
 
     const renderLabels = () => {
-        if (labelInfo.state === 'loading') return <div>loading...</div>;
-        if (labelInfo.state === 'hasError') return <div>label fetch failed</div>;
-        if (labelInfo.state === 'hasValue' && labelings) {
+        const labelInfo = useRecoilValue<ILabel[]>(labelInfoAtom);
+        if (labelings) {
             return labelings.map(({ labelId }) => {
-                const labelTarget = labelInfo.contents.find(
-                    (label: ILabel) => label.id === labelId
-                );
+                const labelTarget = labelInfo.find((label: ILabel) => label.id === labelId);
                 if (!labelTarget) return <div></div>;
                 return <SmallLabel type="light-text" labelInfo={labelTarget} key={labelId} />;
             });
         }
+    };
+
+    const getAuthorName = (userId: number) => {
+        const userInfo = useRecoilValue<IUser[]>(userInfoAtom);
+        const targetUser = userInfo.find((user) => user.id === userId);
+        if (!targetUser) throw Error('유저를 찾을 수 없습니다');
+        return targetUser.name;
     };
 
     return (
@@ -57,23 +60,25 @@ export const IssueRow = ({
             <CheckBox isLast={isLast}>
                 <input type="checkbox" checked={!!checkStatus} onChange={onChangeHandler} />
             </CheckBox>
-            <IssueItem>
-                <IssueItemUpperArea>
-                    <Alertcircle />
-                    <div>{title}</div>
-                    {renderLabels()}
-                </IssueItemUpperArea>
-                <IssueItemBelowArea>
-                    <div>#{id}</div>
-                    <TimeStampMessage
-                        timeStamp={timeStamp}
-                        current={new Date().getTime()}
-                        type={status}
-                        author="임시유저"
-                    />
-                    <MilestoneTag id={milestoneId} />
-                </IssueItemBelowArea>
-            </IssueItem>
+            <React.Suspense fallback={<div>loading...</div>}>
+                <IssueItem>
+                    <IssueItemUpperArea>
+                        <Alertcircle />
+                        <div>{title}</div>
+                        {renderLabels()}
+                    </IssueItemUpperArea>
+                    <IssueItemBelowArea>
+                        <div>#{id}</div>
+                        <TimeStampMessage
+                            timeStamp={timeStamp}
+                            current={new Date().getTime()}
+                            type={status}
+                            author={getAuthorName(issueData.userId)}
+                        />
+                        <MilestoneTag id={milestoneId} />
+                    </IssueItemBelowArea>
+                </IssueItem>
+            </React.Suspense>
             {renderRightArea(selectMode, issueData, isLast)}
         </>
     );

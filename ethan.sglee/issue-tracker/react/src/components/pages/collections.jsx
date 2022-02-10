@@ -4,6 +4,7 @@ import { LargeInput, MediumInput, SmallInput } from '@Atoms/inputs'
 import { IssuesProvider } from '@Context/issues/IssuesContext.jsx'
 import Issues from '@Molecules/Issues.jsx'
 
+
 function Collections() {
   return (
     <div>

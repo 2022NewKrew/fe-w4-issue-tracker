@@ -76,7 +76,6 @@ function MediumButton() {
 }
 
 function SmallButton() {
-  const plusIconPath = require('@Public/svg/plus.svg').default
   return (
     <SmallBtn>
       <PlusIcon></PlusIcon>

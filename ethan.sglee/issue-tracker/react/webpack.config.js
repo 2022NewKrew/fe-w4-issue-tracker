@@ -14,6 +14,7 @@ module.exports = {
       "@Components": path.resolve(__dirname, "src/components"),
       "@Public": path.resolve(__dirname, "public"),
       "@Atoms": path.resolve(__dirname, "src/components/UI/atoms"),
+      "@Molecules": path.resolve(__dirname, "src/components/UI/molecules"),
     },
   },
   output: {

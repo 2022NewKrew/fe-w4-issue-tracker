@@ -1,4 +1,4 @@
-import React, { useState, useRef, useImperativeHandle } from 'react'
+import React, { useState, useRef, useImperativeHandle, useEffect } from 'react'
 import styled, { css } from 'styled-components'
 import BaseCSS from '@Components/UI/atoms/base_css/base'
 
@@ -10,10 +10,12 @@ const BaseInput = styled.div`
   font-family: ${BaseCSS.textFont};
   border: 1px solid ${BaseCSS.grayInputBackground};
   color: ${BaseCSS.grayPlaceholder};
-  &:active {
-    background-color: ${BaseCSS.grayWhite};
-    border-color: ${BaseCSS.grayTitle};
-  }
+  ${(props) => {
+    return props.focus && css`
+      background-color: ${BaseCSS.grayWhite};
+      border-color: ${BaseCSS.grayTitle};
+    `
+  }}
   &:disabled {
     background-color: ${BaseCSS.primaryLightColor};
   }
@@ -26,6 +28,7 @@ const StyledLargeInput = styled(BaseInput)`
   border-radius: ${BaseCSS.buttonLargeRadius};
   font-size: ${BaseCSS.buttonLargeFontSize};
   line-height: ${BaseCSS.buttonLargeLineHeight};
+  padding: 0px ${BaseCSS.buttonLargeRadius};
 `
 
 const StyledMediumInput = styled(BaseInput)`
@@ -49,13 +52,15 @@ const StyledSmallInput = styled(BaseInput)`
 
 const StyledInput = styled.input`
   display: none;
-  background-color: ${BaseCSS.grayWhite};
+  background-color: ${BaseCSS.grayInputBackground};
   border: none;
+  outline: none;
+  width: 90%;
 
   ${(props) => {
     return props.focus && css`
       display: block;
-      background-color: ${BaseCSS.grayInputBackground};
+      background-color: ${BaseCSS.grayWhite};
     `
   }}
 `
@@ -65,6 +70,9 @@ const Input = React.forwardRef((props, ref) => {
   useImperativeHandle(ref, () => ({
     focus: () => {
       inputRef.current.focus()
+    },
+    blur: () => {
+      inputRef.current.blur()
     }
   }))
   return (
@@ -75,18 +83,27 @@ const Input = React.forwardRef((props, ref) => {
   
 function LargeInput() {
   
-  function onClick(e) {
-    e.preventDefault();
-    setFocus(true)
-    inputRef.current.focus()
-  }
-  
   const [focus, setFocus] = useState(false)
-
   const inputRef = useRef()
+  
+  function onClick(e) {
+    setFocus(true)
+  }
+
+  function onBlur() {
+    setFocus(false)
+  }
+
+  useEffect(() => {
+    if (focus) {
+      inputRef.current.focus()
+    } else {
+      inputRef.current.blur()
+    }
+  }, [focus])
 
   return (
-    <StyledLargeInput onClick={onClick}>
+    <StyledLargeInput onClick={onClick} onBlur={onBlur} focus={focus}>
       아이디
       <Input focus={focus} ref={inputRef}></Input>
     </StyledLargeInput>

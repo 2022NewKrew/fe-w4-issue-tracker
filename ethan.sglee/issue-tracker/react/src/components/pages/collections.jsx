@@ -1,28 +1,28 @@
 import React from 'react'
 import { LargeButton, MediumButton, SmallButton } from '@Atoms/buttons'
 import { LargeInput, MediumInput, SmallInput } from '@Atoms/inputs'
-
-const Btn1 = LargeButton
-const Btn2 = MediumButton
-const Btn3 = SmallButton
-const Input1 = LargeInput
-const Input2 = MediumInput
-const Input3 = SmallInput
+import { IssuesProvider } from '@Context/issues/IssuesContext.jsx'
+import Issues from '@Molecules/Issues.jsx'
 
 function Collections() {
   return (
     <div>
-      <Btn1></Btn1>
+      <IssuesProvider>
+        <Issues></Issues>
+      </IssuesProvider>
       <br/>
-      <Btn2></Btn2>
       <br/>
-      <Btn3></Btn3>
+      <LargeButton></LargeButton>
       <br/>
-      <Input1></Input1>
+      <MediumButton></MediumButton>
       <br/>
-      <Input2></Input2>
+      <SmallButton></SmallButton>
       <br/>
-      <Input3></Input3>
+      <LargeInput></LargeInput>
+      <br/>
+      <MediumInput></MediumInput>
+      <br/>
+      <SmallInput></SmallInput>
       <br/>
     </div>
   )

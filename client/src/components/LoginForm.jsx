@@ -90,6 +90,7 @@ export function LoginForm() {
                 required
                 handleChange={handleInputUserId}
                 className={userIdType && 'typing'}
+                largeInput
                 label="아이디"
             />
             <Input
@@ -97,6 +98,7 @@ export function LoginForm() {
                 required
                 handleChange={handleInputPassword}
                 className={passwordType && 'typing'}
+                largeInput
                 label="비밀번호"
             />
             <Button type="submit" large disabled={!chkButtonCanClick()}>

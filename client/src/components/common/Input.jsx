@@ -71,9 +71,9 @@ const MediumInputLabel = styled.label`
 `;
 
 export function Input({ label, ...inputProps }) {
-    const { handleChange, large, medium, className } = inputProps;
+    const { handleChange, largeInput, mediumInput, className } = inputProps;
 
-    if (large) {
+    if (largeInput) {
         return (
             <Wrapper>
                 <LargeInputLabel className={className}>{label}</LargeInputLabel>
@@ -88,7 +88,7 @@ export function Input({ label, ...inputProps }) {
         );
     }
 
-    if (medium) {
+    if (mediumInput) {
         return (
             <Wrapper>
                 <MediumInputLabel className={className}>

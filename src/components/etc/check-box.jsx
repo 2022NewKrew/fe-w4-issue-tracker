@@ -1,13 +1,14 @@
-const StyledCheckBox = styled.input`
-  position: absolute;
+import styled from "styled-components";
+
+const StyledCheckBox = styled.div`
   width: 16px;
   height: 16px;
 `;
 
-const CheckBox = ({ children }) => {
+const CheckBox = ({ children, checked, onChange }) => {
   return (
     <StyledCheckBox>
-      <input type={"checkbox"}></input>
+      <input type={"checkbox"} checked={checked} onChange={onChange}></input>
       <span>{children}</span>
     </StyledCheckBox>
   );

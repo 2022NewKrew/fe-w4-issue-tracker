@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 
+import CheckBox from "@components/etc/check-box";
 import greyscale from "@styles/constants/greyscale";
 
 const StyledIssueTableCell = styled.div`
@@ -46,11 +47,7 @@ const IssueTableCell = ({
 
   return (
     <StyledIssueTableCell>
-      <input
-        type={"checkbox"}
-        checked={checked}
-        onChange={(e) => handleChecked(e)}
-      ></input>
+      <CheckBox checked={checked} onChange={(e) => handleChecked(e)}></CheckBox>
       <div>checked: {checked}</div>
       <div>opened: {opened}</div>
       <div>이슈 제목: {title}</div>

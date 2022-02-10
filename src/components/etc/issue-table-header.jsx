@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 
+import CheckBox from "@components/etc/check-box";
 import greyscale from "@styles/constants/greyscale";
 
 const StyledIssueTableHeader = styled.div`
@@ -25,11 +26,7 @@ const IssueTableHeader = ({ children, handleAllChecked }) => {
 
   return (
     <StyledIssueTableHeader>
-      <input
-        type={"checkbox"}
-        checked={checked}
-        onChange={(e) => handleCheck(e)}
-      ></input>
+      <CheckBox checked={checked} onChange={(e) => handleCheck(e)}></CheckBox>
       <button>열린 이슈</button>
       <button>닫힌 이슈</button>
       <button>담당자</button>

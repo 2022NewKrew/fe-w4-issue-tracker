@@ -33,7 +33,6 @@ const IssueTable = ({ children }) => {
       setAllChecked(true);
     } else {
       checkedIssues.clear();
-      setCheckedIssues(setCheckedIssues);
       setAllChecked(false);
     }
   };

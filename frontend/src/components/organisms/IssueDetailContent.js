@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import { useRecoilValue } from "recoil";
 import { issueState } from "../../_state";
+import { useIssuesActions } from "../../_actions/issues.actions";
 
 import { Sidebar } from "@components/molecules/Sidebars";
 import { Comment } from "@components/molecules/Comment";
@@ -46,6 +47,7 @@ const ButtonWrapper = styled.div`
 
 export default function IssueDetailContent() {
   const issue = useRecoilValue(issueState);
+  const issuesActions = useIssuesActions();
 
   const [selectedAssignee, setSelectedAssignee] = useState([]);
   const [selectedLabel, setSelectedLabel] = useState([]);
@@ -80,15 +82,18 @@ export default function IssueDetailContent() {
     );
   }
 
+  function handleCreateComment() {
+    const data = { content: comment };
+    issuesActions.createComment(issue.id, data);
+  }
+
   return (
     <Container>
       <LeftWrapper>
         {CommentList()}
-
         <CommentWrapper>
           <UserimageLarge />
           <TextArea
-            className='yayy'
             placeholder='코멘트를 입력하세요'
             value={comment}
             setValue={setComment}
@@ -97,7 +102,7 @@ export default function IssueDetailContent() {
         </CommentWrapper>
 
         <ButtonWrapper>
-          <Button size='small' color='blue'>
+          <Button size='small' color='blue' onClick={handleCreateComment}>
             <Plus />
             <XSmallLink color='offWhite'>코멘트 작성</XSmallLink>
           </Button>

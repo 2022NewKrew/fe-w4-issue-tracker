@@ -121,7 +121,7 @@ const InputLengthText = styled.div`
   font-size: ${(props) => props.theme.fontSizes.extraSmall};
 `;
 
-export default function TextArea({
+function TextArea({
   placeholder,
   isDisabled,
   onAttachClickListener,
@@ -206,3 +206,5 @@ export default function TextArea({
     </TextInputContainer>
   );
 }
+
+export default React.memo(TextArea);

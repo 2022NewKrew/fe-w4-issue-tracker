@@ -26,6 +26,7 @@ export function useIssuesActions() {
     getAllUsers,
     getAllMilestones,
     getAllLabels,
+    createComment,
   };
 
   async function getIssues() {
@@ -52,6 +53,15 @@ export function useIssuesActions() {
       .then((res) => {
         const createdIssueId = res.id;
         navigate(`/issues/${createdIssueId}`);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  async function createComment(issueId, data) {
+    fetchWrapper
+      .post(`/api/issues/${issueId}/comment`, data)
+      .then((res) => {
+        console.log(res);
       })
       .catch((err) => console.log(err));
   }

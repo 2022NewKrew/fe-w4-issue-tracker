@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useCallback } from "react";
 import {
   atom,
@@ -10,6 +11,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 
 import { Label, LabelForm } from "@types";
 import { LabelService } from "@services";
+import { userState } from "./user";
 
 const labelListState = atom<Label[]>({
   key: "labelListState",
@@ -78,6 +80,8 @@ export const useLabelMutation = () => {
   const resetLabelForm = useResetRecoilState(labelFormState);
   const labelForm = useRecoilValue(labelFormState);
   const [labelFormMode, setLabelFormMode] = useRecoilState(labelFormModeState);
+  const nav = useNavigate();
+  const me = useRecoilValue(userState);
 
   const onSuccess = useCallback(() => {
     queryClient.invalidateQueries("labelList");
@@ -103,9 +107,17 @@ export const useLabelMutation = () => {
     }
   );
 
+  const checkPermission = (fn: Function) => {
+    if (!me) {
+      nav("/login");
+    } else {
+      fn();
+    }
+  };
+
   return {
-    addLabel: () => addLabel.mutate(),
-    modifyLabel: () => modifyLabel.mutate(),
-    removeLabel: (id: string) => removeLabel.mutate(id),
+    addLabel: () => checkPermission(addLabel.mutate),
+    modifyLabel: () => checkPermission(modifyLabel.mutate),
+    removeLabel: (id: string) => checkPermission(() => removeLabel.mutate(id)),
   };
 };

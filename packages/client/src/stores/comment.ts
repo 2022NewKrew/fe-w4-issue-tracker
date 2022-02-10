@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { CommentService } from "@services";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
@@ -12,6 +12,7 @@ import {
 import { issueFormModeState } from "./issue";
 import { Comment, CommentForm } from "@types";
 import { useCallback } from "react";
+import { userState } from "./user";
 
 const commentListState = atomFamily<Comment[], string>({
   key: "commentListState",
@@ -87,6 +88,8 @@ export const useCommentMutation = (commentId: string) => {
   const resetCommentForm = useResetRecoilState(commentFormState(commentId));
   const commentForm = useRecoilValue(commentFormState(commentId));
   const setcommentFormMode = useSetRecoilState(commentFormModeState(commentId));
+  const me = useRecoilValue(userState);
+  const nav = useNavigate();
 
   const onSuccess = useCallback(() => {
     queryClient.invalidateQueries("issueList");
@@ -98,7 +101,7 @@ export const useCommentMutation = (commentId: string) => {
   const addComment = useMutation(
     async () =>
       CommentService.post({
-        author: "user1",
+        author: me!.id,
         issueId,
         commentForm,
       }),
@@ -121,9 +124,17 @@ export const useCommentMutation = (commentId: string) => {
     }
   );
 
+  const checkPermission = (fn: Function) => {
+    if (!me) {
+      nav("/login");
+    } else {
+      fn();
+    }
+  };
+
   return {
-    addComment: () => addComment.mutate(),
-    modifyComment: () => modifyComment.mutate(),
-    removeLabel: () => removeLabel.mutate(),
+    addComment: () => checkPermission(addComment.mutate),
+    modifyComment: () => checkPermission(modifyComment.mutate),
+    removeLabel: () => checkPermission(removeLabel.mutate),
   };
 };

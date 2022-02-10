@@ -12,6 +12,7 @@ import {
   useSetRecoilState,
 } from "recoil";
 import { FormMode } from "@stores/label";
+import { userState, useUserStore } from "./user";
 
 export type IssueFilter = {
   status: IssueStatus;
@@ -103,6 +104,9 @@ export const useIssueStore = () => {
   const issueListCount = useRecoilValue(issueListCountState);
   const [filter, setFilter] = useRecoilState(issueFilterState);
   const [selectAll, setSelectAll] = useRecoilState(selectedIssueAllState);
+
+  const resetFilter = useResetRecoilState(issueFilterState);
+
   useQuery<Issue[], Error>("issueList", IssueService.getAll, {
     onSuccess: (data) => {
       setIssueList(data);
@@ -118,6 +122,7 @@ export const useIssueStore = () => {
     setSelectedIssue,
     selectAll,
     setSelectAll,
+    resetFilter,
   };
 };
 
@@ -184,12 +189,13 @@ export const useIssueMutation = () => {
   const issueForm = useRecoilValue(issueFormState);
   const setSelectedIssue = useSetRecoilState(selectedIssueState);
   const [issueFormMode, setIssueFormMode] = useRecoilState(issueFormModeState);
+  const me = useRecoilValue(userState);
 
   const queryClient = useQueryClient();
   const nav = useNavigate();
 
   const addIssue = useMutation(
-    async () => IssueService.post("user1", issueForm),
+    async () => IssueService.post(me!.id, issueForm),
     {
       onSuccess: () => {
         queryClient.invalidateQueries("issueList");
@@ -203,7 +209,7 @@ export const useIssueMutation = () => {
 
   const modifyIssueStatus = useMutation(
     ({ issueId, status }: { issueId: string; status: IssueStatus }) =>
-      IssueService.patchChangeStatus(issueId, status),
+      IssueService.patchChangeStatus({ issueId, status, author: me!.id }),
     {
       onSuccess: () => {
         queryClient.invalidateQueries("issueList");
@@ -249,17 +255,35 @@ export const useIssueMutation = () => {
     }
   );
 
+  const checkPermission = (fn: Function) => {
+    if (!me) {
+      nav("/login");
+    } else {
+      fn();
+    }
+  };
+
   return {
-    addIssue: () => addIssue.mutate(),
+    addIssue: () => checkPermission(() => addIssue.mutate()),
     modifyIssueStatus: ({
       issueId,
       status,
     }: {
       issueId: string;
       status: IssueStatus;
-    }) => modifyIssueStatus.mutate({ issueId, status }),
-    modifyIssueTitle: () => modifyIssueTitle.mutate(),
-    modifyIssue: () => modifyIssue.mutate(),
-    removeIssue: () => removeIssue.mutate(),
+    }) => checkPermission(() => modifyIssueStatus.mutate({ issueId, status })),
+    modifyIssueTitle: () => checkPermission(modifyIssueTitle.mutate),
+    modifyIssue: () => checkPermission(modifyIssue.mutate),
+    removeIssue: () => checkPermission(removeIssue.mutate),
   };
+};
+
+export const checkPermission = (fn: Function) => {
+  const { me } = useUserStore();
+  const nav = useNavigate();
+  if (!me) {
+    nav("/login");
+  } else {
+    fn();
+  }
 };

@@ -8,35 +8,11 @@ import Dropdown, {
 } from "../Common/Dropdown";
 import searchImg from "@/asset/img/search.svg";
 import SVG from "react-inlinesvg";
+import { issueFilterGroup } from "@/common/constant";
 
 const FilterBar = () => {
-  const [issueGroup, setIssueGroup] = useState<DropdownItem[]>([
-    {
-      type: DropdownType.none,
-      itemTitle: "열린이슈",
-      isChecked: false,
-    },
-    {
-      type: DropdownType.none,
-      itemTitle: "내가 작성한 이슈",
-      isChecked: false,
-    },
-    {
-      type: DropdownType.none,
-      itemTitle: "나에게 할당된 이슈",
-      isChecked: false,
-    },
-    {
-      type: DropdownType.none,
-      itemTitle: "내가 댓글을 남긴 이슈",
-      isChecked: false,
-    },
-    {
-      type: DropdownType.none,
-      itemTitle: "닫힌 이슈",
-      isChecked: false,
-    },
-  ]);
+  const [issueGroup, setIssueGroup] =
+    useState<DropdownItem[]>(issueFilterGroup);
 
   const clickIssue = (clickItemIndex: number) => {
     const newDropdownGroup = [...issueGroup];

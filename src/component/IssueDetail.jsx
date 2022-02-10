@@ -35,39 +35,22 @@ export default function IssueDetail(){
 
 
   useEffect(()=>{
-    getFromURL(issueListURL, {issueID}).then((data)=>{
-      setIssue(data);
-    });
-  }, [setIssue, issueID]);
-
-  useEffect(()=>{
-    if(issue.issueID!==undefined){
-      setComments((comments)=>[{authorID: issue.authorID, timestamp: issue.timestamp,
-        isIssueAuthor: true, body: issue.body}, ...comments]);
-    }
-  }, [issue]);
-
-  useEffect(()=>{
-    getFromURL(commentListURL, {issueID}).then((fetchedComments)=>{
-      setComments((comments)=>[...comments, ...fetchedComments]);
-    });
-  }, [setComments, issueID]);
-
-  useEffect(()=>{
-    getFromURL(assigneeListURL, {issueID}).then((fetchedAssignees)=>{
+    Promise.all([
+      getFromURL(issueListURL, {issueID}),
+      getFromURL(commentListURL, {issueID}),
+      getFromURL(assigneeListURL, {issueID}),
+      getFromURL(issueLabelURL, {issueID})
+    ]).then(([fetchedIssue, fetchedComments, fetchedAssignees, fetchedLabels])=>{
+      setIssue(fetchedIssue);
+      setComments(fetchedComments);
       setAssignees(fetchedAssignees);
-    });
-  }, [setAssignees, issueID]);
-
-  useEffect(()=>{
-    getFromURL(issueLabelURL, {issueID}).then((fetchedLabels)=>{
       setLabelIDArray(fetchedLabels);
     });
-  }, [setLabelIDArray, issueID]);
+  }, [setIssue, setComments, setAssignees, setLabelIDArray, issueID]);
 
   const getComments=useCallback(()=>{
-    return comments.map(({authorID, timestamp, isIssueAuthor, body})=>
-      <Comment key={body+authorID}
+    return comments.map(({commentID, authorID, timestamp, isIssueAuthor, body})=>
+      <Comment key={commentID}
         authorID={authorID}
         timestamp={timestamp}
         isIssueAuthor={isIssueAuthor!==undefined ? isIssueAuthor : authorID===issue.authorID}
@@ -118,6 +101,11 @@ export default function IssueDetail(){
 
       <div className='body'>
         <div className='comments'>
+          {issue.issueID!==undefined && <Comment
+            authorID={issue.authorID}
+            timestamp={issue.timestamp}
+            isIssueAuthor={true}
+            body={issue.body} />}
           {getComments()}
         </div>
         <div className='panel'>

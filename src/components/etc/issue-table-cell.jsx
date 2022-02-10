@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import greyscale from "@styles/constants/greyscale";
 
 const StyledIssueTableCell = styled.div`
   position: static;
   width: 1280px;
-  height: 160px;
+  height: 180px;
   background: ${greyscale.OFF_WHITE};
   flex: none;
   order: 1;
@@ -16,6 +16,8 @@ const StyledIssueTableCell = styled.div`
 
 const IssueTableCell = ({
   children,
+  allChecked,
+  handleCheckedIssue,
   initialOpened,
   initialTitle,
   initialLabel,
@@ -24,7 +26,7 @@ const IssueTableCell = ({
   initialTimestamp,
   initialMilestone,
 }) => {
-  const [value, setValue] = useState(false);
+  const [checked, setChecked] = useState(false);
   const [opened, setOpened] = useState(initialOpened);
   const [title, setTitle] = useState(initialTitle);
   const [label, setLabel] = useState(initialLabel);
@@ -33,12 +35,23 @@ const IssueTableCell = ({
   const [timestamp, setTimestamp] = useState(initialTimestamp);
   const [milestone, setMilestone] = useState(initialMilestone);
 
+  const handleChecked = ({ target }) => {
+    setChecked(!checked);
+    handleCheckedIssue(number, target.checked);
+  };
+
+  const handleAllChecked = () => setChecked(allChecked);
+
+  useEffect(() => handleAllChecked(), [allChecked]);
+
   return (
     <StyledIssueTableCell>
       <input
         type={"checkbox"}
-        onChange={(e) => setValue(e.target.value)}
+        checked={checked}
+        onChange={(e) => handleChecked(e)}
       ></input>
+      <div>checked: {checked}</div>
       <div>opened: {opened}</div>
       <div>이슈 제목: {title}</div>
       <div>레이블 이름: {label}</div>

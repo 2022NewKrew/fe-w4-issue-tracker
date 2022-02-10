@@ -5,8 +5,6 @@ import HeaderContainer from "@components/containers/header-container";
 import StandardButton from "@components/buttons/standard-button";
 import TextInput from "@components/inputs/text-input";
 import IssueTable from "@components/etc/issue-table";
-import IssueTableCell from "@components/etc/issue-table-cell";
-import IssueTableHeader from "@components/etc/issue-table-header";
 import colors from "@styles/constants/colors";
 import greyscale from "@styles/constants/greyscale";
 import sizes from "@styles/constants/sizes";
@@ -78,28 +76,7 @@ const IssueList = () => {
           <StandardButton componentSize={sizes.SMALL}>이슈 작성</StandardButton>
         </Link>
       </ButtonIssueAdd>
-      <IssueTable>
-        <IssueTableHeader>
-          <button>열린 이슈</button>
-          <button>닫힌 이슈</button>
-          <button>담당자</button>
-          <button>레이블</button>
-          <button>마일스톤</button>
-          <button>작성자</button>
-          <button>선택한 이슈 열기</button>
-          <button>선택한 이슈 닫기</button>
-        </IssueTableHeader>
-        <IssueTableCell></IssueTableCell>
-        <IssueTableCell></IssueTableCell>
-        <IssueTableCell></IssueTableCell>
-        <IssueTableCell></IssueTableCell>
-        <IssueTableCell></IssueTableCell>
-        <IssueTableCell></IssueTableCell>
-        <IssueTableCell></IssueTableCell>
-        <IssueTableCell></IssueTableCell>
-        <IssueTableCell></IssueTableCell>
-        <IssueTableCell></IssueTableCell>
-      </IssueTable>
+      <IssueTable></IssueTable>
     </div>
   );
 };

@@ -53,6 +53,7 @@ module.exports = {
             '@style': path.resolve(__dirname, 'src/style'),
             '@utils': path.resolve(__dirname, 'src/utils'),
             '@api': path.resolve(__dirname, 'src/api'),
+            '@states': path.resolve(__dirname, 'src/states'),
         },
     },
 };

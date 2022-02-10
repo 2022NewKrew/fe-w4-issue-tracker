@@ -20,13 +20,22 @@ export const theme = {
         white-space: nowrap;
     `,
     multiElip(lineHeight, rowNum) {
-        css`
+        return css`
             max-height: ${lineHeight * rowNum};
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: ${rowNum};
+        `;
+    },
+    icon(url) {
+        return css`
+            display: inline-block;
+            vertical-align: top;
+            background: url(${url}) no-repeat;
+            width: 16px;
+            height: 16px;
         `;
     },
     basicButton: css`
@@ -55,20 +64,21 @@ export const theme = {
         line-height: 20px;
         font-weight: 700;
     `,
-    textButton: css`
-        &: before {
-            content: '+';
-            width: 16px;
-            height: 16px;
-            font-size: 22px;
-            font-weight: 400;
-            display: inline-block;
-            vertical-align: top;
-            margin-right: 4px;
-        }
-        color: #6e7191;
-        font-weight: 700;
-    `,
+    textButton(url) {
+        return css`
+            &: before {
+                content: '';
+                width: 16px;
+                height: 16px;
+                background: url(${url}) no-repeat;
+                display: inline-block;
+                vertical-align: top;
+                margin: 4px 4px 0 0;
+            }
+            color: #6e7191;
+            font-weight: 700;
+        `;
+    },
     basicInput: css`
         background-color: #eff0f6;
         border-radius: 16px;

@@ -101,7 +101,8 @@ const SmallDisabledButton = styled.button`
 `;
 
 const TextButton = styled.button`
-    ${({ theme }) => theme.textButton}
+    ${({ theme, imageURL }) => theme.textButton(imageURL)}
+
     &: active {
         color: #14142b;
     }
@@ -111,21 +112,19 @@ const TextButton = styled.button`
     ${({ medium_text }) =>
         medium_text &&
         css`
-            width: 87px;
             font-size: 16px;
-            line-height: 32px;
+            line-height: 28px;
         `}
     ${({ small_text }) =>
         small_text &&
         css`
-            width: 70px;
             font-size: 12px;
-            line-height: 32px;
+            line-height: 20px;
         `}
 `;
 
 const TextDisabledButton = styled.button`
-    ${({ theme }) => theme.textButton}
+    ${({ theme, imageURL }) => theme.textButton(imageURL)}
     cursor: default;
     opacity: 0.5;
     ${({ medium_text }) =>

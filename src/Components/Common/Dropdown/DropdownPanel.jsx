@@ -56,9 +56,7 @@ const DropdownPanel = ({ itemInfoList, type, title, isShown }) => {
       <Panel style={{ visibility: isShown ? 'visible' : 'hidden' }}>
         <TitleText>{title}</TitleText>
         <List>
-          {itemInfoList.map((itemInfo, idx) => {
-            const { text, imgSrc } = itemInfo
-
+          {itemInfoList.map(({ text, imgSrc }, idx) => {
             return (
               <DropdownPanelItem
                 key={text}

@@ -159,12 +159,38 @@ const PaddingDiv = styled.div`
   padding: 5px 24px;
 `
 
+const WRAPPER_STYLE_BY_TYPE = {
+  [TEXT_INPUT_TYPE.LARGE]: largeWrapperStyle,
+  [TEXT_INPUT_TYPE.MEDIUM]: mediumWrapperStyle,
+  [TEXT_INPUT_TYPE.SMALL]: smallWrapperStyle,
+  [TEXT_INPUT_TYPE.TEXT_AREA]: textAreaWrapperStyle,
+  [TEXT_INPUT_TYPE.FILTER_BAR]: filterBarWrapperStyle,
+}
+
+const WRAPPER_STYLE_BY_STATE = {
+  [TEXT_INPUT_STATE.NORMAL]: css``,
+  [TEXT_INPUT_STATE.SUCCESS]: successWrapperStyle,
+  [TEXT_INPUT_STATE.ERROR]: errorWrapperStyle,
+}
+
+const LABEL_STYLE_BY_STATE = {
+  [TEXT_INPUT_STATE.NORMAL]: css``,
+  [TEXT_INPUT_STATE.SUCCESS]: successLabelStyle,
+  [TEXT_INPUT_STATE.ERROR]: errorLabelStyle,
+}
+
+const PLACEHOLDER_COLOR_BY_STATE = {
+  [TEXT_INPUT_STATE.NORMAL]: COLOR.PLACEHOLDER,
+  [TEXT_INPUT_STATE.SUCCESS]: COLOR.GREEN,
+  [TEXT_INPUT_STATE.ERROR]: COLOR.RED,
+}
+
 /**
  * @param {ReactNode?} children
  * @param {string} type
  * @param {string} state
  * @param {string} placeholder
- * @param {string} labelPlaceholder
+ * @param {string|JSX.Element} labelPlaceholder
  * @param {boolean?} isDisabled
  * @param {string?} inputValue
  * @param {function?} onInputValueChangeListener
@@ -253,27 +279,12 @@ const TextInput = ({
   )
 
   const wrapperStyle = useMemo(() => {
-    let style =
-      type === TEXT_INPUT_TYPE.LARGE
-        ? largeWrapperStyle
-        : type === TEXT_INPUT_TYPE.MEDIUM
-        ? mediumWrapperStyle
-        : type === TEXT_INPUT_TYPE.SMALL
-        ? smallWrapperStyle
-        : type === TEXT_INPUT_TYPE.TEXT_AREA
-        ? textAreaWrapperStyle
-        : type === TEXT_INPUT_TYPE.FILTER_BAR
-        ? filterBarWrapperStyle
-        : mediumWrapperStyle
+    let style = WRAPPER_STYLE_BY_TYPE[type]
 
     if (isFocus) {
       style = style.concat(activeWrapperStyle)
     } else {
-      state === TEXT_INPUT_STATE.SUCCESS
-        ? (style = style.concat(successWrapperStyle))
-        : state === TEXT_INPUT_STATE.ERROR
-        ? (style = style.concat(errorWrapperStyle))
-        : null
+      style = style.concat(WRAPPER_STYLE_BY_STATE[state])
     }
 
     if (isDisabled) {
@@ -296,11 +307,7 @@ const TextInput = ({
     }
 
     if (!isFocus) {
-      state === TEXT_INPUT_STATE.SUCCESS
-        ? (style = style.concat(successLabelStyle))
-        : state === TEXT_INPUT_STATE.ERROR
-        ? (style = style.concat(errorLabelStyle))
-        : null
+      style = style.concat(LABEL_STYLE_BY_STATE[state])
     }
 
     return style
@@ -324,13 +331,9 @@ const TextInput = ({
 
   const placeholderColor = useMemo(() => {
     if (!isFocus) {
-      return state === TEXT_INPUT_STATE.SUCCESS
-        ? COLOR.GREEN
-        : state === TEXT_INPUT_STATE.ERROR
-        ? COLOR.RED
-        : COLOR.PLACEHOLDER
+      return PLACEHOLDER_COLOR_BY_STATE[state]
     } else {
-      return COLOR.PLACEHOLDER
+      return PLACEHOLDER_COLOR_BY_STATE[TEXT_INPUT_STATE.NORMAL]
     }
   }, [state, isFocus])
 

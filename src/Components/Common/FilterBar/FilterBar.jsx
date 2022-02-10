@@ -27,6 +27,24 @@ const buttonPaddingStyle = css`
   padding: 0 24px;
 `
 
+const DROPDOWN_LIST = [
+  {
+    text: '열린 이슈',
+  },
+  {
+    text: '내가 작성한 이슈',
+  },
+  {
+    text: '나에게 할당된 이슈',
+  },
+  {
+    text: '내가 댓글을 남긴 이슈',
+  },
+  {
+    text: '닫힌 이슈',
+  },
+]
+
 const FilterBar = () => {
   return (
     <TextInput
@@ -41,23 +59,7 @@ const FilterBar = () => {
           panelTitle="이슈 필터"
           btnUserStyle={buttonPaddingStyle}
           isCheckCircleExists
-          itemInfoList={[
-            {
-              text: '열린 이슈',
-            },
-            {
-              text: '내가 작성한 이슈',
-            },
-            {
-              text: '나에게 할당된 이슈',
-            },
-            {
-              text: '내가 댓글을 남긴 이슈',
-            },
-            {
-              text: '닫힌 이슈',
-            },
-          ]}
+          itemInfoList={DROPDOWN_LIST}
         />
       </DropdownContainer>
     </TextInput>

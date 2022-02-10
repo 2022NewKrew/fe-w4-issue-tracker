@@ -94,8 +94,6 @@ const TextArea = ({
       return (
         <InputLengthText>{`띄어쓰기 포함 ${inputLength}자`}</InputLengthText>
       )
-    } else {
-      return null
     }
   }, [isFocus, isPassedTwoSecondsAfterTyping])
 

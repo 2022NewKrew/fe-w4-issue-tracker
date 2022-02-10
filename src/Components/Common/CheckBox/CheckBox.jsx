@@ -16,24 +16,22 @@ const CheckBoxContainer = styled.div`
   cursor: pointer;
 `
 
+const CHECKED_ICON = {
+  [CHECK_BOX_TYPE.RECT]: <CheckedBoxIcon width="16px" height="16px" />,
+  [CHECK_BOX_TYPE.CIRCLE]: <CheckedCircleIcon width="16px" height="16px" />,
+}
+
+const UNCHECKED_ICON = {
+  [CHECK_BOX_TYPE.RECT]: <UncheckedBoxIcon width="16px" height="16px" />,
+  [CHECK_BOX_TYPE.CIRCLE]: <UncheckedCircleIcon width="16px" height="16px" />,
+}
+
 const CheckBox = ({ type, isSelected, onClick }) => {
-  const checkedIcon = useMemo(() => {
-    return type === CHECK_BOX_TYPE.RECT ? (
-      <CheckedBoxIcon width="16px" height="16px" />
-    ) : CHECK_BOX_TYPE.CIRCLE ? (
-      <CheckedCircleIcon width="16px" height="16px" />
-    ) : null
-  }, [type])
+  const checkIcon = useMemo(() => {
+    return isSelected ? CHECKED_ICON[type] : UNCHECKED_ICON[type]
+  }, [isSelected, type])
 
-  const uncheckedIcon = useMemo(() => {
-    return type === CHECK_BOX_TYPE.RECT ? (
-      <UncheckedBoxIcon width="16px" height="16px" />
-    ) : type === CHECK_BOX_TYPE.CIRCLE ? (
-      <UncheckedCircleIcon width="16px" height="16px" />
-    ) : null
-  }, [type])
-
-  return <CheckBoxContainer onClick={onClick}>{isSelected ? checkedIcon : uncheckedIcon}</CheckBoxContainer>
+  return <CheckBoxContainer onClick={onClick}>{checkIcon}</CheckBoxContainer>
 }
 
 CheckBox.propTypes = {

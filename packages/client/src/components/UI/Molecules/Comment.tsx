@@ -97,7 +97,7 @@ const statusList = {
   initial: `
     border: 1px solid var(--line);
     color: var(--titleActive);
-    .header{
+    & > li:first-of-type{
         color: var(--titleActive);
         background: var(--background);
         border-bottom: 1px solid var(--line);
@@ -106,7 +106,7 @@ const statusList = {
   closed: `
     border: 1px solid #0025E7;
     color: #020070;
-    .header{
+    & > li:first-of-type{
         color: #020070;
         background: #CCD4FF;
         border-bottom: 1px solid #0025E7;
@@ -115,7 +115,7 @@ const statusList = {
   reopen: `
     border: 1px solid var(--primary-default);
     color: var(--primary-dark);
-    .header{
+    & > li:first-of-type{
         color: var(--primary-dark);
         background: var(--primary-light);
         border-bottom: 1px solid var(--primary-default);

@@ -23,11 +23,11 @@ class CommentService {
   }) {
     const id = uuidv4();
     const newComment: Comment = {
-      ...commentForm,
       id,
       author,
       issueId,
       status: "initial",
+      ...commentForm,
     };
     const [{ data }, _] = await Promise.all([
       _axios.post<Comment>(`${baseUrl}`, newComment),

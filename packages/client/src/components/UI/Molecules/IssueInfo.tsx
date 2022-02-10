@@ -1,11 +1,15 @@
 import styled from "@emotion/styled";
-import { useIssueFormStore } from "@stores/issue";
+import { useCommentStore } from "@stores/comment";
+import { useIssueFormStore, useIssueStore } from "@stores/issue";
 import Atoms from "@UI/Atoms";
 import { CustomButton } from "@UI/Molecules";
 import TextInput from "./TextInput";
 
 const IssueInfo = () => {
-  const { issueForm, setTitle, issueTitleModify } = useIssueFormStore();
+  const { issueForm, setTitle, issueTitleModify, issueFormMode } =
+    useIssueFormStore();
+  const { commentListCount } = useCommentStore();
+  const { issueList } = useIssueStore();
 
   return (
     <Wrapper>
@@ -24,7 +28,15 @@ const IssueInfo = () => {
         </Atoms.Title>
       )}
       <div>
-        <Atoms.Label type="open" />이 이슈가 20분전에 열렸습니다 * 코멘트 1개
+        {issueList.find(({ id }) => id === issueFormMode)?.status === "open"
+          ? [
+              <Atoms.Label type="open" />,
+              `이슈가 열렸습니다 * 코멘트 ${commentListCount}개`,
+            ]
+          : [
+              <Atoms.Label type="close" />,
+              `이슈가 닫혔습니다 * 코멘트 ${commentListCount}개`,
+            ]}
       </div>
       <CustomButton.IssueDetailButton />
     </Wrapper>

@@ -60,11 +60,37 @@ class IssueService {
     return data;
   }
 
-  static async patchChangeStatus(issueId: string, status: "open" | "close") {
+  static async patchChangeTitle({
+    issueId,
+    title,
+  }: {
+    issueId: string;
+    title: string;
+  }) {
     const { data } = await _axios.patch<Issue>(`${baseUrl}/${issueId}`, {
-      status,
+      title,
     });
-    console.log(data);
+    return data;
+  }
+
+  static async patchChangeStatus(issueId: string, status: "open" | "close") {
+    const [{ data }, _] = await Promise.all([
+      _axios.patch<Issue>(`${baseUrl}/${issueId}`, {
+        status,
+      }),
+      CommentService.post({
+        author: "user1",
+        issueId,
+        commentForm: {
+          content:
+            status === "close"
+              ? "이슈가 닫혔습니다."
+              : "이슈가 다시 열렸습니다.",
+          status: status === "close" ? "closed" : "reopen",
+        },
+      }),
+    ]);
+
     return data;
   }
   static async patchAddComment({

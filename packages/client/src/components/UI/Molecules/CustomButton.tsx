@@ -1,4 +1,8 @@
-import { useIssueFormStore, useIssueStore } from "@stores/issue";
+import {
+  useIssueFormStore,
+  useIssueMutation,
+  useIssueStore,
+} from "@stores/issue";
 import { useLabelFormStore } from "@stores/label";
 import Atoms from "@UI/Atoms";
 import { useNavigate } from "react-router-dom";
@@ -140,6 +144,7 @@ export const IssueDetailButton = () => {
   const { issueFormMode, issueTitleModify, setIssueTitleModify, setIssueForm } =
     useIssueFormStore();
   const { issueList } = useIssueStore();
+  const { modifyIssueStatus, modifyIssueTitle } = useIssueMutation();
 
   const cancelEdit = () => {
     const prevTitle = issueList.find(({ id }) => id === issueFormMode)
@@ -157,7 +162,15 @@ export const IssueDetailButton = () => {
         text="편집 취소"
         onClick={cancelEdit}
       />
-      <Atoms.Button size="small" icon="edit" text="편집 완료" />
+      <Atoms.Button
+        size="small"
+        icon="edit"
+        text="편집 완료"
+        onClick={() => {
+          modifyIssueTitle();
+          setIssueTitleModify(false);
+        }}
+      />
     </Atoms.ButtonGroup>
   ) : (
     <Atoms.ButtonGroup gap={8}>
@@ -168,12 +181,33 @@ export const IssueDetailButton = () => {
         text="제목 편집"
         onClick={() => setIssueTitleModify(true)}
       />
-      <Atoms.Button
-        size="small"
-        shape="secondary"
-        icon="close"
-        text="이슈 닫기"
-      />
+      {issueList.find(({ id }) => id === issueFormMode)?.status === "open" ? (
+        <Atoms.Button
+          size="small"
+          shape="secondary"
+          icon="close"
+          text="이슈 닫기"
+          onClick={() =>
+            modifyIssueStatus({
+              issueId: issueFormMode,
+              status: "close",
+            })
+          }
+        />
+      ) : (
+        <Atoms.Button
+          size="small"
+          shape="secondary"
+          icon="open"
+          text="다시 열기"
+          onClick={() =>
+            modifyIssueStatus({
+              issueId: issueFormMode,
+              status: "open",
+            })
+          }
+        />
+      )}
     </Atoms.ButtonGroup>
   );
 };

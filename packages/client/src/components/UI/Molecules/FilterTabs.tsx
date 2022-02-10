@@ -38,7 +38,7 @@ const FilterTabs = () => {
     (status: string) => {
       Promise.all(
         selectedIssue.map((issueId) =>
-          modifyIssueStatus(issueId, status as IssueStatus)
+          modifyIssueStatus({ issueId, status: status as IssueStatus })
         )
       );
     },

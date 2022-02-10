@@ -183,7 +183,7 @@ export const useIssueMutation = () => {
   const resetIssueForm = useResetRecoilState(issueFormState);
   const issueForm = useRecoilValue(issueFormState);
   const setSelectedIssue = useSetRecoilState(selectedIssueState);
-  const setIssueFormMode = useSetRecoilState(issueFormModeState);
+  const [issueFormMode, setIssueFormMode] = useRecoilState(issueFormModeState);
 
   const queryClient = useQueryClient();
   const navigate = useNavigate();
@@ -206,14 +206,34 @@ export const useIssueMutation = () => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries("issueList");
+        queryClient.invalidateQueries("commentList");
         setSelectedIssue([]);
+      },
+    }
+  );
+
+  const modifyIssueTitle = useMutation(
+    async () =>
+      IssueService.patchChangeTitle({
+        issueId: issueFormMode,
+        title: issueForm.title,
+      }),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("issueList");
       },
     }
   );
 
   return {
     addIssue: () => addIssue.mutate(),
-    modifyIssueStatus: (issueId: string, status: IssueStatus) =>
-      modifyIssueStatus.mutate({ issueId, status }),
+    modifyIssueStatus: ({
+      issueId,
+      status,
+    }: {
+      issueId: string;
+      status: IssueStatus;
+    }) => modifyIssueStatus.mutate({ issueId, status }),
+    modifyIssueTitle: () => modifyIssueTitle.mutate(),
   };
 };

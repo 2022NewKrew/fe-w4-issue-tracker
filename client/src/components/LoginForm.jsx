@@ -6,6 +6,16 @@ import { Button, Input } from '@components';
 import { userInfoSelector } from '@states';
 import { setLocalStorage } from '@utils';
 
+const USER_ID_MIN_LENGTH = 6;
+const USER_ID_MAX_LENGTH = 16;
+const PASSWORD_MIN_LENGTH = 6;
+const PASSWORD_MAX_LENGTH = 12;
+
+const errorMessage = {
+    userIdError: '아이디는 최소 6자리에서 16자리까지 입력할 수 있습니다.',
+    passwordError: '비밀번호는 최소 6자리에서 12자리까지 입력할 수 있습니다.',
+};
+
 export function LoginForm() {
     const [userId, setUserId] = useState('');
     const [userIdType, setUserIdType] = useState(false);
@@ -14,8 +24,12 @@ export function LoginForm() {
 
     const setUserInfo = useSetRecoilState(userInfoSelector);
 
-    const chkUserIdAvailable = userId.length >= 6 && userId.length <= 16;
-    const chkPasswordAvailable = password.length >= 6 && password.length <= 12;
+    const chkUserIdAvailable =
+        userId.length >= USER_ID_MIN_LENGTH &&
+        userId.length <= USER_ID_MAX_LENGTH;
+    const chkPasswordAvailable =
+        password.length >= PASSWORD_MIN_LENGTH &&
+        password.length <= PASSWORD_MAX_LENGTH;
 
     const navigate = useNavigate();
 
@@ -44,15 +58,11 @@ export function LoginForm() {
             e.preventDefault();
 
             if (!chkUserIdAvailable) {
-                throw new Error(
-                    '아이디는 최소 6자리에서 16자리까지 입력할 수 있습니다.'
-                );
+                throw new Error(errorMessage['userIdError']);
             }
 
             if (!chkPasswordAvailable) {
-                throw new Error(
-                    '비밀번호는 최소 6자리에서 12자리까지 입력할 수 있습니다.'
-                );
+                throw new Error(errorMessage['passwordError']);
             }
 
             const {

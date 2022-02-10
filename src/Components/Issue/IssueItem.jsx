@@ -115,6 +115,7 @@ const IssueItem = ({ issue, onSelectedEventListener }) => {
           </DescriptionText>
         </HorizontalDiv>
       </IssueContentWrapper>
+      <div>{issue.author.name}</div>
     </IssueItemContainer>
   )
 }

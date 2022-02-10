@@ -82,12 +82,12 @@ export default function IssueListHeader() {
 
       <Wrapper>
         <Taps />
-        <Button size='small' color='blue'>
-          <StyledLink to='/create'>
+        <StyledLink to='/create'>
+          <Button size='small' color='blue'>
             <Plus />
             이슈 작성
-          </StyledLink>
-        </Button>
+          </Button>
+        </StyledLink>
       </Wrapper>
     </HeaderContainer>
   );

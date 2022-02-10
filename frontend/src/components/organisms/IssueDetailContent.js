@@ -7,7 +7,11 @@ import { useIssuesActions } from "../../_actions/issues.actions";
 
 import { Sidebar } from "@components/molecules/Sidebars";
 import { Comment } from "@components/molecules/Comment";
-import { Button, SecondaryButton } from "@components/atoms/Buttons";
+import {
+  Button,
+  SecondaryButton,
+  SmallTextButton,
+} from "@components/atoms/Buttons";
 import { XSmallLink } from "@components/atoms/Link";
 import TextArea from "@components/atoms/TextAreas";
 
@@ -15,6 +19,7 @@ import { ReactComponent as Plus } from "@assets/icons/plus.svg";
 import { ReactComponent as XSquare } from "@assets/icons/xsquare.svg";
 import { ReactComponent as Edit } from "@assets/icons/edit.svg";
 import { ReactComponent as UserimageLarge } from "@assets/icons/userimageLarge.svg";
+import { ReactComponent as Trash } from "@assets/icons/trash.svg";
 
 const Container = styled.div`
   display: flex;
@@ -55,6 +60,18 @@ const ButtonWrapper = styled.div`
   }
 `;
 
+const DeleteWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  cursor: pointer;
+
+  svg {
+    color: ${(props) => props.theme.colors.red};
+  }
+`;
+
 export default function IssueDetailContent() {
   const issue = useRecoilValue(issueState);
   const issuesActions = useIssuesActions();
@@ -85,6 +102,10 @@ export default function IssueDetailContent() {
     issuesActions.updateComment(issue.id, commentId, data);
     setEditingCommentValue("");
     setEditingCommentId(null);
+  }
+
+  function handleDeleteIssue() {
+    issuesActions.deleteIssue(issue.id);
   }
 
   function CommentList() {
@@ -154,15 +175,22 @@ export default function IssueDetailContent() {
           </Button>
         </ButtonWrapper>
       </LeftWrapper>
-
-      <Sidebar
-        selectedAssignee={selectedAssignee}
-        setSelectedAssignee={setSelectedAssignee}
-        selectedLabel={selectedLabel}
-        setSelectedLabel={setSelectedLabel}
-        selectedMilestone={selectedMilestone}
-        setSelectedMilestone={setSelectedMilestone}
-      />
+      <div>
+        <Sidebar
+          selectedAssignee={selectedAssignee}
+          setSelectedAssignee={setSelectedAssignee}
+          selectedLabel={selectedLabel}
+          setSelectedLabel={setSelectedLabel}
+          selectedMilestone={selectedMilestone}
+          setSelectedMilestone={setSelectedMilestone}
+        />
+        <DeleteWrapper>
+          <SmallTextButton onClick={() => handleDeleteIssue()}>
+            <Trash />
+            <XSmallLink color='red'>이슈 삭제</XSmallLink>
+          </SmallTextButton>
+        </DeleteWrapper>
+      </div>
     </Container>
   );
 }

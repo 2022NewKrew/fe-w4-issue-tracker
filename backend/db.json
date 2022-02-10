@@ -52,7 +52,7 @@
     {
       "id": "0272f5f1-7062-401d-b519-61639ee81ac0",
       "num": 2,
-      "status": "open",
+      "status": "close",
       "writer": "user1",
       "timestamp": "Tue, 08 Feb 2022 14:33:28 GMT",
       "title": "어쩔티비 ㅋㅋ",
@@ -64,7 +64,10 @@
         "b0bffb05-b763-41bb-bf82-45a87e36510d"
       ],
       "comments": [
-        "a2ad6224-ca43-4153-a4c2-3bac3434242b"
+        "a2ad6224-ca43-4153-a4c2-3bac3434242b",
+        "87a70868-31a6-4376-9eee-93c91760b6d9",
+        "3dc9abc3-c0cd-4d2d-900c-baccd14528fb",
+        "2820901d-5f0d-46f2-843d-57d91c77e298"
       ],
       "milestone": null
     },
@@ -242,90 +245,6 @@
       "milestone": null
     },
     {
-      "id": "6a49e11f-bc59-423c-8a9b-a97bf3b7fe71",
-      "num": 10,
-      "status": "open",
-      "writer": "user1",
-      "timestamp": "Wed, 09 Feb 2022 04:32:58 GMT",
-      "title": "12",
-      "assignees": [],
-      "labels": [],
-      "comments": [
-        "f79ee4ee-8bd5-4eb8-b42c-e5979294a3d7"
-      ],
-      "milestone": null
-    },
-    {
-      "id": "2cfa0fbd-d82b-409f-8737-c88df69d0638",
-      "num": 11,
-      "status": "open",
-      "writer": "user1",
-      "timestamp": "Wed, 09 Feb 2022 04:33:36 GMT",
-      "title": "2",
-      "assignees": [],
-      "labels": [],
-      "comments": [
-        "eb338c61-07f4-4f3f-9351-492359ac03cc"
-      ],
-      "milestone": null
-    },
-    {
-      "id": "9747031f-39c9-443c-8b3d-f5d562c98285",
-      "num": 12,
-      "status": "open",
-      "writer": "user1",
-      "timestamp": "Wed, 09 Feb 2022 04:33:48 GMT",
-      "title": "22",
-      "assignees": [],
-      "labels": [],
-      "comments": [
-        "c1842a4f-e462-4446-acbc-d672c73d89b4"
-      ],
-      "milestone": null
-    },
-    {
-      "id": "d8fc2cce-fcb5-46dd-b740-fe12c3e83694",
-      "num": 13,
-      "status": "open",
-      "writer": "user1",
-      "timestamp": "Wed, 09 Feb 2022 04:34:17 GMT",
-      "title": "1",
-      "assignees": [],
-      "labels": [],
-      "comments": [
-        "0f34e3fd-64bb-416a-8c57-24dec179e986"
-      ],
-      "milestone": null
-    },
-    {
-      "id": "264151a2-6cd5-44ab-a1f0-209f5d75bc17",
-      "num": 14,
-      "status": "open",
-      "writer": "user1",
-      "timestamp": "Wed, 09 Feb 2022 04:35:08 GMT",
-      "title": "11111",
-      "assignees": [],
-      "labels": [],
-      "comments": [
-        "8412f72d-6bb4-4f26-a8ab-d0bc91a7bfa6"
-      ],
-      "milestone": null
-    },
-    {
-      "id": "6fbae0b5-7864-4851-aafa-47ef231096a7",
-      "num": 15,
-      "status": "open",
-      "writer": "user1",
-      "timestamp": "Wed, 09 Feb 2022 04:35:42 GMT",
-      "title": "222",
-      "assignees": [],
-      "labels": [],
-      "comments": [
-        "065cd10e-e3d9-45b3-8cc4-5eb8d3095754"
-      ],
-      "milestone": null
-    },
-    {
       "id": "1877358e-105c-4d94-ace0-ae2641d9a80a",
       "num": 16,
       "status": "open",
@@ -364,50 +283,6 @@
       "milestone": "2dbe31cf-f626-4c80-9fd8-952c251c018b"
     },
     {
-      "id": "72e03f7b-22ad-46c6-8578-8e8973df8433",
-      "num": 18,
-      "status": "open",
-      "writer": "user1",
-      "timestamp": "Wed, 09 Feb 2022 19:03:26 GMT",
-      "title": "111111",
-      "assignees": [
-        "user2"
-      ],
-      "labels": [],
-      "comments": [
-        "2c2fcba5-d09d-45e1-ad4e-ef3c3a07662d"
-      ],
-      "milestone": null
-    },
-    {
-      "id": "b338648c-79db-49a3-8d79-3e130f93c26f",
-      "num": 19,
-      "status": "open",
-      "writer": "user1",
-      "timestamp": "Wed, 09 Feb 2022 19:10:38 GMT",
-      "title": "111",
-      "assignees": [],
-      "labels": [],
-      "comments": [
-        "fe92e5b8-6314-4f6a-b4df-4e43c6a1760a"
-      ],
-      "milestone": null
-    },
-    {
-      "id": "ea58c28d-f2b4-4808-a963-84fc2b048fde",
-      "num": 20,
-      "status": "open",
-      "writer": "user1",
-      "timestamp": "Wed, 09 Feb 2022 19:10:58 GMT",
-      "title": "12",
-      "assignees": [],
-      "labels": [],
-      "comments": [
-        "b264ff7d-9a90-4b3a-9b3e-c4a53c268388"
-      ],
-      "milestone": null
-    },
-    {
       "id": "5f75daa7-88b4-48ad-ad6e-ef4ee2215dd1",
       "num": 21,
       "status": "open",
@@ -426,62 +301,6 @@
         "2e5d8ed4-e555-49d9-9489-cfe10eaeda5a"
       ],
       "milestone": "ce566239-bb91-4fcd-856f-1237fe3e8e14"
-    },
-    {
-      "id": "2ceffefd-8a9d-4626-b44c-82e7903b92b4",
-      "num": 22,
-      "status": "open",
-      "writer": "user1",
-      "timestamp": "Wed, 09 Feb 2022 19:14:44 GMT",
-      "title": "1",
-      "assignees": [],
-      "labels": [],
-      "comments": [
-        "399533c9-94fe-4628-af83-a1a1dca47e45"
-      ],
-      "milestone": null
-    },
-    {
-      "id": "e3eea781-93df-418a-8b70-bf29e7f214d1",
-      "num": 23,
-      "status": "open",
-      "writer": "user1",
-      "timestamp": "Wed, 09 Feb 2022 19:15:33 GMT",
-      "title": "12",
-      "assignees": [],
-      "labels": [],
-      "comments": [
-        "1567469a-1bfc-440a-b9f1-c277aa54d197"
-      ],
-      "milestone": null
-    },
-    {
-      "id": "7ee1d397-72e0-4cd9-bcda-d89ff9398bc8",
-      "num": 26,
-      "status": "open",
-      "writer": "user1",
-      "timestamp": "Thu, 10 Feb 2022 02:18:03 GMT",
-      "title": "title",
-      "assignees": [],
-      "labels": [],
-      "comments": [
-        "228ace40-0380-4cd6-bb92-d9ff5750466d"
-      ],
-      "milestone": null
-    },
-    {
-      "id": "314694d7-1457-4d17-85b6-280279e85303",
-      "num": 27,
-      "status": "open",
-      "writer": "user1",
-      "timestamp": "Thu, 10 Feb 2022 02:23:04 GMT",
-      "title": "23",
-      "assignees": [],
-      "labels": [],
-      "comments": [
-        "56451b70-503b-4eb4-acf0-60b6f80bdc62"
-      ],
-      "milestone": null
     }
   ],
   "labels": [
@@ -653,48 +472,6 @@
       "content": "No description provided."
     },
     {
-      "id": "f79ee4ee-8bd5-4eb8-b42c-e5979294a3d7",
-      "status": "initial",
-      "author": "user1",
-      "timestamp": "Wed, 09 Feb 2022 04:32:58 GMT",
-      "content": "No description provided."
-    },
-    {
-      "id": "eb338c61-07f4-4f3f-9351-492359ac03cc",
-      "status": "initial",
-      "author": "user1",
-      "timestamp": "Wed, 09 Feb 2022 04:33:36 GMT",
-      "content": "No description provided."
-    },
-    {
-      "id": "c1842a4f-e462-4446-acbc-d672c73d89b4",
-      "status": "initial",
-      "author": "user1",
-      "timestamp": "Wed, 09 Feb 2022 04:33:48 GMT",
-      "content": "No description provided."
-    },
-    {
-      "id": "0f34e3fd-64bb-416a-8c57-24dec179e986",
-      "status": "initial",
-      "author": "user1",
-      "timestamp": "Wed, 09 Feb 2022 04:34:17 GMT",
-      "content": "No description provided."
-    },
-    {
-      "id": "8412f72d-6bb4-4f26-a8ab-d0bc91a7bfa6",
-      "status": "initial",
-      "author": "user1",
-      "timestamp": "Wed, 09 Feb 2022 04:35:08 GMT",
-      "content": "No description provided."
-    },
-    {
-      "id": "065cd10e-e3d9-45b3-8cc4-5eb8d3095754",
-      "status": "initial",
-      "author": "user1",
-      "timestamp": "Wed, 09 Feb 2022 04:35:42 GMT",
-      "content": "No description provided."
-    },
-    {
       "id": "808d886e-2ad6-4c27-9c83-29fad9de9e70",
       "status": "initial",
       "author": "user1",
@@ -709,60 +486,11 @@
       "content": "No description provided."
     },
     {
-      "id": "2c2fcba5-d09d-45e1-ad4e-ef3c3a07662d",
-      "status": "initial",
-      "author": "user1",
-      "timestamp": "Wed, 09 Feb 2022 19:03:26 GMT",
-      "content": "No description provided."
-    },
-    {
-      "id": "fe92e5b8-6314-4f6a-b4df-4e43c6a1760a",
-      "status": "initial",
-      "author": "user1",
-      "timestamp": "Wed, 09 Feb 2022 19:10:38 GMT",
-      "content": "No description provided."
-    },
-    {
-      "id": "b264ff7d-9a90-4b3a-9b3e-c4a53c268388",
-      "status": "initial",
-      "author": "user1",
-      "timestamp": "Wed, 09 Feb 2022 19:10:58 GMT",
-      "content": "No description provided."
-    },
-    {
       "id": "2e5d8ed4-e555-49d9-9489-cfe10eaeda5a",
       "status": "initial",
       "author": "user1",
       "timestamp": "Wed, 09 Feb 2022 19:13:55 GMT",
       "content": "No description provided."
-    },
-    {
-      "id": "399533c9-94fe-4628-af83-a1a1dca47e45",
-      "status": "initial",
-      "author": "user1",
-      "timestamp": "Wed, 09 Feb 2022 19:14:44 GMT",
-      "content": "No description provided."
-    },
-    {
-      "id": "1567469a-1bfc-440a-b9f1-c277aa54d197",
-      "status": "initial",
-      "author": "user1",
-      "timestamp": "Wed, 09 Feb 2022 19:15:33 GMT",
-      "content": "No description provided."
-    },
-    {
-      "id": "228ace40-0380-4cd6-bb92-d9ff5750466d",
-      "status": "initial",
-      "author": "user1",
-      "timestamp": "Thu, 10 Feb 2022 02:18:03 GMT",
-      "content": "No description provided."
-    },
-    {
-      "id": "56451b70-503b-4eb4-acf0-60b6f80bdc62",
-      "status": "initial",
-      "author": "user1",
-      "timestamp": "Thu, 10 Feb 2022 02:23:04 GMT",
-      "content": "23"
     },
     {
       "id": "7b7907b0-3881-463d-8d91-ffc69c66fe53",
@@ -789,25 +517,29 @@
       "id": "3929086b-4a21-48d6-8fd0-a5710537ca77",
       "status": "initial",
       "author": "user1",
-      "timestamp": "Thu, 10 Feb 2022 02:45:12 GMT"
+      "timestamp": "Thu, 10 Feb 2022 02:45:12 GMT",
+      "content": "룰루"
     },
     {
       "id": "2624860a-5d0d-4f91-91f3-3954696303f9",
       "status": "initial",
       "author": "user1",
-      "timestamp": "Thu, 10 Feb 2022 02:45:32 GMT"
+      "timestamp": "Thu, 10 Feb 2022 02:45:32 GMT",
+      "content": "랄라"
     },
     {
       "id": "5298ca1d-9a9e-4f87-a7ad-7f6387ebdda8",
       "status": "initial",
       "author": "user1",
-      "timestamp": "Thu, 10 Feb 2022 02:50:10 GMT"
+      "timestamp": "Thu, 10 Feb 2022 02:50:10 GMT",
+      "content": "수정 :) "
     },
     {
       "id": "97828cb2-03a0-43bd-938e-ccaea2ac37d0",
       "status": "initial",
       "author": "user1",
-      "timestamp": "Thu, 10 Feb 2022 02:51:56 GMT"
+      "timestamp": "Thu, 10 Feb 2022 02:51:56 GMT",
+      "content": "흐흫"
     },
     {
       "id": "d983692c-eeed-44eb-8159-1c6a57a5eeec",
@@ -863,6 +595,27 @@
       "status": "closed",
       "author": "user1",
       "timestamp": "Thu, 10 Feb 2022 04:21:04 GMT",
+      "content": "이슈가 닫혔습니다."
+    },
+    {
+      "id": "87a70868-31a6-4376-9eee-93c91760b6d9",
+      "status": "closed",
+      "author": "user1",
+      "timestamp": "Thu, 10 Feb 2022 05:32:40 GMT",
+      "content": "이슈가 닫혔습니다."
+    },
+    {
+      "id": "3dc9abc3-c0cd-4d2d-900c-baccd14528fb",
+      "status": "reopen",
+      "author": "user1",
+      "timestamp": "Thu, 10 Feb 2022 05:33:29 GMT",
+      "content": "이슈가 다시 열렸습니다."
+    },
+    {
+      "id": "2820901d-5f0d-46f2-843d-57d91c77e298",
+      "status": "closed",
+      "author": "user1",
+      "timestamp": "Thu, 10 Feb 2022 05:33:31 GMT",
       "content": "이슈가 닫혔습니다."
     }
   ]

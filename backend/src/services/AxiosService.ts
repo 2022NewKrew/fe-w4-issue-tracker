@@ -7,7 +7,7 @@ export type AxiosResponse<T> = Promise<{
 
 const instance = axios.create({
   baseURL: "http://localhost:1234/json",
-  timeout: 15000,
+  timeout: 30000,
 });
 
 instance.interceptors.response.use(

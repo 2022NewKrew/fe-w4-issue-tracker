@@ -102,20 +102,13 @@ export default function IssueDetailHeader() {
               <Edit />
               <XSmallLink color='blue'>제목 편집</XSmallLink>
             </SecondaryButton>
-            <SecondaryButton>
+            <SecondaryButton
+              onClick={() => issuesActions.updateIssueStatus(issue.id)}>
               <Archive />
               {issue.status === "open" ? (
-                <XSmallLink
-                  color='blue'
-                  onClick={() => issuesActions.updateIssueStatus(issue.id)}>
-                  이슈 닫기
-                </XSmallLink>
+                <XSmallLink color='blue'>이슈 닫기</XSmallLink>
               ) : (
-                <XSmallLink
-                  color='blue'
-                  onClick={() => issuesActions.updateIssueStatus(issue.id)}>
-                  이슈 열기
-                </XSmallLink>
+                <XSmallLink color='blue'>이슈 열기</XSmallLink>
               )}
             </SecondaryButton>
           </ButtonWrapper>

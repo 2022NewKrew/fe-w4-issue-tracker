@@ -162,7 +162,11 @@ export function Sidebar({
       selectedLabel.map((label) => {
         return (
           <ListWrapper key={label.id}>
-            <SmallLabel type='light' text={label.name} />
+            <SmallLabel
+              color={label.backgroundColor}
+              type={label.color}
+              text={label.name}
+            />
           </ListWrapper>
         );
       })
@@ -176,7 +180,9 @@ export function Sidebar({
         return (
           <MilestoneWrapper key={milestone.id}>
             <ProgressIndicator openIssues={5} closedIssues={12} />
-            <SmallText color='label'>{milestone.title}</SmallText>
+            <SmallText color={milestone.background}>
+              {milestone.title}
+            </SmallText>
           </MilestoneWrapper>
         );
       })

@@ -25,6 +25,7 @@ export function useIssuesActions() {
     createIssues,
     updateIssue,
     updateIssueStatus,
+    deleteIssue,
     getAllUsers,
     getAllMilestones,
     getAllLabels,
@@ -60,16 +61,6 @@ export function useIssuesActions() {
       .catch((err) => console.log(err));
   }
 
-  async function createComment(issueId, data) {
-    fetchWrapper
-      .post(`/api/issues/${issueId}/comment`, data)
-      .then((res) => {
-        console.log(res);
-        getIssue(issueId);
-      })
-      .catch((err) => console.log(err));
-  }
-
   async function updateIssue(issueId, data) {
     fetchWrapper
       .patch(`/api/issues/${issueId}`, data)
@@ -86,6 +77,16 @@ export function useIssuesActions() {
       .then((res) => {
         console.log(res);
         getIssue(issueId);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  async function deleteIssue(issueId) {
+    fetchWrapper
+      .delete(`/api/issues/${issueId}`)
+      .then((res) => {
+        console.log(res);
+        navigate("/");
       })
       .catch((err) => console.log(err));
   }
@@ -113,6 +114,16 @@ export function useIssuesActions() {
       .get("/api/labels")
       .then((res) => {
         setLabels(res);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  async function createComment(issueId, data) {
+    fetchWrapper
+      .post(`/api/issues/${issueId}/comment`, data)
+      .then((res) => {
+        console.log(res);
+        getIssue(issueId);
       })
       .catch((err) => console.log(err));
   }

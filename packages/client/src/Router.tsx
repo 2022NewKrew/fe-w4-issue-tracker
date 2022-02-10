@@ -31,12 +31,12 @@ const Router = () => {
               element={[<Helmet title="IssueList" />, <Issue />]}
             />
             <Route
-              path="add"
-              element={[<Helmet title="Add Issue" />, <Add />]}
-            />
-            <Route
               path=":id"
               element={[<Helmet title="Issue Detail" />, <IssueDetail />]}
+            />
+            <Route
+              path="add"
+              element={[<Helmet title="Add Issue" />, <Add />]}
             />
           </Route>
           <Route

@@ -23,15 +23,15 @@ type buttonType =
   | TYPE_TEXT_SMALL;
 
 interface IButtonProps {
-  type: buttonType;
+  btnType: buttonType;
   styles?: IStyle;
   iconType?: any;
   onClick?: EventHandler<any & Event>;
 }
 
-const Button: React.FC<IButtonProps> = ({ type, styles, iconType, children, ...props }) => {
+const Button: React.FC<IButtonProps> = ({ btnType, styles, iconType, children, ...props }) => {
   const StyledButtonProps = {
-    type,
+    btnType,
     ...styles,
     ...props,
   };
@@ -48,8 +48,8 @@ const StyledButton = styled.button<any>`
   & > svg {
     display: none;
   }
-  ${({ type, color, backgroundColor, margin, padding, textAlign }) => {
-    switch (type) {
+  ${({ btnType, color, backgroundColor, margin, padding, textAlign }) => {
+    switch (btnType) {
       case BUTTON_TYPE.LARGE:
         return css`
           width: 340px;

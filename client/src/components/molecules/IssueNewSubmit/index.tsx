@@ -23,10 +23,10 @@ const IssueAddSubmit: React.FC<IIssueAddSubmit> = ({ styles }) => {
 
   return (
     <IssueSubmit {...styles}>
-      <Button type="textMedium" {...Props.CancleBtnProps}>
+      <Button btnType="textMedium" {...Props.CancleBtnProps}>
         작성 취소
       </Button>
-      <Button type="mediumStandard" {...Props.SubmitBtnProps}>
+      <Button btnType="mediumStandard" {...Props.SubmitBtnProps}>
         완료
       </Button>
     </IssueSubmit>

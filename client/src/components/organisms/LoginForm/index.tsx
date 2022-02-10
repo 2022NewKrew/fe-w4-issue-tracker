@@ -59,16 +59,17 @@ const LoginForm: React.FC = () => {
 
   return (
     <LoginFormWrap>
-      <Button type="large" {...Props.GitHubLoginBtnProps}>
+      <Button btnType="large" {...Props.GitHubLoginBtnProps}>
         GitHub으로 로그인
       </Button>
       <span style={{ margin: "24px 0px 24px 0px" }}>or</span>
       <form onSubmit={submitHandler}>
         <TextInput type="large" {...Props.InputIdProps} />
         <TextInput type="large" {...Props.InputPasswdProps} />
-      <Button type="large" {...Props.LoginBtnProps}>
-        아이디로 로그인
-      </Button>
+        <Button btnType="large" {...Props.LoginBtnProps}>
+          아이디로 로그인
+        </Button>
+      </form>
       <Text type="xsmall" {...Props.SingUpBtnProps}>
         회원가입
       </Text>

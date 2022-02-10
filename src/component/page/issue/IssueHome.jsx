@@ -41,7 +41,7 @@ export const IssueHome = () => {
 
   // 선택 이슈들 상태 변경
   const changeStateCheckedIssue = async () => {
-    await patchCheckedIssue([...checkedIssues.current]);
+    await patchCheckedIssue([...checkedIssues]);
     refetch();
   };
 

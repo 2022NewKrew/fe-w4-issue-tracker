@@ -23,6 +23,8 @@ export const getLabels = () => customFetch({ url: `${BaseURL}/labels` });
 
 export const getMilestones = () => customFetch({ url: `${BaseURL}/milestones` });
 
+export const getIssueById = (id) => customFetch({ url: `${BaseURL}/issues/${id}` });
+
 export const patchCheckedIssue = (idList) =>
   customFetch({
     url: `${BaseURL}/issues`,

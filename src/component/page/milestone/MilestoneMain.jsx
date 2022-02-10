@@ -38,7 +38,7 @@ export const MilestoneMain = () => {
       {newMode && <MilestoneNew closeFn={() => setNewMode(false)} />}
       <TableWrapper>
         <TableHeader>
-          <span css={[cssFontSize["small"], cssLink]}>{`${numMilestones}개의 마일스톤`}</span>
+          <span css={[cssFontSize["small"], cssLink]}>{`${milestonesLength}개의 마일스톤`}</span>
         </TableHeader>
         {milestoneItems}
       </TableWrapper>

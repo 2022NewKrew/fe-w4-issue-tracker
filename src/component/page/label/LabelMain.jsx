@@ -38,7 +38,7 @@ export const LabelMain = () => {
       {newMode && <LabelNew closeFn={() => setNewMode(false)} />}
       <TableWrapper>
         <TableHeader>
-          <span css={[cssFontSize["small"], cssLink]}>{`${numLabels}개의 레이블`}</span>
+          <span css={[cssFontSize["small"], cssLink]}>{`${labelsLength}개의 레이블`}</span>
         </TableHeader>
         {labelItems}
       </TableWrapper>

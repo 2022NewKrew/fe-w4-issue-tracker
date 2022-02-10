@@ -20,12 +20,12 @@ export function useParams() {
     const splitedCurrentRoute = currentRoute.split(regSeparateBasedSlash);
     const splitedCurrentPath = currentPath.split(regSeparateBasedSlash);
 
-    return splitedCurrentRoute.reduce((acc, curr, idx) => {
-        if (isParam(curr, splitedCurrentPath[idx])) {
-            acc[removeSlashandColumn(curr)] = removeSlashandColumn(
+    return splitedCurrentRoute.reduce((routes, route, idx) => {
+        if (isParam(route, splitedCurrentPath[idx])) {
+            routes[removeSlashandColumn(route)] = removeSlashandColumn(
                 splitedCurrentPath[idx]
             );
         }
-        return acc;
+        return routes;
     }, {});
 }

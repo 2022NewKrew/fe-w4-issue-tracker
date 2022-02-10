@@ -9,6 +9,6 @@ export const login = async (param) =>
 
 export const getUserInfo = async () =>
     await theAxios({
-        url: '/api/users/auth',
+        url: '/api/users/info',
         type: 'get',
     });

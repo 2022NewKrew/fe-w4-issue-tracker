@@ -68,7 +68,7 @@ app.post('/api/login', (req, res) => {
     });
 });
 
-app.get('/api/users/auth', auth, (req, res) => {
+app.get('/api/users/info', auth, (req, res) => {
     res.status(200).json({
         _id: req.user._id,
         name: req.user.name,

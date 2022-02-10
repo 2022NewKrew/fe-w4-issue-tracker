@@ -36,7 +36,7 @@ export const ProgressIndicator = ({ milestone, ...props }) => {
 
   return (
     <div {...props}>
-      <ProgressIndicatorBar milestone={milestone} />
+      <ProgressIndicatorBar percentage={percentage} />
       <TextWrapper>
         <span>{`${percentage.toFixed(0)}%`}</span>
         <StyledSpan>{`열린 이슈 ${openIssueLength}`}</StyledSpan>

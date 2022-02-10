@@ -16,11 +16,9 @@ export const issuesFilterState = atom({
 export const allIssuesSelector = selector<IIssue[]>({
     key: 'allIssuesSelector',
     get: async () => {
-        const { data } = await fetchIssues().then((res: Response) => {
-            if (!res.ok) throw Error(`fetch fail! status code: ${res.status}`);
-            return res.json();
-        });
-
+        const res = await fetchIssues();
+        if (!res.ok) throw Error(`fetch fail! status code: ${res.status}`);
+        const { data } = await res.json();
         return data;
     },
 });

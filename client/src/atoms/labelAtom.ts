@@ -5,11 +5,9 @@ import { ILabel } from '@types';
 export const labelInfoSelector = selector<ILabel[]>({
     key: 'labelInfoSelector',
     get: async () => {
-        const { data } = await fetchLabels().then((res: Response) => {
-            if (!res.ok) throw Error(`fetch fail! status code: ${res.status}`);
-            return res.json();
-        });
-
+        const res = await fetchLabels();
+        if (!res.ok) throw Error(`fetch fail! status code: ${res.status}`);
+        const { data } = await res.json();
         return data;
     },
 });

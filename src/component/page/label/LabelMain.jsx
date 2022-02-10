@@ -17,14 +17,14 @@ export const LabelMain = () => {
   const { data: labels } = useQuery("labels", getLabels);
   const { data: milestones } = useQuery("milestones", getMilestones);
 
-  const numLabels = labels?.length || 0;
-  const numMilestones = milestones?.length || 0;
+  const labelsLength = labels?.length || 0;
+  const milestonesLength = milestones?.length || 0;
   const labelItems = labels?.map((label) => <LabelItem key={label.id} label={label} />);
 
   return (
     <>
       <PageHeader>
-        <Taps labelCount={numLabels} milestoneCount={numMilestones} />
+        <Taps labelCount={labelsLength} milestoneCount={milestonesLength} />
         {newMode ? (
           <StyledButton options={{ type: "Small-Secondary", prefixIcon: "x-square" }} onClick={() => setNewMode(false)}>
             닫기

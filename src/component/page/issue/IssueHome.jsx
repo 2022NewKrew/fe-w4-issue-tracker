@@ -67,18 +67,18 @@ export const IssueHome = () => {
   };
 
   const issueItems = filteredIssueList.map((item) => <IssueItem key={item.id} item={item} handleCheckBoxById={handleCheckBoxById} checked={item.checked} />);
-  const numOpenIssue = issues?.reduce((prev, item) => (item.status === "open" ? prev + 1 : prev), 0) || 0;
-  const numCloseIssue = issues?.reduce((prev, item) => (item.status === "close" ? prev + 1 : prev), 0) || 0;
-  const numLabels = labels?.length || 0;
-  const numMilestones = milestones?.length || 0;
-  const numCheckedIssues = checkedIssues.current.size;
+  const openIssuesLength = issues?.reduce((prev, item) => (item.status === "open" ? prev + 1 : prev), 0) || 0;
+  const closedIssuesLength = issues?.reduce((prev, item) => (item.status === "close" ? prev + 1 : prev), 0) || 0;
+  const labelsLength = labels?.length || 0;
+  const milestonesLength = milestones?.length || 0;
+  const checkedIssuesLength = checkedIssues.current.size;
 
   const issueTableHeader =
-    numCheckedIssues === 0 ? (
+    checkedIssuesLength === 0 ? (
       <TableHeader>
         <CheckBox onClick={handleTotalCheckBox} checked={checked} />
-        <Button options={{ type: "Medium-Text", prefixIcon: "alert-circle" }}>{`열린 이슈(${numOpenIssue})`}</Button>
-        <Button options={{ type: "Medium-Text", prefixIcon: "archive" }}>{`닫힌 이슈(${numCloseIssue})`}</Button>
+        <Button options={{ type: "Medium-Text", prefixIcon: "alert-circle" }}>{`열린 이슈(${openIssuesLength})`}</Button>
+        <Button options={{ type: "Medium-Text", prefixIcon: "archive" }}>{`닫힌 이슈(${closedIssuesLength})`}</Button>
         <RightItemWrapper>
           <Button options={{ type: "Medium-Text", suffixIcon: "arrow-down" }}>담당자</Button>
           <Button options={{ type: "Medium-Text", suffixIcon: "arrow-down" }}>레이블</Button>
@@ -89,7 +89,7 @@ export const IssueHome = () => {
     ) : (
       <TableHeader>
         <CheckBox onClick={handleTotalCheckBox} checked={checked} />
-        <span css={[cssFontSize["small"], cssLink]}>{`${numCheckedIssues}개 이슈 선택`}</span>
+        <span css={[cssFontSize["small"], cssLink]}>{`${checkedIssuesLength}개 이슈 선택`}</span>
         <RightItemWrapper>
           <Button options={{ type: "Medium-Text", suffixIcon: "arrow-down" }} onClick={changeStateCheckedIssue}>
             상태 수정
@@ -102,7 +102,7 @@ export const IssueHome = () => {
     <>
       <PageHeader>
         <FilterBar />
-        <StyledTaps labelCount={numLabels} milestoneCount={numMilestones} />
+        <StyledTaps labelCount={labelsLength} milestoneCount={milestonesLength} />
         <Link to="new">
           <Button options={{ type: "Small-Standard", prefixIcon: "plus" }}>이슈 작성</Button>
         </Link>

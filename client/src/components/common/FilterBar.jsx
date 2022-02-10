@@ -66,6 +66,8 @@ const FilterInput = styled.input`
 const Wrapper = styled.div`
     position: relative;
     width: 601px;
+    display: inline-block;
+    vertical-align: top;
 
     &:focus-within {
         ${FilterButton} {
@@ -82,8 +84,12 @@ export function FilterBar() {
             <FilterInput
                 type="text"
                 placeholder="is:issue is:open"
-                onFocus={(e) => (e.target.placeholder = 'Search all issues')}
-                onBlur={(e) => (e.target.placeholder = 'is:issue is:open')}
+                onFocus={({ target }) =>
+                    (target.placeholder = 'Search all issues')
+                }
+                onBlur={({ target }) =>
+                    (target.placeholder = 'is:issue is:open')
+                }
             />
         </Wrapper>
     );

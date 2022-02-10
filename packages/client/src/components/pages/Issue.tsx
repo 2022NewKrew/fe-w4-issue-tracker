@@ -1,12 +1,12 @@
 import AppLayout from "@templetes/AppLayout";
-import { LinkTap, FilterBar, IssueListTable } from "@UI/Organisms";
+import { LinkTap, FilterBar, IssueTable } from "@UI/Organisms";
 
 const Issue = () => {
   return (
     <AppLayout>
       <LinkTap />
       <FilterBar />
-      <IssueListTable />
+      <IssueTable />
     </AppLayout>
   );
 };

@@ -1,22 +1,79 @@
 import { IssueService } from "@services";
-import { Issue, IssueStatus } from "@types";
-import { useMutation, useQueries, useQuery, useQueryClient } from "react-query";
+import { Issue, IssueForm, IssueStatus } from "@types";
+import { arrayToggle } from "@utils/helper";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useNavigate } from "react-router-dom";
 import {
   atom,
-  atomFamily,
   selector,
+  useRecoilState,
   useRecoilValue,
+  useResetRecoilState,
   useSetRecoilState,
 } from "recoil";
+import { FormMode } from "@stores/label";
+import { userState, useUserStore } from "./user";
 
-export const issueListState = atomFamily<Issue[], string>({
-  key: "issueListState",
-  default: [] as Issue[],
+export type IssueFilter = {
+  status: IssueStatus;
+  assignees: string | null;
+  label: string[];
+  milestone: string | null;
+  author: string | null;
+};
+
+const issueFilterState = atom<IssueFilter>({
+  key: "issueFilterState",
+  default: {
+    status: "open",
+    assignees: null,
+    label: [],
+    milestone: null,
+    author: null,
+  },
 });
 
-export const issueStatusFilterState = atom<IssueStatus>({
-  key: "issueStatusFilterState",
-  default: "open",
+const issueListState = atom<Issue[]>({
+  key: "issueListState",
+  default: [],
+});
+
+const filteredIssueListState = selector<Issue[]>({
+  key: "filteredIssueListState",
+  get: ({ get }) => {
+    const { assignees, label, milestone, author } = get(issueFilterState);
+    let issueList = get(issueListState);
+    if (assignees || milestone || author || label.length) {
+      return issueList.filter((issue) => {
+        if (assignees && !issue.assignees.includes(assignees)) return false;
+        if (milestone && issue.milestone?.id !== milestone) return false;
+        if (author && issue.author !== author) return false;
+        if (
+          label.length &&
+          !issue.labels.map(({ id }) => id).filter((id) => label.includes(id))
+            .length
+        )
+          return false;
+        return true;
+      });
+    }
+    return issueList;
+  },
+});
+
+const issueListCountState = selector<{
+  [key in "openCount" | "closeCount"]: number;
+}>({
+  key: "issueListCountState",
+  get: ({ get }) => {
+    const filteredIssueList = get(filteredIssueListState);
+    return {
+      openCount: filteredIssueList.filter(({ status }) => status === "open")
+        .length,
+      closeCount: filteredIssueList.filter(({ status }) => status === "close")
+        .length,
+    };
+  },
 });
 
 export const selectedIssueState = atom<string[]>({
@@ -24,74 +81,209 @@ export const selectedIssueState = atom<string[]>({
   default: [],
 });
 
-export const useIssueList = () => {
-  const issueStatus = useRecoilValue(issueStatusFilterState);
-  const setIssueList = useSetRecoilState(issueListState(issueStatus));
-  return useQuery<Issue[], Error>(
-    ["issue", issueStatus],
-    () => IssueService.getAll(issueStatus),
-    {
-      staleTime: 5000,
-      cacheTime: Infinity,
-      suspense: true,
-      onSuccess: (data) => {
-        setIssueList(data);
-      },
-    }
-  );
-};
-
-export const selectedAllIssueState = selector<boolean>({
-  key: "selectedAllIssueState",
+export const selectedIssueAllState = selector<boolean>({
+  key: "selectedIssueAllState",
   get: ({ get }) => {
-    const issueStatus = get(issueStatusFilterState);
-    const total = get(issueListState(issueStatus)).length;
-    const current = get(selectedIssueState).length;
-    return total === current;
+    const filter = get(issueFilterState);
+    const total = get(filteredIssueListState).filter(
+      ({ status }) => status === filter.status
+    ).length;
+    const selected = get(selectedIssueState).length;
+    return total > 0 && total === selected;
   },
   set: ({ get, set }, newValue) => {
-    const issueStatus = get(issueStatusFilterState);
-    const total = get(issueListState(issueStatus));
+    const total = get(filteredIssueListState);
     set(selectedIssueState, newValue ? total.map(({ id }) => id) : []);
   },
 });
 
-export type IssueFilterKey = "assignees" | "label" | "milestone" | "author";
+export const useIssueStore = () => {
+  const issueList = useRecoilValue(filteredIssueListState);
+  const setIssueList = useSetRecoilState(issueListState);
+  const [selectedIssue, setSelectedIssue] = useRecoilState(selectedIssueState);
+  const issueListCount = useRecoilValue(issueListCountState);
+  const [filter, setFilter] = useRecoilState(issueFilterState);
+  const [selectAll, setSelectAll] = useRecoilState(selectedIssueAllState);
 
-export type IssueFilter = {
-  [key in IssueFilterKey]: string | null;
+  const resetFilter = useResetRecoilState(issueFilterState);
+
+  useQuery<Issue[], Error>("issueList", IssueService.getAll, {
+    onSuccess: (data) => {
+      setIssueList(data);
+    },
+  });
+
+  return {
+    issueList,
+    issueListCount,
+    filter,
+    setFilter,
+    selectedIssue,
+    setSelectedIssue,
+    selectAll,
+    setSelectAll,
+    resetFilter,
+  };
 };
 
-export const issueFilterState = atom<IssueFilter>({
-  key: "issueFilterState",
+const issueFormState = atom<IssueForm>({
+  key: "issueFormState",
   default: {
-    assignees: null,
-    label: null,
+    title: "",
+    comment: "",
+    assignees: [],
+    labels: [],
     milestone: null,
-    author: null,
   },
 });
 
-export const useIssueCountData = () =>
-  useQueries([
-    { queryKey: ["issue", "open"], queryFn: () => IssueService.getAll("open") },
-    {
-      queryKey: ["issue", "close"],
-      queryFn: () => IssueService.getAll("close"),
-    },
-  ]);
+export const issueFormModeState = atom<FormMode>({
+  key: "issueFormModeState",
+  default: "close",
+});
 
-export const useModifyIssueStatusData = () => {
+const issueTitleModifyState = atom<boolean>({
+  key: "issueTitleModifyState",
+  default: false,
+});
+
+export const useIssueFormStore = () => {
+  const [issueForm, setIssueForm] = useRecoilState(issueFormState);
+  const [issueFormMode, setIssueFormMode] = useRecoilState(issueFormModeState);
+  const resetIssueForm = useResetRecoilState(issueFormState);
+  const [issueTitleModify, setIssueTitleModify] = useRecoilState(
+    issueTitleModifyState
+  );
+  return {
+    issueForm,
+    setIssueForm,
+    resetIssueForm,
+    setTitle: (e: any) =>
+      setIssueForm((prev) => ({ ...prev, title: e.target.value })),
+    setComment: (e: any) =>
+      setIssueForm((prev) => ({ ...prev, comment: e.target.value })),
+    setAssignees: (id: string) =>
+      setIssueForm((prev) => ({
+        ...prev,
+        assignees: arrayToggle(prev.assignees, id),
+      })),
+    setLabels: (id: string) =>
+      setIssueForm((prev) => ({
+        ...prev,
+        labels: arrayToggle(prev.labels, id),
+      })),
+    setMilestone: (milestone: string) =>
+      setIssueForm((prev) => ({
+        ...prev,
+        milestone,
+      })),
+    issueFormMode,
+    setIssueFormMode,
+    issueTitleModify,
+    setIssueTitleModify,
+  };
+};
+
+export const useIssueMutation = () => {
+  const resetIssueForm = useResetRecoilState(issueFormState);
+  const issueForm = useRecoilValue(issueFormState);
+  const setSelectedIssue = useSetRecoilState(selectedIssueState);
+  const [issueFormMode, setIssueFormMode] = useRecoilState(issueFormModeState);
+  const me = useRecoilValue(userState);
+
   const queryClient = useQueryClient();
-  return useMutation(
-    ({ issueId, status }: { issueId: string; status: "open" | "close" }) =>
-      IssueService.patchChangeStatus(issueId, status),
+  const nav = useNavigate();
+
+  const addIssue = useMutation(
+    async () => IssueService.post(me!.id, issueForm),
     {
-      onSuccess: (data) => {
-        queryClient.invalidateQueries(["issue", "open"]);
-        queryClient.invalidateQueries(["issue", "close"]);
-        queryClient.setQueryData(["issue", "open"], data);
+      onSuccess: () => {
+        queryClient.invalidateQueries("issueList");
+        queryClient.invalidateQueries("commentList");
+        setIssueFormMode("close");
+        resetIssueForm();
+        nav("/issue");
       },
     }
   );
+
+  const modifyIssueStatus = useMutation(
+    ({ issueId, status }: { issueId: string; status: IssueStatus }) =>
+      IssueService.patchChangeStatus({ issueId, status, author: me!.id }),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("issueList");
+        queryClient.invalidateQueries("commentList");
+        setSelectedIssue([]);
+      },
+    }
+  );
+
+  const modifyIssueTitle = useMutation(
+    async () =>
+      IssueService.patchChangeTitle({
+        issueId: issueFormMode,
+        title: issueForm.title,
+      }),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("issueList");
+      },
+    }
+  );
+
+  const modifyIssue = useMutation(
+    async () =>
+      IssueService.patch({
+        issueId: issueFormMode,
+        issueForm,
+      }),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("issueList");
+      },
+    }
+  );
+
+  const removeIssue = useMutation(
+    async () => IssueService.delete(issueFormMode),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("issueList");
+        nav("/issue");
+      },
+    }
+  );
+
+  const checkPermission = (fn: Function) => {
+    if (!me) {
+      nav("/login");
+    } else {
+      fn();
+    }
+  };
+
+  return {
+    addIssue: () => checkPermission(() => addIssue.mutate()),
+    modifyIssueStatus: ({
+      issueId,
+      status,
+    }: {
+      issueId: string;
+      status: IssueStatus;
+    }) => checkPermission(() => modifyIssueStatus.mutate({ issueId, status })),
+    modifyIssueTitle: () => checkPermission(modifyIssueTitle.mutate),
+    modifyIssue: () => checkPermission(modifyIssue.mutate),
+    removeIssue: () => checkPermission(removeIssue.mutate),
+  };
+};
+
+export const checkPermission = (fn: Function) => {
+  const { me } = useUserStore();
+  const nav = useNavigate();
+  if (!me) {
+    nav("/login");
+  } else {
+    fn();
+  }
 };

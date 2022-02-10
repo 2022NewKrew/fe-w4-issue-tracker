@@ -1,10 +1,10 @@
 import AppLayout from "@templetes/AppLayout";
-import { IssueRegisterForm } from "@UI/Organisms";
+import { IssueForm } from "@UI/Organisms";
 
 const Add = () => {
   return (
     <AppLayout>
-      <IssueRegisterForm />
+      <IssueForm />
     </AppLayout>
   );
 };

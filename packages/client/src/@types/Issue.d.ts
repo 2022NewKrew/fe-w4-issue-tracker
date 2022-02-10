@@ -11,10 +11,12 @@ declare module "@types" {
     author: string;
     status: IssueStatus;
     timestamp: string;
+    comments: string[];
   }
 
   interface Issue extends IssueJSON {
     labels: Label[];
+    milestone: MilestoneJSON | null;
   }
 
   interface IssueDetail extends Issue {
@@ -22,11 +24,11 @@ declare module "@types" {
     assignees: User[];
   }
 
-  interface IssueRequest {
+  interface IssueForm {
     title: string;
     comment: string;
     labels: string[];
     assignees: string[];
-    milestone?: string | null;
+    milestone: string | null;
   }
 }

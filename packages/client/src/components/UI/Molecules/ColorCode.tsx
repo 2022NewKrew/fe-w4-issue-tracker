@@ -1,21 +1,20 @@
 import Atoms from "@UI/Atoms";
 import Icon from "@UI/Icon";
 
-import { useInput } from "@hooks";
-
 import { v4 } from "uuid";
 import styled from "@emotion/styled";
 
 interface Props {
-  label: string;
+  value: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  reset: () => void;
 }
 
-const ColorCode = ({ label }: Props) => {
+const ColorCode = ({ value, onChange, reset }: Props) => {
   const uuid = v4();
-  const [value, onChange, reset] = useInput("");
   return (
     <SInputWrapper className="ColorCode">
-      <label htmlFor={uuid}>{label}</label>
+      <label htmlFor={uuid}>배경 색상</label>
       <input id={uuid} value={value} onChange={onChange} maxLength={7} />
       <Icon name="refresh" onClick={reset} />
     </SInputWrapper>
@@ -32,9 +31,10 @@ const SInputWrapper = styled(Atoms.InputWrapper)`
   display: flex;
   & > label {
     ${({ theme }) => theme.FontSize.xsmall}
-    display: inline-flex;
+    display: flex;
     align-items: center;
     min-width: 80px;
+    color: var(--label);
   }
   & > input {
     ${({ theme }) => theme.FontSize.small}

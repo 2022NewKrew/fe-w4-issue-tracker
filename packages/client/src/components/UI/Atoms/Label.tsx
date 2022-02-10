@@ -2,14 +2,17 @@ import { LayoutProps } from "@emotion/react";
 import styled from "@emotion/styled";
 import Icon from "@UI/Icon";
 
-export interface Props extends SProps, LayoutProps {}
+export interface Props extends SProps, LayoutProps {
+  text?: string;
+}
 
-const Label = ({ type, color, children }: Props) => {
+const Label = ({ type, bgColor, color, children, text }: Props) => {
   return (
-    <SLabel className="Label" type={type} color={color}>
+    <SLabel className="Label" type={type} bgColor={bgColor} color={color}>
       {type === "open" && [<Icon name="issue_open_blue" />, "열린 이슈"]}
       {type === "close" && [<Icon name="issue_close" />, "닫힌 이슈"]}
       {type === "athor" && "작성자"}
+      {text}
       {children}
     </SLabel>
   );
@@ -19,7 +22,8 @@ export default Label;
 
 interface SProps {
   type: "open" | "close" | "dark" | "light" | "athor" | "custom";
-  color?: string;
+  bgColor?: string;
+  color?: "dark" | "light";
 }
 
 const SLabel = styled.label<SProps>`
@@ -27,14 +31,15 @@ const SLabel = styled.label<SProps>`
   align-items: center;
   border-radius: 30px;
   padding: 4px 16px;
+  font-weight: bold;
   ${({ theme }) => theme.FontSize.xsmall};
-  ${({ type, color }) =>
+  ${({ type, color, bgColor }) =>
     type !== "custom"
       ? typeList[type]
       : `
         width: max-content;
-        color: var(--offWhite);
-        background: ${color};
+        color: ${color == "dark" ? "var(--titleActive)" : "var(--offWhite)"};
+        background: ${bgColor};
         `}
   & > svg {
     position: static;

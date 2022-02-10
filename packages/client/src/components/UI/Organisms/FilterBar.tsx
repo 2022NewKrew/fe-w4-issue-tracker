@@ -1,36 +1,28 @@
-import { Dropdown } from "@UI/Molecules";
+import { CustomButton, Dropdown } from "@UI/Molecules";
 import Atoms from "@UI/Atoms";
 
 import styled from "@emotion/styled";
 
 import { useCallback, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { issueFilterBarState, selectFilterBarState } from "@recoils/filterbar";
+import { issueFilterBarState, selectFilterBarState } from "@stores/filterbar";
 
 const FilterBar = () => {
   const [focus, setFocus] = useState(false);
   const issueFilterBarList = useRecoilValue(issueFilterBarState);
-  const [selectFilterList, setSelectFilterList] =
-    useRecoilState(selectFilterBarState);
+  const [selectFilter, setSelectFilter] = useRecoilState(selectFilterBarState);
 
   const onSelect = useCallback(
-    ({ target }: React.MouseEvent<HTMLLIElement>) => {
-      const filterId = (target as HTMLLIElement).dataset.id as string;
-      if (selectFilterList.includes(filterId)) {
-        const newFilter = selectFilterList.filter((ele) => ele !== filterId);
-        setSelectFilterList(newFilter);
-      } else {
-        const newFilter = [...selectFilterList, filterId];
-        setSelectFilterList(newFilter);
-      }
+    (id: string) => {
+      setSelectFilter(id);
     },
-    [selectFilterList]
+    [selectFilter]
   );
 
   const handleSubmit = (e: React.BaseSyntheticEvent) => {
     e.preventDefault();
     console.log(e.target.search.value);
-    console.log(selectFilterList);
+    console.log(selectFilter);
   };
 
   const onFocus = useCallback(() => setFocus(true), []);
@@ -39,7 +31,7 @@ const FilterBar = () => {
   return (
     <Wrapper className="FilterBar" focus={focus}>
       <Dropdown
-        select={selectFilterList}
+        select={selectFilter}
         onSelect={onSelect}
         indicator="Filter"
         listTitle="이슈 필터"
@@ -48,7 +40,7 @@ const FilterBar = () => {
         icon
       />
       <form onSubmit={handleSubmit}>
-        <Atoms.Button size="small" shape="text" icon="search" type="submit" />
+        <CustomButton.SearchButton />
         <input
           id="search"
           placeholder={focus ? "Search all issues" : "is:issue is:open"}
@@ -68,9 +60,9 @@ const Wrapper = styled(Atoms.InputWrapper)<{ focus: boolean }>`
   height: 40px;
   border-radius: 11px;
   border: 1px solid var(--line);
-  & > .Dropdown > .Button {
+  & > .Dropdown > button {
     width: 128px;
-    height: 38px;
+    height: 36px;
     padding: 1px 24px 0;
     justify-content: space-between;
     border-radius: 11px 0 0 11px;
@@ -85,7 +77,7 @@ const Wrapper = styled(Atoms.InputWrapper)<{ focus: boolean }>`
     flex: 1;
     border-radius: 0 11px 11px 0;
     overflow: hidden;
-    & > .Button {
+    & > button {
       position: absolute;
       width: min-content;
       height: 16px;

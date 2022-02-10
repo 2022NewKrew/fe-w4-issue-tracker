@@ -1,15 +1,19 @@
 import styled from "@emotion/styled";
+import { Milestone } from "@types";
 
 interface Props {
+  title?: boolean;
   text?: boolean;
+  milestone: Milestone;
 }
 
-const Progress = ({ text = false }: Props) => {
+const Progress = ({ text = false, title = false, milestone }: Props) => {
   return (
     <Wrapper percent={30} className="Progress">
       <div className="bar">
         <span />
       </div>
+      {title && <div>{milestone.name}</div>}
       {text && (
         <div>
           <span>100%</span>

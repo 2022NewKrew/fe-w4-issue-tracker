@@ -2,13 +2,21 @@ import styled from "@emotion/styled";
 import Atoms from "@UI/Atoms";
 
 import { v4 } from "uuid";
+import { CustomButton } from ".";
 
 interface Props extends SProps {
   value: string;
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  autoFocus?: boolean;
 }
 
-const TextArea = ({ value, onChange, height, width }: Props) => {
+const TextArea = ({
+  value,
+  onChange,
+  height,
+  width,
+  autoFocus = false,
+}: Props) => {
   const uuid = v4();
   return (
     <SInputWrapper width={width} height={height} className="TextArea">
@@ -17,6 +25,7 @@ const TextArea = ({ value, onChange, height, width }: Props) => {
         value={value}
         onChange={onChange}
         placeholder=" "
+        autoFocus={autoFocus}
       ></textarea>
       <Atoms.Placeholder
         id={uuid}
@@ -24,9 +33,7 @@ const TextArea = ({ value, onChange, height, width }: Props) => {
         size="large"
         typing={value !== ""}
       />
-      <Atoms.Button shape="text" icon="paperclip" size="small">
-        파일 첨부하기
-      </Atoms.Button>
+      <CustomButton.FileAttachButton />
     </SInputWrapper>
   );
 };
@@ -54,7 +61,7 @@ const SInputWrapper = styled(Atoms.InputWrapper)<SProps>`
       padding-top: 24px;
     }
   }
-  & > .Button {
+  & > button {
     position: absolute;
     left: 0;
     bottom: 0;

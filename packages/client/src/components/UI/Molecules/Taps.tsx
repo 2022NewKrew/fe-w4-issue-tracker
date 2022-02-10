@@ -1,13 +1,12 @@
 import Icon from "@UI/Icon";
 import { NavLink } from "react-router-dom";
 import styled from "@emotion/styled";
-import { useRecoilValue } from "recoil";
-import { labelListCountState } from "@stores/label";
-import { milestoneListCountState } from "@stores/milestone";
+import { useLabelStore } from "@stores/label";
+import { useMilestoneStore } from "@stores/milestone";
 
 const Taps = () => {
-  const labelListCount = useRecoilValue(labelListCountState);
-  const milestoneListCount = useRecoilValue(milestoneListCountState);
+  const { labelListCount } = useLabelStore();
+  const { milestoneListCount } = useMilestoneStore();
 
   return (
     <Wrapper>

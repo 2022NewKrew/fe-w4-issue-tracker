@@ -1,84 +1,143 @@
-import { Dropdown, Progress } from "@UI/Molecules";
+import { CustomButton, Dropdown, Progress } from "@UI/Molecules";
 import Atoms from "@UI/Atoms";
 import Icon from "@UI/Icon";
 
 import styled from "@emotion/styled";
 
-const athorList = ["Oni", "Daniel"];
+import { useUserStore } from "@stores/user";
+import { useMilestoneStore } from "@stores/milestone";
+import { useLabelStore } from "@stores/label";
+import { Milestone } from "@types";
+import { useIssueFormStore, useIssueMutation } from "@stores/issue";
+import { useEffect } from "react";
 
 const SideBar = () => {
+  const { userList } = useUserStore();
+  const { labelList } = useLabelStore();
+  const { milestoneList } = useMilestoneStore();
+
+  const { issueForm, setAssignees, setLabels, setMilestone, issueFormMode } =
+    useIssueFormStore();
+
+  const { removeIssue, modifyIssue } = useIssueMutation();
+  const { assignees, labels, milestone } = issueForm;
+
+  const Aside = Wrapper.withComponent("aside");
+
+  useEffect(() => {
+    return () => {
+      modifyIssue();
+    };
+  }, []);
+
   return (
-    <Wrapper className="SideBar">
-      <div>
+    <Aside className="SideBar">
+      <Atoms.Li>
         <Dropdown
+          select={assignees}
+          onSelect={setAssignees}
           indicator="담장자"
           listTitle="담당자 추가"
-          list={athorList}
+          list={userList}
           direction="right"
         />
-        <li className="athorlist">
-          <Icon name="user_image_large" />
-          Oni
-        </li>
-      </div>
-      <div>
+        <ul>
+          {userList
+            .filter(({ id }) => assignees.includes(id))
+            .map(({ id, name }) => (
+              <li key={id} className="athorlist">
+                <Icon name="user_image_large" />
+                {name}
+              </li>
+            ))}
+        </ul>
+      </Atoms.Li>
+      <Atoms.Li>
         <Dropdown
+          select={labels}
+          onSelect={setLabels}
           indicator="레이블"
           listTitle="레이블 추가"
-          list={athorList}
+          list={labelList}
           direction="right"
         />
-        <Atoms.Label type="custom" color="#0025E7">
-          document
-        </Atoms.Label>
-      </div>
-      <div>
+        <ul>
+          {labelList
+            .filter(({ id }) => labels.includes(id))
+            .map(({ id, name, backgroundColor, textColor }) => (
+              <Atoms.Label
+                key={id}
+                type="custom"
+                color={textColor}
+                bgColor={backgroundColor}
+                text={name}
+              />
+            ))}
+        </ul>
+      </Atoms.Li>
+      <Atoms.Li>
         <Dropdown
+          select={milestone}
+          onSelect={setMilestone}
           indicator="마일스톤"
           listTitle="마일스톤 추가"
-          list={athorList}
+          list={milestoneList}
           direction="right"
         />
-        <Progress />
-      </div>
-    </Wrapper>
+        {milestone && (
+          <Progress
+            title
+            milestone={
+              milestoneList.find(({ id }) => id === milestone) as Milestone
+            }
+          />
+        )}
+      </Atoms.Li>
+      {issueFormMode !== "add" && (
+        <CustomButton.RemoveButton onClick={() => removeIssue()} />
+      )}
+    </Aside>
   );
 };
 
 export default SideBar;
 
-const Wrapper = styled.aside`
+const Wrapper = styled(Atoms.Ul)`
   width: 308px;
-  position: absolute;
-  & > div {
-    border: 1px solid var(--line);
+  height: min-content;
+  position: relative;
+  & > li {
     min-height: 96px;
-    padding: 32px;
-    & > .Dropdown > .Button {
+    padding: 20px 32px;
+    flex-direction: column;
+    & > .Dropdown > button {
       width: 244px;
-      height: 32px;
       justify-content: space-between;
-      margin-bottom: 18px;
+      margin-bottom: 2px;
+      & > svg {
+        position: static;
+      }
       + .Panel {
-        top: 38px;
+        top: 48px;
+      }
+    }
+    & > ul {
+      width: 100%;
+      & > * {
+        margin-top: 16px;
       }
     }
     .athorlist {
-      height: 44px;
       display: flex;
       align-items: center;
-      padding-left: 48px;
-      position: relative;
       & > svg {
-        left: 0;
-        top: 0;
+        position: static;
+        margin-right: 4px;
       }
     }
-    :first-of-type {
-      border-radius: 16px 16px 0 0;
-    }
-    :last-of-type {
-      border-radius: 0 0 16px 16px;
-    }
+  }
+  & > .RemoveButton {
+    position: absolute;
+    right: 0;
   }
 `;

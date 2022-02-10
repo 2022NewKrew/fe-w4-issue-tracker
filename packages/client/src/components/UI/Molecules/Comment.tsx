@@ -1,88 +1,113 @@
 import styled from "@emotion/styled";
 import Icon from "@UI/Icon";
 import Atoms from "@UI/Atoms";
+import { CommentStatus, Comment } from "@types";
+import { CustomButton } from ".";
+import { useCommentFormStore, useCommentMutation } from "@stores/comment";
+import { CommentForm } from "@UI/Organisms";
+import { useUserStore } from "@stores/user";
 
-interface Props extends SProps {
-  text: string;
+interface Props {
+  comment: Comment;
 }
 
-const Comment = ({ width, text, state = "initial" }: Props) => {
-  return (
-    <Wrapper width={width} state={state} className="Comment">
-      <div className="header">
-        UserName
-        <span>TimeStamp</span>
-        <Icon name="smile" />
-        {state === "initial" && [
-          <Atoms.Label type="athor" />,
-          <Atoms.Button shape="text" size="small" icon="edit">
-            편집
-          </Atoms.Button>,
-        ]}
-      </div>
-      {text}
+const Comment = ({ comment }: Props) => {
+  const { id, status, content, author } = comment;
+  const { setCommentForm, commentFormMode, setcommentFormMode } =
+    useCommentFormStore(id);
+  const { removeLabel } = useCommentMutation(id);
+  const { me } = useUserStore();
+
+  return commentFormMode === "close" ? (
+    <Wrapper status={status} className="Comment">
+      <Icon name="user_image_large" />
+      <Atoms.Li header>
+        <h2>
+          {author}
+          <span>TimeStamp</span>
+        </h2>
+        <div>
+          {status === "initial" &&
+            author === me?.id && [
+              <Atoms.Label type="athor" />,
+              <CustomButton.EditButton
+                onClick={() => {
+                  setCommentForm({ content, status });
+                  setcommentFormMode(id);
+                }}
+              />,
+              <CustomButton.RemoveButton onClick={() => removeLabel()} />,
+            ]}
+          <Icon name="smile" />
+        </div>
+      </Atoms.Li>
+      <Atoms.Li>{content}</Atoms.Li>
     </Wrapper>
+  ) : (
+    <CommentForm commentId={id} />
   );
 };
 
 export default Comment;
 
 interface SProps {
-  width: number;
-  state?: "initial" | "close" | "reopen";
+  status?: CommentStatus;
 }
 
-const Wrapper = styled.article<SProps>`
-  ${({ state = "initial" }) => stateList[state]}
-  width: ${({ width }) => width + "px"};
-  border-radius: 16px;
-  overflow: hidden;
-  min-height: 124px;
-  padding: 80px 24px 16px;
+const Wrapper = styled(Atoms.Ul)<SProps>`
+  ${({ status = "initial" }) => statusList[status]}
+  width: 880px;
+  margin-left: 60px;
   position: relative;
-  .header {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    left: 0;
-    ${({ theme }) => theme.FontSize.small};
-    height: 64px;
-    padding: 18px 24px;
-    & > span {
-      margin-left: 8px;
-      color: var(--label);
+  & > svg {
+    left: -60px;
+  }
+  & > li {
+    padding: 0 24px;
+    & > h2 {
+      color: var(--titleActive);
+      & > span {
+        margin-left: 8px;
+        color: var(--label);
+      }
     }
-    & > svg {
-      top: 24px;
-      right: 24px;
+    & > div {
+      display: flex;
+      align-items: center;
+      & > .EditButton {
+        margin: 0 20px 0 24px;
+      }
+      & > svg {
+        position: static;
+        margin-left: 20px;
+      }
     }
-    & > .Label {
-      position: absolute;
-      top: 18px;
-      right: 127px;
+
+    :first-of-type {
+      height: 64px;
+      justify-content: space-between;
     }
-    & > .Button {
-      position: absolute;
-      top: 12px;
-      right: 60px;
+    :last-of-type {
+      height: 60px;
+      color: var(--titleActive);
     }
   }
 `;
 
-const stateList = {
+const statusList = {
   initial: `
     border: 1px solid var(--line);
     color: var(--titleActive);
-    .header{
+    & > li:first-of-type{
         color: var(--titleActive);
         background: var(--background);
         border-bottom: 1px solid var(--line);
     }
     `,
-  close: `
+  closed: `
     border: 1px solid #0025E7;
     color: #020070;
-    .header{
+    & > li:first-of-type{
         color: #020070;
         background: #CCD4FF;
         border-bottom: 1px solid #0025E7;
@@ -91,7 +116,7 @@ const stateList = {
   reopen: `
     border: 1px solid var(--primary-default);
     color: var(--primary-dark);
-    .header{
+    & > li:first-of-type{
         color: var(--primary-dark);
         background: var(--primary-light);
         border-bottom: 1px solid var(--primary-default);

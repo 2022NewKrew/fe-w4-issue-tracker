@@ -118,12 +118,12 @@ class IssueService {
     const { status } = await this.getByIdJSON(issueId);
     const IssueStatus = status === "open" ? "close" : "open";
     const commentStatus = status === "open" ? "closed" : "reopen";
-    const comemntContent =
+    const commentContent =
       status === "open" ? "이슈가 닫혔습니다." : "이슈가 다시 열렸습니다.";
 
     const comment: CommentRequestDTO = {
       status: commentStatus,
-      content: comemntContent,
+      content: commentContent,
     };
 
     const [_, data] = await Promise.all([

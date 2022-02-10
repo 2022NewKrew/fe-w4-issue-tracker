@@ -27,7 +27,7 @@ const Container = styled.div`
       return css`
         border: 1px solid ${(props) => props.theme.greyscale.line};
       `;
-    } else if (props.type === "open") {
+    } else if (props.type === "reopen") {
       return css`
         border: 1px solid ${(props) => props.theme.colors.blue};
       `;
@@ -55,7 +55,7 @@ const Header = styled.div`
         background-color: ${(props) => props.theme.greyscale.background};
         border-bottom: 1px solid ${(props) => props.theme.greyscale.line};
       `;
-    } else if (props.type === "open") {
+    } else if (props.type === "reopen") {
       return css`
         background-color: ${(props) => props.theme.colors.lightBlue};
         border-bottom: 1px solid ${(props) => props.theme.colors.blue};

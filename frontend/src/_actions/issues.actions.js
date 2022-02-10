@@ -24,6 +24,7 @@ export function useIssuesActions() {
     getIssue,
     createIssues,
     updateIssue,
+    updateIssueStatus,
     getAllUsers,
     getAllMilestones,
     getAllLabels,
@@ -71,6 +72,16 @@ export function useIssuesActions() {
   async function updateIssue(issueId, data) {
     fetchWrapper
       .patch(`/api/issues/${issueId}`, data)
+      .then((res) => {
+        console.log(res);
+        getIssue(issueId);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  async function updateIssueStatus(issueId) {
+    fetchWrapper
+      .patch(`/api/issues/${issueId}/status`)
       .then((res) => {
         console.log(res);
         getIssue(issueId);

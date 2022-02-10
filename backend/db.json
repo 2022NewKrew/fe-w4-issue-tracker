@@ -71,7 +71,7 @@
     {
       "id": "5957bcc1-018f-40cf-9328-ace2627bb184",
       "num": 3,
-      "status": "open",
+      "status": "close",
       "writer": "lin1234",
       "timestamp": "Tue, 08 Feb 2022 14:42:48 GMT",
       "title": "이슈이슈~",
@@ -82,7 +82,10 @@
         "35d9532d-d164-478f-ab94-d7a94af2325e"
       ],
       "comments": [
-        "2deb6fdd-975c-4928-b39a-1c215f264e68"
+        "2deb6fdd-975c-4928-b39a-1c215f264e68",
+        "b7582122-6ef3-497e-b479-763bd57e69f9",
+        "f4690ebe-fb99-4fae-8505-e2550a6afd56",
+        "60281baf-6f3d-4cfa-b8fb-0e50635c9be0"
       ],
       "milestone": "ce566239-bb91-4fcd-856f-1237fe3e8e14"
     },
@@ -837,6 +840,27 @@
       "author": "user1",
       "timestamp": "Thu, 10 Feb 2022 04:01:35 GMT",
       "content": "comment222"
+    },
+    {
+      "id": "b7582122-6ef3-497e-b479-763bd57e69f9",
+      "status": "closed",
+      "author": "user1",
+      "timestamp": "Thu, 10 Feb 2022 04:20:00 GMT",
+      "content": "이슈가 닫혔습니다."
+    },
+    {
+      "id": "f4690ebe-fb99-4fae-8505-e2550a6afd56",
+      "status": "reopen",
+      "author": "user1",
+      "timestamp": "Thu, 10 Feb 2022 04:20:06 GMT",
+      "content": "이슈가 다시 열렸습니다."
+    },
+    {
+      "id": "60281baf-6f3d-4cfa-b8fb-0e50635c9be0",
+      "status": "closed",
+      "author": "user1",
+      "timestamp": "Thu, 10 Feb 2022 04:21:04 GMT",
+      "content": "이슈가 닫혔습니다."
     }
   ]
 }

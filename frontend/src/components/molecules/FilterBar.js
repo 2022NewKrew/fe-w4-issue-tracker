@@ -111,13 +111,14 @@ export function FilterBar({ setShowPanel, showPanel, value }) {
     setPlaceholderText("is:issue is:open");
   }
 
-  function handleFilterClick() {
+  function handleFilterClick(e) {
+    e.preventDefault();
     setShowPanel(!showPanel);
   }
 
   return (
     <Container isFocus={isFocus}>
-      <Button isFocus={isFocus} onClick={handleFilterClick()}>
+      <Button isFocus={isFocus} onClick={handleFilterClick}>
         <Text>필터</Text>
         <Down></Down>
       </Button>

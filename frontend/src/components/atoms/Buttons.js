@@ -87,6 +87,9 @@ export const SecondaryButton = styled.button`
   padding: 0 24px;
   cursor: pointer;
 
+  display: flex;
+  align-items: center;
+
   font-weight: 700;
 
   border: 2px solid ${(props) => props.theme.colors.blue};

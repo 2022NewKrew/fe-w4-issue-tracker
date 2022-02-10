@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-import { LoginContainer } from "@components/templates/loginContainer";
+import { LoginContainer } from "@components/templates/LoginContainer";
 import { ReactComponent as Logo } from "@assets/icons/logo.svg";
-import { Button, SmallTextButton } from "@components/atoms/buttons";
-import { TextInput } from "@components/atoms/textInputs";
-import { SmallLink } from "@components/atoms/link";
+import { Button, SmallTextButton } from "@components/atoms/Buttons";
+import { TextInput } from "@components/atoms/TextInputs";
+import { SmallLink } from "@components/atoms/Link";
 
-import { firebaseAuth, githubProvider } from "../firebase";
-import axios from "axios";
+// import { firebaseAuth, githubProvider } from "../firebase";
 
 import { useRecoilState } from "recoil";
 import { userState } from "../_state/users";
@@ -19,7 +18,7 @@ import { useCookies } from "react-cookie";
 export default function Login() {
   const userActions = useUserActions();
 
-  const provider = githubProvider;
+  // const provider = githubProvider;
   const navigate = useNavigate();
 
   const [user, setUser] = useRecoilState(userState);

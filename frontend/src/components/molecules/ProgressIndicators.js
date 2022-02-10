@@ -59,7 +59,7 @@ export function ProgressIndicator({ openIssues, closedIssues, type }) {
 
   return (
     <>
-      <ProgressBar value={value} max='100' />
+      <ProgressBar value={progressPercentage} max='100' />
       {showText()}
     </>
   );

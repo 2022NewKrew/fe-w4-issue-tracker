@@ -1,8 +1,6 @@
 import { useRecoilState } from "recoil";
 import { authState } from "../_state";
 
-import axios from "axios";
-
 export { useFetchWrapper };
 
 function useFetchWrapper() {
@@ -12,6 +10,7 @@ function useFetchWrapper() {
     get: request("GET"),
     post: request("POST"),
     put: request("PUT"),
+    patch: request("PATCH"),
     delete: request("DELETE"),
   };
 
@@ -26,7 +25,6 @@ function useFetchWrapper() {
         requestOptions.body = JSON.stringify(body);
       }
       return fetch(url, requestOptions).then(handleResponse);
-      // return axios(url, requestOptions).then(handleResponse);
     };
   }
 
@@ -55,7 +53,7 @@ function useFetchWrapper() {
           history.push("/login");
         }
 
-        const error = (data && data.message) || response.statusText;
+        const error = (data && data.message) || response;
         alert(error);
         return Promise.reject(error);
       }

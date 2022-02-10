@@ -1,4 +1,10 @@
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import styled, { css } from "styled-components";
 import { ReactComponent as Paperclip } from "@assets/icons/paperclip.svg";
 
@@ -20,6 +26,7 @@ const TextInputContainer = styled.div`
 
 const TextAreaInput = styled.textarea`
   width: 100%;
+  height: 80%;
 
   background: none;
   border: none;
@@ -120,13 +127,14 @@ const InputLengthText = styled.div`
   font-size: ${(props) => props.theme.fontSizes.extraSmall};
 `;
 
-export default function TextArea({
+function TextArea({
   placeholder,
   isDisabled,
   onAttachClickListener,
   value,
   setValue,
   height,
+  initialValue,
 }) {
   const [active, setActive] = useState(false);
   const [disable, setDisable] = useState(false);
@@ -173,6 +181,9 @@ export default function TextArea({
 
   // focus인 상태에서 input 값이 바뀐지 2초가 지나면 몇자를 입력했는지 보여주도록 함
   function inputLengthText() {
+    useEffect(() => {
+      setValue(initialValue);
+    }, []);
     if (isFocus && isPassedTwoSecondsAfterTyping) {
       return (
         <InputLengthText>{`띄어쓰기 포함 ${value.length}자`}</InputLengthText>
@@ -205,3 +216,5 @@ export default function TextArea({
     </TextInputContainer>
   );
 }
+
+export default React.memo(TextArea);

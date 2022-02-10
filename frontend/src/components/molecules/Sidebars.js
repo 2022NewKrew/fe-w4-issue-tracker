@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
-import { SmallLink } from "@components/atoms/link";
+import { SmallLink } from "@components/atoms/Link";
 import { SmallText } from "@components/atoms/Text";
 import { DropdownPanel } from "@components/molecules/DropdownPanel";
 import { SmallLabel } from "@components/molecules/Labels";
@@ -9,9 +9,15 @@ import { ProgressIndicator } from "@components/molecules/ProgressIndicators";
 import { ReactComponent as Plus } from "@assets/icons/plus.svg";
 import { ReactComponent as UserImageLarge } from "@assets/icons/userimageLarge.svg";
 
+import { useIssuesActions } from "../../_actions/issues.actions";
+
+import { usersList, labelList, milestoneList } from "../../_state";
+import { useRecoilValue, useRecoilState } from "recoil";
+
 const SidebarContainer = styled.div`
   width: 308px;
   height: fit-content;
+  box-sizing: border-box;
 
   border: 1px solid ${(props) => props.theme.greyscale.line};
   border-radius: 16px;
@@ -60,7 +66,7 @@ const Header = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  width: 100%:
+  box-sizing: border-box;
 
   svg {
     cursor: pointer;
@@ -87,7 +93,7 @@ const ListWrapper = styled.div`
 `;
 
 const MilestoneWrapper = styled.div`
-  padding: 0 32px;
+  padding: 0 32px 32px 32px;
   margin-top: 4px;
 
   progress {
@@ -103,15 +109,32 @@ export function Sidebar({
   selectedMilestone,
   setSelectedMilestone,
 }) {
-  const assigneeMenus = ["Lin", "Min"];
-  const labelMenus = ["documentation", "review"];
-  const milestoneMenus = ["Milestone 1", "Milestone 2"];
+  // const assigneeMenus = useRecoilValue(usersList);
+  const [assigneeMenus, setAssigneeMenus] = useRecoilState(usersList);
+  // const labelMenus = useRecoilValue(labelList);
+  const [labelMenus, setLabelMenus] = useRecoilState(labelList);
+  const [milestoneMenus, setMilestoneMenus] = useRecoilState(milestoneList);
+  // const milestoneMenus = useRecoilValue(milestoneList);
 
   const [showPanel, setShowPanel] = useState({
     assignee: false,
     label: false,
     milestone: false,
   });
+
+  const issuesActions = useIssuesActions();
+
+  useEffect(() => {
+    issuesActions.getAllUsers();
+    issuesActions.getAllLabels();
+    issuesActions.getAllMilestones();
+
+    return () => {
+      setAssigneeMenus([]);
+      setLabelMenus([]);
+      setMilestoneMenus([]);
+    };
+  }, []);
 
   function handlePanel(name) {
     setShowPanel({
@@ -125,8 +148,8 @@ export function Sidebar({
       selectedAssignee &&
       selectedAssignee.map((assignee) => {
         return (
-          <ListWrapper key={assignee}>
-            <UserImageLarge /> <SmallText>{assignee}</SmallText>
+          <ListWrapper key={assignee.id}>
+            <UserImageLarge /> <SmallText>{assignee.id}</SmallText>
           </ListWrapper>
         );
       })
@@ -138,8 +161,12 @@ export function Sidebar({
       selectedLabel &&
       selectedLabel.map((label) => {
         return (
-          <ListWrapper key={label}>
-            <SmallLabel type='light' text={label} />
+          <ListWrapper key={label.id}>
+            <SmallLabel
+              color={label.backgroundColor}
+              type={label.color}
+              text={label.name}
+            />
           </ListWrapper>
         );
       })
@@ -151,9 +178,11 @@ export function Sidebar({
       selectedMilestone &&
       selectedMilestone.map((milestone) => {
         return (
-          <MilestoneWrapper key={milestone}>
+          <MilestoneWrapper key={milestone.id}>
             <ProgressIndicator openIssues={5} closedIssues={12} />
-            <SmallText color='label'>{milestone}</SmallText>
+            <SmallText color={milestone.background}>
+              {milestone.title}
+            </SmallText>
           </MilestoneWrapper>
         );
       })

@@ -14,7 +14,9 @@ ReactDOM.render(
     <ThemeProvider theme={theme}>
       <CookiesProvider>
         <RecoilRoot>
-          <App />
+          <React.Suspense fallback={<div>Loading...</div>}>
+            <App />
+          </React.Suspense>
         </RecoilRoot>
       </CookiesProvider>
     </ThemeProvider>

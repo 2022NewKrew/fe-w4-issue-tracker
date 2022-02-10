@@ -11,7 +11,7 @@ import {
   closedIssuesState,
   activeIssueTabState,
 } from "../../_state";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useRecoilState } from "recoil";
 
 const Container = styled.div`
   margin: 0 80px;
@@ -34,7 +34,7 @@ const Container = styled.div`
 `;
 
 export default function IssueTableContainer() {
-  const issues = useRecoilValue(issuesState);
+  const [issues, setIssues] = useRecoilState(issuesState);
   const openIssues = useRecoilValue(openIssuesState);
   const closedIssues = useRecoilValue(closedIssuesState);
   const activeIssueTab = useRecoilValue(activeIssueTabState);
@@ -43,6 +43,7 @@ export default function IssueTableContainer() {
 
   useEffect(() => {
     issuesActions.getIssues();
+    return () => setIssues();
   }, []);
 
   const [selectedIssueIds, setSelectedIssueIds] = useState([]);
@@ -55,12 +56,11 @@ export default function IssueTableContainer() {
   function issueList() {
     // 열린이슈/닫힌이슈 탭에 따라 보여질 이슈 선택
     const currentIssues = activeIssueTab === "open" ? openIssues : closedIssues;
-
     const issueList =
       currentIssues &&
       currentIssues.map((issue) => (
         <IssueTableCell
-          key={issue.num}
+          key={issue.id}
           selected={checkSelected(issue.id)}
           selectedIssueIds={selectedIssueIds}
           setSelectedIssueIds={setSelectedIssueIds}

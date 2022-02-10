@@ -1,12 +1,16 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import moment from "moment";
+import "moment/locale/ko";
 
 import { ReactComponent as CheckboxInitial } from "@assets/icons/checkboxInitial.svg";
 import { ReactComponent as CheckboxActive } from "@assets/icons/checkboxActive.svg";
 import { ReactComponent as AlertCircle } from "@assets/icons/alertCircle.svg";
 import { ReactComponent as Milestone } from "@assets/icons/milestone.svg";
 import { ReactComponent as UserimageSmall } from "@assets/icons/userimageSmall.svg";
-import { MediumLink } from "@components/atoms/link";
+
+import { MediumLink } from "@components/atoms/Link";
 import { SmallLabel } from "@components/molecules/Labels";
 import { SmallText } from "@components/atoms/Text";
 
@@ -49,6 +53,10 @@ const IssueTitleWrapper = styled.div`
   p + div {
     margin-left: 8px;
   }
+
+  div + div {
+    margin-left: 8px;
+  }
 `;
 
 const IssueInfoWrapper = styled.div`
@@ -82,7 +90,9 @@ export default function IssueTableCell(props) {
     writer,
   } = props.info;
   const color = "#004DE3";
-  const formattedDate = new Date(timestamp).toLocaleDateString();
+  const formattedDate = moment(
+    new Date(timestamp).toLocaleDateString()
+  ).fromNow();
 
   function handleCheckboxClick() {
     if (props.selectedIssueIds.includes(id)) {
@@ -101,39 +111,51 @@ export default function IssueTableCell(props) {
     }
   }
 
-  return (
-    <Container>
-      <Wrapper>
-        {checkbox()}
-        <ContentWrapper>
-          <IssueTitleWrapper>
-            <AlertCircle color='#007AFF' />
-            <MediumLink>{title}</MediumLink>
-            {labels.length >= 1 && (
-              <SmallLabel
-                type='light'
-                color={color}
-                text={labels[0].description}
-              />
-            )}
-          </IssueTitleWrapper>
-          <IssueInfoWrapper>
-            <SmallText color='label'>#{num}</SmallText>
-            <SmallText color='label'>
-              이 이슈가 {formattedDate}에, {writer.name}님에 의해
-              작성되었습니다.
-            </SmallText>
-            {milestone && (
-              <SmallText color='label'>
-                <Milestone />
-                {milestone.title}
-              </SmallText>
-            )}
-          </IssueInfoWrapper>
-        </ContentWrapper>
-      </Wrapper>
+  function showLabels() {
+    if (labels.length >= 1) {
+      return labels.map((label) => (
+        <SmallLabel
+          type={label.color}
+          color={label.backgroundColor}
+          text={label.name}
+          key={label.name}
+        />
+      ));
+    }
+    return null;
+  }
 
-      <UserimageSmall />
-    </Container>
+  const url = `issues/${id}`;
+
+  return (
+    <Link to={url}>
+      <Container>
+        <Wrapper>
+          {checkbox()}
+          <ContentWrapper>
+            <IssueTitleWrapper>
+              <AlertCircle color='#007AFF' />
+              <MediumLink>{title}</MediumLink>
+              {showLabels()}
+            </IssueTitleWrapper>
+            <IssueInfoWrapper>
+              <SmallText color='label'>#{num}</SmallText>
+              <SmallText color='label'>
+                이 이슈가 {formattedDate}에 {writer.name}님에 의해
+                작성되었습니다.
+              </SmallText>
+              {milestone && (
+                <SmallText color='label'>
+                  <Milestone />
+                  {milestone.title}
+                </SmallText>
+              )}
+            </IssueInfoWrapper>
+          </ContentWrapper>
+        </Wrapper>
+
+        <UserimageSmall />
+      </Container>
+    </Link>
   );
 }

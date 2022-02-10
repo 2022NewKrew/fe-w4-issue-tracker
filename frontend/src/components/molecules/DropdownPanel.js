@@ -82,7 +82,13 @@ export function DropdownPanel(props) {
 
   function showSelectionIcon(type, menu) {
     if (type !== "modify") {
-      if (selectedMenus && selectedMenus.includes(menu)) {
+      if (
+        selectedMenus &&
+        selectedMenus.filter(
+          (selectedMenu) =>
+            JSON.stringify(selectedMenu) === JSON.stringify(menu)
+        ).length >= 1
+      ) {
         return <CheckonCircle />;
       } else {
         return <CheckoffCircle />;
@@ -100,10 +106,10 @@ export function DropdownPanel(props) {
         </Header>
         {props.menus.map((menu, id) => {
           return (
-            <ItemContainer key={id} onClick={() => handleClick(id, menu)}>
+            <ItemContainer key={menu.id} onClick={() => handleClick(id, menu)}>
               <ImageTextContainer>
                 {type === "image" ? <UserimageSmall /> : null}
-                <SmallText>{menu}</SmallText>
+                <SmallText>{menu.name || menu.title}</SmallText>
               </ImageTextContainer>
               {showSelectionIcon(type, menu)}
             </ItemContainer>

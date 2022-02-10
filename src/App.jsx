@@ -1,11 +1,13 @@
+import {lazy, Suspense} from 'react';
 import {
   Route,
-  BrowserRouter as Router,
+  HashRouter as Router,
   Routes
 } from 'react-router-dom';
-import IssueList from './component/IssueList';
 import {RecoilRoot} from 'recoil';
-import {Suspense} from 'react';
+
+const IssueList=lazy(()=>import('./component/IssueList'));
+const IssueDetail=lazy(()=>import('./component/IssueDetail'));
 
 export default function App(){
   return (
@@ -14,7 +16,7 @@ export default function App(){
         <Router>
           <Routes>
             <Route path='/' element={<IssueList />}/>
-            <Route path='*' element={null}/>
+            <Route path='/issue/:issueID' element={<IssueDetail />}/>
           </Routes>
         </Router>
       </Suspense>

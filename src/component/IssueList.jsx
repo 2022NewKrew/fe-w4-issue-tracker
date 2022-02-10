@@ -80,9 +80,11 @@ export default function IssueList(){
   }, [isIndexChecked, toggleCheck, showingIssues]);
 
   const fetchIssues=useCallback(()=>{
-    getFromURL(issueListURL, {
-      filter: issueFilter
-    }).then(newIssueArray=>{
+    getFromURL(issueListURL,
+      issueFilter.length ? {
+        filter: issueFilter
+      }
+        : undefined).then(newIssueArray=>{
       setIssueArray(newIssueArray);
     }).catch(()=>{
       alert('잘못된 필터 값입니다. 다시 시도해주세요!');
@@ -114,7 +116,7 @@ export default function IssueList(){
             <Tap icon={<TagIcon />} title={`레이블 (${numLabels})`}></Tap>
             <Tap icon={<MilestoneIcon />} title={`마일스톤 (${numMilestones})`}></Tap>
           </ul>
-          <ButtonMedium title='+ 이슈 작성' onClick={()=>console.log('Add Issue')}/>
+          <ButtonMedium title='+ 이슈 작성' onClick={()=>alert('Not yet implemented!')}/>
         </div>
       </div>
 

@@ -1,16 +1,18 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { FilterBar } from "@/components/atoms";
-import { IssueFilterOption } from "@/components/molecules";
+import { IssueFilterOption, IssueFilterBar } from "@/components/molecules";
 import { IStyle } from "@/constants/type";
 
 interface IIssueHeaderProps {
   styles?: IStyle;
 }
 const IssueHeader: React.FC<IIssueHeaderProps> = ({ styles }) => {
+  const IssueHeaderWrapProp = {
+    ...styles,
+  };
   return (
-    <IssueHeaderWrap {...styles}>
-      <FilterBar />
+    <IssueHeaderWrap {...IssueHeaderWrapProp}>
+      <IssueFilterBar />
       <IssueFilterOption />
     </IssueHeaderWrap>
   );

@@ -1,14 +1,62 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import { Indicator, Label } from "@/components/atoms";
 import { IStyle } from "@/constants/type";
+import { useIssueStore } from "@/stores/issue";
+import { DropDown } from "@/components/molecules";
+import { useLabelStore } from "@/stores/label";
+import { useMilestoneStore } from "@/stores/milestone";
 
 interface IIssueListTitle {
   styles?: IStyle;
   open?: number;
   close?: number;
+  visible?: boolean;
 }
-const IssueListTitle: React.FC<IIssueListTitle> = ({ styles, open = 2, close = 0 }) => {
+const DropDownGroup: React.FC = () => {
+  const { labelList } = useLabelStore();
+  const { milestoneList } = useMilestoneStore();
+
+  const DropDownProp = {
+    styles: {
+      right: "0px",
+      width: "",
+    },
+  };
+  useEffect(() => {
+    console.log(milestoneList);
+  }, [milestoneList]);
+  return (
+    <>
+      <DropDown {...DropDownProp} optionList={[]}>
+        담당자
+      </DropDown>
+      <DropDown
+        {...DropDownProp}
+        optionList={labelList.reduce((acc: string[], cur: { name: string }) => {
+          acc.push(cur.name);
+          return acc;
+        }, [])}
+      >
+        레이블
+      </DropDown>
+      <DropDown
+        {...DropDownProp}
+        optionList={milestoneList.reduce((acc: string[], cur: { title: string }) => {
+          acc.push(cur.title);
+          return acc;
+        }, [])}
+      >
+        마일스톤
+      </DropDown>
+      <DropDown {...DropDownProp} optionList={[]}>
+        작성자
+      </DropDown>
+    </>
+  );
+};
+const IssueListTitle: React.FC<IIssueListTitle> = ({ styles }) => {
+  const { issueFilter, setIssueFilter, openIssueCounts, closeIssueCounts } = useIssueStore();
   const Props = {
     IssueTitleWrapProps: {
       ...styles,
@@ -19,6 +67,9 @@ const IssueListTitle: React.FC<IIssueListTitle> = ({ styles, open = 2, close = 0
         color: "#14142B",
         fontSize: "16px",
       },
+      onClick: () => {
+        setIssueFilter({ ...issueFilter, status: "open" });
+      },
     },
     CloseLabelProps: {
       styles: {
@@ -27,6 +78,9 @@ const IssueListTitle: React.FC<IIssueListTitle> = ({ styles, open = 2, close = 0
         fontSize: "16px",
         width: "120px",
         margin: "0px 0px 0px 4px",
+      },
+      onClick: () => {
+        setIssueFilter({ ...issueFilter, status: "close" });
       },
     },
   };
@@ -38,17 +92,14 @@ const IssueListTitle: React.FC<IIssueListTitle> = ({ styles, open = 2, close = 0
       </IssueCheckInput>
       <IssueTitleMeta>
         <Label type="large-open" {...Props.OpenLabelProps}>
-          ({open})
+          ({openIssueCounts})
         </Label>
         <Label type="large-close" {...Props.CloseLabelProps}>
-          ({close})
+          ({closeIssueCounts})
         </Label>
       </IssueTitleMeta>
       <IssueTitleFilter>
-        <Indicator>담당자</Indicator>
-        <Indicator>레이블</Indicator>
-        <Indicator>마일스톤</Indicator>
-        <Indicator>작성자</Indicator>
+        <DropDownGroup />
       </IssueTitleFilter>
     </IssueTitleWrap>
   );

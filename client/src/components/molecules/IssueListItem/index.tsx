@@ -6,23 +6,36 @@ import { ExamIcons } from "@/components/atoms/Icons";
 import { IStyle } from "@/constants/type";
 
 interface IIssueListItem {
+  key?: string;
   styles?: IStyle;
-  issueTitle?: string;
-  issueNumber?: string;
-  issueInfo?: string;
-  issueLabel?: string;
+  assignees?: any[];
+  comments?: any[];
+  labels?: any;
+  milestone?: any;
+  status?: string;
+  num?: number;
+  timestamp?: string;
+  title?: string;
+  writer?: any;
   onClick?: any;
 }
 const IssueListItem: React.FC<IIssueListItem> = ({
   styles,
-  issueTitle = "이슈 제목",
-  issueNumber = "#1",
-  issueInfo = "이 이슈가 8분 전, Oni님에 의해 작성되었습니다.",
-  issueLabel = "레이블 이름",
+  assignees,
+  comments,
+  labels,
+  milestone,
+  status,
+  num,
+  timestamp,
+  title,
+  writer,
   onClick,
+  ...props
 }) => {
   const Props = {
     IssueItemWrapProps: {
+      value: num,
       ...styles,
     },
     OpenLabelProps: {
@@ -47,9 +60,9 @@ const IssueListItem: React.FC<IIssueListItem> = ({
     },
     IssueLabelProps: {
       styles: {
-        background: styles?.background,
+        background: labels[0]?.backgroundColor ?? "",
         margin: "0px 0px 0px 10px",
-        color: styles?.color,
+        color: labels[0]?.color ?? styles?.color,
       },
     },
   };
@@ -57,22 +70,22 @@ const IssueListItem: React.FC<IIssueListItem> = ({
   return (
     <IssueItemWrap {...Props.IssueItemWrapProps}>
       <IssueCheckInput>
-        <input type="checkbox" name="xxx" value="yyy" />
+        <input type="checkbox" name="xxx" value={num} />
       </IssueCheckInput>
       <IssueItemMeta>
         <LabelWrap>
           <Label type="large" {...Props.OpenLabelProps}>
             <Text type="medium" {...Props.MediumTextProps}>
-              {issueTitle}
+              {title}
             </Text>
           </Label>
           <Label type="small-light" {...Props.IssueLabelProps}>
-            {issueLabel}
+            {labels[0]?.name}
           </Label>
         </LabelWrap>
         <IssueInfoWrap>
-          <Text type="issue">{issueNumber}</Text>
-          <Text type="issue">{issueInfo}</Text>
+          <Text type="issue">#{num}</Text>
+          <Text type="issue">{timestamp}</Text>
         </IssueInfoWrap>
       </IssueItemMeta>
       <IssueItemFilter>

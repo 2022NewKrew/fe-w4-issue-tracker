@@ -6,16 +6,32 @@ import { Issue } from "@types";
 
 import withSuspense from "@templetes/withSuspense";
 import { useIssueStore } from "@stores/issue";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import Atoms from "@UI/Atoms";
 
 const IssueTable = () => {
-  const { issueList, filter } = useIssueStore();
+  const {
+    issueList,
+    filter,
+    resetFilter,
+    selectedIssue,
+    selectAll,
+    setSelectAll,
+  } = useIssueStore();
 
   const filtedIssueList = useMemo(
     () => issueList.filter(({ status }) => status === filter.status),
     [issueList, filter]
   );
+
+  console.log(filter, selectAll, selectedIssue);
+
+  useEffect(() => {
+    return () => {
+      setSelectAll(false);
+      resetFilter();
+    };
+  }, []);
 
   return (
     <Wrapper className="IssueListTable">

@@ -58,6 +58,7 @@ interface SProps {
 const SInputWrapper = styled(Atoms.InputWrapper)<SProps>`
   ${({ size }) => sizeList[size]}
   & > input {
+    ${({ size }) => sizeList[size]}
     width: 100%;
     height: 100%;
     ${({ theme }) => theme.FontSize.small};

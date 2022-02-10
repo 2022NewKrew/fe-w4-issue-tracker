@@ -7,6 +7,7 @@ import {
 import { useLabelFormStore } from "@stores/label";
 import { IssueStatus } from "@types";
 import Atoms from "@UI/Atoms";
+import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const EditButton = ({ onClick }: { onClick?: any }) => (
@@ -159,6 +160,13 @@ export const IssueDetailButton = () => {
     setIssueTitleModify(false);
   };
 
+  const changeIssue = useCallback((status: IssueStatus) => {
+    modifyIssueStatus({
+      issueId: issueFormMode,
+      status,
+    });
+  }, []);
+
   return issueTitleModify ? (
     <Atoms.ButtonGroup gap={8}>
       <Atoms.Button
@@ -193,12 +201,7 @@ export const IssueDetailButton = () => {
           shape="secondary"
           icon="close"
           text="이슈 닫기"
-          onClick={() =>
-            modifyIssueStatus({
-              issueId: issueFormMode,
-              status: "close",
-            })
-          }
+          onClick={() => changeIssue("close")}
         />
       ) : (
         <Atoms.Button
@@ -206,12 +209,7 @@ export const IssueDetailButton = () => {
           shape="secondary"
           icon="open"
           text="다시 열기"
-          onClick={() =>
-            modifyIssueStatus({
-              issueId: issueFormMode,
-              status: "open",
-            })
-          }
+          onClick={() => changeIssue("open")}
         />
       )}
     </Atoms.ButtonGroup>
@@ -286,8 +284,8 @@ export const IDLoginButton = ({ disabled }: { disabled: boolean }) => (
   <Atoms.Button
     size="large"
     disabled={disabled}
-    link="/issue"
     text="아이디로 로그인"
+    type="submit"
   />
 );
 

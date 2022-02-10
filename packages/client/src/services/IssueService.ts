@@ -1,5 +1,5 @@
 import { LabelService, MilestoneService } from "@services";
-import { Issue, IssueForm, IssueJSON } from "@types";
+import { Issue, IssueForm, IssueJSON, IssueStatus } from "@types";
 import _axios from "@utils/axios";
 import { v4 as uuidv4 } from "uuid";
 import CommentService from "./CommentService";
@@ -73,13 +73,21 @@ class IssueService {
     return data;
   }
 
-  static async patchChangeStatus(issueId: string, status: "open" | "close") {
+  static async patchChangeStatus({
+    issueId,
+    status,
+    author,
+  }: {
+    issueId: string;
+    status: IssueStatus;
+    author: string;
+  }) {
     const [{ data }, _] = await Promise.all([
       _axios.patch<Issue>(`${baseUrl}/${issueId}`, {
         status,
       }),
       CommentService.post({
-        author: "user1",
+        author,
         issueId,
         commentForm: {
           content:

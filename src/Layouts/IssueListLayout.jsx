@@ -43,10 +43,11 @@ const LeftMarginSpan = styled.span`
 
 const IssueListLayout = (props) => {
   const [filterOption, setFilterOption] = useState({
-    userId: undefined,
     state: STATE_TYPE.OPEN,
     authorId: undefined,
     labelId: undefined,
+    milestoneId: undefined,
+    assigneeId: undefined,
   })
 
   const [issues, setIssues] = useState([])
@@ -86,7 +87,7 @@ const IssueListLayout = (props) => {
           </Button>
         </HorizontalDiv>
       </Header>
-      <IssueList issues={issues} />
+      <IssueList issues={issues} setFilterOption={setFilterOption} />
     </Container>
   )
 }

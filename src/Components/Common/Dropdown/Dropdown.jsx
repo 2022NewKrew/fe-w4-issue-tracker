@@ -24,6 +24,7 @@ const DropdownContainer = styled.div`
  * @param {string} type
  * @param {string} indicatorText
  * @param {object[]} btnUserStyle
+ * @param {function} onChange
  * @return {JSX.Element}
  * @constructor
  */
@@ -33,6 +34,7 @@ const Dropdown = ({
   type,
   indicatorText,
   btnUserStyle,
+  onChange,
 }) => {
   const dropdownRef = useRef()
 
@@ -65,6 +67,7 @@ const Dropdown = ({
         title={panelTitle}
         type={type}
         isShown={isPanelShown}
+        onChange={onChange}
       />
     </DropdownContainer>
   )
@@ -76,6 +79,7 @@ Dropdown.propTypes = {
   panelTitle: PropTypes.string,
   btnUserStyle: PropTypes.array,
   type: PropTypes.oneOf(Object.values(DROPDOWN_ITEM_TYPE)).isRequired,
+  onChange: PropTypes.func,
 }
 
 export default Dropdown

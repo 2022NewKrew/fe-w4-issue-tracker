@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { readLabel, readMilestone, readUser } from '../../Services/DB/firebase'
@@ -55,7 +55,7 @@ const ItemWrapper = styled.li`
   }
 `
 
-const IssueList = ({ issues }) => {
+const IssueList = ({ issues, setFilterOption }) => {
   const [labels, setLabels] = useState([])
   const [milestones, setMilestones] = useState([])
   const [users, setUsers] = useState([])
@@ -93,6 +93,62 @@ const IssueList = ({ issues }) => {
     })
   }, [milestones])
 
+  const onAssigneeDropdownChange = useCallback(
+    (selectedIdx) => {
+      if (selectedIdx >= 0) {
+        setFilterOption((prev) => {
+          return {
+            ...prev,
+            assigneeId: users[selectedIdx].id,
+          }
+        })
+      }
+    },
+    [setFilterOption, users]
+  )
+
+  const onLabelDropdownChange = useCallback(
+    (selectedIdx) => {
+      if (selectedIdx >= 0) {
+        setFilterOption((prev) => {
+          return {
+            ...prev,
+            labelId: labels[selectedIdx].id,
+          }
+        })
+      }
+    },
+    [setFilterOption, labels]
+  )
+
+  const onMilestoneDropdownChange = useCallback(
+    (selectedIdx) => {
+      if (selectedIdx >= 0) {
+        setFilterOption((prev) => {
+          return {
+            ...prev,
+            milestoneId: milestones[selectedIdx].id,
+          }
+        })
+      }
+    },
+    [setFilterOption, milestones]
+  )
+
+  const onAuthorDropdownChange = useCallback(
+    (selectedIdx) => {
+      if (selectedIdx >= 0) {
+        setFilterOption((prev) => {
+          return {
+            ...prev,
+            authorId: users[selectedIdx].id,
+          }
+        })
+      }
+    },
+    [setFilterOption, users]
+  )
+
   return (
     <Container>
       <Header>
@@ -106,10 +162,8 @@ const IssueList = ({ issues }) => {
               indicatorText="담당자"
               panelTitle="담당자"
               type={DROPDOWN_ITEM_TYPE.RADIO_BTN}
-              itemInfoList={[
-                { text: '담당자가 없는 이슈' },
-                ...userDropdownList,
-              ]}
+              itemInfoList={userDropdownList}
+              onChange={onAssigneeDropdownChange}
             />
           </SmallDropdownWrapper>
           <SmallDropdownWrapper>
@@ -117,10 +171,8 @@ const IssueList = ({ issues }) => {
               indicatorText="레이블"
               panelTitle="레이블"
               type={DROPDOWN_ITEM_TYPE.RADIO_BTN}
-              itemInfoList={[
-                { text: '레이블이 없는 이슈' },
-                ...labelDropdownList,
-              ]}
+              itemInfoList={labelDropdownList}
+              onChange={onLabelDropdownChange}
             />
           </SmallDropdownWrapper>
           <LargeDropdownWrapper>
@@ -128,10 +180,8 @@ const IssueList = ({ issues }) => {
               indicatorText="마일스톤"
               panelTitle="마일스톤"
               type={DROPDOWN_ITEM_TYPE.RADIO_BTN}
-              itemInfoList={[
-                { text: '마일스톤이 없는 이슈' },
-                ...milestoneDropdownList,
-              ]}
+              itemInfoList={milestoneDropdownList}
+              onChange={onMilestoneDropdownChange}
             />
           </LargeDropdownWrapper>
           <SmallDropdownWrapper>
@@ -140,6 +190,7 @@ const IssueList = ({ issues }) => {
               panelTitle="작성자"
               type={DROPDOWN_ITEM_TYPE.RADIO_BTN}
               itemInfoList={userDropdownList}
+              onChange={onAuthorDropdownChange}
             />
           </SmallDropdownWrapper>
         </HorizontalDiv>
@@ -157,6 +208,7 @@ const IssueList = ({ issues }) => {
 
 IssueList.propTypes = {
   issues: PropTypes.array.isRequired,
+  setFilterOption: PropTypes.func.isRequired,
 }
 
 export default IssueList

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -45,11 +45,18 @@ const List = styled.ul`
  * @param {string} type
  * @param {string} title
  * @param {boolean} isShown
+ * @param {function} onChange
  * @return {JSX.Element}
  * @constructor
  */
-const DropdownPanel = ({ itemInfoList, type, title, isShown }) => {
+const DropdownPanel = ({ itemInfoList, type, title, isShown, onChange }) => {
   const [selectedIdx, setSelectedIdx] = useState(-1)
+
+  useEffect(() => {
+    if (onChange) {
+      onChange(selectedIdx)
+    }
+  }, [selectedIdx])
 
   return (
     <ReferencePoint>
@@ -81,6 +88,7 @@ DropdownPanel.propTypes = {
   itemInfoList: PropTypes.arrayOf(PropTypes.object).isRequired,
   title: PropTypes.string.isRequired,
   isShown: PropTypes.bool,
+  onChange: PropTypes.func,
 }
 
 export default DropdownPanel

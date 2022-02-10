@@ -1,5 +1,4 @@
-import { Taps } from "@UI/Molecules";
-import Atoms from "@UI/Atoms";
+import { CustomButton, Taps } from "@UI/Molecules";
 
 import styled from "@emotion/styled";
 
@@ -7,12 +6,7 @@ const LinkTap = () => {
   return (
     <Wrapper className="LinkTap">
       <Taps />
-      <Atoms.Button
-        size="small"
-        link="/issue/new"
-        icon="plus_white"
-        text="이슈 작성"
-      />
+      <CustomButton.AddIssueButton />
     </Wrapper>
   );
 };

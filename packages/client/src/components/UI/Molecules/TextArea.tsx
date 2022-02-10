@@ -6,9 +6,16 @@ import { v4 } from "uuid";
 interface Props extends SProps {
   value: string;
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  autoFocus?: boolean;
 }
 
-const TextArea = ({ value, onChange, height, width }: Props) => {
+const TextArea = ({
+  value,
+  onChange,
+  height,
+  width,
+  autoFocus = false,
+}: Props) => {
   const uuid = v4();
   return (
     <SInputWrapper width={width} height={height} className="TextArea">
@@ -17,6 +24,7 @@ const TextArea = ({ value, onChange, height, width }: Props) => {
         value={value}
         onChange={onChange}
         placeholder=" "
+        autoFocus={autoFocus}
       ></textarea>
       <Atoms.Placeholder
         id={uuid}

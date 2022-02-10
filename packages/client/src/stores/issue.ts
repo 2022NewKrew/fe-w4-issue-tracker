@@ -132,22 +132,22 @@ const issueFormState = atom<IssueForm>({
   },
 });
 
-const IssueFormModeState = atom<FormMode>({
-  key: "IssueFormModeState",
+export const issueFormModeState = atom<FormMode>({
+  key: "issueFormModeState",
   default: "close",
 });
 
-const IssueTitleModifyState = atom<boolean>({
-  key: "IssueTitleModifyState",
+const issueTitleModifyState = atom<boolean>({
+  key: "issueTitleModifyState",
   default: false,
 });
 
 export const useIssueFormStore = () => {
   const [issueForm, setIssueForm] = useRecoilState(issueFormState);
-  const [issueFormMode, setIssueFormMode] = useRecoilState(IssueFormModeState);
+  const [issueFormMode, setIssueFormMode] = useRecoilState(issueFormModeState);
   const resetIssueForm = useResetRecoilState(issueFormState);
   const [issueTitleModify, setIssueTitleModify] = useRecoilState(
-    IssueTitleModifyState
+    issueTitleModifyState
   );
   return {
     issueForm,
@@ -183,7 +183,7 @@ export const useIssueMutation = () => {
   const resetIssueForm = useResetRecoilState(issueFormState);
   const issueForm = useRecoilValue(issueFormState);
   const setSelectedIssue = useSetRecoilState(selectedIssueState);
-  const setIssueFormMode = useSetRecoilState(IssueFormModeState);
+  const setIssueFormMode = useSetRecoilState(issueFormModeState);
 
   const queryClient = useQueryClient();
   const navigate = useNavigate();

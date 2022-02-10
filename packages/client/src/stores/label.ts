@@ -16,7 +16,7 @@ const labelListState = atom<Label[]>({
   default: [] as Label[],
 });
 
-const labelListCountState = selector({
+const labelListCountState = selector<number>({
   key: "labelListCountState",
   get: ({ get }) => {
     const labelList = get(labelListState);
@@ -35,8 +35,8 @@ export const useLabelStore = () => {
   return { labelList, labelListCount };
 };
 
-const LabelFormState = atom<LabelForm>({
-  key: "LabelFormState",
+const labelFormState = atom<LabelForm>({
+  key: "labelFormState",
   default: {
     name: "",
     description: "",
@@ -47,15 +47,15 @@ const LabelFormState = atom<LabelForm>({
 
 export type FormMode = "add" | "close" | string;
 
-const LabelFormModeState = atom<FormMode>({
-  key: "LabelFormModeState",
+const labelFormModeState = atom<FormMode>({
+  key: "labelFormModeState",
   default: "close",
 });
 
 export const useLabelFormStore = () => {
-  const [labelForm, setLabelForm] = useRecoilState(LabelFormState);
-  const resetLabelForm = useResetRecoilState(LabelFormState);
-  const [labelFormMode, setLabelFormMode] = useRecoilState(LabelFormModeState);
+  const [labelForm, setLabelForm] = useRecoilState(labelFormState);
+  const resetLabelForm = useResetRecoilState(labelFormState);
+  const [labelFormMode, setLabelFormMode] = useRecoilState(labelFormModeState);
   return {
     labelForm,
     setLabelForm,
@@ -75,9 +75,9 @@ export const useLabelFormStore = () => {
 
 export const useLabelMutation = () => {
   const queryClient = useQueryClient();
-  const resetLabelForm = useResetRecoilState(LabelFormState);
-  const labelForm = useRecoilValue(LabelFormState);
-  const [labelFormMode, setLabelFormMode] = useRecoilState(LabelFormModeState);
+  const resetLabelForm = useResetRecoilState(labelFormState);
+  const labelForm = useRecoilValue(labelFormState);
+  const [labelFormMode, setLabelFormMode] = useRecoilState(labelFormModeState);
 
   const onSuccess = useCallback(() => {
     queryClient.invalidateQueries("labelList");

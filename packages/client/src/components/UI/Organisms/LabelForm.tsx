@@ -1,9 +1,5 @@
 import styled from "@emotion/styled";
-import {
-  LabelFormMode,
-  useLabelFormStore,
-  useLabelMutation,
-} from "@stores/label";
+import { FormMode, useLabelFormStore, useLabelMutation } from "@stores/label";
 import Atoms from "@UI/Atoms";
 import {
   ColorCode,
@@ -21,6 +17,7 @@ const LabelForm = ({ mode }: SProps) => {
     setBackgroundColor,
     setTextColor,
     labelFormMode,
+    setLabelFormMode,
   } = useLabelFormStore();
 
   const { addLabel, modifyLabel } = useLabelMutation();
@@ -36,8 +33,10 @@ const LabelForm = ({ mode }: SProps) => {
         modifyLabel();
       }
     },
-    [addLabel, labelFormMode]
+    [labelFormMode]
   );
+
+  const onCancel = useCallback(() => setLabelFormMode("close"), []);
 
   return (
     <Wrapper onSubmit={onSubmit} mode={mode}>
@@ -62,7 +61,11 @@ const LabelForm = ({ mode }: SProps) => {
         />
         <TextColorSelection value={textColor} onChange={setTextColor} />
       </div>
-      <CustomButton.LabelFormButton />
+      <CustomButton.FormButton
+        onCancel={onCancel}
+        formMode={labelFormMode}
+        disabled={!labelForm.name}
+      />
       <PreView
         type="custom"
         color={labelForm.textColor}
@@ -76,7 +79,7 @@ const LabelForm = ({ mode }: SProps) => {
 export default LabelForm;
 
 interface SProps {
-  mode: LabelFormMode;
+  mode: FormMode;
 }
 
 const Wrapper = styled.form<SProps>`
@@ -108,11 +111,8 @@ const Wrapper = styled.form<SProps>`
     width: 608px;
     justify-content: space-between;
   }
-  & > .LabelFormButton {
-    margin-top: 24px;
-    align-self: flex-end;
-  }
-  & > .ButtonGroup {
+  & > .ButtonGroup,
+  & > .FormButton {
     margin-top: 24px;
     align-self: flex-end;
   }

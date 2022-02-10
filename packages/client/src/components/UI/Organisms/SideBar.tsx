@@ -95,7 +95,7 @@ const Wrapper = styled(Atoms.Ul)`
   height: min-content;
   & > li {
     min-height: 96px;
-    padding: 32px;
+    padding: 20px 32px;
     flex-direction: column;
     & > .Dropdown > button {
       width: 244px;

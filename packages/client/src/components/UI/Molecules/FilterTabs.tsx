@@ -1,7 +1,7 @@
 import { Dropdown } from "@UI/Molecules";
 import styled from "@emotion/styled";
 
-import { useIssueStore, useModifyIssueStatusData } from "@stores/issue";
+import { useIssueMutation, useIssueStore } from "@stores/issue";
 import { useCallback } from "react";
 import { useUserStore } from "@stores/user";
 import { useMilestoneStore } from "@stores/milestone";
@@ -15,7 +15,7 @@ const FilterTabs = () => {
   const { userList } = useUserStore();
   const { filter, setFilter, selectedIssue } = useIssueStore();
 
-  const { mutate: modifyIssueStatus } = useModifyIssueStatusData();
+  const { modifyIssueStatus } = useIssueMutation();
 
   const onSelect = useCallback(
     (type: "assignees" | "label" | "milestone" | "author", id: string) => {
@@ -35,10 +35,10 @@ const FilterTabs = () => {
   );
 
   const changeIssuesState = useCallback(
-    (id: string) => {
+    (status: string) => {
       Promise.all(
         selectedIssue.map((issueId) =>
-          modifyIssueStatus({ issueId, status: id as IssueStatus })
+          modifyIssueStatus(issueId, status as IssueStatus)
         )
       );
     },

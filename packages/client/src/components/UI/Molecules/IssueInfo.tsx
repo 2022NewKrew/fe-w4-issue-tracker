@@ -23,7 +23,6 @@ const IssueInfo = () => {
           <span> #2</span>
         </Atoms.Title>
       )}
-
       <div>
         <Atoms.Label type="open" />이 이슈가 20분전에 열렸습니다 * 코멘트 1개
       </div>

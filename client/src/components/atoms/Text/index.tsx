@@ -22,7 +22,6 @@ const Text: React.FC<ITextProps> = ({ type, styles, ...props }) => {
 
 const StyledText = styled.div<any>`
   ${({ type, margin, fontSize, width, height, childCSS }) => {
-    console.log(margin);
     switch (type) {
       case TEXT_TYPE.LARGE:
         return css`

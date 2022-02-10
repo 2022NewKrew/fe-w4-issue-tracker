@@ -23,12 +23,15 @@ const Indicator: React.FC<IIndicatorProps> = ({ styles, children }) => {
 const SelectDropdown = styled.div<IStyle>`
   font-weight: bold;
   font-size: 16px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   cursor: pointer;
   &:hover {
     color: ${theme.color.body};
   }
   & > svg {
-    padding-top: 3px;
+    margin-bottom: 2px;
     margin-left: 5px;
   }
   ${({ width, height, margin, color }) => css`

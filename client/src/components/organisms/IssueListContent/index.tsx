@@ -43,7 +43,6 @@ const IssueListWrap = styled.div`
   flex-direction: column;
   border: 1px solid #d9dbe9;
   border-radius: 16px;
-  overflow: hidden;
   & > * {
     border-bottom: 1px solid #d9dbe9;
   }

@@ -131,7 +131,7 @@ const LabelWrap = styled.div<any>`
         return css`
           width: 90px;
           height: 28px;
-          background: ${background ?? "#4e4b66"};
+          background: ${background ?? ""};
           margin: ${margin ?? "auto"};
           color: ${color ?? "#fefefe"};
           font-weight: 500;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { IssueFilterOption, IssueFilterBar } from "@/components/molecules";
 import { IStyle } from "@/constants/type";
@@ -23,6 +23,7 @@ const IssueHeaderWrap = styled.div<any>`
   display: flex;
   width: 1280px;
   justify-content: space-between;
+  position: relative;
   ${IssueOptionWrap} {
     display: flex;
     & > * {

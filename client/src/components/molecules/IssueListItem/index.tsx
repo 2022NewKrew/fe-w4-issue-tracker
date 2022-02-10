@@ -103,7 +103,7 @@ const IssueItemMeta = styled.div``;
 const IssueItemFilter = styled.div``;
 const LabelWrap = styled.div``;
 const IssueInfoWrap = styled.div``;
-const IssueItemWrap = styled.div<IStyle>`
+const IssueItemWrap = styled.div<any>`
   display: flex;
   justify-content: space-between;
   padding-right: 54px;

@@ -102,7 +102,12 @@ function IssueDetailMain() {
       navigateTo('/main');
     }, switchPageTime);
   };
-  if (isLoading) return <Loader />;
+  if (isLoading)
+    return (
+      <LoaderContainer>
+        <Loader />
+      </LoaderContainer>
+    );
 
   return (
     <IssueDetailMainContainer theme={theme}>
@@ -141,6 +146,11 @@ function IssueDetailMain() {
 
 export default IssueDetailMain;
 
+const LoaderContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 const IssueDetailMainContainer = styled.div`
   display: flex;
   gap: 20px;

@@ -31,6 +31,7 @@ const SLabel = styled.label<SProps>`
   align-items: center;
   border-radius: 30px;
   padding: 4px 16px;
+  font-weight: bold;
   ${({ theme }) => theme.FontSize.xsmall};
   ${({ type, color, bgColor }) =>
     type !== "custom"

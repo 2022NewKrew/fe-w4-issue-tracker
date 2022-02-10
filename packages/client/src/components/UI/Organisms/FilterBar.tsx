@@ -1,4 +1,4 @@
-import { Dropdown } from "@UI/Molecules";
+import { CustomButton, Dropdown } from "@UI/Molecules";
 import Atoms from "@UI/Atoms";
 
 import styled from "@emotion/styled";
@@ -40,7 +40,7 @@ const FilterBar = () => {
         icon
       />
       <form onSubmit={handleSubmit}>
-        <Atoms.Button size="small" shape="text" icon="search" type="submit" />
+        <CustomButton.SearchButton />
         <input
           id="search"
           placeholder={focus ? "Search all issues" : "is:issue is:open"}

@@ -1,4 +1,4 @@
-import { TextInput } from "@UI/Molecules";
+import { CustomButton, TextInput } from "@UI/Molecules";
 import Atoms from "@UI/Atoms";
 
 import { useInput } from "@hooks";
@@ -25,12 +25,7 @@ const IDLoginForm: React.FC = () => {
         pattern=".{8,}"
         errormsg="비밀번호는 8자리 이상입니다."
       />
-      <Atoms.Button
-        size="large"
-        disabled={!id || !password}
-        link="/issue"
-        text="아이디로 로그인"
-      />
+      <CustomButton.IDLoginButton disabled={!id || !password} />
     </Wrapper>
   );
 };

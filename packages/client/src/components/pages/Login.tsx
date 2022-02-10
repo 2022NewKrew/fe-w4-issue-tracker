@@ -3,15 +3,16 @@ import Atoms from "@UI/Atoms";
 import { IDLoginForm } from "@UI/Organisms";
 
 import Icon from "@UI/Icon";
+import { CustomButton } from "@UI/Molecules";
 
 const Login: React.FC = () => {
   return (
     <LoginLayout>
       <Icon name="logo_large" />
-      <Atoms.Button size="large" text="GitHub 계정으로 로그인" />
+      <CustomButton.GithubLoginButton />
       <span>or</span>
       <IDLoginForm />
-      <Atoms.Button size="small" shape="text" link="/issue" text="회원가입" />
+      <CustomButton.SignupButton />
     </LoginLayout>
   );
 };

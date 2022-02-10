@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import Atoms from "@UI/Atoms";
 
 import { v4 } from "uuid";
+import { CustomButton } from ".";
 
 interface Props extends SProps {
   value: string;
@@ -32,12 +33,7 @@ const TextArea = ({
         size="large"
         typing={value !== ""}
       />
-      <Atoms.Button
-        shape="text"
-        icon="paperclip"
-        size="small"
-        text="파일 첨부하기"
-      />
+      <CustomButton.FileAttachButton />
     </SInputWrapper>
   );
 };

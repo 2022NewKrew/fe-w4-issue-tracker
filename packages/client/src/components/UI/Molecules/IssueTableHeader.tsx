@@ -2,27 +2,11 @@ import Atoms from "@UI/Atoms";
 import Icon from "@UI/Icon";
 
 import styled from "@emotion/styled";
-import { MouseEvent } from "react";
 import { useIssueStore } from "@stores/issue";
-import { FilterTabs } from ".";
-import { IssueStatus } from "@types";
+import { CustomButton, FilterTabs } from ".";
 
 const IssueTableHeader = () => {
-  const {
-    issueListCount,
-    filter,
-    setFilter,
-    selectedIssue,
-    selectAll,
-    setSelectAll,
-  } = useIssueStore();
-
-  const onClick = ({ target }: MouseEvent<HTMLButtonElement>) => {
-    const btn = (target as HTMLElement).closest("button");
-    if (!btn || !btn.dataset.status) return;
-    const status = btn.dataset.status as IssueStatus;
-    setFilter((prev) => ({ ...prev, status }));
-  };
+  const { selectedIssue, selectAll, setSelectAll } = useIssueStore();
 
   return (
     <Wrapper className="TableHeader" header>
@@ -35,26 +19,7 @@ const IssueTableHeader = () => {
       {selectedIssue.length ? (
         <span>{selectedIssue.length}개 이슈 선택</span>
       ) : (
-        <Atoms.ButtonGroup gap={24}>
-          <Atoms.Button
-            size="medium"
-            shape="text"
-            icon="open"
-            data-status="open"
-            onClick={onClick}
-            active={filter.status === "open"}
-            text={`열린 이슈(${issueListCount.openCount})`}
-          />
-          <Atoms.Button
-            size="medium"
-            shape="text"
-            icon="close"
-            data-status="close"
-            onClick={onClick}
-            active={filter.status === "close"}
-            text={`닫힌 이슈(${issueListCount.closeCount})`}
-          />
-        </Atoms.ButtonGroup>
+        <CustomButton.IssueTableIssueStatusButton />
       )}
       <FilterTabs />
     </Wrapper>
@@ -75,7 +40,7 @@ const Wrapper = styled(Atoms.Li)`
     color: var(--label);
   }
   & > .ButtonGroup > button {
-    width: 105px;
+    min-width: 105px;
     .active {
       color: var(--titleActive);
     }

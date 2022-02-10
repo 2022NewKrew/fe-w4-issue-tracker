@@ -3,6 +3,7 @@ import { useDropdown } from "@hooks";
 
 import styled from "@emotion/styled";
 import Atoms from "@UI/Atoms";
+import { CustomButton } from ".";
 
 interface PannelList {
   id: string;
@@ -57,13 +58,7 @@ const Dropdown = ({
 
   return (
     <Wrapper className="Dropdown">
-      <Atoms.Button
-        shape="text"
-        size="medium"
-        onClick={open}
-        icon="arrow_down"
-        text={indicator}
-      />
+      <CustomButton.IndicatorButton text={indicator} onClick={open} />
       <Panel className="Panel" visible={visible} direction={direction}>
         <Atoms.Li header>{listTitle}</Atoms.Li>
         {createList(list)}

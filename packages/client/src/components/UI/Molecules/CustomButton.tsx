@@ -1,9 +1,11 @@
+import styled from "@emotion/styled";
 import {
   useIssueFormStore,
   useIssueMutation,
   useIssueStore,
 } from "@stores/issue";
 import { useLabelFormStore } from "@stores/label";
+import { IssueStatus } from "@types";
 import Atoms from "@UI/Atoms";
 import { useNavigate } from "react-router-dom";
 
@@ -19,7 +21,7 @@ export const EditButton = ({ onClick }: { onClick?: any }) => (
 );
 
 export const RemoveButton = ({ onClick }: { onClick?: any }) => (
-  <Atoms.Button
+  <SRemoveButton
     className="RemoveButton"
     size="small"
     shape="text"
@@ -28,6 +30,10 @@ export const RemoveButton = ({ onClick }: { onClick?: any }) => (
     onClick={onClick}
   />
 );
+
+const SRemoveButton = styled(Atoms.Button)`
+  color: #ff3b30;
+`;
 
 export const LabelAddButton = () => {
   const { labelFormMode, setLabelFormMode, resetLabelForm } =
@@ -211,3 +217,93 @@ export const IssueDetailButton = () => {
     </Atoms.ButtonGroup>
   );
 };
+
+export const IssueTableIssueStatusButton = () => {
+  const { issueListCount, filter, setFilter } = useIssueStore();
+
+  const onClick = ({ target }: MouseEvent) => {
+    const btn = (target as HTMLElement).closest("button");
+    if (!btn || !btn.dataset.status) return;
+    const status = btn.dataset.status as IssueStatus;
+    setFilter((prev) => ({ ...prev, status }));
+  };
+
+  return (
+    <Atoms.ButtonGroup gap={24}>
+      <Atoms.Button
+        size="medium"
+        shape="text"
+        icon="open"
+        data-status="open"
+        onClick={onClick}
+        active={filter.status === "open"}
+        text={`열린 이슈(${issueListCount.openCount})`}
+      />
+      <Atoms.Button
+        size="medium"
+        shape="text"
+        icon="close"
+        data-status="close"
+        onClick={onClick}
+        active={filter.status === "close"}
+        text={`닫힌 이슈(${issueListCount.closeCount})`}
+      />
+    </Atoms.ButtonGroup>
+  );
+};
+
+interface IndicatorButtonProps {
+  text: string;
+  onClick: any;
+}
+
+export const IndicatorButton = ({ onClick, text }: IndicatorButtonProps) => {
+  return (
+    <Atoms.Button
+      shape="text"
+      size="medium"
+      onClick={onClick}
+      icon="arrow_down"
+      text={text}
+    />
+  );
+};
+
+export const GithubLoginButton = () => {
+  return <SGithubLoginButton size="large" text="GitHub 계정으로 로그인" />;
+};
+
+const SGithubLoginButton = styled(Atoms.Button)`
+  background: #14142b;
+  :hover:enabled:not(:active),
+  :active {
+    background: #14142b;
+    border: none;
+  }
+`;
+
+export const IDLoginButton = ({ disabled }: { disabled: boolean }) => (
+  <Atoms.Button
+    size="large"
+    disabled={disabled}
+    link="/issue"
+    text="아이디로 로그인"
+  />
+);
+
+export const SignupButton = () => (
+  <Atoms.Button size="small" shape="text" link="/issue" text="회원가입" />
+);
+
+export const FileAttachButton = () => (
+  <Atoms.Button
+    shape="text"
+    icon="paperclip"
+    size="small"
+    text="파일 첨부하기"
+  />
+);
+
+export const SearchButton = () => (
+  <Atoms.Button size="small" shape="text" icon="search" type="submit" />
+);

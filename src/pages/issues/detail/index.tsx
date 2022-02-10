@@ -1,41 +1,16 @@
-import { useMutation, useQueryClient } from 'react-query';
-import {
-  Button,
-  Comment,
-  DeleteButton,
-  Icon,
-  IssueSideBar,
-  TextArea,
-} from '@components';
-import { useInput, useIssueSideBar } from '@hooks';
-import { API } from '@services';
+import { Comment, Icon, IssueSideBar } from '@components';
 import { useIssueDetailStore } from '@stores';
 import { styled } from '@styles';
 import { IssueDetailHeader } from './IssueDetailHeader';
+import { IssueDetailCommentForm } from './IssueDetailCommentForm';
+import { IssueDetailDeleteButton } from './IssueDetailDeleteButton';
+import { useIssueDetailSideBar } from '@hooks';
 
 export const IssuesDetail = () => {
-  const queryClient = useQueryClient();
-  const { issue } = useIssueDetailStore();
-  const { setValue, ...commentProps } = useInput();
+  const { issue, isLoading } = useIssueDetailStore();
+  const issueSideBarProps = useIssueDetailSideBar(issue);
 
-  const issueSideBarProps = useIssueSideBar();
-
-  const commentMutaion = useMutation(
-    async () => {
-      if (!issue) return;
-
-      await API.create_issue_comment(issue.id, {
-        status: 'initial',
-        content: commentProps.value,
-      });
-      setValue('');
-    },
-    {
-      onSuccess: () => queryClient.invalidateQueries('read_issue_by_id'),
-    },
-  );
-
-  if (!issue) {
+  if (!issue || isLoading) {
     return <>로딩중...</>;
   }
 
@@ -52,23 +27,12 @@ export const IssuesDetail = () => {
             </CommentWrapper>
           ))}
 
-          <CommentWrapper>
-            <Icon name="user_image_large" />
-            <TextArea label="코멘트를 입력하세요" {...commentProps} />
-          </CommentWrapper>
-
-          <Button
-            css={{ marginLeft: 'auto' }}
-            size="small"
-            onClick={() => commentMutaion.mutate()}
-          >
-            <Icon name="plus" /> 코멘트 작성
-          </Button>
+          <IssueDetailCommentForm issue={issue} />
         </CommentContainer>
 
         <SideBarWrapper>
           <IssueSideBar {...issueSideBarProps} />
-          <DeleteButton>이슈 삭제</DeleteButton>
+          <IssueDetailDeleteButton issue={issue} />
         </SideBarWrapper>
       </Content>
     </>
@@ -95,8 +59,7 @@ const CommentContainer = styled('div', {
   },
 });
 
-const CommentWrapper = styled('div', {
-  flex: 1,
+export const CommentWrapper = styled('div', {
   display: 'flex',
 
   '& > * + *': {

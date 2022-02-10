@@ -2,20 +2,31 @@ import { TableLayout } from '@components';
 import { useMilestoneStore } from '@stores';
 import { styled } from '@styles';
 import { MilestoneHeader } from './MilestoneHeader';
+import { MilestoneNewForm } from './MilestoneNewForm';
 import { MilestoneTableItem } from './MilestoneTableItem';
 import { MilestonesToolbar } from './MilestoneToolbar';
+import { useMilestoneItemQuery } from './_hooks';
 
 export const Milestones = () => {
-  const { milestoneList } = useMilestoneStore();
+  const { filteredMilestoneList } = useMilestoneStore();
+
+  const { onDeleteMilestone, onToggleMilestoneStatus } =
+    useMilestoneItemQuery();
 
   return (
     <Wrapper>
       <MilestonesToolbar />
+      <MilestoneNewForm />
       <TableLayout header={<MilestoneHeader />}>
-        {milestoneList.map((item, index) => (
-          <MilestoneTableItem key={index} milestone={item} />
+        {filteredMilestoneList.map((item, index) => (
+          <MilestoneTableItem
+            key={index}
+            milestone={item}
+            onToggleMilestoneStatus={onToggleMilestoneStatus}
+            onDeleteMilestone={onDeleteMilestone}
+          />
         ))}
-        {!milestoneList.length && <div>마일스톤이 없습니다.</div>}
+        {!filteredMilestoneList.length && <div>마일스톤이 없습니다.</div>}
       </TableLayout>
     </Wrapper>
   );

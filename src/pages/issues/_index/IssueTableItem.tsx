@@ -1,7 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-import { Icon, Label } from '@components';
+import { Checkbox, Icon, Label } from '@components';
 import { styled } from '@styles';
 import { IssueDTO } from '@types';
+import { toTimeDuration } from '@utils';
+import { useCheckedIssueItem } from '@stores';
 
 interface Props {
   issue: IssueDTO;
@@ -9,12 +11,15 @@ interface Props {
 
 export const IssueTableItem = ({ issue }: Props) => {
   const nav = useNavigate();
+  const { getIssueToggleStatus, onToggleIssue } = useCheckedIssueItem();
 
+  const status = getIssueToggleStatus(issue);
+  const onClick = () => onToggleIssue(issue);
   const navToIssueDetail = () => nav(issue.id);
 
   return (
     <Wrapper>
-      <input type="checkbox" />
+      <Checkbox status={status} onClick={onClick} />
 
       <div>
         <TitleWrapper>
@@ -28,7 +33,7 @@ export const IssueTableItem = ({ issue }: Props) => {
         <DescWrapper>
           <span>#{issue.num}</span>
           <span>
-            {issue.writer.name} 및 {issue.timestamp}
+            {issue.writer.name} 및 {toTimeDuration(issue.timestamp)}
           </span>
           {issue.milestone && (
             <span>
@@ -44,15 +49,15 @@ export const IssueTableItem = ({ issue }: Props) => {
 const Wrapper = styled('div', {
   display: 'flex',
 
+  '.checkbox': {
+    marginTop: '6px',
+    marginRight: '1.5rem',
+  },
   '&:last-child': {
     borderRadius: '0px 0px 1rem 1rem',
   },
   '&:hover': {
     backgroundColor: '$background',
-  },
-  input: {
-    marginTop: '0.5rem',
-    marginRight: '1.5rem',
   },
 });
 

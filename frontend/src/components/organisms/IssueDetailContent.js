@@ -85,6 +85,7 @@ export default function IssueDetailContent() {
   function handleCreateComment() {
     const data = { content: comment };
     issuesActions.createComment(issue.id, data);
+    setComment("");
   }
 
   return (

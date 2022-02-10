@@ -110,7 +110,7 @@ const SmallField = styled.div`
   align-items: center;
   box-sizing: border-box;
 
-  width: 300px;
+  width: 100%;
   height: 40px;
   padding: 0 24px;
   border-radius: 11px;
@@ -136,7 +136,7 @@ const SmallField = styled.div`
 `;
 
 const SmallInput = styled.input`
-  width: 164px;
+  width: 100%;
   margin-left: 8px;
   background-color: inherit;
 
@@ -196,11 +196,14 @@ export function TextInput({
   );
 }
 
-export function SmallTextInput(props) {
+export function SmallTextInput({ text, value, setValue }) {
+  function handleValueChange(e) {
+    setValue(e.currentTarget.value);
+  }
   return (
     <SmallField>
-      <SmallLabel>{props.text}</SmallLabel>
-      <SmallInput />
+      <SmallLabel>{text}</SmallLabel>
+      <SmallInput value={value} onChange={(e) => handleValueChange(e)} />
     </SmallField>
   );
 }

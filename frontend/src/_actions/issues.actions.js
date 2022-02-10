@@ -23,6 +23,7 @@ export function useIssuesActions() {
     getIssues,
     getIssue,
     createIssues,
+    updateIssue,
     getAllUsers,
     getAllMilestones,
     getAllLabels,
@@ -62,6 +63,17 @@ export function useIssuesActions() {
       .post(`/api/issues/${issueId}/comment`, data)
       .then((res) => {
         console.log(res);
+        getIssue(issueId);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  async function updateIssue(issueId, data) {
+    fetchWrapper
+      .patch(`/api/issues/${issueId}`, data)
+      .then((res) => {
+        console.log(res);
+        getIssue(issueId);
       })
       .catch((err) => console.log(err));
   }

@@ -14,20 +14,15 @@ import {
 import { IssueCreationSidebarOptionTab } from "@molecules";
 
 import { ACTION_TYPE, COLOR } from "@constants";
-import {
-  issueListState,
-  labelListState,
-  milestoneListState,
-  userListState,
-} from "@stores";
+import { labelListState, milestoneListState, userListState } from "@stores";
 
 import { getAuth, putIssue } from "@/firebase.js";
-import { findObjectWithTextFromList } from "@utils";
-import { useRefreshRecoilState } from "@hooks";
 
-const FormInputWrapper = styled(Wrapper)`
+const FormInputWrapper = styled.form`
   width: 100%;
+  display: flex;
   flex-direction: row;
+  justify-content: center;
   align-items: flex-start;
   border-top: 1px solid ${COLOR.GREYSCALE.LINE};
   border-bottom: 1px solid ${COLOR.GREYSCALE.LINE};
@@ -104,8 +99,7 @@ function IssueCreationForm() {
   const [selectedAssignee, setSelectedAssignee] = useState({});
   const [selectedLabel, setSelectedLabel] = useState({});
   const [selectedMilestone, setSelectedMilestone] = useState({});
-  const titleRef = useRef(null);
-  const commentRef = useRef(null);
+  const formRef = useRef(null);
   const navigate = useNavigate();
 
   const dropdownData = [
@@ -196,12 +190,19 @@ function IssueCreationForm() {
     e.preventDefault();
     const auth = getAuth();
     const currentUserId = auth.currentUser.uid;
+    const { title, contents } = formRef.current;
+    if (!title.value.trim().length) {
+      return alert("제목이 올바르게 입력되지 않았습니다!");
+    }
+    if (!contents.value.trim().length) {
+      return alert("내용이 올바르게 입력되지 않았습니다!");
+    }
     const issueData = {
-      title: titleRef.current.value,
+      title: formRef.current.title.value,
       comment: [
         {
           writer: currentUserId,
-          text: commentRef.current.value,
+          text: formRef.current.contents.value,
           timestamp: new Date(),
         },
       ],
@@ -213,19 +214,18 @@ function IssueCreationForm() {
       timestamp: new Date(),
     };
     await putIssue(issueData);
-    navigate("../issuelist");
+    navigate("/issuelist");
   };
 
   const auth = getAuth();
   return (
     <>
-      <FormInputWrapper>
+      <FormInputWrapper ref={formRef}>
         <BigProfileImg src={auth.currentUser.photoURL} />
         <TextInputWrapper>
-          <TitleInput ref={titleRef} placeholder={"제목"} name={"title"} />
+          <TitleInput placeholder={"제목"} name={"title"} />
           <CommentInputWrapper>
             <InputTextArea
-              ref={commentRef}
               placeholder={"코멘트를 입력하세요."}
               defaultValue={""}
               name={"contents"}

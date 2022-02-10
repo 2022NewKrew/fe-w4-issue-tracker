@@ -42,9 +42,13 @@ function IssueListPageHeader() {
       <FilterBar />
       <RightPart>
         <TabList />
-        <CreateIssueButton color={COLOR.BLUE} direction={DIRECTION.ROW}>
+        <CreateIssueButton
+          color={COLOR.BLUE}
+          direction={DIRECTION.ROW}
+          onClick={clickCreateIssueButton}
+        >
           <PlusIcon />
-          <ButtonText onClick={clickCreateIssueButton}>이슈 작성</ButtonText>
+          <ButtonText>이슈 작성</ButtonText>
         </CreateIssueButton>
       </RightPart>
     </IssueListPageHeaderWrapper>

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { RegularDisplay, Wrapper } from "@atoms";
 import { IssueCreationForm } from "@organisms";
 
-const IssueCreationFormWrapper = styled.form`
+const IssueCreationFormWrapper = styled(Wrapper)`
   width: 100%;
 `;
 

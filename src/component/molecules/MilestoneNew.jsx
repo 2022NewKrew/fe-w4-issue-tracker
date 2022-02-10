@@ -12,7 +12,7 @@ export const MilestoneNew = ({ closeFn }) => {
       closeFn();
     },
   });
-  const [newMilestone, dispatch, disabled] = useNewMilestone({
+  const [newMilestone, milestoneDispatch, disabled] = useNewMilestone({
     title: "",
     deadline: "",
     description: "",
@@ -21,7 +21,7 @@ export const MilestoneNew = ({ closeFn }) => {
   return (
     <NewMilestoneWrapper>
       <NewMilestoneHeader>새로운 레이블 추가</NewMilestoneHeader>
-      <NewMilestoneForm label={newMilestone} dispatch={dispatch} />
+      <NewMilestoneForm label={newMilestone} dispatch={milestoneDispatch} />
       <MilestoneButtonWrapper>
         <Button options={{ type: "Small-Standard", prefixIcon: "edit" }} onClick={() => newMutation.mutate({ milestone: newMilestone })} disabled={disabled}>
           완료

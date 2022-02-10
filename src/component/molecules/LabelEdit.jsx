@@ -12,13 +12,13 @@ export const LabelEdit = ({ initState, closeFn }) => {
       closeFn();
     },
   });
-  const [editedLabel, dispatch, disabled] = useNewLabel(initState);
+  const [editedLabel, labelDispatch, disabled] = useNewLabel(initState);
 
   return (
     <EditLabelWrapper>
       <NewLabelHeader>레이블 편집</NewLabelHeader>
       <NewLabelPreview label={editedLabel} />
-      <NewLabelForm label={editedLabel} dispatch={dispatch} />
+      <NewLabelForm label={editedLabel} dispatch={labelDispatch} />
       <LabelButtonWrapper>
         <Button options={{ type: "Small-Secondary", prefixIcon: "x-square" }} onClick={closeFn}>
           취소

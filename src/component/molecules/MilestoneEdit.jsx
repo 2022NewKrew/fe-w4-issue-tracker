@@ -12,12 +12,12 @@ export const MilestoneEdit = ({ initState, closeFn }) => {
       closeFn();
     },
   });
-  const [newMilestone, dispatch, disabled] = useNewMilestone(initState);
+  const [newMilestone, milestoneDispatch, disabled] = useNewMilestone(initState);
 
   return (
     <EditMilestoneWrapper>
       <NewMilestoneHeader>마일스톤 편집</NewMilestoneHeader>
-      <NewMilestoneForm label={newMilestone} dispatch={dispatch} />
+      <NewMilestoneForm label={newMilestone} dispatch={milestoneDispatch} />
       <MilestoneButtonWrapper>
         <Button options={{ type: "Small-Secondary", prefixIcon: "x-square" }} onClick={closeFn}>
           취소

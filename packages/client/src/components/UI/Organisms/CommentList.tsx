@@ -7,8 +7,8 @@ const CommentList = () => {
   const { commentList } = useCommentStore();
   return (
     <Wrapper>
-      {commentList.map(({ id, content, status }) => (
-        <Comment key={id} id={id} content={content} status={status} />
+      {commentList.map((comment) => (
+        <Comment key={comment.id} comment={comment} />
       ))}
       <CommentForm commentId="add" />
     </Wrapper>

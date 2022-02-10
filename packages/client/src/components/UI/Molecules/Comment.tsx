@@ -1,42 +1,43 @@
 import styled from "@emotion/styled";
 import Icon from "@UI/Icon";
 import Atoms from "@UI/Atoms";
-import { CommentStatus } from "@types";
+import { CommentStatus, Comment } from "@types";
 import { CustomButton } from ".";
 import { useCommentFormStore, useCommentMutation } from "@stores/comment";
 import { CommentForm } from "@UI/Organisms";
+import { useUserStore } from "@stores/user";
 
-interface Props extends SProps {
-  id: string;
-  content: string;
+interface Props {
+  comment: Comment;
 }
 
-const Comment = ({ id, content, status = "initial" }: Props) => {
+const Comment = ({ comment }: Props) => {
+  const { id, status, content, author } = comment;
   const { setCommentForm, commentFormMode, setcommentFormMode } =
     useCommentFormStore(id);
   const { removeLabel } = useCommentMutation(id);
+  const { me } = useUserStore();
 
   return commentFormMode === "close" ? (
     <Wrapper status={status} className="Comment">
       <Icon name="user_image_large" />
       <Atoms.Li header>
         <h2>
-          UserName
+          {author}
           <span>TimeStamp</span>
         </h2>
         <div>
-          {status === "initial" && <Atoms.Label type="athor" />}
-          {status === "initial" && (
-            <CustomButton.EditButton
-              onClick={() => {
-                setCommentForm({ content, status });
-                setcommentFormMode(id);
-              }}
-            />
-          )}
-          {status === "initial" && (
-            <CustomButton.RemoveButton onClick={() => removeLabel()} />
-          )}
+          {status === "initial" &&
+            author === me?.id && [
+              <Atoms.Label type="athor" />,
+              <CustomButton.EditButton
+                onClick={() => {
+                  setCommentForm({ content, status });
+                  setcommentFormMode(id);
+                }}
+              />,
+              <CustomButton.RemoveButton onClick={() => removeLabel()} />,
+            ]}
           <Icon name="smile" />
         </div>
       </Atoms.Li>

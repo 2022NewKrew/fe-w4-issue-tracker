@@ -2,12 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "react-query";
 import { User, UserLogin } from "@types";
 import { UserService } from "@services";
-import {
-  atom,
-  useRecoilState,
-  useRecoilValue,
-  useSetRecoilState,
-} from "recoil";
+import { atom, useRecoilState, useSetRecoilState } from "recoil";
 
 const userListState = atom<User[]>({
   key: "userListState",
@@ -16,13 +11,14 @@ const userListState = atom<User[]>({
 
 export const useUserStore = () => {
   const [userList, setUserList] = useRecoilState(userListState);
-  const me = useRecoilValue(userState);
+  const [me, setMe] = useRecoilState(userState);
   useQuery<User[], Error>("users", UserService.getAll, {
     onSuccess: (data) => {
       setUserList(data);
     },
   });
-
+  const userId = sessionStorage.getItem("userId");
+  if (userId) setMe(userList.find(({ id }) => id === userId) as User);
   return {
     userList,
     me,
@@ -56,6 +52,7 @@ export const useUserMutation = () => {
     {
       onSuccess: (user) => {
         setUserState(user);
+        sessionStorage.setItem("userId", user.id);
         nav("issue");
       },
       onError: (e: Error) => {

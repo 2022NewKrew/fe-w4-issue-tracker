@@ -40,7 +40,9 @@ const LabelForm = ({ mode }: SProps) => {
 
   return (
     <Wrapper onSubmit={onSubmit} mode={mode}>
-      <Atoms.Title size="large">새로운 레이블 추가</Atoms.Title>
+      <Atoms.Title size="large">
+        {labelFormMode === "add" ? "새로운 레이블 추가" : "레이블 편집"}
+      </Atoms.Title>
       <TextInput
         label="레이블 이름"
         size="small"

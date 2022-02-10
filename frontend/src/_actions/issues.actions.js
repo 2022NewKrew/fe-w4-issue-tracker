@@ -29,6 +29,7 @@ export function useIssuesActions() {
     getAllMilestones,
     getAllLabels,
     createComment,
+    updateComment,
   };
 
   async function getIssues() {
@@ -112,6 +113,15 @@ export function useIssuesActions() {
       .get("/api/labels")
       .then((res) => {
         setLabels(res);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  async function updateComment(issueId, commentId, data) {
+    fetchWrapper
+      .patch(`/api/comments/${commentId}/`, data)
+      .then((res) => {
+        getIssue(issueId);
       })
       .catch((err) => console.log(err));
   }

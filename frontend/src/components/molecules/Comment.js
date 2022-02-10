@@ -95,7 +95,14 @@ const Content = styled.div`
   background-color: ${(props) => props.theme.greyscale.offWhite};
 `;
 
-export function Comment({ username, timestamp, type, content }) {
+export function Comment({
+  id,
+  username,
+  timestamp,
+  type,
+  content,
+  setEditingCommentId,
+}) {
   const user = useRecoilValue(userState);
   const isAuthor = user && user === username;
 
@@ -104,7 +111,7 @@ export function Comment({ username, timestamp, type, content }) {
       return (
         <>
           <SmallLabel type='line' text='작성자' />
-          <TextButton>
+          <TextButton onClick={() => setEditingCommentId(id)}>
             <Edit />
             <XSmallLink color='label'>편집</XSmallLink>
           </TextButton>

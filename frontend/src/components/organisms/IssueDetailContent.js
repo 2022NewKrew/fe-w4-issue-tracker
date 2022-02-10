@@ -7,11 +7,13 @@ import { useIssuesActions } from "../../_actions/issues.actions";
 
 import { Sidebar } from "@components/molecules/Sidebars";
 import { Comment } from "@components/molecules/Comment";
-import { Button } from "@components/atoms/Buttons";
+import { Button, SecondaryButton } from "@components/atoms/Buttons";
 import { XSmallLink } from "@components/atoms/Link";
 import TextArea from "@components/atoms/TextAreas";
 
 import { ReactComponent as Plus } from "@assets/icons/plus.svg";
+import { ReactComponent as XSquare } from "@assets/icons/xsquare.svg";
+import { ReactComponent as Edit } from "@assets/icons/edit.svg";
 import { ReactComponent as UserimageLarge } from "@assets/icons/userimageLarge.svg";
 
 const Container = styled.div`
@@ -33,6 +35,10 @@ const CommentWrapper = styled.div`
   }
 `;
 
+const TextAreaWrapper = styled.div`
+  width: 100%;
+`;
+
 const ButtonWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -41,7 +47,11 @@ const ButtonWrapper = styled.div`
   margin-top: 16px;
 
   svg {
-    margin-right: 7.33px;
+    margin-right: 7px;
+  }
+
+  button + button {
+    margin-left: 16px;
   }
 `;
 
@@ -52,7 +62,9 @@ export default function IssueDetailContent() {
   const [selectedAssignee, setSelectedAssignee] = useState([]);
   const [selectedLabel, setSelectedLabel] = useState([]);
   const [selectedMilestone, setSelectedMilestone] = useState([]);
-  const [comment, setComment] = useState([]);
+  const [comment, setComment] = useState("");
+  const [editingCommentId, setEditingCommentId] = useState("");
+  const [editingCommentValue, setEditingCommentValue] = useState("");
 
   useEffect(() => {
     if (issue) {
@@ -62,6 +74,19 @@ export default function IssueDetailContent() {
     }
   }, [issue]);
 
+  function handleCreateComment() {
+    const data = { content: comment };
+    issuesActions.createComment(issue.id, data);
+    setComment("");
+  }
+
+  function handleEditComment(commentId) {
+    const data = { content: editingCommentValue };
+    issuesActions.updateComment(issue.id, commentId, data);
+    setEditingCommentValue("");
+    setEditingCommentId(null);
+  }
+
   function CommentList() {
     return (
       issue &&
@@ -69,23 +94,43 @@ export default function IssueDetailContent() {
         return (
           <CommentWrapper key={comment.id}>
             <UserimageLarge />
-            <Comment
-              className='comment'
-              username={comment.author}
-              type={comment.status}
-              content={comment.content}
-              timestamp={comment.timestamp}
-            />
+            {editingCommentId === comment.id ? (
+              <TextAreaWrapper>
+                <TextArea
+                  placeholder='코멘트를 입력하세요'
+                  initialValue={comment.content}
+                  value={editingCommentValue}
+                  setValue={setEditingCommentValue}
+                  height='343'
+                />
+                <ButtonWrapper>
+                  <SecondaryButton onClick={() => setEditingCommentId(null)}>
+                    <XSquare />
+                    <XSmallLink color='blue'>편집 취소</XSmallLink>
+                  </SecondaryButton>
+                  <Button
+                    size='small'
+                    color='blue'
+                    onClick={() => handleEditComment(comment.id)}>
+                    <Edit />
+                    <XSmallLink color='offWhite'>편집 완료</XSmallLink>
+                  </Button>
+                </ButtonWrapper>
+              </TextAreaWrapper>
+            ) : (
+              <Comment
+                id={comment.id}
+                username={comment.author}
+                type={comment.status}
+                content={comment.content}
+                timestamp={comment.timestamp}
+                setEditingCommentId={setEditingCommentId}
+              />
+            )}
           </CommentWrapper>
         );
       })
     );
-  }
-
-  function handleCreateComment() {
-    const data = { content: comment };
-    issuesActions.createComment(issue.id, data);
-    setComment("");
   }
 
   return (

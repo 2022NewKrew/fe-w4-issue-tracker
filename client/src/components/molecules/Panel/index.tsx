@@ -1,19 +1,22 @@
 import React, { EventHandler, useCallback } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { theme } from "@/styles/theme";
 import { PanelOption } from "@/components/atoms";
 import { IStyle } from "@/constants/type";
 
 interface IPanelProps {
-  type: "text" | "imageText" | "modify";
-  optionList: string[];
+  type: "text" | "imageText" | "modify" | string;
+  optionList: any[];
   onSelect?: EventHandler<any>;
   onClick?: EventHandler<any>;
   styles?: IStyle;
+  title?: string;
+  visible?: boolean;
 }
+
 const transOptionTag = (
-  optionList: string[] = [],
-  type: "text" | "imageText" | "modify",
+  optionList: any[] = [],
+  type: "text" | "imageText" | "modify" | string,
   userIcon?: any,
 ) => {
   const contentClickHandler: EventHandler<any> = useCallback(({ target }) => {
@@ -31,25 +34,31 @@ const transOptionTag = (
     </PanelOption>
   ));
 };
-const Panel: React.FC<IPanelProps> = ({ type, optionList, styles }) => {
+
+const Panel: React.FC<IPanelProps> = ({ title, type, optionList, styles, visible }) => {
   const PanelWrapProps = {
     ...styles,
+    visible,
   };
   const PanelOptions = transOptionTag(optionList, type);
   return (
     <PanelWrap {...PanelWrapProps}>
-      <PanelTitle>필터 이름</PanelTitle>
+      <PanelTitle>{title}</PanelTitle>
       {PanelOptions}
     </PanelWrap>
   );
 };
 
 const PanelTitle = styled.div``;
-const PanelWrap = styled.div`
+const PanelWrap = styled.div<any>`
+  ${({ visible, childCSS }) => css`
+    display: ${visible ? "" : "none"};
+    ${childCSS ?? ""};
+  `};
+  z-index: 3;
   width: 240px;
-  height: 183px;
   background: ${theme.color.line};
-  border: 1px solid ${theme.color.line};
+  border: 1px solid ${theme.color.body};
   border-radius: 16px;
   ${PanelTitle} {
     height: 48px;

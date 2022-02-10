@@ -26,9 +26,9 @@ function IssueSidebar({ setOptionValues }) {
 
   useEffect(() => {
     setOptionValues({
-      [ISSUE_PROP_TYPE.LABEL]: Object.keys(selectedLabel),
-      [ISSUE_PROP_TYPE.ASSIGNEE]: Object.keys(selectedAssignee),
-      [ISSUE_PROP_TYPE.MILESTONE]: Object.keys(selectedMilestone)[0],
+      [ISSUE_PROP_TYPE.LABEL]: Object.keys(selectedLabel) || [],
+      [ISSUE_PROP_TYPE.ASSIGNEE]: Object.keys(selectedAssignee) || [],
+      [ISSUE_PROP_TYPE.MILESTONE]: Object.keys(selectedMilestone)[0] || "",
     });
   }, [selectedLabel, selectedMilestone, selectedAssignee]);
 

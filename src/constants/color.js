@@ -9,6 +9,11 @@ export const COLOR = {
     HOVER: "#004de3",
     ACTIVATED: "#c7ebff",
     DARK_BLUE: "#004DE3",
+    LIGHT_BLUE: "#C7EBFF",
+  },
+  PURPLE: {
+    LIGHT_PURPLE: "#CCD4FF",
+    PURPLE: "#0025E7",
   },
   GREYSCALE: {
     TITLE_ACTIVE: "#14142B",

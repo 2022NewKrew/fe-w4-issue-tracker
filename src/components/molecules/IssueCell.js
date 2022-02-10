@@ -10,6 +10,7 @@ import { COLOR } from "@constants";
 import { issueSelectionState } from "@stores";
 
 import { calculateTimeDiff } from "@utils";
+import { useNavigate } from "react-router-dom";
 
 const IssueCellWrapper = styled(Wrapper)`
   flex-direction: row;
@@ -19,6 +20,9 @@ const IssueCellWrapper = styled(Wrapper)`
   padding: 10px;
   box-sizing: border-box;
   border-top: 1px solid ${COLOR.GREYSCALE.LINE};
+  &:hover {
+    background-color: ${COLOR.GREYSCALE.BACKGROUND};
+  }
 `;
 
 const IssueInfoWrapper = styled(Wrapper)`
@@ -66,6 +70,7 @@ function IssueCell({
   const [selectedIssueList, setSelectedIssueList] =
     useRecoilState(issueSelectionState);
 
+  const navigate = useNavigate();
   const checkboxRef = useRef();
 
   useEffect(() => {
@@ -80,10 +85,23 @@ function IssueCell({
         : (prev) => prev.filter((selectedId) => selectedId !== id)
     );
   };
+
+  const clickIssueCell = (e) => {
+    const { target } = e;
+    if (target.dataset.notNavigate) {
+      return;
+    }
+    navigate(`./${id}`);
+  };
   return (
-    <IssueCellWrapper>
+    <IssueCellWrapper onClick={clickIssueCell}>
       <LeftPart>
-        <input type="checkbox" ref={checkboxRef} onChange={changeCheckbox} />
+        <input
+          data-not-navigate="true"
+          type="checkbox"
+          ref={checkboxRef}
+          onChange={changeCheckbox}
+        />
         <IssueInfoWrapper>
           <IssueTitleWrapper>
             {isOpened ? <AlertCircleIcon /> : <ArchieveIcon />}
@@ -110,18 +128,20 @@ function IssueCell({
               이 이슈가 {calculateTimeDiff(timestamp)} 전, {writer.name} 님에
               의해 작성되었습니다
             </IssueTag>
-            <IssueTag>
-              <MilestoneIcon
-                css={`
-                  margin-right: 10px;
-                `}
-              />
-              {milestone.text}
-            </IssueTag>
+            {milestone && (
+              <IssueTag>
+                <MilestoneIcon
+                  css={`
+                    margin-right: 10px;
+                  `}
+                />
+                {milestone.text}
+              </IssueTag>
+            )}
           </IssueTagWrapper>
         </IssueInfoWrapper>
       </LeftPart>
-      <WriterProfile src={writer.photoUrl} />
+      <WriterProfile data-not-navigate="true" src={writer.photoUrl} />
     </IssueCellWrapper>
   );
 }

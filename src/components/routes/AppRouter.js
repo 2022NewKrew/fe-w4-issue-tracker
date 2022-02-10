@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { IssueCreation, IssueList } from "@templates";
+import { IssueCreation, IssueDetail, IssueList } from "@templates";
 import { Auth, Home } from "@pages";
 
 import { getAuth, onAuthStateChanged, putUser } from "@/firebase.js";
@@ -43,6 +43,7 @@ function AppRouter() {
       <Route path="/" element={<Home />}>
         <Route index element={<IssueList />} />
         <Route path="issuelist" element={<IssueList />} />
+        <Route path="issuelist/:issueId" element={<IssueDetail />} />
         <Route path="issuecreation" element={<IssueCreation />} />
       </Route>
     </Routes>

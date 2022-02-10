@@ -9,6 +9,7 @@ import {
   setDoc,
   query,
   where,
+  deleteDoc,
 } from "firebase/firestore";
 import { DATA_TYPE } from "@constants";
 
@@ -101,6 +102,10 @@ export const putUser = async ({ id, ...userData }) => {
     const redundantUserId = redundantUser.docs[0].id;
     return redundantUserId === id;
   }
+};
+
+export const deleteIssue = async ({ id }) => {
+  await deleteDoc(doc(db, DATA_TYPE.ISSUE, id));
 };
 
 export * from "firebase/auth";

@@ -2,19 +2,18 @@ import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-import { PaperclipIcon } from "@icons";
 import {
   BigProfileImg,
   MediumStandardButton,
   MediumTextInput,
   Wrapper,
-  XSmallLinkText,
 } from "@atoms";
 import { IssueSidebar } from "@organisms";
 
-import { ACTION_TYPE, COLOR, ISSUE_PROP_TYPE } from "@constants";
+import { COLOR, ISSUE_PROP_TYPE } from "@constants";
 
 import { getAuth, putIssue } from "@/firebase.js";
+import { CommentInput } from "@molecules";
 
 const FormInputWrapper = styled.form`
   width: 100%;
@@ -39,43 +38,6 @@ const TitleInput = styled(MediumTextInput)`
   width: 100%;
 `;
 
-const CommentInputWrapper = styled(Wrapper)`
-  margin-top: 20px;
-  position: relative;
-  width: 100%;
-`;
-
-const InputTextArea = styled.textarea`
-  width: 100%;
-  background: ${COLOR.GREYSCALE.INPUT_BACKGROUND};
-  border-color: transparent;
-  box-sizing: border-box;
-  height: 340px;
-  padding: 24px;
-
-  &:focus {
-    background: ${COLOR.GREYSCALE.OFF_WHITE};
-    border: 1px solid ${COLOR.GREYSCALE.TITLE_ACTIVE};
-  }
-  border-radius: 14px 14px 0 0;
-`;
-
-const AddFileButton = styled(Wrapper)`
-  position: relative;
-  width: 100%;
-  flex-direction: row;
-  background-color: ${COLOR.GREYSCALE.INPUT_BACKGROUND};
-  border-top: 1px dashed ${COLOR.GREYSCALE.LINE};
-  padding: 10px 24px;
-  box-sizing: border-box;
-  border-radius: 0 0 14px 14px;
-`;
-
-const AddFileButtonText = styled(XSmallLinkText)`
-  margin: 5px 10px;
-  width: 100%;
-`;
-
 const CreateIssueButtonWrapper = styled(Wrapper)`
   margin-top: 20px;
   width: 100%;
@@ -86,10 +48,9 @@ function IssueCreationForm() {
   const [optionValues, setOptionValues] = useState({});
   const formRef = useRef(null);
   const navigate = useNavigate();
-
+  const auth = getAuth();
   const clickIssueCreateButton = async (e) => {
     e.preventDefault();
-    const auth = getAuth();
     const currentUserId = auth.currentUser.uid;
     const { title, contents } = formRef.current;
     if (!title.value.trim().length) {
@@ -118,24 +79,13 @@ function IssueCreationForm() {
     navigate("/issuelist");
   };
 
-  const auth = getAuth();
   return (
     <>
       <FormInputWrapper ref={formRef}>
         <BigProfileImg src={auth.currentUser.photoURL} />
         <TextInputWrapper>
           <TitleInput placeholder={"제목"} name={"title"} />
-          <CommentInputWrapper>
-            <InputTextArea
-              placeholder={"코멘트를 입력하세요."}
-              defaultValue={""}
-              name={"contents"}
-            />
-            <AddFileButton>
-              <PaperclipIcon />
-              <AddFileButtonText>파일 첨부하기</AddFileButtonText>
-            </AddFileButton>
-          </CommentInputWrapper>
+          <CommentInput />
         </TextInputWrapper>
         <IssueSidebar setOptionValues={setOptionValues} />
       </FormInputWrapper>

@@ -1,4 +1,4 @@
-import { selector, atom } from "recoil";
+import { selector, atom, selectorFamily } from "recoil";
 import { getIssueList } from "@/firebase.js";
 import { filterState } from "@/stores/filterStore.js";
 import { labelListState } from "@/stores/labelListStore.js";
@@ -36,6 +36,16 @@ export const issueListState = selector({
     );
     return processedIssueList;
   },
+});
+
+export const exactIssueState = selectorFamily({
+  key: "exactIssue",
+  get:
+    (id) =>
+    ({ get }) => {
+      const issueList = get(issueListState);
+      return findObjectWithIdFromList(id, issueList);
+    },
 });
 
 export const filteredIssueListState = selector({

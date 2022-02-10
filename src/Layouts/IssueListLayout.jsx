@@ -86,7 +86,7 @@ const IssueListLayout = (props) => {
           </Button>
         </HorizontalDiv>
       </Header>
-      <IssueList issueList={issues} />
+      <IssueList issues={issues} />
     </Container>
   )
 }

@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { readLabel, readMilestone, readUser } from '../../Services/DB/firebase'
 
 import IssueItem from './IssueItem'
 import Dropdown from '../Common/Dropdown/Dropdown'
@@ -54,7 +55,44 @@ const ItemWrapper = styled.li`
   }
 `
 
-const IssueList = ({ issueList }) => {
+const IssueList = ({ issues }) => {
+  const [labels, setLabels] = useState([])
+  const [milestones, setMilestones] = useState([])
+  const [users, setUsers] = useState([])
+
+  useEffect(async () => {
+    const [labels, milestones, users] = await Promise.all([
+      readLabel(),
+      readMilestone(),
+      readUser(),
+    ])
+
+    setLabels(labels)
+    setMilestones(milestones)
+    setUsers(users)
+  }, [])
+
+  const userDropdownList = useMemo(() => {
+    return users.map((user) => {
+      return {
+        text: user.name,
+        imgSrc: user.profileImgSrc,
+      }
+    })
+  }, [users])
+
+  const labelDropdownList = useMemo(() => {
+    return labels.map((label) => {
+      return { text: label.name }
+    })
+  }, [labels])
+
+  const milestoneDropdownList = useMemo(() => {
+    return milestones.map((milestone) => {
+      return { text: milestone.title }
+    })
+  }, [milestones])
+
   return (
     <Container>
       <Header>
@@ -70,11 +108,7 @@ const IssueList = ({ issueList }) => {
               type={DROPDOWN_ITEM_TYPE.RADIO_BTN}
               itemInfoList={[
                 { text: '담당자가 없는 이슈' },
-                {
-                  text: 'Oni',
-                  imgSrc:
-                    'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
-                },
+                ...userDropdownList,
               ]}
             />
           </SmallDropdownWrapper>
@@ -85,7 +119,7 @@ const IssueList = ({ issueList }) => {
               type={DROPDOWN_ITEM_TYPE.RADIO_BTN}
               itemInfoList={[
                 { text: '레이블이 없는 이슈' },
-                { text: 'documentation' },
+                ...labelDropdownList,
               ]}
             />
           </SmallDropdownWrapper>
@@ -96,7 +130,7 @@ const IssueList = ({ issueList }) => {
               type={DROPDOWN_ITEM_TYPE.RADIO_BTN}
               itemInfoList={[
                 { text: '마일스톤이 없는 이슈' },
-                { text: '마스터즈 코스' },
+                ...milestoneDropdownList,
               ]}
             />
           </LargeDropdownWrapper>
@@ -105,19 +139,13 @@ const IssueList = ({ issueList }) => {
               indicatorText="작성자"
               panelTitle="작성자"
               type={DROPDOWN_ITEM_TYPE.RADIO_BTN}
-              itemInfoList={[
-                {
-                  text: 'Oni',
-                  imgSrc:
-                    'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
-                },
-              ]}
+              itemInfoList={userDropdownList}
             />
           </SmallDropdownWrapper>
         </HorizontalDiv>
       </Header>
       <List>
-        {issueList.map((issue) => (
+        {issues.map((issue) => (
           <ItemWrapper key={issue.id}>
             <IssueItem issue={issue} />
           </ItemWrapper>
@@ -128,7 +156,7 @@ const IssueList = ({ issueList }) => {
 }
 
 IssueList.propTypes = {
-  issueList: PropTypes.array.isRequired,
+  issues: PropTypes.array.isRequired,
 }
 
 export default IssueList

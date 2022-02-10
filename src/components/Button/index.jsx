@@ -7,14 +7,18 @@ export default function CustomButton({
   disable = false,
   text = '내용 없음',
   fontColor = 'white',
+  bgColor = primary,
   size = 3,
+  className,
 }) {
   return (
     <Button
       onClick={onClick}
       disable={disable}
       fontColor={fontColor}
+      bgColor={bgColor}
       size={size}
+      className={className}
     >
       <span>{text}</span>
     </Button>
@@ -22,7 +26,7 @@ export default function CustomButton({
 }
 
 const Button = styled.button`
-  background-color: ${primary};
+  background-color: ${(props) => props.bgColor};
   color: ${(props) => props.fontColor};
   font-weight: bold;
   ${() => getButtonSize}
@@ -34,7 +38,7 @@ const Button = styled.button`
   }
 `;
 
-const getHoverCSS = ({ disable }) => {
+const getHoverCSS = ({ disable, bgColor }) => {
   switch (disable) {
     case true:
       return css`
@@ -46,10 +50,10 @@ const getHoverCSS = ({ disable }) => {
       return css`
         cursor: pointer;
         &:hover {
-          background-color: ${darkPrimary};
+          background-color: ${bgColor === primary ? darkPrimary : bgColor};
         }
         &:active {
-          border: 4px solid ${softPrimary};
+          border: 4px solid ${bgColor === primary ? softPrimary : bgColor};
         }
       `;
   }

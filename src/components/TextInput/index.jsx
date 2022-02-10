@@ -18,6 +18,7 @@ export default function TextInput({
   validationFailText = '',
   validationSuccessText = '',
   inputType = 'text',
+  className,
 }) {
   const [inputValue, setInputValue] = useState('');
 
@@ -26,7 +27,7 @@ export default function TextInput({
   };
 
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       {inputValue && <Label size={size}>{label}</Label>}
       <Input
         placeholder={label}

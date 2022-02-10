@@ -25,20 +25,14 @@ interface IProps {
 }
 
 const getFilterAtom = (type: issueFilterType) => {
-    switch (type) {
-        case 'assignee':
-            return userInfoAtom;
-        case 'label':
-            return labelInfoAtom;
-        case 'milestone':
-            return milestoneInfoAtom;
-        case 'author':
-            return userInfoAtom;
-        case 'statusChange':
-            return statusInfoAtom;
-        default:
-            throw Error('no match filter type');
-    }
+    const filterAtoms = {
+        assignee: userInfoAtom,
+        label: labelInfoAtom,
+        milestone: milestoneInfoAtom,
+        author: userInfoAtom,
+        statusChange: statusInfoAtom,
+    };
+    return filterAtoms[type];
 };
 
 const getOptionClickHandler = (

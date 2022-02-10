@@ -23,11 +23,11 @@ const App = () => {
                     <RecoilRoot>
                         <Routes>
                             <Route path="issue" element={<IssueDetailPage />} />
-                            <Route path="issue/new/:id" element={<CreateIssuePage />} />
-                            <Route path="issue/edit/:id" element={<EditIssuePage />} />
-                            <Route path="issues" element={<IssueListPage />} />
-                            <Route path="labels" element={<LabelListPage />} />
-                            <Route path="milestones" element={<MilestoneListPage />} />
+                            <Route path="newissue/:id" element={<CreateIssuePage />} />
+                            <Route path="editissue/:id" element={<EditIssuePage />} />
+                            <Route path="issuelist" element={<IssueListPage />} />
+                            <Route path="labellist" element={<LabelListPage />} />
+                            <Route path="milestonelist" element={<MilestoneListPage />} />
                             <Route path="*" element={<ErrorPage />} />
                             <Route path="/" element={<TempPage />} />
                         </Routes>

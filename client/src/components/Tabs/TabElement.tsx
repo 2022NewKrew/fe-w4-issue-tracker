@@ -1,15 +1,26 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { LinkSmall, TextSmall, SmallIcon } from '@styles/styleTemplates';
 import { ITabElement } from '@types';
 
-export const TabElement = ({ icon, title, count, isLast = false }: ITabElement) => {
+interface IProps {
+    tabProperty: ITabElement;
+    isLast: boolean;
+}
+
+export const TabElement = ({
+    tabProperty: { icon, title, count, href },
+    isLast = false,
+}: IProps) => {
     return (
-        <Tab isLast={isLast}>
-            {icon}
-            <TitleDiv>{title}</TitleDiv>
-            <CountDiv>({count})</CountDiv>
-        </Tab>
+        <Link to={href}>
+            <Tab isLast={isLast}>
+                {icon}
+                <TitleDiv>{title}</TitleDiv>
+                <CountDiv>({count})</CountDiv>
+            </Tab>
+        </Link>
     );
 };
 

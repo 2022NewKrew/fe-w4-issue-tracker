@@ -16,6 +16,7 @@ declare module '@types' {
         icon: string;
         title: string;
         count: number;
+        href: string;
         isLast?: boolean;
     }
     interface IIssue {

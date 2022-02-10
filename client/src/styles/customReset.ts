@@ -14,4 +14,7 @@ export const customReset = css`
         padding: 0;
         background-color: unset;
     }
+    a {
+        text-decoration: none;
+    }
 `;

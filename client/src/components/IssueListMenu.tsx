@@ -17,8 +17,13 @@ export const IssueListMenu = () => {
         const milestoneCount =
             milestoneInfo.state === 'hasValue' ? milestoneInfo.contents.length : 0;
         return [
-            { icon: TagIcon(), title: '레이블', count: labelCount },
-            { icon: MilestoneIcon(), title: '마일스톤', count: milestoneCount },
+            { icon: TagIcon(), title: '레이블', count: labelCount, href: '/labellist' },
+            {
+                icon: MilestoneIcon(),
+                title: '마일스톤',
+                count: milestoneCount,
+                href: '/milestonelist',
+            },
         ];
     };
 

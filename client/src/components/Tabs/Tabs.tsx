@@ -8,14 +8,14 @@ interface IProps {
     TabElementProperties: ITabElement[];
 }
 
-export const Tabs = ({ TabElementProperties }: IProps) => {
-    const renderTabElements = () => {
-        return TabElementProperties.map(({ icon, title, count }: ITabElement, i) => {
-            const isLast = i === TabElementProperties.length - 1 ? true : false;
-            return <TabElement icon={icon} title={title} count={count} key={i} isLast={isLast} />;
-        });
-    };
+const renderTabElements = (TabElementProperties) => {
+    return TabElementProperties.map((tabProperty, i) => {
+        const isLast = i === TabElementProperties.length - 1 ? true : false;
+        return <TabElement tabProperty={tabProperty} key={i} isLast={isLast} />;
+    });
+};
 
+export const Tabs = ({ TabElementProperties }: IProps) => {
     return <TabsBorder>{renderTabElements(TabElementProperties)}</TabsBorder>;
 };
 

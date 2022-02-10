@@ -54,11 +54,10 @@ const FilterBar = () => {
       placeholder="is:open is:issue">
       <DropdownContainer>
         <Dropdown
-          type={DROPDOWN_ITEM_TYPE.NORMAL}
+          type={DROPDOWN_ITEM_TYPE.RADIO_BTN}
           indicatorText="필터"
           panelTitle="이슈 필터"
           btnUserStyle={buttonPaddingStyle}
-          isCheckCircleExists
           itemInfoList={DROPDOWN_LIST}
         />
       </DropdownContainer>

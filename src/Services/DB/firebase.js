@@ -342,10 +342,12 @@ export function writeIssue(issue) {
 /**
  * 파이어베이스 데이터베이스로부터 이슈를 조건에 따라 반환
  * @param {Object?} filterOption
- * @param {string?} filterOption.userId
+ * @param {string?} filterOption.issueId
  * @param {string?} filterOption.state
  * @param {string?} filterOption.authorId
  * @param {string?} filterOption.labelId
+ * @param {string?} filterOption.milestoneId
+ * @param {string?} filterOption.assigneeId
  * @return {Promise<Issue[]>}
  */
 export async function readIssue(filterOption) {
@@ -353,10 +355,10 @@ export async function readIssue(filterOption) {
   let filteredIssues = snapshot.val()
 
   if (filterOption) {
-    if (filterOption.userId) {
+    if (filterOption.issueId) {
       filteredIssues = Object.keyFilter(
         filteredIssues,
-        (issueId) => issueId === filterOption.userId
+        (issueId) => issueId === filterOption.issueId
       )
     }
 
@@ -376,7 +378,20 @@ export async function readIssue(filterOption) {
 
     if (filterOption.labelId) {
       filteredIssues = Object.filter(filteredIssues, (issue) =>
-        issue.labels.contains(filterOption.labelId)
+        JSON.parse(issue.labelIds).includes(filterOption.labelId)
+      )
+    }
+
+    if (filterOption.milestoneId) {
+      filteredIssues = Object.filter(
+        filteredIssues,
+        (issue) => issue.milestoneId === filterOption.milestoneId
+      )
+    }
+
+    if (filterOption.assigneeId) {
+      filteredIssues = Object.filter(filteredIssues, (issue) =>
+        JSON.parse(issue.assigneeIds).includes(filterOption.assigneeId)
       )
     }
   }

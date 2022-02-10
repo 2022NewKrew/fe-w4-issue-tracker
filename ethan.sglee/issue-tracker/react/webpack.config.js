@@ -12,7 +12,8 @@ module.exports = {
     alias: {
       "@Context": path.resolve(__dirname, "src/context"),
       "@Components": path.resolve(__dirname, "src/components"),
-      "@Public": path.resolve(__dirname, "public")
+      "@Public": path.resolve(__dirname, "public"),
+      "@Atoms": path.resolve(__dirname, "src/components/UI/atoms"),
     },
   },
   output: {

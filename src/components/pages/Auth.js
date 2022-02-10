@@ -1,4 +1,6 @@
 import React from "react";
+import styled from "styled-components";
+
 import {
   LargeButton,
   LargeLogo,
@@ -7,8 +9,8 @@ import {
   Wrapper,
 } from "@atoms";
 import { OAuthForm } from "@molecules";
+
 import { COLOR } from "@constants";
-import styled from "styled-components";
 
 const AuthWrapper = styled(Wrapper)`
   position: relative;

@@ -1,7 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { COLOR } from "@constants";
+
 import { LargeButton, Wrapper } from "@atoms";
+
+import { COLOR } from "@constants";
+
 import { GithubAuthProvider, getAuth, signInWithPopup } from "@/firebase.js";
 
 const OAuthButton = styled(LargeButton)`

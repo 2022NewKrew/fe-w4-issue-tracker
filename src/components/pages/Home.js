@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { Header } from "@molecules";
 import { Outlet } from "react-router-dom";
+
 import { Wrapper } from "@atoms";
+import { Header } from "@molecules";
 
 const Layout = styled(Wrapper)`
   position: relative;
@@ -15,7 +16,9 @@ function Home() {
   return (
     <Layout>
       <Header />
-      <Outlet />
+      <React.Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+      </React.Suspense>
     </Layout>
   );
 }

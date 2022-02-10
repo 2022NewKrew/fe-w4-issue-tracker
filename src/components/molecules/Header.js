@@ -1,7 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+
 import { BigProfileImg, MediumLogo, SmallLinkText, Wrapper } from "@atoms";
+
 import { getAuth } from "@/firebase.js";
+import { useNavigate } from "react-router-dom";
 
 const HeaderWrapper = styled(Wrapper)`
   position: relative;
@@ -23,9 +26,15 @@ const ProfileWrapper = styled(Wrapper)`
 function Header() {
   const auth = getAuth();
   const url = auth.currentUser.photoURL;
+  const navigate = useNavigate();
+
+  const clickLogo = () => {
+    navigate("/");
+  };
+
   return (
     <HeaderWrapper>
-      <MediumLogo>Issue Tracker</MediumLogo>
+      <MediumLogo onClick={clickLogo}>Issue Tracker</MediumLogo>
       <ProfileWrapper>
         <SmallLinkText onClick={() => auth.signOut()}>로그아웃</SmallLinkText>
         <ProfileImg src={url} />

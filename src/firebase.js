@@ -4,7 +4,12 @@ import {
   collection,
   getDocs,
   doc,
-  writeBatch,
+  updateDoc,
+  addDoc,
+  setDoc,
+  query,
+  where,
+  deleteDoc,
 } from "firebase/firestore";
 import { DATA_TYPE } from "@constants";
 
@@ -61,15 +66,46 @@ export const getIssueList = async () => {
   return await getDocList(DATA_TYPE.ISSUE);
 };
 
-export const updateIssue = async (updateData) => {
-  const batch = writeBatch(db);
-  updateData.map((data) => {
-    const { id, key, value } = data;
-    const issueRef = doc(db, DATA_TYPE.ISSUE, id);
-    batch.update(issueRef, { [key]: value });
-  });
-  await batch.commit();
-  return await getIssueList();
+export const updateIssue = async (issueData) => {
+  return await Promise.all(
+    issueData.map(async ({ id, key, value }) => {
+      const issueRef = doc(db, DATA_TYPE.ISSUE, id);
+      await updateDoc(issueRef, {
+        [key]: value,
+      });
+    })
+  );
+};
+
+export const putIssue = async (issueData) => {
+  const issueCollection = collection(db, DATA_TYPE.ISSUE);
+  return await addDoc(issueCollection, issueData);
+};
+
+export const putUser = async ({ id, ...userData }) => {
+  const userCollection = collection(db, DATA_TYPE.USER);
+  const queryForCheckRedundant = query(
+    userCollection,
+    where("name", "==", userData.name)
+  );
+  const redundantUser = await getDocs(queryForCheckRedundant);
+  if (redundantUser.empty) {
+    if (id) {
+      const userRef = doc(db, DATA_TYPE.USER, id);
+      await setDoc(userRef, userData);
+      return true;
+    } else {
+      await setDoc(userCollection, userData);
+      return true;
+    }
+  } else {
+    const redundantUserId = redundantUser.docs[0].id;
+    return redundantUserId === id;
+  }
+};
+
+export const deleteIssue = async ({ id }) => {
+  await deleteDoc(doc(db, DATA_TYPE.ISSUE, id));
 };
 
 export * from "firebase/auth";

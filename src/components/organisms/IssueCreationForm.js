@@ -1,33 +1,103 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
-import { Wrapper } from "@atoms";
+import { useNavigate } from "react-router-dom";
 
-const IssueCreationFormWrapper = styled.form``;
+import {
+  BigProfileImg,
+  MediumStandardButton,
+  MediumTextInput,
+  Wrapper,
+} from "@atoms";
+import { IssueSidebar } from "@organisms";
 
-const IssueCreationFormHeader = styled(Wrapper)``;
+import { COLOR, ISSUE_PROP_TYPE } from "@constants";
 
-const IssueCreationFormInputWrapper = styled(Wrapper)``;
+import { getAuth, putIssue } from "@/firebase.js";
+import { CommentInput } from "@molecules";
+
+const FormInputWrapper = styled.form`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  border-top: 1px solid ${COLOR.GREYSCALE.LINE};
+  border-bottom: 1px solid ${COLOR.GREYSCALE.LINE};
+  box-sizing: border-box;
+  padding: 20px;
+`;
+
+const TextInputWrapper = styled(Wrapper)`
+  position: relative;
+  width: 100%;
+  justify-content: space-between;
+  margin: 0 20px;
+`;
+
+const TitleInput = styled(MediumTextInput)`
+  width: 100%;
+`;
+
+const CreateIssueButtonWrapper = styled(Wrapper)`
+  margin-top: 20px;
+  width: 100%;
+  align-items: flex-end;
+`;
 
 function IssueCreationForm() {
+  const [optionValues, setOptionValues] = useState({});
+  const formRef = useRef(null);
+  const navigate = useNavigate();
+  const auth = getAuth();
+  const clickIssueCreateButton = async (e) => {
+    e.preventDefault();
+    const currentUserId = auth.currentUser.uid;
+    const { title, contents } = formRef.current;
+    if (!title.value.trim().length) {
+      return alert("제목이 올바르게 입력되지 않았습니다!");
+    }
+    if (!contents.value.trim().length) {
+      return alert("내용이 올바르게 입력되지 않았습니다!");
+    }
+    const issueData = {
+      title: formRef.current.title.value,
+      comment: [
+        {
+          writer: currentUserId,
+          text: formRef.current.contents.value,
+          timestamp: new Date(),
+        },
+      ],
+      label: optionValues[ISSUE_PROP_TYPE.LABEL],
+      assignee: optionValues[ISSUE_PROP_TYPE.ASSIGNEE],
+      milestone: optionValues[ISSUE_PROP_TYPE.MILESTONE],
+      writer: currentUserId,
+      isOpened: true,
+      timestamp: new Date(),
+    };
+    await putIssue(issueData);
+    navigate("/issuelist");
+  };
+
   return (
-    <IssueCreationFormWrapper>
-      <IssueCreationFormHeader>새로운 이슈 작성</IssueCreationFormHeader>
-      <IssueCreationFormInputWrapper>
-        <div>profileImg</div>
-        <div>
-          <input placeholder={"제목"} />
-          <div>
-            <textarea placeholder={"코멘트를 입력하세요."} defaultValue={""} />
-            <div>파일첨부</div>
-          </div>
-        </div>
-        <div>
-          <div>assignee selection</div>
-          <div>milestone selection</div>
-          <div>label selection</div>
-        </div>
-      </IssueCreationFormInputWrapper>
-    </IssueCreationFormWrapper>
+    <>
+      <FormInputWrapper ref={formRef}>
+        <BigProfileImg src={auth.currentUser.photoURL} />
+        <TextInputWrapper>
+          <TitleInput placeholder={"제목"} name={"title"} />
+          <CommentInput />
+        </TextInputWrapper>
+        <IssueSidebar setOptionValues={setOptionValues} />
+      </FormInputWrapper>
+      <CreateIssueButtonWrapper>
+        <MediumStandardButton
+          color={COLOR.BLUE}
+          onClick={clickIssueCreateButton}
+        >
+          이슈 작성
+        </MediumStandardButton>
+      </CreateIssueButtonWrapper>
+    </>
   );
 }
 

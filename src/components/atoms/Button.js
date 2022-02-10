@@ -74,6 +74,7 @@ export const SmallSecondaryButton = styled(Button)`
       &:hover {
         color: ${HOVER};
         border-color: ${HOVER};
+        background-color: transparent;
       }
     `;
   }}

@@ -29,12 +29,15 @@ module.exports = {
       "@constants": path.resolve(__dirname, "src/constants"),
       "@icons": path.resolve(__dirname, "src/assets/icons"),
       "@stores": path.resolve(__dirname, "src/stores"),
+      "@hooks": path.resolve(__dirname, "src/hooks"),
+      "@utils": path.resolve(__dirname, "src/utils"),
       "@": path.resolve(__dirname, "src"),
     },
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: "index.html",
+      publicPath: "/",
     }),
   ],
 };

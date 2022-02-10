@@ -1,22 +1,16 @@
 import React, { useEffect, useRef } from "react";
-import styled, { css } from "styled-components";
-import {
-  MediumLinkText,
-  SmallProfileImg,
-  SmallText,
-  Wrapper,
-  XSmallText,
-} from "@atoms";
-import { COLOR } from "@constants";
-import { AlertCircleIcon, ArchieveIcon, MilestoneIcon } from "@icons";
-import { calculateTimeDiff } from "@/utils/timestampUtils.js";
+import styled from "styled-components";
 import { useRecoilState } from "recoil";
+
+import { AlertCircleIcon, ArchieveIcon, MilestoneIcon } from "@icons";
+import { MediumLinkText, SmallProfileImg, SmallText, Wrapper } from "@atoms";
+import { IssueLabel } from "@molecules";
+
+import { COLOR } from "@constants";
 import { issueSelectionState } from "@stores";
 
-const LABEL_TYPE = {
-  DOCUMENTATION: "documentation",
-  LIGHT_TEXT: "lightText",
-};
+import { calculateTimeDiff } from "@utils";
+import { useNavigate } from "react-router-dom";
 
 const IssueCellWrapper = styled(Wrapper)`
   flex-direction: row;
@@ -26,6 +20,9 @@ const IssueCellWrapper = styled(Wrapper)`
   padding: 10px;
   box-sizing: border-box;
   border-top: 1px solid ${COLOR.GREYSCALE.LINE};
+  &:hover {
+    background-color: ${COLOR.GREYSCALE.BACKGROUND};
+  }
 `;
 
 const IssueInfoWrapper = styled(Wrapper)`
@@ -52,27 +49,6 @@ const IssueTag = styled(SmallText)`
   margin: 0 10px;
 `;
 
-const IssueLabel = styled(XSmallText)`
-  border-radius: 30px;
-  padding: 4px 16px;
-  margin-left: 10px;
-  ${({ type }) => {
-    const { BLUE, GREYSCALE } = COLOR;
-    switch (type) {
-      case LABEL_TYPE.DOCUMENTATION:
-        return css`
-          background-color: ${BLUE.DARK_BLUE};
-          color: ${GREYSCALE.OFF_WHITE};
-        `;
-      default:
-        return css`
-          background-color: ${GREYSCALE.BODY};
-          color: ${GREYSCALE.OFF_WHITE};
-        `;
-    }
-  }}
-`;
-
 const WriterProfile = styled(SmallProfileImg)`
   top: 40px;
   margin-right: 30px;
@@ -93,26 +69,39 @@ function IssueCell({
 }) {
   const [selectedIssueList, setSelectedIssueList] =
     useRecoilState(issueSelectionState);
+
+  const navigate = useNavigate();
   const checkboxRef = useRef();
 
   useEffect(() => {
-    checkboxRef.current.checked = selectedIssueList.indexOf(id) !== -1;
+    checkboxRef.current.checked = selectedIssueList.includes(id);
   }, [selectedIssueList]);
 
   const changeCheckbox = (e) => {
     const { target } = e;
-    if (target.checked) {
-      setSelectedIssueList((prev) => [...prev, id]);
-    } else {
-      setSelectedIssueList((prev) =>
-        prev.filter((selectedId) => selectedId !== id)
-      );
+    setSelectedIssueList(
+      target.checked
+        ? (prev) => [...prev, id]
+        : (prev) => prev.filter((selectedId) => selectedId !== id)
+    );
+  };
+
+  const clickIssueCell = (e) => {
+    const { target } = e;
+    if (target.dataset.notNavigate) {
+      return;
     }
+    navigate(`./${id}`);
   };
   return (
-    <IssueCellWrapper>
+    <IssueCellWrapper onClick={clickIssueCell}>
       <LeftPart>
-        <input type="checkbox" ref={checkboxRef} onChange={changeCheckbox} />
+        <input
+          data-not-navigate="true"
+          type="checkbox"
+          ref={checkboxRef}
+          onChange={changeCheckbox}
+        />
         <IssueInfoWrapper>
           <IssueTitleWrapper>
             {isOpened ? <AlertCircleIcon /> : <ArchieveIcon />}
@@ -123,13 +112,15 @@ function IssueCell({
             >
               {title}
             </MediumLinkText>
-            {labelList.map((label, idx) => {
-              return (
-                <IssueLabel key={`${title}-label${idx}`} type={label}>
-                  {label}
-                </IssueLabel>
-              );
-            })}
+            {labelList.map((label, idx) => (
+              <IssueLabel
+                key={`${title}-label${idx}`}
+                {...label}
+                css={`
+                  margin-left: 10px;
+                `}
+              />
+            ))}
           </IssueTitleWrapper>
           <IssueTagWrapper>
             <IssueTag>#{id}</IssueTag>
@@ -137,18 +128,20 @@ function IssueCell({
               이 이슈가 {calculateTimeDiff(timestamp)} 전, {writer.name} 님에
               의해 작성되었습니다
             </IssueTag>
-            <IssueTag>
-              <MilestoneIcon
-                css={`
-                  margin-right: 10px;
-                `}
-              />
-              {milestone}
-            </IssueTag>
+            {milestone && (
+              <IssueTag>
+                <MilestoneIcon
+                  css={`
+                    margin-right: 10px;
+                  `}
+                />
+                {milestone.text}
+              </IssueTag>
+            )}
           </IssueTagWrapper>
         </IssueInfoWrapper>
       </LeftPart>
-      <WriterProfile src={writer.photoUrl} />
+      <WriterProfile data-not-navigate="true" src={writer.photoUrl} />
     </IssueCellWrapper>
   );
 }

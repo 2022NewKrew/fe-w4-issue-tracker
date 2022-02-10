@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { COLOR } from "@constants";
+import { useRecoilValue } from "recoil";
+
 import { MilestoneIcon, TagIcon } from "@icons";
 import { SmallText, Wrapper } from "@atoms";
-import { useRecoilValue } from "recoil";
+
+import { COLOR } from "@constants";
 import { labelListCountState, milestoneListCountState } from "@stores";
 
 const TabListWrapper = styled(Wrapper)`

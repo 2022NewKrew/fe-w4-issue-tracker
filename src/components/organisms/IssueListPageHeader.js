@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { FilterBar, TabList } from "@molecules";
-import { SmallStandardButton, Wrapper, XSmallText } from "@atoms";
-import { PlusIcon } from "@icons";
-import { COLOR, DIRECTION } from "@constants";
 import { useNavigate } from "react-router-dom";
+
+import { PlusIcon } from "@icons";
+import { SmallStandardButton, Wrapper, XSmallText } from "@atoms";
+import { FilterBar, TabList } from "@molecules";
+
+import { COLOR, DIRECTION } from "@constants";
 
 const IssueListPageHeaderWrapper = styled(Wrapper)`
   flex-direction: row;
@@ -30,17 +32,23 @@ const CreateIssueButton = styled(SmallStandardButton)`
 
 function IssueListPageHeader() {
   const navigate = useNavigate();
+
   const clickCreateIssueButton = () => {
     navigate("/issuecreation");
   };
+
   return (
     <IssueListPageHeaderWrapper>
       <FilterBar />
       <RightPart>
         <TabList />
-        <CreateIssueButton color={COLOR.BLUE} direction={DIRECTION.ROW}>
+        <CreateIssueButton
+          color={COLOR.BLUE}
+          direction={DIRECTION.ROW}
+          onClick={clickCreateIssueButton}
+        >
           <PlusIcon />
-          <ButtonText onClick={clickCreateIssueButton}>이슈 작성</ButtonText>
+          <ButtonText>이슈 작성</ButtonText>
         </CreateIssueButton>
       </RightPart>
     </IssueListPageHeaderWrapper>

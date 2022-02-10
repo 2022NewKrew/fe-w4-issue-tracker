@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { SmallProfileImg, SmallText, Wrapper } from "@atoms";
-import { COLOR } from "@constants";
+
 import { CheckOffCircleIcon, CheckOnCircleIcon } from "@icons";
+import { SmallProfileImg, SmallText, Wrapper } from "@atoms";
+
+import { COLOR } from "@constants";
 
 const DropdownPanelWrapper = styled(Wrapper)`
   background-color: ${COLOR.GREYSCALE.OFF_WHITE};
@@ -26,21 +28,14 @@ const ProfileImg = styled(SmallProfileImg)``;
 function DropdownPanel({ text, photoUrl, isCheckIcon, isChecked, onClick }) {
   return (
     <DropdownPanelWrapper onClick={onClick}>
-      {photoUrl ? <ProfileImg src={photoUrl} /> : <></>}
+      {photoUrl && <ProfileImg src={photoUrl} />}
       <DropdownPanelInfoWrapper
         isImgContained={!!photoUrl}
         isActivated={isChecked}
       >
         <span>{text}</span>
-        {isCheckIcon ? (
-          isChecked ? (
-            <CheckOnCircleIcon />
-          ) : (
-            <CheckOffCircleIcon />
-          )
-        ) : (
-          <></>
-        )}
+        {isCheckIcon && isChecked && <CheckOnCircleIcon />}
+        {isCheckIcon && !isChecked && <CheckOffCircleIcon />}
       </DropdownPanelInfoWrapper>
     </DropdownPanelWrapper>
   );

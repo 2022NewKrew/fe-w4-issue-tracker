@@ -1,11 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { Wrapper } from "@/components/atoms/Wrapper.js";
-import { AlertCircleIcon, ArchieveIcon } from "@icons";
-import { SmallLinkText } from "@atoms";
-import { ACTION_TYPE, COLOR, DATA_TYPE, ISSUE_PROP_TYPE } from "@constants";
-import { IssueTableHeaderOptionTab } from "@/components/molecules/index.js";
 import { useRecoilState, useRecoilValue, waitForAll } from "recoil";
+
+import { AlertCircleIcon, ArchieveIcon } from "@icons";
+import { Wrapper, SmallLinkText } from "@atoms";
+import { IssueTableHeaderOptionTab } from "@molecules";
+
+import { ACTION_TYPE, COLOR, DATA_TYPE, ISSUE_PROP_TYPE } from "@constants";
 import {
   closedIssueListCountState,
   filteredIssueListState,
@@ -109,15 +110,17 @@ const OptionTabList = styled(Wrapper)`
 
 function IssueTableHeader() {
   const [issueFilter, setIssueFilter] = useRecoilState(filterState);
+  const [selectedIssueList, setSelectedIssueList] =
+    useRecoilState(issueSelectionState);
   const openedIssueCount = useRecoilValue(openedIssueListCountState);
   const closedIssueCount = useRecoilValue(closedIssueListCountState);
-  const [headerOptionTabData, setHeaderOptionTabData] = useState([]);
   const [userList, milestoneList, labelList] = useRecoilValue(
     waitForAll([userListState, milestoneListState, labelListState])
   );
-  const [selectedIssueList, setSelectedIssueList] =
-    useRecoilState(issueSelectionState);
   const filteredIssueList = useRecoilValue(filteredIssueListState);
+
+  const [headerOptionTabData, setHeaderOptionTabData] = useState([]);
+
   const checkboxRef = useRef();
 
   useEffect(() => {
@@ -126,26 +129,22 @@ function IssueTableHeader() {
 
   useEffect(() => {
     checkboxRef.current.checked =
+      selectedIssueList.length &&
       selectedIssueList.length === filteredIssueList.length;
   }, [selectedIssueList]);
 
-  const getDataWithDataKey = async (dataKey) => {
-    switch (dataKey) {
-      case DATA_TYPE.USER:
-        return userList;
-      case DATA_TYPE.LABEL:
-        return labelList;
-      case DATA_TYPE.MILESTONE:
-        return milestoneList;
-      default:
-        return [];
-    }
+  const getDataWithDataKey = (dataKey) => {
+    const dataValue = {
+      [DATA_TYPE.USER]: userList,
+      [DATA_TYPE.LABEL]: labelList,
+      [DATA_TYPE.MILESTONE]: milestoneList,
+    };
+    return dataValue[dataKey] || [];
   };
 
   const processRawData = useCallback(
     (filterKey, rawData) => {
-      return rawData.map((data) => {
-        const { text: dataText, name: dataName, photoUrl } = data;
+      return rawData.map(({ text: dataText, name: dataName, photoUrl }) => {
         const text = dataText || dataName;
         return {
           text,
@@ -163,8 +162,7 @@ function IssueTableHeader() {
 
   const generateHeaderOptionTabData = () => {
     Promise.all(
-      TAB_LIST_METADATA.map(async (meta) => {
-        const { title, filterKey, dataKey } = meta;
+      TAB_LIST_METADATA.map(async ({ title, filterKey, dataKey }) => {
         const rawData = await getDataWithDataKey(dataKey);
         const processedData = processRawData(filterKey, rawData);
         return {
@@ -252,14 +250,12 @@ function IssueTableHeader() {
               </FilterTab>
             </FilterTabList>
             <OptionTabList>
-              {headerOptionTabData.map((tabData, idx) => {
-                return (
-                  <IssueTableHeaderOptionTab
-                    key={`filterTab-${tabData.title}-${idx}`}
-                    tabData={tabData}
-                  />
-                );
-              })}
+              {headerOptionTabData.map((tabData, idx) => (
+                <IssueTableHeaderOptionTab
+                  key={`filterTab-${tabData.title}-${idx}`}
+                  tabData={tabData}
+                />
+              ))}
             </OptionTabList>
           </>
         )}

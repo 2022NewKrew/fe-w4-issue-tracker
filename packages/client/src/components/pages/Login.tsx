@@ -1,5 +1,4 @@
 import LoginLayout from "@templetes/LoginLayout";
-import Atoms from "@UI/Atoms";
 import { IDLoginForm } from "@UI/Organisms";
 
 import Icon from "@UI/Icon";

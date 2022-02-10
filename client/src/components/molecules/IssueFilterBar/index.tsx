@@ -5,16 +5,18 @@ import { Search } from "@/components/atoms/Icons";
 import useInput from "@/hooks/useInput";
 import { inputWrapMediaStyle } from "@/styles/common";
 import { IStyle } from "@/constants/type";
+import { DropDown } from "@/components/molecules";
 
-interface IFilterBar {
+interface IIssueFilterBar {
   styles?: IStyle;
   onClick?: VoidFunction;
 }
-const FilterBar: React.FC<IFilterBar> = ({ styles }) => {
+const IssueFilterBar: React.FC<IIssueFilterBar> = ({ styles, onClick }) => {
   const { value, className, onChange, onFocus, onBlur } = useInput({
     initialValue: "is:issue is:open",
     inputType: "FilterBar",
   });
+  const [visible, setVisible] = useState(false);
 
   const Props = {
     BarWrap: {
@@ -36,9 +38,32 @@ const FilterBar: React.FC<IFilterBar> = ({ styles }) => {
     BarButtonProps: {
       className: className,
     },
+    DropDownProp: {
+      visible,
+      styles: {
+        width: "130px",
+        childCSS: css`
+          position: absolute;
+          z-index: 1;
+          right: 1020px;
+          top: 135px;
+        `,
+      },
+      optionList: [
+        "열린 이슈",
+        "내가 작성한 이슈",
+        "나에게 할당된 이슈",
+        "내가 댓글을 남긴 이슈",
+        "닫힌 이슈",
+      ],
+      onClick: () => {
+        setVisible(!visible);
+      },
+    },
   };
   return (
     <BarWrap {...Props.BarWrap}>
+      <DropDown {...Props.DropDownProp}>필터</DropDown>
       <BarLine {...Props.BarLineProps} />
       <BarInputWrap {...Props.BarInputWrapProps}>
         <Search color={theme.color.placeholder} />
@@ -127,4 +152,4 @@ const BarWrap = styled.div<IStyle>`
     }
   }
 `;
-export default FilterBar;
+export default IssueFilterBar;

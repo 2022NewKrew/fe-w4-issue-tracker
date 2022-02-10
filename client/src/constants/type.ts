@@ -48,6 +48,8 @@ export interface IStyle {
   iconColor?: string;
   childCSS?: any;
   padding?: string;
+  position?: string;
+  right?: string;
 }
 const GITHUB_AUTH_URL = "https://github.com/login/oauth/authorize";
 const CLIENT_ID = "0e4c6359e99345114044";

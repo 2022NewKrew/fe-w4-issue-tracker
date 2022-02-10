@@ -8,6 +8,7 @@ interface LabelProps {
   type?: "large" | "large-open" | "large-close" | "small-dark" | "small-light" | "small-line";
   children?: React.ReactNode;
   styles?: IStyle;
+  onClick?: VoidFunction;
 }
 interface ITransedIcon {
   type?: string;
@@ -35,11 +36,12 @@ const TransedIcon: React.FC<ITransedIcon> = iconProps => {
       return <></>;
   }
 };
-const Label: React.FC<LabelProps> = ({ type, styles, children }) => {
+const Label: React.FC<LabelProps> = ({ type, styles, children, onClick }) => {
   const Props = {
     LabelWrapProps: {
       type: type,
       ...styles,
+      onClick,
     },
     IconProps: {
       type: type,
@@ -131,7 +133,7 @@ const LabelWrap = styled.div<any>`
         return css`
           width: 90px;
           height: 28px;
-          background: ${background ?? "#4e4b66"};
+          background: ${background ?? ""};
           margin: ${margin ?? "auto"};
           color: ${color ?? "#fefefe"};
           font-weight: 500;

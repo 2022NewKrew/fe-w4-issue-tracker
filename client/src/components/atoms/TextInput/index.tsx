@@ -34,9 +34,11 @@ export interface IInputProps {
   name: string;
   styles?: IStyle;
   icon?: any;
+  id?: string;
+  label?: string;
 }
 
-const TextInput: React.FC<IInputProps> = ({ type, name, styles, icon }) => {
+const TextInput: React.FC<IInputProps> = ({ type, name, styles, icon, id, label }) => {
   const { value, className, onChange, onFocus, onBlur }: TextInputProps = useInput({
     initialValue: type === TEXT_INPUT_TYPE.COLOR_CODE ? "#000000" : name,
     inputType: type,
@@ -47,6 +49,7 @@ const TextInput: React.FC<IInputProps> = ({ type, name, styles, icon }) => {
     StyledWrapProps: {
       type,
       className,
+
       ...styles,
     },
     StyledLabelProps: {
@@ -55,6 +58,8 @@ const TextInput: React.FC<IInputProps> = ({ type, name, styles, icon }) => {
     StyledInputProps: {
       type,
       name,
+      id,
+      label,
       onChange,
       onFocus,
       onBlur,
@@ -85,6 +90,7 @@ const StyledWrap = styled.div<any>`
             font-size: 12px;
             width: 292px;
             height: 20px;
+            line-height: 20px;
           }
           ${StyledInput} {
             width: 292px;
@@ -160,6 +166,7 @@ const StyledLabel = styled.label`
   &.filled,
   &.typing {
     display: flex;
+    margin-top: 5px;
   }
   &.success {
     display: flex;

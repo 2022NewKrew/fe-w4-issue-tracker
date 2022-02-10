@@ -13,7 +13,7 @@ const IssueFilterOption: React.FC<IIssueFilterOptionProps> = ({ styles }) => {
     <IssueOptionWrap>
       <Tab />
       <Button
-        type="smallStandard"
+        btnType="smallStandard"
         onClick={() => {
           navigate("/issue/add");
         }}

@@ -17,12 +17,12 @@ import React from "react";
 const Atoms: React.FC = () => {
   return (
     <>
-      <Button type="large"></Button>
-      <Button type="mediumStandard"></Button>
-      <Button type="smallSecondary" styles={{ iconColor: theme.color.primary }}></Button>
-      <Button type="smallStandard"></Button>
-      <Button type="textMedium" styles={{ iconColor: theme.color.label }}></Button>
-      <Button type="textSmall" styles={{ iconColor: theme.color.label }}></Button>
+      <Button btnType="large"></Button>
+      <Button btnType="mediumStandard"></Button>
+      <Button btnType="smallSecondary" styles={{ iconColor: theme.color.primary }}></Button>
+      <Button btnType="smallStandard"></Button>
+      <Button btnType="textMedium" styles={{ iconColor: theme.color.label }}></Button>
+      <Button btnType="textSmall" styles={{ iconColor: theme.color.label }}></Button>
       <TextInput type="large" name="아이디"></TextInput>
       <TextInput type="medium" name="제목"></TextInput>
       <TextInput type="small" name="제목"></TextInput>

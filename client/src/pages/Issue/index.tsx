@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Header } from "@/components/organisms";
 import styled from "styled-components";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 const Issue: React.FC = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (location.pathname === "/issue") {
+      navigate("/issue/list");
+    }
+  }, []);
   return (
     <IssueWrap>
       <Header></Header>

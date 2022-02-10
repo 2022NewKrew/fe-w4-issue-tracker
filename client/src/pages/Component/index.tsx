@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 const Component: React.FC = props => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (location.pathname === "/component") {
+      navigate("/component/atoms");
+    }
+  }, []);
   return (
     <ComponentWrap>
       <Outlet />

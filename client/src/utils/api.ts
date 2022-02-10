@@ -1,11 +1,10 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:3001/";
-
-const server = "http://localhost:3001/";
+axios.defaults.baseURL = "http://49.50.174.24:1234/api";
+const server = "http://49.50.174.24:1234/api/";
 
 // get user token
-const setCommonParams = (params: any) => {
+const setCommonParams = ({ params }: any) => {
   return params;
 };
 
@@ -13,7 +12,9 @@ const api = {
   async get(endpoint: string, param?: any) {
     const params = param;
     try {
-      const response = await axios.get(`${server}${endpoint}`);
+      const token = localStorage.getItem("authToken");
+      const headers = { Authorization: `Bearer ${token}` };
+      const response = await axios.get(`${server}${endpoint}`, { headers });
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -23,20 +24,12 @@ const api = {
     }
   },
 
-  async post(endpoint: string, param: any) {
+  async post(endpoint: string, data: any) {
     // api.setAxiosDefaultHeader();
-    const params = setCommonParams(param);
-    const headers = {
-      "Content-Type": "application/x-www-form-urlencoded",
-    };
     try {
-      const response = await axios.post(
-        `${server}${endpoint}`,
-        { params },
-        {
-          headers,
-        },
-      );
+      const token = localStorage.getItem("authToken");
+      const headers = { Authorization: `Bearer ${token}` };
+      const response = await axios.post(`${server}${endpoint}`, { ...data }, { headers });
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {

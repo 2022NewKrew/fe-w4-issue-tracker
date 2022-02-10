@@ -21,10 +21,10 @@ const IssueDetailHeader: React.FC<IIssueDetailHeaderProps> = ({ styles, children
       <IssueHeader>
         {children ?? "FE 이슈트래커 디자인 시스템 구현 #2"}
         <IssueHeaderBtnWrap>
-          <Button type="smallSecondary" {...Props.EditHeaderProps}>
+          <Button btnType="smallSecondary" {...Props.EditHeaderProps}>
             제목 편집
           </Button>
-          <Button type="smallSecondary" {...Props.CloseHeaderProps}>
+          <Button btnType="smallSecondary" {...Props.CloseHeaderProps}>
             이슈 닫기
           </Button>
         </IssueHeaderBtnWrap>

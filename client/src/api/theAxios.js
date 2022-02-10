@@ -12,10 +12,10 @@ const theAxios = ({ url, type = 'get', param }) => {
             'Origin,Accept,X-Requested-With,Content-Type,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization',
     };
 
-    // const accessToken = getLocalStorage(token);
-    // if (accessToken !== null) {
-    // headers.Authorization = `Bearer${accessToken}`;
-    // }
+    const accessToken = getLocalStorage('token');
+    if (accessToken !== null) {
+        headers.Authorization = `Bearer${accessToken}`;
+    }
 
     return Axios({
         method: type,

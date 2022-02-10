@@ -1,4 +1,4 @@
-import { Dropdown, Progress } from "@UI/Molecules";
+import { CustomButton, Dropdown, Progress } from "@UI/Molecules";
 import Atoms from "@UI/Atoms";
 import Icon from "@UI/Icon";
 
@@ -8,18 +8,27 @@ import { useUserStore } from "@stores/user";
 import { useMilestoneStore } from "@stores/milestone";
 import { useLabelStore } from "@stores/label";
 import { Milestone } from "@types";
-import { useIssueFormStore } from "@stores/issue";
+import { useIssueFormStore, useIssueMutation } from "@stores/issue";
+import { useEffect } from "react";
 
 const SideBar = () => {
   const { userList } = useUserStore();
   const { labelList } = useLabelStore();
   const { milestoneList } = useMilestoneStore();
 
-  const { issueForm, setAssignees, setLabels, setMilestone } =
+  const { issueForm, setAssignees, setLabels, setMilestone, issueFormMode } =
     useIssueFormStore();
+
+  const { removeIssue, modifyIssue } = useIssueMutation();
   const { assignees, labels, milestone } = issueForm;
 
   const Aside = Wrapper.withComponent("aside");
+
+  useEffect(() => {
+    return () => {
+      modifyIssue();
+    };
+  }, []);
 
   return (
     <Aside className="SideBar">
@@ -84,6 +93,9 @@ const SideBar = () => {
           />
         )}
       </Atoms.Li>
+      {issueFormMode !== "add" && (
+        <CustomButton.RemoveButton onClick={() => removeIssue()} />
+      )}
     </Aside>
   );
 };
@@ -93,6 +105,7 @@ export default SideBar;
 const Wrapper = styled(Atoms.Ul)`
   width: 308px;
   height: min-content;
+  position: relative;
   & > li {
     min-height: 96px;
     padding: 20px 32px;
@@ -122,5 +135,9 @@ const Wrapper = styled(Atoms.Ul)`
         margin-right: 4px;
       }
     }
+  }
+  & > .RemoveButton {
+    position: absolute;
+    right: 0;
   }
 `;

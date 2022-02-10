@@ -63,6 +63,10 @@ class CommentService {
 
     return data;
   }
+  static async deleteByIssue(id: string) {
+    const { data } = await _axios.delete(`${baseUrl}/${id}`);
+    return data;
+  }
 }
 
 export default CommentService;

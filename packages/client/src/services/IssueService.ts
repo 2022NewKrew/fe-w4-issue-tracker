@@ -119,6 +119,28 @@ class IssueService {
     });
     return data;
   }
+
+  static async patch({
+    issueId,
+    issueForm,
+  }: {
+    issueId: string;
+    issueForm: IssueForm;
+  }) {
+    const { data } = await _axios.patch<IssueJSON>(`${baseUrl}/${issueId}`, {
+      ...issueForm,
+    });
+    return data;
+  }
+
+  static async delete(issueId: string) {
+    const issue = await this.getByIdJSON(issueId);
+
+    await Promise.all([
+      _axios.delete(`${baseUrl}/${issueId}`),
+      issue.comments.map(CommentService.deleteByIssue),
+    ]);
+  }
 }
 
 export default IssueService;

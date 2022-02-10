@@ -186,16 +186,17 @@ export const useIssueMutation = () => {
   const [issueFormMode, setIssueFormMode] = useRecoilState(issueFormModeState);
 
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
+  const nav = useNavigate();
 
   const addIssue = useMutation(
     async () => IssueService.post("user1", issueForm),
     {
       onSuccess: () => {
         queryClient.invalidateQueries("issueList");
+        queryClient.invalidateQueries("commentList");
         setIssueFormMode("close");
         resetIssueForm();
-        navigate("/issue");
+        nav("/issue");
       },
     }
   );
@@ -225,6 +226,29 @@ export const useIssueMutation = () => {
     }
   );
 
+  const modifyIssue = useMutation(
+    async () =>
+      IssueService.patch({
+        issueId: issueFormMode,
+        issueForm,
+      }),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("issueList");
+      },
+    }
+  );
+
+  const removeIssue = useMutation(
+    async () => IssueService.delete(issueFormMode),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("issueList");
+        nav("/issue");
+      },
+    }
+  );
+
   return {
     addIssue: () => addIssue.mutate(),
     modifyIssueStatus: ({
@@ -235,5 +259,7 @@ export const useIssueMutation = () => {
       status: IssueStatus;
     }) => modifyIssueStatus.mutate({ issueId, status }),
     modifyIssueTitle: () => modifyIssueTitle.mutate(),
+    modifyIssue: () => modifyIssue.mutate(),
+    removeIssue: () => removeIssue.mutate(),
   };
 };

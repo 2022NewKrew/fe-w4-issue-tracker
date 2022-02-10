@@ -1,19 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { theme } from "@/styles/theme";
-import { DropIcon, Search } from "@/components/atoms/Icons";
+import { Search } from "@/components/atoms/Icons";
 import useInput from "@/hooks/useInput";
 import { inputWrapMediaStyle } from "@/styles/common";
 import { IStyle } from "@/constants/type";
 
 interface IFilterBar {
   styles?: IStyle;
+  onClick?: VoidFunction;
 }
 const FilterBar: React.FC<IFilterBar> = ({ styles }) => {
   const { value, className, onChange, onFocus, onBlur } = useInput({
     initialValue: "is:issue is:open",
     inputType: "FilterBar",
   });
+
   const Props = {
     BarWrap: {
       ...styles,
@@ -37,10 +39,6 @@ const FilterBar: React.FC<IFilterBar> = ({ styles }) => {
   };
   return (
     <BarWrap {...Props.BarWrap}>
-      <BarButton {...Props.BarButtonProps}>
-        필터
-        <DropIcon />
-      </BarButton>
       <BarLine {...Props.BarLineProps} />
       <BarInputWrap {...Props.BarInputWrapProps}>
         <Search color={theme.color.placeholder} />

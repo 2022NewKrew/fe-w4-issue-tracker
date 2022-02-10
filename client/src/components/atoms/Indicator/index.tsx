@@ -7,10 +7,12 @@ import { IStyle } from "@/constants/type";
 interface IIndicatorProps {
   children?: React.ReactNode;
   styles?: IStyle;
+  onClick?: VoidFunction;
 }
-const Indicator: React.FC<IIndicatorProps> = ({ styles, children }) => {
+const Indicator: React.FC<IIndicatorProps> = ({ styles, children, onClick }) => {
   const SelectDropdownProps = {
     ...styles,
+    onClick,
   };
   return (
     <SelectDropdown {...SelectDropdownProps}>

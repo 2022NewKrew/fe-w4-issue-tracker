@@ -1,6 +1,6 @@
 import { ChangeEventHandler, FocusEventHandler, useState, EventHandler } from "react";
 import useSWR from "swr";
-import fetcher from "@/utils/fetcher";
+import { fetcher } from "@/utils/fetcher";
 import { TEXT_INPUT_TYPE, INPUT_TYPE, INPUT_CLASS_TYPE } from "@/constants/type";
 
 export interface TextInputProps {
@@ -15,19 +15,9 @@ export interface UseInputProps {
   inputType?: string | "FilterBar";
   loginType?: "아이디" | "비밀번호" | string;
 }
-const useInput = ({ initialValue = "", inputType = "", loginType = "" }: UseInputProps) => {
+const useInput = ({ initialValue = "", inputType = "" }: UseInputProps) => {
   const [value, setValue] = useState(initialValue);
   const [className, setClassName] = useState(INPUT_CLASS_TYPE.INITIAL);
-  const largeSuccessData = useSWR(
-    checkTypeURL({ className, inputType, value, initialValue, loginType }),
-    fetcher,
-  ).data;
-
-  if (!!largeSuccessData) {
-    largeSuccessData.status === INPUT_CLASS_TYPE.SUCCESS
-      ? setClassName(INPUT_CLASS_TYPE.SUCCESS)
-      : setClassName(INPUT_CLASS_TYPE.ERROR);
-  }
 
   const onChange: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
     setClassName(INPUT_CLASS_TYPE.TYPING);
@@ -45,7 +35,6 @@ const useInput = ({ initialValue = "", inputType = "", loginType = "" }: UseInpu
       if (value !== "" && value !== initialValue) {
         setClassName(INPUT_CLASS_TYPE.FILLED);
       } else {
-        console.log(initialValue);
         setClassName(INPUT_CLASS_TYPE.INITIAL);
         setValue(initialValue);
       }

@@ -6,7 +6,7 @@ export default function CustomButton({
   onClick = () => {},
   disable = false,
   text = '내용 없음',
-  fontColor = white,
+  fontColor = 'white',
   size = 3,
 }) {
   return (

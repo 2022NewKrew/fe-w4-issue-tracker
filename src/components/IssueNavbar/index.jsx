@@ -2,12 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import MediumLogo from '@/assets/logo/LogotypeMedium.svg';
 import { lineGS } from '@/assets/styles/Palette';
+import SampleProfileImage from '@/assets/images/sample-profile.png';
 
 export default function IssueNavbar() {
   return (
     <Wrapper>
       <MediumLogo />
-      <ProfileImage />
+      <ProfileImage src={SampleProfileImage} />
     </Wrapper>
   );
 }
@@ -15,12 +16,12 @@ export default function IssueNavbar() {
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 27px;
+  align-items: center;
 `;
 
 const ProfileImage = styled.img`
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   border: 1px solid ${lineGS};
-  margin-top: 25px;
 `;

@@ -11,7 +11,7 @@ export default function App() {
       <GlobalStyle />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="login" element={<Login />} />
           <Route path="components" element={<Components />} />
           <Route path="issue-list" element={<IssueList />} />
         </Routes>

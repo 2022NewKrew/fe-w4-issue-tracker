@@ -41,6 +41,8 @@ export default function TextInput({
 
 const Wrapper = styled.div`
   position: relative;
+  display: flex;
+  justify-content: center;
 `;
 
 const Input = styled.input`

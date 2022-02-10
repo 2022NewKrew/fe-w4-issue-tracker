@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { getIssues, getLabels, getMilestones, patchCheckedIssue } from "../../../api";
+import { useCheckbox } from "../../../hooks/useCheckbox";
 import { Button } from "../../atoms/Button";
 import { CheckBox } from "../../atoms/CheckBox";
 import { cssFontSize, cssLink } from "../../atoms/Text";
@@ -13,51 +14,29 @@ import { Taps } from "../../molecules/Taps";
 
 export const IssueHome = () => {
   // local state
-  const [checked, setCheck] = useState(false);
   const [filteredIssueList, setIssueList] = useState([]); // 나중에 필터 적용 예정
-  const checkedIssues = useRef(new Set());
+  // checkbox logic
+  const [filteredIssueIdList, setIdList] = useState([]);
+  const [checkedIssues, handleCheckIssue, clearAllIssues, checkAllIssues, isCheckedAll] = useCheckbox(filteredIssueIdList);
 
-  // data fetch
+  // server state
   const { data: labels } = useQuery(["labels"], getLabels);
   const { data: milestones } = useQuery(["milestones"], getMilestones);
   const { data: issues, refetch } = useQuery(["issues"], getIssues);
   useEffect(() => {
     if (Array.isArray(issues)) {
       setIssueList(issues);
-      setCheck(false);
-      checkedIssues.current = new Set();
+      setIdList(issues.map(({ id }) => id));
     }
   }, [issues]);
 
   // 전체 선택, 해제
   const handleTotalCheckBox = () => {
-    if (checked) {
-      checkedIssues.current.clear();
-      setIssueList((prev) => prev.map((item) => ({ ...item, checked: false })));
+    if (isCheckedAll) {
+      clearAllIssues();
     } else {
-      checkedIssues.current = new Set(filteredIssueList.map((item) => item.id));
-      setIssueList((prev) => prev.map((item) => ({ ...item, checked: true })));
+      checkAllIssues();
     }
-    setCheck((prev) => !prev);
-  };
-
-  // 이슈별 체크박스
-  const handleCheckBoxById = (id) => {
-    setIssueList((prev) =>
-      prev.map((issue) =>
-        issue.id === id
-          ? {
-              ...issue,
-              checked: !issue.checked,
-            }
-          : issue
-      )
-    );
-    if (checkedIssues.current.delete(id)) {
-      setCheck(false);
-      return;
-    }
-    checkedIssues.current.add(id);
   };
 
   // 선택 이슈들 상태 변경
@@ -66,17 +45,17 @@ export const IssueHome = () => {
     refetch();
   };
 
-  const issueItems = filteredIssueList.map((item) => <IssueItem key={item.id} item={item} handleCheckBoxById={handleCheckBoxById} checked={item.checked} />);
+  const issueItems = filteredIssueList.map((item) => <IssueItem key={item.id} item={item} onClickCheckBox={() => handleCheckIssue(item.id)} checked={checkedIssues.has(item.id)} />);
   const openIssuesLength = issues?.reduce((prev, item) => (item.status === "open" ? prev + 1 : prev), 0) || 0;
   const closedIssuesLength = issues?.reduce((prev, item) => (item.status === "close" ? prev + 1 : prev), 0) || 0;
   const labelsLength = labels?.length || 0;
   const milestonesLength = milestones?.length || 0;
-  const checkedIssuesLength = checkedIssues.current.size;
+  const checkedIssuesLength = checkedIssues.size;
 
   const issueTableHeader =
     checkedIssuesLength === 0 ? (
       <TableHeader>
-        <CheckBox onClick={handleTotalCheckBox} checked={checked} />
+        <CheckBox onClick={handleTotalCheckBox} checked={isCheckedAll} />
         <Button options={{ type: "Medium-Text", prefixIcon: "alert-circle" }}>{`열린 이슈(${openIssuesLength})`}</Button>
         <Button options={{ type: "Medium-Text", prefixIcon: "archive" }}>{`닫힌 이슈(${closedIssuesLength})`}</Button>
         <RightItemWrapper>
@@ -88,7 +67,7 @@ export const IssueHome = () => {
       </TableHeader>
     ) : (
       <TableHeader>
-        <CheckBox onClick={handleTotalCheckBox} checked={checked} />
+        <CheckBox onClick={handleTotalCheckBox} checked={isCheckedAll} />
         <span css={[cssFontSize["small"], cssLink]}>{`${checkedIssuesLength}개 이슈 선택`}</span>
         <RightItemWrapper>
           <Button options={{ type: "Medium-Text", suffixIcon: "arrow-down" }} onClick={changeStateCheckedIssue}>

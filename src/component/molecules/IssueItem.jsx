@@ -6,10 +6,10 @@ import { Icon } from "../atoms/Icons";
 import { SmallLabel } from "../atoms/Label";
 import { cssFontSize, cssLink } from "../atoms/Text";
 
-export const IssueItem = ({ item, handleCheckBoxById, checked, ...props }) => {
+export const IssueItem = ({ item, onClickCheckBox, checked, ...props }) => {
   return (
     <Issue {...props}>
-      <IssueCheckBox onClick={() => handleCheckBoxById(item.id)} checked={checked} />
+      <IssueCheckBox onClick={onClickCheckBox} checked={checked} />
       <IssueTitle>
         <Icon name="alert-circle" />
         <Link to={`${item.id}`}>

@@ -8,7 +8,7 @@ const DropDownButton = styled.button`
 
     &:after {
         content: '';
-        margin: 3px 0 0 4px;
+        margin: 4px 0 0 4px;
         ${({ theme }) => theme.icon('/assets/img/dropdown.png')}
     }
 `;

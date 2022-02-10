@@ -50,6 +50,7 @@ export const GlobalStyle = createGlobalStyle`
         border: 0;
     }
     button {
+        vertical-align: top;
         cursor: pointer;
         background-color: transparent;
         border: 0;

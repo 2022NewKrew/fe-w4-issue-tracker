@@ -1,3 +1,5 @@
+const {flatObjectArray} = require('../global');
+
 /**
  * @param {import('better-sqlite3').Database} db
  */
@@ -14,7 +16,7 @@ module.exports=function initAssigneeDB(db){
     stmt.run();
   }
   createTable();
-  
+
   const insertStmt=db.prepare(`
     INSERT INTO assignee(userID, issueID)
     VALUES (@userID, @issueID)
@@ -31,16 +33,17 @@ module.exports=function initAssigneeDB(db){
     removeStmt.run({userID, issueID});
   }
 
-  const selectByissueIDStmt=db.prepare(`
-    SELECT * FROM assignee WHERE issueID=@issueID
+  const selectUserIDByissueIDStmt=db.prepare(`
+    SELECT userID FROM assignee WHERE issueID=@issueID
   `);
-  function selectByissueID(issueID){
-    return selectByissueIDStmt.all({issueID});
+  function selectUserIDByissueID(issueID){
+    const rows=selectUserIDByissueIDStmt.all({issueID});
+    return flatObjectArray(rows, 'userID');
   }
 
   return {
     insert,
     remove,
-    selectByissueID
+    selectUserIDByissueID
   };
 };

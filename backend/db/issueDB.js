@@ -76,7 +76,19 @@ module.exports=function initIssueDB(db){
     return result;
   }
 
-  function select({authorID, milestoneID, labelID, assigneeID}){
+  /**
+   * Return the issue(s) matching given column values.
+   * Return one row (or nothing) if `issueID` is given.
+   */
+  function select({authorID, milestoneID, labelID, assigneeID, issueID}){
+    if(issueID!==undefined){
+      const selectStmt=db.prepare(`
+        SELECT * FROM
+        issue WHERE issueID=@issueID
+      `);
+      const result=selectStmt.get({issueID});
+      return result;
+    }
     const condition=[
       createWhereCondition(authorID, 'authorID'),
       createWhereCondition(milestoneID, 'milestoneID'),

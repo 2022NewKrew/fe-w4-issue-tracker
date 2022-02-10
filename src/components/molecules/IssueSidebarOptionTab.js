@@ -55,7 +55,7 @@ const SelectedMilestoneWrapper = styled(Wrapper)`
   align-items: flex-start;
 `;
 
-function IssueCreationSidebarOptionTab({
+function IssueSidebarOptionTab({
   actionForSelectOption,
   selectedList,
   actionType,
@@ -120,4 +120,4 @@ function IssueCreationSidebarOptionTab({
   );
 }
 
-export default IssueCreationSidebarOptionTab;
+export default IssueSidebarOptionTab;

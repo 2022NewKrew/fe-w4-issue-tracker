@@ -122,7 +122,7 @@ export default function IssueDetail(){
         </div>
         <div className='panel'>
           <div className='panel-item'>
-            <h3>작성자</h3>
+            <h3>담당자</h3>
             {getAssignees()}
           </div>
           <div className='panel-item'>

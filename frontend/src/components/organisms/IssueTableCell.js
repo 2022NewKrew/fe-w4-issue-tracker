@@ -53,6 +53,10 @@ const IssueTitleWrapper = styled.div`
   p + div {
     margin-left: 8px;
   }
+
+  div + div {
+    margin-left: 8px;
+  }
 `;
 
 const IssueInfoWrapper = styled.div`

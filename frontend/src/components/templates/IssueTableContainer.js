@@ -11,7 +11,7 @@ import {
   closedIssuesState,
   activeIssueTabState,
 } from "../../_state";
-import { useRecoilValue, useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilValue, useRecoilState } from "recoil";
 
 const Container = styled.div`
   margin: 0 80px;

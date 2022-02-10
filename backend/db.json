@@ -201,20 +201,6 @@
       "milestone": "2dbe31cf-f626-4c80-9fd8-952c251c018b"
     },
     {
-      "id": "367b98ba-1ab5-4faa-8dc6-aaefff3ce7e8",
-      "num": 7,
-      "status": "open",
-      "writer": "user1",
-      "timestamp": "Wed, 09 Feb 2022 04:28:09 GMT",
-      "title": "sdf",
-      "assignees": [],
-      "labels": [],
-      "comments": [
-        "abf2ff18-0427-425e-928b-8b028c24e331"
-      ],
-      "milestone": null
-    },
-    {
       "id": "cdcca68e-d0de-48ba-8e10-88a667133838",
       "num": 8,
       "status": "open",
@@ -227,20 +213,6 @@
       ],
       "comments": [
         "3def1f08-fd01-4df0-9681-688c69909bf6"
-      ],
-      "milestone": null
-    },
-    {
-      "id": "0ad71a98-8d6d-4172-a6be-5f8cef310878",
-      "num": 9,
-      "status": "open",
-      "writer": "user1",
-      "timestamp": "Wed, 09 Feb 2022 04:28:40 GMT",
-      "title": "asd",
-      "assignees": [],
-      "labels": [],
-      "comments": [
-        "43f3e065-7852-4d45-a043-1519e35b31ac"
       ],
       "milestone": null
     },
@@ -451,24 +423,10 @@
       "content": "No description provided."
     },
     {
-      "id": "abf2ff18-0427-425e-928b-8b028c24e331",
-      "status": "initial",
-      "author": "user1",
-      "timestamp": "Wed, 09 Feb 2022 04:28:09 GMT",
-      "content": "No description provided."
-    },
-    {
       "id": "3def1f08-fd01-4df0-9681-688c69909bf6",
       "status": "initial",
       "author": "user1",
       "timestamp": "Wed, 09 Feb 2022 04:28:25 GMT",
-      "content": "No description provided."
-    },
-    {
-      "id": "43f3e065-7852-4d45-a043-1519e35b31ac",
-      "status": "initial",
-      "author": "user1",
-      "timestamp": "Wed, 09 Feb 2022 04:28:40 GMT",
       "content": "No description provided."
     },
     {

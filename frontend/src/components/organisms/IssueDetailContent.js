@@ -85,7 +85,13 @@ export default function IssueDetailContent() {
 
   useEffect(() => {
     if (issue) {
-      issue.assignees && setSelectedAssignee(issue.assignees);
+      issue.assignees &&
+        setSelectedAssignee(
+          issue.assignees.map((assignee) => ({
+            id: assignee.id,
+            name: assignee.name,
+          }))
+        );
       issue.labels && setSelectedLabel(issue.labels);
       issue.milestone && setSelectedMilestone([issue.milestone]);
     }

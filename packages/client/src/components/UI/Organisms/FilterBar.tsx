@@ -62,7 +62,7 @@ const Wrapper = styled(Atoms.InputWrapper)<{ focus: boolean }>`
   border: 1px solid var(--line);
   & > .Dropdown > button {
     width: 128px;
-    height: 38px;
+    height: 36px;
     padding: 1px 24px 0;
     justify-content: space-between;
     border-radius: 11px 0 0 11px;

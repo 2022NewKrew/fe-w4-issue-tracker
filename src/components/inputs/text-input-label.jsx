@@ -1,24 +1,24 @@
 import styled, { css } from "styled-components";
 
 import greyscale from "@styles/constants/greyscale";
-import {
-  getTextInputTypographyDisplay,
-  getTextInputAlignItems,
-} from "@utils/helper";
+import numbers from "@styles/constants/numbers";
+import sizes from "@styles/constants/sizes";
+import { textXSmall } from "@styles/templates/text-template";
+import { getTextInputDisplay, getTextInputAlignItems } from "@utils/helper";
 
 const getLabelWidth = ({ componentSize }) => {
   switch (componentSize) {
-    case "large":
+    case sizes.LARGE:
       return css`
-        width: 292px;
+        width: ${numbers.TEXT_INPUT_LABEL_LARGE_WIDTH};
       `;
-    case "medium":
+    case sizes.MEDIUM:
       return css`
-        width: 272px;
+        width: ${numbers.TEXT_INPUT_LABEL_MEDIUM_WIDTH};
       `;
-    case "small":
+    case sizes.SMALL:
       return css`
-        width: 80px;
+        width: ${numbers.TEXT_INPUT_LABEL_SMALL_WIDTH};
       `;
     default:
       return css``;
@@ -27,14 +27,17 @@ const getLabelWidth = ({ componentSize }) => {
 
 const getLabelHeight = ({ componentSize }) => {
   switch (componentSize) {
-    case "large":
-    case "medium":
+    case sizes.LARGE:
       return css`
-        height: 20px;
+        height: ${numbers.TEXT_INPUT_LABEL_LARGE_HEIGHT};
       `;
-    case "small":
+    case sizes.MEDIUM:
       return css`
-        height: 36px;
+        height: ${numbers.TEXT_INPUT_LABEL_MEDIUM_HEIGHT};
+      `;
+    case sizes.SMALL:
+      return css`
+        height: ${numbers.TEXT_INPUT_LABEL_SMALL_HEIGHT};
       `;
     default:
       return css``;
@@ -42,16 +45,12 @@ const getLabelHeight = ({ componentSize }) => {
 };
 
 const TextInputLabel = styled.span`
-  font-family: Noto Sans KR;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 20px;
-  color: ${greyscale.label};
+  color: ${greyscale.LABEL};
 
+  ${textXSmall}
   ${() => getLabelWidth}
   ${() => getLabelHeight}
-  ${() => getTextInputTypographyDisplay}
+  ${() => getTextInputDisplay}
   ${() => getTextInputAlignItems}
 `;
 

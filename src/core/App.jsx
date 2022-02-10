@@ -2,19 +2,38 @@ import { Routes, BrowserRouter as Router, Route } from "react-router-dom";
 import importedComponent from "react-imported-component";
 
 import Home from "@pages/home";
+import Loading from "@pages/loading";
 
-const AsyncComponentsPage = importedComponent(() =>
-  import("@pages/components-page")
+const AsyncComponentsPage = importedComponent(
+  () => import("@pages/components-page"),
+  {
+    LoadingComponent: Loading,
+  }
 );
-const AsyncIssueList = importedComponent(() => import("@pages/issue-list"));
-const AsyncNewIssue = importedComponent(() => import("@pages/new-issue"));
-const AsyncIssueDetail = importedComponent(() =>
-  import("@pages/issue-details")
+const AsyncIssueList = importedComponent(() => import("@pages/issue-list"), {
+  LoadingComponent: Loading,
+});
+const AsyncNewIssue = importedComponent(() => import("@pages/new-issue"), {
+  LoadingComponent: Loading,
+});
+const AsyncIssueDetail = importedComponent(
+  () => import("@pages/issue-details"),
+  {
+    LoadingComponent: Loading,
+  }
 );
-const AsyncLabelList = importedComponent(() => import("@pages/label-list"));
-const AsyncMilestoneList = importedComponent(() =>
-  import("@pages//milestone-list")
+const AsyncLabelList = importedComponent(() => import("@pages/label-list"), {
+  LoadingComponent: Loading,
+});
+const AsyncMilestoneList = importedComponent(
+  () => import("@pages/milestone-list"),
+  {
+    LoadingComponent: Loading,
+  }
 );
+const AsyncNoMatch = importedComponent(() => import("@pages/no-match"), {
+  LoadingComponent: Loading,
+});
 
 const App = () => {
   return (
@@ -36,6 +55,7 @@ const App = () => {
             path="/milestone-list"
             element={<AsyncMilestoneList />}
           />
+          <Route element={<AsyncNoMatch />} />
         </Routes>
       </div>
     </Router>

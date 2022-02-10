@@ -2,12 +2,13 @@ import styled from "styled-components";
 
 import colors from "@styles/constants/colors";
 import greyscale from "@styles/constants/greyscale";
+import numbers from "@styles/constants/numbers";
 
 const StyledComponentContainer = styled.div`
-  background: ${greyscale.offWhite};
-  border: 1px dashed ${colors.default};
+  background: ${greyscale.OFF_WHITE};
+  border: ${numbers.COMPONENT_CONTAINER_BORDER_WIDTH} dashed ${colors.DEFAULT};
   box-sizing: border-box;
-  border-radius: 5px;
+  border-radius: ${numbers.COMPONENT_CONTAINER_BORDER_RADIUS};
 `;
 
 const ComponentContainer = ({ children }) => {

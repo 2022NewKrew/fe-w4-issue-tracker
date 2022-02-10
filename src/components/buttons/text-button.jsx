@@ -1,19 +1,21 @@
 import styled from "styled-components";
 import { useState } from "react";
 
+import TemplateContainer from "@components/containers/template-container";
 import greyscale from "@styles/constants/greyscale";
-import TypographyLink from "@styles/templates/typography-link";
+import numbers from "@styles/constants/numbers";
 import {
   allCenterAlign,
   disabledOpacity,
   getButtonWidth,
   getButtonHeight,
-  getButtonTypographyLinkSize,
+  getButtoncomponentSize,
 } from "@utils/helper";
 
 const StyledTextButton = styled.button`
-  padding: 0px;
-  border: 20px;
+  padding: ${numbers.TEXT_BUTTON_PADDING};
+  border: ${numbers.TEXT_BUTTON_BORDER_WIDTH};
+  background: ${greyscale.OFF_WHITE};
 
   ${allCenterAlign}
   ${disabledOpacity}
@@ -26,12 +28,12 @@ const TextButton = ({ children, componentSize, componentDisabled }) => {
 
   return (
     <StyledTextButton disabled={disabled} componentSize={componentSize}>
-      <TypographyLink
-        componentSize={getButtonTypographyLinkSize({ componentSize })}
-        componentColor={greyscale.label}
+      <TemplateContainer
+        componentSize={getButtoncomponentSize({ componentSize })}
+        componentColor={greyscale.LABEL}
       >
         <span>{children}</span>
-      </TypographyLink>
+      </TemplateContainer>
     </StyledTextButton>
   );
 };

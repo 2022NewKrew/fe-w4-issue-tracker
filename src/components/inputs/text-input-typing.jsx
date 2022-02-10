@@ -1,24 +1,28 @@
 import styled, { css } from "styled-components";
 
 import greyscale from "@styles/constants/greyscale";
+import numbers from "@styles/constants/numbers";
+import sizes from "@styles/constants/sizes";
+import { textSmall } from "@styles/templates/text-template";
 import {
-  getTextInputTypographyDisplay,
+  allBorderRemove,
+  getTextInputDisplay,
   getTextInputAlignItems,
 } from "@utils/helper";
 
 const getTypingWidth = ({ componentSize }) => {
   switch (componentSize) {
-    case "large":
+    case sizes.LARGE:
       return css`
-        width: 292px;
+        width: ${numbers.TEXT_INPUT_TYPING_LARGE_WIDTH};
       `;
-    case "medium":
+    case sizes.MEDIUM:
       return css`
-        width: 272px;
+        width: ${numbers.TEXT_INPUT_TYPING_MEDIUM_WIDTH};
       `;
-    case "small":
+    case sizes.SMALL:
       return css`
-        width: 164px;
+        width: ${numbers.TEXT_INPUT_TYPING_SMALL_WIDTH};
       `;
     default:
       return css``;
@@ -27,14 +31,17 @@ const getTypingWidth = ({ componentSize }) => {
 
 const getTypingHeight = ({ componentSize }) => {
   switch (componentSize) {
-    case "large":
-    case "medium":
+    case sizes.LARGE:
       return css`
-        height: 28px;
+        height: ${numbers.TEXT_INPUT_TYPING_LARGE_HEIGHT};
       `;
-    case "small":
+    case sizes.MEDIUM:
       return css`
-        height: 36px;
+        height: ${numbers.TEXT_INPUT_TYPING_MEDIUM_HEIGHT};
+      `;
+    case sizes.SMALL:
+      return css`
+        height: ${numbers.TEXT_INPUT_TYPING_SMALL_HEIGHT};
       `;
     default:
       return css``;
@@ -43,7 +50,7 @@ const getTypingHeight = ({ componentSize }) => {
 
 const getTypingAlignSelf = ({ componentSize }) => {
   switch (componentSize) {
-    case "medium":
+    case sizes.MEDIUM:
       return css`
         align-self: stretch;
       `;
@@ -53,23 +60,15 @@ const getTypingAlignSelf = ({ componentSize }) => {
 };
 
 const TextInputTyping = styled.input`
-  font-family: Noto Sans KR;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 16px;
-  line-height: 28px;
-  color: ${greyscale.titleActive};
-  border: 0px;
+  color: ${greyscale.TITLE_ACTIVE};
 
+  ${textSmall}
+  ${allBorderRemove}
   ${() => getTypingWidth}
   ${() => getTypingHeight}
-  ${() => getTextInputTypographyDisplay}
+  ${() => getTextInputDisplay}
   ${() => getTextInputAlignItems}
   ${() => getTypingAlignSelf}
-
-  &:focus {
-    outline: none;
-  }
 `;
 
 export default TextInputTyping;

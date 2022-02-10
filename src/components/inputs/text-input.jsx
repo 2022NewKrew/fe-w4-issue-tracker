@@ -4,26 +4,18 @@ import { useState } from "react";
 import TextInputLabel from "@components/inputs/text-input-label";
 import TextInputTyping from "@components/inputs/text-input-typing";
 import greyscale from "@styles/constants/greyscale";
-
-const getTextInputOpacity = ({ componentDisabled }) => {
-  switch (componentDisabled) {
-    case true:
-      return css`
-        opacity: 0.5;
-      `;
-    default:
-      return css``;
-  }
-};
+import numbers from "@styles/constants/numbers";
+import sizes from "@styles/constants/sizes";
+import { disabledOpacity } from "@utils/helper";
 
 const getTextInputFlexDirection = ({ componentSize }) => {
   switch (componentSize) {
-    case "large":
-    case "medium":
+    case sizes.LARGE:
+    case sizes.MEDIUM:
       return css`
         flex-direction: column;
       `;
-    case "small":
+    case sizes.SMALL:
       return css`
         flex-direction: row;
       `;
@@ -34,8 +26,8 @@ const getTextInputFlexDirection = ({ componentSize }) => {
 
 const getTextInputJustifyContent = ({ componentSize }) => {
   switch (componentSize) {
-    case "large":
-    case "medium":
+    case sizes.LARGE:
+    case sizes.MEDIUM:
       return css`
         justify-content: center;
       `;
@@ -46,12 +38,12 @@ const getTextInputJustifyContent = ({ componentSize }) => {
 
 const getTextInputAlignItems = ({ componentSize }) => {
   switch (componentSize) {
-    case "large":
-    case "medium":
+    case sizes.LARGE:
+    case sizes.MEDIUM:
       return css`
         align-items: flex-start;
       `;
-    case "small":
+    case sizes.SMALL:
       return css`
         align-items: center;
       `;
@@ -62,17 +54,17 @@ const getTextInputAlignItems = ({ componentSize }) => {
 
 const getTextInputWidth = ({ componentSize }) => {
   switch (componentSize) {
-    case "large":
+    case sizes.LARGE:
       return css`
-        width: 340px;
+        width: ${numbers.TEXT_INPUT_LARGE_WIDTH};
       `;
-    case "medium":
+    case sizes.MEDIUM:
       return css`
-        width: 320px;
+        width: ${numbers.TEXT_INPUT_MEDIUM_WIDTH};
       `;
-    case "small":
+    case sizes.SMALL:
       return css`
-        width: 300px;
+        width: ${numbers.TEXT_INPUT_SMALL_WIDTH};
       `;
     default:
       return css``;
@@ -81,17 +73,17 @@ const getTextInputWidth = ({ componentSize }) => {
 
 const getTextInputHeight = ({ componentSize }) => {
   switch (componentSize) {
-    case "large":
+    case sizes.LARGE:
       return css`
-        height: 64px;
+        height: ${numbers.TEXT_INPUT_LARGE_HEIGHT};
       `;
-    case "medium":
+    case sizes.MEDIUM:
       return css`
-        height: 56px;
+        height: ${numbers.TEXT_INPUT_MEDIUM_HEIGHT};
       `;
-    case "small":
+    case sizes.SMALL:
       return css`
-        height: 40px;
+        height: ${numbers.TEXT_INPUT_SMALL_HEIGHT};
       `;
     default:
       return css``;
@@ -100,17 +92,17 @@ const getTextInputHeight = ({ componentSize }) => {
 
 const getTextInputBorderRadius = ({ componentSize }) => {
   switch (componentSize) {
-    case "large":
+    case sizes.LARGE:
       return css`
-        border-radius: 16px;
+        border-radius: ${numbers.TEXT_INPUT_LARGE_BORDER_RADIUS};
       `;
-    case "medium":
+    case sizes.MEDIUM:
       return css`
-        border-radius: 14px;
+        border-radius: ${numbers.TEXT_INPUT_MEDIUM_BORDER_RADIUS};
       `;
-    case "small":
+    case sizes.SMALL:
       return css`
-        border-radius: 11px;
+        border-radius: ${numbers.TEXT_INPUT_SMALL_BORDER_RADIUS};
       `;
     default:
       return css``;
@@ -119,13 +111,12 @@ const getTextInputBorderRadius = ({ componentSize }) => {
 
 const StyledTextInput = styled.div`
   display: flex;
-  padding: 0px 24px;
-  color: ${greyscale.inputBackground};
-  background: ${greyscale.offWhite};
-  border: 1px solid ${greyscale.titleActive};
+  padding: ${numbers.TEXT_INPUT_PADDING};
+  background: ${greyscale.OFF_WHITE};
+  border: ${numbers.TEXT_INPUT_BORDER_WIDTH} solid ${greyscale.TITLE_ACTIVE};
   box-sizing: border-box;
 
-  ${() => getTextInputOpacity}
+  ${disabledOpacity}
   ${() => getTextInputFlexDirection}
   ${() => getTextInputJustifyContent}
   ${() => getTextInputAlignItems}
@@ -134,13 +125,14 @@ const StyledTextInput = styled.div`
   ${() => getTextInputBorderRadius}
 `;
 
-const TextInput = ({ children, componentSize, componentDisabled }) => {
+const TextInput = ({
+  children,
+  componentSize,
+  componentDisabled,
+  componentValue,
+}) => {
   const [disabled, setDisabled] = useState(componentDisabled);
-  const [value, setValue] = useState("");
-
-  const onChange = (e) => {
-    setValue(e.target.value);
-  };
+  const [value, setValue] = useState(componentValue);
 
   return (
     <StyledTextInput componentSize={componentSize} componentDisabled={disabled}>
@@ -151,8 +143,8 @@ const TextInput = ({ children, componentSize, componentDisabled }) => {
         type={"text"}
         disabled={disabled}
         value={value}
-        onChange={onChange}
         componentSize={componentSize}
+        onChange={(e) => setValue(e.target.value)}
       ></TextInputTyping>
     </StyledTextInput>
   );

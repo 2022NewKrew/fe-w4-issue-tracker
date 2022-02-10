@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { backgroundGS } from '@/assets/styles/Palette';
 
 export const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -13,10 +14,13 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 700;
   }
 
+  body {
+    background-color: ${backgroundGS};
+  }
+
   * {
     box-sizing: border-box;
     font-family: "NotoSans";
-    font-weight: 400;
   }
 
   button {

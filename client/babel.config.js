@@ -10,5 +10,6 @@ module.exports = {
         cssPropOptimization: true,
       },
     ],
+    '@babel/plugin-transform-runtime',
   ],
 };

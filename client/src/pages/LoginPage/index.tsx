@@ -7,12 +7,14 @@ import Button from '@components/Button';
 import { theme } from '@styles/theme';
 import TextInput from '@components/TextInput';
 import { ButtonType } from '@/types';
+import axios from 'axios';
 
 const LoginPage = () => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleGithubLogin = () => {
+  const handleGithubLogin = async () => {
+    axios.get('http://localhost:5000/').then((res) => console.log(res));
     alert('깃헙 로그인 기능은 준비 중에 있습니다');
   };
 

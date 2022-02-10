@@ -9,7 +9,7 @@ const LargeInput = styled.input`
     padding: 18px 24px;
     width: 292px;
 
-    &.type {
+    &.typing {
         padding: 30px 24px 6px 24px;
     }
 `;
@@ -18,7 +18,7 @@ const LargeInputLabel = styled.label`
     ${({ theme }) => theme.basicInputLabel}
     top: 20px;
 
-    &.type {
+    &.typing {
         top: 8px;
     }
 
@@ -56,7 +56,7 @@ const MediumInput = styled.input`
     padding: 14px 24px;
     width: 272px;
 
-    &.type {
+    &.typing {
         padding: 26px 24px 2px 24px;
     }
 `;
@@ -65,7 +65,7 @@ const MediumInputLabel = styled.label`
     ${({ theme }) => theme.basicInputLabel}
     top: 15px;
 
-    &.type {
+    &.typing {
         top: 4px;
     }
 `;

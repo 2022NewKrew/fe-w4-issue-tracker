@@ -89,16 +89,14 @@ export function LoginForm() {
                 type="text"
                 required
                 handleChange={handleInputUserId}
-                className={userIdType && 'type'}
-                large
+                className={userIdType && 'typing'}
                 label="아이디"
             />
             <Input
                 type="password"
                 required
                 handleChange={handleInputPassword}
-                className={passwordType && 'type'}
-                large
+                className={passwordType && 'typing'}
                 label="비밀번호"
             />
             <Button type="submit" large disabled={!chkButtonCanClick()}>

@@ -1,8 +1,6 @@
 import { Link, Navigate, Route, Routes } from "react-router-dom";
 import { MainTemplate } from "./component/page/MainTemplate";
 import { IssueHome } from "./component/page/issue/IssueHome";
-import { TestPage } from "./component/page/test/TestPage";
-import { TestNew } from "./component/page/test/TestNew";
 import { Button } from "./component/atoms/Button";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
@@ -32,19 +30,16 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Routes>
-        <Route path="/" element={<Navigate to="/issue" />} />
+        <Route path="/" element={<Navigate to="/issues" />} />
         <Route path="/login" element={defaultElementForTest} />
-        <Route path="*" element={<MainTemplate />}>
-          <Route path="issue">
+        <Route path="/*" element={<MainTemplate />}>
+          <Route path="issues">
             <Route path="" element={<IssueHome />} />
             <Route path=":issueId" element={<IssueDetail />} />
             <Route path="new" element={defaultElementForTest} />
           </Route>
           <Route path="labels" element={<LabelMain />} />
           <Route path="milestones" element={<MilestoneMain />} />
-          <Route path="test" element={<TestPage />}>
-            <Route path="new" element={<TestNew />} />
-          </Route>
           <Route path="*" element={<div>404</div>} />
         </Route>
       </Routes>

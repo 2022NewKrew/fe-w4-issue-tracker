@@ -69,7 +69,7 @@ export default function CreateIssueTemplate() {
 
     const data = {
       title: title,
-      comments: comment,
+      comment: comment,
       assignees: assignees,
       labels: labels,
       milestone: milestone,

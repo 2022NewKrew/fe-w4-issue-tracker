@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
+
 import { COLOR, FONT } from '../../../Assets/Styles/commonStyle'
 
 export const TEXT_INPUT_TYPE = {
@@ -77,7 +78,6 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  border-radius: 16px;
   background-color: ${COLOR.INPUT_BACKGROUND};
   border: 1px solid rgba(0, 0, 0, 0);
   cursor: text;
@@ -106,15 +106,18 @@ const errorWrapperStyle = css`
 
 const largeWrapperStyle = css`
   height: 64px;
+  border-radius: 16px;
 `
 
 const mediumWrapperStyle = css`
   height: 56px;
+  border-radius: 14px;
 `
 
 const smallWrapperStyle = css`
   align-items: center;
   height: 40px;
+  border-radius: 11px;
 
   ${LabelText} {
     width: 80px;
@@ -128,12 +131,14 @@ const smallWrapperStyle = css`
 const textAreaWrapperStyle = css`
   flex-direction: column;
   height: 100%;
+  border-radius: 16px;
 `
 
 const filterBarWrapperStyle = css`
   align-items: center;
   height: 40px;
   border: 1px solid ${COLOR.LINE};
+  border-radius: 11px;
 
   ${LabelText} {
     width: 15px;
@@ -154,12 +159,38 @@ const PaddingDiv = styled.div`
   padding: 5px 24px;
 `
 
+const WRAPPER_STYLE_BY_TYPE = {
+  [TEXT_INPUT_TYPE.LARGE]: largeWrapperStyle,
+  [TEXT_INPUT_TYPE.MEDIUM]: mediumWrapperStyle,
+  [TEXT_INPUT_TYPE.SMALL]: smallWrapperStyle,
+  [TEXT_INPUT_TYPE.TEXT_AREA]: textAreaWrapperStyle,
+  [TEXT_INPUT_TYPE.FILTER_BAR]: filterBarWrapperStyle,
+}
+
+const WRAPPER_STYLE_BY_STATE = {
+  [TEXT_INPUT_STATE.NORMAL]: css``,
+  [TEXT_INPUT_STATE.SUCCESS]: successWrapperStyle,
+  [TEXT_INPUT_STATE.ERROR]: errorWrapperStyle,
+}
+
+const LABEL_STYLE_BY_STATE = {
+  [TEXT_INPUT_STATE.NORMAL]: css``,
+  [TEXT_INPUT_STATE.SUCCESS]: successLabelStyle,
+  [TEXT_INPUT_STATE.ERROR]: errorLabelStyle,
+}
+
+const PLACEHOLDER_COLOR_BY_STATE = {
+  [TEXT_INPUT_STATE.NORMAL]: COLOR.PLACEHOLDER,
+  [TEXT_INPUT_STATE.SUCCESS]: COLOR.GREEN,
+  [TEXT_INPUT_STATE.ERROR]: COLOR.RED,
+}
+
 /**
  * @param {ReactNode?} children
  * @param {string} type
  * @param {string} state
  * @param {string} placeholder
- * @param {string} labelPlaceholder
+ * @param {string|JSX.Element} labelPlaceholder
  * @param {boolean?} isDisabled
  * @param {string?} inputValue
  * @param {function?} onInputValueChangeListener
@@ -248,27 +279,12 @@ const TextInput = ({
   )
 
   const wrapperStyle = useMemo(() => {
-    let style =
-      type === TEXT_INPUT_TYPE.LARGE
-        ? largeWrapperStyle
-        : type === TEXT_INPUT_TYPE.MEDIUM
-        ? mediumWrapperStyle
-        : type === TEXT_INPUT_TYPE.SMALL
-        ? smallWrapperStyle
-        : type === TEXT_INPUT_TYPE.TEXT_AREA
-        ? textAreaWrapperStyle
-        : type === TEXT_INPUT_TYPE.FILTER_BAR
-        ? filterBarWrapperStyle
-        : mediumWrapperStyle
+    let style = WRAPPER_STYLE_BY_TYPE[type]
 
     if (isFocus) {
       style = style.concat(activeWrapperStyle)
     } else {
-      state === TEXT_INPUT_STATE.SUCCESS
-        ? (style = style.concat(successWrapperStyle))
-        : state === TEXT_INPUT_STATE.ERROR
-        ? (style = style.concat(errorWrapperStyle))
-        : null
+      style = style.concat(WRAPPER_STYLE_BY_STATE[state])
     }
 
     if (isDisabled) {
@@ -291,11 +307,7 @@ const TextInput = ({
     }
 
     if (!isFocus) {
-      state === TEXT_INPUT_STATE.SUCCESS
-        ? (style = style.concat(successLabelStyle))
-        : state === TEXT_INPUT_STATE.ERROR
-        ? (style = style.concat(errorLabelStyle))
-        : null
+      style = style.concat(LABEL_STYLE_BY_STATE[state])
     }
 
     return style
@@ -319,13 +331,9 @@ const TextInput = ({
 
   const placeholderColor = useMemo(() => {
     if (!isFocus) {
-      return state === TEXT_INPUT_STATE.SUCCESS
-        ? COLOR.GREEN
-        : state === TEXT_INPUT_STATE.ERROR
-        ? COLOR.RED
-        : COLOR.PLACEHOLDER
+      return PLACEHOLDER_COLOR_BY_STATE[state]
     } else {
-      return COLOR.PLACEHOLDER
+      return PLACEHOLDER_COLOR_BY_STATE[TEXT_INPUT_STATE.NORMAL]
     }
   }, [state, isFocus])
 

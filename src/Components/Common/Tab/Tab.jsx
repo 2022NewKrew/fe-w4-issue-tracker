@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { COLOR } from '../../../Assets/Styles/commonStyle'
-import TabItem from './TabItem'
 import PropTypes from 'prop-types'
+
+import TabItem from './TabItem'
+
+import { COLOR } from '../../../Assets/Styles/commonStyle'
 
 const TabItemList = styled.ul`
   display: inline-flex;
 `
 
 const TabContainer = styled.div`
-  display: inline-block;
+  height: 40px;
+  display: inline-flex;
   background-color: ${COLOR.BACKGROUND};
   border: 1px solid ${COLOR.LINE};
   border-radius: 11px;
@@ -23,7 +26,6 @@ const TabContainer = styled.div`
  */
 const Tab = ({ children }) => {
   const [selectedIdx, setSelectedIdx] = useState(-1)
-  const asd = { ss: '123', cc: '12344' }
 
   return (
     <TabContainer>
@@ -44,7 +46,7 @@ const Tab = ({ children }) => {
 }
 
 Tab.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.arrayOf(PropTypes.element),
 }
 
 export default Tab

@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { COLOR, FONT } from '../../../Assets/Styles/commonStyle'
+
 import DropdownPanelItem, { DROPDOWN_ITEM_TYPE } from './DropdownPanelItem'
+
+import { COLOR, FONT } from '../../../Assets/Styles/commonStyle'
 
 const ReferencePoint = styled.div`
   position: relative;
@@ -43,20 +45,25 @@ const List = styled.ul`
  * @param {string} type
  * @param {string} title
  * @param {boolean} isShown
+ * @param {function} onChange
  * @return {JSX.Element}
  * @constructor
  */
-const DropdownPanel = ({ itemInfoList, type, title, isShown }) => {
+const DropdownPanel = ({ itemInfoList, type, title, isShown, onChange }) => {
   const [selectedIdx, setSelectedIdx] = useState(-1)
+
+  useEffect(() => {
+    if (onChange) {
+      onChange(selectedIdx)
+    }
+  }, [selectedIdx])
 
   return (
     <ReferencePoint>
       <Panel style={{ visibility: isShown ? 'visible' : 'hidden' }}>
         <TitleText>{title}</TitleText>
         <List>
-          {itemInfoList.map((itemInfo, idx) => {
-            const { text, imgSrc } = itemInfo
-
+          {itemInfoList.map(({ text, imgSrc }, idx) => {
             return (
               <DropdownPanelItem
                 key={text}
@@ -81,6 +88,7 @@ DropdownPanel.propTypes = {
   itemInfoList: PropTypes.arrayOf(PropTypes.object).isRequired,
   title: PropTypes.string.isRequired,
   isShown: PropTypes.bool,
+  onChange: PropTypes.func,
 }
 
 export default DropdownPanel

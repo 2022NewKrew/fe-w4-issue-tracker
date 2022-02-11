@@ -1,11 +1,14 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
-import { COLOR, FONT } from '../../Assets/Styles/commonStyle'
+
 import CheckBox, { CHECK_BOX_TYPE } from '../Common/CheckBox/CheckBox'
+import Label, { LABEL_SIZE } from '../Common/Label/Label'
+
 import { ReactComponent as AlertIcon } from '../../Assets/Icon/ic-alert.svg'
 import { ReactComponent as MilestoneIcon } from '../../Assets/Icon/ic-milestone.svg'
-import Label from '../Common/Label/Label'
+
+import { COLOR, FONT } from '../../Assets/Styles/commonStyle'
 import { STATE_TYPE } from '../../Services/DB/data'
 
 const IssueItemContainer = styled.div`
@@ -14,25 +17,30 @@ const IssueItemContainer = styled.div`
   width: 100%;
   height: 100%;
   background-color: ${COLOR.OFF_WHITE};
-  padding: 24px 32px;
+  padding: 16px 32px;
 `
 
 const CheckBoxWrapper = styled.div`
-  height: 100px;
+  height: 52px;
 `
 
 const IssueContentWrapper = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   height: 100%;
+`
+
+const HorizontalDiv = styled.div`
+  display: flex;
+  align-items: center;
 `
 
 const IconBox = styled.div`
   svg {
     ${({ backgroundColor, color }) => css`
-      background-color: ${backgroundColor};
+      fill: ${backgroundColor};
       color: ${color};
     `}
   }
@@ -80,7 +88,7 @@ const IssueItem = ({ issue, onSelectedEventListener }) => {
         <CheckBox type={CHECK_BOX_TYPE.RECT} isSelected={isSelected} />
       </CheckBoxWrapper>
       <IssueContentWrapper>
-        <div>
+        <HorizontalDiv>
           <IconBox
             onClick={onCheckBoxClick}
             backgroundColor={iconColor.backgroundColor}
@@ -91,21 +99,23 @@ const IssueItem = ({ issue, onSelectedEventListener }) => {
           {labels.map((label) => (
             <Label
               key={label.id}
-              textColor={label.textColor}
-              backgroundColor={label.backgroundColor}>
+              size={LABEL_SIZE.SMALL}
+              textColor={'#' + label.textColor}
+              backgroundColor={'#' + label.backgroundColor}>
               {label.name}
             </Label>
           ))}
-        </div>
-        <div>
+        </HorizontalDiv>
+        <HorizontalDiv>
           <DescriptionText>{id}</DescriptionText>
           <DescriptionText>{}</DescriptionText>
           <DescriptionText>
             <MilestoneIcon width="16px" height="16px" />
             {milestone.title}
           </DescriptionText>
-        </div>
+        </HorizontalDiv>
       </IssueContentWrapper>
+      <div>{issue.author.name}</div>
     </IssueItemContainer>
   )
 }

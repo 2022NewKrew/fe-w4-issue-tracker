@@ -1,11 +1,13 @@
 import React, { useCallback, useRef, useState } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
+
 import Button, { BUTTON_SIZE, BUTTON_TYPE } from '../Button/Button'
 import DropdownPanel from './DropdownPanel'
-import { ReactComponent as DropdownIcon } from '../../../Assets/Icon/ic-dropdown.svg'
 import useOutsideClickEventListener from '../../../Services/Hooks/useOutsideClickEventListener'
-import PropTypes from 'prop-types'
 import { DROPDOWN_ITEM_TYPE } from './DropdownPanelItem'
+
+import { ReactComponent as DropdownIcon } from '../../../Assets/Icon/ic-dropdown.svg'
 
 const DropdownContainer = styled.div`
   width: 100%;
@@ -22,6 +24,7 @@ const DropdownContainer = styled.div`
  * @param {string} type
  * @param {string} indicatorText
  * @param {object[]} btnUserStyle
+ * @param {function} onChange
  * @return {JSX.Element}
  * @constructor
  */
@@ -31,6 +34,7 @@ const Dropdown = ({
   type,
   indicatorText,
   btnUserStyle,
+  onChange,
 }) => {
   const dropdownRef = useRef()
 
@@ -63,6 +67,7 @@ const Dropdown = ({
         title={panelTitle}
         type={type}
         isShown={isPanelShown}
+        onChange={onChange}
       />
     </DropdownContainer>
   )
@@ -74,6 +79,7 @@ Dropdown.propTypes = {
   panelTitle: PropTypes.string,
   btnUserStyle: PropTypes.array,
   type: PropTypes.oneOf(Object.values(DROPDOWN_ITEM_TYPE)).isRequired,
+  onChange: PropTypes.func,
 }
 
 export default Dropdown

@@ -1,7 +1,8 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { COLOR, FONT } from '../../../Assets/Styles/commonStyle'
 import PropTypes from 'prop-types'
+
+import { FONT } from '../../../Assets/Styles/commonStyle'
 
 export const LABEL_SIZE = {
   LARGE: 'large',
@@ -63,7 +64,7 @@ const Label = ({ children, size, textColor, backgroundColor }) => {
 }
 
 Label.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
   size: PropTypes.oneOf(Object.values(LABEL_SIZE)).isRequired,
   textColor: PropTypes.string.isRequired,
   backgroundColor: PropTypes.string.isRequired,

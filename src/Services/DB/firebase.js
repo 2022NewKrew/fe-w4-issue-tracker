@@ -71,6 +71,20 @@ Object.filter = (obj, predicate) =>
     .filter((key) => predicate(obj[key]))
     .reduce((res, key) => ((res[key] = obj[key]), res), {})
 
+Object.keyFilter = (obj, predicate) =>
+  Object.keys(obj)
+    .filter((key) => predicate(key))
+    .reduce((res, key) => ((res[key] = obj[key]), res), {})
+
+/**
+ * 결과가 배열인 promise를 인자로 받아 그 결과의 첫번째 요소를 반환
+ * @param promise
+ * @return {Promise<unknown>}
+ */
+async function createPromiseToGetFirstResultOfPromise(promise) {
+  return (await promise)[0]
+}
+
 /**
  * 이슈 데이터를 파이어베이스에 저장할 형태로 변환
  * @param {Issue} issue
@@ -78,7 +92,7 @@ Object.filter = (obj, predicate) =>
  */
 function convertIssueToJson(issue) {
   let historiesJson = {}
-  const labelIds = issue.labels.map((label) => label.textColor)
+  const labelIds = issue.labels.map((label) => label.id)
   const assigneesIds = issue.assignees.map((user) => user.id)
 
   issue.histories.forEach((history) => {
@@ -114,17 +128,28 @@ async function convertIssueJsonToData({ issueId, issueJson }) {
   const assigneeIds = JSON.parse(issueJson.assigneeIds)
 
   const [author, labels, milestone, assignees, histories] = await Promise.all([
-    await readUser({ userId: issueJson.authorId }),
-    await labelIds.map(async (labelId) => await readLabel({ labelId })),
-    await readMilestone({ milestoneId: issueJson.milestoneId }),
-    await assigneeIds.map(async (userId) => await readUser({ userId })),
+    createPromiseToGetFirstResultOfPromise(
+      readUser({ userId: issueJson.authorId })
+    ),
     await Promise.all(
-      Object.entries(issueJson.histories).map(
-        async ([historyId, historyJson]) =>
-          await convertHistoryJsonToData({
-            historyId,
-            historyJson,
-          })
+      labelIds.map((labelId) =>
+        createPromiseToGetFirstResultOfPromise(readLabel({ labelId }))
+      )
+    ),
+    createPromiseToGetFirstResultOfPromise(
+      readMilestone({ milestoneId: issueJson.milestoneId })
+    ),
+    await Promise.all(
+      assigneeIds.map((userId) =>
+        createPromiseToGetFirstResultOfPromise(readUser({ userId }))
+      )
+    ),
+    await Promise.all(
+      Object.entries(issueJson.histories).map(([historyId, historyJson]) =>
+        convertHistoryJsonToData({
+          historyId,
+          historyJson,
+        })
       )
     ),
   ])
@@ -182,7 +207,7 @@ function convertHistoryToJson(history) {
  * @return {History}
  */
 async function convertHistoryJsonToData({ historyId, historyJson }) {
-  const author = await readUser({ userId: historyJson.authorId })
+  const author = (await readUser({ userId: historyJson.authorId }))[0]
 
   return {
     id: historyId,
@@ -253,7 +278,9 @@ function convertMilestoneToJson(milestone) {
 async function convertMilestoneJsonToData({ milestoneId, milestoneJson }) {
   const issueIds = JSON.parse(milestoneJson.issueIds)
   const issues = await Promise.all(
-    issueIds.map(async (issueId) => await readIssueSummary({ issueId }))
+    issueIds.map((issueId) =>
+      createPromiseToGetFirstResultOfPromise(readIssueSummary({ issueId }))
+    )
   )
 
   return {
@@ -315,10 +342,12 @@ export function writeIssue(issue) {
 /**
  * 파이어베이스 데이터베이스로부터 이슈를 조건에 따라 반환
  * @param {Object?} filterOption
- * @param {string?} filterOption.userId
+ * @param {string?} filterOption.issueId
  * @param {string?} filterOption.state
  * @param {string?} filterOption.authorId
  * @param {string?} filterOption.labelId
+ * @param {string?} filterOption.milestoneId
+ * @param {string?} filterOption.assigneeId
  * @return {Promise<Issue[]>}
  */
 export async function readIssue(filterOption) {
@@ -326,10 +355,10 @@ export async function readIssue(filterOption) {
   let filteredIssues = snapshot.val()
 
   if (filterOption) {
-    if (filterOption.userId) {
-      filteredIssues = Object.filter(
+    if (filterOption.issueId) {
+      filteredIssues = Object.keyFilter(
         filteredIssues,
-        (issue) => issue.id === filterOption.userId
+        (issueId) => issueId === filterOption.issueId
       )
     }
 
@@ -349,7 +378,20 @@ export async function readIssue(filterOption) {
 
     if (filterOption.labelId) {
       filteredIssues = Object.filter(filteredIssues, (issue) =>
-        issue.labels.contains(filterOption.labelId)
+        JSON.parse(issue.labelIds).includes(filterOption.labelId)
+      )
+    }
+
+    if (filterOption.milestoneId) {
+      filteredIssues = Object.filter(
+        filteredIssues,
+        (issue) => issue.milestoneId === filterOption.milestoneId
+      )
+    }
+
+    if (filterOption.assigneeId) {
+      filteredIssues = Object.filter(filteredIssues, (issue) =>
+        JSON.parse(issue.assigneeIds).includes(filterOption.assigneeId)
       )
     }
   }
@@ -379,9 +421,9 @@ export async function readIssueSummary(filterOption) {
 
   if (filterOption) {
     if (filterOption.issueId) {
-      filteredIssues = Object.filter(
+      filteredIssues = Object.keyFilter(
         filteredIssues,
-        (issue) => issue.id === filterOption.issueId
+        (issueId) => issueId === filterOption.issueId
       )
     }
   }
@@ -416,9 +458,9 @@ export async function readUser(filterOption) {
 
   if (filterOption) {
     if (filterOption.userId) {
-      filteredUsers = Object.filter(
+      filteredUsers = Object.keyFilter(
         filteredUsers,
-        (user) => user.id === filterOption.userId
+        (userId) => userId === filterOption.userId
       )
     }
   }
@@ -454,9 +496,9 @@ export async function readMilestone(filterOption) {
 
   if (filterOption) {
     if (filterOption.milestoneId) {
-      filteredMilestones = Object.filter(
+      filteredMilestones = Object.keyFilter(
         filteredMilestones,
-        (milestone) => milestone.id === filterOption.milestoneId
+        (milestoneId) => milestoneId === filterOption.milestoneId
       )
     }
 
@@ -501,9 +543,9 @@ export async function readLabel(filterOption) {
 
   if (filterOption) {
     if (filterOption.labelId) {
-      filteredLabels = Object.filter(
+      filteredLabels = Object.keyFilter(
         filteredLabels,
-        (label) => label.id === filterOption.labelId
+        (labelId) => labelId === filterOption.labelId
       )
     }
   }

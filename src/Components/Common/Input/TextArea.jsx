@@ -1,9 +1,12 @@
 import React, { useCallback, useMemo, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
+
 import TextInput, { TEXT_INPUT_STATE, TEXT_INPUT_TYPE } from './TextInput'
-import { COLOR, FONT } from '../../../Assets/Styles/commonStyle'
+
 import { ReactComponent as AttachIcon } from '../../../Assets/Icon/ic-paperclip.svg'
+
+import { COLOR, FONT } from '../../../Assets/Styles/commonStyle'
 
 const AttachWrapper = styled.div`
   width: 100%;
@@ -91,8 +94,6 @@ const TextArea = ({
       return (
         <InputLengthText>{`띄어쓰기 포함 ${inputLength}자`}</InputLengthText>
       )
-    } else {
-      return null
     }
   }, [isFocus, isPassedTwoSecondsAfterTyping])
 

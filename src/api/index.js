@@ -11,8 +11,8 @@ const handleStatusError = async (response) => {
   return response;
 };
 
-const customFetch = async ({ url, option }) => {
-  const response = option ? await fetch(url, option) : await fetch(url);
+const customFetch = async ({ url, option = {} }) => {
+  const response = await fetch(url, option);
   const validResponse = await handleStatusError(response);
   return validResponse.json ? await validResponse.json() : validResponse;
 };
@@ -22,6 +22,8 @@ export const getIssues = () => customFetch({ url: `${BaseURL}/issues` });
 export const getLabels = () => customFetch({ url: `${BaseURL}/labels` });
 
 export const getMilestones = () => customFetch({ url: `${BaseURL}/milestones` });
+
+export const getIssueById = (id) => customFetch({ url: `${BaseURL}/issues/${id}` });
 
 export const patchCheckedIssue = (idList) =>
   customFetch({
@@ -64,5 +66,37 @@ export const createNewLabel = ({ newLabel }) =>
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
+    },
+  });
+
+export const postMilestone = ({ milestone }) =>
+  customFetch({
+    url: `${BaseURL}/milestones`,
+    option: {
+      method: "POST",
+      body: JSON.stringify(milestone),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    },
+  });
+
+export const patchMilestone = ({ id, milestone }) =>
+  customFetch({
+    url: `${BaseURL}/Milestones/${id}`,
+    option: {
+      method: "PATCH",
+      body: JSON.stringify(milestone),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    },
+  });
+
+export const deleteMilestone = ({ id }) =>
+  customFetch({
+    url: `${BaseURL}/milestones/${id}`,
+    option: {
+      method: "DELETE",
     },
   });

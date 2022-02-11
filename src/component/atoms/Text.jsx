@@ -6,6 +6,10 @@ export const Text = styled.p`
 `;
 
 export const cssFontSize = {
+  title: css`
+    font-size: 32px;
+    line-height: 48px;
+  `,
   large: css`
     font-size: 24px;
     line-height: 40px;
@@ -25,5 +29,5 @@ export const cssFontSize = {
 };
 
 export const cssLink = css`
-  font-weight: 500;
+  font-weight: 700;
 `;

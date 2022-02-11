@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "react-query";
-import { createNewLabel } from "../../api/api";
+import { createNewLabel } from "../../api";
 import { useNewLabel } from "../../hooks/useNewLabel";
 import { randomHexColor } from "../../utils";
 import { Button } from "../atoms/Button";
@@ -13,7 +13,7 @@ export const LabelNew = ({ closeFn }) => {
       closeFn();
     },
   });
-  const [newLabel, dispatch, disabled] = useNewLabel({
+  const [newLabel, labelDispatch, disabled] = useNewLabel({
     name: "",
     description: "",
     backgroundColor: randomHexColor(),
@@ -24,7 +24,7 @@ export const LabelNew = ({ closeFn }) => {
     <NewLabelWrapper>
       <NewLabelHeader>새로운 레이블 추가</NewLabelHeader>
       <NewLabelPreview label={newLabel} />
-      <NewLabelForm label={newLabel} dispatch={dispatch} />
+      <NewLabelForm label={newLabel} dispatch={labelDispatch} />
       <LabelButtonWrapper>
         <Button options={{ type: "Small-Standard", prefixIcon: "edit" }} onClick={() => newMutation.mutate({ newLabel })} disabled={disabled}>
           완료

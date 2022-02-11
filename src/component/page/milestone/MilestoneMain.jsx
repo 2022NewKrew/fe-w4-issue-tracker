@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
 import styled from "styled-components";
-import { getLabels, getMilestones } from "../../../api/api";
+import { getLabels, getMilestones } from "../../../api";
 import { Button } from "../../atoms/Button";
 import { cssFontSize, cssLink } from "../../atoms/Text";
 import { PageHeader, TableHeader, TableWrapper } from "../../commonLayout";
+import { MilestoneItem } from "../../molecules/MilestoneItem";
+import { MilestoneNew } from "../../molecules/MilestoneNew";
 import { Taps } from "../../molecules/Taps";
 
 export const MilestoneMain = () => {
@@ -12,17 +14,17 @@ export const MilestoneMain = () => {
   const [newMode, setNewMode] = useState(false);
 
   // server state
-  const { data: labels } = useQuery("labels", getLabels, { staleTime: 5000 });
-  const { data: milestones } = useQuery("milestones", getMilestones, { staleTime: 5000 });
+  const { data: labels } = useQuery("labels", getLabels);
+  const { data: milestones } = useQuery("milestones", getMilestones);
 
-  const numLabels = labels?.length || 0;
-  const numMilestones = milestones?.length || 0;
-  const milestoneItems = milestones?.map((milestone) => <div>{milestone.title}</div>);
+  const labelsLength = labels?.length || 0;
+  const milestonesLength = milestones?.length || 0;
+  const milestoneItems = milestones?.map((milestone) => <MilestoneItem key={milestone.id} milestone={milestone} />);
 
   return (
     <>
       <PageHeader>
-        <Taps labelCount={numLabels} milestoneCount={numMilestones} />
+        <Taps labelCount={labelsLength} milestoneCount={milestonesLength} />
         {newMode ? (
           <StyledButton options={{ type: "Small-Secondary", prefixIcon: "x-square" }} onClick={() => setNewMode(false)}>
             닫기
@@ -33,9 +35,10 @@ export const MilestoneMain = () => {
           </StyledButton>
         )}
       </PageHeader>
+      {newMode && <MilestoneNew closeFn={() => setNewMode(false)} />}
       <TableWrapper>
         <TableHeader>
-          <span css={[cssFontSize["small"], cssLink]}>{`${numMilestones}개의 마일스톤`}</span>
+          <span css={[cssFontSize["small"], cssLink]}>{`${milestonesLength}개의 마일스톤`}</span>
         </TableHeader>
         {milestoneItems}
       </TableWrapper>

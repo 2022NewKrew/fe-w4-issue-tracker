@@ -7,7 +7,7 @@ export default styled.div(
     align-items: center;
     width: 100%;
     height: 64px;
-    padding-left: 32px;
+    padding: 0 32px;
     color: ${theme.grayscale.label};
   `
 );

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import styled, { css } from "styled-components";
-import { deleteLabel } from "../../api/api";
+import { deleteLabel } from "../../api";
 import { Button } from "../atoms/Button";
 import { SmallLabel } from "../atoms/Label";
 import { cssFontSize } from "../atoms/Text";

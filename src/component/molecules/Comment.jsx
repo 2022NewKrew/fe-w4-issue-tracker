@@ -1,35 +1,31 @@
 import styled, { css } from "styled-components";
-import { Text } from "../atoms/Text";
+import { cssFontSize } from "../atoms/Text";
 
-export const Comment = ({ state, ...props }) => {
+export const Comment = ({ comment, ...props }) => {
   return (
-    <CommentWrapper state={state} {...props}>
+    <CommentWrapper state={comment.status} {...props}>
       <CommentHeader>
-        <Text options={{ size: "small" }} className="username">
-          Remian103
-        </Text>
-        <Text options={{ size: "small" }} className="timestamp">
-          5min
-        </Text>
+        <Author>{comment.author}</Author>
+        <Timestamp>{comment.timestamp}</Timestamp>
       </CommentHeader>
-      <Content options={{ size: "small" }}>안녕하세요</Content>
+      <Content>{comment.content}</Content>
     </CommentWrapper>
   );
 };
 
-export const CommentWrapper = styled.div(({ theme, state }) => {
+const CommentWrapper = styled.div(({ theme, state }) => {
   const color = {
-    common: {
+    initial: {
       backgroundColor: theme.grayscale.background,
       borderColor: theme.grayscale.line,
       usernameColor: theme.grayscale.titleActive,
     },
-    close: {
+    closed: {
       backgroundColor: theme.color.purple.light,
       borderColor: theme.color.purple.default,
       usernameColor: theme.color.purple.dark,
     },
-    open: {
+    reopen: {
       backgroundColor: theme.color.blue.light,
       borderColor: theme.color.blue.default,
       usernameColor: theme.color.blue.dark,
@@ -45,20 +41,20 @@ export const CommentWrapper = styled.div(({ theme, state }) => {
     border-radius: 16px;
     overflow: hidden;
 
-    & > *:first-child {
+    ${CommentHeader} {
       border-bottom: 1px solid ${color[state].borderColor};
 
-      .username {
+      ${Author} {
         color: ${color[state].usernameColor};
       }
-      .timestamp {
+      ${Timestamp} {
         color: ${theme.grayscale.label};
       }
     }
   `;
 });
 
-export const CommentHeader = styled.div`
+const CommentHeader = styled.div`
   display: flex;
   align-items: center;
   padding: 0px 16px 0px 24px;
@@ -69,17 +65,16 @@ export const CommentHeader = styled.div`
   }
 `;
 
-export const Username = styled(Text).attrs({
-  options: { size: "small" },
-  className: "username",
-})``;
+const Author = styled.p`
+  ${cssFontSize["small"]}
+`;
 
-export const CommentText = styled(Text).attrs({
-  options: { size: "small" },
-})(
-  ({ theme }) => css`
-    padding: 16px 24px;
-    width: 100%;
-    background-color: ${theme.grayscale.offWhite};
-  `
-);
+const Timestamp = styled.p`
+  ${cssFontSize["small"]}
+`;
+
+const Content = styled.div`
+  ${cssFontSize["small"]}
+  padding: 16px 24px;
+  background-color: ${({ theme }) => theme.grayscale.offWhite};
+`;

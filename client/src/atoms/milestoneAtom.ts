@@ -5,11 +5,9 @@ import { IMilestone } from '@types';
 export const milestoneInfoSelector = selector<IMilestone[]>({
     key: 'milestoneInfoSelector',
     get: async () => {
-        const { data } = await fetchMilestones().then((res: Response) => {
-            if (!res.ok) throw Error(`fetch fail! status code: ${res.status}`);
-            return res.json();
-        });
-
+        const res = await fetchMilestones();
+        if (!res.ok) throw Error(`fetch fail! status code: ${res.status}`);
+        const { data } = await res.json();
         return data;
     },
 });

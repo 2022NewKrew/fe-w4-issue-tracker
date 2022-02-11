@@ -5,10 +5,9 @@ import { IUser } from '@types';
 export const userInfoSelector = selector<IUser[]>({
     key: 'userInfoSelector',
     get: async () => {
-        const { data } = await fetchUsers().then((res: Response) => {
-            if (!res.ok) throw Error(`fetch fail! status code: ${res.status}`);
-            return res.json();
-        });
+        const res = await fetchUsers();
+        if (!res.ok) throw Error(`fetch fail! status code: ${res.status}`);
+        const { data } = await res.json();
         return data;
     },
 });

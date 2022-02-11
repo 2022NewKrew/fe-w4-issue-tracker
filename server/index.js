@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
 const { database } = require('./api');
+const { parallelFetch } = require('./util');
 dotenv.config();
 
 const app = express();
@@ -18,7 +19,16 @@ app.use(function (req, res, next) {
 
 app.get('/issues', async (req, res) => {
     console.log('GET /issues');
-    const { data } = await database.get('issues?_embed=labelings');
+    const reqUrls = ['issues?_embed=labelings', 'assignments'];
+    const [issuesRes, assignmentsRes] = await parallelFetch(reqUrls);
+    const { data } = issuesRes;
+    assignmentsRes.data.forEach((assignment) => {
+        const targetIssue = data.find((issue) => issue.id === assignment.issueId);
+        if (targetIssue) {
+            if (targetIssue.assignments) targetIssue.assignments.push(assignment);
+            else targetIssue.assignments = [assignment];
+        }
+    });
     res.status('200').json({ data });
 });
 

@@ -1,17 +1,17 @@
 {
     "users": [
         {
-            "id": "0",
+            "id": 0,
             "name": "milly",
             "profileImgSrc": "https://yt3.ggpht.com/yti/APfAmoGb9GknvFP6JQRMR8iQApOWMifRAwZddAr1q5lqQA=s88-c-k-c0x00ffffff-no-rj-mo"
         },
         {
-            "id": "1",
+            "id": 1,
             "name": "subway",
             "profileImgSrc": "https://i.pinimg.com/originals/d5/b0/4c/d5b04cc3dcd8c17702549ebc5f1acf1a.png"
         },
         {
-            "id": "2",
+            "id": 2,
             "name": "yasmin",
             "profileImgSrc": "https://www.pngitem.com/pimgs/m/248-2483089_ubud-monkey-forest-flat-design-flat-icon-person.png"
         }
@@ -56,6 +56,20 @@
             "userId": 0,
             "timeStamp": 1643794189926,
             "milestoneId": 2
+        },
+        {
+            "id": 6,
+            "title": "코드 리팩토링",
+            "status": "open",
+            "userId": 0,
+            "timeStamp": 1643794189926
+        },
+        {
+            "id": 7,
+            "title": "타입스크립트 에러 고치기",
+            "status": "open",
+            "userId": 1,
+            "timeStamp": 1643794189926
         }
     ],
     "comments": [
@@ -143,7 +157,7 @@
             "description": "기능구현 - api서버와 통신"
         }
     ],
-    "assigned": [
+    "assignments": [
         {
             "id": 0,
             "userId": 0,
@@ -163,6 +177,11 @@
             "id": 3,
             "userId": 2,
             "issueId": 5
+        },
+        {
+            "id": 4,
+            "userId": 2,
+            "issueId": 3
         }
     ],
     "labelings": [
@@ -205,6 +224,11 @@
             "id": 7,
             "labelId": 6,
             "issueId": 1
+        },
+        {
+            "id": 8,
+            "labelId": 3,
+            "issueId": 6
         }
     ]
 }

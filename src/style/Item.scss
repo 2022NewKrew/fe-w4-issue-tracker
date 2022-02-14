@@ -5,6 +5,9 @@
     border-radius: 30px;
     padding: 4px 16px;
     font-size: 0.8rem;
+    width: fit-content;
+    height: fit-content;
+    margin: 5px;
 }
 
 .MilestoneSmall {
@@ -148,4 +151,91 @@
             }
         }
     }
+}
+
+.OpenIndicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 40px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: bold;
+
+    &.open {
+        border: 1px solid $primary-color;
+        color: $primary-color;
+        background-color: $light-blue;
+    }
+    &.close {
+        border: 1px solid $secondary-color;
+        color: $secondary-color;
+        background-color: $light-purple;
+    }
+}
+
+.Comment {
+    margin-bottom: 20px;
+    border-radius: 16px;
+    border: 1px solid $line-color;
+    overflow: hidden;
+
+    & > .info {
+        display: flex;
+        flex-direction: row;
+        padding: 10px 20px;
+        background-color: $background-color;
+
+        & > .align-left {
+            margin-left: 0;
+            margin-right: auto;
+            .user-id {
+                color: $title-active-color;
+                font-size: 1.15rem;
+                font-weight: bold;
+                margin-right: 10px;
+            }
+            .timestamp {
+                color: $body-color;
+                font-weight: 0.9rem;
+                font-weight: bold;
+            }
+        }
+        & > .align-right {
+            margin-left: auto;
+            margin-right: 0;
+
+            .emoji-button {
+                outline: none;
+                border: none;
+                background-color: #0000;
+                stroke: $label-color;
+
+                &:hover {
+                    cursor: pointer;
+                    stroke: $title-active-color;
+                }
+                &:active {
+                    stroke: $primary-color;
+                }
+            }
+        }
+    }
+    & > .body {
+        color: $title-active-color;
+        padding: 15px 20px;
+        background-color: $off-white-color;
+    }
+}
+
+.AuthorIndicator {
+    padding: 3px 12px;
+    color: $body-color;
+    font-size: 0.75rem;
+    font-weight: bold;
+    margin: 0 10px;
+    border-radius: 16px;
+    border: 1px solid $line-color;
+    user-select: none;
 }

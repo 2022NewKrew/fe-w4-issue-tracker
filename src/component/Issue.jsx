@@ -21,7 +21,7 @@ export default function Issue({
     getFromURL(issueLabelURL, {issueID: issueID}).then((newIssueLabelArray)=>{
       setLabelIDArray(newIssueLabelArray);
     });
-  }, [issueID]);
+  }, [setLabelIDArray, issueID]);
 
   const getLabels=useCallback(()=>{
     return labelIDArray.map((labelID)=>(

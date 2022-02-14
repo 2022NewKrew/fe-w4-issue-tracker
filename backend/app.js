@@ -25,6 +25,11 @@ app.listen(appPort, ()=>{
 
 app.get('/issue-list', (req, res)=>{
   try{
+    if(req.query.issueID!==undefined){
+      const issueID=req.query.issueID;
+      const issue=issueDB.select({issueID});
+      return res.send(issue).status(200);
+    }
     const rawFilter=req.query.filter;
     if(rawFilter===undefined || rawFilter.match(/^\s*$/)){
       const issues=issueDB.selectAll();
@@ -59,7 +64,7 @@ app.get('/issue-list', (req, res)=>{
       res.send(issues).status(200);
     })();
   }catch(e){
-    console.error(e.message);
+    console.error(e.stack, e.message);
     res.sendStatus(500);
   }
 });
@@ -104,7 +109,7 @@ app.get('/issue-label', (req, res)=>{
     const issueLabels=issueLabelDB.selectLabelIDsByIssueID(issueID);
     res.send(issueLabels).status(200);
   }catch(e){
-    console.error(e.message);
+    console.error(e.stack, e.message);
     res.sendStatus(500);
   }
 });
@@ -115,7 +120,7 @@ app.get('/label-list', (req, res)=>{
     const keyedLabels=createObjectWithKey(labels, 'labelID');
     res.send(keyedLabels).status(200);
   }catch(e){
-    console.error(e.message);
+    console.error(e.stack, e.message);
     res.sendStatus(500);
   }
 });
@@ -126,7 +131,7 @@ app.get('/milestone-list', (_, res)=>{
     const keyedMilestones=createObjectWithKey(milestones, 'milestoneID');
     res.send(keyedMilestones).status(200);
   }catch(e){
-    console.error(e.message);
+    console.error(e.stack, e.message);
     res.sendStatus(500);
   }
 });
@@ -137,7 +142,7 @@ app.get('/user-list', (_, res)=>{
     const keyedUsers=createObjectWithKey(users, 'userID');
     res.send(keyedUsers).status(200);
   }catch(e){
-    console.error(e.message);
+    console.error(e.stack, e.message);
     res.sendStatus(500);
   }
 });
@@ -156,7 +161,35 @@ app.post('/api/update-issue', (req, res)=>{
     })();
     res.sendStatus(200);
   }catch(e){
-    console.error(e.message);
+    console.error(e.stack, e.message);
+    res.sendStatus(500);
+  }
+});
+
+app.get('/comment-list', (req, res)=>{
+  try{
+    const issueID=req.query.issueID;
+    if(issueID===undefined){
+      return res.sendStatus(500);
+    }
+    const comments=commentDB.selectByIssueID(issueID);
+    res.send(comments).status(200);
+  }catch(e){
+    console.error(e.stack, e.message);
+    res.sendStatus(500);
+  }
+});
+
+app.get('/assignee-list', (req, res)=>{
+  try{
+    const issueID=req.query.issueID;
+    if(issueID===undefined){
+      return res.sendStatus(500);
+    }
+    const assignees=assigneeDB.selectUserIDByissueID(issueID);
+    res.send(assignees).status(200);
+  }catch(e){
+    console.error(e.stack, e.message);
     res.sendStatus(500);
   }
 });

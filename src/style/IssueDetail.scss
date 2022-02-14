@@ -1,0 +1,77 @@
+@use "variables" as *;
+
+.IssueDetail {
+    background-color: $background-color;
+    padding: 20px;
+    & > * {
+        margin: 0 auto;
+        max-width: min(95vw, 1200px);
+    }
+
+    & > .header {
+        display: flex;
+        align-items: center;
+        .title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-right: 10px;
+            overflow: hidden;
+        }
+        .issue-id {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: $label-color;
+            overflow: hidden;
+        }
+        .buttons {
+            margin-left: auto;
+            & > *:not(:last-child) {
+                margin-right: 10px;
+            }
+        }
+    }
+
+    & > .info {
+        display: flex;
+        align-items: center;
+        color: $label-color;
+        padding-bottom: 35px;
+        border-bottom: 2px solid $line-color;
+
+        .creation-info {
+            font-size: 1.1rem;
+            margin-left: 10px;
+        }
+    }
+
+    & > .body {
+        display: flex;
+        align-items: flex-start;
+        padding-top: 10px;
+        column-gap: 10px;
+
+        & > .comments {
+            flex: 3;
+        }
+
+        & > .panel {
+            flex: 1;
+            border-radius: 16px;
+            border: 1px solid $line-color;
+            background-color: $off-white-color;
+
+            & > .panel-item {
+                padding: 10px;
+                padding-left: 15px;
+
+                h3 {
+                    color: $body-color;
+                    font-weight: bold;
+                }
+                &:not(:last-child) {
+                    border-bottom: 1px solid $line-color;
+                }
+            }
+        }
+    }
+}

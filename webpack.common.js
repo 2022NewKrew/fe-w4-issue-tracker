@@ -4,8 +4,9 @@ module.exports={
   entry: './src/index.js',
   output: {
     path: __dirname+'/dist',
-    filename: 'bundle.js',
-    publicPath: '/'
+    filename: 'bundle.[chunkhash].js',
+    publicPath: '/',
+    clean: true
   },
   plugins: [
     new HTMLPlugin({
